@@ -1,0 +1,4 @@
+repository "ODM Attempt 1@ODM_GEAR@cloud"
+  path "/"
+    br "/main"
+    co "/main"
