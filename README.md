@@ -1,4 +1,4 @@
-project is in unity you can try it on browser here: <a>https://ratweeb.itch.io/odm-gear
+
 
 
 # Attack on Titan ODM Gear Simulator 
@@ -178,3 +178,4 @@ git lfs pull
 - **Issues**: [Report bugs on GitHub](https://github.com/maxsunc/ODM-Gear-Simulation/issues)
 
 **Happy coding, and may your ODM gear never fail! ⚔️🕷️**
+Project is in unity you can try it on browser here: <a>https://ratweeb.itch.io/odm-gear
