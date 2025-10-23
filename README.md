@@ -55,7 +55,7 @@ The project may use Unity packages. If prompted:
    - Cinemachine
    - Universal Render Pipeline (URP)
 
-### Step 5: Set Up Your Development Environment
+### Step 5: Set Up Your Development Environment (OPTIONAL)
 
 1. **Configure Version Control**:
    ```bash
