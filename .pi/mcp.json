@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "unity": {
+      "url": "http://127.0.0.1:8080/mcp",
+      "exposure": "deferred",
+      "description": "Inspect and automate the Unity Editor for this project through Coplay MCP for Unity."
+    }
+  }
+}
