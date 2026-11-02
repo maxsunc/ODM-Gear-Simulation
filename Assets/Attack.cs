@@ -6,6 +6,8 @@ public class Attack : MonoBehaviour
 {
     public Animator armatureAnimator;
 
+    [Header("Combat")]
+    public DamageDealer damageDealer;
 
     [SerializeField] private AudioSource slashSfx;
 
@@ -42,9 +44,14 @@ public class Attack : MonoBehaviour
         armatureAnimator.SetBool("holdingAttack", false);
         PlayAudio(slashSfx, 0.8f, 1.2f);
 
+        // Enable sword damage collider during attack window
+        if (damageDealer != null) damageDealer.gameObject.SetActive(true);
 
         // wait for attack anim to be done
         yield return new WaitForSeconds(0.6f);
+
+        // Disable sword damage collider after attack window
+        if (damageDealer != null) damageDealer.gameObject.SetActive(false);
 
         nextAttackReady = true;
     }

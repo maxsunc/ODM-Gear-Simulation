@@ -45,6 +45,10 @@ public class ODM_Movement : MonoBehaviour
     private Vector3 residualDir;
     private float residualSpeed;
     private bool superGasing;
+
+    // Public read-only accessors for DamageDealer momentum calculation
+    public float CurrentSpeed => currentSpeed;
+    public float ResidualSpeed => residualSpeed;
     private bool gasing;
     private bool isInertia;
     private bool qPress, ePress;
