@@ -33,6 +33,13 @@ public class Attack : MonoBehaviour
 
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();nextAttackReady=true;
+        if(armatureAnimator!=null) armatureAnimator.SetBool("holdingAttack",false);
+        if(damageDealer!=null) damageDealer.gameObject.SetActive(false);
+    }
+
     IEnumerator ChargeAttack()
     {
         nextAttackReady = false;

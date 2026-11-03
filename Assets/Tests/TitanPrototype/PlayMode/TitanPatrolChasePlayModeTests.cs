@@ -42,6 +42,8 @@ public class TitanPatrolChasePlayModeTests
         Assert.That(agent.isOnNavMesh, Is.True);
         brain = body.gameObject.AddComponent<TitanPatrolChaseAI>();
         brain.automaticTick = false;
+        // Fixture tests the original bounded sight cone, independent of game tuning.
+        brain.sightRange = 38; brain.fieldOfView = 120;
         brain.patrolPoints = new[] { new Vector3(-14,0,-12), new Vector3(-14,0,16), new Vector3(14,0,16), new Vector3(14,0,-12) };
         target = new GameObject("Human target ROOT").transform;
         target.position = new Vector3(-10,0,4);

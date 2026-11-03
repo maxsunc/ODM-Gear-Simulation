@@ -54,6 +54,34 @@ public class ODM_Movement : MonoBehaviour
     private bool qPress, ePress;
 
     private Vector3 pastForce;
+    private UnityEngine.Object titanOwner;
+    private bool titanSuspended;
+    public bool TitanSuspended { get { return titanSuspended; } }
+    public bool HasActiveHooks { get { return leftGrappled || rightGrappled; } }
+    public bool SuspendForTitan(UnityEngine.Object owner)
+    {
+        if(owner==null || titanSuspended) return false;
+        titanOwner=owner;titanSuspended=true;StopAllCoroutines();
+        leftGrappled=rightGrappled=qPress=ePress=gasing=isInertia=checkingStuck=false;
+        currentSpeed=residualSpeed=strafeDir=0;direction=residualDir=Vector3.zero;
+        acceleration=accelCopy;additionalAccel=0;superGasing=false;
+        foreach(var line in lines) if(line!=null) line.enabled=false;
+        if(gasTrail!=null) gasTrail.emitting=false;
+        if(gasParticle!=null) gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmitting);
+        if(audio!=null && audio.container!=null && audio.container.Length>3 && audio.container[3]!=null)
+        { audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1; }
+        if(camAnim!=null) camAnim.SetBool("StartGas",false);
+        if(playerAnimator!=null) playerAnimator.SetBool("isGasing",false);
+        return true;
+    }
+    public void ResumeAfterTitan(UnityEngine.Object owner,Vector3 velocity)
+    {
+        if(!titanSuspended || titanOwner!=owner) return;
+        titanOwner=null;titanSuspended=false;
+        if(characterMesh!=null) {var a=characterMesh.localEulerAngles;a.z=0;characterMesh.localEulerAngles=a;}
+        Vector3 planar=Vector3.ProjectOnPlane(velocity,Vector3.up);
+        if(planar.sqrMagnitude>.0001f) StartCoroutine(Deaccelerate(planar.normalized,planar.magnitude));
+    }
 
     //POA:
     /*
@@ -90,11 +118,13 @@ public class ODM_Movement : MonoBehaviour
 
     void LateUpdate()
     {
+        if(titanSuspended) return;
         UpdateLines();
     }
 
     void Update()
     {
+        if(titanSuspended) return;
         if (movement.CheckGround())
         {
             movement.zeroGravity();
@@ -308,6 +338,7 @@ public class ODM_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(titanSuspended || controller==null || !controller.enabled) return;
         Throttle();
     }
 

@@ -9,6 +9,10 @@ public abstract class TitanAerialMotor : MonoBehaviour
     public void ContinueRelease(System.Func<bool> poll) { releasePoll=poll; }
     void LateUpdate() { if(releasePoll!=null && releasePoll()) releasePoll=null; }
     void OnDisable() { var target=GetComponent<TitanCombatTarget>(); if(target!=null) target.EscapeHold(); }
+    // Production ODM can tilt its root during flight. Native Unity CCT axis stays
+    // world-up, but its offset center follows root rotation. Opt in to that CCD.
+    public virtual bool SupportsRotatingCapsule { get { return false; } }
+    public virtual bool SuspendGroundHolds { get { return false; } }
     public abstract Vector3 Velocity { get; }
     public abstract bool CanSuspend { get; }
     public abstract bool TrySuspend();

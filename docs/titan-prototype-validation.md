@@ -1,6 +1,24 @@
 # Titan prototype validation
 
-Latest aerial torso-clearance revision: **108 passed /0 failed twice**, Unity
+Latest real-ODM/Shiganshina integration: **116 passed /0 failed twice**, Unity
+**2021.3.25f1**, **2026-11-03 15:52:12–27 UTC** (PID40516) and
+**15:55:56–15:56:11 UTC** (PID34836,15.561s). All108 approved checks +8 actual
+legacy/default-assembly integration/native-CCT/sword regressions. Strict<8deg/120Hz
+and<40m/s unchanged: fast6.45deg,moving6.64deg; torso0; aerial death11.67m/s;
+intact10.86m/s,gap.003m,hipsY1.03m. Real CCT world-UP axis verified against native
+bounds under45deg root tilt, including rotated local center and blocked headroom.
+
+Saved requested scene also exercised through MCP: actual gear Throttle/FaceGrapplePoint,
+not sandbox flight; native.02s, one physical catch(.18s after selection,root tilt8.61deg),
+one contact bite, actual PlayerHealth/bridge0, hooks disconnected, no parent/pending
+release. Separate true3s scene reload produced HP100, enabled controller, two Titans
+and rebuilt nav. Actual sword sweep crosses zones and deduplicates limb in new tests.
+Owned navigation patch256x256m; full-map/interactive/full-body carry polish remains.
+Proof `ArtSource/Titan/Combat/Shiganshina_ODM_Integration_MCP.png`.
+Approved aerial snapshot940daf1d PUSHED; new scene integration uncommitted for review.
+Full contracts/limits: `titan-shiganshina-integration.md`.
+
+Previous aerial torso-clearance revision: **108 passed /0 failed twice**, Unity
 **2021.3.25f1**, **2026-11-03 14:40:20–36 UTC** (PID34496) and
 **14:44:01–16 UTC** (PID37808,15.493s). All106 prior checks retained. New both-hand/
 two-phase carry test asserts actual forearm/palm colliders stay out of chest/spine

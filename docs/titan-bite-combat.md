@@ -1,13 +1,15 @@
 # Titan ground grab → hand-to-mouth → bite
 
 Continuation of [grab/hold/release](titan-grab-combat.md), before the required
-mid-air ODM interception variant. This is still **sandbox-only**, Unity2021.3.25f1.
-No gameplay-scene, player-controller, rig, art, prefab or physics-setting changes.
+mid-air ODM interception variant. This document records the **sandbox ground milestone**,
+Unity2021.3.25f1; that milestone did not change gameplay scenes/controllers/rig/art/physics.
 
-User approved the ground bite/arm motion and requested the commit: **28cb997a**, local
-only, not pushed. The next [aerial interception lab](titan-aerial-grab.md) is implemented
-separately with actual swept hand contact and a distinct current-pose release policy.
-It is still a controller proxy; the real ODM rope/boost adapter is not yet wired.
+Ground bite/arm fix **28cb997a** and aerial follow-up **940daf1d** are now PUSHED to
+`origin/titan-combat-updates`. After approval the user requested the actual Shiganshina
+scene: [real ODM integration](titan-shiganshina-integration.md), **116/116 twice**.
+That separate uncommitted review slice connects actual PlayerHealth/gear/two swords.
+Lab defaults below remain; real ground/air holds both use motor suspension and safe
+current-pose release, not the proxy ground snap-back. No lab E-escape binding in gameplay.
 
 ## Arm-spasm fix and MCP visual review
 

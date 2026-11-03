@@ -1,8 +1,11 @@
 # Titan sandbox grab, hold and safe release
 
-The next combat slice after [stomp](titan-stomp-combat.md). It stays opt-in and
-sandbox-only: no attacks added to the reusable body prefab, no gameplay scenes
-saved, and no dependency on legacy PlayerHealth or the ODM controller.
+The historical sandbox combat slice after [stomp](titan-stomp-combat.md). Default
+body prefab remains passive. Approved prototype work is pushed through940daf1d.
+The later user-requested [real ODM/Shiganshina integration](titan-shiganshina-integration.md)
+now connects actual PlayerHealth/gear/swords in that one scene (**116/116 twice**),
+with motor suspension + safe CURRENT-pose release for real ground AND aerial holds.
+It is a separate uncommitted review slice; proxy ground defaults below remain unchanged.
 
 **Later ground follow-up:** the combat lab now opts into
 [hand-to-mouth and contact-validated bite](titan-bite-combat.md). This document's
@@ -10,7 +13,8 @@ original timing table describes standalone `enableBite=false` mode; the lab adds
 .7s transfer, .6s mouth warning and .12s jaw closure before the lethal contact.
 E escape and all release/cancellation contracts remain. The subsequent
 [aerial interception lab](titan-aerial-grab.md) now has real3D swept hand contact,
-with separate airborne release. Real ODM rope/boost/controller integration is next.
+with separate airborne release. First real ODM integration is now implemented as
+linked above; full-map/terrain/interactive counterplay polish remains.
 
 ## Try it
 

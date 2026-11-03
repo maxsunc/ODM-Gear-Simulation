@@ -9,7 +9,9 @@ public class TitanCombatTarget : MonoBehaviour
 {
     [Min(1)] public float maxHealth = 100;
     [Range(.5f, 10)] public float maximumHoldDuration = 4;
-    public float Health { get; private set; }
+    float sandboxHealth;
+    TitanHealthSource healthSource;
+    public float Health { get { return healthSource!=null?healthSource.CurrentHealth:sandboxHealth; } private set { sandboxHealth=value; } }
     public int HitCount { get; private set; }
     public Vector3 LastImpact { get; private set; }
     public bool IsDead { get { return Health <= 0; } }
@@ -49,7 +51,7 @@ public class TitanCombatTarget : MonoBehaviour
         public CollisionDetectionMode detection;
     }
 
-    void Awake() { targetRoot=transform; ResetHealth(); }
+    void Awake() { targetRoot=transform; healthSource=GetComponent<TitanHealthSource>(); ResetHealth(); }
     void LateUpdate() { TickHold(Time.deltaTime); }
     void OnDisable() { ReleaseInternal("Target disabled"); }
     void OnDestroy()
@@ -74,18 +76,27 @@ public class TitanCombatTarget : MonoBehaviour
     public void TakeDamage(float damage, Vector3 impact)
     {
         if (IsDead || !isActiveAndEnabled || damage <= 0 || !Finite(damage)) return;
-        Health = Mathf.Max(0, Health - damage); LastImpact = impact; HitCount++;
+        // Restore the held controller BEFORE external lethal callbacks enable a
+        // player ragdoll. Never restore cached animation flags over a new death.
+        if(healthSource!=null)
+        {
+            if(damage>=Health) ReleaseInternal("Target died");
+            healthSource.ApplyDamage(damage);
+        }
+        else Health = Mathf.Max(0, Health - damage);
+        LastImpact = impact; HitCount++;
         if (IsDead) ReleaseInternal("Target died");
         if (Damaged != null) Damaged(damage);
     }
 
-    public bool TryHold(MonoBehaviour owner, Transform socket, bool airborne = false, Vector3? contactPosition = null)
+    public bool TryHold(MonoBehaviour owner, Transform socket, bool airborne = false, Vector3? contactPosition = null, Quaternion? contactRotation = null)
     {
         if (ReleasePending || IsHeld || IsDead || !isActiveAndEnabled || owner == null || !owner.isActiveAndEnabled ||
             socket == null || !socket.gameObject.activeInHierarchy || !socket.IsChildOf(owner.transform) ||
             transform.IsChildOf(owner.transform) || owner.transform.IsChildOf(transform) ||
             owner.gameObject.scene != gameObject.scene || socket.gameObject.scene != gameObject.scene ||
-            !Finite(socket.position) || !Finite(transform.position) || (contactPosition.HasValue && !Finite(contactPosition.Value))) return false;
+            !Finite(socket.position) || !Finite(transform.position) || (contactPosition.HasValue && !Finite(contactPosition.Value)) ||
+            (contactRotation.HasValue && !Finite(contactRotation.Value))) return false;
         Physics.SyncTransforms();
         releasePosition = transform.position; releaseRotation = transform.rotation;
         colliders = GetComponentsInChildren<Collider>(true);
@@ -98,12 +109,18 @@ public class TitanCombatTarget : MonoBehaviour
             if (!colliders[i].enabled || colliders[i].isTrigger || !colliders[i].gameObject.activeInHierarchy) continue;
             if (!found) { bounds = colliders[i].bounds; found = true; } else bounds.Encapsulate(colliders[i].bounds);
         }
-        aerialMotor=airborne?GetComponent<TitanAerialMotor>():null;
-        if(airborne && (aerialMotor==null || !aerialMotor.CanSuspend || !aerialMotor.TrySuspend())) return false;
-        aerialHold=airborne;
+        aerialMotor=GetComponent<TitanAerialMotor>();
+        bool motorHold=airborne || (aerialMotor!=null && aerialMotor.SuspendGroundHolds);
+        if(motorHold && (aerialMotor==null || !aerialMotor.CanSuspend || !aerialMotor.TrySuspend())) return false;
+        aerialHold=motorHold; // Real ground holds use safe current-pose release too.
         Vector3 capturePosition=contactPosition ?? transform.position;
+        Quaternion captureRotation=contactRotation ?? transform.rotation;
+        Vector3 shapeCenter=bounds.center-transform.position;
+        var capsule=GetComponent<CharacterController>();
+        if(airborne && capsule!=null) shapeCenter=captureRotation*Vector3.Scale(capsule.center,transform.lossyScale);
         centerOffset = airborne ? capturePosition-socket.position : transform.position-bounds.center;
-        heldCenterOffset=bounds.center-transform.position+centerOffset;
+        heldCenterOffset=shapeCenter+centerOffset;
+        if(airborne) releaseRotation=captureRotation;
         carryRotation=Quaternion.identity;
         previousHeldPosition=capturePosition; handVelocity=Vector3.zero; lastOwnerPosition=owner.transform.position;
         releaseOwner=owner.transform;
@@ -119,7 +136,7 @@ public class TitanCombatTarget : MonoBehaviour
             rb.isKinematic = true; rb.useGravity = false; rb.detectCollisions = false;
         }
         foreach (var col in colliders) col.enabled = false;
-        if(airborne) transform.position=capturePosition; // physical CCD contact time, not detection aim
+        if(airborne) transform.SetPositionAndRotation(capturePosition,captureRotation); // physical CCD time, not detection aim
         holdOwner = owner; grip = socket; holdAge = 0;
         leaseDuration = Finite(maximumHoldDuration) ? Mathf.Clamp(maximumHoldDuration, .5f, 10) : 4;
         IsHeld = true;
@@ -201,7 +218,7 @@ public class TitanCombatTarget : MonoBehaviour
         {
             var col = colliders[i];
             if (col == null || !colliderStates[i] || col.isTrigger || !col.gameObject.activeInHierarchy ||
-                !col.transform.IsChildOf(transform)) continue;
+                !col.transform.IsChildOf(transform) || (healthSource!=null && !healthSource.IsBodyCollider(col))) continue;
             // Unknown disabled mesh shapes fail closed; a real controller needs an adapter.
             if (!(col is BoxCollider || col is SphereCollider || col is CapsuleCollider || col is CharacterController)) continue;
             Vector3 closest = ClosestCombatPoint(col, point);
@@ -248,11 +265,12 @@ public class TitanCombatTarget : MonoBehaviour
         Vector3 scale = controller.transform.lossyScale;
         float radius = controller.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z));
         float segment = Mathf.Max(0, controller.height * Mathf.Abs(scale.y) * .5f - radius);
-        Vector3 center = controller.transform.TransformPoint(controller.center), axis = controller.transform.up;
+        Vector3 center = controller.transform.TransformPoint(controller.center), axis = Vector3.up;
         Vector3 nearest = center + axis * Mathf.Clamp(Vector3.Dot(point - center, axis), -segment, segment);
         Vector3 delta = point - nearest;
         return delta.sqrMagnitude <= radius * radius ? point : nearest + delta.normalized * radius;
     }
+    static bool Finite(Quaternion q) { float length=Quaternion.Dot(q,q);return Finite(q.x)&&Finite(q.y)&&Finite(q.z)&&Finite(q.w)&&Mathf.Abs(length-1)<.01f; }
     static bool Finite(float value) { return !float.IsNaN(value) && !float.IsInfinity(value); }
     static bool Finite(Vector3 value) { return Finite(value.x) && Finite(value.y) && Finite(value.z); }
 }

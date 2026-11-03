@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector] public bool isGrabbed = false;
     [HideInInspector] public Transform grabbedByTitan;
 
+    // Integration listens before ragdoll ownership takes over; it does not use
+    // legacy OnGrabbed's skeleton parenting path.
+    public event System.Action Died;
     private Movement movement;
     private ODM_Movement odmMovement;
     private Attack attack;
@@ -43,10 +46,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+        if(Died!=null) Died();
 
-        // Disable player controls
-        if (movement != null) movement.enabledMovement = false;
-        if (odmMovement != null) odmMovement.enabled = false;
+        // No live gravity/jump/rope coroutine may keep moving a dead controller.
+        if (movement != null) { movement.StopAllCoroutines();movement.enabledMovement = false;movement.enabled=false; }
+        if (odmMovement != null) { odmMovement.SuspendForTitan(this);odmMovement.enabled = false; }
         if (attack != null) attack.enabled = false;
 
         // Enable ragdoll on player

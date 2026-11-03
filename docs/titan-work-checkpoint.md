@@ -14,7 +14,99 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: aerial mouth-carry torso clipping fixed (uncommitted)
+## Current request: commit integration checkpoint, then test full-map FreeRoam navigation
+
+User moved/copied the two modular Titans into `Assets/Scenes/FreeRoam.unity`, scale3x
+and5x, and tuned AI defaults to sightRange138/FOV180. Preserve these choices. User
+requested committing current integration then full-map navigation as a TESTING pass.
+Checkpoint includes the actual scene/player/FBX dependencies (four GUID-preserving
+model moves + Taking Item used in Shiganshina); unrelated Plastic/IDE/material/
+Ragdoll/unused model/prefab changes excluded. Sight fixture pins its original38/120
+cone rather than assuming game defaults; assertions unchanged. Latest checkpoint
+**116/116 passed**, Unity2021.3.25f1,2026-11-03 **16:42:26–41 UTC**, PID39268.
+
+FreeRoam currently has no scene integration/nav surface/AI on the newly copied Titans;
+403 colliders,332 environment MeshColliders (unreadable CPU meshes), no Unity Terrain
+components. Real map environment bounds roughly2064x1538m, some trees704m tall.
+New navigation work must include actual MeshColliders + boxes, preserve actor
+placements/scales, and avoid runtime whole-map mesh bakes that require changing all
+mesh import settings. Prefer owned Editor-baked data with clear per-size clearance.
+No additional push requested for this checkpoint.
+
+## Previous: approved work PUSHED; real ODM integrated into requested Shiganshina scene
+
+User approved, requested commit/push, then asked to integrate into existing
+`Assets/Scenes/FreeRoam (Shiganshina.unity` and remove its old Titans. Explained that
+motor integration means narrow hold-only suspension/resume hooks, not replacing or
+retuning the ODM gear. **940daf1d** (`Add fast physical aerial grabs and clear torso
+during mouth carry`) committed/pushed to **origin/titan-combat-updates**; HEAD and
+upstream match. Prior prototype commits now pushed too. No merge/main/force push.
+
+NEW integration is a separate uncommitted review slice. Actual requested scene saved,
+only its two old Titan/TitanV2 instances removed (source assets retained); two approved
+modular Titans near spawn target the existing real player. Existing player/body
+prefabs/art/rest rig unchanged. Original scene backed up in ignored Library and
+owned external temp before any edits; unrelated dirty RagdollController/FreeRoam/model/
+material/Plastic/IDE work preserved. New scene-only sword damage window assigned to
+previously unassigned Attack.damageDealer. F remains charge/release sword, E hook,
+T music; NO lab F flight / E escape / T combat shortcuts added.
+
+New default-assembly adapters: `Assets/Titan/Integration/TitanODMMotor.cs`,
+`TitanODMHealthSource.cs`, `TitanODMSwordSweep.cs`, `TitanShiganshinaIntegration.cs`.
+Prototype optional `TitanHealthSource` + bounded compound `TitanReleaseClearance`.
+Movement/ODM get explicit owner-token suspension that stops old jump/boost/inertia
+coroutines/hooks, preserves normal tuning, restores safe current pose/momentum.
+Real ground holds also use motor/current-pose clearance, lab ground unchanged.
+Velocity sampled after real FixedUpdates. Health is ACTUAL PlayerHealth, no duplicate
+HP. External death releases before ragdoll; death and attack-disable cleanup stop
+motion/weapon windows. Player prefab has no assigned human ragdoll; no new one claimed.
+Sword sweeps use actual two mesh poses during original .6s window, per-region/swing
+dedupe, and remain active while held without enabling body colliders. Gear-box-only
+bite contact is rejected. Real release checks CCT AND solid gear boxes.
+
+CRITICAL native observation: Unity2021 CCT capsule axis stays WORLD-UP even when the
+visible/root transform tilts; only configured local CENTER rotates. Verified actual
+45deg root: bounds size(1,3.6,1), center(0,1,0) -> root+(-.70711,.70711,0). Do NOT
+use transform.up for a native CCT capsule. CCD/closest-point/release now match this;
+actual visual root still freezes at physical TOI, no upright snap. Lab retains its
+upright-root gate; real adapter supports observed root/center rotation. Ordinary
+CapsuleColliders/gear boxes follow their own orientation as normal.
+
+Owned nav: explicit real floor/box collision sources, **256x256m patch around origin**,
+not full-map production nav. Both agents on NavMesh/Chase;156 triangle indices.
+Added exact scene to Build Settings (disk + live) for existing3s death/respawn;
+Menu/FreeRoam entries preserved. `Assets/Editor/TitanShiganshinaInstaller.cs` is explicit,
+undoable, refuses wrong/dirty/duplicate setup; no auto scene rebuilding.
+
+**116/116 passed twice**, Unity2021.3.25f1:
+- **2026-11-03 15:52:12–27 UTC**, PID40516,15.169s.
+- **15:55:56–15:56:11 UTC**, PID34836,15.561s.
+All108 approved tests +8 (native CCT bounds/rotating-center CCD, real motor suspend,
+ground current release, full gear clearance, tilted-root native headroom, real
+health/external death, release momentum, crossed sword/per-region dedup). Old strict
+<8deg/120Hz and<40m/s retained: fast6.45deg,moving6.64deg; forearm/palm torso0;
+aerial loaded death11.67m/s; intact10.86m/s,gap.003m,hipsY1.03m. Runner now compiles
+actual default-assembly adapter + narrow legacy dependencies; no preview physics.
+
+Live scene MCP, unpaused, controlled actual `ODM_Movement.Throttle/FaceGrapplePoint`
+(not lab motor), native.02s: selected.54s after pass start, physical catch.18s later,
+root tilt8.61deg, one new capture/one bite, ACTUAL and bridge HP0, no parenting,
+hooks cleared, no pending release. Sampled close scene frames reviewed.
+Proof: `ArtSource/Titan/Combat/Shiganshina_ODM_Integration_MCP.png`.
+Separate native death/respawn confirmed scheduled reload -> changed scene handle,
+HP100/bridge100, controller enabled, two Titans + nav rebuilt. Test replay canceled
+Invoke only in its own screenshot wrapper; separate respawn test did NOT cancel.
+Final Editor clean/unpaused Edit Mode, requested scene; temp camera/RT removed.
+
+Next: USER interactive fast rope/boost/held sword feel review, full-map nav, full-body
+carry/terrain clearance (currently grip sweep + whole-gear release gate), crowd/corpse
+stress, human ragdoll/fingers/escape balance polish. Do not claim production animation
+or all-terrain approval. Before committing new integration, audit scene/player/model
+GUID dependency closure: these included preexisting UNTRACKED assets; do NOT stage
+entire unrelated dirty tree. Source player prefab remains unchanged locally.
+See `docs/titan-shiganshina-integration.md` for contracts, controls and limitations.
+
+## Previous approved aerial mouth-carry torso clipping fix (now committed940daf1d)
 
 User approved the fast catch (looks great), but reported the arm crossing the body
 on the way to the mouth, and asked what comes next. MCP reproduced a backwards

@@ -53,6 +53,23 @@ public class TitanAerialGrabPlayModeTests
         }
         Assert.That(human.IsHeldBy(grab),Is.True,grab.LastResult+" aim="+grab.LockedPoint+" hit="+grab.LastContactPoint);
     }
+    [UnityTest] public IEnumerator RotatingControllerCenterSweepUsesNativeWorldUprightCapsuleGeometry()
+    {
+        controller.center=Vector3.up;controller.height=3.6f;controller.radius=.5f;
+        Vector3 root=Vector3.up*7;controller.transform.SetPositionAndRotation(root,Quaternion.Euler(0,0,45));Physics.SyncTransforms();
+        Assert.That(controller.bounds.size.x,Is.EqualTo(1).Within(.001f),"Native CCT capsule does NOT tilt with the avatar");
+        Assert.That(controller.bounds.size.y,Is.EqualTo(3.6f).Within(.001f));
+        Assert.That(Vector3.Distance(controller.bounds.center,controller.transform.TransformPoint(controller.center)),Is.LessThan(.001f));
+        Vector3 nearTop=controller.bounds.center+Vector3.up*1.75f;
+        Assert.That(Vector3.Distance(TitanCombatTarget.ClosestCombatPoint(controller,nearTop),nearTop),Is.LessThan(.0001f));
+        var palm=new TitanAerialContact.HandPose {center=root+Vector3.left*1.4f,half=Vector3.one*.05f,rotation=Quaternion.identity};
+        Quaternion start=Quaternion.identity,end=Quaternion.Euler(0,0,160);Vector3 contact;float fraction;
+        Assert.That(TitanAerialContact.CapsuleGap(controller,palm,root,start,out contact),Is.GreaterThan(0));
+        Assert.That(TitanAerialContact.CapsuleGap(controller,palm,root,end,out contact),Is.GreaterThan(0));
+        Assert.That(TitanAerialContact.SweepHand(controller,palm,palm,root,root,start,end,out fraction),Is.True);
+        Assert.That(fraction,Is.InRange(0f,1f));
+        Assert.That(TitanAerialContact.CapsuleGap(controller,palm,root,Quaternion.Slerp(start,end,fraction),out contact),Is.LessThan(.0001f));yield return null;
+    }
     [UnityTest] public IEnumerator FastDefaultReachStartsFromThePalmWithoutWarningLiftOrPosePop()
     {
         Assert.That(grab.aerialWindupDuration,Is.Zero);Assert.That(grab.aerialReachDuration,Is.LessThanOrEqualTo(.25f));

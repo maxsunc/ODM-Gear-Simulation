@@ -13,6 +13,7 @@ public class TitanNavigationSurface : MonoBehaviour
     public int agentTypeID;
     public float agentRadius = 1.8f;
     public float agentHeight = 12f;
+    [Min(0)] public float localBakeSize; // 0 retains the lab's full explicit-source bounds.
     public bool IsReady { get { return instance.valid; } }
     public string Error { get; private set; }
     NavMeshData data;
@@ -42,6 +43,7 @@ public class TitanNavigationSurface : MonoBehaviour
         }
         if (sources.Count == 0) { Error = "No explicit navigation geometry assigned"; return false; }
         bounds.Expand(new Vector3(agentRadius * 4, agentHeight * 2, agentRadius * 4));
+        if(localBakeSize>0) bounds=new Bounds(transform.position,new Vector3(localBakeSize,128,localBakeSize));
         var settings = NavMesh.GetSettingsByID(agentTypeID);
         if (settings.agentTypeID < 0) { Error = "Unknown NavMesh agent type"; return false; }
         settings.agentRadius = agentRadius;

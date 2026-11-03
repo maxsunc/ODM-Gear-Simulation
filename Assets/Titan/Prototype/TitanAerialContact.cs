@@ -1,8 +1,9 @@
 using UnityEngine;
 
 /// <summary>Bounded continuous contact against the ACTUAL physical hand box and
-/// configured upright human capsule. Rotating hand, translation-relative target;
-/// capsule tilt changes are rejected by the caller. No expanded catch radius.</summary>
+/// configured human CharacterController. Unity keeps its capsule axis WORLD-UP
+/// even when the player's root tilts; the local center does rotate with the root.
+/// Opted-in motors support that observed center rotation. No expanded catch radius.</summary>
 public static class TitanAerialContact
 {
     public struct HandPose { public Vector3 center,half; public Quaternion rotation; }
@@ -59,25 +60,33 @@ public static class TitanAerialContact
         return Mathf.Sqrt(best);
     }
     public static float CapsuleGap(CharacterController target,HandPose hand,Vector3 root,out Vector3 contact)
+    { return CapsuleGap(target,hand,root,target.transform.rotation,out contact); }
+    public static float CapsuleGap(CharacterController target,HandPose hand,Vector3 root,Quaternion rotation,out Vector3 contact)
     {
         Vector3 scale=target.transform.lossyScale;
         float radius=target.radius*Mathf.Max(Mathf.Abs(scale.x),Mathf.Abs(scale.z));
         float half=Mathf.Max(0,target.height*Mathf.Abs(scale.y)*.5f-radius);
-        Vector3 center=root+target.transform.TransformVector(target.center),axis=target.transform.up*half;
+        Vector3 center=root+rotation*Vector3.Scale(target.center,scale),axis=Vector3.up*half;
         Quaternion inverse=Quaternion.Inverse(hand.rotation);Vector3 local;
         float distance=SegmentBox(inverse*(center+axis-hand.center),inverse*(center-axis-hand.center),hand.half,out local);
         contact=hand.center+hand.rotation*local;return distance-radius;
     }
     public static bool SweepHand(CharacterController target,HandPose from,HandPose to,Vector3 victimFrom,Vector3 victimTo,out float fraction)
+    { return SweepHand(target,from,to,victimFrom,victimTo,target.transform.rotation,target.transform.rotation,out fraction); }
+    public static bool SweepHand(CharacterController target,HandPose from,HandPose to,Vector3 victimFrom,Vector3 victimTo,
+        Quaternion rotationFrom,Quaternion rotationTo,out float fraction)
     {
         fraction=0;
+        Vector3 scale=target.transform.lossyScale;
+        float targetExtent=Vector3.Scale(target.center,scale).magnitude;
         float bound=((to.center-from.center)-(victimTo-victimFrom)).magnitude+
-            Quaternion.Angle(from.rotation,to.rotation)*Mathf.Deg2Rad*Mathf.Max(from.half.magnitude,to.half.magnitude);
+            Quaternion.Angle(from.rotation,to.rotation)*Mathf.Deg2Rad*Mathf.Max(from.half.magnitude,to.half.magnitude)+
+            Quaternion.Angle(rotationFrom,rotationTo)*Mathf.Deg2Rad*targetExtent;
         for(int i=0;i<160;i++)
         {
             HandPose pose=new HandPose {center=Vector3.Lerp(from.center,to.center,fraction),half=from.half,
                 rotation=Quaternion.Slerp(from.rotation,to.rotation,fraction)};
-            Vector3 contact;float gap=CapsuleGap(target,pose,Vector3.Lerp(victimFrom,victimTo,fraction),out contact);
+            Vector3 contact;float gap=CapsuleGap(target,pose,Vector3.Lerp(victimFrom,victimTo,fraction),Quaternion.Slerp(rotationFrom,rotationTo,fraction),out contact);
             if(gap<=.00001f) return true;
             if(bound<.000001f) return false;
             fraction+=Mathf.Max(gap/bound,.0000001f);

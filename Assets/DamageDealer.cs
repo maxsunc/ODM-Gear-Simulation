@@ -25,6 +25,12 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
+    // Scene opt-in swept blades share this exact per-swing region deduplication.
+    public void ProcessContact(Collider other)
+    {
+        if(isActiveAndEnabled && other!=null) OnTriggerEnter(other);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         float playerSpeed = 0f;

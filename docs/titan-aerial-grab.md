@@ -8,6 +8,18 @@ CharacterController proxy. **Not yet the production ODM rope/boost/health adapte
 The existing ground grab and passive body prefab remain unchanged in purpose.
 No gameplay scene, player prefab, rest rig, imported art or physics tuning changed.
 
+## Current real-player integration
+
+Approved aerial/clearance work is committed **940daf1d** and pushed to
+`origin/titan-combat-updates`. User then requested the actual Shiganshina scene.
+NEW review slice wires the real ODM motor/player HP/two swords to two modular Titans
+there: `titan-shiganshina-integration.md`. **116/116 passed twice**; native scene
+gear-driven catch/bite and real death/respawn verified. Existing controls/tuning stay.
+Native CCT remains WORLD-UP despite visual root tilt; only local center rotates.
+Core geometry/release now matches that rather than inventing a tilted native capsule.
+Earlier upright lab limits below are historical for that proxy, not the real adapter.
+Full level nav/full-body terrain/interactive feel polish remains; new slice uncommitted.
+
 ## Mouth-carry torso clearance
 
 User approved the fast grab, then reported the arm crossing the body on the way to
@@ -233,7 +245,12 @@ queries, escape, lease/long tick, blocked releases, component removal, disable,
 limb/eye/death handoffs, bite, arm continuity and saved-scene normal-frame flight.
 Never run the removed Editor-preview physics validator.
 
-## Next: production ODM integration
+## Historical next-step plan (first real adapter now implemented)
+
+The initial requested scene integration now exists; see
+`titan-shiganshina-integration.md` for exact implemented boundaries and remaining work.
+
+### Production ODM integration order
 
 Recommended order after user review of this carry correction:
 1. Checkpoint/commit only this aerial slice and proof/docs when requested; keep the

@@ -33,6 +33,28 @@ public class Movement : MonoBehaviour
     private float jumpForce;
     private bool isJumping = false;
     private float gravityScale = 1f;
+    private UnityEngine.Object titanOwner;
+    private bool titanSuspended;
+    private bool movementBeforeTitan;
+    private float titanReleaseUp;
+    public bool TitanSuspended { get { return titanSuspended; } }
+    public bool SuspendForTitan(UnityEngine.Object owner)
+    {
+        if(owner==null || titanSuspended) return false;
+        titanOwner=owner;titanSuspended=true;movementBeforeTitan=enabledMovement;
+        StopAllCoroutines();isJumping=false;jumpForce=0;titanReleaseUp=0;
+        enabledMovement=false;move=Vector3.zero;_velocity=Vector3.zero;
+        if(playerAnimator!=null) playerAnimator.SetBool("isRunning",false);
+        return true;
+    }
+    public void ResumeAfterTitan(UnityEngine.Object owner,Vector3 velocity)
+    {
+        if(!titanSuspended || titanOwner!=owner) return;
+        titanOwner=null;titanSuspended=false;enabledMovement=movementBeforeTitan;
+        gravity=true;gravityScale=1;isJumping=false;jumpForce=0;
+        _velocity=new Vector3(0,Mathf.Max(0,-velocity.y),0);
+        titanReleaseUp=Mathf.Max(0,velocity.y);
+    }
     
 
     void Start()
@@ -47,6 +69,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(titanSuspended) return;
         Debug.Log("Gravity " + gravity);
         if (CheckGround())
         {
@@ -94,6 +117,7 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if(titanSuspended || controller==null || !controller.enabled) return;
         if (enabledMovement)
         {
             Vector3 dir = new Vector3(move.x, 0f, move.z).normalized;
@@ -117,7 +141,14 @@ public class Movement : MonoBehaviour
                 controller.Move((Vector3.up * jumpForce) * Time.fixedDeltaTime);
             }
         }
-        if (gravity)
+        if(titanReleaseUp>0)
+        {
+            var flags=controller.Move(Vector3.up*titanReleaseUp*Time.fixedDeltaTime);
+            titanReleaseUp-=9.8f*gravityScale*Time.fixedDeltaTime;
+            if((flags & CollisionFlags.Above)!=0) titanReleaseUp=0;
+            if(titanReleaseUp<=0) { _velocity.y=-titanReleaseUp;titanReleaseUp=0; }
+        }
+        else if (gravity)
         {
             Gravity();
         }

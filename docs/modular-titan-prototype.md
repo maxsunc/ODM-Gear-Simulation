@@ -1,5 +1,15 @@
 # Modular Titan — Phase 1: body, rig, damage zones and ragdoll
 
+## Current integration checkpoint
+
+Approved prototype work is pushed through **940daf1d** on `origin/titan-combat-updates`.
+User then authorized integration into the existing **FreeRoam (Shiganshina** scene:
+[real ODM scene integration](titan-shiganshina-integration.md), **116/116 twice**.
+Two old scene Titan instances replaced, actual player/health/swords wired with narrow
+hold-only motor hooks. That new review slice is uncommitted. Shared body/player
+prefabs, rest rig, art and other gameplay scenes remain unchanged. Original phase-1
+scope below is historical; only the explicitly requested scene is now integrated.
+
 ## Scope
 
 This establishes the modular body and physics pipeline before adding the full enemy AI.
@@ -10,7 +20,8 @@ with a continuous stocky torso and rounded block limbs inspired by the user's im
 The blockout and earlier anatomical pass are preserved as backups outside Assets.
 This is still stylized prototype art, not a final production-retopologized character.
 The legacy `Titan.prefab`, `TitanV2.prefab`, existing Titan AI scripts, player prefab,
-and gameplay scenes are intentionally not rebuilt or replaced.
+and other gameplay scenes are intentionally not rebuilt or replaced; the later
+user-requested Shiganshina scene replaces only its old Titan instances.
 
 ## Assets
 
