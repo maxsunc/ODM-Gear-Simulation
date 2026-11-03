@@ -14,7 +14,126 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Latest motion-overhaul phase
+## Latest request: commit combat and require mid-air ODM grabs
+
+User approved committing the current combat slice and explicitly added a requirement:
+**Titans must also grab airborne players swinging on ODM gear.** This is NOT yet
+implemented by the ground-targeted grab (current selection rejects vertical offsets
+above2.2m). Keep it in the next combat/player-integration plan; see the dedicated
+mid-air interception section in `docs/titan-grab-combat.md`.
+
+Plan height-aware3D reach, bounded sight-confirmed motion prediction followed by
+committed/dodgeable aim, swept relative hand/player contact at ODM speeds, and the
+same ownership/escape/cancellation safeguards. Real ODM ropes, boost, gravity and
+release momentum need explicit adapter rules and collision-clear release. Do NOT
+reuse the proxy's snap-to-pre-grab pose as a production aerial release, or solve
+interception with hidden tracking, shortened wind-ups or a giant catch radius.
+A standing Titan catching a flyer is the requirement; Titan jumping is separate.
+
+Combat commits on `titan-combat-updates` (local, not pushed):
+- `5bc07b40` Sandbox stomp/grab runtime, hold ownership, director, HUD and stable physics handoff.
+- `ab988bf7` Combat/contact/ownership/scene-reset regressions (58 passing at checkpoint).
+- Documentation/air-grab requirement committed separately with this checkpoint.
+Unrelated dirty files remain excluded; no new runtime behavior changed for the air-grab note.
+
+## Current grab / hold / release slice
+
+User approved the stomp result and asked for the next step. Added standing,
+sandbox-only `TitanGrabAttack`, exclusive bounded hold ownership in
+`TitanCombatTarget`, and `TitanCombatDirector` for grab/stomp selection. No bite/eat
+or real-player adapter yet. See `docs/titan-grab-combat.md` for API/limits.
+
+- Fixed .65s windup/.18s reach, one actual grip contact,1.5s bounded lift/hold,
+  .45s recovery,3s cooldown. Aim is locked, not homing. Deep crouch/foot planting
+  gets the current rig down to a rounded1.8m human; no finger animation.
+- Human NEVER becomes a child of a hand/Titan. Collider/RB states are cached and
+  restored; default release returns to its captured pre-grab WORLD pose. Moving-
+  geometry clearance/real-player controller integration still need an adapter.
+- E escape; own arm loss/eyes/either leg/death/disable/reset/AI pause release safely.
+  Other arm loss does not cancel. Independent target lease defaults4s, catches a
+  dead/stuck owner or invalid/detached socket. Standing only; no kneeling grab yet.
+- Order: motion20 -> attacks50 -> target follow70 -> injury100. Never overwrite
+  detached bones or stand up an injured/dead body on cancel.
+- Selector uses seeded LOCAL System.Random (55% grab preference/fallback), waits
+  for braking and spaces automatic attacks. Stomp standalone auto is disabled when
+  director is added. Mutual exclusion also holds without a brain.
+- Found rounded-controller edge misses: Unity's CCT query capsule is shrunken.
+  Configured capsule geometry is explicitly checked (same1.05m hand radius), and
+  stomp uses a CharacterController-compatible closest-point helper too. Tests now
+  exercise actual controller-only victims, not just box stand-ins.
+- Final review fixed an auto-update timing hazard: a director/input start earlier
+  in this Update must NOT consume the delta from before it started. Both attacks
+  skip automatic ticking on their selection frame; explicit TickAttack remains
+  deterministic. New regression checks full telegraph and subsequent advancement.
+- **58 passed /0 failed twice**, Unity2021.3.25f1, 2026-11-03 01:04:02–11 UTC and
+  01:05:48–57 UTC. Latest PID20680. All40 previous tests plus18 new ones.
+  Grab crouch/carry4 death cases max7.45/7.83/11.35/10.41m/s; snapshot pose preserved.
+  All8 stomp deaths still pass. Latest intact max10.95m/s,gap.006m,hipsY.85.
+- Actual saved AI scene integration resets WHILE HELD and verifies human survives,
+  controller restored, old owner destroyed and no extra grab actors remain.
+- New controls: **T auto combat**, **8 stomp**, **9/0 left/right grab**, **E escape**;
+  existing limb/eye/nape/P/R and WASD/Shift unchanged. HUD now scrolls.
+
+Stomp/grab runtime and tests are now committed as listed above; no push requested.
+The five earlier snapshot commits remain below. No main scenes/prefab/art/rig generation modified.
+Harness Unity tools unavailable; **live visual review remains pending**. Numeric
+animation/physics tests are not proof of finished motion/art. Next: review the lab,
+then height-aware mid-air ODM interception grabs and hand-to-mouth/bite/eat with
+readable contact/cancellation, followed by real-player/sword integration. Mid-air
+support is an explicit requirement, not an optional polish item.
+
+## Snapshot commits and stomp foundation (previous slice)
+
+User requested committing the current work in chunks, then moving on. Five local
+commits made (not pushed):
+- `4816c15b` Unity2021-compatible MCP tooling.
+- `2a4ee6c1` Titan art, historical backups outside Assets, Blender sources and previews.
+- `69e1a3cc` Modular runtime, patrol labs, injury and responsive motion.
+- `df22a580` Existing legacy combat scaffold plus modular sword-hit adapter; includes
+  Attack.cs window and ODM speed accessors needed to compile that adapter. Legacy
+  gameplay wiring is still unverified, not replaced by modular code.
+- `6c98f1ca` Safe disposable tests and validation checkpoint (28 passing at snapshot).
+
+Unrelated model moves/deletions, gameplay scenes, RagdollController.cs edits,
+materials, IDE/generated project files, Plastic SCM state, old prefabs/plans and
+old implementation-log docs deliberately remain uncommitted. Do not reset them.
+
+The first combat slice was **sandbox-only stomp**, now included in the combat commits above:
+`TitanStompAttack.cs`, `TitanCombatTarget.cs`, AI movement ownership, HUD/proxy health,
+and12 additional tests (40 total). Fixed .65/.14/.5s telegraph/strike/recovery,
+2.2s cooldown, fixed visible landing circle,40 damage once, scene-local geometry,
+cover/airborne/AoE filters and immediate interruption. Passive body prefab unchanged.
+Original slice used T for auto stomps; current T is auto COMBAT, with9/0 grab and
+E escape added above. 8 remains left stomp; P/limb/eye/nape/reset remain.
+See `docs/titan-stomp-combat.md`.
+
+Expanded death tests cover8 deterministic phase/foot combinations and an unforced
+(no gravity/no external contact) handoff. They exposed late wrist velocity spikes
+with hard angular stops in folded, contacting poses. Fixed by **mass-proportional
+compliant/damped angular stops on dynamic activation** (spring=mass*80,damper=mass*12).
+Original angular ranges, masses, solver counts, angular speed cap4, joint count and
+no-interpolation ownership retained. No global physics setting or linear speed cap.
+Also rebase POSITIONAL connected anchors from the current world pose: animated
+non-physical spine/shoulder intermediaries move physics bones off old bind anchors.
+Experimental mass conditioning, friction, solver, preprocessing, angular-cap and
+range changes were NOT retained. Stomp braces within its elbow hinge plane and
+recovers by blending IK targets home; support feet do not sink as hips rise.
+
+**40 passed /0 failed TWICE**: 2026-11-02 23:21:38–47 UTC and23:24:32–40 UTC,
+Unity2021.3.25f1. Latest PID47384 in the same owned disposable project below.
+Loaded-stomp death8 cases max speeds12.01–12.27m/s (formerly up to~100m/s);
+unforced handoff max.000113m/s. Latest intact max10.89,gap.004m,hipsY.86;
+injured prone5.06/kneel11.64m/s; wall routing4.23 simulated seconds.
+All28 snapshot tests still pass. Stomp is now committed together with the grab runtime/tests above.
+
+Working Editor was not running at turn start; opened project then. User later
+reopened it: last read-only process/title check PID42496, TitanAISandbox, Unity2021.3.25f1,
+WebGL target. Harness Unity tools unavailable; **live stomp visual playback is still
+pending**, despite numerical animation/physics checks. No intentional pending
+`TitanPrototypeBuild.request`. Inspect current state before any scene actions; do
+not save gameplay scenes. New code imports on Editor refresh/focus.
+
+## Earlier motion-overhaul phase
 
 - `Assets/Titan/Prototype/TitanMotionStyle.cs`: measured-speed walk/run BlendTree
   parameters, per-instance cycle/cadence/turn/posture bias; seeded local RNG, coherent
@@ -95,7 +214,7 @@ state. No compaction command was executed by the assistant.
   were runtime-only and are gone after exiting Play Mode.
 - Full notes: `docs/titan-injury-animation.md`.
 
-## Current AI phase
+## Navigation foundation (earlier phase)
 
 - New isolated scene: `Assets/Scenes/TitanAISandbox.unity`.
 - `Assets/Titan/Prototype/TitanPatrolChaseAI.cs`: opt-in component requiring the
@@ -124,7 +243,8 @@ state. No compaction command was executed by the assistant.
 Controls: **WASD** human world X/Z, **Left Shift** sprint, **Left/Right arrows**
 orbit, **2/3** sever arms, **4/5** sever legs, **6** blind, **K** kill,
 **P** pause/resume AI, **R** reset Titan and human. Buttons: hidden/open-lane target.
-Yellow wall blocks sight/navigation; cyan markers show patrol route. No attacks yet.
+Yellow wall blocks sight/navigation; cyan markers show patrol route. Current lab also
+has stomps (T toggle /8 manual), unlike this earlier navigation-only phase.
 
 ## Important bugs fixed in this phase
 
@@ -188,27 +308,30 @@ bones,78,888 triangles,2K PBR atlases. No individual finger rig/facial blendshap
 
 ## Boundaries / next steps
 
-**Grab, stomp, bite/eat, attack cancellation, player health/hold/release, swept sword
-hits and actual ODM player integration remain undone.** Leg loss now animates into
+**Bite/eat, real-player health/hold/release, swept sword hits and actual ODM player
+integration remain undone.** Sandbox stomp and standing grab/hold/escape/release
+are now implemented/tested, with live visual review still pending. Leg loss now animates into
 kneeling/prone, but crawling, regeneration and getting back up remain undone.
 Flat-lab airborne projection is not proof of
 multi-floor navigation. Production level bake, dynamic corpse avoidance, crowd
 behavior and authored animation polish are future work.
 
-Next likely phase after user tests the lab: telegraphed/cancellable stomp and grab,
-then player-combat integration. Do not claim full Titan AI or player sword testing.
+Next: user/live visual review of stomp/grab and loaded-pose deaths; add required
+mid-air ODM interception with swept contact and appropriate release, plus readable
+hand-to-mouth/bite/eat built on current hold ownership; then real-player integration. Do not claim full Titan AI or player sword testing.
 
 ## Environment / safety
 
 Root `C:/Users/maxsu/OneDrive/Documents/ODM Attempt # 1`.
 Another Unity6 editor for elderash may be running: identify ODM by project path.
-Heavily dirty tree predates our work; never revert unrelated changes. No commits.
+Heavily dirty tree predates our work; never revert unrelated changes. Five snapshot
+commits plus the new combat commits listed above; unrelated changes remain uncommitted.
 Never rerun removed Editor-preview-scene physics tests (crashed working Editor).
 Use disposable runtime tests. Standard dedicated additive scene authoring is fine.
 MCP Unity v10.3.0 endpoint localhost:8080; Blender socket JSON execute_code localhost9876.
 Existing unrelated legacy `RagdollController` unassigned-animator error and stale
 MCP disconnect logs may exist; don't claim the console globally clean.
 
-Docs: `docs/titan-motion-overhaul.md`, `docs/titan-injury-animation.md`,
+Docs: `docs/titan-grab-combat.md`, `docs/titan-stomp-combat.md`, `docs/titan-motion-overhaul.md`, `docs/titan-injury-animation.md`,
 `docs/titan-patrol-chase.md`, `docs/reference-titan-model.md`,
 `docs/modular-titan-prototype.md`, `docs/titan-prototype-validation.md`.

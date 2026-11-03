@@ -23,10 +23,14 @@ The human starts behind the tall yellow wall. The Titan follows the cyan patrol
 markers, turns toward its next waypoint and can spot the human as it rounds the
 wall. Move into the open to provoke a chase; move behind the wall to break sight.
 The HUD reports awareness state, current visibility, last-seen position and route
-status. **There are no attacks yet**: the Titan stops short of the target.
+status. The later [stomp phase](titan-stomp-combat.md) adds an opt-in attack after
+braking: a fixed visible landing marker, readable wind-up and one40-HP impact.
+The [grab slice](titan-grab-combat.md) adds exclusive bounded hold/escape/release and
+an auto selector. **T** toggles auto combat, **8** requests stomp, **9/0** left/right
+grab, **E** escapes. **P** also interrupts attacks.
 
-The lab proxy has simple ground movement/collision and no health, ODM gear,
-swords, grabbing or damage behavior. Its controls are not changes to your player.
+The proxy has sandbox HP and can be held, but still no ODM gear, swords or actual
+player wiring. Its controls/ownership and health are not changes to your real player.
 
 ## Behavior
 
@@ -95,8 +99,11 @@ to the real player or level automatically.
 - The [motion overhaul](titan-motion-overhaul.md) adds distinct native walk/run clips,
   velocity-matched cadence, head-led pivots and bounded variation. Full runtime
   foot-plant IK, production animation polish and attack clips remain unfinished.
-- Grab, stomp, bite/eat, cancellable attack sequences, damage to the player, swept
-  sword hits, crawling and player-combat integration are **not implemented here**.
+- Stomp/cancellation and proxy HP are a separate opt-in component described in
+  [the stomp phase](titan-stomp-combat.md), not logic inside the navigation class.
+  Standing grab/hold/release also uses a separate module/director. Bite/eat,
+  kneeling grabs, real-player damage, swept swords, crawling and player integration
+  remain unfinished.
 
 ## Regression tests
 

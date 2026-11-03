@@ -1,6 +1,34 @@
 # Titan prototype validation
 
-Latest validation: **28 passed / 0 failed**, **2026-11-02 04:00:16–24 UTC**, Unity
+Latest validation: **58 passed /0 failed twice**, Unity **2021.3.25f1**, **2026-11-03
+01:04:02–11 UTC** and **01:05:48–57 UTC**. The
+[grab/hold/release slice](titan-grab-combat.md) adds18 checks to the40-test stomp
+baseline. They cover fixed timing/contact, no homing, exclusive/bounded ownership,
+escape and lifecycle/limb/eye/death release, physics-state restoration, cover,
+rounded-controller geometry (also for stomp), foot support, AI/director arbitration
+without gameplay RNG consumption, resetting the actual saved lab while held, and
+not consuming pre-selection frame time during a newly started automatic attack.
+Four crouch/carry death cases max7.45/7.83/11.35/10.41m/s; current pose preserved.
+All40 previous checks still pass, including8 loaded-stomp deaths. Latest intact
+max10.95m/s,gap.006m,hipsY.85m. Live visual review/real-player adapter remain pending.
+
+Earlier stomp validation: **40 passed /0 failed twice**, Unity **2021.3.25f1**, **2026-11-02
+23:21:38–47 UTC** and **23:24:32–40 UTC**. The sandbox-only
+[stomp phase](titan-stomp-combat.md) adds12 tests to the28-test snapshot:
+readable fixed timing, exact-once/long-frame contact, dodge/no homing, cover,
+compound/AoE/airborne filtering, cancellation, mirrored foot support through recovery,
+owner-checked navigation locking, an unforced pose handoff and8 death phase/foot cases.
+
+The matrix exposed unstable hard angular stops during contacting folded poses.
+Mass-proportional compliant/damped stops fix those cases without changing masses,
+authored angular ranges, solver settings or the existing angular speed cap. No
+linear speed cap/global physics setting/loosened assertion was used. Current-pose
+positional joint anchors are also recomputed after animated spine/shoulder movement.
+Loaded-stomp death max12.01–12.27m/s across8 cases; unforced handoff.000113m/s.
+Latest intact max10.89m/s, joint gap.004m,hipsY.86; injured prone5.06/kneel11.64m/s.
+Live stomp visual review and real-player integration remain pending.
+
+Earlier motion validation: **28 passed / 0 failed**, **2026-11-02 04:00:16–24 UTC**, Unity
 **2021.3.25f1**. The [motion overhaul](titan-motion-overhaul.md) adds7 motion checks:
 velocity-matched walk/run, seeded variation, visible sole support and loop seams,
 head-led pivots, fast impact collapses, pose/phase-preserving cuts and quick eye recoil.
@@ -118,7 +146,9 @@ checked for the correct detailed geometry and material/UV mapping.
 
 - Human visual approval of proportions, deformation and ragdoll appearance.
 - Actual player sword inputs, high-speed swept hits, and momentum tuning in gameplay.
-- Navigation / sight / pursuit, grab / stomp / bite animations and attacks.
+- Production-level navigation and real-player combat. Lab navigation/sight/pursuit
+  stomp and standing grab/hold/release are tested above; bite/eat and actual player
+  integration remain undone.
 - Held-player ownership, sever-to-release behavior and combat escape sequences.
 - Crawl behavior after losing legs, limb regeneration, sounds, effects and performance variants.
 

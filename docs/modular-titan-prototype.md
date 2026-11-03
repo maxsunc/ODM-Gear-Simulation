@@ -181,8 +181,9 @@ Latest verification results: [titan-prototype-validation.md](titan-prototype-val
    left/right stomp, eye reaction, injured/crawl. Decide native animation vs Humanoid
    retargeting before replacing the prototype Generic clips.
 3. **AI**: patrol, FOV/occlusion sight, chase, investigation and search are implemented
-   in the separate AI lab. Next: attack selection based on surviving arms/legs,
-   production-level navigation and actual player integration.
+   in the separate AI lab. Grab/stomp selection now respects surviving capabilities.
+   Next: height-aware mid-air grabs against ODM-swinging players (explicit user
+   requirement), production navigation, kneeling attacks and real-player integration.
 4. **Attack sequences**: animation-event contact windows, actual hand/mouth overlap
    checks, deduplicated stomp damage, hold/escape/eat, cancel immediately on death,
    arm loss or eye stun. Never let a delayed coroutine kill a released player.
@@ -192,7 +193,8 @@ Latest verification results: [titan-prototype-validation.md](titan-prototype-val
 6. **Polish**: steam, stump surfaces/decals, sounds, impact feedback, corpse lifetime,
    regeneration if desired, size variants and performance testing.
 
-The separate AI lab now patrols and chases its human proxy; the passive body prefab
-still does not do so by itself. **Grab, stomp, eating and actual player-combat
-integration remain unimplemented.** Do not assume those work because legacy scripts
-expose similarly named methods.
+The separate AI lab patrols/chases its proxy and now has a sandbox-only
+[telegraphed stomp](titan-stomp-combat.md) and [grab/hold/release](titan-grab-combat.md).
+The passive body prefab still does not acquire AI/attacks by itself. **Eating and
+actual player-combat integration remain unimplemented.** Do not assume those work because legacy scripts expose
+similarly named methods.
