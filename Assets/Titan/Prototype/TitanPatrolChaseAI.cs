@@ -44,6 +44,21 @@ public class TitanPatrolChaseAI : MonoBehaviour
     NavMeshAgent agent;
     TitanMotionStyle motion;
     Transform eyes, observedTarget;
+    MonoBehaviour movementOwner;
+    public bool IsMovementLocked { get { return movementOwner != null && movementOwner.isActiveAndEnabled; } }
+    public bool TryAcquireMovementLock(MonoBehaviour owner)
+    {
+        if (owner == null || !owner.isActiveAndEnabled || (IsMovementLocked && movementOwner != owner)) return false;
+        movementOwner = owner;
+        StopMovement();
+        return true;
+    }
+    public void ReleaseMovementLock(MonoBehaviour owner)
+    {
+        if (movementOwner != owner) return;
+        movementOwner = null;
+        pathTimer = 0;
+    }
     readonly RaycastHit[] sightHits = new RaycastHit[64];
     NavMeshPath path;
     float senseTimer, pathTimer, memoryAge, waitTimer;
@@ -125,6 +140,9 @@ public class TitanPatrolChaseAI : MonoBehaviour
         }
         // Never keep a stale positive sight result after a target is destroyed/disabled.
         if (target == null || !target.gameObject.activeInHierarchy) CanSeeTarget = false;
+        // Keep perception/memory alive while an attack owns movement, but never
+        // let a chase repath restart navigation during its wind-up or recovery.
+        if (IsMovementLocked) { StopMovement(); return; }
         if (CanSeeTarget)
         {
             EnterState(TitanAwarenessState.Chase);

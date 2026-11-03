@@ -315,7 +315,11 @@ public class ModularTitanBody : MonoBehaviour
             var joint = rb.GetComponent<CharacterJoint>();
             if (joint == null || joint.connectedBody == null) continue;
             var connected = joint.connectedBody;
-            Vector3 anchor = joint.anchor, connectedAnchor = joint.connectedAnchor;
+            Vector3 anchor = joint.anchor;
+            // Spine/shoulder intermediary bones are animated but have no Rigidbody.
+            // Their rotations move the child joint away from its bind-pose anchor.
+            // Reconnecting while retaining that old anchor injects constraint energy.
+            Vector3 connectedAnchor = connected.transform.InverseTransformPoint(joint.transform.TransformPoint(anchor));
             joint.connectedBody = null;
             joint.connectedBody = connected;
             joint.autoConfigureConnectedAnchor = false;
@@ -326,6 +330,16 @@ public class ModularTitanBody : MonoBehaviour
 
     static void MakeDynamic(Rigidbody rb)
     {
+        var joint = rb.GetComponent<CharacterJoint>();
+        if (joint != null)
+        {
+            // Dead joints yield at their angular stops instead of applying hard
+            // corrective impulses against floor contacts. Keep the authored limits
+            // and scale spring/damping with mass, not with the FBX's 100x scale.
+            var stop = new SoftJointLimitSpring { spring = rb.mass * 80, damper = rb.mass * 12 };
+            joint.twistLimitSpring = stop;
+            joint.swingLimitSpring = stop;
+        }
         rb.isKinematic = false;
         // Drop cached kinematic interpolation poses when switching ownership to PhysX.
         rb.interpolation = RigidbodyInterpolation.None;

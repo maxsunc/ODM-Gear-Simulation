@@ -17,7 +17,12 @@ public class TitanAISandboxDemo : MonoBehaviour
         new Vector3(14, 0, 16), new Vector3(14, 0, -12)
     };
     public TitanPatrolChaseAI Brain { get; private set; }
+    public TitanStompAttack Combat { get; private set; }
+    public TitanGrabAttack Grab { get; private set; }
+    public TitanCombatDirector Director { get; private set; }
+    public TitanCombatTarget HumanHealth { get; private set; }
     float orbit = 30f;
+    Vector2 panelScroll;
     string setupError;
     GUIStyle title, small;
 
@@ -49,6 +54,15 @@ public class TitanAISandboxDemo : MonoBehaviour
         Brain = titan.gameObject.AddComponent<TitanPatrolChaseAI>();
         Brain.target = target != null ? target.transform : null;
         Brain.patrolPoints = patrolPoints;
+        if (target != null)
+        {
+            HumanHealth = target.GetComponent<TitanCombatTarget>();
+            if (HumanHealth == null) HumanHealth = target.gameObject.AddComponent<TitanCombatTarget>();
+            HumanHealth.ResetHealth();
+        }
+        Combat = titan.gameObject.AddComponent<TitanStompAttack>();
+        Grab = titan.gameObject.AddComponent<TitanGrabAttack>();
+        Director = titan.gameObject.AddComponent<TitanCombatDirector>();
     }
 
     void Update()
@@ -62,6 +76,11 @@ public class TitanAISandboxDemo : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha5)) Slice(TitanHitRegion.RightLeg);
             if (Input.GetKeyDown(KeyCode.Alpha6)) titan.StunEyes();
             if (Input.GetKeyDown(KeyCode.K)) titan.Die();
+            if (Input.GetKeyDown(KeyCode.Alpha8) && Combat != null) Combat.TryBeginStomp(HumanHealth, true);
+            if (Input.GetKeyDown(KeyCode.Alpha9) && Grab != null) Grab.TryBeginGrab(HumanHealth, true);
+            if (Input.GetKeyDown(KeyCode.Alpha0) && Grab != null) Grab.TryBeginGrab(HumanHealth, false);
+            if (Input.GetKeyDown(KeyCode.E) && HumanHealth != null) HumanHealth.EscapeHold();
+            if (Input.GetKeyDown(KeyCode.T) && Director != null) Director.SetAutomaticAttacks(!Director.automaticAttack);
         }
         if (Input.GetKeyDown(KeyCode.P) && Brain != null) Brain.enabled = !Brain.enabled;
         if (Input.GetKey(KeyCode.LeftArrow)) orbit -= 30 * Time.deltaTime;
@@ -84,6 +103,8 @@ public class TitanAISandboxDemo : MonoBehaviour
             foreach (var limb in titan.limbs)
                 if (limb.severed && limb.rootBone != null) detached.Add(limb.rootBone.root.gameObject);
             foreach (var root in detached) Destroy(root);
+            if (Director != null) Director.CancelAttacks("Reset");
+            if (Grab != null) Grab.Cancel("Reset");
             if (Brain != null) Brain.enabled = false;
             var oldAgent = titan.GetComponent<NavMeshAgent>();
             if (oldAgent != null) oldAgent.enabled = false;
@@ -104,8 +125,9 @@ public class TitanAISandboxDemo : MonoBehaviour
             title = new GUIStyle(GUI.skin.label) { fontSize = 20, fontStyle = FontStyle.Bold };
             small = new GUIStyle(GUI.skin.label) { fontSize = 12, wordWrap = true };
         }
-        GUILayout.BeginArea(new Rect(15, 15, 320, 570), GUI.skin.box);
-        GUILayout.Label("TITAN / SIGHT & CHASE LAB", title);
+        GUILayout.BeginArea(new Rect(15, 15, 360, Mathf.Min(710, Mathf.Max(120, Screen.height - 30))), GUI.skin.box);
+        panelScroll = GUILayout.BeginScrollView(panelScroll);
+        GUILayout.Label("TITAN / COMBAT LAB", title);
         if (setupError != null) GUILayout.Label(setupError, small);
         if (Brain != null)
         {
@@ -118,8 +140,13 @@ public class TitanAISandboxDemo : MonoBehaviour
             var injury = titan.GetComponent<TitanInjuryPose>();
             if (injury != null) GUILayout.Label("Injury: " + injury.State + (injury.IsTransitioning ? " / collapsing" : ""), small);
         }
+        if (Combat != null) GUILayout.Label("Stomp: " + Combat.Stage + " | cooldown " + Combat.CooldownRemaining.ToString("F1") + "s\n" + Combat.LastResult, small);
+        if (Director != null) GUILayout.Label("Auto combat: " + (Director.automaticAttack ? "ON" : "OFF") + " | " + Director.LastChoice, small);
+        if (Grab != null) GUILayout.Label("Grab: " + Grab.Stage + " | " + Grab.LastResult, small);
+        if (HumanHealth != null && HumanHealth.IsHeld) GUILayout.Label("HELD — E to escape (no eat/damage yet)", small);
+        if (HumanHealth != null) GUILayout.Label("Human HP: " + HumanHealth.Health.ToString("F0") + " / " + HumanHealth.maxHealth + (HumanHealth.IsDead ? " — R to reset" : ""), small);
         GUILayout.Space(8);
-        GUILayout.Label("WASD: move teal human (world directions)\nLeft Shift: sprint | Left/Right arrows: orbit\nWalk behind the tall wall to break sight.\nNo attacks yet: Titan stops short of the human.", small);
+        GUILayout.Label("WASD: move teal human | Shift: sprint\nArrows: orbit | T: toggle auto combat\n8: stomp | 9/0: left/right grab | E: escape\nYellow/cyan aim locks BEFORE contact. Dodge it!", small);
         if (GUILayout.Button("Human: behind wall") && target != null) target.Warp(new Vector3(0, 0, 18));
         if (GUILayout.Button("Human: open left lane") && target != null) target.Warp(new Vector3(-12, 0, 0));
         GUI.enabled = titan != null && !titan.IsDead;
@@ -131,7 +158,8 @@ public class TitanAISandboxDemo : MonoBehaviour
         if (GUILayout.Button("P  Pause / resume AI") && Brain != null) Brain.enabled = !Brain.enabled;
         if (GUILayout.Button("R  Reset Titan and human")) ResetTitan();
         GUILayout.Space(8);
-        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. One leg lost: kneel. Both lost: helpless/prone. Attacks are not implemented yet.", small);
+        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. Stomp deals 40 HP once. Blindness, leg loss, death or AI pause cancels it. One leg lost: kneel; both lost: helpless/prone. Grab holds briefly then safely releases; E escapes. Grabbing-arm loss, blindness, leg loss or death releases immediately. Eating/real-player integration pending.", small);
+        GUILayout.EndScrollView();
         GUILayout.EndArea();
     }
 }

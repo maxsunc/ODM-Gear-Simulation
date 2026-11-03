@@ -11,6 +11,8 @@ public class TitanSandboxTarget : MonoBehaviour
     void Awake() { controller = GetComponent<CharacterController>(); }
     void Update()
     {
+        var health = GetComponent<TitanCombatTarget>();
+        if (!controller.enabled || (health != null && health.IsHeld)) { verticalSpeed = 0; return; }
         Vector3 direction = Vector3.zero;
         if (Input.GetKey(KeyCode.W)) direction.z++;
         if (Input.GetKey(KeyCode.S)) direction.z--;
@@ -18,6 +20,7 @@ public class TitanSandboxTarget : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) direction.x--;
         if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
         verticalSpeed += Physics.gravity.y * Time.deltaTime;
+        if (health != null && health.IsDead) direction = Vector3.zero;
         Vector3 motion = direction.normalized * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : speed);
         motion.y = verticalSpeed;
         controller.Move(motion * Time.deltaTime);
@@ -26,9 +29,12 @@ public class TitanSandboxTarget : MonoBehaviour
     }
     public void Warp(Vector3 position)
     {
+        var health = GetComponent<TitanCombatTarget>();
+        if (health != null) health.EscapeHold();
+        bool wasEnabled = controller.enabled;
         controller.enabled = false;
         transform.position = position;
         verticalSpeed = 0;
-        controller.enabled = true;
+        controller.enabled = wasEnabled;
     }
 }
