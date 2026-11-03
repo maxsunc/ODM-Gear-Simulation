@@ -6,9 +6,11 @@ Approved prototype work is pushed through **940daf1d** on `origin/titan-combat-u
 User then authorized integration into the existing **FreeRoam (Shiganshina** scene:
 [real ODM scene integration](titan-shiganshina-integration.md), **116/116 twice**.
 Two old scene Titan instances replaced, actual player/health/swords wired with narrow
-hold-only motor hooks. That new review slice is uncommitted. Shared body/player
-prefabs, rest rig, art and other gameplay scenes remain unchanged. Original phase-1
-scope below is historical; only the explicitly requested scene is now integrated.
+hold-only motor hooks. That integration was committed0f371f2c. The later user-requested
+[FreeRoam full-map navigation test](titan-freeroam-navigation.md) is now a separate
+checkpointed follow-up,123/123 twice, preserving their3x/5x placements. Shared body/
+player prefabs, rest rig and art remain unchanged. Original phase-1 scope below is
+historical; gameplay scene work is limited to the two explicitly requested scenes.
 
 ## Scope
 

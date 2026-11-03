@@ -14,7 +14,66 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current request: commit integration checkpoint, then test full-map FreeRoam navigation
+## Current: full-map FreeRoam navigation TEST ready; integration checkpoint committed
+
+**0f371f2c** committed the prior actual ODM integration + user's3x/5x FreeRoam Titans
+and138m/180deg sight defaults. Local only, no new push requested. NEW navigation
+experiment is now checkpointed at the user's request before switching to player/scout
+model, swords and animation planning. No new push requested; unrelated dirty tree still
+excluded. Navigation commit follows0f371f2c (see Git log). No scout modeling begun yet.
+
+Active scene **Assets/Scenes/FreeRoam.unity**, saved setup object
+**FreeRoam Titan navigation TEST**. Editor-only full-map bake,338 actual physical
+sources (332 MeshColliders), no mesh import/readability edits, no fake floor.
+Bounds~2122x908x1595m including full2km map. Two owned baked assets in
+`Assets/Navigation/Titans/FreeRoam/`: world radius5.4/height36 for3x and9/60 for5x.
+Two named authored agent types added; original Humanoid0 radius.5/height2 unchanged.
+Stable IDs/GUIDs on re-bake verified, type count3 before/after. Canonical.001 scales.
+Native type IDs may be NEGATIVE: only-1 is missing. Profiles(-1372625422,-334000983).
+
+New core: `TitanNavigationGeometry` physical-source collection (actual TerrainCollider
+fallback for local-physics runtime tests), `TitanWorldNavigation` owned asset registration.
+New default-assembly `TitanFreeRoamIntegration`; explicit Editor menu builder
+`TitanFreeRoamNavigationBuilder`. **Enable Combat=false** for nav testing; toggle in
+Edit Mode for combat. Sight Range138/FOV180/Patrol Radius200 editable on setup Inspector.
+Original player controls unchanged. Health/motor/sword bridge wired scene-only.
+Shared prefabs/rest rig/art/Physics settings not edited. Existing user placements/scales
+preserved; three-unit startup projection only, no giant teleports across scenery.
+
+IMPORTANT: user's5x spawn(20,-1.84,25) intersects **mediumTree (193)**. Actual physics
+capsule overlap confirms tree.5x nav has no point within3/5/10m; nearest sample
+(35.76,-1.36,13.18),19.71m away. Setup correctly shows spawn error instead of shrinking
+clearance or forcing movement. Move that Titan to clear ground, e.g.X36/Z13; no rebake
+needed just for repositioning onto current data.3x starts on mesh and chases naturally.
+5x relocation for validation was ONLY temporary Play Mode; original saved pose retained.
+
+**123/123 passed twice**, Unity2021.3.25f1, all116 prior +7 nav tests:
+- **2026-11-03 19:03:46–19:04:02 UTC**, PID21108,16.006s.
+- **19:05:38–54 UTC**, PID26368,16.248s.
+New checks: whole-map static physics source filtering, cross-scene fail-closed,
+actual TerrainCollider,500m sloped-mesh path around cover,16m gap passes3x/rejects5x,
+exactly-once scaled avoidance, owned registration/re-enable preserving external data.
+All existing<8deg/120Hz,<40m/s,physical contact/torso assertions retained.
+
+Live unpaused native Editor review: both data registered,20532 triangulation indices.
+3x61/68 and5x60/67 sampled grid destinations complete, seven disconnected/blocked
+refused. Longest native complete routes1409m/13 corners and1418m/14 corners, native
+actors actually moved>1.3km (not just path queries). First long run exposed double-
+scaled avoidance: world clearance belongs to BAKE, agent component dimensions follow
+transform scale. `Profile.ConfigureAgent` sets radius~1.8/height~12 locally, not5.4/9
+again; regression added. Final distinct-destination native run arrived:3x147.41m
+movement,1.87m remaining within3m stopping distance;5x204.93m movement,0m remaining;
+both on mesh/PathComplete/no pending/velocity0 after reloading rebaked assets.
+
+Proof **ArtSource/Titan/Navigation/FreeRoam_FullMap_MCP.png**, real map with temporary
+native route overlay (cyan3x/orange5x); overlay/camera/RT removed, fog restored.
+Backup `Library/TitanFullMapBackup/`. Editor returned clean/unpaused Edit Mode in
+FreeRoam with saved3x/5x transforms intact. Read `docs/titan-freeroam-navigation.md`
+for menu/rebake/controls/limitations. Moving geometry/new roots/scale changes require
+explicit saved-scene re-bake. Not yet scaled combat/ragdoll/terrain-foot-IK/multi-floor/
+full crowd approval. Do not claim every disconnected island reachable.
+
+## Previous request: commit integration checkpoint, then test full-map FreeRoam navigation
 
 User moved/copied the two modular Titans into `Assets/Scenes/FreeRoam.unity`, scale3x
 and5x, and tuned AI defaults to sightRange138/FOV180. Preserve these choices. User

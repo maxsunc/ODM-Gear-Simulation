@@ -63,6 +63,8 @@ for relative in ['Assets/Prefabs/Titans/ModularTitanPrototype.prefab',
     'com.unity.modules.jsonserialize': '1.0.0',
     'com.unity.modules.uielements': '1.0.0',
     'com.unity.modules.particlesystem': '1.0.0',
+    'com.unity.modules.terrain': '1.0.0',
+    'com.unity.modules.terrainphysics': '1.0.0',
 }}, indent=2), encoding='utf-8')
 (project / 'ProjectSettings').mkdir(exist_ok=True)
 shutil.copy2(root / 'ProjectSettings/ProjectVersion.txt', project / 'ProjectSettings/ProjectVersion.txt')

@@ -1,6 +1,20 @@
 # Titan prototype validation
 
-Latest real-ODM/Shiganshina integration: **116 passed /0 failed twice**, Unity
+Latest FreeRoam full-map navigation experiment: **123 passed /0 failed twice**, Unity
+**2021.3.25f1**, **2026-11-03 19:03:46–19:04:02 UTC** (PID21108,16.006s) and
+**19:05:38–54 UTC** (PID26368,16.248s). All116 prior +7 physical-source/terrain/
+500m ramp-cover path/size-specific16m gap/exactly-once avoidance/owned-data tests.
+No weakened original physics, continuity or contact assertions.
+Live full-map338-source bake, two3x/5x profiles with stable IDs/GUIDs on re-bake.
+Native complete paths1409m/1418m; actual actors travelled>1.3km. Corrected double-
+scaled avoidance; final distinct-destination native arrival147m/205m, remaining1.87m/0,
+both onMesh/PathComplete/velocity0. User5x original spawn intersects mediumTree193,
+so validation relocation only in Play Mode; saved actor positions/scales preserved.
+Details/known limits: `titan-freeroam-navigation.md`.
+Checkpoint0f371f2c committed prior integration; navigation checkpoint committed at the
+user's next request before scout character/animation planning (see Git log). No new push.
+
+Previous real-ODM/Shiganshina integration: **116 passed /0 failed twice**, Unity
 **2021.3.25f1**, **2026-11-03 15:52:12–27 UTC** (PID40516) and
 **15:55:56–15:56:11 UTC** (PID34836,15.561s). All108 approved checks +8 actual
 legacy/default-assembly integration/native-CCT/sword regressions. Strict<8deg/120Hz

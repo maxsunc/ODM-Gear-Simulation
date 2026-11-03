@@ -1,5 +1,12 @@
 # Shiganshina / real ODM integration
 
+## Later checkpoint
+
+This integration was committed **0f371f2c** at the user's next request (local, not pushed).
+They copied3x/5x Titans into FreeRoam; [full-map navigation test](titan-freeroam-navigation.md)
+is now a separately checkpointed follow-up,123/123 twice. Historical initial review
+status below describes this document's earlier milestone.
+
 ## Request and Git checkpoint
 
 User approved the fast aerial/corrected mouth carry, requested commit + push, then

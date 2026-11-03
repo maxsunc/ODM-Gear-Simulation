@@ -10897,6 +10897,10 @@ GameObject:
   - component: {fileID: 273712449}
   - component: {fileID: 273712450}
   - component: {fileID: 273712451}
+  - component: {fileID: 273712455}
+  - component: {fileID: 273712454}
+  - component: {fileID: 273712453}
+  - component: {fileID: 273712452}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -10986,6 +10990,7 @@ Transform:
   - {fileID: 390544619}
   - {fileID: 1967424716}
   - {fileID: 192522817}
+  - {fileID: 2104499012}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11404,7 +11409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armatureAnimator: {fileID: 1920215378}
-  damageDealer: {fileID: 0}
+  damageDealer: {fileID: 2104499014}
   slashSfx: {fileID: 273712451}
 --- !u!82 &273712451
 AudioSource:
@@ -11502,6 +11507,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &273712452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273712438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c06929034e4c0045bc45a55d4eb4f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &273712453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273712438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2852c51d574e1f926de24936c058b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  maximumHoldDuration: 4
+--- !u!114 &273712454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273712438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc65072f3ae919d48af324b11bdd5a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &273712455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273712438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62080bc95ace17b478a9bfb4f37a9372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 0
+  ragdollController: {fileID: 0}
+  isDead: 0
+  isGrabbed: 0
+  grabbedByTitan: {fileID: 0}
 --- !u!1001 &277287159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42207,6 +42268,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: be05db67e5ad0134994acebce0790e85, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77b54d22dc71dae48b9522cb8511c259, type: 3}
+--- !u!4 &1508062664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 77b54d22dc71dae48b9522cb8511c259,
+    type: 3}
+  m_PrefabInstance: {fileID: 1508062663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1510986729
 GameObject:
   m_ObjectHideFlags: 3
@@ -44037,6 +44104,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 990bc66ea34e7f4448417b5c71954f8f, type: 3}
+--- !u!114 &1617714352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4375372391783504337, guid: 990bc66ea34e7f4448417b5c71954f8f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617714351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf7f15b1a6d61c49ba3b3fc7d9d0c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1621496975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48374,6 +48453,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 990bc66ea34e7f4448417b5c71954f8f, type: 3}
+--- !u!114 &1784834836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4375372391783504337, guid: 990bc66ea34e7f4448417b5c71954f8f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1784834835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf7f15b1a6d61c49ba3b3fc7d9d0c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789150282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bc3f3e2d71848144cb274f6e7d16141c,
@@ -48535,6 +48626,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: be05db67e5ad0134994acebce0790e85, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77b54d22dc71dae48b9522cb8511c259, type: 3}
+--- !u!4 &1801050358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 77b54d22dc71dae48b9522cb8511c259,
+    type: 3}
+  m_PrefabInstance: {fileID: 1801050357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1815913805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50688,6 +50785,94 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8081317734454312985, guid: bc3f3e2d71848144cb274f6e7d16141c, type: 3}
+--- !u!1 &1877126867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1877126870}
+  - component: {fileID: 1877126869}
+  - component: {fileID: 1877126868}
+  m_Layer: 0
+  m_Name: FreeRoam Titan navigation TEST
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1877126868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877126867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a60e2a88e78d9b45a3a210164fae05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 273712439}
+  titans:
+  - {fileID: 1617714352}
+  - {fileID: 1784834836}
+  navigation: {fileID: 1877126869}
+  sightRange: 138
+  fieldOfView: 180
+  patrolRadius: 200
+  spawnProjectionDistance: 3
+  enableCombat: 0
+--- !u!114 &1877126869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877126867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a5bdbbfcef14f42ac1f6ce0bbc8ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  geometryRoots:
+  - {fileID: 1443704293}
+  - {fileID: 1841980557}
+  profiles:
+  - label: 3x
+    scale: 3
+    radius: 5.3999996
+    height: 36
+    agentTypeID: -1372625422
+    data: {fileID: 23800000, guid: 7387b647c6667df469a843f9a3d7e818, type: 2}
+  - label: 5x
+    scale: 5
+    radius: 9
+    height: 60
+    agentTypeID: -334000983
+    data: {fileID: 23800000, guid: 7a67eab0c7f1fcf40ab6bce1cf6c2d10, type: 2}
+  bakedBounds:
+    m_Center: {x: -98.97876, y: 346.53607, z: -351.00397}
+    m_Extent: {x: 1061.0112, y: 454.02435, z: 797.61414}
+  sourceCount: 338
+  bakedAt: 2026-11-03T19:05:40.6938956Z
+--- !u!4 &1877126870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877126867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879881720 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bc3f3e2d71848144cb274f6e7d16141c,
@@ -56644,6 +56829,69 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0edd8644a894519439a055cabc4ea2c6, type: 3}
+--- !u!1 &2104499011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104499012}
+  - component: {fileID: 2104499014}
+  - component: {fileID: 2104499013}
+  m_Layer: 0
+  m_Name: Titan sword damage window
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2104499012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104499011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 273712444}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2104499013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104499011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b745495e9b01efa4b988521fcfad3176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bladeMeshes:
+  - {fileID: 1801050358}
+  - {fileID: 1508062664}
+  bladeRadius: 0.035
+--- !u!114 &2104499014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104499011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7574eeec2e53f8f4b875764b7d8a195a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  momentumMultiplier: 2.5
 --- !u!1001 &2105491787
 PrefabInstance:
   m_ObjectHideFlags: 0
