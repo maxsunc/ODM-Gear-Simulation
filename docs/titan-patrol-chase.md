@@ -101,8 +101,9 @@ to the real player or level automatically.
   foot-plant IK, production animation polish and attack clips remain unfinished.
 - Stomp/cancellation and proxy HP are a separate opt-in component described in
   [the stomp phase](titan-stomp-combat.md), not logic inside the navigation class.
-  Standing grab/hold/release also uses a separate module/director. Bite/eat,
-  kneeling grabs, real-player damage, swept swords, crawling and player integration
+  Standing grab/hold/release and [hand-to-mouth/bite](titan-bite-combat.md) also stay
+  outside navigation. Aerial/kneeling grabs, production consumption, real-player
+  damage, swept swords, crawling and player integration
   remain unfinished.
 
 ## Regression tests

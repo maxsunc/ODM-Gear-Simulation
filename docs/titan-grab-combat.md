@@ -4,6 +4,12 @@ The next combat slice after [stomp](titan-stomp-combat.md). It stays opt-in and
 sandbox-only: no attacks added to the reusable body prefab, no gameplay scenes
 saved, and no dependency on legacy PlayerHealth or the ODM controller.
 
+**Later ground follow-up:** the combat lab now opts into
+[hand-to-mouth and contact-validated bite](titan-bite-combat.md). This document's
+original timing table describes standalone `enableBite=false` mode; the lab adds
+.7s transfer, .6s mouth warning and .12s jaw closure before the lethal contact.
+E escape and all release/cancellation contracts remain. Aerial grabs are still next.
+
 ## Try it
 
 Open `Assets/Scenes/TitanAISandbox.unity`, enter Play, move into the open with WASD.
@@ -101,7 +107,9 @@ It is the sole auto-selection owner and turns off stomp's standalone auto select
 - Uses owner-checked AI movement locks; perception may continue but chase cannot
   restart navigation mid-action. No styling/attack query tracks hidden prey.
 
-## Validation
+## Validation of the grab foundation
+
+Current bite-expanded results are in [validation](titan-prototype-validation.md).
 
 **58 passed / 0 failed twice**, Unity2021.3.25f1, in the owned disposable project:
 2026-11-03 **01:04:02–11 UTC** and **01:05:48–57 UTC** (latest PID20680).
@@ -152,8 +160,9 @@ ability, not implied by this requirement.
 
 ## Still pending
 
-Hand-to-mouth/bite/eat, readable lethal contact, production escape/clearance-tested
-release, real ODM player state/controller/damage adapter, real sword/swept-hit testing,
+Production consumption art/respawn, escape/clearance-tested release, real ODM player
+state/controller/damage adapter, real sword/swept-hit testing,
 mid-air ODM interception grabs, kneeling grabs, production hand animation, runtime
 terrain IK and crowd tuning.
-No asynchronous death timer/coroutine or bite damage is present in this grab implementation.
+Hand-to-mouth and readable mouth-contact damage are now an opt-in sandbox extension.
+No asynchronous death timer/coroutine exists; released players cannot be bitten later.

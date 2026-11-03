@@ -76,6 +76,11 @@ public class TitanAISandboxScenePlayModeTests
         Assert.That(demo.HumanHealth.IsHeld,Is.True,demo.Grab.LastResult+" contact="+demo.Grab.LastContactPoint+
             " human="+demo.target.GetComponent<CharacterController>().bounds+" actor="+demo.titan.transform.position+
             " overlaps="+string.Join(",",Physics.OverlapSphere(demo.Grab.LastContactPoint,demo.Grab.contactRadius,~0,QueryTriggerInteraction.Ignore).Select(c=>c.name)));
+        float beforeBite=demo.Grab.windupDuration+demo.Grab.reachDuration+demo.Grab.holdDuration+
+            demo.Grab.mouthTransferDuration+demo.Grab.biteWindupDuration-.02f;
+        demo.Grab.TickAttack(beforeBite-demo.Grab.Elapsed);
+        Assert.That(demo.Grab.Stage,Is.EqualTo(TitanGrabStage.BiteWindup));
+        demo.titan.animator.Update(0); demo.Grab.ApplyPose(); demo.HumanHealth.TickHold(0);
         var human=demo.target; var old=demo.titan;
         demo.ResetTitan();
         Assert.That(demo.HumanHealth.IsHeld,Is.False);
@@ -85,6 +90,29 @@ public class TitanAISandboxScenePlayModeTests
         Assert.That(human.gameObject.scene,Is.EqualTo(scene)); Assert.That(human.transform.parent,Is.Null);
         Assert.That(scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanGrabAttack>()).Count(),Is.EqualTo(1));
         Assert.That(demo.HumanHealth.Health,Is.EqualTo(100));
+    }
+
+    [UnityTest]
+    public IEnumerator AuthoredLabOptInBiteDamagesItsRealControllerProxyThenResets()
+    {
+        yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/TitanAISandbox.unity",new LoadSceneParameters(LoadSceneMode.Additive));
+        scene=SceneManager.GetSceneByPath("Assets/Scenes/TitanAISandbox.unity"); yield return null;
+        var demo=scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanAISandboxDemo>()).Single();
+        demo.Director.SetAutomaticAttacks(false); demo.Grab.automaticTick=false; demo.Grab.drawTelegraph=false;
+        demo.Brain.automaticTick=false;
+        Assert.That(demo.Grab.enableBite,Is.True,"Only the runtime combat lab opts into eating");
+        demo.target.Warp(demo.titan.transform.position+new Vector3(.7f,0,5.7f));
+        Physics.SyncTransforms(); demo.Brain.TickAI(.2f);
+        Assert.That(demo.Grab.TryBeginGrab(demo.HumanHealth,true),Is.True);
+        demo.Grab.TickAttack(.84f); Assert.That(demo.HumanHealth.IsHeld,Is.True);
+        float time=demo.Grab.windupDuration+demo.Grab.reachDuration+demo.Grab.holdDuration+
+            demo.Grab.mouthTransferDuration+demo.Grab.biteWindupDuration+demo.Grab.biteDuration;
+        demo.Grab.TickAttack(time+.01f-demo.Grab.Elapsed);
+        Assert.That(demo.HumanHealth.IsDead,Is.True,demo.Grab.LastResult);
+        Assert.That(demo.HumanHealth.IsHeld,Is.False); Assert.That(demo.target.GetComponent<CharacterController>().enabled,Is.True);
+        Assert.That(demo.Grab.Stage,Is.EqualTo(TitanGrabStage.Recovery));
+        demo.ResetTitan(); yield return null;
+        Assert.That(demo.HumanHealth.Health,Is.EqualTo(100)); Assert.That(demo.Grab.enableBite,Is.True);
     }
 
     [UnityTearDown]

@@ -129,7 +129,8 @@ Tests remain in the disposable project via `tools/run_titan_validation.py --wait
 
 Later sandbox slices now add [stomp](titan-stomp-combat.md) and
 [grab/hold/release](titan-grab-combat.md) independently of the motion component.
-Bite/eat, real-player damage/hold/release, swept sword integration, authored attack
+The later [ground bite](titan-bite-combat.md) adds hand-to-mouth/contact damage too.
+Aerial grabs, production eating art, real-player damage/hold/release, swept sword integration, authored attack
 variants, final production animation/IK and multi-Titan crowd tuning remain undone.
 Future attacks should have unpredictable **selection**, but readable wind-ups/contact
 windows; motion variation must never randomly shorten a damage telegraph.

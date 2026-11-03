@@ -1,6 +1,30 @@
 # Titan prototype validation
 
-Latest validation: **58 passed /0 failed twice**, Unity **2021.3.25f1**, **2026-11-03
+Latest arm-continuity fix: **74 passed /0 failed twice**, Unity **2021.3.25f1**,
+2026-11-03 **02:44:07–20 UTC** and **02:49:24–37 UTC**. The new both-hand/four-phase
+120Hz rotation/jaw test reproduced137.26deg jumps with the prior code (73 others
+still passed), then measured **2.26deg** after stable IK frames and non-accumulating
+jaw rotation. Assertions remain<8deg/sample and jaw<28.1deg. MCP reproduced the
+failure in the working Editor and captured/reviewed both fixed sides: no adjacent
+pose flip, .35m hand/mouth gap. See `titan-bite-combat.md` and the comparison image
+at `ArtSource/Titan/Combat/GrabArmContinuity_Comparison.png`. Mouth-phase death
+maxima10.57/10.36/11.82/11.81m/s; intact11.06m/s,gap.005m,hipsY.84m. No physics tuning
+or damage telegraphs changed. All73 previous checks pass; real-player/aerial work
+and production animation remain pending. Editor returned to clean, unpaused Edit Mode.
+
+Previous ground-bite validation: **73 passed /0 failed twice**, Unity **2021.3.25f1**,
+**2026-11-03 01:50:19–32 UTC** and **01:52:14–28 UTC**, in the owned disposable project. All58 previous checks
+plus15 additions cover actual arm-to-mouth reach with either hand, disabled shape
+contact and rounded controllers, late escape/cancellation, cover/carry obstruction,
+latched timing/damage, lease expiry vs long ticks, exact-once bites, callback death
+handoff, foot support, four mouth-phase ragdolls, normal-frame automatic playback,
+and saved-lab lethal bite/reset. Existing AI pause/reset tests now reach mouth windup.
+See [ground bite](titan-bite-combat.md). No rig, physics settings or assertion limits
+changed. Mouth-phase death maxima10.29/10.09/11.27/11.04m/s (four5s simulations);
+latest intact10.98m/s,gap.005m,hipsY.84m. Live visual/art review and real-player/aerial
+integration remain pending.
+
+Previous grab validation: **58 passed /0 failed twice**, Unity **2021.3.25f1**, **2026-11-03
 01:04:02–11 UTC** and **01:05:48–57 UTC**. The
 [grab/hold/release slice](titan-grab-combat.md) adds18 checks to the40-test stomp
 baseline. They cover fixed timing/contact, no homing, exclusive/bounded ownership,
@@ -147,8 +171,8 @@ checked for the correct detailed geometry and material/UV mapping.
 - Human visual approval of proportions, deformation and ragdoll appearance.
 - Actual player sword inputs, high-speed swept hits, and momentum tuning in gameplay.
 - Production-level navigation and real-player combat. Lab navigation/sight/pursuit
-  stomp and standing grab/hold/release are tested above; bite/eat and actual player
-  integration remain undone.
+  stomp, standing grab/hold/release and ground hand-to-mouth/contact bite are tested
+  above; aerial grabs, consumption art/respawn and actual player integration remain undone.
 - Held-player ownership, sever-to-release behavior and combat escape sequences.
 - Crawl behavior after losing legs, limb regeneration, sounds, effects and performance variants.
 

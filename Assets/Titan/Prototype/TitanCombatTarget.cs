@@ -39,6 +39,12 @@ public class TitanCombatTarget : MonoBehaviour
     void OnDisable() { ReleaseInternal("Target disabled"); }
     void OnDestroy() { ReleaseInternal("Target destroyed"); }
     public bool IsHeldBy(MonoBehaviour owner) { return IsHeld && owner != null && holdOwner == owner; }
+    // Explicit attack fast-forward must not bypass a lease whose LateUpdate has
+    // not run yet. The logical age is a minimum, not a second ticking clock.
+    public bool IsHoldWithinLease(MonoBehaviour owner, float minimumAge)
+    {
+        return IsHeldBy(owner) && Finite(minimumAge) && minimumAge >= 0 && Mathf.Max(holdAge,minimumAge) < leaseDuration;
+    }
     public void ResetHealth()
     {
         ReleaseInternal("Reset");
@@ -127,11 +133,58 @@ public class TitanCombatTarget : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++) if (colliders[i] != null) colliders[i].enabled = colliderStates[i];
         if (HoldReleased != null) HoldReleased();
     }
+    /// <summary>Actual supported shape contact while hold physics is disabled. Never
+    /// temporarily enable a held collider or use its empty disabled bounds.</summary>
+    public bool TryGetHeldContact(MonoBehaviour owner, Vector3 point, float radius, out Vector3 contact)
+    {
+        contact = point;
+        if (!IsHeldBy(owner) || !Finite(point) || !Finite(radius) || radius < 0) return false;
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            var col = colliders[i];
+            if (col == null || !colliderStates[i] || col.isTrigger || !col.gameObject.activeInHierarchy ||
+                !col.transform.IsChildOf(transform)) continue;
+            // Unknown disabled mesh shapes fail closed; a real controller needs an adapter.
+            if (!(col is BoxCollider || col is SphereCollider || col is CapsuleCollider || col is CharacterController)) continue;
+            Vector3 closest = ClosestCombatPoint(col, point);
+            if ((closest - point).sqrMagnitude > radius * radius) continue;
+            contact = closest; return true;
+        }
+        return false;
+    }
+
     /// <summary>CharacterController's native query capsule is shrunken and does not
     /// support Collider.ClosestPoint consistently. Use its configured capsule for
     /// combat geometry, without enlarging the attack's radius.</summary>
     public static Vector3 ClosestCombatPoint(Collider collider, Vector3 point)
     {
+        var box = collider as BoxCollider;
+        if (box != null)
+        {
+            Vector3 local = box.transform.InverseTransformPoint(point) - box.center, half = box.size * .5f;
+            return box.transform.TransformPoint(box.center + new Vector3(Mathf.Clamp(local.x,-half.x,half.x),
+                Mathf.Clamp(local.y,-half.y,half.y), Mathf.Clamp(local.z,-half.z,half.z)));
+        }
+        var sphere = collider as SphereCollider;
+        if (sphere != null)
+        {
+            Vector3 s = sphere.transform.lossyScale, c = sphere.transform.TransformPoint(sphere.center), d = point-c;
+            float r = sphere.radius * Mathf.Max(Mathf.Abs(s.x),Mathf.Abs(s.y),Mathf.Abs(s.z));
+            return d.sqrMagnitude <= r*r ? point : c + d.normalized*r;
+        }
+        var capsule = collider as CapsuleCollider;
+        if (capsule != null)
+        {
+            Vector3 s = capsule.transform.lossyScale;
+            int axisIndex = capsule.direction;
+            float r = capsule.radius * Mathf.Max(Mathf.Abs(s[(axisIndex+1)%3]),Mathf.Abs(s[(axisIndex+2)%3]));
+            Vector3 localAxis = Vector3.zero; localAxis[axisIndex]=1;
+            Vector3 axisWorld = capsule.transform.TransformDirection(localAxis).normalized;
+            float half = Mathf.Max(0,capsule.height*Mathf.Abs(s[axisIndex])*.5f-r);
+            Vector3 c = capsule.transform.TransformPoint(capsule.center);
+            Vector3 near = c + axisWorld*Mathf.Clamp(Vector3.Dot(point-c,axisWorld),-half,half), d = point-near;
+            return d.sqrMagnitude <= r*r ? point : near+d.normalized*r;
+        }
         var controller = collider as CharacterController;
         if (controller == null) return collider.ClosestPoint(point);
         Vector3 scale = controller.transform.lossyScale;

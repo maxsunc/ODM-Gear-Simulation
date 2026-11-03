@@ -14,7 +14,87 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Latest request: commit combat and require mid-air ODM grabs
+## Latest: reported grab arm spasm fixed (uncommitted)
+
+User tested ground grab and reported spasming on the trip to the mouth, explicitly
+asking for Unity MCP visual inspection. Did reproduce in the working Editor:
+137.17deg shoulder jump/1/120s near3.14s. New continuity regression failed137.26deg
+while all73 previous checks passed. Fixed explicit elbow-plane rotation frames in
+`TitanGrabAttack.SolveArm`; source hinge uses the real hand, not offset grip.
+Also fixed cumulative additive jaw opening on a constant Generic Animator channel:
+reset to cached closed local jaw rotation before applying the current opening.
+Do not reintroduce additive jaw accumulation or shortest-arc arm roll ambiguity.
+No damage timing, capture radius, rig/model, physics limits or thresholds relaxed.
+
+**74 passed /0 failed twice**, Unity2021.3.25f1, **2026-11-03 02:44:07–20 UTC**
+(PID51064) and **02:49:24–37 UTC** (PID55304). New both-hand/four-phase120Hz test
+measures shoulder/elbow/wrist rotation and bounded jaw opening. Max step2.26deg
+(assertion<8deg); jaw<28.1deg. All73 prior checks pass. Mouth deaths max10.57/10.36/
+11.82/11.81m/s; latest intact11.06m/s,gap.005m,hipsY.84m.
+
+Unity MCP now actually used via localhost8080 JSON-RPC (normal tool_search still
+exposed none). Started installed10.3.0 server, reconnected existing Editor bridge;
+project hash34b6b0a61e38ef2f, working Editor PID57936. Captured BEFORE and AFTER in
+normal sandbox Play Mode, manually stepping a frozen actor; no preview physics.
+Both sides checked: live max2.13deg left/1.72 right, mouth/grip gap.35m. Adjacent
+captured frames no longer flip. Comparison artifact:
+`ArtSource/Titan/Combat/GrabArmContinuity_Comparison.png`.
+
+Returned Editor to **Edit Mode, unpaused, TitanAISandbox clean**, no scene saves.
+Temporary review camera and `Assets/Editor/TitanGrabReviewReconnectOnce.cs`/meta
+removed. Only ignored Library review captures/logs remain. A connect-only bootstrap
+request was used to restore MCP after removal; never run an asset build by accident.
+Paused Play Mode caused unreliable MCP/WebSocket replies on Unity2021; future
+captures should freeze actor ticks but keep Editor unpaused. Temporary HTTP client/
+capture scripts are in `%TEMP%/titan_mcp_review.py` and `titan_grab_capture.py`.
+Full animation/finger polish remains, but sampled visual review is no longer pending.
+Ground bite/fix still uncommitted; aerial grabs remain the next requested feature.
+
+## Ground hand-to-mouth / bite phase (uncommitted foundation)
+
+User clarified order: finish the ground grab's hand-to-mouth/bite first, THEN do
+aerial ODM grabs. They specifically emphasize the arm must actually catch the player;
+keep actual3D hand contact/reach as a hard requirement for aerial work.
+
+Implemented in `TitanGrabAttack` as opt-in `enableBite` (standalone defaultfalse;
+`TitanAISandboxDemo` sets true at runtime). After .83s ground contact, hold/lift1.5s,
+transfer .7s, open-mouth warning .6s, close .12s, then one mouth-contact event;
+.45s recovery/3s cooldown. Default damage100; latched timing/damage/radius/flag.
+The actual arm IK reaches MouthSocket with both hands; jaw opens/closes. Feet plant
+through rising. Orange/red mouth telegraph; E escapes through the last pre-hit frame.
+
+Damage requires exclusive live ownership, actual disabled-collider geometry touching
+.55m mouth sphere, valid selected arm/eyes/legs/AI/socket, unexpired lease, and clear
+carry/mouth geometry. Grip path is swept during LateUpdate before target follow;
+fast-forward checks lift/transfer segments too. Fail closed on saturated queries.
+No delayed kill timer/coroutine or automatic death solely because holding elapsed.
+Logical hold age prevents long ticks bypassing the victim's shorter lease.
+
+Original cancellation/never-parent/state restoration remain. Lethal contact releases
+but still recovers. Damage callbacks can kill/sever the Titan: snapshot restoration
+must yield to current injury/ragdoll pose. Unsupported disabled mesh shapes fail
+closed. Real player still needs an adapter. Proxy dies at contact then returns to its
+original ground position; no swallowed mesh/corpse consumption or production respawn.
+
+Pre-spasm-fix validation: **73 passed /0 failed twice**, Unity2021.3.25f1,
+**2026-11-03 01:50:19–32 UTC** (PID49920) and **01:52:14–28 UTC** (PID26732).
+All58 previous checks +15 additions, including normal-frame automatic playback and
+saved-lab proxy bite/reset. Four mouth death cases max10.29/10.09/11.27/11.04m/s;
+latest intact10.98m/s,gap.005m,hipsY.84m. No physics settings/limits/assertion thresholds
+changed. Earlier69-check run exposed only a test cooldown sequencing mistake;
+completed recovery before the next cooldown tick rather than weakening the gate.
+See `docs/titan-bite-combat.md` and `docs/titan-prototype-validation.md`.
+
+No new commit/push for this phase. Runtime changes only Grab/CombatTarget/AISandboxDemo;
+three PlayMode test files and documentation. Main scenes, passive prefab, art/rest
+rig/capped cuts and legacy player untouched. Unity harness execution tools still
+unavailable; **live visual review remains pending**, not implied by frame-by-frame tests.
+
+**Next:** review ground bite, then aerial interception with real3D hand reach and
+relative-motion swept contact; explicit real ODM movement/rope/momentum release
+policy. Keep ground proxy snap-back out of the production aerial adapter.
+
+## Previous request: commit combat and require mid-air ODM grabs
 
 User approved committing the current combat slice and explicitly added a requirement:
 **Titans must also grab airborne players swinging on ODM gear.** This is NOT yet
@@ -36,12 +116,12 @@ Combat commits on `titan-combat-updates` (local, not pushed):
 - Documentation/air-grab requirement committed separately with this checkpoint.
 Unrelated dirty files remain excluded; no new runtime behavior changed for the air-grab note.
 
-## Current grab / hold / release slice
+## Grab / hold / release foundation (committed)
 
 User approved the stomp result and asked for the next step. Added standing,
 sandbox-only `TitanGrabAttack`, exclusive bounded hold ownership in
-`TitanCombatTarget`, and `TitanCombatDirector` for grab/stomp selection. No bite/eat
-or real-player adapter yet. See `docs/titan-grab-combat.md` for API/limits.
+`TitanCombatTarget`, and `TitanCombatDirector` for grab/stomp selection. At that
+snapshot no bite/eat or real-player adapter; the new ground bite is above. See `docs/titan-grab-combat.md` for API/limits.
 
 - Fixed .65s windup/.18s reach, one actual grip contact,1.5s bounded lift/hold,
   .45s recovery,3s cooldown. Aim is locked, not homing. Deep crouch/foot planting
@@ -77,10 +157,9 @@ or real-player adapter yet. See `docs/titan-grab-combat.md` for API/limits.
 Stomp/grab runtime and tests are now committed as listed above; no push requested.
 The five earlier snapshot commits remain below. No main scenes/prefab/art/rig generation modified.
 Harness Unity tools unavailable; **live visual review remains pending**. Numeric
-animation/physics tests are not proof of finished motion/art. Next: review the lab,
-then height-aware mid-air ODM interception grabs and hand-to-mouth/bite/eat with
-readable contact/cancellation, followed by real-player/sword integration. Mid-air
-support is an explicit requirement, not an optional polish item.
+animation/physics tests are not proof of finished motion/art. Ground bite follow-up
+is now above; mid-air support follows it and remains an explicit requirement, not
+an optional polish item. Real-player/sword integration remains pending.
 
 ## Snapshot commits and stomp foundation (previous slice)
 
@@ -308,17 +387,17 @@ bones,78,888 triangles,2K PBR atlases. No individual finger rig/facial blendshap
 
 ## Boundaries / next steps
 
-**Bite/eat, real-player health/hold/release, swept sword hits and actual ODM player
-integration remain undone.** Sandbox stomp and standing grab/hold/escape/release
-are now implemented/tested, with live visual review still pending. Leg loss now animates into
+**Aerial grabs, production consumption/respawn, real-player health/hold/release,
+swept sword hits and actual ODM player integration remain undone.** Sandbox stomp,
+standing grab/hold/escape/release and ground hand-to-mouth/contact bite are implemented/tested, with live visual review still pending. Leg loss now animates into
 kneeling/prone, but crawling, regeneration and getting back up remain undone.
 Flat-lab airborne projection is not proof of
 multi-floor navigation. Production level bake, dynamic corpse avoidance, crowd
 behavior and authored animation polish are future work.
 
-Next: user/live visual review of stomp/grab and loaded-pose deaths; add required
-mid-air ODM interception with swept contact and appropriate release, plus readable
-hand-to-mouth/bite/eat built on current hold ownership; then real-player integration. Do not claim full Titan AI or player sword testing.
+Next: user/live visual review of ground combat and loaded-pose deaths; add required
+mid-air ODM interception with actual3D hand contact, swept relative motion and safe
+release; then real-player integration. Do not claim full Titan AI or player sword testing.
 
 ## Environment / safety
 
@@ -332,6 +411,6 @@ MCP Unity v10.3.0 endpoint localhost:8080; Blender socket JSON execute_code loca
 Existing unrelated legacy `RagdollController` unassigned-animator error and stale
 MCP disconnect logs may exist; don't claim the console globally clean.
 
-Docs: `docs/titan-grab-combat.md`, `docs/titan-stomp-combat.md`, `docs/titan-motion-overhaul.md`, `docs/titan-injury-animation.md`,
+Docs: `docs/titan-bite-combat.md`, `docs/titan-grab-combat.md`, `docs/titan-stomp-combat.md`, `docs/titan-motion-overhaul.md`, `docs/titan-injury-animation.md`,
 `docs/titan-patrol-chase.md`, `docs/reference-titan-model.md`,
 `docs/modular-titan-prototype.md`, `docs/titan-prototype-validation.md`.

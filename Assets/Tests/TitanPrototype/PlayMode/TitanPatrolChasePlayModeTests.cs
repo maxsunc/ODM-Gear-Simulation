@@ -96,7 +96,7 @@ public class TitanPatrolChasePlayModeTests
         target.position = new Vector3(.7f,0,-6.3f);
         var health=target.gameObject.AddComponent<TitanCombatTarget>();
         var stomp=body.gameObject.AddComponent<TitanStompAttack>(); stomp.automaticTick=false; stomp.drawTelegraph=false;
-        var grab=body.gameObject.AddComponent<TitanGrabAttack>(); grab.automaticTick=false; grab.drawTelegraph=false;
+        var grab=body.gameObject.AddComponent<TitanGrabAttack>(); grab.automaticTick=false; grab.drawTelegraph=false; grab.enableBite=true;
         var director=body.gameObject.AddComponent<TitanCombatDirector>(); director.automaticTick=false; director.ResetDecisions(1);
         Physics.SyncTransforms(); brain.TickAI(.2f);
         var state=Random.state;
@@ -111,9 +111,12 @@ public class TitanPatrolChasePlayModeTests
         Assert.That(brain.IsMovementLocked && agent.isStopped && !agent.hasPath);
         brain.TickAI(.2f); grab.TickAttack(.84f);
         Assert.That(health.IsHeldBy(grab),Is.True,grab.LastResult);
+        float warning=grab.windupDuration+grab.reachDuration+grab.holdDuration+grab.mouthTransferDuration+grab.biteWindupDuration-.02f;
+        grab.TickAttack(warning-grab.Elapsed); Assert.That(grab.Stage,Is.EqualTo(TitanGrabStage.BiteWindup));
         brain.enabled=false; grab.TickAttack(.01f);
         Assert.That(health.IsHeld || grab.IsBusy || brain.IsMovementLocked,Is.False);
         Assert.That(health.GetComponent<Collider>().enabled,Is.True);
+        grab.TickAttack(20); Assert.That(health.Health,Is.EqualTo(100),"AI pause cannot leave a delayed bite");
         yield return null;
     }
 

@@ -62,6 +62,7 @@ public class TitanAISandboxDemo : MonoBehaviour
         }
         Combat = titan.gameObject.AddComponent<TitanStompAttack>();
         Grab = titan.gameObject.AddComponent<TitanGrabAttack>();
+        Grab.enableBite = true;
         Director = titan.gameObject.AddComponent<TitanCombatDirector>();
     }
 
@@ -143,7 +144,7 @@ public class TitanAISandboxDemo : MonoBehaviour
         if (Combat != null) GUILayout.Label("Stomp: " + Combat.Stage + " | cooldown " + Combat.CooldownRemaining.ToString("F1") + "s\n" + Combat.LastResult, small);
         if (Director != null) GUILayout.Label("Auto combat: " + (Director.automaticAttack ? "ON" : "OFF") + " | " + Director.LastChoice, small);
         if (Grab != null) GUILayout.Label("Grab: " + Grab.Stage + " | " + Grab.LastResult, small);
-        if (HumanHealth != null && HumanHealth.IsHeld) GUILayout.Label("HELD — E to escape (no eat/damage yet)", small);
+        if (HumanHealth != null && HumanHealth.IsHeld) GUILayout.Label("HELD — E to escape BEFORE the mouth closes!", small);
         if (HumanHealth != null) GUILayout.Label("Human HP: " + HumanHealth.Health.ToString("F0") + " / " + HumanHealth.maxHealth + (HumanHealth.IsDead ? " — R to reset" : ""), small);
         GUILayout.Space(8);
         GUILayout.Label("WASD: move teal human | Shift: sprint\nArrows: orbit | T: toggle auto combat\n8: stomp | 9/0: left/right grab | E: escape\nYellow/cyan aim locks BEFORE contact. Dodge it!", small);
@@ -158,7 +159,7 @@ public class TitanAISandboxDemo : MonoBehaviour
         if (GUILayout.Button("P  Pause / resume AI") && Brain != null) Brain.enabled = !Brain.enabled;
         if (GUILayout.Button("R  Reset Titan and human")) ResetTitan();
         GUILayout.Space(8);
-        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. Stomp deals 40 HP once. Blindness, leg loss, death or AI pause cancels it. One leg lost: kneel; both lost: helpless/prone. Grab holds briefly then safely releases; E escapes. Grabbing-arm loss, blindness, leg loss or death releases immediately. Eating/real-player integration pending.", small);
+        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. Stomp deals 40 HP once. Blindness, leg loss, death or AI pause cancels it. One leg lost: kneel; both lost: helpless/prone. Grab lifts to mouth, winds up, then bites for 100 HP only on actual mouth contact; E escapes. Orange mouth ring warns; red is bite. Grabbing-arm loss, blindness, leg loss or death releases immediately. Real-player/aerial-grab integration pending.", small);
         GUILayout.EndScrollView();
         GUILayout.EndArea();
     }

@@ -195,6 +195,7 @@ Latest verification results: [titan-prototype-validation.md](titan-prototype-val
 
 The separate AI lab patrols/chases its proxy and now has a sandbox-only
 [telegraphed stomp](titan-stomp-combat.md) and [grab/hold/release](titan-grab-combat.md).
-The passive body prefab still does not acquire AI/attacks by itself. **Eating and
-actual player-combat integration remain unimplemented.** Do not assume those work because legacy scripts expose
+The lab also opts into [hand-to-mouth/contact bite](titan-bite-combat.md).
+The passive body prefab still does not acquire AI/attacks by itself. **Aerial grabs,
+production consumption/respawn and actual player-combat integration remain unimplemented.** Do not assume those work because legacy scripts expose
 similarly named methods.
