@@ -38,9 +38,13 @@
   <ItemGroup>
      <Compile Include="Assets\Attack.cs" />
      <Compile Include="Assets\ShowFPS.cs" />
+     <Compile Include="Assets\Titan\TitanAttack.cs" />
+     <Compile Include="Assets\Titan\TitanState.cs" />
      <Compile Include="Assets\MenuManager.cs" />
      <Compile Include="Assets\GameElements.cs" />
+     <Compile Include="Assets\Titan\TitanLimb.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
+     <Compile Include="Assets\Titan\TitanController.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\Tree_Packs.cs" />
      <Compile Include="Assets\ThirdPersonCam.cs" />
      <Compile Include="Assets\CameraJitterFix.cs" />
@@ -49,9 +53,17 @@
      <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
      <Compile Include="Assets\Movement.cs" />
+     <Compile Include="Assets\Titan\TitanNape.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanShiganshinaIntegration.cs" />
      <Compile Include="Assets\Scripts\FollowPos.cs" />
+     <Compile Include="Assets\PlayerHealth.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMSwordSweep.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMMotor.cs" />
      <Compile Include="Assets\RagdollController.cs" />
      <Compile Include="Assets\SceneManagement.cs" />
+     <Compile Include="Assets\DamageDealer.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />
@@ -696,6 +708,9 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="MCPForUnity.Runtime">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\MCPForUnity.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
@@ -795,6 +810,9 @@
     <Reference Include="Unity.Play.Publisher.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Play.Publisher.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="MCPForUnity.Editor">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\MCPForUnity.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Services.Core">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
     </Reference>
@@ -848,6 +866,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="ODM.TitanPrototype.csproj">
+      <Project>{917ae359-ff7e-a49b-9e34-fe108c52790f}</Project>
+      <Name>ODM.TitanPrototype</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

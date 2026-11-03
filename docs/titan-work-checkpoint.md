@@ -14,7 +14,23 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: full-map FreeRoam navigation TEST ready; integration checkpoint committed
+## Current: full checkpoint before Scout/player/sword animation overhaul
+
+User approved the Scout character/dual-sword + authored-clips/procedural-hook-IK plan.
+Confirmed right hook uses RIGHT hand; falling holds BOTH swords overhead. Added explicit
+FULL-BODY sword attack remake: current attack is slow/weak and legs static; needs hip/
+shoulder rotation, grounded footwork or aerial leg counterbalance, sharp cut and follow-
+through, convincing before particles/VFX. Preserve existing ODM controls/physics feel.
+Details and interruption/IK contracts: `docs/scout-player-overhaul-plan.md`.
+
+User now explicitly authorized committing ALL remaining changes as a checkpoint,
+including previously excluded source/assets/model moves/material/local metadata. This
+supersedes earlier scoped exclusions for this checkpoint only; do not rewrite or fix
+user experiments while checkpointing. No push requested. Existing tested navigation
+checkpoint is **c07d4295**, after integration0f371f2c. No new character/attack authored
+or integrated yet; no new testing claim for previously unrelated experiments.
+
+## Previous: full-map FreeRoam navigation TEST ready; integration checkpoint committed
 
 **0f371f2c** committed the prior actual ODM integration + user's3x/5x FreeRoam Titans
 and138m/180deg sight defaults. Local only, no new push requested. NEW navigation
