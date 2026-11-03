@@ -14,7 +14,153 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Latest: reported grab arm spasm fixed (uncommitted)
+## Current: aerial mouth-carry torso clipping fixed (uncommitted)
+
+User approved the fast catch (looks great), but reported the arm crossing the body
+on the way to the mouth, and asked what comes next. MCP reproduced a backwards
+elbow and straight inward hand path: forearm/chest penetration1.43m, palm1.32m.
+Now blend the elbow forward/outward ONLY after contact, and lift in front on a
+.9m-forward/.35m-up transfer arc before closing toward the mouth. Existing fast
+0/.22 catch, .25/.65 miss retry, .7s transfer and bite telegraphs remain unchanged.
+
+Important extra root cause: some physical catches grip feet/side with the human
+IN FRONT of the palm. A frozen WORLD-space offset forces the hand inside the chest
+when that person's torso reaches the mouth. `TitanCombatTarget.SetAerialCarryYaw`
+now lets only the current airborne owner turn the person smoothly around the SAME
+grip into side-on carry; local grip point and root-to-grip length remain constant,
+no parenting/recentering/regrip snap, capsule stays upright. `biteGripOffset` remains
+latched but its world direction is yaw-rotated during transfer and retained after
+release for arm recovery. Ground follow/restore is unchanged. Release velocity
+includes the actual held root's orbital motion, not only socket translation.
+Mouth approach.6m forward still requires actual victim contact with unchanged.55m
+bite sphere. Long-tick validation samples the arc INCLUDING its changing yaw offset;
+ordinary frames sweep the real grip; original conservative checks remain too.
+
+**108/108 passed twice**, Unity2021.3.25f1, **2026-11-03 14:40:20–36 UTC** (PID34496)
+and **14:44:01–16 UTC** (PID37808,15.493s). All106 previous checks +2 new for both hands/
+two animation phases torso clearance, preserved local grip/radius/upright root,
+and forward-arc cover on long ticks. Existing fast moving full catch/bite now also
+asserts torso clearance. Actual nontrigger forearm/hand versus chest/spine via
+`Physics.ComputePenetration`: **0** in four static cases and moving case, strict<.005m.
+The shared shoulder seam is intentionally not tested as a separated body part.
+Continuity limits remain<8deg/120Hz: fast6.68deg, moving6.31deg, old-timing5.32deg.
+Aerial mouth death10.83m/s (<40 unchanged); intact11.26m/s,gap.007m,hipsY.86m;
+ground mouth10.91/10.36/11.82/11.81m/s. No physics tuning, speed caps or weaker tests.
+
+MCP inspected before/after working sandbox poses1.70/2.15/2.42s. Final forearm/palm
+penetration0, same.175s capture, one capture/one bite, HP0, release complete, max6.18deg
+across all3 selected arm bones. Proof:
+`ArtSource/Titan/Combat/AerialMouthClearance_Comparison.png`. Temp review wrapper
+`%TEMP%/titan_torso_review.py` generates close captures in ignored Library dirs.
+Returned Editor to Edit Mode, unpaused, scene clean, camera/RT removed; no scene saved.
+Main final import includes new analytic yaw-aware arc obstruction checks.
+
+Next recommendation (user asked): review/checkpoint scoped aerial work, then build a
+REAL-player integration lab, implement actual ODM motor suspension/release (ropes,
+boost, coroutines, input/camera/look, safe current pose/momentum), wire real health/
+death/respawn, then swept real swords and held-arm-cut counterplay, followed by
+full-speed terrain/edge/cover/multiple-Titan stress/polish. Do not start more proxy
+features instead of real gear wiring. No gameplay scene/player prefab changes yet.
+Current aerial work remains uncommitted; ground commit28cb997a stays local/not pushed.
+See `docs/titan-aerial-grab.md` for contract, limitations and next-step order.
+
+## Previous: fast, frequent aerial reach — NO warning-arm preparation
+
+Latest user feedback: grabs felt slow/infrequent. Explicitly requested NO raised
+warning arm: ODM players already know standing/flying in front of a Titan is dangerous.
+This supersedes the earlier aerial windup requirement, not ground/stomp/bite timings.
+
+Implemented defaults: **0s aerial windup, .22s direct reach from the actual palm**,
+no pre-grab warning ring. Miss recovery.25s, aerial cooldown.65s (~1.12s repeat miss
+cycle versus several seconds). Successful carry/bite/recovery retain their existing
+durations; absolute bite now3.14s because the catch starts sooner. Aerial selection
+checks every eligible frame before ground retry/stationary gates. Seven bounded
+prediction times allow current reachable flyers even if a full forecast exits range;
+aim still commits once, actual hand-box/capsule CCD still REQUIRED, dodge still works.
+No snap/homing/hidden target tracking or larger catch geometry added.
+
+Fast reaches transport the ACTUAL selected anatomical hinge plane instead of rolling
+into the old outward/down pole. Partial early catch must cache upper/lower joint
+rotations and begin carry from that exact pose: re-solving the partial contact pose
+with fractional reach weight twice caused12.61deg catch pops before this fix.
+Keep these ownership/continuity guards; ground solver and rig remain untouched.
+
+**106/106 passed twice**, Unity2021.3.25f1, **2026-11-03 14:02:10–26 UTC** (PID31208)
+and **14:04:21–38 UTC** (PID30596). All101 prior checks +5 new for fast defaults,
+no warning lift/ring, dodge, short retry, moving full-sequence continuity and
+bypassing an active ground decision delay. Older explicit-time regressions pin
+configurable.7/.3 values; saved-scene auto test now waits for true reach range.
+Crossing test samples the actual new hand path, not the removed raised pose.
+No assertion thresholds relaxed. Latest<8deg/120Hz: fast stationary6.43deg,
+fast moving6.48deg; actual static catch.158s. Aerial loaded mouth death8.31m/s (<40).
+Intact11.14m/s,gap.005m,hipsY.84m; all74 approved ground/bite/physics tests still pass.
+
+MCP normal Play Mode / unpaused explicit120Hz real CCT replay: one NEW catch/one bite,
+HP0, release complete; capture **.175s** after selection; all3 selected arm bones
+max6.18deg from reach start through recovery. Viewed0ms/100ms/220ms/mouth frames:
+no preparatory lift. Proof `ArtSource/Titan/Combat/AerialGrab_DirectReach_MCP.png`.
+Prior proof with warning lift is historical, not the new behavior. Temp capture
+`%TEMP%/titan_fast_aerial_capture.py` uses counter DELTAS because the lab may already
+have completed an automatic ground grab before a manual review starts.
+
+Editor returned to Edit Mode/unpaused, no scene saved; temporary camera/textures
+removed. Current aerial work stays uncommitted; approved ground commit28cb997a
+remains local/not pushed. No production ODM wiring done: still upright CCT proxy;
+real rope/boost/controller/health integration is next. See `docs/titan-aerial-grab.md`.
+
+## Previous aerial lab baseline (101 tests, before fast-reach feedback)
+
+User said the ground bite/arm fix looks good and explicitly requested a commit,
+then aerial grabbing. **Committed approved ground slice as28cb997a**, local only,
+not pushed. Unrelated dirty assets/Plastic/IDE/model moves were excluded.
+
+Aerial prototype is now implemented in the isolated lab. See
+`docs/titan-aerial-grab.md`. **F** launches a reproducible airborne controller pass;
+T auto combat,9/0 manual selected hand, E escape, normal limb/eye/death/reset controls.
+Actual physical hand OBB versus configured human capsule CCD, with relative motion
+and rotating-hand sweep; not an enlarged catch radius or detection-to-socket snap.
+Prediction is sight-confirmed once, bounded1.05s/24m, then aim locks; actual arm
+reach plus frontal shoulder-plane clearance required. Default .7s windup/.3s reach.
+Standing chest carry8.2m then existing mouth/bite. Catch offset is preserved by moving
+the arm; never parent a human to the skeleton. Early contact time constrains leases.
+
+`TitanAerialMotor` is an explicit opt-in suspension/release contract.
+`TitanSandboxFlight` is only the LAB implementation, NOT real ODM integration.
+It restores from the current airborne pose, full-capsule exit/endpoint clearance,
+explicit decayed incoming + hand velocity, gravity resumes/boost ends. If blocked,
+ownership clears but safe physics restoration retries independently; removed target
+component hands continuation to the motor. Production motor must outlive that gate.
+Upright centered CCT supported; yaw okay, capsule tilt changes fail closed.
+Real ODM ropes/boost/coroutines/health, rotating player shapes, held-sword policy
+and production respawn remain the NEXT integration work. Legacy scripts inspected,
+not modified; no gameplay scene/player-prefab wiring done or claimed.
+
+**101/101 passed twice**, Unity2021.3.25f1: **2026-11-03 04:24:11–26 UTC** (PID9552)
+and **04:26:31–46 UTC** (PID29000). All74 approved checks +27 additions. Final moving
+proxy fixture uses the actual authored1.8m/.32m CCT and local runtime physics.
+Strict<8deg/120Hz continuity: stationary6.39deg, moving5.64deg. Aerial mouth death
+12.79m/s (<40 unchanged). Ground mouth deaths10.47/10.36/11.82/11.81m/s; intact
+11.04m/s,gap.005m,hipsY.84m. No rig, art, mass, angular ranges or physics settings changed.
+
+Unity MCP verified the working project, reproduced/fixed a moving shoulder-roll
+singularity (90deg live /123.67deg new regression) missed by initial stationary
+checks. Aerial uses outward/down pole; offset iterations restart from the SAME
+animated base. Keep the approved ground pole separate. Full physical hand box also
+fixes inscribed-sphere corner misses without enlarging contact geometry.
+Final MCP moving capture -> carry -> mouth -> bite succeeded: one capture/one bite,
+HP0, release complete, upper-arm max4.30deg. Viewed saved poses; proof:
+`ArtSource/Titan/Combat/AerialGrab_MCP.png`. Temporary camera/textures removed;
+Editor returned to Edit Mode, unpaused, scene clean, no scene saved. Normal
+full-speed/finger/art polish is still not production approval.
+
+MCP direct HTTP client is `%TEMP%/titan_mcp_review.py`, capture `%TEMP%/titan_aerial_capture.py`.
+Use tool_search first; this session still exposed none, but server8080 is usable.
+HTTP404 means expired temp MCP session: remove that OWNED .session, initialize,
+select instance34b6b0a61e38ef2f. First command after Play transition may return null;
+confirm a read-only ready query succeeds before a side-effecting replay. Keep
+Editor unpaused. Do not blindly repeat a timed-out capture without checking state.
+
+## Ground bite / arm-spasm fix — approved and committed28cb997a
 
 User tested ground grab and reported spasming on the trip to the mouth, explicitly
 asking for Unity MCP visual inspection. Did reproduce in the working Editor:
@@ -48,9 +194,10 @@ Paused Play Mode caused unreliable MCP/WebSocket replies on Unity2021; future
 captures should freeze actor ticks but keep Editor unpaused. Temporary HTTP client/
 capture scripts are in `%TEMP%/titan_mcp_review.py` and `titan_grab_capture.py`.
 Full animation/finger polish remains, but sampled visual review is no longer pending.
-Ground bite/fix still uncommitted; aerial grabs remain the next requested feature.
+User subsequently approved the visual result and committed it as28cb997a; aerial
+lab follow-up is described at the top of this checkpoint.
 
-## Ground hand-to-mouth / bite phase (uncommitted foundation)
+## Ground hand-to-mouth / bite foundation (committed28cb997a)
 
 User clarified order: finish the ground grab's hand-to-mouth/bite first, THEN do
 aerial ODM grabs. They specifically emphasize the arm must actually catch the player;
@@ -85,14 +232,11 @@ changed. Earlier69-check run exposed only a test cooldown sequencing mistake;
 completed recovery before the next cooldown tick rather than weakening the gate.
 See `docs/titan-bite-combat.md` and `docs/titan-prototype-validation.md`.
 
-No new commit/push for this phase. Runtime changes only Grab/CombatTarget/AISandboxDemo;
-three PlayMode test files and documentation. Main scenes, passive prefab, art/rest
-rig/capped cuts and legacy player untouched. Unity harness execution tools still
-unavailable; **live visual review remains pending**, not implied by frame-by-frame tests.
-
-**Next:** review ground bite, then aerial interception with real3D hand reach and
-relative-motion swept contact; explicit real ODM movement/rope/momentum release
-policy. Keep ground proxy snap-back out of the production aerial adapter.
+This foundation and the subsequent arm fix are now committed28cb997a; not pushed.
+Main scenes, passive prefab, art/rest rig/capped cuts and legacy player untouched.
+MCP review completed and user approved the ground visual result. Aerial lab is now
+implemented; real ODM integration still needs explicit rope/boost/coroutine/momentum
+and controller policies. Keep ground snap-back out of production aerial release.
 
 ## Previous request: commit combat and require mid-air ODM grabs
 
@@ -387,17 +531,18 @@ bones,78,888 triangles,2K PBR atlases. No individual finger rig/facial blendshap
 
 ## Boundaries / next steps
 
-**Aerial grabs, production consumption/respawn, real-player health/hold/release,
-swept sword hits and actual ODM player integration remain undone.** Sandbox stomp,
-standing grab/hold/escape/release and ground hand-to-mouth/contact bite are implemented/tested, with live visual review still pending. Leg loss now animates into
+**Production consumption/respawn, real-player health/hold/release, swept sword hits
+and actual ODM rope/boost integration remain undone.** Ground combat was visually
+approved/committed. Physical3D aerial interception, release and bite now work in the
+isolated controller-proxy lab, with automated and sampled MCP review; see top. Leg loss now animates into
 kneeling/prone, but crawling, regeneration and getting back up remain undone.
 Flat-lab airborne projection is not proof of
 multi-floor navigation. Production level bake, dynamic corpse avoidance, crowd
 behavior and authored animation polish are future work.
 
-Next: user/live visual review of ground combat and loaded-pose deaths; add required
-mid-air ODM interception with actual3D hand contact, swept relative motion and safe
-release; then real-player integration. Do not claim full Titan AI or player sword testing.
+Next: optional user review via F in the lab; then implement/test the real ODM motor
+adapter (rope/boost/coroutine suspension, momentum, rotating controller, health and
+held sword policy). Do not claim full Titan AI or actual player/sword integration.
 
 ## Environment / safety
 

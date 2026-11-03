@@ -1,6 +1,76 @@
 # Titan prototype validation
 
-Latest arm-continuity fix: **74 passed /0 failed twice**, Unity **2021.3.25f1**,
+Latest aerial torso-clearance revision: **108 passed /0 failed twice**, Unity
+**2021.3.25f1**, **2026-11-03 14:40:20–36 UTC** (PID34496) and
+**14:44:01–16 UTC** (PID37808,15.493s). All106 prior checks retained. New both-hand/
+two-phase carry test asserts actual forearm/palm colliders stay out of chest/spine
+(<.005m), and exact local grip point/radius stay fixed through owner-controlled
+upright yaw. Moving fast catch/bite now also asserts clearance. A second test blocks
+long-tick bites with scenery on the forward carry arc. Both static/moving measured0.
+Shared shoulder attachment is intentionally not required to separate.
+
+MCP reproduced old forearm penetration1.43m/palm1.32m and viewed corrected close
+transfer/mouth frames. Final forearm/palm0, one physical capture/one bite, HP0,
+release complete; catch still.175s after selection, max6.18deg/120Hz for all3 arm bones.
+Proof: `ArtSource/Titan/Combat/AerialMouthClearance_Comparison.png`. Forward/outward
+elbow, front clearance arc and yaw around the existing grip replace the clipping
+world-fixed-offset path. Bite sphere stays.55m, arm lengths/rig unchanged. Ground
+follow/timings unchanged. Release includes orbital movement. Full body/terrain and
+real ODM/controller/health integration remain pending; this is still an upright proxy.
+
+Strict old thresholds retained: fast6.68deg, moving6.31deg, legacy-timing5.32deg
+(all<8deg/120Hz). Aerial loaded-mouth death10.83m/s (<40); intact11.26m/s,gap.007m,
+hipsY.86m; ground mouth10.91/10.36/11.82/11.81m/s. No global physics/joint/mass changes,
+velocity caps or relaxed assertions. Editor returned clean Edit Mode, no scene saved.
+
+Previous fast/no-warning aerial revision: **106 passed /0 failed twice**, Unity
+**2021.3.25f1**, **2026-11-03 14:02:10–26 UTC** (PID31208) and
+**14:04:21–38 UTC** (PID30596). User explicitly requested removing the aerial warning
+arm and increasing speed/frequency. Default0s windup/.22s direct reach,.25s miss
+recovery/.65s cooldown; aerial attempts bypass ground decision delay/stationary gates.
+Physical contact, locked aim, exclusive ownership and injury/death handoff unchanged.
+
+All101 prior checks +5 new: current-palm start/no warning lift/ring, quick valid
+capture, fast dodge, ~1s retry, moving catch/bite continuity and ground-delay bypass.
+Explicit old timeline tests retain configurable.7/.3 timing but follow the new direct
+path. A currently reachable flyer is now eligible despite a full forecast leaving
+range, not remotely captured. The CCD crossing setup samples the actual current hand
+path rather than the removed raised pose. No physics or motion assertion weakened.
+
+Transported anatomical hinge plane + cached exact early-catch rotations prevent roll
+preparation and double-blending a partial caught pose (12.61deg regression before fix).
+Latest<8deg/120Hz: fast static6.43deg, fast moving6.48deg; old timing4.86deg.
+Static contact.158s. Aerial loaded-mouth death8.31m/s, strict<40 unchanged; intact
+11.14m/s,gap.005m,hipsY.84m. Ground mouth10.46/10.36/11.82/11.81m/s.
+MCP real moving upright CCT replay: one new catch/one bite, HP0, release complete,
+contact.175s after selection, all3 selected arm bones max6.18deg through recovery.
+Reviewed0/100/220ms and mouth frames; proof
+`ArtSource/Titan/Combat/AerialGrab_DirectReach_MCP.png`. Editor returned to unpaused,
+clean Edit Mode; no scene saved. Real ODM adapter/production animation still pending.
+
+Previous aerial lab baseline: **101 passed /0 failed twice**, Unity **2021.3.25f1**,
+2026-11-03 **04:24:11–26 UTC** (PID9552) and **04:26:31–46 UTC** (PID29000).
+All74 approved checks +27 new, including above-head/side/low reachable poses,
+actual rotating hand-box/capsule CCD, corner contact, fast relative crossings,
+fixed aim/dodge, missing motor, cover/masks/saturation, independent escape/lease,
+actual early-capture lease age, blocked-release recovery and target-component
+removal, selected/other-arm and leg/eye/death ownership, bite, stationary/moving
+full-sequence continuity and saved-scene automatic interception/reset.
+
+Aerial continuity<8deg/120Hz: stationary **6.39deg**, moving **5.64deg**. MCP found a
+moving shoulder-roll singularity missed by stationary checks (90deg live and
+123.67deg regression); fixed aerial pole and animation-base offset iterations.
+Final MCP live moving capture/carry/mouth/bite: one catch/one bite, HP0, no blocked
+release, upper-arm max4.30deg. Sampled pose proof:
+`ArtSource/Titan/Combat/AerialGrab_MCP.png`. This is a controller PROXY, not real ODM.
+Aerial loaded-mouth death **12.79m/s**; ground mouth10.47/10.36/11.82/11.81m/s;
+intact11.04m/s,gap.005m,hipsY.84m. Strict<40m/s unchanged; no velocity caps, angular
+range/mass/solver/global-physics changes. See [aerial contract/limits](titan-aerial-grab.md).
+User approved the previous ground art/motion and committed it as28cb997a (local,
+not pushed); aerial work is separate/uncommitted. Real gear/controller/health and
+production animation remain pending. Working Editor returned to clean Edit Mode.
+
+Previous ground arm-continuity fix: **74 passed /0 failed twice**, Unity **2021.3.25f1**,
 2026-11-03 **02:44:07–20 UTC** and **02:49:24–37 UTC**. The new both-hand/four-phase
 120Hz rotation/jaw test reproduced137.26deg jumps with the prior code (73 others
 still passed), then measured **2.26deg** after stable IK frames and non-accumulating

@@ -182,8 +182,8 @@ Latest verification results: [titan-prototype-validation.md](titan-prototype-val
    retargeting before replacing the prototype Generic clips.
 3. **AI**: patrol, FOV/occlusion sight, chase, investigation and search are implemented
    in the separate AI lab. Grab/stomp selection now respects surviving capabilities.
-   Next: height-aware mid-air grabs against ODM-swinging players (explicit user
-   requirement), production navigation, kneeling attacks and real-player integration.
+   Height-aware mid-air interception now works in the isolated controller-proxy lab.
+   Next: real ODM adapter, production navigation, kneeling attacks and player integration.
 4. **Attack sequences**: animation-event contact windows, actual hand/mouth overlap
    checks, deduplicated stomp damage, hold/escape/eat, cancel immediately on death,
    arm loss or eye stun. Never let a delayed coroutine kill a released player.
@@ -195,7 +195,8 @@ Latest verification results: [titan-prototype-validation.md](titan-prototype-val
 
 The separate AI lab patrols/chases its proxy and now has a sandbox-only
 [telegraphed stomp](titan-stomp-combat.md) and [grab/hold/release](titan-grab-combat.md).
-The lab also opts into [hand-to-mouth/contact bite](titan-bite-combat.md).
-The passive body prefab still does not acquire AI/attacks by itself. **Aerial grabs,
-production consumption/respawn and actual player-combat integration remain unimplemented.** Do not assume those work because legacy scripts expose
-similarly named methods.
+The lab also opts into [hand-to-mouth/contact bite](titan-bite-combat.md) and
+[physical aerial interception](titan-aerial-grab.md); F launches its flight proxy.
+The passive body prefab still does not acquire AI/attacks by itself. **Real ODM
+rope/boost/controller wiring, production consumption/respawn and actual player-combat
+integration remain unimplemented.** Do not mistake the isolated proxy for player wiring.

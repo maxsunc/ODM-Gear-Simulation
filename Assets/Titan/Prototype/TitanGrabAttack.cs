@@ -21,6 +21,13 @@ public class TitanGrabAttack : MonoBehaviour
     [Min(1)] public float attackRange = 6.4f;
     [Min(.1f)] public float contactRadius = 1.05f;
     public LayerMask sceneryMask = ~0, victimMask = ~0;
+    [Header("Aerial interception (requires explicit target motor)")]
+    [Min(0)] public float aerialWindupDuration=0;
+    [Min(.1f)] public float aerialReachDuration=.22f;
+    [Min(.1f)] public float aerialMissRecoveryDuration=.25f;
+    [Min(.1f)] public float aerialCooldownDuration=.65f;
+    public bool IsAerial { get; private set; }
+    Vector3 previousVictimPosition, previousVictimUp, aerialStartPalm, aerialPlaneDirection, aerialPlaneBend;
     [Header("Opt-in sandbox bite (latched at selection)")]
     public bool enableBite;
     [Min(.3f)] public float mouthTransferDuration = .7f;
@@ -48,7 +55,7 @@ public class TitanGrabAttack : MonoBehaviour
     NavMeshAgent agent;
     TitanCombatTarget victim;
     Transform upper, lower, hand, grip, spine, chest, neck, jaw, mouth;
-    Quaternion closedJawRotation;
+    Quaternion closedJawRotation, aerialCaughtUpper, aerialCaughtLower;
     Transform[] bones;
     Pose[] snapshots;
     Transform[] legBones = new Transform[6];
@@ -56,15 +63,15 @@ public class TitanGrabAttack : MonoBehaviour
     Quaternion[] flats = new Quaternion[2];
     readonly Vector3[] baseFeet = new Vector3[2];
     readonly Quaternion[] baseRotations = new Quaternion[2];
-    float elapsed, windup, reach, holding, recovery, radius;
+    float elapsed, windup, reach, holding, recovery, missRecovery, radius, captureTime;
     bool contacted, captured, eating, biteResolved;
-    float transfer, biteWindup, biteStrike, damage, mouthRadius;
+    float transfer, biteWindup, biteStrike, damage, mouthRadius, mouthCarryYaw;
     float ContactTime { get { return windup + reach; } }
     float TransferStart { get { return ContactTime + holding; } }
     float BiteTime { get { return TransferStart + transfer + biteWindup + biteStrike; } }
     float RecoveryStart { get { return ContactTime + (captured ? holding + (eating ? transfer + biteWindup + biteStrike : 0) : 0); } }
     int beginFrame = -1;
-    Vector3 contactGrip, selectionOrigin, previousCarryGrip;
+    Vector3 contactGrip, selectionOrigin, previousCarryGrip, biteGripOffset;
     readonly RaycastHit[] rays = new RaycastHit[64];
     readonly Collider[] overlaps = new Collider[64];
     LineRenderer cue;
@@ -118,18 +125,19 @@ public class TitanGrabAttack : MonoBehaviour
         UpdateCue();
     }
 
-    public bool TryBeginGrab(TitanCombatTarget target, bool leftHand)
+    public bool TryBeginAerialGrab(TitanCombatTarget target, bool leftHand) { return TryBeginGrab(target,leftHand,true); }
+    public bool TryBeginGrab(TitanCombatTarget target, bool leftHand, bool airborne = false)
     {
         if (!isActiveAndEnabled || IsBusy || CooldownRemaining > 0 || body.hips == null || body.head == null ||
             !body.CanWalk || body.animator == null || !body.animator.enabled || !(leftHand ? body.CanGrabLeft : body.CanGrabRight) ||
-            target == null || target.IsDead || target.IsHeld || !target.isActiveAndEnabled || target.gameObject.scene != gameObject.scene) return false;
+            target == null || target.IsDead || target.IsHeld || target.ReleasePending || !target.isActiveAndEnabled || target.gameObject.scene != gameObject.scene) return false;
         var stomp = GetComponent<TitanStompAttack>();
         if (stomp != null && stomp.IsBusy) return false;
         if (brain != null && (!brain.isActiveAndEnabled || brain.target != target.transform || !brain.CanSeeTarget || brain.State != TitanAwarenessState.Chase)) return false;
-        if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh && agent.velocity.sqrMagnitude > 1) return false;
+        if (!airborne && agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh && agent.velocity.sqrMagnitude > 1) return false;
         Vector3 delta = target.transform.position - transform.position;
-        if (Vector3.ProjectOnPlane(delta, Vector3.up).magnitude > attackRange || Mathf.Abs(delta.y) > 2.2f ||
-            Vector3.Angle(transform.forward, Vector3.ProjectOnPlane(delta, Vector3.up)) > 65 ||
+        if ((!airborne && (Vector3.ProjectOnPlane(delta, Vector3.up).magnitude > attackRange || Mathf.Abs(delta.y) > 2.2f)) ||
+            (airborne && delta.y<=2.2f) || Vector3.Angle(transform.forward, Vector3.ProjectOnPlane(delta, Vector3.up)) > 65 ||
             !ClearRay(body.head.position, target.transform.position + Vector3.up, target.transform)) return false;
         upper = leftHand ? body.leftUpperArm : body.rightUpperArm;
         lower = leftHand ? body.leftLowerArm : body.rightLowerArm;
@@ -138,16 +146,51 @@ public class TitanGrabAttack : MonoBehaviour
         mouth = body.mouthSocket;
         if (enableBite && (!Attached(mouth) || !Attached(jaw))) return false;
         if (upper == null || lower == null || hand == null || grip == null || !grip.IsChildOf(transform) || !CachePlants()) return false;
+        Vector3 aimPoint=target.transform.position+Vector3.up;
+        float handRadius=0; Vector3 palmPosition;
+        if(airborne)
+        {
+            var motor=target.GetComponent<TitanAerialMotor>();
+            var controller=target.GetComponent<CharacterController>();
+            if(motor==null || !motor.CanSuspend || controller==null || !controller.enabled || Mathf.Abs(controller.center.x)+Mathf.Abs(controller.center.z)>.0001f ||
+                !Finite(motor.Velocity) || !TitanAerialContact.HandSphere(hand,out palmPosition,out handRadius)) return false;
+            float horizon=Mathf.Min(1.05f,SafeMinimum(aerialWindupDuration,0,0)+SafeMinimum(aerialReachDuration,.1f,.22f));
+            Vector3 center=controller.bounds.center;
+            float armReach=Vector3.Distance(upper.position,lower.position)+Vector3.Distance(lower.position,palmPosition)-.08f;
+            // Prefer the reach-end intercept, but do not reject a currently reachable
+            // flyer merely because its full-horizon prediction has already left range.
+            // Selection is bounded; the chosen point still locks for this attempt.
+            bool reachable=false;
+            for(int i=6;i>=0;i--)
+            {
+                aimPoint=center+Vector3.ClampMagnitude(motor.Velocity*(horizon*i/6),24);
+                if(Vector3.Dot(aimPoint-upper.position,transform.forward)>=1 && Vector3.Distance(upper.position,aimPoint)<=armReach)
+                { reachable=true; break; }
+            }
+            if(!reachable || !ClearRay(body.head.position,aimPoint,target.transform)) return false;
+            aerialStartPalm=palmPosition;
+            aerialPlaneDirection=(hand.position-upper.position).normalized;
+            aerialPlaneBend=Vector3.ProjectOnPlane(lower.position-upper.position,aerialPlaneDirection);
+            if(aerialPlaneBend.sqrMagnitude<.000001f)
+                aerialPlaneBend=Vector3.ProjectOnPlane(transform.right*(leftHand?-1:1)-transform.up*.65f,aerialPlaneDirection);
+            aerialPlaneBend.Normalize();
+        }
         if (brain != null && !brain.TryAcquireMovementLock(this)) return false;
-        LockedPoint = target.transform.position + Vector3.up; selectionOrigin = body.head.position;
+        IsAerial=airborne; previousVictimPosition=target.transform.position; previousVictimUp=target.transform.up;
+        LockedPoint = aimPoint; selectionOrigin = body.head.position;
         victim = target; UsesLeftHand = leftHand; elapsed = 0; contacted = captured = false; LastQueryOverflow = false;
-        windup = Mathf.Max(.3f, windupDuration); reach = Mathf.Max(.1f, reachDuration);
-        holding = Mathf.Clamp(holdDuration, .3f, 3); recovery = Mathf.Max(.2f, recoveryDuration); radius = Mathf.Max(.1f, contactRadius);
-        eating = enableBite; biteResolved = false;
+        windup = airborne?SafeMinimum(aerialWindupDuration,0,0):Mathf.Max(.3f, windupDuration);
+        reach = airborne?SafeMinimum(aerialReachDuration,.1f,.22f):Mathf.Max(.1f, reachDuration);
+        holding = Mathf.Clamp(holdDuration, .3f, 3);
+        recovery = Mathf.Max(.2f, recoveryDuration);
+        missRecovery = SafeMinimum(aerialMissRecoveryDuration,.1f,.25f);
+        radius = airborne?handRadius:Mathf.Max(.1f, contactRadius);
+        eating = enableBite; biteResolved = false; biteGripOffset=Vector3.zero;
         transfer = SafeMinimum(mouthTransferDuration,.3f,.7f); biteWindup = SafeMinimum(biteWindupDuration,.3f,.6f);
         biteStrike = SafeMinimum(biteDuration,.08f,.12f); mouthRadius = SafeMinimum(biteRadius,.1f,.55f);
         damage = SafeMinimum(biteDamage,0,100);
-        Stage = TitanGrabStage.Windup; beginFrame = Time.frameCount; LastResult = "Wind-up / aim locked";
+        Stage = windup>0?TitanGrabStage.Windup:TitanGrabStage.Reach;
+        beginFrame = Time.frameCount; LastResult = airborne?"Direct reach / aim locked":"Wind-up / aim locked";
         body.SetWalking(false);
         if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh) { agent.ResetPath(); agent.isStopped = true; }
         UpdateCue(); return true;
@@ -164,8 +207,11 @@ public class TitanGrabAttack : MonoBehaviour
                 (captured && !victim.IsHeldBy(this)) || (!contacted && victim.IsHeld))) ||
             (eating && (!Attached(mouth) || !mouth.gameObject.activeInHierarchy || !Attached(jaw))) ||
             (brain != null && (!brain.isActiveAndEnabled || (needsVictim && brain.target != victim.transform)))) { Cancel("Interrupted"); return; }
+        float previousElapsed=elapsed;
         elapsed += deltaTime;
-        if (!contacted && elapsed >= ContactTime)
+        if(IsAerial && !contacted) AdvanceAerialContact(previousElapsed,elapsed);
+        if(!IsBusy) return;
+        if (!IsAerial && !contacted && elapsed >= ContactTime)
         {
             float now = elapsed; elapsed = ContactTime; Stage = TitanGrabStage.Reach;
             ResolveContact(); elapsed = now;
@@ -189,6 +235,62 @@ public class TitanGrabAttack : MonoBehaviour
             if (elapsed >= RecoveryStart + recovery) Finish("Recovered");
         }
         UpdateCue();
+    }
+    void AdvanceAerialContact(float fromTime, float toTime)
+    {
+        Vector3 current=victim.transform.position;
+        float start=Mathf.Max(fromTime,windup), end=Mathf.Min(toTime,ContactTime);
+        // Translation CCD is exact for an upright capsule, including arbitrary yaw.
+        // Tilt changes are deliberately a miss until a rotation-aware motor is supplied.
+        bool stableAxis=Vector3.Angle(previousVictimUp,victim.transform.up)<.01f;
+        var shape=victim.GetComponent<CharacterController>();
+        if(end>start && stableAxis && shape!=null && shape.enabled &&
+            (victimMask.value & (1<<shape.gameObject.layer))!=0)
+        {
+            for(int i=0;i<bones.Length;i++) if(Attached(bones[i])) snapshots[i]=new Pose(bones[i].localPosition,bones[i].localRotation);
+            float saved=elapsed;
+            try
+            {
+                int steps=Mathf.Clamp(Mathf.CeilToInt((end-start)*120),1,128);
+                elapsed=start; body.animator.Update(0); ApplyPose();
+                TitanAerialContact.HandPose handFrom;
+                if(!TitanAerialContact.HandBox(hand,out handFrom)) { Cancel("Hand shape unavailable"); return; }
+                if(!ClearVolume(handFrom.center,handFrom.center,handFrom.half.magnitude,victim.transform)) { Cancel("Aerial reach obstructed"); return; }
+                for(int i=1;i<=steps && !captured;i++)
+                {
+                    float t0=Mathf.Lerp(start,end,(i-1f)/steps), t1=Mathf.Lerp(start,end,i/(float)steps);
+                    elapsed=t1; body.animator.Update(0); ApplyPose();
+                    TitanAerialContact.HandPose handTo; TitanAerialContact.HandBox(hand,out handTo);
+                    if(!ClearVolume(handFrom.center,handTo.center,Mathf.Max(handFrom.half.magnitude,handTo.half.magnitude),victim.transform)) { Cancel("Aerial reach obstructed"); break; }
+                    float a=(t0-fromTime)/(toTime-fromTime), b=(t1-fromTime)/(toTime-fromTime), fraction;
+                    Vector3 targetFrom=Vector3.Lerp(previousVictimPosition,current,a), targetTo=Vector3.Lerp(previousVictimPosition,current,b);
+                    if(TitanAerialContact.SweepHand(shape,handFrom,handTo,targetFrom,targetTo,out fraction))
+                    {
+                        elapsed=Mathf.Lerp(t0,t1,fraction); body.animator.Update(0); ApplyPose();
+                        TitanAerialContact.HandPose actual; TitanAerialContact.HandBox(hand,out actual);
+                        Vector3 rootAtContact=Vector3.Lerp(targetFrom,targetTo,fraction), actualContact;
+                        if(TitanAerialContact.CapsuleGap(shape,actual,rootAtContact,out actualContact)<=.0001f)
+                        {
+                            contactGrip=grip.position; LastContactPoint=actualContact;
+                            TryCapture(rootAtContact);
+                            if(captured) { contacted=true; ContactCount++; LastResult="Aerial hand contact / captured"; }
+                        }
+                    }
+                    handFrom=handTo;
+                }
+            }
+            finally
+            {
+                elapsed=saved;
+                if(body.CanWalk && body.animator!=null && body.animator.enabled)
+                    for(int i=0;i<bones.Length;i++) if(Attached(bones[i]))
+                    { bones[i].localPosition=snapshots[i].position; bones[i].localRotation=snapshots[i].rotation; }
+                Physics.SyncTransforms();
+            }
+        }
+        if(!IsBusy || victim==null) return;
+        previousVictimPosition=current; previousVictimUp=victim.transform.up;
+        if(!contacted && toTime>=ContactTime) { contacted=true; recovery=missRecovery; ContactCount++; LastResult="Aerial miss / recovery"; }
     }
     void ResolveContact()
     {
@@ -238,15 +340,21 @@ public class TitanGrabAttack : MonoBehaviour
             Physics.SyncTransforms();
         }
     }
-    void TryCapture()
+    void TryCapture(Vector3? contactPosition = null)
     {
-        if (!victim.TryHold(this, grip)) return;
-        captured = true; previousCarryGrip=contactGrip; CaptureCount++; victim.HoldReleased += OnReleased; LastResult = "Captured / E to escape";
+        if (!victim.TryHold(this, grip, IsAerial,contactPosition)) return;
+        captured = true; captureTime=elapsed;
+        aerialCaughtUpper=upper.localRotation; aerialCaughtLower=lower.localRotation;
+        biteGripOffset=victim.HeldCenterOffset(this);
+        Vector3 horizontal=Vector3.ProjectOnPlane(biteGripOffset,Vector3.up);
+        mouthCarryYaw=horizontal.sqrMagnitude>.0001f?Vector3.SignedAngle(horizontal,transform.right*(UsesLeftHand?1:-1),Vector3.up):0;
+        previousCarryGrip=contactGrip; CaptureCount++; victim.HoldReleased += OnReleased; LastResult = "Captured / E to escape";
     }
     public void Cancel(string reason = "Cancelled") { if (IsBusy) Finish(reason); }
     void Finish(string reason)
     {
-        Stage = TitanGrabStage.Idle; LastResult = reason; CooldownRemaining = Mathf.Max(.2f, cooldownDuration);
+        Stage = TitanGrabStage.Idle; LastResult = reason;
+        CooldownRemaining = IsAerial?SafeMinimum(aerialCooldownDuration,.1f,.65f):Mathf.Max(.2f, cooldownDuration);
         ReleaseVictim(reason); victim = null;
         if (brain != null) brain.ReleaseMovementLock(this);
         if (cue != null) cue.enabled = false;
@@ -265,7 +373,7 @@ public class TitanGrabAttack : MonoBehaviour
         float recover = Mathf.SmoothStep(0, 1, Mathf.Clamp01((elapsed - RecoveryStart) / recovery));
         float carry = captured ? Mathf.SmoothStep(0, 1, Mathf.Clamp01((elapsed - ContactTime) / .55f)) : 0;
         float toMouth = captured && eating ? Mathf.SmoothStep(0,1,Mathf.Clamp01((elapsed-TransferStart)/transfer)) : 0;
-        float load = Mathf.SmoothStep(0, 1, elapsed / windup) * (1 - recover) * (1 - carry * .45f) * (1-toMouth);
+        float load = IsAerial?0:Mathf.SmoothStep(0, 1, elapsed / windup) * (1 - recover) * (1 - carry * .45f) * (1-toMouth);
         baseFeet[0] = legBones[2].position; baseFeet[1] = legBones[5].position;
         baseRotations[0] = legBones[2].rotation; baseRotations[1] = legBones[5].rotation;
         Vector3 toward = Vector3.ProjectOnPlane(LockedPoint - transform.position, Vector3.up).normalized;
@@ -278,7 +386,10 @@ public class TitanGrabAttack : MonoBehaviour
         }
         float side = UsesLeftHand ? -1 : 1;
         Vector3 windupPoint = LockedPoint + Vector3.up * 2 + transform.right * side * 1.1f - toward * .45f;
-        Vector3 aim = Vector3.Lerp(windupPoint, LockedPoint, Mathf.SmoothStep(0, 1, (elapsed - windup) / reach));
+        float reachProgress=Mathf.SmoothStep(0,1,Mathf.Clamp01((elapsed-windup)/reach));
+        // Air catches go directly from the selected physical palm to the fixed
+        // intercept. Never lift to the ground grab's overhead warning/load point.
+        Vector3 aim = Vector3.Lerp(IsAerial?aerialStartPalm:windupPoint, LockedPoint, reachProgress);
         if (captured) aim = Vector3.Lerp(contactGrip, CarryPoint(), carry);
         if (eating && Attached(mouth) && Attached(jaw))
         {
@@ -288,15 +399,50 @@ public class TitanGrabAttack : MonoBehaviour
             // MouthSocket (and its arm target) around the head every frame.
             jaw.localRotation=closedJawRotation;
             Tilt(jaw, 28 * toMouth * (1-close) * (1-recover));
-            aim = Vector3.Lerp(aim, mouth.position + transform.forward * .35f, toMouth);
+            // Preserve the physical catch offset. Move the ARM to bring the held
+            // torso to the mouth; never recenter/snap an aerial victim in the grip.
+            Quaternion heldTurn=IsAerial?Quaternion.AngleAxis(mouthCarryYaw*toMouth,Vector3.up):Quaternion.identity;
+            if(IsAerial && captured && victim!=null) victim.SetAerialCarryYaw(this,mouthCarryYaw*toMouth);
+            // A foot/side catch can leave the person IN FRONT of the palm. Holding
+            // that offset fixed in WORLD space would put the palm inside the chest
+            // at the mouth. Turn around the same grip into a side-on carry instead.
+            aim = MouthCarryAim(aim,mouth.position + transform.forward * (IsAerial?.6f:.35f)-heldTurn*biteGripOffset,toMouth);
         }
-        SolveArm(aim, (1 - recover) * Mathf.Clamp01(elapsed / .2f));
+        float armWeight=(1-recover)*(IsAerial?Mathf.Clamp01((elapsed-windup)/reach):Mathf.Clamp01(elapsed/.2f));
+        if(IsAerial && captured)
+        {
+            // CCD can catch before full extension. Re-solving that partial pose
+            // from idle with the same fractional weight would blend it TWICE and
+            // retract/pop the arm on the catch frame. Start carry from the exact
+            // caught joint pose, then smoothly take over; recovery returns to idle.
+            upper.localRotation=Quaternion.Slerp(aerialCaughtUpper,upper.localRotation,recover);
+            lower.localRotation=Quaternion.Slerp(aerialCaughtLower,lower.localRotation,recover);
+            armWeight=(1-recover)*Mathf.SmoothStep(0,1,Mathf.Clamp01((elapsed-ContactTime)/.12f));
+        }
+        if(IsAerial && !captured)
+        {
+            // Aim the PHYSICAL palm, not the offset grip socket, at the intercept.
+            // Iterate the small rotating socket offset; this does not change aim
+            // or move the victim. After contact the same grip pose carries them.
+            Quaternion baseUpper=upper.localRotation,baseLower=lower.localRotation;
+            for(int i=0;i<3;i++)
+            {
+                Vector3 palm;float physicalRadius;
+                if(!TitanAerialContact.HandSphere(hand,out palm,out physicalRadius)) break;
+                Vector3 gripAim=aim+grip.position-palm;
+                // Infer the hinge from the SAME animation base on each iteration,
+                // never from a previously solved almost-straight elbow.
+                upper.localRotation=baseUpper;lower.localRotation=baseLower;
+                SolveArm(gripAim,armWeight);
+            }
+        }
+        else SolveArm(aim,armWeight,IsAerial && captured?carry:0);
         Transform otherUpper = UsesLeftHand ? body.rightUpperArm : body.leftUpperArm;
         Transform otherLower = UsesLeftHand ? body.rightLowerArm : body.leftLowerArm;
         if (Attached(otherUpper) && otherLower != null)
             Aim(otherUpper, otherLower, otherUpper.position - Vector3.up * 2 - transform.right * side * 1.6f, load * .65f);
     }
-    void SolveArm(Vector3 target, float weight)
+    void SolveArm(Vector3 target, float weight, float outsideCarry = 0)
     {
         Vector3 firstVector=lower.position-upper.position, secondVector=grip.position-lower.position;
         float first=firstVector.magnitude, second=secondVector.magnitude;
@@ -304,12 +450,23 @@ public class TitanGrabAttack : MonoBehaviour
         if (first<.001f || second<.001f || direction.sqrMagnitude<.0001f || weight<=0) return;
         float distance=Mathf.Clamp(direction.magnitude,Mathf.Abs(first-second)+.01f,first+second-.01f);
         direction.Normalize(); target=upper.position+direction*distance;
-        // A torso-facing elbow plane stays continuous as the hand rises past the
-        // shoulder. Projecting an outward pole onto the target direction crossed
-        // a singularity here; shortest-arc Aim also left the arm's roll undefined.
-        Vector3 bend=Vector3.Cross(direction,transform.forward)*(UsesLeftHand?1:-1);
-        if (bend.sqrMagnitude<.001f) bend=Vector3.ProjectOnPlane(transform.right*(UsesLeftHand?-1:1)-transform.up,direction);
+        // Transport the selected arm's ACTUAL initial hinge plane to the reach
+        // direction. A fast reach must not spend its first frames rolling into a
+        // different pole (or cross a shortest-arc roll seam while partially blended).
+        // Frontal selection keeps the goal away from the antipodal initial direction.
+        // The approved ground solver retains its separate torso-facing pole.
+        Vector3 bend=IsAerial?Quaternion.FromToRotation(aerialPlaneDirection,direction)*aerialPlaneBend:
+            Vector3.Cross(direction,transform.forward)*(UsesLeftHand?1:-1);
+        if (bend.sqrMagnitude<.001f) bend=Vector3.ProjectOnPlane(IsAerial?transform.forward:transform.right*(UsesLeftHand?-1:1)-transform.up,direction);
         bend.Normalize();
+        if(outsideCarry>0)
+        {
+            // The transported catch hinge can point BACK through the chest when
+            // the hand rises. Carry with the elbow outside and in front instead;
+            // blend only after contact so the approved fast reach is unchanged.
+            Vector3 outside=Vector3.ProjectOnPlane(transform.forward+transform.right*(UsesLeftHand?-.8f:.8f),direction);
+            if(outside.sqrMagnitude>.001f) bend=Vector3.Slerp(bend,outside.normalized,outsideCarry).normalized;
+        }
         float along=(first*first+distance*distance-second*second)/(2*distance);
         Vector3 middle=upper.position+direction*along+bend*Mathf.Sqrt(Mathf.Max(0,first*first-along*along));
         Vector3 normal=Vector3.Cross(bend,direction).normalized;
@@ -328,14 +485,24 @@ public class TitanGrabAttack : MonoBehaviour
             Quaternion.Inverse(Quaternion.LookRotation(grip.position-lower.position,rotatedNormal))*lower.rotation;
         lower.rotation=Quaternion.Slerp(lower.rotation,solved,weight);
     }
-    Vector3 CarryPoint() { return transform.position + Vector3.up * 6.2f + transform.forward * 2 + transform.right * (UsesLeftHand ? -1 : 1) * 1.2f; }
+    Vector3 MouthCarryAim(Vector3 from,Vector3 to,float progress)
+    {
+        Vector3 point=Vector3.Lerp(from,to,progress);
+        // Lift in FRONT of the torso before bringing the held person inward.
+        // Endpoints, duration and victim-to-grip offset remain fixed; only the
+        // arm follows this clearance arc. Ground carry retains its approved path.
+        if(IsAerial) point+=(transform.forward*.9f+transform.up*.35f)*Mathf.Sin(Mathf.PI*progress);
+        return point;
+    }
+    Vector3 CarryPoint() { return transform.position + Vector3.up * (IsAerial?8.2f:6.2f) + transform.forward * 2 + transform.right * (UsesLeftHand ? -1 : 1) * 1.2f; }
+    static bool Finite(Vector3 value) { return !(float.IsNaN(value.x)||float.IsNaN(value.y)||float.IsNaN(value.z)||float.IsInfinity(value.x)||float.IsInfinity(value.y)||float.IsInfinity(value.z)); }
     static float SafeMinimum(float value, float min, float fallback) { return float.IsNaN(value) || float.IsInfinity(value) ? fallback : Mathf.Max(min,value); }
 
     void ResolveBite()
     {
         biteResolved = true; BiteContactCount++;
         var target = victim;
-        if (target == null || !target.IsHoldWithinLease(this,BiteTime-ContactTime))
+        if (target == null || !target.IsHoldWithinLease(this,BiteTime-captureTime))
         {
             if (target != null) target.ReleaseHold(this,"Hold lease expired before bite");
             if (IsBusy) Cancel("Hold lease expired before bite");
@@ -356,6 +523,20 @@ public class TitanGrabAttack : MonoBehaviour
             bool clear = contact && ClearVolume(contactGrip,CarryPoint(),.45f,target.transform) &&
                 ClearVolume(CarryPoint(),grip.position,.45f,target.transform) &&
                 ClearVolume(LastBitePoint,LastBitePoint,mouthRadius,target.transform);
+            if(clear && IsAerial)
+            {
+                // Long explicit ticks must not skip scenery on the new forward
+                // transfer arc. Keep the conservative existing checks as well.
+                Vector3 from=CarryPoint();
+                for(int i=1;i<=12 && clear;i++)
+                {
+                    float progress=i/12f;
+                    Quaternion turn=Quaternion.AngleAxis(mouthCarryYaw*progress,Vector3.up);
+                    Vector3 goal=mouth.position+transform.forward*.6f-turn*biteGripOffset;
+                    Vector3 to=MouthCarryAim(CarryPoint(),goal,progress);
+                    clear=ClearVolume(from,to,.45f,target.transform);from=to;
+                }
+            }
             Stage = TitanGrabStage.Recovery; // An intentional lethal release must still recover.
             if (clear && target.IsHeldBy(this) && body.CanWalk)
             {
@@ -447,7 +628,7 @@ public class TitanGrabAttack : MonoBehaviour
     void UpdateCue()
     {
         bool atMouth = Stage == TitanGrabStage.ToMouth || Stage == TitanGrabStage.BiteWindup || Stage == TitanGrabStage.Bite;
-        bool visible = drawTelegraph && (Stage == TitanGrabStage.Windup || Stage == TitanGrabStage.Reach || atMouth);
+        bool visible = drawTelegraph && (atMouth || (!IsAerial && (Stage == TitanGrabStage.Windup || Stage == TitanGrabStage.Reach)));
         if (!visible) { if (cue != null) cue.enabled = false; return; }
         if (cue == null)
         {

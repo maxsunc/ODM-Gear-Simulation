@@ -14,6 +14,21 @@ public class TitanCombatTarget : MonoBehaviour
     public Vector3 LastImpact { get; private set; }
     public bool IsDead { get { return Health <= 0; } }
     public bool IsHeld { get; private set; }
+    public bool ReleasePending { get; private set; }
+    TitanAerialMotor aerialMotor;
+    bool aerialHold;
+    Vector3 previousHeldPosition, handVelocity, lastOwnerPosition;
+    Transform releaseOwner, targetRoot;
+    Vector3 heldCenterOffset;
+    Quaternion carryRotation=Quaternion.identity;
+    public Vector3 HeldCenterOffset(MonoBehaviour owner) { return IsHeldBy(owner)?carryRotation*heldCenterOffset:Vector3.zero; }
+    // Rotate around the existing grip, never recenter/reparent the human. Upright
+    // aerial controllers support yaw; ground mode retains its original follow.
+    public bool SetAerialCarryYaw(MonoBehaviour owner,float degrees)
+    {
+        if(!IsHeldBy(owner) || !aerialHold || !Finite(degrees) || Mathf.Abs(degrees)>360) return false;
+        carryRotation=Quaternion.AngleAxis(degrees,Vector3.up);return true;
+    }
     public MonoBehaviour HoldOwner { get { return holdOwner; } }
     public string LastReleaseReason { get; private set; }
     public event Action<float> Damaged;
@@ -34,10 +49,16 @@ public class TitanCombatTarget : MonoBehaviour
         public CollisionDetectionMode detection;
     }
 
-    void Awake() { ResetHealth(); }
+    void Awake() { targetRoot=transform; ResetHealth(); }
     void LateUpdate() { TickHold(Time.deltaTime); }
     void OnDisable() { ReleaseInternal("Target disabled"); }
-    void OnDestroy() { ReleaseInternal("Target destroyed"); }
+    void OnDestroy()
+    {
+        ReleaseInternal("Target destroyed");
+        // A removed health component must not strand its surviving controller.
+        if(ReleasePending && aerialMotor!=null) aerialMotor.ContinueRelease(() =>
+        { if(targetRoot==null) return true; TryCompleteAerialRelease(); return !ReleasePending; });
+    }
     public bool IsHeldBy(MonoBehaviour owner) { return IsHeld && owner != null && holdOwner == owner; }
     // Explicit attack fast-forward must not bypass a lease whose LateUpdate has
     // not run yet. The logical age is a minimum, not a second ticking clock.
@@ -58,13 +79,13 @@ public class TitanCombatTarget : MonoBehaviour
         if (Damaged != null) Damaged(damage);
     }
 
-    public bool TryHold(MonoBehaviour owner, Transform socket)
+    public bool TryHold(MonoBehaviour owner, Transform socket, bool airborne = false, Vector3? contactPosition = null)
     {
-        if (IsHeld || IsDead || !isActiveAndEnabled || owner == null || !owner.isActiveAndEnabled ||
+        if (ReleasePending || IsHeld || IsDead || !isActiveAndEnabled || owner == null || !owner.isActiveAndEnabled ||
             socket == null || !socket.gameObject.activeInHierarchy || !socket.IsChildOf(owner.transform) ||
             transform.IsChildOf(owner.transform) || owner.transform.IsChildOf(transform) ||
             owner.gameObject.scene != gameObject.scene || socket.gameObject.scene != gameObject.scene ||
-            !Finite(socket.position) || !Finite(transform.position)) return false;
+            !Finite(socket.position) || !Finite(transform.position) || (contactPosition.HasValue && !Finite(contactPosition.Value))) return false;
         Physics.SyncTransforms();
         releasePosition = transform.position; releaseRotation = transform.rotation;
         colliders = GetComponentsInChildren<Collider>(true);
@@ -77,7 +98,15 @@ public class TitanCombatTarget : MonoBehaviour
             if (!colliders[i].enabled || colliders[i].isTrigger || !colliders[i].gameObject.activeInHierarchy) continue;
             if (!found) { bounds = colliders[i].bounds; found = true; } else bounds.Encapsulate(colliders[i].bounds);
         }
-        centerOffset = transform.position - bounds.center;
+        aerialMotor=airborne?GetComponent<TitanAerialMotor>():null;
+        if(airborne && (aerialMotor==null || !aerialMotor.CanSuspend || !aerialMotor.TrySuspend())) return false;
+        aerialHold=airborne;
+        Vector3 capturePosition=contactPosition ?? transform.position;
+        centerOffset = airborne ? capturePosition-socket.position : transform.position-bounds.center;
+        heldCenterOffset=bounds.center-transform.position+centerOffset;
+        carryRotation=Quaternion.identity;
+        previousHeldPosition=capturePosition; handVelocity=Vector3.zero; lastOwnerPosition=owner.transform.position;
+        releaseOwner=owner.transform;
         var bodies = GetComponentsInChildren<Rigidbody>(true);
         bodyStates = new BodyState[bodies.Length];
         for (int i = 0; i < bodies.Length; i++)
@@ -90,6 +119,7 @@ public class TitanCombatTarget : MonoBehaviour
             rb.isKinematic = true; rb.useGravity = false; rb.detectCollisions = false;
         }
         foreach (var col in colliders) col.enabled = false;
+        if(airborne) transform.position=capturePosition; // physical CCD contact time, not detection aim
         holdOwner = owner; grip = socket; holdAge = 0;
         leaseDuration = Finite(maximumHoldDuration) ? Mathf.Clamp(maximumHoldDuration, .5f, 10) : 4;
         IsHeld = true;
@@ -99,15 +129,26 @@ public class TitanCombatTarget : MonoBehaviour
 
     public void TickHold(float deltaTime)
     {
-        if (!IsHeld || !Finite(deltaTime) || deltaTime < 0) return;
+        if (!Finite(deltaTime) || deltaTime < 0) return;
+        if(ReleasePending) TryCompleteAerialRelease();
+        if(!IsHeld) return;
         if (holdOwner == null || !holdOwner.isActiveAndEnabled || grip == null || !grip.gameObject.activeInHierarchy ||
             !grip.IsChildOf(holdOwner.transform) || holdOwner.gameObject.scene != gameObject.scene ||
             IsDead || !Finite(grip.position)) { ReleaseInternal("Hold invalidated"); return; }
+        Vector3 desired=grip.position+(aerialHold?carryRotation*centerOffset:centerOffset);
+        // Include the held person's orbital velocity when the wrist turns them,
+        // not just socket translation; release must not discard that momentum.
+        if(deltaTime>0) handVelocity=(desired-previousHeldPosition)/deltaTime;
+        previousHeldPosition=desired; lastOwnerPosition=holdOwner.transform.position;
         holdAge += deltaTime;
         if (holdAge >= leaseDuration) { ReleaseInternal("Hold lease expired"); return; }
         FollowGrip();
     }
-    void FollowGrip() { transform.position = grip.position + centerOffset; }
+    void FollowGrip()
+    {
+        transform.position=grip.position+(aerialHold?carryRotation*centerOffset:centerOffset);
+        if(aerialHold) transform.rotation=carryRotation*releaseRotation;
+    }
     public bool ReleaseHold(MonoBehaviour owner, string reason = "Released")
     {
         if (!IsHeldBy(owner)) return false;
@@ -119,19 +160,36 @@ public class TitanCombatTarget : MonoBehaviour
         if (!IsHeld) return;
         // Clear ownership before callbacks: release/cancel can re-enter each other.
         IsHeld = false; holdOwner = null; grip = null; LastReleaseReason = reason;
-        // Deliberate sandbox policy: return to the captured pre-grab world pose,
-        // not an airborne drop or a parent that might disappear with a severed limb.
-        transform.SetPositionAndRotation(releasePosition, releaseRotation);
+        if(aerialHold)
+        {
+            ReleasePending=true;
+            TryCompleteAerialRelease();
+        }
+        else RestorePhysics(releasePosition,releaseRotation,Vector3.zero);
+        if (HoldReleased != null) HoldReleased();
+    }
+    void TryCompleteAerialRelease()
+    {
+        Vector3 position,velocity;
+        if(aerialMotor==null || !aerialMotor.TryRelease(lastOwnerPosition,releaseOwner,handVelocity,holdAge,out position,out velocity)) return;
+        if(!Finite(position) || !Finite(velocity)) return;
+        ReleasePending=false;
+        RestorePhysics(position,targetRoot.rotation,velocity);
+        aerialMotor.Resume(velocity);
+    }
+    void RestorePhysics(Vector3 position, Quaternion rotation, Vector3 velocity)
+    {
+        // Ground retains the approved snap-back policy. Air NEVER uses it.
+        targetRoot.SetPositionAndRotation(position, rotation);
         foreach (var state in bodyStates)
         {
             var rb = state.body; if (rb == null) continue;
             rb.position = rb.transform.position; rb.rotation = rb.transform.rotation;
             rb.isKinematic = state.kinematic; rb.useGravity = state.gravity;
             rb.collisionDetectionMode = state.detection; rb.detectCollisions = state.collisions;
-            if (!rb.isKinematic) { rb.velocity = Vector3.zero; rb.angularVelocity = Vector3.zero; }
+            if (!rb.isKinematic) { rb.velocity = velocity; rb.angularVelocity = Vector3.zero; }
         }
         for (int i = 0; i < colliders.Length; i++) if (colliders[i] != null) colliders[i].enabled = colliderStates[i];
-        if (HoldReleased != null) HoldReleased();
     }
     /// <summary>Actual supported shape contact while hold physics is disabled. Never
     /// temporarily enable a held collider or use its empty disabled bounds.</summary>

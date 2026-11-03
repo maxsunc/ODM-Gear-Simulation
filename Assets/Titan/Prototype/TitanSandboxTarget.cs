@@ -12,6 +12,8 @@ public class TitanSandboxTarget : MonoBehaviour
     void Update()
     {
         var health = GetComponent<TitanCombatTarget>();
+        var flight=GetComponent<TitanSandboxFlight>();
+        if(flight!=null && flight.isActiveAndEnabled && flight.IsFlying) return;
         if (!controller.enabled || (health != null && health.IsHeld)) { verticalSpeed = 0; return; }
         Vector3 direction = Vector3.zero;
         if (Input.GetKey(KeyCode.W)) direction.z++;
@@ -31,6 +33,9 @@ public class TitanSandboxTarget : MonoBehaviour
     {
         var health = GetComponent<TitanCombatTarget>();
         if (health != null) health.EscapeHold();
+        if(health!=null && health.ReleasePending) return;
+        var flight=GetComponent<TitanSandboxFlight>();
+        if(flight!=null) flight.StopFlight();
         bool wasEnabled = controller.enabled;
         controller.enabled = false;
         transform.position = position;

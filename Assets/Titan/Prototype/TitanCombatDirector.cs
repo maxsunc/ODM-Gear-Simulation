@@ -44,14 +44,21 @@ public class TitanCombatDirector : MonoBehaviour
         decisionDelay = Mathf.Max(0, decisionDelay - deltaTime);
         bool settled = agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh && agent.isStopped && agent.velocity.sqrMagnitude < .25f;
         stationaryAge = settled ? stationaryAge + deltaTime : 0;
-        if (!isActiveAndEnabled || !automaticAttack || busy || decisionDelay > 0 || stationaryAge < .12f ||
+        if (!isActiveAndEnabled || !automaticAttack || busy ||
             brain == null || !brain.isActiveAndEnabled || brain.State != TitanAwarenessState.Chase || !brain.CanSeeTarget || brain.target == null) return;
         var victim = brain.target.GetComponent<TitanCombatTarget>();
-        if (victim == null || victim.IsDead || victim.IsHeld) return;
+        if (victim == null || victim.IsDead || victim.IsHeld || victim.ReleasePending) return;
         bool leftFoot = transform.InverseTransformPoint(victim.transform.position).x < 0;
         bool leftHand = leftFoot;
         var body = GetComponent<ModularTitanBody>();
         if (!(leftHand ? body.CanGrabLeft : body.CanGrabRight)) leftHand = !leftHand;
+        if(grab.TryBeginAerialGrab(victim,leftHand) || grab.TryBeginAerialGrab(victim,!leftHand))
+        {
+            LastChoice="Aerial grab"; decisionDelay=.65f; wasBusy=true; return;
+        }
+        // Do not lose the brief aerial reach window to a ground-choice retry
+        // delay or stationary-age gate. Grab's own cooldown still rate-limits it.
+        if(decisionDelay>0 || stationaryAge<.12f) return;
         bool preferGrab = random.NextDouble() < .55;
         bool started;
         if (preferGrab)

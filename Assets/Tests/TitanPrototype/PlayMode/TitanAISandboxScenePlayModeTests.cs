@@ -115,6 +115,48 @@ public class TitanAISandboxScenePlayModeTests
         Assert.That(demo.HumanHealth.Health,Is.EqualTo(100)); Assert.That(demo.Grab.enableBite,Is.True);
     }
 
+    [UnityTest]
+    public IEnumerator AuthoredLabInterceptsItsMovingAirborneProxyThenResets()
+    {
+        yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/TitanAISandbox.unity",new LoadSceneParameters(LoadSceneMode.Additive));
+        scene=SceneManager.GetSceneByPath("Assets/Scenes/TitanAISandbox.unity");yield return null;
+        var demo=scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanAISandboxDemo>()).Single();
+        demo.Director.automaticTick=false;demo.Brain.automaticTick=false;
+        demo.LaunchFlyer();float time=0;
+        while(time<1.5f && !demo.Grab.IsBusy)
+        {
+            Physics.SyncTransforms();demo.Brain.TickAI(Time.deltaTime);demo.Director.TickSelection(Time.deltaTime);
+            time+=Time.deltaTime;if(!demo.Grab.IsBusy) yield return null;
+        }
+        Assert.That(demo.Grab.IsBusy && demo.Grab.IsAerial,Is.True,demo.Director.LastChoice+" brain="+demo.Brain.State+" sight="+demo.Brain.CanSeeTarget+" target="+demo.target.transform.position);
+        Assert.That(demo.Grab.Stage,Is.EqualTo(TitanGrabStage.Reach),"Direct aerial reach has no warning stage");
+        Vector3 locked=demo.Grab.LockedPoint;
+        while(time<1.8f && demo.Grab.CaptureCount==0) {time+=Time.deltaTime;yield return null;}
+        Assert.That(demo.Grab.CaptureCount,Is.EqualTo(1),demo.Grab.LastResult+" target="+demo.target.transform.position+" aim="+locked);
+        Assert.That(demo.HumanHealth.IsHeld,Is.True);Assert.That(demo.Grab.LockedPoint,Is.EqualTo(locked));
+        Assert.That(demo.target.transform.parent,Is.Null);
+        demo.ResetTitan();yield return null;
+        Assert.That(demo.HumanHealth.IsHeld,Is.False);Assert.That(demo.target.GetComponent<CharacterController>().enabled,Is.True);
+        Assert.That(demo.target.GetComponent<TitanSandboxFlight>().IsFlying,Is.False);
+    }
+    [UnityTest]
+    public IEnumerator AerialOpportunityBypassesAnExistingGroundDecisionRetryDelay()
+    {
+        yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/TitanAISandbox.unity",new LoadSceneParameters(LoadSceneMode.Additive));
+        scene=SceneManager.GetSceneByPath("Assets/Scenes/TitanAISandbox.unity");yield return null;
+        var demo=scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanAISandboxDemo>()).Single();
+        demo.Director.automaticTick=false;demo.Brain.automaticTick=false;demo.Grab.automaticTick=false;
+        var flight=demo.target.GetComponent<TitanSandboxFlight>();flight.automaticTick=false;
+        demo.LaunchFlyer();Physics.SyncTransforms();demo.Brain.TickAI(.2f);
+        var agent=demo.titan.GetComponent<NavMeshAgent>();agent.ResetPath();agent.isStopped=true;agent.velocity=Vector3.zero;
+        demo.Director.TickSelection(.2f);Assert.That(demo.Director.LastChoice,Is.EqualTo("No valid attack"));
+        // The far flyer was rejected and set the normal .2s ground retry delay.
+        // A newly reachable flyer must not wait out that delay and escape the hand.
+        flight.Launch(demo.titan.transform.TransformPoint(new Vector3(.7f,7,2.6f)),Vector3.zero);
+        Physics.SyncTransforms();demo.Director.TickSelection(.001f);
+        Assert.That(demo.Grab.IsAerial && demo.Grab.IsBusy,Is.True,demo.Director.LastChoice);
+        Assert.That(demo.Grab.Stage,Is.EqualTo(TitanGrabStage.Reach));demo.ResetTitan();yield return null;
+    }
     [UnityTearDown]
     public IEnumerator TearDown()
     {

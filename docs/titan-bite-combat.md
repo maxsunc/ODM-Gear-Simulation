@@ -4,6 +4,11 @@ Continuation of [grab/hold/release](titan-grab-combat.md), before the required
 mid-air ODM interception variant. This is still **sandbox-only**, Unity2021.3.25f1.
 No gameplay-scene, player-controller, rig, art, prefab or physics-setting changes.
 
+User approved the ground bite/arm motion and requested the commit: **28cb997a**, local
+only, not pushed. The next [aerial interception lab](titan-aerial-grab.md) is implemented
+separately with actual swept hand contact and a distinct current-pose release policy.
+It is still a controller proxy; the real ODM rope/boost adapter is not yet wired.
+
 ## Arm-spasm fix and MCP visual review
 
 User reported the arm spasming during hand-to-mouth. Reproduced in the working
@@ -147,9 +152,13 @@ A sampled MCP visual pass for the arm fix is now recorded above. Full-speed feel
 art and production animation review still matter; numerical checks are not a substitute. This is
 procedural blocking with mitten hands, not articulated fingers or production mocap.
 
-**Next: mid-air ODM interception grabs**, as the user requested after this ground
-phase. Selection must respect actual3D arm reach, then use readable committed
-interception and swept relative hand/player contact at swing speeds. Aerial release
-must handle real rope/boost/controller/momentum and collision clearance: do not reuse
-the ground proxy's snap-back policy or fake a catch with a giant radius/homing.
-See the explicit aerial requirements in `titan-grab-combat.md`.
+**Aerial follow-up:** the [interception lab](titan-aerial-grab.md) now implements
+actual3D hand reach, committed aim, swept hand-box/player-capsule contact and a
+separate current-air-pose release. Real rope/boost/controller integration remains
+next: do not reuse ground snap-back or fake a catch with a giant radius/homing.
+See the motor contract, limits and108-pass evidence in `titan-aerial-grab.md`.
+The aerial mouth path now keeps the elbow forward/outward and turns the held person
+smoothly around the same grip, avoiding the chest while preserving physical contact.
+Ground carry remains unchanged.
+User subsequently requested no aerial warning-arm preparation: aerial catches now
+reach directly in.22s, with shorter miss retry; ground/bite warning timings remain.

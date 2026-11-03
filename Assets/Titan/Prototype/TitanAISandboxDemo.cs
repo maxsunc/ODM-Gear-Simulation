@@ -59,6 +59,7 @@ public class TitanAISandboxDemo : MonoBehaviour
             HumanHealth = target.GetComponent<TitanCombatTarget>();
             if (HumanHealth == null) HumanHealth = target.gameObject.AddComponent<TitanCombatTarget>();
             HumanHealth.ResetHealth();
+            if(target.GetComponent<TitanSandboxFlight>()==null) target.gameObject.AddComponent<TitanSandboxFlight>();
         }
         Combat = titan.gameObject.AddComponent<TitanStompAttack>();
         Grab = titan.gameObject.AddComponent<TitanGrabAttack>();
@@ -78,8 +79,9 @@ public class TitanAISandboxDemo : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha6)) titan.StunEyes();
             if (Input.GetKeyDown(KeyCode.K)) titan.Die();
             if (Input.GetKeyDown(KeyCode.Alpha8) && Combat != null) Combat.TryBeginStomp(HumanHealth, true);
-            if (Input.GetKeyDown(KeyCode.Alpha9) && Grab != null) Grab.TryBeginGrab(HumanHealth, true);
-            if (Input.GetKeyDown(KeyCode.Alpha0) && Grab != null) Grab.TryBeginGrab(HumanHealth, false);
+            if (Input.GetKeyDown(KeyCode.Alpha9) && Grab != null) RequestGrab(true);
+            if (Input.GetKeyDown(KeyCode.Alpha0) && Grab != null) RequestGrab(false);
+            if (Input.GetKeyDown(KeyCode.F)) LaunchFlyer();
             if (Input.GetKeyDown(KeyCode.E) && HumanHealth != null) HumanHealth.EscapeHold();
             if (Input.GetKeyDown(KeyCode.T) && Director != null) Director.SetAutomaticAttacks(!Director.automaticAttack);
         }
@@ -94,6 +96,14 @@ public class TitanAISandboxDemo : MonoBehaviour
         }
     }
 
+    void RequestGrab(bool left) { if(!Grab.TryBeginAerialGrab(HumanHealth,left)) Grab.TryBeginGrab(HumanHealth,left); }
+    public void LaunchFlyer()
+    {
+        if(titan==null || target==null) return;
+        HumanHealth.ResetHealth();
+        var flight=target.GetComponent<TitanSandboxFlight>();
+        if(flight!=null) flight.Launch(titan.transform.TransformPoint(new Vector3(-10,7,9)),titan.transform.TransformDirection(new Vector3(11.5f,0,-7.65f)));
+    }
     void Slice(TitanHitRegion region) { titan.ApplyDamage(region, 100, titan.transform.position, Vector3.zero); }
     public void ResetTitan()
     {
@@ -143,11 +153,13 @@ public class TitanAISandboxDemo : MonoBehaviour
         }
         if (Combat != null) GUILayout.Label("Stomp: " + Combat.Stage + " | cooldown " + Combat.CooldownRemaining.ToString("F1") + "s\n" + Combat.LastResult, small);
         if (Director != null) GUILayout.Label("Auto combat: " + (Director.automaticAttack ? "ON" : "OFF") + " | " + Director.LastChoice, small);
-        if (Grab != null) GUILayout.Label("Grab: " + Grab.Stage + " | " + Grab.LastResult, small);
+        if (Grab != null) GUILayout.Label((Grab.IsAerial?"Aerial grab: ":"Grab: ") + Grab.Stage + " | " + Grab.LastResult, small);
         if (HumanHealth != null && HumanHealth.IsHeld) GUILayout.Label("HELD — E to escape BEFORE the mouth closes!", small);
         if (HumanHealth != null) GUILayout.Label("Human HP: " + HumanHealth.Health.ToString("F0") + " / " + HumanHealth.maxHealth + (HumanHealth.IsDead ? " — R to reset" : ""), small);
         GUILayout.Space(8);
         GUILayout.Label("WASD: move teal human | Shift: sprint\nArrows: orbit | T: toggle auto combat\n8: stomp | 9/0: left/right grab | E: escape\nYellow/cyan aim locks BEFORE contact. Dodge it!", small);
+        if(GUILayout.Button("F  Launch airborne crossing proxy")) LaunchFlyer();
+        if(HumanHealth!=null && HumanHealth.ReleasePending) GUILayout.Label("Release blocked — waiting for full capsule clearance",small);
         if (GUILayout.Button("Human: behind wall") && target != null) target.Warp(new Vector3(0, 0, 18));
         if (GUILayout.Button("Human: open left lane") && target != null) target.Warp(new Vector3(-12, 0, 0));
         GUI.enabled = titan != null && !titan.IsDead;
@@ -159,7 +171,7 @@ public class TitanAISandboxDemo : MonoBehaviour
         if (GUILayout.Button("P  Pause / resume AI") && Brain != null) Brain.enabled = !Brain.enabled;
         if (GUILayout.Button("R  Reset Titan and human")) ResetTitan();
         GUILayout.Space(8);
-        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. Stomp deals 40 HP once. Blindness, leg loss, death or AI pause cancels it. One leg lost: kneel; both lost: helpless/prone. Grab lifts to mouth, winds up, then bites for 100 HP only on actual mouth contact; E escapes. Orange mouth ring warns; red is bite. Grabbing-arm loss, blindness, leg loss or death releases immediately. Real-player/aerial-grab integration pending.", small);
+        GUILayout.Label("Cyan markers: patrol route. Yellow wall blocks sight AND navigation. This human is a lab proxy, not your ODM player. Stomp deals 40 HP once. Blindness, leg loss, death or AI pause cancels it. One leg lost: kneel; both lost: helpless/prone. Grab lifts to mouth, winds up, then bites for 100 HP only on actual mouth contact; E escapes. Orange mouth ring warns; red is bite. Grabbing-arm loss, blindness, leg loss or death releases immediately. F launches an airborne proxy pass. Aerial catches need real swept mitten contact; miss/dodge is possible. Real ODM rope/boost adapter remains pending.", small);
         GUILayout.EndScrollView();
         GUILayout.EndArea();
     }

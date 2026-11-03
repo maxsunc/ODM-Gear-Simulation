@@ -8,7 +8,9 @@ saved, and no dependency on legacy PlayerHealth or the ODM controller.
 [hand-to-mouth and contact-validated bite](titan-bite-combat.md). This document's
 original timing table describes standalone `enableBite=false` mode; the lab adds
 .7s transfer, .6s mouth warning and .12s jaw closure before the lethal contact.
-E escape and all release/cancellation contracts remain. Aerial grabs are still next.
+E escape and all release/cancellation contracts remain. The subsequent
+[aerial interception lab](titan-aerial-grab.md) now has real3D swept hand contact,
+with separate airborne release. Real ODM rope/boost/controller integration is next.
 
 ## Try it
 
@@ -128,18 +130,19 @@ latest intact death10.95m/s, joint gap.006m, hipsY.85m.
 Run `python tools/run_titan_validation.py --reuse /c/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d`.
 Never use the removed Editor-preview physics test that crashed the working Editor.
 
-**Live visual playback review remains pending**: harness Unity tools were not
-available during this slice. Saved-scene normal-physics integration is automated,
-but tests are not proof of final animation quality. The user subsequently requested
-committing the stomp/grab slice; commit references are in `titan-work-checkpoint.md`.
+At this58-test foundation checkpoint, live playback tools were unavailable.
+Subsequent MCP ground-bite/arm review was completed and the user approved/committed
+that work (28cb997a). The aerial lab now also has sampled MCP review. Tests and
+stills are not final production animation approval. See `titan-work-checkpoint.md`.
 No push requested.
 
 ## Required follow-up: mid-air ODM interception grab
 
 The user explicitly requires grabs against **airborne players swinging on ODM gear**.
-This is not implemented by the current ground-targeted crouch grab: its selection
-rejects targets more than2.2m above/below the Titan root. Do not treat that limit or
-the ground-only proxy as the final combat design.
+This is not implemented by the ground-targeted crouch variant: it still rejects
+vertical offsets above2.2m. The new aerial variant/motor contract is documented in
+[titan-aerial-grab.md](titan-aerial-grab.md); F launches its airborne LAB proxy.
+The actual production ODM adapter is not wired yet; do not mistake the lab for that.
 
 Plan this as a height-aware reach/interception variant: a standing Titan can catch
 an airborne player inside its actual3D hand reach. A jumping Titan is a separate
@@ -162,7 +165,7 @@ ability, not implied by this requirement.
 
 Production consumption art/respawn, escape/clearance-tested release, real ODM player
 state/controller/damage adapter, real sword/swept-hit testing,
-mid-air ODM interception grabs, kneeling grabs, production hand animation, runtime
+real-gear integration for the aerial interception prototype, kneeling grabs, production hand animation, runtime
 terrain IK and crowd tuning.
 Hand-to-mouth and readable mouth-contact damage are now an opt-in sandbox extension.
 No asynchronous death timer/coroutine exists; released players cannot be bitten later.
