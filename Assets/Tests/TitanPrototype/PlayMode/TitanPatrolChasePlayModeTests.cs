@@ -63,6 +63,61 @@ public class TitanPatrolChasePlayModeTests
     }
 
     [UnityTest]
+    public IEnumerator StompLocksNavigationWithoutStoppingPerceptionAndReleasesOnPause()
+    {
+        target.position = new Vector3(.5f,0,-6.2f);
+        var health = target.gameObject.AddComponent<TitanCombatTarget>();
+        var attack = body.gameObject.AddComponent<TitanStompAttack>();
+        attack.automaticTick = false; attack.drawTelegraph = false;
+        Physics.SyncTransforms(); brain.TickAI(.2f);
+        Assert.That(attack.TryBeginStomp(health,true), Is.True);
+        Assert.That(brain.IsMovementLocked && agent.isStopped && !agent.hasPath);
+        Vector3 root = body.transform.position, known = brain.LastKnownPosition;
+        target.position = new Vector3(20,0,-6.2f); Physics.SyncTransforms();
+        for(int i=0;i<8;i++)
+        {
+            brain.TickAI(.05f); attack.TickAttack(.05f);
+            yield return null;
+            Assert.That(Vector3.Distance(root,body.transform.position), Is.LessThan(.03f));
+            Assert.That(agent.isStopped && !agent.hasPath, "Chase must not restart navigation during windup");
+        }
+        Assert.That(brain.CanSeeTarget, Is.False);
+        Assert.That(brain.LastKnownPosition, Is.EqualTo(known), "Attack lock must not cause through-wall/out-of-FOV tracking");
+        brain.enabled = false; attack.TickAttack(.1f);
+        Assert.That(attack.IsBusy || brain.IsMovementLocked, Is.False);
+        Assert.That(attack.ImpactCount, Is.EqualTo(0));
+        brain.enabled = true; brain.TickAI(.2f);
+        Assert.That(brain.IsMovementLocked, Is.False);
+    }
+
+    [UnityTest]
+    public IEnumerator DirectorSelectsExclusivelyWithoutConsumingGameplayRandomAndPauseReleasesGrab()
+    {
+        target.position = new Vector3(.7f,0,-6.3f);
+        var health=target.gameObject.AddComponent<TitanCombatTarget>();
+        var stomp=body.gameObject.AddComponent<TitanStompAttack>(); stomp.automaticTick=false; stomp.drawTelegraph=false;
+        var grab=body.gameObject.AddComponent<TitanGrabAttack>(); grab.automaticTick=false; grab.drawTelegraph=false;
+        var director=body.gameObject.AddComponent<TitanCombatDirector>(); director.automaticTick=false; director.ResetDecisions(1);
+        Physics.SyncTransforms(); brain.TickAI(.2f);
+        var state=Random.state;
+        try
+        {
+            Random.InitState(4761); float expected=Random.value; Random.InitState(4761);
+            director.TickSelection(.2f); Assert.That(Random.value,Is.EqualTo(expected));
+        }
+        finally { Random.state=state; }
+        Assert.That(grab.IsBusy,Is.True,director.LastChoice); Assert.That(stomp.IsBusy,Is.False);
+        Assert.That(stomp.automaticAttack,Is.False,"Director must be the sole auto-selection owner");
+        Assert.That(brain.IsMovementLocked && agent.isStopped && !agent.hasPath);
+        brain.TickAI(.2f); grab.TickAttack(.84f);
+        Assert.That(health.IsHeldBy(grab),Is.True,grab.LastResult);
+        brain.enabled=false; grab.TickAttack(.01f);
+        Assert.That(health.IsHeld || grab.IsBusy || brain.IsMovementLocked,Is.False);
+        Assert.That(health.GetComponent<Collider>().enabled,Is.True);
+        yield return null;
+    }
+
+    [UnityTest]
     public IEnumerator SightRequiresRangeFieldOfViewAndUnobstructedRay()
     {
         agent.updateRotation = false;

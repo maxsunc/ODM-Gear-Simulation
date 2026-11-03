@@ -61,6 +61,32 @@ public class TitanAISandboxScenePlayModeTests
         Assert.That(demo.surface.IsReady, Is.True);
     }
 
+    [UnityTest]
+    public IEnumerator AuthoredLabResetReleasesHeldProxyBeforeDestroyingItsOwner()
+    {
+        yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/TitanAISandbox.unity",new LoadSceneParameters(LoadSceneMode.Additive));
+        scene=SceneManager.GetSceneByPath("Assets/Scenes/TitanAISandbox.unity"); yield return null;
+        var demo=scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanAISandboxDemo>()).Single();
+        demo.Director.SetAutomaticAttacks(false); demo.Grab.automaticTick=false; demo.Grab.drawTelegraph=false;
+        demo.Brain.automaticTick=false;
+        demo.target.Warp(demo.titan.transform.position+new Vector3(.7f,0,5.7f));
+        Physics.SyncTransforms(); demo.Brain.TickAI(.2f);
+        Assert.That(demo.Grab.TryBeginGrab(demo.HumanHealth,true),Is.True);
+        demo.Grab.TickAttack(.84f);
+        Assert.That(demo.HumanHealth.IsHeld,Is.True,demo.Grab.LastResult+" contact="+demo.Grab.LastContactPoint+
+            " human="+demo.target.GetComponent<CharacterController>().bounds+" actor="+demo.titan.transform.position+
+            " overlaps="+string.Join(",",Physics.OverlapSphere(demo.Grab.LastContactPoint,demo.Grab.contactRadius,~0,QueryTriggerInteraction.Ignore).Select(c=>c.name)));
+        var human=demo.target; var old=demo.titan;
+        demo.ResetTitan();
+        Assert.That(demo.HumanHealth.IsHeld,Is.False);
+        Assert.That(human.GetComponent<CharacterController>().enabled,Is.True);
+        yield return null;
+        Assert.That(old==null,Is.True); Assert.That(human!=null,Is.True,"Victim must not be destroyed with an owner or limb");
+        Assert.That(human.gameObject.scene,Is.EqualTo(scene)); Assert.That(human.transform.parent,Is.Null);
+        Assert.That(scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanGrabAttack>()).Count(),Is.EqualTo(1));
+        Assert.That(demo.HumanHealth.Health,Is.EqualTo(100));
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
