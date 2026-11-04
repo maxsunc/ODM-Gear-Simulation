@@ -46,6 +46,7 @@
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanInjuryPosePlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ModularTitanPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanPatrolChasePlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutPlayerPlayModeTests.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

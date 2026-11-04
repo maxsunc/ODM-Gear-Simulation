@@ -11,6 +11,14 @@ no project asset/source excluded, no push requested. This checkpoint records exi
 unrelated Ragdoll/prefab experiments have been fully validated. Latest automated
 navigation/combat suite remains123/123 twice on the validated source snapshot.
 
+## Implementation update
+
+First implementation is now in FreeRoam, separate uncommitted review slice after full
+checkpoint16517e6c. **137/137 passed twice**. See `scout-player-implementation.md` for
+actual scope/evidence and remaining polish. Blender model/rest rig + Unity-authored
+Generic clips/late IK; not a claim of exported Blender animation takes or mocap.
+The approved intent below is preserved as the requirements, not completion claims.
+
 ## Approved visual direction
 
 - Similar low-poly silhouette/readability to existing player; Scout-inspired uniform,

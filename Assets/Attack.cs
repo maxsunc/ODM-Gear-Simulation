@@ -11,6 +11,12 @@ public class Attack : MonoBehaviour
 
     [SerializeField] private AudioSource slashSfx;
 
+    [Min(0)] public float strikeDelay=0;
+    [Min(.001f)] public float activeDuration=.6f;
+    [Min(0)] public float recoveryDuration=0;
+    public bool IsCharging { get; private set; }
+    public bool IsAttacking { get; private set; }
+    public event System.Action Released;
     private bool nextAttackReady = true;
     
 
@@ -35,32 +41,31 @@ public class Attack : MonoBehaviour
 
     void OnDisable()
     {
-        StopAllCoroutines();nextAttackReady=true;
+        StopAllCoroutines();nextAttackReady=true;IsCharging=IsAttacking=false;
         if(armatureAnimator!=null) armatureAnimator.SetBool("holdingAttack",false);
         if(damageDealer!=null) damageDealer.gameObject.SetActive(false);
     }
 
     IEnumerator ChargeAttack()
     {
-        nextAttackReady = false;
-        armatureAnimator.SetBool("holdingAttack", true);
+        nextAttackReady = false;IsCharging=true;
+        if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", true);
         while (Input.GetKey(KeyCode.F))
         {
             yield return null;
         }
-        armatureAnimator.SetBool("holdingAttack", false);
-        PlayAudio(slashSfx, 0.8f, 1.2f);
-
-        // Enable sword damage collider during attack window
+        IsCharging=false;IsAttacking=true;
+        if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", false);
+        if(Released!=null)Released();
+        if(slashSfx!=null)PlayAudio(slashSfx, 0.8f, 1.2f);
+        // Defaults retain the legacy .6s window. Scout installer explicitly opts
+        // its scene instance into anticipation / sharp cut / recovery timing.
+        if(strikeDelay>0)yield return new WaitForSeconds(strikeDelay);
         if (damageDealer != null) damageDealer.gameObject.SetActive(true);
-
-        // wait for attack anim to be done
-        yield return new WaitForSeconds(0.6f);
-
-        // Disable sword damage collider after attack window
+        yield return new WaitForSeconds(Mathf.Max(.001f,activeDuration));
         if (damageDealer != null) damageDealer.gameObject.SetActive(false);
-
-        nextAttackReady = true;
+        if(recoveryDuration>0)yield return new WaitForSeconds(recoveryDuration);
+        IsAttacking=false;nextAttackReady = true;
     }
 
     void PlayAudio(AudioSource audio, float startPitch, float endPitch)

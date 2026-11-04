@@ -40,6 +40,8 @@ public class ODM_Movement : MonoBehaviour
     public GameObject collisionParticle;
 
 
+    [Tooltip("Optional visual-only replacement; null retains the original player.")]
+    public Animator visualAnimator;
     private Animator playerAnimator;
     private Animator swordAnimator;
     private Vector3 residualDir;
@@ -58,6 +60,11 @@ public class ODM_Movement : MonoBehaviour
     private bool titanSuspended;
     public bool TitanSuspended { get { return titanSuspended; } }
     public bool HasActiveHooks { get { return leftGrappled || rightGrappled; } }
+    public bool LeftHooked { get { return leftGrappled; } }
+    public bool RightHooked { get { return rightGrappled; } }
+    public bool IsGasing { get { return gasing; } }
+    public Vector3 LeftAnchor { get { return pointLeft; } }
+    public Vector3 RightAnchor { get { return pointRight; } }
     public bool SuspendForTitan(UnityEngine.Object owner)
     {
         if(owner==null || titanSuspended) return false;
@@ -97,7 +104,7 @@ public class ODM_Movement : MonoBehaviour
     {
         movement = GetComponent<Movement>();
         accelCopy = acceleration;
-        playerAnimator = GetComponentInChildren<Animator>();
+        playerAnimator = visualAnimator!=null?visualAnimator:GetComponentInChildren<Animator>();
       //  swordAnimator = this.gameObject.transform.GetChild(0).GetChild(3).GetComponent<Animator>();
         // when acceleration is treated as speed
         grappleIndict = GameObject.Find("GrappleIndict").GetComponent<Animator>();

@@ -21,6 +21,8 @@ public class Movement : MonoBehaviour
     public AudioSource jumpSfx;
     public float gravityConstant = 6f;
 
+    [Tooltip("Optional visual-only replacement; null retains the original player.")]
+    public Animator visualAnimator;
     private Animator playerAnimator;
 
     private Vector3 _velocity;
@@ -59,7 +61,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        playerAnimator = GetComponentInChildren<Animator>();
+        playerAnimator = visualAnimator!=null?visualAnimator:GetComponentInChildren<Animator>();
       //  swordAnimator = this.gameObject.transform.GetChild(0).GetChild(3).GetComponent<Animator>();
 
         copySpeed = moveSpeed;

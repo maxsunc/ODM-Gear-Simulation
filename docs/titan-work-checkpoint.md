@@ -14,7 +14,174 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: full checkpoint before Scout/player/sword animation overhaul
+## Current: Scout player / dual swords / full-body animations first implementation
+
+**LATEST: smooth Fall entry + Inspector duration / animation speed instructions.**
+User wanted gradual previous-animation->Fall, asked where animation speed is changed.
+Fall now native **.5s fixed-time crossfade**, not.075; new `fallBlendDuration` Inspector
+field on **Player > Scout Player Animation > Animation blending > Fall Blend Duration**,
+higher seconds=slower (min.05). Runtime GetPoseTransitionDuration respects custom value.
+Actual clip speed: open Assets/Art/Player/Scout/Animations/ScoutPlayer.controller, select
+state, Inspector Speed (.5 half,2 double). Fall held pose -> use blend duration for entry;
+global Animator.speed overwritten in Update; run cadence/attack-hit timing need care.
+No movement/input/physics/priority/dual-entry/release changes; no animation assets rebuilt.
+
+Final **147/149 passed,same2 Run timing failures**,2026-11-04 01:46:00–17 UTC,
+PID45036,16.833s. New Inspector/default/custom/min + native8-source Fall crossfade checks
+pass, other urgent transition timings unchanged. Runtime/test byte-match; animation
+folder all hashes unchanged. Native controlled review smoothly raises hands from~.4m
+to~2.09m over~.5s, root/pivot0. NOT normal-input traversal proof.27-frame preview
+ArtSource/Player/Scout/Scout_Fall_Smooth_Transition.gif; review_scout_fall_transition.py.
+Scene remains clean Edit Mode, no main save/reload. Before/after COPY snapshots only
+add new default fallBlendDuration:.5 field, existing scene data unchanged. No commit/push.
+
+**Previous: Fall pose — overhead lightly crossed swords, look down.**
+User requested both swords directly above, slightly crossed; character looking down.
+ONLY Fall.anim regenerated via new **Rebuild fall pose only** menu/RebuildFall(). Arms
+raised/inward, wrist roll, slight depth offset; actual blade axes19.56deg from up,
+tips cross near ends without steel interpenetration. Neck/head gaze~38deg down.
+Torso/legs/cape retained. Runtime state/IK/motor/controls/root untouched. All OTHER
+animation/controller/meta files SHA256 byte-unchanged incl run/dual flight/releases.
+
+Final **145/147 passed, SAME2 known Run timing failures**,2026-11-04 01:36:15–32 UTC,
+PID40012,17.191s. New actual-blade/fall pose test passes across loop: directions up,
+blades above head, projected near-tip crossing with depth gap, gaze down/root isolation.
+Initial nearly-meeting tips corrected rather than weakening test. Native static front/
+profile proof ArtSource/Player/Scout/Scout_Fall_Overhead_Unity.png; capture_scout_fall.py.
+No physics stepping; not actual-input traversal proof. Scene NOW CLEAN at task entry
+(user saved since prior turn), clean unpaused Edit Mode retained; before/after snapshot
+copies identical. No scene save/reload, no commit/push. See implementation doc.
+
+**Previous: smooth, less-flat dual-hook recline with live independent arm aim.**
+User liked laying down but requested slower upright->feet-first entry, less recline,
+normal anchor-pointing arms. Enter dual flight using **.75s native Animator fade**.
+Gas/coast pose swaps wait for entry to settle, then use.20s adjustment; controls/thrust/
+hooks/late hand IK are NOT delayed. End hips-62/-56gas/coast, torso~22/28deg above
+horizontal. Both legs still lead, head looks ahead. Other transitions/dual release/
+backflip unchanged. Scoped only2 clips. Run, dual releases, single-hook pose hashes
+unchanged. Before/after dirty-scene snapshot copies identical; remains dirty Edit Mode.
+
+Final **144/146 passed, SAME2 Run failures**,2026-11-04 01:13:22–39 UTC,PID28860,
+17.349s. All new tests pass incl actual Animator20ms-step entry/no snap, gas-toggle
+settle + independent hand aim<1deg across blend, end-pose/root isolation. No tests
+weakened to hide user-retimed Run1.1667s vs old.56 timing mismatch. Changed runtime/
+clip/test bytes match disposable run. Native timed controlled pose review: progressive
+~21/32/39/53/68deg torso from upright, anchor aim~0 afterinitial.15s, root/pivot0;
+gas off midway continues entry then coasts to62deg. NOT normal-input gameplay proof.
+27-frame previews ArtSource/Player/Scout/Scout_DualHook_Smooth_Recline.gif and
+Scout_DualHook_Smooth_Recline_GasToggle.gif, source tools/review_scout_recline.py.
+Full implementation doc updated. No save/reload of user scene; no commit/push.
+
+**Previous: user accepted run; requested no single-hook release + feet-first dual flight.**
+Single final left/right hook detach now goes straight to persistent Fall (no recoil),
+until regrapple/landing/attack/hold/death. Partial dual detach keeps remaining hook pose;
+near-simultaneous/full dual release path unchanged. GasBoth/AttachedBoth recline nearly
+supine, both legs extended feet-leading; independent anchor hand IK retained. Root/camera/
+controller/motor unchanged. Scoped **Rebuild dual-hook flight poses only** menu updates
+ONLY those2 clips and removes ReleaseLeft/Right states (legacy clips unreferenced).
+Run/ReleaseBoth/ReleaseFlip/single-hook gas/coast clips SHA256 BYTE-UNCHANGED.
+
+**IMPORTANT validation:142/144 passed,2 FAILED**,2026-11-04 00:40:11–28 UTC,PID38988,
+16.499s. ALL changed-feature tests + dual flip/independent IK pass. Two existing Naruto
+gait assertions fail against unchanged Run clip now1.1666666s (previous recipe.56s),
+retimed since previous checkpoint. Do NOT overwrite approved/user run, weaken tests or
+claim all green. Run timing/cadence reconciliation deferred for separate user direction.
+Changed runtime/clip/controller/test files byte-match disposable project.
+
+Scene was DIRTY BEFORE TASK. Preserved UNSAVED edits, no reload/normal save. Before/
+after save-AS-COPY backups Library/ScoutBackup/FreeRoam.before/after-feet-first.unity
+are byte-identical1985763 bytes; Editor still dirty, unpaused Edit Mode. Native controlled
+sky review: GasBoth/AttachedBoth feet2.76/2.68m ahead of head, independent hand weights~1,
+root/pivot angle0; final single-hook release Fall. NOT normal-input full ODM proof.
+Preview ArtSource/Player/Scout/Scout_DualHook_FeetFirst_Unity.png. Source/new tests/
+scoped builder + review helper in implementation doc. All new work still uncommitted.
+
+**Previous accepted: stronger lower-body power / rear extension per further user feedback.**
+Previous gait was still judged tucked/weak despite numerical tests. Revised support to
+30% per leg, half-cycle offset, real flight/no double support. Asymmetric front .22m,
+full rear reach~.66m; nearly extended trailing leg and~128deg sole pitch so rear sole
+plane nearly parallels body. Toe/heel-pivot compensation prevents sliding during roll.
+Hip loading/push/flight, then heel recovery/forward reach, not a faster bicycle shuffle.
+.86m contact stroke/.56s cycle; normal real W test: speed15.00001,Run/grounded,hooksfalse,
+Animator1.465117. Motor/controls unchanged. **141/141 passed twice**,2026-11-04
+00:08:00–15 UTC,PID10548,15.853s;00:09:54–00:10:11 UTC,PID13532,16.221s.71 code/art/
+clip/prefab files byte-matched. Saved clean unpaused Edit Mode; original root(0,0,0),
+capsule3.6 unchanged. +2 strict rear-extension/sole-plane and120-phase contact/flight
+regressions. Old gait assertions adapted to actual planted toe rather than flat ankle;
+all Titan/ODM/attack limits unchanged. Preview Scout_NarutoRun + Scout_PowerRun_Rear
+GIF/PNG in ArtSource/Player/Scout. Owned render translation only, not gameplay video.
+See implementation doc. Another review iteration, not assumed visual approval.
+
+**Previous follow-up: user requested natural Naruto-style ground running.** Rebuilt Run:
+~38-degree torso lean, head looking ahead, nearly straight arms/blades trailing, subtle
+shoulder/cape motion. Actual stance/recovery foot path + two-link leg solve instead of
+independent thigh/knee sinusoids; heel settle/push-off/loop continuity. Cadence matches
+sampled planted-foot travel and model scale, NOT arbitrary speed/9. No motor tuning or
+controls changed. Normal real W input in FreeRoam: Run/groundedtrue,15.00001m/s,
+Animator2.205,hooksoff. No motor-disabling fixture for that check. Two new regressions,
+**139/139 passed twice**,2026-11-03 21:44:25–41 UTC,PID34668,16.059s; and21:46:11–28
+UTC,PID23208,16.890s. Final gait runtime/clip/test/prefab byte-matched; all137 retained.
+Preview ArtSource/Player/Scout/Scout_NarutoRun.gif/png (temporary preview translation,
+NOT gameplay-root motion or terrain approval). Clean unpaused Edit Mode, original root
+position retained; new work still uncommitted. Full details in implementation document.
+
+Pre-overhaul full checkpoint **16517e6c** (includes previously excluded user changes,
+except locked .vsidx cache), after navigationc07d4295. NEW player work UNCOMMITTED for
+review; no new push. Implemented/saved ONLY `Assets/Scenes/FreeRoam.unity`; original
+shared Player prefab, Shiganshina and all approved Titan art/rig/physics/nav untouched.
+See **docs/scout-player-implementation.md** and original approved plan.
+
+Blender owned ScoutPlayer_v1 collection: **11520 triangles,43 bones**, tailored Scout
+uniform/harness/green cape/ODM gear, separate grip-centered pistol-grip metal swords,
+one1024 PBR atlas (baseColor/metallicSmoothness/normal), explicit existing URP/Lit.
+Source packed `.blend`/previews in ArtSource/Player/Scout; FBX/material/textures in
+Assets/Art/Player/Scout. Native Generic rig (not Humanoid/mocap/human ragdoll).
+`ScoutVisual.prefab` passive visuals, **24 Unity-authored clips** recreated by
+`Assets/Editor/ScoutPlayerBuilder.cs` from imported rig/rest axes. Blender contains
+model/rest rig, not animation takes. Animation asset constant-channel compaction:
+225575 ->22090 keys,21 samples/binding, max channel delta5.69e-8, folder113MB ->16MB.
+
+`ScoutAnimationBrain` presentation-only hook/gas/air/ground/attack/hold/death priority;
+`ScoutPlayerAnimation` owns new Animator and bounded independent late hand IK. Left/
+right/dual gas/coast, run with trailing swords, raised-blade fall, separate left/right/
+dual releases, interrupted .48s cosmetic dual-release flip with3.6m envelope endpoint+
+travel clearance. Camera/controller/velocity NOT flipped. Existing motors get only
+explicit optional Animator target + read-only hook/anchor/gas getters. Hip launcher
+markers replace rope emitter positions ONLY; camera raycasts/input/forces unchanged.
+
+Full-body ground/air/held charge + attack: hips/chest twist, active legs and follow-
+through. F hold/release unchanged. Opt-in scene timing **.075 anticipation/.12 cut/
+.195 recovery=.39s**, old default **0/.6/0** retained elsewhere. Physical new blade
+sweeps still shared DamageDealer deduplication; no timer-only damage/new pool/parenting.
+Hold OR pending-release motor suspension yields pose/IK/flip but allows held counter.
+
+**137/137 passed twice** final runtime + compacted assets, Unity2021.3.25f1:
+- **2026-11-03 21:17:40–56 UTC**, PID27388,16.739s.
+- **21:19:50–21:20:08 UTC**, PID34396,17.463s.
+All123 earlier retained +14 new tests (state/interruptions, actual skin/leg motion and
+root isolation, independent generic IK, distinct release clips, blade parenting,
+actual damage timing/defaults/disable, swept flip envelope). No weakened Titan limits.
+Live native unpaused controlled sky fixture: correct left/right/dual IK weights~1,
+AttachedBoth when stopping gas; flip pivot rotates while root angle0. ACTUAL Windows
+F press/release in focused Game view: age.156894s =normalized.402293*.39; damage active,
+root angle0. Direct coroutine calls from MCP outside PlayerLoop defer Animator entry;
+not valid timing proof. Real-key proof matches. This is NOT new normal-ODM traversal
+or comprehensive terrain/crowd/clipping approval. Native motor regressions still pass.
+
+Menu restore/reinstall + scene RELOAD verified: legacy CharacterAnimated/.6s/two old
+blades restored, then Scout modelscale2/offsetY-1.8/new emitters/.12 cut persisted;
+zero hidden legacy renderers enabled; CCT3.6/.5, speed15, acceleration50/max80 unchanged.
+Backup Library/ScoutBackup/FreeRoam.unity. Tools > Player > Scout > Build/Install/
+Restore legacy visuals. Original model retained hidden; solid gear colliders retained.
+
+Evidence ArtSource/Player/Scout/Scout_Unity_Overview.png, Scout_AerialAttack.gif
+(authored clip preview, not gameplay video), Scout_Front/Back.png. All temporary
+camera/RT/render settings/runtime placements cleaned. Editor clean unpaused Edit Mode
+in FreeRoam. Temporary reconnect Editor helper removed. Model/face/shoulder/cloth/
+foot-plant/fast-flight animation polish, lateral bank integration, full-body clearance,
+human ragdoll and VFX still need review; do not call first pass final/fully collision-free.
+
+## Previous: full checkpoint before Scout/player/sword animation overhaul
 
 User approved the Scout character/dual-sword + authored-clips/procedural-hook-IK plan.
 Confirmed right hook uses RIGHT hand; falling holds BOTH swords overhead. Added explicit

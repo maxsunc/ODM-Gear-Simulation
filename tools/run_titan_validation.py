@@ -32,7 +32,8 @@ else:
     project = Path(tempfile.mkdtemp(prefix='ODM-TitanValidation-'))
     (project / '.titan-validation-owned').write_text(str(root), encoding='utf-8')
 
-for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Assets/Tests/TitanPrototype']:
+for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Assets/Tests/TitanPrototype',
+                 'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
 # Compile the real opt-in adapter and its narrow legacy dependencies as the default
 # assembly. Tests access that assembly by reflection (Unity asmdefs cannot reference it).

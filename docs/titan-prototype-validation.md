@@ -1,6 +1,81 @@
 # Titan prototype validation
 
-Latest FreeRoam full-map navigation experiment: **123 passed /0 failed twice**, Unity
+LATEST gradual/tunable Fall entry: **147/149 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **01:46:00–17 UTC**,PID45036,16.833s. New passing tests:
+Inspector fallBlendDuration default.5/custom.85/min.05 and unchanged priority timings;
+actual native Animator entry from8 previous animation poses, no instant bone jump,
+still visibly blending at.1s and completes overhead-sword/downward-gaze pose. Runtime/
+test bytes match; every clip/controller/meta unchanged. Native timed single-hook ->Fall
+review hand heights progress~.4/1.3/1.9/2.09m over~.5s, root/pivot0, controlled motor-
+suspended fixture NOT ordinary-input flight approval. Clean Editor scene preserved,
+COPY snapshots differ only by new default serialized fallBlendDuration line, no save/
+reload of main scene. Same approved/user Run timing failures remain unmasked.
+
+Previous overhead crossed-blade/downward-gaze Fall: **145/147 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **01:36:15–32 UTC**,PID40012,17.191s. New actual-mesh
+Fall test samples whole loop: each cutting mesh<20deg from up, above head, tips cross
+slightly in front projection with separate depth, head gaze down/root bindings isolated.
+Corrected near-meeting tips to actual crossing, no weakened assertion. All other clips/
+controller/meta SHA256 unchanged, notably run/dual flight/releases. Scoped Fall rebuild;
+no runtime controls/IK/motor/root changes. Native static front/profile proof not actual
+input gameplay approval. Clean scene preserved with identical before/after copies.
+Known2 run timing failures remain against retimed approved/user clip, not hidden.
+
+Previous gradual/milder dual recline: **144/146 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **01:13:22–39 UTC**,PID28860,17.349s. New passing tests:
+.75s dual entry/deferred gas-to-coast policy; actual native Animator20ms-step continuity
+(no body snap), hands independently tracking anchors through changing torso and gas
+switch, root isolation. End-pose assertions updated for requested less-flat22/28deg
+above-horizontal torso. Native controlled sky sequence agrees, hand aim~0 after~.15s,
+gas off does not interrupt/restart entry. No physics/motor/root changes. Run, dual release,
+single-hook clips byte-unchanged; dirty scene before/after copies identical; changed
+runtime/test/clip files byte-matched. Same known Run timing checks still fail against
+unchanged1.1667s clip, not masked or overwritten. See implementation doc / timed GIFs.
+
+Previous feet-first dual-flight / direct single detach Fall: **142/144 PASSED,2 FAILED**,
+Unity2021.3.25f1,2026-11-04 **00:40:11–28 UTC**,PID38988,16.499s. All changed-feature
+checks pass: feet lead head/body reclined for GasBoth/AttachedBoth, no single recoil,
+persistent Fall + interrupt priorities, original dual releases/near-simultaneous flip,
+independent actual-anchor IK/root isolation. Runtime/changed clip/controller/test byte-match.
+Two existing gait failures: NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso,
+NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel. Run clip unchanged
+this task but now1.1666666s vs old recipe.56s; user/approved retiming left UNTOUCHED.
+Do not weaken checks or overwrite run to hide mismatch; cadence reconciliation separate.
+Run + dual releases + single-hook flight SHA256 unchanged. Dirty scene preserved exactly
+(before/after unsaved snapshot byte comparison), no scene save/reload. Native controlled
+pose proof is not normal-input traversal proof. See scout-player-implementation.md.
+
+Previous powered rear-stride revision: **141 passed /0 failed twice**, Unity2021.3.25f1,
+2026-11-04 **00:08:00–15 UTC**,PID10548,15.853s; **00:09:54–00:10:11 UTC**,PID13532,
+16.221s.71 code/art/clip/prefab files byte-matched. No changed Titan/ODM/attack limits.
+Added rear reach/extended leg/rear sole parallel-to-body checks and120-phase sole
+contact/floor clearance: max one foot touching, real flight, each side has support.
+Existing gait checks now inspect flat early support + rolling TOE travel, not a forced
+flat ankle throughout push-off. Real normal W: Run/grounded,speed15.00001,Animator1.465117,
+hooksfalse, motors enabled/unmodified. Tests are not user visual approval or terrain IK.
+
+Previous Naruto ground-run refinement: **139 passed /0 failed twice**, Unity2021.3.25f1,
+2026-11-03 **21:44:25–41 UTC**, PID34668,16.059s; **21:46:11–28 UTC**,PID23208,16.890s.
+Final gait runtime/clip/test/prefab byte-matched the completed validation project. All137 retained +2 actual sampled-gait
+regressions: support ankle height/even backwards travel, leaned torso/trailing hands,
+recovery clearance, loop bone continuity, and measured clip foot travel vs runtime
+cadence. Normal actual W input: Run/grounded,15.00001m/s,Animator2.205,hooksfalse; no
+sky fixture/motor disabling. Motor speed/gravity/controls unchanged. Preview translation
+is render-only, not gameplay root curves or terrain-foot-IK proof. See implementation doc.
+
+Previous Scout/player first implementation: **137 passed /0 failed twice**, Unity
+**2021.3.25f1**,2026-11-03 **21:17:40–56 UTC** (PID27388,16.739s) and
+**21:19:50–21:20:08 UTC** (PID34396,17.463s). All123 prior retained +14 new state,
+IK, real skin/leg deformation, root-isolation, distinct-release, swept flip-envelope,
+physical-blade parenting and opt-in attack-timing/lifecycle regressions. Final compacted
+clip channels (5.69e-8 sampled max delta, no intentional pose change). No weakened
+Titan continuity/physics/contact assertions. Live native actual F input synchronized
+age.156894 with normalized.402293*.39, damage active, root angle0. Other sky-fixture
+IK/flip evidence is controlled animation review, NOT normal ODM traversal approval.
+See `scout-player-implementation.md`. New player work uncommitted; full previous
+checkpoint16517e6c. Shared Player prefab/Shiganshina/Titan assets/global physics unchanged.
+
+Previous FreeRoam full-map navigation experiment: **123 passed /0 failed twice**, Unity
 **2021.3.25f1**, **2026-11-03 19:03:46–19:04:02 UTC** (PID21108,16.006s) and
 **19:05:38–54 UTC** (PID26368,16.248s). All116 prior +7 physical-source/terrain/
 500m ramp-cover path/size-specific16m gap/exactly-once avoidance/owned-data tests.
