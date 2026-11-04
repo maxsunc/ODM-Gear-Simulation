@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>Opt-in real sword mesh sweeps. Active only during Attack's existing .6s
-/// damage window. No native victim collider needed: sword counters remain active
+/// damage window (Scout .12s, legacy .6s). No native victim collider needed: sword counters remain active
 /// while movement is held. DamageDealer owns exact per-swing region deduplication.</summary>
 [DefaultExecutionOrder(110)]
 [RequireComponent(typeof(DamageDealer))]
@@ -45,7 +45,11 @@ public class TitanODMSwordSweep : MonoBehaviour
                     int n=gameObject.scene.GetPhysicsScene().OverlapCapsule(p+q*Vector3.Scale(old.a,old.scale),
                         p+q*Vector3.Scale(old.b,old.scale),Mathf.Max(.001f,bladeRadius),overlaps,~0,QueryTriggerInteraction.Collide);
                     if(n==overlaps.Length) continue;
-                    for(int k=0;k<n;k++) if(overlaps[k]!=null && overlaps[k].GetComponent<TitanHitZone>()!=null) damage.ProcessContact(overlaps[k]);
+                    Vector3 center=p+q*Vector3.Scale((old.a+old.b)*.5f,old.scale);
+                    Vector3 slash=(t.position+t.rotation*Vector3.Scale((old.a+old.b)*.5f,old.scale))-
+                        (old.position+old.rotation*Vector3.Scale((old.a+old.b)*.5f,old.scale));
+                    for(int k=0;k<n;k++) if(overlaps[k]!=null && overlaps[k].GetComponent<TitanHitZone>()!=null)
+                        damage.ProcessContact(overlaps[k],overlaps[k].ClosestPoint(center),slash);
                 }
             old.position=t.position;old.rotation=t.rotation;old.scale=t.lossyScale;blades[i]=old;
         }

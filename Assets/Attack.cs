@@ -10,12 +10,14 @@ public class Attack : MonoBehaviour
     public DamageDealer damageDealer;
 
     [SerializeField] private AudioSource slashSfx;
+    public bool HasSlashSound { get { return slashSfx!=null && slashSfx.clip!=null; } }
 
     [Min(0)] public float strikeDelay=0;
     [Min(.001f)] public float activeDuration=.6f;
     [Min(0)] public float recoveryDuration=0;
     public bool IsCharging { get; private set; }
     public bool IsAttacking { get; private set; }
+    public event System.Action ChargeStarted;
     public event System.Action Released;
     private bool nextAttackReady = true;
     
@@ -49,6 +51,7 @@ public class Attack : MonoBehaviour
     IEnumerator ChargeAttack()
     {
         nextAttackReady = false;IsCharging=true;
+        if(ChargeStarted!=null)ChargeStarted();
         if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", true);
         while (Input.GetKey(KeyCode.F))
         {

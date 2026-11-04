@@ -40,6 +40,7 @@
      <Compile Include="Assets\Titan\Prototype\TitanHitZone.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAerialContact.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanGrabAttack.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanDamageResult.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAerialMotor.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSandboxFlight.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanMotionStyle.cs" />

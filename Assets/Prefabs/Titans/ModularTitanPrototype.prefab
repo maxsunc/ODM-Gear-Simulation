@@ -278,6 +278,14 @@ MonoBehaviour:
   - {fileID: 511141683721163916}
   - {fileID: 7743559947257905480}
   limbHealth: 60
+  useRegionalHealth: 0
+  armHealth: 1000
+  legHealth: 2500
+  faceHealth: 500
+  napeHealth: 500
+  severLaunchSpeed: 7
+  severUpwardSpeed: 0.65
+  severSpinSpeed: 0.8
   eyeStunDuration: 5
   detachedLifetime: 30
 --- !u!114 &175780621415915748
@@ -656,8 +664,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.15, y: 0.4, z: 0.35}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4488014, y: 0.8720331, z: 0.35}
+  m_Center: {x: -0.06265658, y: -0.1351018, z: 0}
 --- !u!114 &511141683721163916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,8 +1567,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64, z: 0.32}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5241466, y: 0.9197006, z: 0.32}
+  m_Center: {x: 0.00488317, y: -0.19239521, z: 0}
 --- !u!114 &7743559947257905480
 MonoBehaviour:
   m_ObjectHideFlags: 0

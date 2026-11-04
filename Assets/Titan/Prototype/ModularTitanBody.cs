@@ -43,7 +43,15 @@ public class ModularTitanBody : MonoBehaviour
     public TitanHitZone[] hitZones = new TitanHitZone[0];
 
     [Header("Damage")]
+    [Tooltip("Legacy lab health. Scene-installed regional health takes precedence.")]
     [Min(1)] public float limbHealth = 60f;
+    [Tooltip("Enable for the new sword-combat balance; legacy physics labs retain their original damage fixture.")]
+    public bool useRegionalHealth;
+    [Min(1)] public float armHealth = 1000f, legHealth = 2500f, faceHealth = 500f, napeHealth = 500f;
+    [Header("Sever impact (regional-health profile)")]
+    [Range(0,12)] public float severLaunchSpeed = 7f;
+    [Range(0,3)] public float severUpwardSpeed = .65f;
+    [Range(0,1.5f)] public float severSpinSpeed = .8f;
     [Min(0.1f)] public float eyeStunDuration = 5f;
     [Min(0)] public float detachedLifetime = 30f;
 
@@ -63,6 +71,8 @@ public class ModularTitanBody : MonoBehaviour
     bool initialized;
     bool wantsToWalk;
     float blindTimeRemaining;
+    bool regionalHealthInitialized;
+    float faceRemaining, napeRemaining;
     float blindPoseWeight;
     float eyeReactionAge;
     int eyeReactionVariant;
@@ -78,6 +88,7 @@ public class ModularTitanBody : MonoBehaviour
         initialized = true;
         if (animator == null) animator = GetComponentInChildren<Animator>();
         foreach (var limb in limbs) { limb.health = limbHealth; limb.severed = false; }
+        EnsureRegionalHealth();
         foreach (var zone in hitZones) if (zone != null) zone.owner = this;
         for (int i = 0; i < ragdollBones.Length; i++)
         {
@@ -116,6 +127,7 @@ public class ModularTitanBody : MonoBehaviour
         blindTimeRemaining = Mathf.Max(0, blindTimeRemaining - deltaTime);
         if (blindTimeRemaining <= 0)
         {
+            if (useRegionalHealth) faceRemaining = GetMaximumHealth(TitanHitRegion.Eyes);
             UpdateLocomotion();
             if (BlindnessChanged != null) BlindnessChanged(false);
         }
@@ -173,19 +185,72 @@ public class ModularTitanBody : MonoBehaviour
             animator.SetBool(Walking, wantsToWalk && CanWalk);
     }
 
-    public void ApplyDamage(TitanHitRegion region, float damage, Vector3 point, Vector3 impulse)
+    void EnsureRegionalHealth()
     {
-        Initialize();
-        if (IsDead || damage <= 0 || float.IsNaN(damage) || float.IsInfinity(damage)) return;
-        if (region == TitanHitRegion.Nape) { Die(impulse); return; }
-        if (region == TitanHitRegion.Eyes) { StunEyes(); return; }
-        foreach (var limb in limbs)
+        if (!useRegionalHealth || regionalHealthInitialized) return;
+        regionalHealthInitialized = true;
+        foreach (var limb in limbs) limb.health = limb.severed ? 0 : GetMaximumHealth(limb.region);
+        faceRemaining = GetMaximumHealth(TitanHitRegion.Eyes); napeRemaining = GetMaximumHealth(TitanHitRegion.Nape);
+    }
+
+    public float GetMaximumHealth(TitanHitRegion region)
+    {
+        if (!useRegionalHealth) return region == TitanHitRegion.Eyes || region == TitanHitRegion.Nape ? 1 : limbHealth;
+        switch (region)
+        {
+            case TitanHitRegion.LeftArm: case TitanHitRegion.RightArm: return Mathf.Max(1,armHealth);
+            case TitanHitRegion.LeftLeg: case TitanHitRegion.RightLeg: return Mathf.Max(1,legHealth);
+            case TitanHitRegion.Eyes: return Mathf.Max(1,faceHealth);
+            case TitanHitRegion.Nape: return Mathf.Max(1,napeHealth);
+            default: return 0;
+        }
+    }
+
+    public float GetHealth(TitanHitRegion region)
+    {
+        Initialize(); EnsureRegionalHealth();
+        if (region == TitanHitRegion.Nape) return IsDead ? 0 : useRegionalHealth ? napeRemaining : 1;
+        if (region == TitanHitRegion.Eyes) return IsBlind || IsDead ? 0 : useRegionalHealth ? faceRemaining : 1;
+        foreach (var limb in limbs) if (limb.region == region) return limb.health;
+        return 0;
+    }
+
+    public void ApplyDamage(TitanHitRegion region, float damage, Vector3 point, Vector3 impulse)
+    { ReceiveDamage(region,damage,point,impulse); }
+
+    public TitanDamageResult ReceiveDamage(TitanHitRegion region, float damage, Vector3 point, Vector3 impulse)
+    {
+        Initialize(); EnsureRegionalHealth();
+        var result = new TitanDamageResult();
+        if (IsDead || damage <= 0 || float.IsNaN(damage) || float.IsInfinity(damage)) return result;
+        if (!useRegionalHealth && region == TitanHitRegion.Eyes && IsBlind) { StunEyes(); return result; }
+        float before = GetHealth(region);
+        if (before <= 0) return result; // Missing limbs, corpses and already-blind eyes give no hit feedback.
+        if(float.IsNaN(impulse.sqrMagnitude)||float.IsInfinity(impulse.sqrMagnitude))impulse=Vector3.zero;
+        if(float.IsNaN(point.sqrMagnitude)||float.IsInfinity(point.sqrMagnitude))point=transform.position;
+        float remaining = !useRegionalHealth && (region==TitanHitRegion.Nape||region==TitanHitRegion.Eyes) ? 0 : Mathf.Max(0,before-damage);
+        var outcome = TitanDamageOutcome.Hit;
+        if (region == TitanHitRegion.Nape)
+        {
+            napeRemaining = remaining;
+            if (remaining <= 0) { Die(impulse); outcome = TitanDamageOutcome.Killed; }
+        }
+        else if (region == TitanHitRegion.Eyes)
+        {
+            faceRemaining = remaining;
+            if (remaining <= 0) { StunEyes(); outcome = TitanDamageOutcome.Blinded; }
+        }
+        else foreach (var limb in limbs)
         {
             if (limb.region != region || limb.severed) continue;
-            limb.health = Mathf.Max(0, limb.health - damage);
-            if (limb.health <= 0) Sever(region, impulse);
-            return;
+            limb.health = remaining;
+            if (remaining <= 0 && Sever(region,impulse)) outcome = TitanDamageOutcome.Severed;
+            break;
         }
+        result = new TitanDamageResult { Body=this, Region=region, Outcome=outcome, Damage=damage,
+            AppliedDamage=Mathf.Min(before,damage), RemainingHealth=remaining, Point=point,
+            Direction=impulse.sqrMagnitude>.000001f ? impulse.normalized : transform.forward };
+        return result;
     }
 
     public void StunEyes()
@@ -234,7 +299,8 @@ public class ModularTitanBody : MonoBehaviour
                 MakeDynamic(rb);
             }
             IgnoreInternalCollisions();
-            if (limb.bodies.Length > 0 && limb.bodies[0] != null)
+            if (useRegionalHealth) LaunchSeveredBranch(limb,impulse);
+            else if (limb.bodies.Length > 0 && limb.bodies[0] != null)
                 limb.bodies[0].AddForce(Vector3.ClampMagnitude(impulse, 250), ForceMode.Impulse);
             if (Application.isPlaying && detachedLifetime > 0) Destroy(detached, detachedLifetime);
             UpdateLocomotion();
@@ -242,6 +308,27 @@ public class ModularTitanBody : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    void LaunchSeveredBranch(TitanDetachableLimb limb, Vector3 impulse)
+    {
+        if (impulse.sqrMagnitude < .000001f || float.IsNaN(impulse.sqrMagnitude) || float.IsInfinity(impulse.sqrMagnitude)) return;
+        Vector3 center=Vector3.zero;float mass=0;
+        foreach(var rb in limb.bodies) if(rb!=null) { center+=rb.worldCenterOfMass*rb.mass;mass+=rb.mass; }
+        if(mass<=0)return;center/=mass;float radius=0;
+        foreach(var rb in limb.bodies)if(rb!=null)radius=Mathf.Max(radius,Vector3.Distance(center,rb.worldCenterOfMass));
+        Vector3 direction=impulse.normalized;
+        Vector3 axis=Vector3.Cross(Vector3.up,direction);if(axis.sqrMagnitude<.001f)axis=transform.forward;
+        Vector3 spin=axis.normalized*Mathf.Min(Mathf.Clamp(severSpinSpeed,0,1.5f),2/Mathf.Max(.1f,radius));
+        Vector3 launch=direction*Mathf.Clamp(severLaunchSpeed,0,12)+Vector3.up*Mathf.Clamp(severUpwardSpeed,0,3);
+        // A coherent rigid-motion impulse across ALL three bodies, not a violent
+        // shove into just the upper bone. Bounded input spin, no velocity clipping,
+        // unchanged masses, joint limits, solver, angular cap or global gravity.
+        foreach(var rb in limb.bodies)if(rb!=null)
+        {
+            rb.AddForce(launch+Vector3.Cross(spin,rb.worldCenterOfMass-center),ForceMode.VelocityChange);
+            rb.AddTorque(spin,ForceMode.VelocityChange);
+        }
     }
 
     void RebindAnimatorPreservingDetachedPose(Transform detachedRoot)

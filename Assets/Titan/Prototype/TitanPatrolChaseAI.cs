@@ -17,7 +17,7 @@ public class TitanPatrolChaseAI : MonoBehaviour
     public Vector3[] patrolPoints = new Vector3[0];
     public bool automaticTick = true;
     [Header("Sight")]
-    [Min(1)] public float sightRange = 138f;
+    [Min(1)] public float sightRange = 158f;
     [Range(1, 360)] public float fieldOfView = 180f;
     public LayerMask sightMask = ~0;
     [Min(.02f)] public float perceptionInterval = .15f;

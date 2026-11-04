@@ -74,13 +74,121 @@ public class ScoutPlayerPlayModeTests
         finally { Object.Destroy(go);Object.Destroy(mesh); }
         yield return null;
     }
+    [TestCase("Ground")][TestCase("Air")][TestCase("Held")]
+    public void MirroredSlashesCurlBehindNeckTraceAnArcAndFinishWithBothArmsExtended(string context)
+    {
+        var go=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/ScoutVisual.prefab"));go.GetComponent<Animator>().enabled=false;
+        try
+        {
+            var b=go.GetComponentsInChildren<Transform>().ToDictionary(t=>t.name);Vector3 forwardAxis=b["Chest"].InverseTransformDirection(Vector3.forward);
+            foreach(string suffix in new[]{"","_Right"})
+            {
+                var charge=AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Charge"+context+suffix+".anim");var clip=AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Attack"+context+suffix+".anim");
+                Assert.That(charge,Is.Not.Null);Assert.That(clip.length,Is.EqualTo(.39f).Within(.001f));charge.SampleAnimation(go,0);float deepestFold=0;
+                foreach(string side in new[]{"Left","Right"})
+                {
+                    var u=b[side+"UpperArm"];var l=b[side+"LowerArm"];var h=b[side+"Hand"];
+                    float fold=Vector3.Angle(l.position-u.position,h.position-l.position);deepestFold=Mathf.Max(deepestFold,fold);
+                    Assert.That(fold,Is.GreaterThan(55f),"The crossing arm stays bent while reaching the same loaded shoulder");
+                    Assert.That(Vector3.Dot(h.position-b["Neck"].position,b["Chest"].TransformDirection(forwardAxis)),Is.LessThan(-.05f),"Hands chamber behind the neck/shoulder plane");
+                    Assert.That(Vector3.Distance(h.position,b["Neck"].position),Is.LessThan(.45f));
+                }
+                Assert.That(deepestFold,Is.GreaterThan(110f),"The near arm remains deeply curled behind the neck");
+                foreach(var blade in go.GetComponentsInChildren<MeshFilter>().Where(m=>m.name.StartsWith("ScoutBlade_")))
+                {
+                    Vector3 a,start,end;clip.SampleAnimation(go,.065f);BladeEndpoints(blade,out a,out start);clip.SampleAnimation(go,.185f);BladeEndpoints(blade,out a,out end);
+                    float deviation=0;for(int i=0;i<=24;i++){clip.SampleAnimation(go,.065f+.12f*i/24);Vector3 tip;BladeEndpoints(blade,out a,out tip);deviation=Mathf.Max(deviation,Vector3.Cross(tip-start,end-start).magnitude/(end-start).magnitude);}
+                    Assert.That(deviation,Is.GreaterThan(.35f),"Actual cutting steel travels a curved arc, not a straight thrust");
+                }
+                foreach(float t in new[]{.20f,.30f,.39f})
+                {
+                    clip.SampleAnimation(go,t);
+                    foreach(string side in new[]{"Left","Right"})
+                    {
+                        Vector3 u=b[side+"UpperArm"].position,l=b[side+"LowerArm"].position,h=b[side+"Hand"].position;
+                        Assert.That(Vector3.Distance(u,h)/(Vector3.Distance(u,l)+Vector3.Distance(l,h)),Is.GreaterThan(.995f),"Both arms stay fully extended through the finish");
+                        Assert.That((h-u).normalized.x*(suffix==""?1:-1),Is.GreaterThan(.5f));
+                    }
+                }
+                foreach(var binding in AnimationUtility.GetCurveBindings(clip))Assert.That(binding.path,Is.Not.EqualTo("").And.Not.EqualTo("ScoutRig"));
+            }
+            Assert.That(go.transform.position,Is.EqualTo(Vector3.zero));Assert.That(Quaternion.Angle(go.transform.rotation,Quaternion.identity),Is.LessThan(.001f));
+        }
+        finally{Object.DestroyImmediate(go);}
+    }
+    [TestCase("Ground")][TestCase("Air")][TestCase("Held")]
+    public void BothHandsLoadOppositeTheSwingAndChargeMatchesTheReleasedSlash(string context)
+    {
+        var go=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/ScoutVisual.prefab"));go.GetComponent<Animator>().enabled=false;
+        try
+        {
+            var bones=go.GetComponentsInChildren<Transform>();var b=bones.ToDictionary(t=>t.name);
+            foreach(string suffix in new[]{"","_Right"})
+            {
+                float swingSign=suffix==""?1:-1;
+                var charge=AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Charge"+context+suffix+".anim");var cut=AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Attack"+context+suffix+".anim");
+                charge.SampleAnimation(go,.6f);var rotations=bones.Select(t=>t.localRotation).ToArray();var positions=bones.Select(t=>t.localPosition).ToArray();
+                foreach(string hand in new[]{"LeftHand","RightHand"})Assert.That((b[hand].position.x-b["Neck"].position.x)*swingSign,Is.LessThan(-.08f),"BOTH hands load the opposite shoulder; don't merely mirror a symmetric behind-head pose");
+                foreach(float time in new[]{0f,.03f,.06f})
+                {
+                    cut.SampleAnimation(go,time);
+                    for(int i=0;i<bones.Length;i++){Assert.That(Quaternion.Angle(rotations[i],bones[i].localRotation),Is.LessThan(.1f),bones[i].name+" at "+time+": releasing must start from the matching charge pose");Assert.That(Vector3.Distance(positions[i],bones[i].localPosition),Is.LessThan(.0001f));}
+                }
+                cut.SampleAnimation(go,.10f);
+                foreach(string hand in new[]{"LeftHand","RightHand"})Assert.That((b[hand].position.x-b["Neck"].position.x)*swingSign,Is.LessThan(-.03f),"The early arc retains its loaded side rather than resetting to a symmetric pose");
+                cut.SampleAnimation(go,.20f);
+                foreach(string hand in new[]{"LeftHand","RightHand"})Assert.That((b[hand].position.x-b["Neck"].position.x)*swingSign,Is.GreaterThan(.2f),"Both arms finish on the other side after the slash");
+            }
+        }
+        finally{Object.DestroyImmediate(go);}
+    }
+    [Test]public void LeftAndRightAttackClipsMirrorTheWholeBodyNotJustSwapOneArm()
+    {
+        var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/ScoutVisual.prefab");var left=Object.Instantiate(prefab);var right=Object.Instantiate(prefab);
+        left.GetComponent<Animator>().enabled=false;right.GetComponent<Animator>().enabled=false;
+        try
+        {
+            var a=left.GetComponentsInChildren<Transform>().ToDictionary(t=>t.name);var b=right.GetComponentsInChildren<Transform>().ToDictionary(t=>t.name);
+            foreach(string context in new[]{"Ground","Air","Held"})foreach(float time in new[]{0f,.075f,.10f,.14f,.185f,.39f})
+            {
+                AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Attack"+context+".anim").SampleAnimation(left,time);
+                AssetDatabase.LoadAssetAtPath<AnimationClip>(Assets+"Attack"+context+"_Right.anim").SampleAnimation(right,time);
+                foreach(string name in new[]{"Hips","Chest","Head","LeftUpperArm","LeftLowerArm","LeftHand","RightUpperArm","RightLowerArm","RightHand","LeftFoot","RightFoot"})
+                {
+                    string mirror=name.StartsWith("Left")?"Right"+name.Substring(4):name.StartsWith("Right")?"Left"+name.Substring(5):name;
+                    Vector3 p=a[name].position;Assert.That(Vector3.Distance(new Vector3(-p.x,p.y,p.z),b[mirror].position),Is.LessThan(.005f),name+" must reflect with torso/legs");
+                }
+            }
+        }
+        finally{Object.DestroyImmediate(left);Object.DestroyImmediate(right);}
+    }
+    [Test]public void AttackSideIsRandomizedOnceForTheWholeChargeAndSlashWithoutUsingGlobalRng()
+    {
+        var go=new GameObject("Owned cosmetic attack variation");go.SetActive(false);
+        try
+        {
+            var driver=go.AddComponent(Real("ScoutPlayerAnimation"));Set(driver,"attackRandom",new System.Random(1729));
+            var choose=driver.GetType().GetMethod("OnChargeStarted",BindingFlags.Instance|BindingFlags.NonPublic);var resolve=driver.GetType().GetMethod("AttackAnimationState");
+            var global=UnityEngine.Random.state;int right=0,repeats=0;bool last=false;
+            for(int i=0;i<128;i++)
+            {
+                choose.Invoke(driver,null);bool mirrored=Prop<bool>(driver,"MirroredAttack");if(mirrored)right++;if(i>0&&mirrored==last)repeats++;last=mirrored;
+                foreach(string state in new[]{"ChargeGround","ChargeAir","ChargeHeld","AttackGround","AttackAir","AttackHeld"})
+                    Assert.That((string)resolve.Invoke(driver,new object[]{state}),Is.EqualTo(state+(mirrored?"_Right":"")));
+                Assert.That((string)resolve.Invoke(driver,new object[]{"Fall"}),Is.EqualTo("Fall"));Assert.That(Prop<bool>(driver,"MirroredAttack"),Is.EqualTo(mirrored),"Do not reroll during windup/release");
+            }
+            Assert.That(right,Is.InRange(40,88));Assert.That(repeats,Is.GreaterThan(10),"Random variation, not forced alternation");Assert.That(UnityEngine.Random.state,Is.EqualTo(global));
+        }
+        finally{Object.DestroyImmediate(go);}
+    }
     [UnityTest]public IEnumerator FastAttackUsesSeparateAnticipationCutRecoveryAndDisableClosesWindow()
     {
         var player=new GameObject("Scout attack timing");var attack=(MonoBehaviour)player.AddComponent(Real("Attack"));
         var window=new GameObject("Physical damage window");window.transform.SetParent(player.transform);var dealer=window.AddComponent(Real("DamageDealer"));window.SetActive(false);
         Set(attack,"damageDealer",dealer);Set(attack,"strikeDelay",.075f);Set(attack,"activeDuration",.12f);Set(attack,"recoveryDuration",.195f);
+        int starts=0;attack.GetType().GetEvent("ChargeStarted").AddEventHandler(attack,(Action)(()=>{starts++;Assert.That(Prop<bool>(attack,"IsCharging"),Is.True);}));
         var routine=(IEnumerator)attack.GetType().GetMethod("ChargeAttack",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(attack,null);
-        attack.StartCoroutine(routine);Assert.That(Prop<bool>(attack,"IsAttacking"),Is.True);Assert.That(window.activeSelf,Is.False);
+        attack.StartCoroutine(routine);Assert.That(starts,Is.EqualTo(1));Assert.That(Prop<bool>(attack,"IsAttacking"),Is.True);Assert.That(window.activeSelf,Is.False);
         yield return new WaitForSeconds(.04f);Assert.That(window.activeSelf,Is.False);
         yield return new WaitForSeconds(.065f);Assert.That(window.activeSelf,Is.True);
         yield return new WaitForSeconds(.14f);Assert.That(window.activeSelf,Is.False);Assert.That(Prop<bool>(attack,"IsAttacking"),Is.True);

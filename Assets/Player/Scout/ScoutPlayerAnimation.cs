@@ -56,7 +56,18 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     Vector3 lastPosition,previousFlipPosition,leftAimAxis,rightAimAxis;
     string playing;
     float dualEntryAge=DualHookReclineDuration;
-    bool sampled;
+    bool sampled,mirroredAttack,attackVariantChosen;
+    System.Random attackRandom=new System.Random();
+    public bool MirroredAttack { get { return mirroredAttack; } }
+    public string AttackAnimationState(string state)
+    {
+        return mirroredAttack&&(state.StartsWith("Charge")||state.StartsWith("Attack"))?state+"_Right":state;
+    }
+    void OnChargeStarted()
+    {
+        // Separate RNG: cosmetic variation must not perturb Titan/physics randomness.
+        mirroredAttack=attackRandom.Next(2)==1;attackVariantChosen=true;
+    }
     void Awake()
     {
         walking=GetComponent<Movement>();gear=GetComponent<ODM_Movement>();attack=GetComponent<Attack>();health=GetComponent<PlayerHealth>();
@@ -69,11 +80,12 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     void OnEnable()
     {
         if(attack==null)attack=GetComponent<Attack>();
-        attack.Released+=OnStrike;
+        attack.ChargeStarted+=OnChargeStarted;attack.Released+=OnStrike;
     }
     void OnDisable()
     {
-        if(attack!=null)attack.Released-=OnStrike;
+        if(attack!=null){attack.ChargeStarted-=OnChargeStarted;attack.Released-=OnStrike;}
+        attackVariantChosen=false;
         if(flipPivot!=null)flipPivot.localRotation=Quaternion.identity;
     }
     void FixedUpdate()
@@ -85,7 +97,8 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     {
         if(animator==null)return;
         bool held=(walking!=null&&walking.TitanSuspended)||(gear!=null&&gear.TitanSuspended);
-        string clip=held?"AttackHeld":Grounded?"AttackGround":"AttackAir";
+        if(!attackVariantChosen)OnChargeStarted();
+        string clip=AttackAnimationState(held?"AttackHeld":Grounded?"AttackGround":"AttackAir");
         animator.CrossFadeInFixedTime(clip,.025f,0,0);playing=clip;
     }
     void Update()
@@ -101,13 +114,15 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
         bool clear=hooks==0&&!Grounded&&FlipClear();
         string state=brain.Step(new ScoutAnimationBrain.Frame {grounded=Grounded,gas=gear.IsGasing,hooks=hooks,speed=MeasuredVelocity.magnitude,vertical=MeasuredVelocity.y,
             charging=attack.IsCharging,attacking=attack.IsAttacking,dead=health!=null&&health.isDead,held=held,flipClear=clear},Time.deltaTime);
+        if(!attack.IsCharging&&!attack.IsAttacking)attackVariantChosen=false;
+        string visualState=AttackAnimationState(state);
         // Keep the native entry fade intact across gas toggles. Only the small
         // visual gas/coast adjustment waits; hooks, thrust and arm IK stay live.
-        if(state!=playing&&!DeferDualPoseSwitch(playing,state,dualEntryAge))
+        if(visualState!=playing&&!DeferDualPoseSwitch(playing,visualState,dualEntryAge))
         {
-            float blendDuration=GetPoseTransitionDuration(playing,state);
-            if(IsDualHookFlight(state)&&!IsDualHookFlight(playing))dualEntryAge=0;
-            animator.CrossFadeInFixedTime(state,blendDuration,0,0);playing=state;
+            float blendDuration=GetPoseTransitionDuration(playing,visualState);
+            if(IsDualHookFlight(visualState)&&!IsDualHookFlight(playing))dualEntryAge=0;
+            animator.CrossFadeInFixedTime(visualState,blendDuration,0,0);playing=visualState;
         }
         dualEntryAge=IsDualHookFlight(state)?Mathf.Min(DualHookReclineDuration,dualEntryAge+Time.deltaTime):DualHookReclineDuration;
         animator.speed=state=="Run"?RunPlaybackSpeed(Vector3.ProjectOnPlane(MeasuredVelocity,Vector3.up).magnitude,model!=null?model.lossyScale.z:2):1;

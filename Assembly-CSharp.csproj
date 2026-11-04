@@ -45,7 +45,9 @@
      <Compile Include="Assets\Titan\TitanLimb.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
      <Compile Include="Assets\Titan\TitanController.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutPlayerAnimation.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\Tree_Packs.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutAnimationBrain.cs" />
      <Compile Include="Assets\ThirdPersonCam.cs" />
      <Compile Include="Assets\CameraJitterFix.cs" />
      <Compile Include="Assets\ODM_Movement.cs" />
@@ -54,6 +56,7 @@
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
      <Compile Include="Assets\Movement.cs" />
      <Compile Include="Assets\Titan\TitanNape.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSwordFeedback.cs" />
      <Compile Include="Assets\Titan\Integration\TitanShiganshinaIntegration.cs" />
      <Compile Include="Assets\Scripts\FollowPos.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
@@ -64,8 +67,6 @@
      <Compile Include="Assets\DamageDealer.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
      <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
-     <Compile Include="Assets\Player\Scout\ScoutPlayerAnimation.cs" />
-     <Compile Include="Assets\Player\Scout\ScoutAnimationBrain.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />
@@ -86,6 +87,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanImpact.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />

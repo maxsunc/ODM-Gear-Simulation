@@ -14,9 +14,110 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: Scout player / dual swords / full-body animations first implementation
+## Current: regional sword damage / impact effects / severed-limb launch
 
-**LATEST: smooth Fall entry + Inspector duration / animation speed instructions.**
+**Latest:** user approved nape health/speed-dependent killing, requested HP legs2500,
+arms1000, face500, nape500; blood, outcome-colored numbers, shake, slash/hit feedback,
+and a real sever kick instead of merely releasing a limb. Implemented scene-only
+FreeRoam opt-in; shared prefabs/labs retain legacy health fixture. No clip rebuild,
+root/motor/global Physics/time-scale changes, commit or push. Full details:
+**docs/titan-sword-damage-effects.md**.
+
+- Body useRegionalHealth=true on both existing scene Titans (inactive included),
+  per-side limbs; face shares original eye region, blindness only at zero,5s then
+  restores500. Nape accumulates500 before death. ReceiveDamage receipt + old wrapper.
+- Dealer scene base250 +35*max(0,min(actualSpeed,80)-15): <=15:250,30:775,80:2525.
+  Root FixedUpdate sampling,2 continuous samples, invalid/teleport>160/held/carried/
+  release-pending/dead suppression. No sword-animation speed damage amplification.
+- Actual cutting mesh sweeps remain authoritative (.035/.025/max256/fail-closed),
+  now contact point/slash direction passed through shared per-region dedup/event.
+  New profile ignores legacy hilt/gear native trigger damage when sweep active.
+- White ordinary damage, yellow actual sever/blind, red killing nape. Screen-anchored
+  outlined rising numbers (raw damage incl overkill), marker, render-only projection
+  shake with exact restore/live automatic FOV, cut-only tip trails, directional
+  blood bursts and.18s moving cut-branch spray.8x96 particle pool/32 numbers, toggles.
+  Original procedural provisional SFX; existing slash audio takes precedence.
+- Whole detached branch coherent velocity impulse7m/s along cut +.65 up, spin<=.8
+  reduced by world radius to<=2m/s orbital contribution. No velocity clipping,
+  preserved pose/solver12/4/angular cap4/masses/limits/global gravity.
+
+**167/169 passed**,2026-11-04 **03:51:08–27 UTC**,PID46464,19.099s; previous167/169
+03:47:22–39,PID50212. Only SAME2 retimed Run failures.12 new checks cover health,
+face recovery, scaling/held/teleport, dedup/colors, pool/trail/asset refs/cleanup,
+render-only shake/FOV,12 branch/scale combinations. Sever one-second max11.16–11.38
+m/s (<40 unchanged), COM launch~(6.99,.57,0), no pose snap. All strict prior tests pass.
+Owned disposable runtime only; no Editor-preview physics. New runtime/test/art bytes
+must remain matched to latest validation; audio/material copying added to runner.
+
+Actual F + actual Scout blade sweeps in controlled stationary sky fixture: arm
+1000->750->500->250->0, one receipt per swing, white then yellow, blood/trail/GUI.
+Preview ArtSource/Titan/Combat/Scout_SwordImpact_ConfirmedHits.png, raw Library/
+TitanImpactReview/LeftArm_1..4. This is NOT full-speed normal ODM combat approval.
+Native nape/face capture not completed (foreground safety guard refused); their
+health/colors are automated evidence. New review helper refuses existing Play and
+stops only its own session. User subsequently began normal gameplay Play; leave it
+alone. Main setup was intentionally NOT saved over live Play: **after user stops,
+save FreeRoam** to persist feedback component/dealer config/two body profile flags.
+Before/after COPY snapshots differ only these intended settings; no transforms or
+activation changes. Code/material/audio/shader saved. No fixture scene saves.
+Installer menu Tools > Titans > FreeRoam > Install sword health and impact effects.
+Uncommitted work remains after approved059dd52e. User aesthetic/volume/shake/real
+high-speed/scaled combat review remains; no claims of final approval.
+
+## Previous: Scout player / dual swords / full-body animations first implementation
+
+**LATEST: directional F-held wind-ups — both arms load opposite the slash.**
+User rejected nearly symmetric original chamber: both starting arms must differ too.
+Base variant BOTH hands left -> swing right; `_Right` mirror BOTH hands right -> swing
+left. Historical `_Right`/attackSide means LOAD side. Early arc retains this side;
+charge and slash first.065s use exactly the same pose. Near elbow125deg/opposite
+cross-body60deg reach (not both125, which stranded one hand on each side). Updated
+fold assertions for intentional geometry, added stronger both-hand opposition tests.
+Fixed auto-quaternion tangent anticipation drift instead of relaxing matching check.
+Random selection/timings/input/root/motor/IK policy unchanged. Only combat clips baked;
+noncombat clips/controller unchanged. No new commit; checkpoint remains059dd52e.
+
+**155/157 passed,same2 Run failures**,2026-11-04 02:29:24–40 UTC,PID33772,16.721s.
+New3-context tests: BOTH hands opposite finish, identical F-hold/attack0/.03/.06,
+early arc retains load, fully extended finish goes other side. All previous tests
+retained, strict Titan thresholds unchanged. Runtime/tests/all clips/controller
+byte-match. Native actual F-hold right handXs+.4555/+.4175, left-.4175/-.4555m, release
+matches side, damage active/time synced; IK0/root0. Controlled sky NOT full ODM proof.
+Updated review_scout_attack_input.py captures/asserts BOTH charge and cut. Previews
+Scout_Directional_Windup_Unity.png, Scout_Slash_ToLeft/ToRight.gif, updated mirrored
+sheet. Old Left/Right GIFs historical load-named first pass. Scene clean/unpaused Edit
+Mode and before/after copies identical. New work still uncommitted/no push.
+
+**Previous: checkpoint approved Scout, then mirrored random two-arm arc attacks.**
+User authorized commit of current approved art/run/grapple/fall. **059dd52e** —
+Checkpoint approved Scout player, grapple poses and smooth falling.122 paths, local
+only/no push; locked.vsidx excluded, no oversized/sensitive-name flags. All new attack
+work AFTER059dd52e intentionally uncommitted for review, no further commit authorized.
+
+New attacks Ground/Air/Held: both hands chamber behind neck/back(~125deg elbow curl),
+C1 arcing cut back->overhead->front->side, both arms fully extended at.185s through.39s
+finish. Whole-body sagittal mirror (6 new `_Right` charge/attack clips; controller28).
+`Attack.ChargeStarted` chooses50/50 cosmetic System.Random side once per F press,
+cache persists through hold/release/context swaps. No reroll/restart on release, no
+Unity-global RNG disturbance. Physical.075/.12/.195=.39 timing, F controls, sweep/dedup,
+held counter and IK priorities unchanged. Scoped RebuildAttacks/menu regenerates ONLY
+12 combat clips; Run/Fall/grapple/releases/idle/land hashes unchanged. Root/camera/motor/
+scene prefab/model/material unchanged. No VFX/combo/buffering.
+
+**152/154 passed,same2 known retimed-Run failures**,2026-11-04 02:10:30–47 UTC,
+PID14608,16.607s.5 new cases: actual curve/chamber/extension in3 contexts, whole-body
+mirror, stable seeded selection/global RNG; existing event/timing check expanded.
+Runtime/test/ALL clips/controller byte-match completed owned disposable project.
+Actual F input BOTH sides verified native AttackAir/AttackAir_Right at age.13447/.14564,
+normalizedTime*.39 matches age, same charged/release side, damage active, hand IK0,
+root/pivot0. Controlled motor-suspended sky fixture, NOT full ODM combat/terrain proof.
+Preview ArtSource/Player/Scout/Scout_Mirrored_Attack_Unity.png, Scout_Slash_Left.gif,
+Scout_Slash_Right.gif (authored skin-bakes with review pauses, not gameplay video).
+Tools capture_scout_attacks.py / review_scout_attack_input.py updated for both sides.
+Scene CLEAN unpaused Edit Mode, before/after scene copies identical, no scene save/
+reload. Approved checkpoint059dd52e + new attack dirty work. See implementation doc.
+
+**Previous: smooth Fall entry + Inspector duration / animation speed instructions.**
 User wanted gradual previous-animation->Fall, asked where animation speed is changed.
 Fall now native **.5s fixed-time crossfade**, not.075; new `fallBlendDuration` Inspector
 field on **Player > Scout Player Animation > Animation blending > Fall Blend Duration**,

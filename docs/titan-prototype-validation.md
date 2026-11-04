@@ -1,6 +1,48 @@
 # Titan prototype validation
 
-LATEST gradual/tunable Fall entry: **147/149 PASSED,same2 Run failures**,
+LATEST regional sword health / effects / sever impulse: **167/169 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **03:51:08–27 UTC**,PID46464,19.099s. Previous167/169
+03:47:22–39,PID50212,17.019s.12 new cases: regional/nape/face HP boundaries and
+recovery, capped real speed/teleport/held suppression, confirmed per-region dedup and
+outcome colors, bounded pool/cut-only trails/real asset refs/cleanup, render-only
+projection restore/live FOV, coherent branch launch all4 limbs x1/3/5 scale.
+Sever max11.16–11.38m/s in1s120Hz freefall, no pose snap; unchanged40m/s bound and
+solver12/4/angular4; all existing strict Titan continuity/torso/death checks pass.
+Legacy fixtures intentionally retain old damage profile; production FreeRoam opts
+into1000arm/2500leg/500face/500nape. No weakened Run or physics assertions.
+Actual F/actual cutting mesh sky fixture arm1000->750->500->250->0, white normal and
+yellow sever, one receipt/swing, native GUI/blood/trail screenshot. Native nape/face
+review not completed, automated evidence only. NOT full ODM traversal proof.
+New effects/audio included in disposable runner. Details docs/titan-sword-damage-effects.md.
+Main scene setup remains unsaved while user runs Play: don't stop/overwrite session;
+save FreeRoam after exiting Play. No new commit/push.
+
+Previous opposite-side BOTH-arm wind-up: **155/157 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **02:29:24–40 UTC**,PID33772,16.721s. Three new cases
+Ground/Air/Held: both hands on load side opposite slash, charge matches released
+attack at0/.03/.06s, early arc preserves side, both finish other side. Near125/cross60
+elbow pose assertions intentionally replace old symmetric both125 expectation; no
+strict Titan check weakened. Exact matching initially caught native quaternion
+tangent drift; authoring corrected instead of loosening test. Native F charge AND
+release checked both variants, correct hand-side signs/consistent selection, active
+window/time sync. Controlled sky fixture NOT full ODM combat proof. Runtime/test/all
+clips/controller byte-match. Noncombat/controller hashes unchanged; scene copies
+identical/clean Edit Mode. Work uncommitted after approved059dd52e. See updated
+Directional_Windup / ToLeft / ToRight previews, old load-named GIFs historical.
+
+Previous mirrored curled-neck/arc/full-extension attacks: **152/154 PASSED,same2 Run failures**,
+Unity2021.3.25f1,2026-11-04 **02:10:30–47 UTC**,PID14608,16.607s. New passing cases:
+chamber/actual steel arc/both-arm extension inGround/Air/Held, whole-body mirror<.005m,
+seeded stable per-charge variation/global RNG unchanged; single charge-start event.
+Native actual F input both sides agrees with physical attack timeline: right.14564s,
+left.13447s, normalizedTime*.39 matches age, damage active, same charged/released side,
+hand IK0/root/pivot0. Controlled motor-suspended sky fixture NOT full ODM combat proof.
+Runtime/test/all clips/controller byte-match. All noncombat clips/metadata hashes
+unchanged. Clean scene before/after copies identical, no scene save/reload. New attack
+work uncommitted after approved Scout checkpoint059dd52e; checkpoint local/no push.
+Same2 Run timing failures against unchanged user clip remain, no weakened assertions.
+
+Previous gradual/tunable Fall entry: **147/149 PASSED,same2 Run failures**,
 Unity2021.3.25f1,2026-11-04 **01:46:00–17 UTC**,PID45036,16.833s. New passing tests:
 Inspector fallBlendDuration default.5/custom.85/min.05 and unchanged priority timings;
 actual native Animator entry from8 previous animation poses, no instant bone jump,

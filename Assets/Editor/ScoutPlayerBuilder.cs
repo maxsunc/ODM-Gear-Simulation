@@ -13,7 +13,7 @@ public static class ScoutPlayerBuilder
     const string Root="Assets/Art/Player/Scout";
     const string Anim=Root+"/Animations";
     public const string Prefab="Assets/Prefabs/Player/ScoutVisual.prefab";
-    static readonly string[] States={"Idle","Run","Rise","Fall","AirCoast","Land","GasLeft","GasRight","GasBoth","AttachedLeft","AttachedRight","AttachedBoth","ReleaseBoth","ReleaseFlip","ChargeGround","ChargeAir","ChargeHeld","AttackGround","AttackAir","AttackHeld","Held","Dead"};
+    static readonly string[] States={"Idle","Run","Rise","Fall","AirCoast","Land","GasLeft","GasRight","GasBoth","AttachedLeft","AttachedRight","AttachedBoth","ReleaseBoth","ReleaseFlip","ChargeGround","ChargeAir","ChargeHeld","AttackGround","AttackAir","AttackHeld","Held","Dead","ChargeGround_Right","ChargeAir_Right","ChargeHeld_Right","AttackGround_Right","AttackAir_Right","AttackHeld_Right"};
     sealed class Pose
     {
         public Dictionary<string,Vector3> angles=new Dictionary<string,Vector3>();
@@ -28,6 +28,28 @@ public static class ScoutPlayerBuilder
         var names=new HashSet<string>(a.angles.Keys);names.UnionWith(b.angles.Keys);
         foreach(var n in names){Vector3 x,y;a.angles.TryGetValue(n,out x);b.angles.TryGetValue(n,out y);p.angles[n]=Vector3.Lerp(x,y,f);}return p;
     }
+    static Vector3 Cubic(Vector3 a,Vector3 b,Vector3 da,Vector3 db,float f,float span)
+    {
+        float f2=f*f,f3=f2*f;
+        return (2*f3-3*f2+1)*a+(f3-2*f2+f)*span*da+(-2*f3+3*f2)*b+(f3-f2)*span*db;
+    }
+    static Vector3 Angle(Pose p,string name) { Vector3 a;p.angles.TryGetValue(name,out a);return a; }
+    static Pose Stroke(float t,Pose[] keys)
+    {
+        float[] times={.065f,.10f,.14f,.185f};
+        if(t<=times[0])return keys[0];if(t>=times[3])return keys[3];
+        int i=t<times[1]?0:t<times[2]?1:2;float span=times[i+1]-times[i],f=(t-times[i])/span;
+        var p=new Pose();var names=new HashSet<string>();foreach(var key in keys)names.UnionWith(key.angles.Keys);
+        foreach(string n in names)
+        {
+            Vector3 da=i==0?Vector3.zero:(Angle(keys[i+1],n)-Angle(keys[i-1],n))/(times[i+1]-times[i-1]);
+            Vector3 db=i==2?Vector3.zero:(Angle(keys[i+2],n)-Angle(keys[i],n))/(times[i+2]-times[i]);
+            p.angles[n]=Cubic(Angle(keys[i],n),Angle(keys[i+1],n),da,db,f,span);
+        }
+        Vector3 ha=i==0?Vector3.zero:(keys[i+1].hip-keys[i-1].hip)/(times[i+1]-times[i-1]);
+        Vector3 hb=i==2?Vector3.zero:(keys[i+2].hip-keys[i].hip)/(times[i+2]-times[i]);
+        p.hip=Cubic(keys[i].hip,keys[i+1].hip,ha,hb,f,span);return p;
+    }
     static Pose Idle(float t)
     {
         var p=new Pose();p.Arm("Left",78,0,12);p.Arm("Right",78,0,12);
@@ -35,17 +57,43 @@ public static class ScoutPlayerBuilder
         p.Set("Chest",2+Mathf.Sin(t*Mathf.PI*2)*.7f);p.Set("Neck",-2);
         p.Set("CapeUpper",-3);p.Set("CapeLower",2);return p;
     }
+    static Pose Mirror(Pose source)
+    {
+        var p=new Pose();p.hip=new Vector3(-source.hip.x,source.hip.y,source.hip.z);
+        foreach(var pair in source.angles)
+        {
+            string n=pair.Key.StartsWith("Left")?"Right"+pair.Key.Substring(4):pair.Key.StartsWith("Right")?"Left"+pair.Key.Substring(5):pair.Key;
+            p.angles[n]=new Vector3(pair.Value.x,-pair.Value.y,-pair.Value.z);
+        }
+        return p;
+    }
     static Pose Charge(bool air,bool held=false)
     {
-        var p=Idle(0);p.Set("Hips",air?22:6,held?0:-10);p.Set("Chest",8,-28);p.Set("Head",-6,20);
-        p.Arm("Left",45,-15,65);p.Arm("Right",-30,20,85);
+        // BOTH hands load behind the LEFT shoulder for the rightward cut. The
+        // near elbow folds deeply; the opposite arm crosses behind the neck.
+        // Mirroring this entire pose puts BOTH hands on the right for a left cut.
+        var p=Idle(0);p.Set("Hips",air?18:6,held?0:-10);p.Set("Chest",4,-10);p.Set("Head",-10,12);
+        p.Set("LeftUpperArm",-55,0,-25);p.Set("RightUpperArm",-75,100,40);
+        p.Set("LeftLowerArm",0,0,-125);p.Set("RightLowerArm",0,0,60);
+        p.Set("LeftHand",35,-70);p.Set("RightHand",-35,70);
         if(!held){p.Set("LeftUpperLeg",air?-45:8);p.Set("RightUpperLeg",air?10:-8);p.Set("LeftLowerLeg",air?90:15);p.Set("RightLowerLeg",air?35:18);}
         return p;
     }
-    static Pose Cut(bool air,bool held=false)
+    static Pose ArcTop(bool air,bool held)
     {
-        var p=Idle(0);p.Set("Hips",air?30:12,held?0:12);p.Set("Chest",18,48);p.Set("Head",-10,-20);
-        p.Arm("Left",65,-75,8);p.Arm("Right",72,-65,10);
+        var p=Charge(air,held);p.Set("Hips",air?22:9,held?0:-6);p.Set("Chest",-6,-18);
+        // Carry the loaded side into the arc instead of opening into the same
+        // symmetric hands-above-head waypoint for both swing directions.
+        p.Set("LeftUpperArm",-10,0,-70);p.Set("RightUpperArm",-10,70,120);
+        p.Set("LeftLowerArm",0,0,-50);p.Set("RightLowerArm",0,0,20);
+        p.Set("LeftHand",35,-15);p.Set("RightHand",-35,15);return p;
+    }
+    static Pose Cut(bool air,bool held=false,bool extended=false)
+    {
+        var p=Idle(0);p.Set("Hips",air?30:12,held?0:extended?12:0);p.Set("Chest",extended?8:12,extended?36:6);p.Set("Head",-10,extended?-22:-6);
+        p.Set("LeftUpperArm",-12,extended?125:78,-8);p.Set("RightUpperArm",-12,extended?-55:-78,8);
+        p.Set("LeftLowerArm",0,extended?4:8);p.Set("RightLowerArm",0,extended?-4:-8);
+        p.Set("LeftHand",35);p.Set("RightHand",-35);
         if(!held){p.Set("LeftUpperLeg",air?12:-12);p.Set("RightUpperLeg",air?-35:12);p.Set("LeftLowerLeg",air?35:18);p.Set("RightLowerLeg",air?80:18);p.hip=new Vector3(.025f,-.025f,0);}
         p.Set("CapeUpper",-25);p.Set("CapeLower",-15);return p;
     }
@@ -104,6 +152,7 @@ public static class ScoutPlayerBuilder
     }
     static Pose Sample(string state,float t,float length)
     {
+        if(state.EndsWith("_Right"))return Mirror(Sample(state.Substring(0,state.Length-6),t,length));
         float f=Mathf.Clamp01(t/length),wave=Mathf.Sin(f*Mathf.PI*2);var p=Idle(f);
         if(state=="Run")
         {
@@ -159,13 +208,10 @@ public static class ScoutPlayerBuilder
         else if(state.StartsWith("Charge"))return Charge(state!="ChargeGround",state=="ChargeHeld");
         else if(state.StartsWith("Attack"))
         {
-            bool air=state!="AttackGround",held=state=="AttackHeld";var a=Charge(air,held);var cut=Cut(air,held);
-            var follow=Idle(0);follow.Set("Chest",18,20);follow.Arm("Left",95,-15,15);follow.Arm("Right",93,-20,20);
-            if(air&&!held){follow.Set("Hips",20);follow.Set("LeftUpperLeg",15);follow.Set("RightUpperLeg",-25);follow.Set("LeftLowerLeg",30);follow.Set("RightLowerLeg",65);}
-            if(t<.065f)return a;
-            if(t<.135f)return Blend(a,cut,Mathf.SmoothStep(0,1,(t-.065f)/.07f));
-            if(t<.22f)return Blend(cut,follow,(t-.135f)/.085f);
-            return Blend(follow,air?Sample("AirCoast",0,1):Idle(0),(t-.22f)/.17f);
+            bool air=state!="AttackGround",held=state=="AttackHeld";var a=Charge(air,held);var top=ArcTop(air,held);var cut=Cut(air,held);var finish=Cut(air,held,true);
+            // Swift curved cut inside the unchanged .075-.195 physical window.
+            // Distinct back/overhead/front/side waypoints, not a straight thrust.
+            return Stroke(t,new[]{a,top,cut,finish}); // C1 arc, then hold the fully extended finish.
         }
         else if(state=="ReleaseFlip")
         {
@@ -189,6 +235,22 @@ public static class ScoutPlayerBuilder
         foreach(var key in keys)if(Mathf.Abs(key.value-value)>1e-7f)return curve;
         return AnimationCurve.Linear(keys[0].time,value,keys[keys.Length-1].time,value);
     }
+    static void KeepWindupFlat(AnimationClip clip)
+    {
+        // Unity's automatic quaternion tangents can anticipate the next moving
+        // key and subtly drift away from Charge before the stroke begins.
+        foreach(var binding in AnimationUtility.GetCurveBindings(clip))
+        {
+            var curve=AnimationUtility.GetEditorCurve(clip,binding);bool changed=false;
+            for(int i=0;i<curve.length&&curve[i].time<=.06501f;i++)
+            {
+                AnimationUtility.SetKeyLeftTangentMode(curve,i,AnimationUtility.TangentMode.Free);
+                AnimationUtility.SetKeyRightTangentMode(curve,i,AnimationUtility.TangentMode.Free);
+                var key=curve[i];key.inTangent=key.outTangent=0;curve.MoveKey(i,key);changed=true;
+            }
+            if(changed)AnimationUtility.SetEditorCurve(clip,binding,curve);
+        }
+    }
     static void Folder(string path)
     {
         if(AssetDatabase.IsValidFolder(path))return;string parent=Path.GetDirectoryName(path).Replace('\\','/');Folder(parent);AssetDatabase.CreateFolder(parent,Path.GetFileName(path));
@@ -199,10 +261,12 @@ public static class ScoutPlayerBuilder
     public static void RebuildFlight() { BuildAssets(true); }
     [MenuItem("Tools/Player/Scout/Rebuild fall pose only")]
     public static void RebuildFall() { BuildAssets(false,true); }
-    static void BuildAssets(bool flightOnly,bool fallOnly=false)
+    [MenuItem("Tools/Player/Scout/Rebuild mirrored attack poses only")]
+    public static void RebuildAttacks() { BuildAssets(false,false,true); }
+    static void BuildAssets(bool flightOnly,bool fallOnly=false,bool attackOnly=false)
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Exit Play first");
-        bool poseOnly=flightOnly||fallOnly;
+        bool poseOnly=flightOnly||fallOnly||attackOnly;
         AssetDatabase.Refresh();Material material=null;
         if(!poseOnly)
         {
@@ -240,6 +304,7 @@ public static class ScoutPlayerBuilder
             {
                 if(flightOnly&&state!="GasBoth"&&state!="AttachedBoth")continue;
                 if(fallOnly&&state!="Fall")continue;
+                if(attackOnly&&!state.StartsWith("Attack")&&!state.StartsWith("Charge"))continue;
                 float length=state=="Run"?ScoutPlayerAnimation.RunCycleDuration:state.StartsWith("Attack")?.39f:state=="ReleaseFlip"?.48f:state.StartsWith("Release")?.22f:state=="Land"?.12f:1.2f;
                 bool loop=!(state.StartsWith("Attack")||state.StartsWith("Release")||state=="Land");
                 var clip=new AnimationClip {name=state,frameRate=60};int frames=Mathf.CeilToInt(length*60);
@@ -262,7 +327,7 @@ public static class ScoutPlayerBuilder
                         AnimationUtility.SetEditorCurve(clip,EditorCurveBinding.FloatCurve(path,typeof(Transform),"m_LocalPosition."+"xyz"[k]),CompactConstant(curve));
                     }
                 }
-                clip.EnsureQuaternionContinuity();var settings=AnimationUtility.GetAnimationClipSettings(clip);settings.loopTime=loop;AnimationUtility.SetAnimationClipSettings(clip,settings);
+                clip.EnsureQuaternionContinuity();if(state.StartsWith("Attack"))KeepWindupFlat(clip);var settings=AnimationUtility.GetAnimationClipSettings(clip);settings.loopTime=loop;AnimationUtility.SetAnimationClipSettings(clip,settings);
                 string clipPath=Anim+"/"+state+".anim";var existing=AssetDatabase.LoadAssetAtPath<AnimationClip>(clipPath);if(existing==null)AssetDatabase.CreateAsset(clip,clipPath);else{EditorUtility.CopySerialized(clip,existing);EditorUtility.SetDirty(existing);UnityEngine.Object.DestroyImmediate(clip);clip=existing;}
                 AnimatorState st=null;foreach(var candidate in controller.layers[0].stateMachine.states)if(candidate.state.name==state){st=candidate.state;break;}
                 if(st==null)st=controller.layers[0].stateMachine.AddState(state);st.motion=clip;st.writeDefaultValues=true;if(state=="Idle")controller.layers[0].stateMachine.defaultState=st;

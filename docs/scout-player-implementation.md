@@ -3,7 +3,10 @@
 ## Scope and status
 
 Pre-overhaul full checkpoint **16517e6c**, after navigationc07d4295 and ODM integration
-0f371f2c. New Scout work is separate, **uncommitted for review**, no push. Unity remains
+0f371f2c. User explicitly approved the Scout/run/grapple/fall version and authorized a
+checkpoint: **059dd52e** committed locally before attack changes (122 paths; locked.vs
+cache excluded). No push. New mirrored attack work AFTER that checkpoint is **uncommitted
+for review**. Unity remains
 **2021.3.25f1**. Installed/saved ONLY in `Assets/Scenes/FreeRoam.unity`. Shiganshina and
 shared `Assets/Prefabs/Player.prefab` remain unchanged. Tools menu can explicitly opt
 Shiganshina in later. The user's3x/5x Titans, navigation data and placements are retained;
@@ -48,7 +51,109 @@ python tools/blender_request.py --file tools/blender/render_scout_preview.py
 Then **Tools > Player > Scout > Build visual assets and animations** in Unity Edit Mode.
 No Editor-preview-scene physics tests or simulation used for this feature.
 
-## Current: gradual Fall entry / Inspector blend-duration control
+## Current: sword damage and feedback integration
+
+Added scene-only `TitanSwordFeedback` and DamageDealer speed profile, HP thresholds,
+white/yellow/red confirmed-hit numbers, render-only camera shake, actual tip trails,
+blood bursts/moving sever spray and original provisional SFX. No animation assets
+rebuilt/retimed; approved mirrored wind-up/cut, F timings, controls and physical
+blade sweep authority retained. Whole severed branch now gets coherent cut momentum.
+See **docs/titan-sword-damage-effects.md** for values/Inspector/validation/limitations.
+Latest167/169 (same2 Run failures),2026-11-04 03:51:08–27 UTC. Native F confirmed
+arm damage/sever; no claim of full-speed ODM proof or aesthetic approval. Setup
+installed on FreeRoam but scene unsaved while user in Play; save after Play, don't
+force-stop user session. New work remains uncommitted after059dd52e.
+
+## Previous: both arms load opposite the slash (including F-held wind-up)
+
+User correctly rejected the previous almost-symmetric behind-neck chamber: mirroring
+it did not clearly move BOTH hands to the opposite starting side. Changed authoring:
+- Base charge/attack: BOTH hands behind LEFT shoulder, finish slash RIGHT.
+- `_Right` mirrored variant: BOTH hands behind RIGHT shoulder, finish slash LEFT.
+  Historical `_Right` / MirroredAttack / review attackSide refer to LOAD side, NOT
+  finish direction. New preview labels and ToLeft/ToRight filenames name actual swing.
+- Same directional pose used throughout F-hold and release anticipation; early arc
+  keeps the loaded side rather than resetting to symmetric hands-above-head.
+- Near arm folds~125deg, opposite arm bends~60deg and reaches across behind the neck
+  to the same shoulder. Earlier both-arms>110deg assertion intentionally changed to
+  reflect this cross-body reach; deep near fold retained, stronger both-hands/swing
+  opposition assertions added. No Titan physics/continuity thresholds changed.
+- Unity automatic quaternion tangents initially drifted~.2-.5deg before stroke. Added
+  KeepWindupFlat after quaternion continuity so initial.065s exactly matches charge,
+  rather than relaxing new matching test. Hold F and first slash frames now agree.
+
+Final **155/157 passed,same2 known Run failures**,2026-11-04 **02:29:24–40 UTC**,
+PID33772,16.721s. New3-context tests check BOTH hands> .08m opposite swing relative
+neck, same charge/initial attack pose at0/.03/.06s, early arc preserves side, finish
+both on other side. Existing curve/mirror/full-extension/selection tests retained.
+All runtime/test/animation/controller bytes match completed disposable run; noncombat
+clips/controller SHA256 unchanged. No root/motor/scene/physical damage timing changes.
+
+Actual F-hold tests prove native ChargeAir variants before release: right-load handX
++.45549/+.41748 world m, left-load-.41748/-.45549, then correct cached-side release,
+active damage and normalizedTime*.39 matching age (~.14040/.13088s). Hand IK0/root0,
+no transition at charge snapshot. Controlled motor-suspended sky fixture, NOT normal
+ODM traversal proof. Updated input helper checks charge pose as well as release.
+Preview **Scout_Directional_Windup_Unity.png**, **Scout_Slash_ToLeft.gif**,
+**Scout_Slash_ToRight.gif**, **Scout_Mirrored_Attack_Unity.png** under ArtSource/Player/
+Scout. GIFs are authored skin-bake renders with review pauses; paired wind-ups are
+actual F-hold native captures. Old Scout_Slash_Left/Right.gif are historical superseded
+load-named first-pass previews. Scene remains clean/unpaused Edit Mode; before/after
+copies identical. Work still uncommitted after approved059dd52e; no new push/commit.
+
+## Previous: mirrored two-arm curled wind-up / swift arcing slash
+
+After local approved Scout checkpoint **059dd52e**, user requested arms curled behind
+neck/back -> swift arc -> fully extended arms, mirrored left/right, randomly chosen.
+Implemented new charge/attack pairs for Ground/Air/Held: existing base names represent
+left-load/right-finish, six new `_Right` clips/controller states mirror the entire body.
+Controller now28 states. Both arms participate in BOTH variants; not single-arm attacks.
+
+- Charge has~125deg elbow fold, hands behind neck/shoulder plane, steel back/down.
+- Distinct chamber(.065s), overhead arc(.10), front cut(.14), extended side finish(.185).
+  Nonuniform C1 Hermite phase interpolation carries velocity through arc waypoints
+  rather than stopping at each pose. Fully extended finish holds through clip end.39s.
+- Full-body hip/chest twist, head counter-look, grounded brace/air leg scissor, held
+  context retained; exact sagittal reflection swaps sides, mirrors yaw/roll/hip offset.
+- `Attack.ChargeStarted` event chooses cosmetic side ONCE per F press. Separate
+  System.Random,50/50, repeats allowed; does not perturb Unity random used elsewhere.
+  Driver resolves charge + slash to SAME cached side across contexts; no reroll on
+  release, no Update fallback restarting the right slash as the base left state.
+- Existing F hold/release, attack.39s = anticipation.075 + damage.12 + recovery.195
+  unchanged, same physical blade sweep/dedup. No buffering/combo/VFX/root impulses.
+  Attack/charge still suppress hand aiming; normal hook IK resumes afterwards.
+- **Tools > Player > Scout > Rebuild mirrored attack poses only** / RebuildAttacks()
+  regenerates ONLY12 combat clips. All Run/Fall/grapple/release/idle/land clips + metadata
+  verified SHA256 byte-unchanged; passive model/prefab/material, scene/player tuning
+  untouched. Full build still regenerates all owned clips, don't overwrite user run.
+
+Final owned Unity2021 suite **152/154 passed,same2 known retimed-Run failures**,
+2026-11-04 **02:10:30–47 UTC**,PID14608,16.607s. New tests pass: three contexts'
+folded neck chamber, actual steel's curved arc, both arms fully extended through finish;
+full-body mirror agreement<.005m, charge-time selection stable across all contexts,
+seeded50/50 with repeats/global RNG preservation, single charge-start event/timing.
+All prior regressions retained; unchanged Run assertions still fail, not weakened.
+Runtime/test/ALL animation/controller files byte-match completed disposable project;
+new6 clip metas present. No Editor-preview-scene physics tests used.
+
+Actual Windows F input (controlled unpaused Play sky fixture) exercised BOTH sides,
+seeding cosmetic RNG only for deterministic coverage:
+- Right: chargedRight=true, same release side, age.1456405s, normalized.37343696*.39
+  matches age, actual AttackAir_Right, damage active, no transition, hand IK0/root0.
+- Left: chargedRight=false, age.1344721s, normalized.34480032*.39 matches age, actual
+  AttackAir, damage active, no transition, hand IK0/root0. Always releases F/exits Play.
+This proves native input synchronization, NOT normal-input full ODM combat clearance.
+No claim of comprehensive shoulder/cloth/gear/terrain clearance or aesthetic approval.
+
+Review: **ArtSource/Player/Scout/Scout_Mirrored_Attack_Unity.png**,
+**Scout_Slash_Left.gif**, **Scout_Slash_Right.gif**.25-frame authored Unity skin-bake
+GIFs have initial/final review pauses, not gameplay video. Reproduce via
+`tools/capture_scout_attacks.py`; two-side input check `tools/review_scout_attack_input.py`.
+Scene left CLEAN/unpaused Edit Mode, original placements preserved; before/after scene
+copies byte-identical. No new save/reload or post-attack commit/push. Approved checkpoint
+remains059dd52e; these new attacks are reviewable working-tree work.
+
+## Previous: gradual Fall entry / Inspector blend-duration control
 
 User requested smooth previous-pose -> Fall instead of immediately raising swords,
 and asked where to adjust animation speed. Fall entry now uses **.5s native fixed-time
