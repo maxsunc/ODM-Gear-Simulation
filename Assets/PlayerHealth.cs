@@ -27,6 +27,15 @@ public class PlayerHealth : MonoBehaviour
         movement = GetComponent<Movement>();
         odmMovement = GetComponent<ODM_Movement>();
         attack = GetComponent<Attack>();
+        EnsureScoutRagdoll();
+    }
+
+    public ScoutPlayerRagdoll EnsureScoutRagdoll()
+    {
+        var existing = GetComponent<ScoutPlayerRagdoll>();
+        if (existing != null) return existing;
+        var scout = GetComponent<ScoutPlayerAnimation>();
+        return scout != null && scout.model != null ? gameObject.AddComponent<ScoutPlayerRagdoll>() : null;
     }
 
     public void TakeDamage(float damage)
@@ -45,6 +54,8 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         if (isDead) return;
+        var presentation = EnsureScoutRagdoll();
+        if (presentation != null) presentation.CaptureDeathPose();
         isDead = true;
         if(Died!=null) Died();
 
@@ -54,10 +65,8 @@ public class PlayerHealth : MonoBehaviour
         if (attack != null) attack.enabled = false;
 
         // Enable ragdoll on player
-        if (ragdollController != null)
-        {
-            ragdollController.EnableRagdoll();
-        }
+        bool scoutCorpse = presentation != null && presentation.Activate();
+        if (!scoutCorpse && ragdollController != null) ragdollController.EnableRagdoll();
 
         // Reload scene after a short delay (matches GameElements.cs pattern)
         Invoke(nameof(ReloadScene), 3f);

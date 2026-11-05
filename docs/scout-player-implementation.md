@@ -1,6 +1,20 @@
 # Scout player — first implementation / review slice
 
-## Scope and status
+## Latest: real bite/death physical presentation
+
+See **docs/titan-scout-bite-presentation.md**. Scout now feeds side-on into mouth and
+hands off captured real skin pose to independent13-body/12-joint corpse on lethal
+chomp; accepted HP loss drives existing blood pool once. PlayerHealth automatically
+adds passive runtime ScoutPlayerRagdoll (no new live physics), safe controller exit
+cannot move corpse. Clone Animator disabled, captured bone pose preserved, no passive
+visual prefab/FBX/clip changes; live Scout driver stops on death. Existing3s respawn,
+C/F/hook/gas controls/tuning unchanged. Non-Scout fallback kept with legacy null guards.
+222/224 twice (same2 Run failures),native3x graphics1/1. User authorized committing
+this follow-up and pushing the branch (including12901b9c); see latest checkpoint.
+Old initial-slice scope below is historical. No main scene/
+Editor Play/input automation. Early reach/scaled-ground/full-speed feel separate.
+
+## Historical initial scope and status
 
 Pre-overhaul full checkpoint **16517e6c**, after navigationc07d4295 and ODM integration
 0f371f2c. User explicitly approved the Scout/run/grapple/fall version and authorized a

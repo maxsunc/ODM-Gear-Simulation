@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections;
+using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEditor.Animations;
@@ -13,6 +14,10 @@ public class TitanODMIntegrationPlayModeTests
 {
     Scene scene,previous;
     GameObject player,owner,jumpFloor;
+    ModularTitanBody biteTitan;
+    TitanGrabAttack biteGrab;
+    Transform biteModel;
+    MonoBehaviour corpsePresentation,biteFeedback;
     MonoBehaviour walk,gear,hp;
     TitanAerialMotor motor;
     TitanCombatTarget target;
@@ -319,6 +324,194 @@ public class TitanODMIntegrationPlayModeTests
         float before=player.transform.position.y;Assert.That(Call(walk,"TryJump"),Is.True);GravitySteps(1);
         Assert.That(Get<float>(walk,"jumpForce"),Is.Zero);Assert.That(player.transform.position.y-before,Is.GreaterThan(3.5f).And.LessThan(4f),"Native ceiling at 3.99m must be caught even though the full rise fits into one fixed step");
         yield return null;
+    }
+    void ScoutBiteSetup(float damage=100)
+    {
+        walk.enabled=false;gear.enabled=false;cc.enabled=false;player.transform.SetPositionAndRotation(new Vector3(.7f,1.8f,5.7f),Quaternion.identity);cc.enabled=true;
+        var visual=Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/ScoutVisual.prefab"));
+        SceneManager.MoveGameObjectToScene(visual,scene);visual.transform.SetParent(player.transform,false);visual.transform.localPosition=Vector3.down*1.8f;visual.transform.localScale=Vector3.one*2;
+        biteModel=visual.transform;var animator=visual.GetComponent<Animator>();animator.Play("Held",0,0);animator.Update(0);animator.enabled=false;
+        corpsePresentation=Add("ScoutPlayerRagdoll");Set(corpsePresentation,"visualRoot",biteModel);
+        biteFeedback=Add("TitanSwordFeedback");biteFeedback.enabled=false;Set(biteFeedback,"effectMaterial",UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Effects/TitanSwordImpact.mat"));biteFeedback.enabled=true;
+        var floor=new GameObject("Owned real Scout bite floor");SceneManager.MoveGameObjectToScene(floor,scene);floor.transform.position=Vector3.down*.25f;floor.AddComponent<BoxCollider>().size=new Vector3(80,.5f,80);
+        biteTitan=Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Titans/ModularTitanPrototype.prefab")).GetComponent<ModularTitanBody>();SceneManager.MoveGameObjectToScene(biteTitan.gameObject,scene);
+        biteTitan.GetComponent<TitanMotionStyle>().automaticTick=false;
+        biteGrab=biteTitan.gameObject.AddComponent<TitanGrabAttack>();biteGrab.automaticTick=false;biteGrab.drawTelegraph=false;biteGrab.enableBite=true;biteGrab.biteDamage=damage;
+        Physics.SyncTransforms();
+    }
+    void BiteFrame(float dt)
+    {
+        biteGrab.TickAttack(dt);biteTitan.animator.Update(0);biteGrab.ApplyPose();target.TickHold(dt);
+    }
+    void CaptureScout(bool left=true,bool aerial=false)
+    {
+        Assert.That(aerial?biteGrab.TryBeginAerialGrab(target,left):biteGrab.TryBeginGrab(target,left),Is.True);
+        if(aerial){for(int i=0;i<40&&!target.IsHeld;i++)BiteFrame(1f/120);}else BiteFrame(.84f);
+        Assert.That(target.IsHeldBy(biteGrab),Is.True,biteGrab.LastResult);
+    }
+    void FinishScoutBite()
+    {
+        for(int i=0;i<450 && biteGrab.BiteContactCount==0;i++)BiteFrame(1f/120);
+        hp.CancelInvoke();
+        Assert.That(biteGrab.BiteContactCount,Is.EqualTo(1),biteGrab.LastResult);
+    }
+    T Property<T>(object o,string name){return (T)o.GetType().GetProperty(name).GetValue(o);}
+    IEnumerator RealScoutBite(bool left)
+    {
+        ScoutBiteSetup();CaptureScout(left);
+        while(biteGrab.Stage!=TitanGrabStage.BiteWindup)BiteFrame(1f/120);
+        Vector3 outside=target.transform.position;float outsideDepth=Vector3.Dot(outside-biteTitan.mouthSocket.position,biteTitan.transform.forward);
+        // Wait through insertion, stopping before the closure contact event.
+        for(int i=0;i<60 && biteGrab.Stage!=TitanGrabStage.Bite;i++)BiteFrame(1f/120);
+        Assert.That(biteGrab.BiteContactCount,Is.Zero);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+        Assert.That(Vector3.Dot(target.transform.position-biteTitan.mouthSocket.position,biteTitan.transform.forward),Is.LessThan(outsideDepth-.3f),"Feed the torso inward before biting; don't just kill outside the lips");
+        FinishScoutBite();Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);Assert.That(Get<bool>(hp,"isDead"),Is.True);
+        var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        Assert.That(Property<Rigidbody[]>(corpsePresentation,"Bodies").Length,Is.EqualTo(13));Assert.That(corpse.GetComponentsInChildren<CharacterJoint>().Length,Is.EqualTo(12));
+        Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));
+        Assert.That(Vector3.Distance(corpse.transform.GetChild(0).position,Property<Vector3>(corpsePresentation,"CapturedPosition")),Is.LessThan(.0001f),"Corpse is at exact bite pose, not the safe controller-exit pose");
+        Assert.That(corpse.transform.parent,Is.Null);Assert.That(player.transform.parent,Is.Null);Assert.That(walk.enabled||gear.enabled,Is.False);
+        Assert.That(biteModel.GetComponentsInChildren<Renderer>().All(r=>!r.enabled),Is.True);Assert.That(cc.enabled,Is.False);
+        foreach(var skin in corpse.GetComponentsInChildren<SkinnedMeshRenderer>())Assert.That(skin.bones.All(b=>b.IsChildOf(corpse.transform)),Is.True,"Skin remains bound to copied physical bones");
+        var alivePosition=corpse.transform.GetChild(0).position;player.transform.position+=Vector3.right*50;Call(corpsePresentation,"LateUpdate");
+        Assert.That(Vector3.Distance(corpse.transform.GetChild(0).position,alivePosition),Is.LessThan(.0001f),"Pending release/motor root cannot drag corpse out of mouth");
+        BiteFrame(5);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));
+        yield return null;
+    }
+    [UnityTest] public IEnumerator LeftHandFeedsRealScoutIntoMouthThenRagdollsAndBleedsOnce(){yield return RealScoutBite(true);}
+    [UnityTest] public IEnumerator RightHandFeedsRealScoutIntoMouthThenRagdollsAndBleedsOnce(){yield return RealScoutBite(false);}
+    [UnityTest] public IEnumerator NonlethalBiteBleedsWithoutDuplicatingHealthOrCreatingACorpse()
+    {
+        ScoutBiteSetup(40);CaptureScout();FinishScoutBite();
+        Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(60));Assert.That(target.Health,Is.EqualTo(60));Assert.That(Get<bool>(hp,"isDead"),Is.False);
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));
+        Assert.That(biteModel.GetComponentsInChildren<Renderer>().Any(r=>r.enabled),Is.True);Assert.That(target.IsHeld,Is.False);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeBeforeChompNeverSpawnsBloodOrRagdoll()
+    {
+        ScoutBiteSetup();CaptureScout();BiteFrame(1.5f);target.EscapeHold();BiteFrame(5);
+        Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(100));Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+        Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator NewMouthObstructionCancelsRealBiteEffectsAndDamage()
+    {
+        ScoutBiteSetup();CaptureScout();while(biteGrab.Stage!=TitanGrabStage.BiteWindup)BiteFrame(1f/120);
+        var wall=new GameObject("Solid at final feeding path");SceneManager.MoveGameObjectToScene(wall,scene);
+        wall.transform.position=biteGrab.MouthBitePoint;wall.AddComponent<BoxCollider>().size=Vector3.one*2;Physics.SyncTransforms();FinishScoutBite();
+        Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(100));Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);yield return null;
+    }
+    [UnityTest] public IEnumerator ActualScoutCorpsePhysicsHasCoincidentAnchorsAndNoLaunchExplosion()
+    {
+        ScoutBiteSetup();CaptureScout();FinishScoutBite();var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        var bodies=Property<Rigidbody[]>(corpsePresentation,"Bodies");foreach(var joint in corpse.GetComponentsInChildren<CharacterJoint>())
+            Assert.That(Vector3.Distance(joint.transform.TransformPoint(joint.anchor),joint.connectedBody.transform.TransformPoint(joint.connectedAnchor)),Is.LessThan(.002f));
+        float max=0;for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in bodies)max=Mathf.Max(max,rb.velocity.magnitude);}
+        Debug.Log("SCOUT_BITE_RAGDOLL max1_5sSpeed="+max);Assert.That(max,Is.LessThan(40),"No post-simulation velocity clipping or weakened death speed threshold");
+        foreach(var rb in bodies){Assert.That(float.IsNaN(rb.position.x)||float.IsInfinity(rb.position.y),Is.False);Assert.That(rb.isKinematic,Is.False);}
+        yield return null;
+    }
+    [UnityTest] public IEnumerator SceneScoutHealthAutomaticallyCreatesOnePassiveDeathAdapter()
+    {
+        ScoutBiteSetup();Object.DestroyImmediate(corpsePresentation);var driver=Add("ScoutPlayerAnimation");Set(driver,"model",biteModel);driver.enabled=false;
+        var first=Call(hp,"EnsureScoutRagdoll");Assert.That(first,Is.Not.Null);Assert.That(Call(hp,"EnsureScoutRagdoll"),Is.SameAs(first));
+        Assert.That(Property<GameObject>(first,"Corpse"),Is.Null);Assert.That(biteModel.GetComponentsInChildren<Rigidbody>().Length,Is.Zero,"No live Scout physics/motor changes before death");yield return null;
+    }
+    [UnityTest] public IEnumerator SolidSceneryAtCorpsePoseRefusesUnsafeDynamicHandoff()
+    {
+        ScoutBiteSetup();var wall=new GameObject("Invalid corpse birth solid");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*8;Physics.SyncTransforms();
+        Call(hp,"Die");hp.CancelInvoke();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+        StringAssert.Contains("intersects",Property<string>(corpsePresentation,"Error"));Assert.That(Property<Rigidbody[]>(corpsePresentation,"Bodies").Length,Is.Zero);yield return null;
+    }
+    IEnumerator ScaledRealScoutBite(float scale,bool left)
+    {
+        ScoutBiteSetup();biteTitan.transform.localScale=Vector3.one*scale;
+        cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*scale;cc.enabled=true;Call(motor,"ResetMotionHistory");
+        biteTitan.animator.Update(0);Physics.SyncTransforms();
+        var upper=left?biteTitan.leftUpperArm:biteTitan.rightUpperArm;var lower=left?biteTitan.leftLowerArm:biteTitan.rightLowerArm;var hand=left?biteTitan.leftHand:biteTitan.rightHand;
+        Assert.That(biteGrab.TryBeginAerialGrab(target,left),Is.True,"scale="+scale+" canWalk="+biteTitan.CanWalk+" canSuspend="+motor.CanSuspend+" plants="+Call(biteGrab,"CachePlants")+" head="+biteTitan.head.position+" target="+player.transform.position+" upper="+upper.position+" reach="+(Vector3.Distance(upper.position,lower.position)+Vector3.Distance(lower.position,hand.position))+" ray="+Call(biteGrab,"ClearRay",biteTitan.head.position,player.transform.position+Vector3.up,player.transform));
+        var bones=new[]{left?biteTitan.leftUpperArm:biteTitan.rightUpperArm,left?biteTitan.leftLowerArm:biteTitan.rightLowerArm,left?biteTitan.leftHand:biteTitan.rightHand};
+        var previous=bones.Select(b=>b.rotation).ToArray();float maximum=0,penetration=0,earlyPenetration=0,gripRadius=0;int steps=0;string worst="";bool gripRecorded=false;Vector3 localGrip=Vector3.zero;
+        while(biteGrab.BiteContactCount==0 && biteGrab.IsBusy && steps++<500)
+        {
+            BiteFrame(1f/120);
+            if(target.IsHeldBy(biteGrab))
+            {
+                var grip=left?biteTitan.leftGripSocket:biteTitan.rightGripSocket;
+                if(!gripRecorded){gripRecorded=true;localGrip=player.transform.InverseTransformPoint(grip.position);gripRadius=Vector3.Distance(player.transform.position,grip.position);}
+                Assert.That(Vector3.Distance(player.transform.TransformPoint(localGrip),grip.position),Is.LessThan(.003f));
+                Assert.That(Vector3.Distance(player.transform.position,grip.position),Is.EqualTo(gripRadius).Within(.003f),"Feeding rotates around the same physical grip; never recenter/regrip");
+            }
+            for(int j=0;j<bones.Length;j++){maximum=Mathf.Max(maximum,Quaternion.Angle(previous[j],bones[j].rotation));previous[j]=bones[j].rotation;}
+            var colliders=biteTitan.GetComponentsInChildren<Collider>();
+            foreach(var arm in colliders)
+            {
+                if(!arm.enabled||arm.isTrigger||arm.attachedRigidbody==null||(arm.attachedRigidbody.transform!=bones[1]&&arm.attachedRigidbody.transform!=bones[2]))continue;
+                foreach(var torso in colliders)
+                {
+                    if(!torso.enabled||torso.isTrigger||torso.attachedRigidbody==null||(torso.attachedRigidbody.name!="Chest"&&torso.attachedRigidbody.name!="Spine"))continue;
+                    Vector3 normal;float depth;if(Physics.ComputePenetration(arm,arm.transform.position,arm.transform.rotation,torso,torso.transform.position,torso.transform.rotation,out normal,out depth))
+                    {
+                        // Match existing AerialCarryAndMouth clearance window:
+                        // .9s onward, after the unchanged catch/takeover pose.
+                        // Record early reach separately; don't claim it is clear.
+                        if(biteGrab.Elapsed<.9f)earlyPenetration=Mathf.Max(earlyPenetration,depth);
+                        else if(depth>penetration){penetration=depth;worst=" time="+biteGrab.Elapsed+" stage="+biteGrab.Stage+" part="+arm.name+" vs="+torso.name;}
+                    }
+                }
+            }
+        }
+        hp.CancelInvoke();Debug.Log("SCOUT_REAL_MOUTH scale="+scale+" left="+left+" arm120Hz="+maximum+" carryMouthPenetration="+penetration+" unchangedEarlyReachPenetration="+earlyPenetration+worst);
+        Assert.That(biteGrab.CaptureCount,Is.EqualTo(1));Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        Assert.That(maximum,Is.LessThan(8));Assert.That(penetration,Is.LessThan(.005f));yield return null;
+    }
+    [UnityTest] public IEnumerator ThreeTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,true);}
+    [UnityTest] public IEnumerator ThreeTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,false);}
+    [UnityTest] public IEnumerator FiveTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(5,true);}
+    [UnityTest] public IEnumerator FiveTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(5,false);}
+    [UnityTest] public IEnumerator ChompCanRenderRealScoutRagdollAndBloodInOwnedGraphicsPreview()
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_SCOUT_BITE_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"),"Never capture over a user's live Scene/Play");
+        Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        var old=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");
+        var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var rt=new RenderTexture(800,800,24);var texture=new Texture2D(800,800,TextureFormat.RGB24,false);
+        var camera=new GameObject("Owned bite preview camera").AddComponent<Camera>();var light=new GameObject("Owned bite preview light").AddComponent<Light>();
+        light.type=LightType.Directional;light.intensity=1.6f;light.transform.rotation=Quaternion.Euler(35,160,0);
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;
+            ScoutBiteSetup();biteTitan.transform.localScale=Vector3.one*3;
+            cc.enabled=false;player.transform.position=new Vector3(-2.1f,24,7.8f);cc.enabled=true;Call(motor,"ResetMotionHistory");Physics.SyncTransforms();
+            camera.transform.position=new Vector3(7,33,18);camera.transform.LookAt(new Vector3(0,30.5f,2.7f));camera.fieldOfView=50;
+            camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.04f,.065f,.08f);camera.targetTexture=rt;
+            // Batchmode doesn't resume WaitForEndOfFrame; warm the real camera
+            // before capture, then read the previous completed frame on next Update.
+            yield return null;yield return null;yield return null;CaptureScout(true,true);
+            while(biteGrab.Stage!=TitanGrabStage.BiteWindup)BiteFrame(1f/120);
+            yield return null;yield return null;SaveBiteFrame(rt,texture,System.IO.Path.Combine(folder,"ScoutBite_Approach.png"));
+            while(biteGrab.Stage!=TitanGrabStage.Bite)BiteFrame(1f/120);
+            yield return null;yield return null;SaveBiteFrame(rt,texture,System.IO.Path.Combine(folder,"ScoutBite_Inside.png"));
+            FinishScoutBite();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+            yield return new WaitForSeconds(.12f);for(int i=0;i<12;i++)scene.GetPhysicsScene().Simulate(1f/120);
+            yield return null;SaveBiteFrame(rt,texture,System.IO.Path.Combine(folder,"ScoutBite_Chomp.png"));
+            Assert.That(texture.GetPixels32().Count(c=>c.r>65&&c.r>c.g*3&&c.r>c.b*3),Is.GreaterThan(15),"Actual red blood must render outside the mouth, not just a presentation counter");
+            for(int i=0;i<36;i++)scene.GetPhysicsScene().Simulate(1f/120);
+            yield return null;SaveBiteFrame(rt,texture,System.IO.Path.Combine(folder,"ScoutBite_Ragdoll.png"));
+        }
+        finally
+        {
+            camera.targetTexture=null;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=old;QualitySettings.renderPipeline=oldQuality;
+            Object.Destroy(pipeline);Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(rt);Object.Destroy(texture);
+        }
+    }
+    static void SaveBiteFrame(RenderTexture rt,Texture2D texture,string path)
+    {
+        var old=RenderTexture.active;RenderTexture.active=rt;texture.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);texture.Apply();RenderTexture.active=old;System.IO.File.WriteAllBytes(path,texture.EncodeToPNG());
     }
     [UnityTest] public IEnumerator ReleaseTransfersUpwardAndPlanarMotionWithoutResumingOldHooks()
     {

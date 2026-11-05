@@ -1,5 +1,22 @@
 # Titan ground grab → hand-to-mouth → bite
 
+## Current real Scout presentation follow-up
+
+**docs/titan-scout-bite-presentation.md** supersedes the old proxy-only art/death scope
+below for real Scout players. Character feeds sideways/inward into teeth, corpse13-body
+physical copy captured BEFORE safe release, blood only after real HP loss on closure.
+Auto runtime Scout adapter, existing3s respawn; no live-Editor/scene/prefab edits.
+Real carry waypoint scales once, head-relative aperture avoids open jaw pulling hand
+into chest, preserve actual grip radius/coordinate through yaw+roll. Non-Scout/labs keep
+historical policy. **222/224 twice** (same2 Run),13 new cases;actual3x graphics1/1.
+Mouth/carry .9s-onward torso penetration0,6.581deg/120Hz arms,corpse17.55m/s max1.5s,
+all unchanged strict thresholds. Early fixed reach overlaps logged separately/not fixed;
+full ordinary ODM/giant ground behavior remains separate. Preview
+ArtSource/Titan/Combat/Scout_Bite_Chomp_Preview.png. Follow-up after12901b9c; user
+subsequently authorized commit and branch push. See latest work checkpoint.
+
+## Historical contact/ownership milestone
+
 Continuation of [grab/hold/release](titan-grab-combat.md), before the required
 mid-air ODM interception variant. This document records the **sandbox ground milestone**,
 Unity2021.3.25f1; that milestone did not change gameplay scenes/controllers/rig/art/physics.

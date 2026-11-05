@@ -70,6 +70,7 @@
      <Compile Include="Assets\DamageDealer.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
      <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />

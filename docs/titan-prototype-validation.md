@@ -1,6 +1,22 @@
 # Titan prototype validation
 
-LATEST customizable ballistic jumping: **209/211 PASSED,same2 Run failures**.
+LATEST real Scout feeding/chomp ragdoll/blood: **222/224 PASS TWICE**,same2 Run fails.
+Unity2021.3.25f1,2026-11-05 **03:20:07–27UTC** PID5752/20.4350115s and
+**03:22:24–45UTC** PID14044/20.6246924s.13 added cases: both ground hands/insertion/
+exact-pose one corpse/one blood,nonlethal,escape,blocked mouth,13-body real corpse
+stability/anchors,auto adapter uniqueness/passive live rig,unsafe world birth rejects,
+3x/5x mirrored aerial feeds/same-grip invariants/arm continuity+mouth clearance,guarded
+native graphics. Corpse max1.5s17.55m/s (<40),anchor<.002;new3x/5x arm6.581deg120Hz
+(<8),mouth/carry penetration0 (<.005,existing .9s-onward window). Early reach overlap
+logged separately, not claimed clear or fixed; no tolerance weakened. Need separate
+full-speed ODM/scaled ground review. Original gameplay/physics tests retained.
+Graphics OWNED3x runtime URP **1/1**,**03:22:09–10UTC**1.1057197s, actual body/teeth/
+red-blood pixel check; raw800px/3-panel under ArtSource/Titan/Combat. NOT ordinary map
+footage. See docs/titan-scout-bite-presentation.md. No main Editor Play/scene/input/save
+or global Physics changes, no art/nav/settings changes. Follow-up after12901b9c;
+user subsequently authorized commit and branch push (see latest work checkpoint).
+
+Previous customizable ballistic jumping: **209/211 PASSED,same2 Run failures**.
 Unity2021.3.25f1,2026-11-05 **02:03:56–02:04:15UTC**,PID39640,19.1112139s.
 8 additional native CCT tests cover3 height/gravity/apex/landing variants,physics delay/
 zero delay/cooldown/duplicates,air-trigger-wall rejection,walk-off-windup cancellation,

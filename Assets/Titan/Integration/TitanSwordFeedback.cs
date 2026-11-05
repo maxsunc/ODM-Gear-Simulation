@@ -22,6 +22,7 @@ public class TitanSwordFeedback : MonoBehaviour
     public bool screenAnchoredNumbers=true;
     [Range(.2f,2)] public float numberLifetime=.85f;
     [Min(1)] public float maximumTrustedMotionSpeed=160;
+    public int BiteBloodCount { get; private set; }
     public int ConfirmedHitCount { get; private set; }
     public TitanDamageResult LastHit { get; private set; }
     public float CurrentDamageSpeed { get { return MovementBlocked()?0:damageSpeed; } }
@@ -121,6 +122,12 @@ public class TitanSwordFeedback : MonoBehaviour
         ps.useAutoRandomSeed=false;ps.randomSeed=(uint)(++serial);spray.follow=follow;spray.followUntil=Time.time+.18f;
         var emission=ps.emission;emission.enabled=follow!=null;emission.rateOverTime=90;
         ps.Play();ps.Emit(count);
+    }
+    public void PlayBiteBlood(Vector3 point, Vector3 direction)
+    {
+        if (!isActiveAndEnabled || !bloodEnabled || sprays == null) return;
+        BiteBloodCount++;
+        SprayBlood(point, direction + Vector3.up * .25f, 1.5f, 80);
     }
     public static Color OutcomeColor(TitanDamageOutcome outcome)
     {

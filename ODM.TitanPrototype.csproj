@@ -59,6 +59,7 @@
      <Compile Include="Assets\Titan\Prototype\TitanNavigationSurface.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanInjuryPose.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanPatrolChaseAI.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanBiteImpact.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

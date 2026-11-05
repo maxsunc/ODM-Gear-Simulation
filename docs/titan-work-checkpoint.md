@@ -14,7 +14,60 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: user-authorized checkpoint of all current project work
+## Current: authorized Scout bite commit and branch push
+
+After reviewing the completed follow-up, user requested **"commit and push this"**.
+Commit the bite presentation/runtime/tests/docs/preview/helper and tracked C# source
+references; push `titan-combat-updates` normally to origin. This also publishes prior
+local checkpoint12901b9c (runtime spawning/arrival effects/gravity/jump/user-saved scene),
+since verified remote is stillb6447972. Exclude .vs/, .plastic/ databases and Python
+bytecode; leave them untouched. No new gameplay changes or validation claims in this
+Git-only step. Use `git log -1` and origin branch SHA to verify completed publication.
+This authorization supersedes earlier local-only/uncommitted/no-push status notes.
+
+## Scout feeding / chomp ragdoll / blood
+
+User requested going INTO mouth, ragdoll at chomp and blood. Implemented real-player
+side-on same-grip feed/insertion, head-relative bite aperture, pre-release pose capture,
+independent exact-pose Scout corpse13 bodies/12 joints, accepted-contact blood via
+existing bounded sword FX pool. **docs/titan-scout-bite-presentation.md** full contract.
+PlayerHealth sole HP, default100 bite at existing closure. Nonlethal blood/no corpse;
+escape/block/expired lease no effects. No new capture size/timing/homing/parenting.
+
+Scout PlayerHealth auto adds one passive runtime ScoutPlayerRagdoll; no install/scene
+save required. Captures BEFORE lethal release, hides old visuals/colliders/animation,
+world-independent physics clone so ReleasePending can't drag/reanimate body. Body self/
+catching-Titan collision pairs ignored locally; world/others still collide. Birth full
+scenery clearance rejects unsafe overlapping corpse, no teleport. Native current-pose
+RB/joint initialization fixed10m inactive-RB-origin anchor issue. Initial inherited
+input<=12m/s, outward2.5, angular fold1.5rad/s (editable), no post-sim velocity clipping.
+Corpse8smax lifetime default, existing3s respawn; legacy null Animator/rootRB guards.
+
+Real 3x/5x carry waypoint now scales once; real feed rotates vertical foot-catch offset
+inward/down around same original grip, palm above/outside lips. Head-relative CLOSED
+aperture avoids following opening lower-jaw socket DOWN into chest; .3 local insertion
+through bite warning, sphere .55 unchanged. Labs retain old waypoint/yaw/jaw behavior.
+No art/rig/clip/mass/nav/global Physics/camera settings/motor tuning or saved scene edits.
+
+**222/224 passed TWICE**,2026-11-05 **03:20:07–27UTC** PID5752/20.435s and
+**03:22:24–45UTC** PID14044/20.625s. ONLY same2 Run fails.13 additional cases all pass;
+4 3x/5x side cases mouth/carry penetration0 (<.005), all-phase arm max6.581deg/120Hz
+(<8),same grip coordinate/radius<.003;corpse1.5s max17.55m/s (<40),anchors<.002.
+Clearance uses existing .9s-through-bite window; initial reach/takeover overlaps remain
+separately logged ~1.97–3.08m (NOT claimed fixed or threshold relaxed). Protected fast
+reach not redesigned. Full scaled ground/ordinary ODM still needs separate review.
+
+Graphics OWNED runtime3x aerial fixture **1/1**,**03:22:09–10UTC**1.106s, actual skin/
+teeth/physics/blood red-pixel assertion. `tools/capture_scout_bite.py`; ArtSource/Titan/
+Combat/Scout_Bite_Chomp_Preview.png (+3 raw800px frames), Library/ScoutBiteReview raw.
+Not ordinary map gameplay footage/final aesthetic approval. No live Play/scene/input
+control; main scenes/prefabs/art/nav/settings byte-unchanged from12901b9c. No new audio,
+player dismemberment or swallowing/deformation claim. Blood respects existing feedback
+material/bloodEnabled. Implementation followed12901b9c; user subsequently authorized
+its commit AND normal branch push (including12901b9c), as recorded above. Leave
+IDE/Plastic caches alone.
+
+## Previous: user-authorized checkpoint of all current project work
 
 User requested committing everything currently ready, after runtime registration,
 random population/arrival effects and gravity/customizable jumping. This commit bundles

@@ -12,6 +12,7 @@ public class TitanCombatTarget : MonoBehaviour
     float sandboxHealth;
     TitanHealthSource healthSource;
     public float Health { get { return healthSource!=null?healthSource.CurrentHealth:sandboxHealth; } private set { sandboxHealth=value; } }
+    public bool UsesMouthInsertion { get { return healthSource != null && healthSource.UsesMouthInsertion; } }
     public int HitCount { get; private set; }
     public Vector3 LastImpact { get; private set; }
     public bool IsDead { get { return Health <= 0; } }
@@ -30,6 +31,11 @@ public class TitanCombatTarget : MonoBehaviour
     {
         if(!IsHeldBy(owner) || !aerialHold || !Finite(degrees) || Mathf.Abs(degrees)>360) return false;
         carryRotation=Quaternion.AngleAxis(degrees,Vector3.up);return true;
+    }
+    public bool SetAerialCarryOrientation(MonoBehaviour owner, Quaternion rotation)
+    {
+        if (!IsHeldBy(owner) || !aerialHold || !Finite(rotation)) return false;
+        carryRotation = rotation; return true;
     }
     public MonoBehaviour HoldOwner { get { return holdOwner; } }
     public string LastReleaseReason { get; private set; }
@@ -73,6 +79,17 @@ public class TitanCombatTarget : MonoBehaviour
         ReleaseInternal("Reset");
         Health = Mathf.Max(1, maxHealth); HitCount = 0;
     }
+    public void TakeBiteDamage(MonoBehaviour owner, float damage, Vector3 point, Vector3 direction)
+    {
+        if (!IsHeldBy(owner) || IsDead || !isActiveAndEnabled || !Finite(damage) || damage <= 0 || !Finite(point) || !Finite(direction)) return;
+        float before = Health;
+        var impact = new TitanBiteImpact { Attacker = owner.transform, Point = point, Direction = direction,
+            Velocity = handVelocity, Damage = damage, Lethal = damage >= before };
+        if (healthSource != null) healthSource.PrepareBite(impact);
+        try { TakeDamage(damage, point); }
+        finally { if (healthSource != null) healthSource.CompleteBite(impact, Health < before); }
+    }
+
     public void TakeDamage(float damage, Vector3 impact)
     {
         if (IsDead || !isActiveAndEnabled || damage <= 0 || !Finite(damage)) return;

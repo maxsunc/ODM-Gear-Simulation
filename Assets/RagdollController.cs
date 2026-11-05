@@ -28,8 +28,8 @@ public class RagdollController : MonoBehaviour
 
     public void SetRagdollState(bool isRagdoll)
     {
-        animator.enabled = !isRagdoll;
-        rootRigidbody.isKinematic = isRagdoll;
+        if (animator != null) animator.enabled = !isRagdoll;
+        if (rootRigidbody != null) rootRigidbody.isKinematic = isRagdoll;
         // rootCollider.enabled = !isRagdoll; 
 
         foreach (var joint in joints)
