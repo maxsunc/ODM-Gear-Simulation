@@ -533,18 +533,19 @@ public class TitanODMIntegrationPlayModeTests
         Call(hp,"Die");hp.CancelInvoke();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
         StringAssert.Contains("intersects",Property<string>(corpsePresentation,"Error"));Assert.That(Property<Rigidbody[]>(corpsePresentation,"Bodies").Length,Is.Zero);yield return null;
     }
-    IEnumerator ScaledRealScoutBite(float scale,bool left)
+    IEnumerator ScaledRealScoutBite(float scale,bool left,bool escapeWindow=false,bool escapeSuccess=false)
     {
-        ScoutBiteSetup();biteTitan.transform.localScale=Vector3.one*scale;
+        ScoutBiteSetup();var escape=escapeWindow?AddEscape():null;biteTitan.transform.localScale=Vector3.one*scale;
         cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*scale;cc.enabled=true;Call(motor,"ResetMotionHistory");
         biteTitan.animator.Update(0);Physics.SyncTransforms();
         var upper=left?biteTitan.leftUpperArm:biteTitan.rightUpperArm;var lower=left?biteTitan.leftLowerArm:biteTitan.rightLowerArm;var hand=left?biteTitan.leftHand:biteTitan.rightHand;
         Assert.That(biteGrab.TryBeginAerialGrab(target,left),Is.True,"scale="+scale+" canWalk="+biteTitan.CanWalk+" canSuspend="+motor.CanSuspend+" plants="+Call(biteGrab,"CachePlants")+" head="+biteTitan.head.position+" target="+player.transform.position+" upper="+upper.position+" reach="+(Vector3.Distance(upper.position,lower.position)+Vector3.Distance(lower.position,hand.position))+" ray="+Call(biteGrab,"ClearRay",biteTitan.head.position,player.transform.position+Vector3.up,player.transform));
         var bones=new[]{left?biteTitan.leftUpperArm:biteTitan.rightUpperArm,left?biteTitan.leftLowerArm:biteTitan.rightLowerArm,left?biteTitan.leftHand:biteTitan.rightHand};
         var previous=bones.Select(b=>b.rotation).ToArray();float maximum=0,penetration=0,earlyPenetration=0,gripRadius=0;int steps=0;string worst="";bool gripRecorded=false;Vector3 localGrip=Vector3.zero;
-        while(biteGrab.BiteContactCount==0 && biteGrab.IsBusy && steps++<500)
+        while(biteGrab.BiteContactCount==0 && biteGrab.IsBusy && steps++<(escapeWindow?700:500))
         {
             BiteFrame(1f/120);
+            if(escapeSuccess && target.IsHeldBy(biteGrab) && biteGrab.Elapsed>=1.5f)WinEscape(escape);
             if(target.IsHeldBy(biteGrab))
             {
                 var grip=left?biteTitan.leftGripSocket:biteTitan.rightGripSocket;
@@ -571,15 +572,205 @@ public class TitanODMIntegrationPlayModeTests
                 }
             }
         }
-        hp.CancelInvoke();Debug.Log("SCOUT_REAL_MOUTH scale="+scale+" left="+left+" arm120Hz="+maximum+" carryMouthPenetration="+penetration+" unchangedEarlyReachPenetration="+earlyPenetration+worst);
-        Assert.That(biteGrab.CaptureCount,Is.EqualTo(1));Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);
-        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        hp.CancelInvoke();Debug.Log("SCOUT_REAL_MOUTH scale="+scale+" left="+left+" qte="+escapeWindow+" escape="+escapeSuccess+" arm120Hz="+maximum+" carryMouthPenetration="+penetration+" unchangedEarlyReachPenetration="+earlyPenetration+worst);
+        Assert.That(biteGrab.CaptureCount,Is.EqualTo(1));
+        if(escapeSuccess)
+        {
+            Assert.That(escape.State,Is.EqualTo(TitanGrabEscapeState.Succeeded));Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(target.Health,Is.EqualTo(100));
+            Assert.That(target.ReleasePending,Is.False,"Arm recovery must eventually clear the actual supported-size escape");Assert.That(cc.enabled,Is.True);
+            Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);
+        }
+        else
+        {
+            Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);
+            Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        }
         Assert.That(maximum,Is.LessThan(8));Assert.That(penetration,Is.LessThan(.005f));yield return null;
     }
     [UnityTest] public IEnumerator ThreeTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,true);}
     [UnityTest] public IEnumerator ThreeTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,false);}
     [UnityTest] public IEnumerator FiveTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(5,true);}
     [UnityTest] public IEnumerator FiveTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(5,false);}
+    [UnityTest] public IEnumerator SevenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(7,true);}
+    [UnityTest] public IEnumerator SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(7,false);}
+    [UnityTest] public IEnumerator TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,true);}
+    [UnityTest] public IEnumerator TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,false);}
+    TitanGrabEscape AddEscape()
+    {var q=player.AddComponent<TitanGrabEscape>();q.automaticInput=false;q.ResetVariation(241);return q;}
+    void EscapePress(TitanGrabEscape q,KeyCode key)
+    {q.SampleButtons(0);q.SampleButtons(TitanGrabEscape.Button(key));}
+    void WinEscape(TitanGrabEscape q)
+    {for(int i=0;i<3;i++)EscapePress(q,q.CurrentKey);Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Succeeded));}
+    void FinishEscapeRelease()
+    {
+        biteGrab.TickAttack(1);biteTitan.animator.Update(0);biteGrab.ApplyPose();target.TickHold(0);
+        Assert.That(target.ReleasePending,Is.False);Assert.That(cc.enabled,Is.True);
+    }
+    [UnityTest] public IEnumerator EscapeQteStartsOnlyAtActualCaptureAndOffersThreeSecondsEvenAfterALongCatchFrame()
+    {
+        ScoutBiteSetup();var q=AddEscape();Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Idle));
+        Assert.That(biteGrab.TryBeginGrab(target,true),Is.True);Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Idle));
+        BiteFrame(10);Assert.That(target.IsHeldBy(biteGrab),Is.True);Assert.That(q.Remaining,Is.EqualTo(3));Assert.That(biteGrab.BiteContactCount,Is.Zero);
+        // Attack logical time is bounded independently of the captured frame's old dt.
+        q.Advance(2.999f);Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Running));q.Advance(3);Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Failed));
+        yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteWrongKeysResetProgressNotClockAndHeldKeysOrMashingCannotWin()
+    {
+        ScoutBiteSetup();var q=AddEscape();q.SampleButtons(63);CaptureScout();
+        q.SampleButtons(63);Assert.That(q.Progress,Is.Zero,"Pre-capture held buttons are not presses");
+        var first=q.CurrentKey;EscapePress(q,first);Assert.That(q.Progress,Is.EqualTo(1));Assert.That(q.CurrentKey,Is.Not.EqualTo(first));
+        q.SampleButtons(TitanGrabEscape.Button(first));Assert.That(q.Progress,Is.EqualTo(1),"Holding does not advance");
+        q.Advance(2);EscapePress(q,q.CurrentKey==KeyCode.W?KeyCode.A:KeyCode.W);Assert.That(q.Progress,Is.Zero);Assert.That(q.Remaining,Is.EqualTo(1));
+        EscapePress(q,q.CurrentKey);q.SampleButtons(0);q.SampleButtons(63);Assert.That(q.Progress,Is.Zero);Assert.That(q.Remaining,Is.EqualTo(1));
+        Assert.That(q.WrongPresses,Is.EqualTo(2));Assert.That(q.CurrentKey,Is.EqualTo(first));WinEscape(q);Assert.That(target.Health,Is.EqualTo(100));yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteSuccessCancelsBiteRecoversArmAndLaunchesOnlyAfterNativeClearance()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();BiteFrame(.6f);WinEscape(q);
+        Assert.That(target.IsHeld,Is.False);Assert.That(biteGrab.Stage,Is.EqualTo(TitanGrabStage.Recovery));FinishEscapeRelease();
+        Assert.That(Get<float>(walk,"titanReleaseUp"),Is.EqualTo(6));Assert.That(Get<float>(gear,"residualSpeed"),Is.EqualTo(6).Within(.001f));
+        Assert.That(player.transform.parent,Is.Null);Assert.That(Get<bool>(gear,"leftGrappled")||Get<bool>(gear,"rightGrappled"),Is.False);
+        BiteFrame(10);Assert.That(target.Health,Is.EqualTo(100));Assert.That(biteGrab.BiteContactCount,Is.Zero);Assert.That(EatenSoundCount,Is.Zero);
+        Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteBlockedExitCancelsBiteImmediatelyAndKeepsSuspensionUntilSceneryClears()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();
+        var wall=new GameObject("Escape obstruction");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*10;Physics.SyncTransforms();
+        WinEscape(q);Assert.That(target.ReleasePending,Is.True);Assert.That(target.IsHeld,Is.False);Assert.That(cc.enabled,Is.False);Assert.That(Get<bool>(walk,"titanSuspended"),Is.True);
+        BiteFrame(5);Assert.That(target.Health,Is.EqualTo(100));Assert.That(biteGrab.BiteContactCount,Is.Zero);Assert.That(target.GrabGraceRemaining,Is.EqualTo(1));
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();FinishEscapeRelease();Assert.That(Get<float>(walk,"titanReleaseUp"),Is.EqualTo(6));yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteGraceBlocksAllHandsForOneSecondButNeverBlocksDamage()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();WinEscape(q);FinishEscapeRelease();
+        Assert.That(target.GrabGraceRemaining,Is.EqualTo(1));Assert.That(target.TryHold(owner.GetComponent<TitanCombatTarget>(),Socket,true),Is.False);
+        target.TakeDamage(10,player.transform.position);Assert.That(target.Health,Is.EqualTo(90));target.TickHold(.99f);Assert.That(target.IsGrabImmune,Is.True);
+        target.TickHold(.02f);Assert.That(target.IsGrabImmune,Is.False);Assert.That(target.TryHold(owner.GetComponent<TitanCombatTarget>(),Socket,true),Is.True);target.EscapeHold();yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteFinalButtonsStayQuarantinedUntilReleasedAndDoNotDisableNormalControls()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();var first=q.CurrentKey;EscapePress(q,first);EscapePress(q,q.CurrentKey);var final=q.CurrentKey;EscapePress(q,final);FinishEscapeRelease();
+        Assert.That(q.BlocksKey(final),Is.True);Assert.That(q.FilterAxis(1,final==KeyCode.A?KeyCode.D:KeyCode.A,final),Is.Zero);
+        q.SampleButtons(0);Assert.That(q.BlocksKey(final),Is.False);Assert.That(q.FilterAxis(1,KeyCode.A,KeyCode.D),Is.EqualTo(1));yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteDeadlineRejectsLateThirdPressAndFailureStillUsesConfirmedBiteDeath()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();EscapePress(q,q.CurrentKey);EscapePress(q,q.CurrentKey);BiteFrame(3);EscapePress(q,KeyCode.W);
+        Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Failed));FinishScoutBite();Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1));Assert.That(target.IsDead,Is.True);
+        Assert.That(EatenSoundCount,Is.EqualTo(1));Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQtePausesWithGameAndDisableOrInjuryCannotLeaveAStaleChallenge()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();float scale=Time.timeScale;
+        try{Time.timeScale=0;EscapePress(q,q.CurrentKey);Assert.That(q.Progress,Is.Zero);Assert.That(q.Remaining,Is.EqualTo(3));}finally{Time.timeScale=scale;}
+        biteTitan.ApplyDamage(TitanHitRegion.LeftArm,1000,biteTitan.leftHand.position,Vector3.zero);
+        Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Cancelled));Assert.That(target.IsHeld,Is.False);BiteFrame(10);Assert.That(target.Health,Is.EqualTo(100));yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteComponentDisableReleasesSafelyAndCannotBiteLater()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();q.enabled=false;Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Cancelled));Assert.That(target.IsHeld,Is.False);
+        BiteFrame(10);Assert.That(target.Health,Is.EqualTo(100));Assert.That(biteGrab.BiteContactCount,Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteUsesAllSixKeysWithoutMutatingUnityGameplayRandom()
+    {
+        ScoutBiteSetup();var q=AddEscape();var state=UnityEngine.Random.state;var seen=new System.Collections.Generic.HashSet<KeyCode>();
+        for(int n=0;n<24;n++)
+        {
+            player.transform.position=new Vector3(.7f,1.8f,5.7f);biteGrab.TickAttack(10);target.TickHold(10);CaptureScout();
+            for(int i=0;i<3;i++){seen.Add(q.CurrentKey);EscapePress(q,q.CurrentKey);}FinishEscapeRelease();
+        }
+        Assert.That(seen,Is.EquivalentTo(new[]{KeyCode.W,KeyCode.A,KeyCode.S,KeyCode.D,KeyCode.Q,KeyCode.E}));Assert.That(JsonUtility.ToJson(UnityEngine.Random.state),Is.EqualTo(JsonUtility.ToJson(state)));yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteSceneInstallationIsIdempotentAndLeavesPassiveTitanPrefabAlone()
+    {
+        TitanGrabEscape.Install(player);TitanGrabEscape.Install(player);Assert.That(player.GetComponents<TitanGrabEscape>().Length,Is.EqualTo(1));
+        var q=player.GetComponent<TitanGrabEscape>();Assert.That(q.automaticInput && q.showHud,Is.True);Assert.That(q.State,Is.EqualTo(TitanGrabEscapeState.Idle));
+        var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Titans/ModularTitanPrototype.prefab");Assert.That(prefab.GetComponentsInChildren<TitanGrabEscape>(true),Is.Empty);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteCanCompleteJustBeforeDeadlineEvenWithShortConfiguredHoldLease()
+    {
+        ScoutBiteSetup();var q=AddEscape();target.maximumHoldDuration=.5f;CaptureScout();BiteFrame(2.999f);
+        Assert.That(target.IsHeldBy(biteGrab),Is.True);Assert.That(q.Remaining,Is.GreaterThan(0).And.LessThan(.002f));WinEscape(q);FinishEscapeRelease();
+        BiteFrame(10);Assert.That(target.Health,Is.EqualTo(100));Assert.That(biteGrab.BiteContactCount,Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteJumpUsesNativeCeilingCollisionRatherThanMovingThroughScenery()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();BiteFrame(.6f);WinEscape(q);FinishEscapeRelease();
+        Vector3 before=player.transform.position;var ceiling=new GameObject("Escape jump ceiling");SceneManager.MoveGameObjectToScene(ceiling,scene);
+        ceiling.transform.position=before+Vector3.up*(cc.height*.5f+.15f);ceiling.AddComponent<BoxCollider>().size=new Vector3(20,.1f,20);Physics.SyncTransforms();
+        Call(walk,"TickVerticalMotion",.2f);Assert.That(player.transform.position.y-before.y,Is.LessThan(.2f));Assert.That(Get<float>(walk,"titanReleaseUp"),Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteDeathWhileReleaseIsPendingNeverLaunchesOrResurrectsPlayer()
+    {
+        ScoutBiteSetup();var q=AddEscape();CaptureScout();var wall=new GameObject("Blocked escape before external death");SceneManager.MoveGameObjectToScene(wall,scene);
+        wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*10;Physics.SyncTransforms();WinEscape(q);Assert.That(target.ReleasePending,Is.True);
+        target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Assert.That(target.IsDead,Is.True);Object.DestroyImmediate(wall);Physics.SyncTransforms();
+        biteGrab.TickAttack(1);biteTitan.animator.Update(0);biteGrab.ApplyPose();target.TickHold(0);
+        Assert.That(target.ReleasePending,Is.False);Assert.That(cc.enabled,Is.False,"Do not overwrite corpse-owned dead physics on delayed completion");
+        Assert.That(Get<float>(walk,"titanReleaseUp"),Is.Zero);Assert.That(walk.enabled||gear.enabled,Is.False);Assert.That(target.Health,Is.Zero);Assert.That(EatenSoundCount,Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator EscapeQteThreeTimesLeftTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(3,true,true);}
+    [UnityTest] public IEnumerator EscapeQteThreeTimesRightTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(3,false,true);}
+    [UnityTest] public IEnumerator EscapeQteFiveTimesLeftTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(5,true,true);}
+    [UnityTest] public IEnumerator EscapeQteFiveTimesRightTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(5,false,true);}
+    [UnityTest] public IEnumerator EscapeQteThreeTimesLeftSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(3,true,true,true);}
+    [UnityTest] public IEnumerator EscapeQteThreeTimesRightSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(3,false,true,true);}
+    [UnityTest] public IEnumerator EscapeQteFiveTimesLeftSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(5,true,true,true);}
+    [UnityTest] public IEnumerator EscapeQteFiveTimesRightSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(5,false,true,true);}
+    [UnityTest] public IEnumerator EscapeQteSevenTimesLeftTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(7,true,true);}
+    [UnityTest] public IEnumerator EscapeQteSevenTimesRightTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(7,false,true);}
+    [UnityTest] public IEnumerator EscapeQteTenTimesLeftTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(10,true,true);}
+    [UnityTest] public IEnumerator EscapeQteTenTimesRightTimeoutKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(10,false,true);}
+    [UnityTest] public IEnumerator EscapeQteSevenTimesLeftSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(7,true,true,true);}
+    [UnityTest] public IEnumerator EscapeQteSevenTimesRightSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(7,false,true,true);}
+    [UnityTest] public IEnumerator EscapeQteTenTimesLeftSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(10,true,true,true);}
+    [UnityTest] public IEnumerator EscapeQteTenTimesRightSuccessKeepsStrictArmAndMouthBounds(){yield return ScaledRealScoutBite(10,false,true,true);}
+    [UnityTest] public IEnumerator EscapeQteHudRendersRealPromptsAndOutcomesInOwnedNativeGraphics()
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_GRAB_ESCAPE_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        float oldTime=Time.timeScale;var oldPipeline=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");
+        var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var camera=new GameObject("Owned QTE review camera").AddComponent<Camera>();camera.gameObject.AddComponent<AudioListener>();var light=new GameObject("Owned QTE review sun").AddComponent<Light>();
+        light.type=LightType.Directional;light.intensity=1.5f;light.transform.rotation=Quaternion.Euler(35,160,0);
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;
+            ScoutBiteSetup();var q=AddEscape();CaptureScout();BiteFrame(.6f);Time.timeScale=0;
+            camera.transform.position=player.transform.position+new Vector3(6,4,10);camera.transform.LookAt(player.transform.position);camera.fieldOfView=55;
+            camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.04f,.065f,.08f);
+            yield return null;yield return null;yield return null;
+            yield return SaveEscapeScreen(System.IO.Path.Combine(folder,"GrabEscape_Prompt.png"));
+            Time.timeScale=1;EscapePress(q,q.CurrentKey);q.Advance(1);Time.timeScale=0;
+            yield return null;yield return null;yield return SaveEscapeScreen(System.IO.Path.Combine(folder,"GrabEscape_Progress.png"));
+            Time.timeScale=1;q.SampleButtons(0);q.SampleButtons(63);Time.timeScale=0;
+            yield return null;yield return null;yield return SaveEscapeScreen(System.IO.Path.Combine(folder,"GrabEscape_Wrong.png"));
+            Time.timeScale=1;WinEscape(q);Time.timeScale=0;
+            yield return null;yield return null;yield return SaveEscapeScreen(System.IO.Path.Combine(folder,"GrabEscape_Success.png"));
+            Debug.Log("GRAB_ESCAPE_NATIVE "+SystemInfo.graphicsDeviceName+" "+SystemInfo.graphicsDeviceType+" "+Screen.width+"x"+Screen.height);
+        }
+        finally
+        {
+            Time.timeScale=oldTime;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;
+            Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(pipeline);
+        }
+    }
+    static IEnumerator SaveEscapeScreen(string path)
+    {
+        // Native screenshot request schedules its own completed-frame readback;
+        // never wait for a batchmode WaitForEndOfFrame that cannot resume.
+        if(System.IO.File.Exists(path))System.IO.File.Delete(path);
+        ScreenCapture.CaptureScreenshot(path);
+        for(int i=0;i<120 && !System.IO.File.Exists(path);i++)yield return null;
+        Assert.That(System.IO.File.Exists(path),Is.True,"No actual completed-frame HUD screenshot");
+        var image=new Texture2D(2,2);image.LoadImage(System.IO.File.ReadAllBytes(path));
+        Assert.That(image.GetPixels32().Count(c=>(c.r>170 && c.g>150 && c.b<120)||(c.g>170 && c.r<160 && c.b<190)),Is.GreaterThan(20),"Actual gold prompt/progress or green outcome pixels must render");
+        Object.Destroy(image);
+    }
     [UnityTest] public IEnumerator ChompCanRenderRealScoutRagdollAndBloodInOwnedGraphicsPreview()
     {
         string folder=Environment.GetEnvironmentVariable("ODM_SCOUT_BITE_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;

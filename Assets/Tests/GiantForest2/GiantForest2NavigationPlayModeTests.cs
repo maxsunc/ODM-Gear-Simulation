@@ -70,6 +70,8 @@ public class GiantForest2NavigationPlayModeTests
     }
     [UnityTest]public IEnumerator CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives()
     {
+        var player=Field<Component>(manager,"player");Assert.That(player.GetComponents<TitanGrabEscape>().Length,Is.EqualTo(1),"Current saved map auto-installs one player QTE without changing its scene asset");
+        Assert.That(player.GetComponent<TitanGrabEscape>().automaticInput,Is.True);
         object[] config={null};Assert.That((bool)Call(spawner,"ValidateConfiguration",config),Is.True,(string)config[0]);Assert.That(Prop<string>(spawner,"SizeWarning"),Is.Null);
         spawner.GetType().GetField("randomSeed").SetValue(spawner,241);Call(spawner,"RestartSchedule");int triangles=NavMesh.CalculateTriangulation().indices.Length;
         bool queued=false;string error="";

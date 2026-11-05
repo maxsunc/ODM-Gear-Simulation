@@ -1,5 +1,9 @@
 # Titan ground grab → hand-to-mouth → bite
 
+**Gameplay update:** [3-second hand-grab escape QTE](titan-grab-escape.md) extends
+only opted-in player holding BEFORE transfer. Success cancels bite; failure retains
+this real contact/HP/death path. Standalone lab timings below remain unchanged.
+
 ## Current real Scout presentation follow-up
 
 **docs/titan-scout-bite-presentation.md** supersedes the old proxy-only art/death scope

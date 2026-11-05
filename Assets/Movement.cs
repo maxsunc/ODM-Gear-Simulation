@@ -114,6 +114,12 @@ public class Movement : MonoBehaviour
         }
         move.x = Input.GetAxisRaw("Horizontal");
         move.z = Input.GetAxisRaw("Vertical");
+        var escape=GetComponent<TitanGrabEscape>();
+        if(escape!=null)
+        {
+            move.x=escape.FilterAxis(move.x,KeyCode.A,KeyCode.D);
+            move.z=escape.FilterAxis(move.z,KeyCode.S,KeyCode.W);
+        }
     }
 
     static float JumpSeconds(float value, float fallback)

@@ -14,6 +14,7 @@ public class TitanShiganshinaIntegration : MonoBehaviour
     {
         if(player==null || navigation==null || !navigation.Build())
         { SetupError=player==null?"Player not assigned":navigation==null?"Navigation not assigned":navigation.Error;Debug.LogError(SetupError,this);return; }
+        TitanGrabEscape.Install(player.gameObject);
         foreach(var titan in titans)
         {
             if(titan==null) continue;

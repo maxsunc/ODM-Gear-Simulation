@@ -1,5 +1,9 @@
 # Titan sandbox grab, hold and safe release
 
+**Gameplay update:** real integrated players now get a [3-second, three-key escape
+QTE](titan-grab-escape.md). It preserves collision-safe release and cancels bite on
+success. Historical standalone lab E escape/timing below is unchanged by default.
+
 The historical sandbox combat slice after [stomp](titan-stomp-combat.md). Default
 body prefab remains passive. Approved prototype work is pushed through940daf1d.
 The later user-requested [real ODM/Shiganshina integration](titan-shiganshina-integration.md)

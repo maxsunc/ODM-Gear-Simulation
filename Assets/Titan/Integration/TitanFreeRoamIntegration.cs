@@ -82,6 +82,7 @@ public class TitanFreeRoamIntegration : MonoBehaviour
     void Begin()
     {
         string error;if(!Ready(out error)) {SetupError=error;return;}
+        TitanGrabEscape.Install(player.gameObject);
         started=true;appliedCombat=enableCombat;SetupError=null;
         if(titans!=null)foreach(var b in titans)if(b!=null&&b.gameObject.activeInHierarchy)pending.Add(b);
         foreach(var pair in actors)if(pair.Key!=null&&pair.Key.gameObject.activeInHierarchy)pending.Add(pair.Key);

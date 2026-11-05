@@ -118,7 +118,7 @@ public class ODM_Movement : MonoBehaviour
         titanOwner=null;titanSuspended=false;
         if(characterMesh!=null) {var a=characterMesh.localEulerAngles;a.z=0;characterMesh.localEulerAngles=a;}
         Vector3 planar=Vector3.ProjectOnPlane(velocity,Vector3.up);
-        if(planar.sqrMagnitude>.0001f) StartCoroutine(Deaccelerate(planar.normalized,planar.magnitude));
+        if(planar.sqrMagnitude>.0001f && gameObject.activeInHierarchy) StartCoroutine(Deaccelerate(planar.normalized,planar.magnitude));
     }
 
     //POA:
@@ -293,6 +293,9 @@ public class ODM_Movement : MonoBehaviour
         residualSpeed = 0;
     }
 
+    bool EscapeKeyBlocked(KeyCode key)
+    { var escape=GetComponent<TitanGrabEscape>();return escape!=null && escape.BlocksKey(key); }
+
     void CheckHooks()
     {
         // check if cant grapple for the sake of UI
@@ -323,7 +326,7 @@ public class ODM_Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !EscapeKeyBlocked(KeyCode.Q))
         {
             qPress = true;
             Grapple("left");
@@ -360,7 +363,7 @@ public class ODM_Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !EscapeKeyBlocked(KeyCode.E))
         {
             ePress = true;
             Grapple();
@@ -484,6 +487,8 @@ public class ODM_Movement : MonoBehaviour
             // turn off gravity
         }
         strafeDir = Input.GetAxisRaw("Horizontal");
+        var escape=GetComponent<TitanGrabEscape>();
+        if(escape!=null)strafeDir=escape.FilterAxis(strafeDir,KeyCode.A,KeyCode.D);
         // depending on strafe dir change rotation
         if(strafeDir < 0)
         {

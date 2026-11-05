@@ -14,7 +14,42 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: GiantForest2 7x/10x bakes + unbaked-size quick fix
+## Current:3-second hand-grab escape QTE
+
+User approved3 random W/A/S/D/Q/E prompts, no consecutive repeats, one at a time;
+3s TOTAL (not2.5), wrong key resets progress NOT clock. Fresh edges only, pre-held
+keys/chord mashing/pause cannot win. Runtime-install one TitanGrabEscape on actual
+FreeRoam/GiantForest2/Shiganshina motor player; no saved scene/prefab changes.
+Capture alone starts QTE; opted-in hold extends BEFORE mouth transfer, bounded
+lease<=10s, catch-frame old dt cannot consume new opportunity. Success synchronously
+cancels bite and blends arm through recovery. Original whole-gear/WORLD-UP CCT exit
+sweep must succeed before6m/s-up+6m/s-away launch through existing real motor; pending
+release remains independent/suspended.1s other-hand/Titan regrab protection starts
+at clear exit, NOT general damage immunity. QTE inputs quarantined until key UP.
+Failure continues real contact bite; PlayerHealth sole HP/death. No late kill timer,
+remote damage, reparent/regrip/collider ignoring or global Physics changes.
+Pending external death cannot restore live flags over corpse ownership or launch
+coroutine on inactive root. Standalone labs retain old timing/E escape by default.
+
+Size checks uncovered old10x support-probe reach and over-scaled human insertion:
+scale only foot query distances; cap feeding depth to half human CC height(1.8m),
+leaving established3x/.9m,5x/1.5m depths untouched. No widening grab radius/reach.
+Left/right QTE success+timeout3x/5x/7x/10x +non-QTE7x/10x now retain arm<8deg/120Hz,
+same grip<.003m, later mouth/torso<.005m. Early reach1.97–6.17m overlaps remain
+disclosed/not hidden. Original corpse-speed<40m/s/jump/physics assertions unchanged.
+
+Fresh pre-code baseline257pass/7fail/1skip265; current292pass/SAME7fail/1skip300.
+35 added cases including gated native HUD case. Same7 tuning/Run/one-scream fixture
+conflicts described below; no tuning or thresholds reset. Native HUD1/1 actual
+owned GameView screenshots, no synthetic input; saved-map integration3/3 includes
+QTE auto-install and old nav/spawn checks, no rebake. WorkerUnity2021.3.25f1/URP12.
+Owned capture uses NON-batch worker because actual IMGUI needs GameView; exits own
+worker automatically. No live Editor stop/reload/save or input performed. Native
+screenshots/evidence ArtSource/Titan/GrabEscape/, docs/titan-grab-escape.md,
+tools/capture_titan_grab_escape.py. Source scene/palettes/prefab/art/navigation
+unchanged. New work LOCAL only; no further push permission.
+
+## Previous: GiantForest2 7x/10x bakes + unbaked-size quick fix
 
 User added7x(weight1) and10x(weight3) among3x/5x/6x, then explicitly asked to bake
 and add the quick fix. Runtime spawner skips only unsupported size choices, warns

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-05 21:55:23Z" end-time="2026-11-05 21:55:30Z" duration="7.1841378">
+  <test-suite type="TestSuite" id="1000" name="ODM Attempt # 1" fullname="ODM Attempt # 1" runstate="Runnable" testcasecount="310" result="Passed" start-time="2026-11-05 21:55:23Z" end-time="2026-11-05 21:55:30Z" duration="7.184138" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1013" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-05 21:55:23Z" end-time="2026-11-05 21:55:30Z" duration="7.177769" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="54932" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="GiantForest2NavigationPlayModeTests" fullname="GiantForest2NavigationPlayModeTests" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-05 21:55:23Z" end-time="2026-11-05 21:55:30Z" duration="7.176466" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" fullname="GiantForest2NavigationPlayModeTests.AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" methodname="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1243686220" result="Passed" start-time="2026-11-05 21:55:23Z" end-time="2026-11-05 21:55:29Z" duration="5.639824" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" fullname="GiantForest2NavigationPlayModeTests.CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" methodname="CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1894671203" result="Passed" start-time="2026-11-05 21:55:29Z" end-time="2026-11-05 21:55:30Z" duration="1.119027" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1003" name="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" fullname="GiantForest2NavigationPlayModeTests.SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" methodname="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="363198892" result="Passed" start-time="2026-11-05 21:55:30Z" end-time="2026-11-05 21:55:30Z" duration="0.408218" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

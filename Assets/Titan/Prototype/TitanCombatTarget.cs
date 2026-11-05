@@ -18,6 +18,11 @@ public class TitanCombatTarget : MonoBehaviour
     public bool IsDead { get { return Health <= 0; } }
     public bool IsHeld { get; private set; }
     public bool ReleasePending { get; private set; }
+    public float GrabGraceRemaining { get { return escapeGrabGrace; } }
+    public bool IsGrabImmune { get { return escapeGrabGrace > 0; } }
+    float escapeGrabGrace;
+    bool escapeJumpPending, freshEscapeLease;
+    int escapeGraceFrame=-1;
     TitanAerialMotor aerialMotor;
     bool aerialHold;
     Vector3 previousHeldPosition, handVelocity, lastOwnerPosition;
@@ -58,8 +63,8 @@ public class TitanCombatTarget : MonoBehaviour
     }
 
     void Awake() { targetRoot=transform; healthSource=GetComponent<TitanHealthSource>(); ResetHealth(); }
-    void LateUpdate() { TickHold(Time.deltaTime); }
-    void OnDisable() { ReleaseInternal("Target disabled"); }
+    void LateUpdate() { TickHold(escapeGrabGrace>0 && Time.frameCount==escapeGraceFrame?0:Time.deltaTime); }
+    void OnDisable() { escapeGrabGrace=0;escapeJumpPending=false;ReleaseInternal("Target disabled"); }
     void OnDestroy()
     {
         ReleaseInternal("Target destroyed");
@@ -76,6 +81,7 @@ public class TitanCombatTarget : MonoBehaviour
     }
     public void ResetHealth()
     {
+        escapeGrabGrace=0;escapeJumpPending=false;
         ReleaseInternal("Reset");
         Health = Mathf.Max(1, maxHealth); HitCount = 0;
     }
@@ -93,6 +99,7 @@ public class TitanCombatTarget : MonoBehaviour
     public void TakeDamage(float damage, Vector3 impact)
     {
         if (IsDead || !isActiveAndEnabled || damage <= 0 || !Finite(damage)) return;
+        if(damage>=Health) {escapeJumpPending=false;escapeGrabGrace=0;}
         // Restore the held controller BEFORE external lethal callbacks enable a
         // player ragdoll. Never restore cached animation flags over a new death.
         if(healthSource!=null)
@@ -108,7 +115,7 @@ public class TitanCombatTarget : MonoBehaviour
 
     public bool TryHold(MonoBehaviour owner, Transform socket, bool airborne = false, Vector3? contactPosition = null, Quaternion? contactRotation = null)
     {
-        if (ReleasePending || IsHeld || IsDead || !isActiveAndEnabled || owner == null || !owner.isActiveAndEnabled ||
+        if (ReleasePending || IsHeld || IsDead || IsGrabImmune || !isActiveAndEnabled || owner == null || !owner.isActiveAndEnabled ||
             socket == null || !socket.gameObject.activeInHierarchy || !socket.IsChildOf(owner.transform) ||
             transform.IsChildOf(owner.transform) || owner.transform.IsChildOf(transform) ||
             owner.gameObject.scene != gameObject.scene || socket.gameObject.scene != gameObject.scene ||
@@ -164,8 +171,13 @@ public class TitanCombatTarget : MonoBehaviour
     public void TickHold(float deltaTime)
     {
         if (!Finite(deltaTime) || deltaTime < 0) return;
+        bool wasPending=ReleasePending;
         if(ReleasePending) TryCompleteAerialRelease();
+        if(IsDead) {escapeGrabGrace=0;escapeJumpPending=false;}
+        else if(!wasPending)escapeGrabGrace=Mathf.Max(0,escapeGrabGrace-deltaTime);
         if(!IsHeld) return;
+        // A new QTE cannot lose its entire lease to the interval BEFORE capture.
+        if(freshEscapeLease) {deltaTime=0;freshEscapeLease=false;}
         if (holdOwner == null || !holdOwner.isActiveAndEnabled || grip == null || !grip.gameObject.activeInHierarchy ||
             !grip.IsChildOf(holdOwner.transform) || holdOwner.gameObject.scene != gameObject.scene ||
             IsDead || !Finite(grip.position)) { ReleaseInternal("Hold invalidated"); return; }
@@ -189,11 +201,25 @@ public class TitanCombatTarget : MonoBehaviour
         ReleaseInternal(reason); return true;
     }
     public void EscapeHold() { ReleaseInternal("Escaped"); }
+    internal void ReserveEscapeLease(MonoBehaviour owner,float extension,float minimumDuration)
+    {
+        if(IsHeldBy(owner) && Finite(extension) && Finite(minimumDuration))
+        {
+            leaseDuration=Mathf.Clamp(Mathf.Max(leaseDuration+Mathf.Max(0,extension),minimumDuration),.5f,10);
+            freshEscapeLease=true;
+        }
+    }
+    internal bool TryEscapeGrab(TitanGrabAttack owner)
+    {
+        if(IsDead || !IsHeldBy(owner) || !owner.BeginEscapeRecovery(this))return false;
+        escapeJumpPending=true;escapeGrabGrace=1;escapeGraceFrame=Time.frameCount;
+        ReleaseInternal("Quick-time escape");return true;
+    }
     void ReleaseInternal(string reason)
     {
         if (!IsHeld) return;
         // Clear ownership before callbacks: release/cancel can re-enter each other.
-        IsHeld = false; holdOwner = null; grip = null; LastReleaseReason = reason;
+        IsHeld = false; holdOwner = null; grip = null; freshEscapeLease=false; LastReleaseReason = reason;
         if(aerialHold)
         {
             ReleasePending=true;
@@ -207,7 +233,15 @@ public class TitanCombatTarget : MonoBehaviour
         Vector3 position,velocity;
         if(aerialMotor==null || !aerialMotor.TryRelease(lastOwnerPosition,releaseOwner,handVelocity,holdAge,out position,out velocity)) return;
         if(!Finite(position) || !Finite(velocity)) return;
-        ReleasePending=false;
+        // Success changes velocity ONLY after the original whole-gear exit/sweep
+        // succeeds. Normal releases retain their original carry/incoming momentum.
+        if(escapeJumpPending && !IsDead)
+        {
+            Vector3 away=Vector3.ProjectOnPlane(position-lastOwnerPosition,Vector3.up).normalized;
+            if(away.sqrMagnitude<.5f)away=Vector3.forward;
+            velocity=away*6+Vector3.up*6;escapeGraceFrame=Time.frameCount;
+        }
+        escapeJumpPending=false;ReleasePending=false;
         RestorePhysics(position,targetRoot.rotation,velocity);
         aerialMotor.Resume(velocity);
     }
@@ -215,6 +249,9 @@ public class TitanCombatTarget : MonoBehaviour
     {
         // Ground retains the approved snap-back policy. Air NEVER uses it.
         targetRoot.SetPositionAndRotation(position, rotation);
+        // Pending release may finish AFTER real death has handed physics to its
+        // corpse adapter. Never restore cached live flags over that ownership.
+        if(healthSource!=null && IsDead)return;
         foreach (var state in bodyStates)
         {
             var rb = state.body; if (rb == null) continue;
