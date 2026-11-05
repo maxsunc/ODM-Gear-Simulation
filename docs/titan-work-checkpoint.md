@@ -14,7 +14,165 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: regional sword damage / impact effects / severed-limb launch
+## Current: user-authorized checkpoint of all current project work
+
+User requested committing everything currently ready, after runtime registration,
+random population/arrival effects and gravity/customizable jumping. This commit bundles
+those systems/tests/materials/preview tools/docs plus current user-SAVED FreeRoam edits
+and tracked C# project source references. **Commit only; not pushed** (no push requested).
+Use `git log -1` for this checkpoint SHA. Earlier local/uncommitted/not-installed notes
+below describe their respective development milestones, not this checkpoint's status.
+
+Excluded ONLY machine-local `.vs/`, Python `tools/__pycache__/` and changing `.plastic/`
+workspace databases; left them untouched/uncommitted. No blanket revert, IDE metadata
+cleanup, Unity stop/reload/save or forced input. Existing saved FreeRoam includes user
+installed spawner/initialization settings and gravity16/jump4/.1/.15; also user-changed
+some Titan scale values to6 and bladeRadius.2. Preserve those deliberately rather than
+silently reverting to fixture values. Navigation assets still only3x/5x:6x requires
+one explicit editor bake before that size can initialize. Runtime/physics fixture
+passes do NOT assert these saved scene tuning/clearance choices are gameplay-approved.
+
+Latest full owned validation209/211 (same2 known Run failures),2026-11-05
+02:03:56–02:04:15UTC,PID39640.8 new jump cases pass. Last graphics strike render1/1
+at2026-11-04 21:44:29–30UTC; audio user slot optional/unassigned. Never weaken strict
+physics thresholds or regenerate approved Run. This is a snapshot, no new gameplay
+feature change during commit. See docs/player-jumping.md,player-gravity.md,
+titan-random-spawning.md,titan-runtime-initialization.md for details and evidence.
+
+## Previous: customizable ballistic player jumping
+
+User requested fixing/customizing jumping; **docs/player-jumping.md**. Movement.cs
+replaces55/120-render-frame IEnumerator lift with physics-time ballistic launch
+sqrt(2*g*height), Inspector **Jump Height4m / Jump Delay.1s / Jump Cooldown.15s**.
+C remains the key, existing Gravity Constant now applies during ascent AND descent.
+Requested height independent of gravity at launch; stronger gravity yields quicker
+same-height jump.0g/invalid height rejects finite-height jump, no double jump/buffer/
+coyote or changed hook/gas/boost/motor/camera/animation authority.
+
+One pending/active jump, native/short scene-local nontrigger/self-filtered support
+and recheck at actual takeoff. Walking off during delay,gas ResetGravity,hold,disable,
+death cancel without delayed coroutine/phantom launch. Ceiling stops rise; native
+landing clears state. Analytical ascent splits at apex, preserving real UP sweep even
+if high gravity puts rise/fall in one tick. New timing/cooldown private state; read-only
+JumpLaunchSpeed/JumpPending, existing GravityVerticalSpeed includes jump ascent.
+
+**209/211 pass**,2026-11-05 **02:03:56–02:04:15UTC**,PID39640,19.1112139s, SAME2
+Run failures only.8 additional native CCT cases + adapted obsolete legacy-jump regression
+all pass, strict Titan/gravity/runtime/spawner checks retained. Initial208/211 had new
+fixture error (unsettled capsule spawned within skin envelope); settled FROM ABOVE,
+kept original .02m landing/.035m apex tolerances. No threshold weakening.
+
+User saved FreeRoam gravity16/height4/delay.1/cooldown.15 during review (old25000 warning
+historical). Left user scene/formatting/settings intact; no main Editor input/Play
+stop/save/reload, no scene/prefab/art/nav/settings modification by this task. Source
+Movement/ODM/test byte-match completed owned run. Previous dirty runtime/spawner work
+preserved. No commit/push afterb6447972. Tests not full-speed ODM feel approval.
+
+## Previous: functional player gravity Inspector setting
+
+User requested a gravity constant that really affects falling. **docs/player-gravity.md**.
+Movement.cs now reads Gravity Constant (m/s², positive downward; default9.8) for fall and
+upward release braking, replaces unused field/hardcoded9.8 and removes sticky hidden
+post-jump1.5x multiplier. Exposes existing78.4 fall-speed limit as Maximum Fall Speed.
+Native landing clears retained fall speed; head contact cancels upward release. Existing
+powered gas resets both old vertical components so no stale release-up fighting thrust;
+ground helper preserves real upward throws. ODM foot probe only zeroes falling on real
+CCT support, not early proximity. Existing scripted jump lift/55/.1s/C and hook/gas/
+boost/inertia/visuals unchanged; no ballistic jump rewrite. Removes gravity log spam.
+
+Preserved user's Movement formatting and dirty FreeRoam.scene; user's saved gravity
+value is25000 (warned: reaches terminal on first tick; recommend9.8 or20–30). No main
+Editor scene/Play/input/save changes or global Physics edits. All earlier uncommitted
+runtime/spawner work remains. Still no new commit/push afterb6447972.
+
+**201/203 pass**,2026-11-04 **22:31:17–22:31:36UTC**,PID52448,18.2195347s.8 new
+real CCT gravity cases pass (live acceleration,zero/coast/terminal/invalid input,landing/
+ledge,upward release/gas,hold/disabled,multiplier,ceiling); ONLY same2 Run failures.
+Changed3 code/test files byte-match completed disposable validation. No thresholds
+weakened/approved Run regeneration. Controlled motor/physics tests, not full ODM feel.
+
+## Previous: random Titan population / configurable sizes / arrival strike
+
+User requested random map spawning, editable random sizes, Titan-strike particle effect
+and a sound slot (user will provide audio). Implemented scene-opt-in `TitanRandomSpawner`,
+`TitanSpawnSurfaceSampler`, `TitanSpawnStrikeEffect`, additive shader/material and explicit
+installer/Inspector. **docs/titan-random-spawning.md** contains full defaults/API/limits.
+New work AND preceding initializer remain uncommitted after pushedb6447972; no new push.
+
+- Weighted discrete sizes default3x/5x; no arbitrary unbaked scale borrowing/runtime bake.
+  Spawner choices automatically join next editor bake-size union (existing types retained).
+- Area-weighted cached loaded walkable-triangle proposals, final profile-filtered,
+  horizontal player exclusion80m, optional max range/world bounds, spacing15m.24 bounded
+  attempts/request,2s failure backoff. Initial4 after2s, then8–16s randomized intervals,
+  one warning at a time. Cap6 on component/counts placed by default; installer cap is
+  at least active placed+4 so current placed population doesn't suppress all arrivals.
+- Manager TryPrepareSpawn inactive full configured rig + conservative full-arm AABB
+  reservation; TryActivatePreparedSpawn rechecks real solids/NavMesh. Existing TrySpawn
+  composes same path. Player approaches/new blocker/cap ->cancel, no strike/sound/fight.
+- Faint golden sky bolts -> confirmed bright lightning/local point flash/sparks/dust/
+  rising steam. No collider/force/fullscreen effects/global light/fog/time/input changes.
+  Bounded4-slot effect/audio pool (max8), no global RNG/material leaks. Optional3D
+  Spawn Sound field EMPTY awaiting user clip, volume/max-distance configurable.
+- Own-only dead rig cleanup25s/max6 corpses and replenishment; never deletes placed
+  Titans/corpses. Component disable cancels warning and pauses (keeps live NPCs), destroying
+  spawner cleans its own actors by default. No repair/pooling of severed bodies.
+
+**193/195 passed**,2026-11-04 **21:43:58–21:44:18 UTC**,PID3784,19.584s;
+previous193/19521:40:22–42PID17444. SAME2 Run failures only;12 new cases all pass,
+all prior strict Titan tests retained. Separate graphics-enabled OWNED runtime URP
+capture **1/1**,21:44:29–30UTC,.998s, pixel-tested gold lightning ABOVE Titan. Preview
+ArtSource/Titan/Spawning/TitanSpawn_Strike_Preview.png +3 frames, raw Library/
+TitanSpawnerReview. Controlledfixture, NOT ordinary map traversal/crowd proof or final
+art/audio approval. User audio clip not assigned/aurally reviewed.
+
+**NOT installed into main scene yet**: Unity MCP offline/no connected instance, no
+forced focus/key input, scene save/reload or YAML overwrite. After compile user chooses
+Tools > Titans > FreeRoam > Install random Titan spawner in Edit Mode, then saves scene.
+Installer creates Save-AS-COPY before/after backups, wires prefab/materials/manager,
+refuses duplicates and preserves existing actors/nav assets/activation. Select new
+Titan random spawner object for fields/live buttons/error counts. No production bake.
+New sizes require ONE edit-mode bake; existing3x/5x immediately usable after install.
+
+## Previous: pushed checkpoint + reusable runtime Titan initialization
+
+User authorized commit/push THEN move to spawn-ready initialization. Completed
+**b6447972236dca8a2e34d5cf7eec733078420406**, pushed and remote-confirmed on
+origin/titan-combat-updates.75 paths: attacks/health/effects plus user's saved scene,
+extra placed Titans, enlarged nape/eyes prefab triggers and sight tuning. Prior4
+local checkpoints through059dd52e pushed too. Locked.vs cache/Python bytecode excluded.
+New runtime work AFTER this checkpoint is UNCOMMITTED; no second commit requested.
+
+**docs/titan-runtime-initialization.md**: rewritten TitanFreeRoamIntegration opt-in
+scene registry, body neutral BecameActive/Inactive hooks, TitanRuntimeActor single-owner
+stack, TitanSpawnPlacement bounded real-geometry query. Auto-discover placed actors once
+and queue enabled/new bodies for next Update; no recurring full-world scan or fixed-list
+requirement. Respect inactive scene actors; old explicit list also works auto-discovery
+OFF. Full player/perception/nav/stomp/grab/bite/director setup with regional health,
+grapple layer9, no duplicate components; no reset/heal/repose on duplicate registration.
+TrySpawn(prefab,pos,yawRotation,scale,out body,out error) configures inactive in owning
+scene then activates; Despawn releases/cancels/unregisters owned actor only. Reject
+foreign/external-owner/unsupported/nonuniform/nonfinite/tilted/blocked/offmesh; old5x tree
+spawn still must move onto clear ground. No distant fallback. Current production sizes
+remain3x/5x:1x/arbitrary size requires a new profile ONCE, not per actor. Additional Bake
+Scales + scoped builder unions future sizes/existing profiles/discovered+listed actors,
+so no placeholder needed. No actual production bake/settings/scene save performed.
+Actor/manager/nav disable suspends/re-enable validates/resumes, no corpse resurrection
+or reconstruction of severed rigs; full corpse pooling not implemented. Combat toggle
+can cancel/resume live. Timed/wave spawner itself remains separate.
+
+**181/183 passed TWICE**,2026-11-04 **15:27:52–15:28:09 UTC**,PID19600,16.665s,
+then **15:30:27–44 UTC**,PID47984,16.912s. ONLY same2 retimed Run failures, no weakened
+checks.14 new cases cover late/placed/explicit/inactive/cross-scene ownership, profile
+scale-once/shared unchanged data, safe spawn/despawn/crowd/full-arm scenery, HP retained,
+combat/actor/manager/nav suspend/resume, future bake sizes, scale mutation rejection,
+spawned director's actual40 damage stomp, physical grab/lease released on despawn and
+dead no-resurrection. Final178-file byte match; saved scenes/prefabs/art/nav/settings
+unchanged from pushed checkpoint. Main Editor Play/input untouched this step; runtime
+validation only in disposable owned project, not preview scenes. New code takes effect
+after normal Unity compilation/new Play session. No natural full-speed scaled-combat or
+user aesthetic approval claim. New cs/meta files present; no forced live scene save.
+
+## Previous: regional sword damage / impact effects / severed-limb launch
 
 **Latest:** user approved nape health/speed-dependent killing, requested HP legs2500,
 arms1000, face500, nape500; blood, outcome-colored numbers, shake, slash/hit feedback,

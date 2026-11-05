@@ -37,11 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Attack.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSpawnStrikeEffect.cs" />
      <Compile Include="Assets\ShowFPS.cs" />
      <Compile Include="Assets\Titan\TitanAttack.cs" />
      <Compile Include="Assets\Titan\TitanState.cs" />
      <Compile Include="Assets\MenuManager.cs" />
      <Compile Include="Assets\GameElements.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanRuntimeActor.cs" />
      <Compile Include="Assets\Titan\TitanLimb.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
      <Compile Include="Assets\Titan\TitanController.cs" />
@@ -52,6 +54,7 @@
      <Compile Include="Assets\CameraJitterFix.cs" />
      <Compile Include="Assets\ODM_Movement.cs" />
      <Compile Include="Assets\Scripts\Audio.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanRandomSpawner.cs" />
      <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
      <Compile Include="Assets\Movement.cs" />
@@ -70,6 +73,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanSpawnLightning.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\2_Notices.txt" />

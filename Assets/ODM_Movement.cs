@@ -134,7 +134,9 @@ public class ODM_Movement : MonoBehaviour
         if(titanSuspended) return;
         if (movement.CheckGround())
         {
-            movement.zeroGravity();
+            // The generous foot probe may overlap ground before the controller
+            // lands. Don't erase falling speed every render frame in that gap.
+            if (controller.isGrounded) movement.zeroGravity();
             playerAnimator.SetBool("isFalling", false);
         }
         else

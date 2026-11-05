@@ -51,7 +51,15 @@ python tools/blender_request.py --file tools/blender/render_scout_preview.py
 Then **Tools > Player > Scout > Build visual assets and animations** in Unity Edit Mode.
 No Editor-preview-scene physics tests or simulation used for this feature.
 
-## Current: sword damage and feedback integration
+## Current checkpoint / following runtime work
+
+User-authorized checkpoint **b6447972** is now committed and PUSHED on
+titan-combat-updates: includes mirrored attacks, sword damage/effects and user-saved
+scene/weakpoint edits. Later reusable Titan initialization is local/uncommitted; see
+docs/titan-runtime-initialization.md (181/183 twice,14 new tests, same2 Run failures).
+No Scout art/animation/controller changes during the runtime-registration step.
+
+## Previous: sword damage and feedback integration
 
 Added scene-only `TitanSwordFeedback` and DamageDealer speed profile, HP thresholds,
 white/yellow/red confirmed-hit numbers, render-only camera shake, actual tip trails,

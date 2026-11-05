@@ -2,8 +2,10 @@
 
 Unity **2021.3.25f1**. Scene opt-in implementation; no pipeline upgrade, animation
 rebuild, motor tuning, global time/Physics change, shared Titan/player prefab edits,
-commit or push. Approved Scout checkpoint remains `059dd52e`; mirrored attacks and
-this work are still working-tree changes.
+commit or push during the effects task. Subsequently, at user request, attacks,
+effects and the user's saved scene/hitbox changes were committed and PUSHED as
+**b6447972**. Later runtime registration work is separate, uncommitted; see
+`docs/titan-runtime-initialization.md`.
 
 ## Installed balance
 
@@ -133,7 +135,8 @@ input guard refused focus. No claim of completed native nape/face captures.
 `tools/review_titan_sword_impacts.py` can reproduce when user is not playing; always
 releases F and exits its owned Play session. Do not run over a user's live Play session.
 
-Scene started clean; installer left intended setup dirty/unsaved. Before/after COPY
+Historical effects-task scene state (user subsequently saved it; included in pushed
+b6447972): scene started clean; installer left intended setup dirty/unsaved. Before/after COPY
 snapshots `Library/ScoutBackup/FreeRoam.before/after-impact-system.unity` differ ONLY by
 new Player feedback component, DamageDealer speed settings and two regional-profile
 prefab overrides (health defaults are1000/2500/500/500). No transform/activation edits.

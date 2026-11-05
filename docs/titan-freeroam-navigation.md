@@ -1,6 +1,32 @@
 # FreeRoam full-map navigation TEST
 
-## Checkpoint / request
+## Current random spawning (2026-11-04)
+
+See **docs/titan-random-spawning.md**: weighted editable size categories, cached
+walkable-surface random proposals, inactive full-rig reservations then revalidated
+activation, strike particles/optional user audio, bounded population/placement/corpse
+cleanup. No per-spawn bake. Spawner choices join next bake's scale union automatically.
+193/195 full-suite (same2 Run failures), separate1/1 runtime URP rendered strike.
+Opt-in installer Tools > Titans > FreeRoam > Install random Titan spawner; NOT yet
+installed in main scene (bridge offline, preserve user scene/Play). No nav assets
+rebaked or scene saved; code remains local/uncommitted after pushedb6447972.
+
+## Previous runtime registration (2026-11-04)
+
+Checkpoint **b6447972** is now PUSHED on origin/titan-combat-updates, including user's
+saved Enable Combat=true/sight150/FOV245/patrol300 scene and enlarged weakpoint edits.
+The following runtime changes are subsequent uncommitted work; details/API/limits:
+**docs/titan-runtime-initialization.md**. Scene manager auto-registers active placed
+and newly enabled/instantiated scene bodies, no fixed array or per-spawn bake needed.
+It owns guarded nav/perception/stomp/grab/bite/director initialization, atomic TrySpawn
+and owned Despawn. Disabled scene actors stay disabled. Existing3x/5x baked profiles
+are shared. Add future sizes in Additional Bake Scales and rebake ONCE; declaration
+alone does not create nav data. Builder retains existing sizes and discovers scene
+actors when collecting requested sizes. No production data/assets rebaked/changed.
+181/183 twice,14 new tests pass; only2 existing retimed Run failures remain. Original
+milestone notes below are historical, including default combat-OFF and old Git status.
+
+## Historical checkpoint / request
 
 User requested committing the real ODM integration and their copied/scaled Titans,
 then trying full-map navigation in `Assets/Scenes/FreeRoam.unity`.

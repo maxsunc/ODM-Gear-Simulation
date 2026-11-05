@@ -39,6 +39,12 @@ for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Asset
 # Compile the real opt-in adapter and its narrow legacy dependencies as the default
 # assembly. Tests access that assembly by reflection (Unity asmdefs cannot reference it).
 shutil.copytree(root / 'Assets/Titan/Integration', project / 'Assets/Titan/Integration', dirs_exist_ok=True)
+# Compile the scoped bake-size UI as well; it never autoruns or bakes in tests.
+(project / 'Assets/Editor').mkdir(exist_ok=True)
+for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller']:
+    for suffix in ['', '.meta']:
+        relative='Assets/Editor/'+name+'.cs'+suffix
+        shutil.copy2(root / relative, project / relative)
 legacy = ['Movement.cs','ODM_Movement.cs','PlayerHealth.cs','Attack.cs','DamageDealer.cs',
           'RagdollController.cs','ThirdPersonCam.cs','Scripts/Audio.cs',
           'Titan/TitanController.cs','Titan/TitanAttack.cs','Titan/TitanLimb.cs',
@@ -61,6 +67,7 @@ for relative in ['Assets/Prefabs/Titans/ModularTitanPrototype.prefab',
     'com.unity.modules.animation': '1.0.0',
     'com.unity.modules.audio': '1.0.0',
     'com.unity.modules.imgui': '1.0.0',
+    'com.unity.modules.imageconversion': '1.0.0',
     'com.unity.modules.physics': '1.0.0',
     'com.unity.modules.jsonserialize': '1.0.0',
     'com.unity.modules.uielements': '1.0.0',

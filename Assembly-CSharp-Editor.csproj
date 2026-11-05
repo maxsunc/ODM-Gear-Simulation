@@ -40,6 +40,7 @@
      <Compile Include="Assets\Editor\TitanCombatEffectsInstaller.cs" />
      <Compile Include="Assets\Editor\TitanFreeRoamNavigationBuilder.cs" />
      <Compile Include="Assets\Editor\TitanPrototypeBuilder.cs" />
+     <Compile Include="Assets\Editor\TitanRandomSpawnerInstaller.cs" />
      <Compile Include="Assets\Editor\TitanAISandboxBuilder.cs" />
      <Compile Include="Assets\Editor\ScoutPlayerBuilder.cs" />
      <Compile Include="Assets\Editor\TitanMotionClipBuilder.cs" />

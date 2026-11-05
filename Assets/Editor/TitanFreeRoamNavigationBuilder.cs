@@ -72,16 +72,10 @@ public static class TitanFreeRoamNavigationBuilder
     {
         var nav=setup.navigation;var sources=new List<NavMeshBuildSource>();Bounds bounds;string error;
         if(!TitanNavigationGeometry.Collect(setup.gameObject.scene,nav.geometryRoots,sources,out bounds,out error))throw new InvalidOperationException(error);
-        var scales=new SortedSet<float>();
-        foreach(var body in setup.titans)
-        {
-            if(body==null)continue;var s=body.transform.lossyScale;
-            if(s.x<=0 || Mathf.Abs(s.x-s.y)>.001f || Mathf.Abs(s.x-s.z)>.001f)throw new InvalidOperationException("Uniform positive Titan scale required: "+body.name);
-            // Lossy scale varies by a few ulps with rotation; one canonical profile
-            // per milliscale prevents duplicate IDs/data for visually identical Titans.
-            scales.Add(Mathf.Round(s.x*1000)/1000);
-        }
-        if(scales.Count==0)throw new InvalidOperationException("No Titans assigned");
+        // Include discovered scene actors, retain already-baked sizes, and allow
+        // future spawner sizes without requiring a placeholder actor in the map.
+        float[] scales;
+        if(!setup.TryGetBakeScales(out scales,out error))throw new InvalidOperationException(error);
         foreach(var s in scales)bounds.Expand(new Vector3(1.8f*s*4,12*s*2,1.8f*s*4));
         EnsureFolders();var profiles=new List<TitanWorldNavigation.Profile>();var createdIDs=new List<int>();var temporary=new List<NavMeshData>();
         try

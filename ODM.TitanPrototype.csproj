@@ -46,7 +46,9 @@
      <Compile Include="Assets\Titan\Prototype\TitanMotionStyle.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanWorldNavigation.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanCombatDirector.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanSpawnSurfaceSampler.cs" />
      <Compile Include="Assets\Titan\Prototype\ModularTitanBody.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanSpawnPlacement.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAISandboxDemo.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSandboxDemo.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanHealthSource.cs" />

@@ -78,6 +78,15 @@ public class ModularTitanBody : MonoBehaviour
     int eyeReactionVariant;
     static readonly int Walking = Animator.StringToHash("IsWalking");
 
+    // Neutral lifecycle notifications: only an opted-in scene manager subscribes.
+    // Queue initialization outside this callback; a caller may still be assigning
+    // the cloned root's scale/scene immediately after Instantiate returns.
+    public static event Action<ModularTitanBody> BecameActive;
+    public static event Action<ModularTitanBody> BecameInactive;
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetLifecycleListeners() { BecameActive = null; BecameInactive = null; }
+    void OnEnable() { if (Application.isPlaying && BecameActive != null) BecameActive(this); }
+    void OnDisable() { if (Application.isPlaying && BecameInactive != null) BecameInactive(this); }
     void Awake() { Initialize(); }
 
     // Explicit initialization also allows isolated Editor physics validation without

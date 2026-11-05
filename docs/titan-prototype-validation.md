@@ -1,6 +1,60 @@
 # Titan prototype validation
 
-LATEST regional sword health / effects / sever impulse: **167/169 PASSED,same2 Run failures**,
+LATEST customizable ballistic jumping: **209/211 PASSED,same2 Run failures**.
+Unity2021.3.25f1,2026-11-05 **02:03:56–02:04:15UTC**,PID39640,19.1112139s.
+8 additional native CCT tests cover3 height/gravity/apex/landing variants,physics delay/
+zero delay/cooldown/duplicates,air-trigger-wall rejection,walk-off-windup cancellation,
+real ceiling,gas/disable/hold/death takeover,invalid height/zero gravity/settings,same
+apex at.01/.02/.05 physics steps and extreme25000g real ceiling sweep. Previous
+legacy-jump test adapted to ballistic jump retaining its post-jump gravity assertion.
+First208/211 had a NEW fixture baseline error (spawn within native skin); settle
+FROM ABOVE, unchanged .02 landing/.035 apex tolerances, final only2 known Run fails.
+No global timestep/Physics writes or main scene/input/Play automation.3 source/test
+files byte-match run. User currently saved gravity16 and jump4/.1/.15, preserved.
+See docs/player-jumping.md; all preceding dirty work remains local afterb6447972.
+
+Previous functional player gravity: **201/203 PASSED,same2 Run failures**.
+Unity2021.3.25f1,2026-11-04 **22:31:17–22:31:36UTC**,PID52448,18.2195347s.
+8 new real native CCT cases in TitanODMIntegrationPlayModeTests: live Inspector
+acceleration/displacement;zero rest/coast;configurable terminal/extreme25000/invalid
+runtime values;native landing/ledge fresh speed;upward release same gravity/powered
+reset;held/disabled no integration;completed legacy jump no sticky multiplier;
+native ceiling -> falling. All8 pass; all prior strict Titan/runtime/spawner cases
+retained.3 changed code/test files byte-match full validation. See docs/player-gravity.md.
+User Movement formatting and dirty scene preserved; current saved gravityConstant25000
+untouched (warned to lower). No main scene/Play/input/save/global Physics changes.
+Still local/uncommitted afterb6447972. Scoped actual falling/release fix; existing
+scripted jump ascent/controls/thrust/inertia untouched, not ballistic jump redesign.
+
+Previous random spawning / arrival strike: **193/195 PASSED,same2 Run failures**.
+Unity2021.3.25f1,2026-11-04 **21:43:58–21:44:18 UTC**,PID3784,19.584s;
+previous193/19521:40:22–42PID17444.12 new cases: weighted size/seed/global-RNG,
+random walkable proposals/shared unchanged nav, staged inactive/full-clearance spawn,
+player/blocker/cap cancellation/no fake impact, owned-only population/corpse lifecycle,
+bounded FX/audio cleanup/no physics/time/root writes, weighted sizes in next bake,
+bounded impossible placement and full-arm inactive reservation, shader asset import.
+Graphics-enabled owned runtime URP separate **1/1 pass**,21:44:29–30UTC,.998s:
+actual lightning-above-head pixel check plus warning/strike/steam frames. No main
+scene/pipeline/Play automation; capture pipeline setup/restore ONLY owned project.
+Details docs/titan-random-spawning.md. Installation is explicit user menu in Edit Mode
+(MCP not connected); no production bake/main scene save. User clip unassigned.
+Current main fixtures/rig/health/strict thresholds not weakened; only original2 Run
+assertions fail. New code remains uncommitted after pushedb6447972.
+
+Previous reusable runtime Titan registration: **181/183 PASSED TWICE,same2 Run failures**.
+Unity2021.3.25f1,2026-11-04 **15:27:52–15:28:09 UTC**,PID19600,16.665s;
+**15:30:27–44 UTC**,PID47984,16.912s.14 new runtime tests all pass: late/plain/placed
+clones without list,3x/5x profile/scale-once, unchanged shared nav triangulation,
+atomic spawn/despawn/crowd/offmesh/uniform scale, wide actual arm obstruction,
+duplicate/foreign owner/scene guards, HP retained, actor/manager/nav/combat toggle,
+inactive explicit policy, future bake-size union, changed initialized scale rejected,
+actual spawned director40-damage stomp, genuine grab contact then despawn releases
+victim, no corpse resurrection. Runtime/Editor bake UI compiled;178-file byte match.
+Saved scenes/prefabs/art/nav/settings unchanged from pushedb6447972. No live editor
+Play/scene automation or production bake. New runtime code is uncommitted review work.
+See docs/titan-runtime-initialization.md; full-speed giant combat remains separate.
+
+Previous regional sword health / effects / sever impulse: **167/169 PASSED,same2 Run failures**,
 Unity2021.3.25f1,2026-11-04 **03:51:08–27 UTC**,PID46464,19.099s. Previous167/169
 03:47:22–39,PID50212,17.019s.12 new cases: regional/nape/face HP boundaries and
 recovery, capped real speed/teleport/held suppression, confirmed per-region dedup and

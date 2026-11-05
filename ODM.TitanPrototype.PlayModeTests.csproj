@@ -39,6 +39,7 @@
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanGrabPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutPlayerPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAerialGrabPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanRandomSpawnerPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanSwordImpactPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanWorldNavigationPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanMotionStylePlayModeTests.cs" />
@@ -47,6 +48,7 @@
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAISandboxScenePlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanInjuryPosePlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ModularTitanPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanRuntimeRegistrationPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanPatrolChasePlayModeTests.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
