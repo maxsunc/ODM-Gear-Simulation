@@ -47,10 +47,10 @@ public class ScoutPlayerPlayModeTests
         Assert.That(b.F("attacking",true).Step(),Is.EqualTo("AttackGround"));
         b=new Brain().F("hooks",3);b.Step();b.F("hooks",0).Step();Assert.That(b.F("flipClear",false).F("vertical",-5f).Step(),Is.EqualTo("Fall"));
     }
-    [Test]public void HeldCounterRemainsAvailableButDeathOverridesEverything()
+    [Test]public void HeldBlocksChargeAndSlashEvenWithStaleAttackFlagsAndDeathOverridesEverything()
     {
-        var b=new Brain().F("held",true);Assert.That(b.Step(),Is.EqualTo("Held"));Assert.That(b.F("charging",true).Step(),Is.EqualTo("ChargeHeld"));
-        Assert.That(b.F("charging",false).F("attacking",true).Step(),Is.EqualTo("AttackHeld"));Assert.That(b.F("dead",true).Step(),Is.EqualTo("Dead"));
+        var b=new Brain().F("held",true);Assert.That(b.Step(),Is.EqualTo("Held"));Assert.That(b.F("charging",true).Step(),Is.EqualTo("Held"));
+        Assert.That(b.F("charging",false).F("attacking",true).Step(),Is.EqualTo("Held"));Assert.That(b.F("dead",true).Step(),Is.EqualTo("Dead"));
     }
     const string Assets="Assets/Art/Player/Scout/Animations/";
     [UnityTest]public IEnumerator AuthoredSwingMovesLegsAndSkinWithoutMovingGameplayRoot()

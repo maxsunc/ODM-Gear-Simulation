@@ -14,7 +14,21 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: Giant Forest 2.0 — larger rocks / doubled walls / local commit authorized
+## Current: approved combat UX / longer cloth cape — staged local commits
+
+User approved dedicated hit volumes, same-Titan impact-speed grace, Option B true
+cloth with LONGER cape, kill text, blood1/blood2 WAV layering and fixes for moving
+Titan grapples/held slashing. **Commit as we go locally; no push requested.** Contract
+and evidence: **docs/player-combat-ux.md**. Stage1 implemented/validated: collider-local
+independent moving anchors, invalid/sever/death release, hard held/ReleasePending/
+dead input + damage gates, synchronous capture cancellation and held visual priority.
+Full owned suite **226/228**,2026-11-05 16:22:58–16:23:16UTC; only established two
+Run failures unchanged. Stage2 hitboxes/speed/feedback and Stage3 cape still pending.
+The user's GiantForest2 scene has NEW saved edits after346c85c0: preserve, don't
+rewrite/stage it. Baseline recorded in Library/CombatUXBaseline.json. Live Editor
+untouched. Source audio supplied Assets/Audio/blood{1,2}.wav, not yet integrated.
+
+## Previous: Giant Forest 2.0 — larger rocks / doubled walls / local commit authorized
 
 User requested more varied, much larger rocks and walls2x their current height,
 then explicitly authorized **committing what we have**. Completed scoped resize:

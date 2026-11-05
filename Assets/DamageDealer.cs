@@ -39,7 +39,7 @@ public class DamageDealer : MonoBehaviour
     }
     public void ProcessContact(Collider other, Vector3 point, Vector3 slashDirection)
     {
-        if(!isActiveAndEnabled||other==null)return;
+        if(!isActiveAndEnabled||other==null||PlayerCombatPermission.IsBlocked(this))return;
         ResolvePlayer();
         float damage=speedScaledDamage ? CalculateDamage(feedback!=null?feedback.CurrentDamageSpeed:0) :
             baseDamage+(odmMovement!=null?(odmMovement.CurrentSpeed+odmMovement.ResidualSpeed)*momentumMultiplier:0);

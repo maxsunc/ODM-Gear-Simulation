@@ -36,7 +36,7 @@ public class TitanShiganshinaIntegration : MonoBehaviour
         GUILayout.BeginArea(new Rect(12,12,390,100),GUI.skin.box);
         GUILayout.Label(SetupError!=null?SetupError:"ODM / MODULAR TITAN COMBAT");
         if(health!=null) GUILayout.Label("HP "+health.currentHP.ToString("F0")+" / "+health.maxHP.ToString("F0")+
-            (health.isDead?" — respawning":target!=null && target.ReleasePending?" — clearing release":target!=null && target.IsHeld?" — HELD: swords still active":""));
+            (health.isDead?" — respawning":target!=null && target.ReleasePending?" — clearing release":target!=null && target.IsHeld?" — HELD: swords blocked":""));
         GUILayout.Label("Mouse / Q,E: hooks | Space: gas | Shift: boost | C: jump");
         GUILayout.Label("Hold/release F: swords | J: existing menu | T: music");
         GUILayout.EndArea();

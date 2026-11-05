@@ -32,6 +32,7 @@ public class ODM_Movement : MonoBehaviour
     public LineRenderer[] lines;
     private bool rightGrappled, leftGrappled;
     private Vector3 pointLeft, pointRight;
+    readonly ODMHookAnchor leftAttachment=new ODMHookAnchor(),rightAttachment=new ODMHookAnchor();
     public Transform camTransform;
     public TrailRenderer gasTrail;
     public Animator camAnim;
@@ -63,12 +64,42 @@ public class ODM_Movement : MonoBehaviour
     public bool LeftHooked { get { return leftGrappled; } }
     public bool RightHooked { get { return rightGrappled; } }
     public bool IsGasing { get { return gasing; } }
-    public Vector3 LeftAnchor { get { return pointLeft; } }
-    public Vector3 RightAnchor { get { return pointRight; } }
+    public Vector3 LeftAnchor { get { RefreshHookAnchors();return pointLeft; } }
+    public Vector3 RightAnchor { get { RefreshHookAnchors();return pointRight; } }
+    public bool TryAttachHook(bool right,Collider surface,Vector3 hitPoint)
+    {
+        if(titanSuspended || PlayerCombatPermission.IsBlocked(this))return false;
+        var anchor=right?rightAttachment:leftAttachment;
+        if(!anchor.Bind(surface,hitPoint))return false;
+        if(right){rightGrappled=true;pointRight=hitPoint;}
+        else {leftGrappled=true;pointLeft=hitPoint;}
+        SetHookLine(right,true,hitPoint);return true;
+    }
+    void SetHookLine(bool right,bool enabled,Vector3 point)
+    {
+        int index=right?0:1;
+        if(lines==null || index>=lines.Length || lines[index]==null)return;
+        lines[index].enabled=enabled;
+        if(enabled && lines[index].positionCount>=2)lines[index].SetPosition(1,point);
+    }
+    public void ReleaseHook(bool right)
+    {
+        (right?rightAttachment:leftAttachment).Clear();
+        if(right)rightGrappled=false;else leftGrappled=false;
+        SetHookLine(right,false,Vector3.zero);
+    }
+    public void RefreshHookAnchors()
+    {
+        Vector3 p;
+        if(leftGrappled){if(leftAttachment.TryGetPoint(out p)){pointLeft=p;SetHookLine(false,true,p);}else ReleaseHook(false);}
+        if(rightGrappled){if(rightAttachment.TryGetPoint(out p)){pointRight=p;SetHookLine(true,true,p);}else ReleaseHook(true);}
+    }
+    void OnDisable(){ReleaseHook(false);ReleaseHook(true);}
     public bool SuspendForTitan(UnityEngine.Object owner)
     {
         if(owner==null || titanSuspended) return false;
         titanOwner=owner;titanSuspended=true;StopAllCoroutines();
+        ReleaseHook(false);ReleaseHook(true);
         leftGrappled=rightGrappled=qPress=ePress=gasing=isInertia=checkingStuck=false;
         currentSpeed=residualSpeed=strafeDir=0;direction=residualDir=Vector3.zero;
         acceleration=accelCopy;additionalAccel=0;superGasing=false;
@@ -126,12 +157,13 @@ public class ODM_Movement : MonoBehaviour
     void LateUpdate()
     {
         if(titanSuspended) return;
-        UpdateLines();
+        RefreshHookAnchors();UpdateLines();
     }
 
     void Update()
     {
         if(titanSuspended) return;
+        RefreshHookAnchors();
         if (movement.CheckGround())
         {
             // The generous foot probe may overlap ground before the controller
@@ -348,7 +380,7 @@ public class ODM_Movement : MonoBehaviour
     void FixedUpdate()
     {
         if(titanSuspended || controller==null || !controller.enabled) return;
-        Throttle();
+        RefreshHookAnchors();Throttle();
     }
 
     void Throttle()
@@ -374,7 +406,7 @@ public class ODM_Movement : MonoBehaviour
 
         // Old stuff
         //if(Physics.Raycast(grappleTransform.position, grappleTransform.forward, out hitInfo, range, targetLayer))
-        if(Physics.Raycast(camTransform.position, camTransform.forward, out hitInfo, range, targetLayer))
+        if(gameObject.scene.GetPhysicsScene().Raycast(camTransform.position, camTransform.forward, out hitInfo, range, targetLayer,QueryTriggerInteraction.Ignore) && TryAttachHook(dir=="right",hitInfo.collider,hitInfo.point))
         {
 
             if (dir == "right")

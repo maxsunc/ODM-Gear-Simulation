@@ -19,6 +19,8 @@ public class Attack : MonoBehaviour
     public bool IsAttacking { get; private set; }
     public event System.Action ChargeStarted;
     public event System.Action Released;
+    public event System.Action Cancelled;
+    public bool CanAttack { get { return isActiveAndEnabled && !PlayerCombatPermission.IsBlocked(this); } }
     private bool nextAttackReady = true;
     
 
@@ -34,29 +36,41 @@ public class Attack : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.F) && nextAttackReady)
+        if(!CanAttack)
         {
-            StartCoroutine(ChargeAttack());
+            if(IsCharging || IsAttacking || (damageDealer!=null && damageDealer.gameObject.activeSelf))CancelAttack();
+            return;
         }
+        if (Input.GetKeyDown(KeyCode.F))TryBeginCharge();
 
     }
 
-    void OnDisable()
+    public bool TryBeginCharge()
+    {
+        if(!CanAttack || !nextAttackReady)return false;
+        StartCoroutine(ChargeAttack());return true;
+    }
+    public void CancelAttack()
     {
         StopAllCoroutines();nextAttackReady=true;IsCharging=IsAttacking=false;
         if(armatureAnimator!=null) armatureAnimator.SetBool("holdingAttack",false);
         if(damageDealer!=null) damageDealer.gameObject.SetActive(false);
+        if(Cancelled!=null)Cancelled();
     }
+    void OnDisable() { CancelAttack(); }
 
     IEnumerator ChargeAttack()
     {
+        if(!CanAttack)yield break;
         nextAttackReady = false;IsCharging=true;
         if(ChargeStarted!=null)ChargeStarted();
         if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", true);
         while (Input.GetKey(KeyCode.F))
         {
+            if(!CanAttack){CancelAttack();yield break;}
             yield return null;
         }
+        if(!CanAttack){CancelAttack();yield break;}
         IsCharging=false;IsAttacking=true;
         if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", false);
         if(Released!=null)Released();
@@ -64,6 +78,7 @@ public class Attack : MonoBehaviour
         // Defaults retain the legacy .6s window. Scout installer explicitly opts
         // its scene instance into anticipation / sharp cut / recovery timing.
         if(strikeDelay>0)yield return new WaitForSeconds(strikeDelay);
+        if(!CanAttack){CancelAttack();yield break;}
         if (damageDealer != null) damageDealer.gameObject.SetActive(true);
         yield return new WaitForSeconds(Mathf.Max(.001f,activeDuration));
         if (damageDealer != null) damageDealer.gameObject.SetActive(false);

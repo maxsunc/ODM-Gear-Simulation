@@ -23,7 +23,7 @@ public sealed class ScoutAnimationBrain
         ReleaseAge+=dt;landing=Mathf.Max(0,landing-dt);
         bool landed=f.grounded&&!wasGrounded;wasGrounded=f.grounded;
         if(f.dead) { CancelRelease();return State="Dead"; }
-        if(f.held) { CancelRelease();return State=f.attacking?"AttackHeld":f.charging?"ChargeHeld":"Held"; }
+        if(f.held) { CancelRelease();return State="Held"; }
         if(f.charging||f.attacking) { CancelRelease();return State=(f.charging?"Charge":"Attack")+(f.grounded?"Ground":"Air"); }
         if(f.grounded)
         {

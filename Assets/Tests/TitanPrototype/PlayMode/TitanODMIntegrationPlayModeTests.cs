@@ -114,6 +114,59 @@ public class TitanODMIntegrationPlayModeTests
         blade.transform.position=center-Vector3.right*2;sweep.SendMessage("LateUpdate");Assert.That(limb.health,Is.EqualTo(body.limbHealth-10).Within(.001f));
         window.SetActive(false);yield return null;Assert.That(limb.health,Is.EqualTo(body.limbHealth-10).Within(.001f));Object.Destroy(mesh);
     }
+    ModularTitanBody HookTitan()
+    {
+        var body=Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Titans/ModularTitanPrototype.prefab")).GetComponent<ModularTitanBody>();
+        SceneManager.MoveGameObjectToScene(body.gameObject,scene);body.transform.position=Vector3.right*30;
+        body.GetComponent<TitanMotionStyle>().automaticTick=false;Physics.SyncTransforms();return body;
+    }
+    [UnityTest] public IEnumerator HooksFollowExactAnimatedBoneLocalPointThroughTranslationRotationAndScale()
+    {
+        gear.enabled=false;var body=HookTitan();
+        var shape=body.ragdollBones.First(e=>e.collider!=null && e.body.transform==body.leftLowerArm).collider;
+        Vector3 point=shape.ClosestPoint(shape.bounds.center+Vector3.back*10),local=shape.transform.InverseTransformPoint(point);
+        Assert.That(Call(gear,"TryAttachHook",false,shape,point),Is.True);
+        body.transform.position+=new Vector3(3,4,5);body.transform.rotation=Quaternion.Euler(0,127,0);body.transform.localScale=Vector3.one*3;
+        body.leftLowerArm.localRotation*=Quaternion.Euler(35,0,25);Physics.SyncTransforms();Call(gear,"RefreshHookAnchors");
+        Vector3 expected=shape.transform.TransformPoint(local),actual=(Vector3)gear.GetType().GetProperty("LeftAnchor").GetValue(gear);
+        Assert.That(Vector3.Distance(actual,expected),Is.LessThan(.0001f));Assert.That(Vector3.Distance(actual,point),Is.GreaterThan(5));
+        Assert.That(Vector3.Distance(Get<LineRenderer[]>(gear,"lines")[1].GetPosition(1),expected),Is.LessThan(.0001f));Assert.That(player.transform.parent,Is.Null);
+        yield return null;
+    }
+    [UnityTest] public IEnumerator TwoHooksTrackIndependentlyAndSeverDeathOrDisabledSurfaceReleaseOnlyInvalidAnchors()
+    {
+        gear.enabled=false;var body=HookTitan();var shape=body.ragdollBones.First(e=>e.collider!=null && e.body.transform==body.leftLowerArm).collider;
+        var rock=new GameObject("Moving scenery hook");SceneManager.MoveGameObjectToScene(rock,scene);rock.transform.position=Vector3.right*10;var solid=rock.AddComponent<BoxCollider>();Physics.SyncTransforms();
+        Assert.That(Call(gear,"TryAttachHook",false,shape,shape.bounds.center),Is.True);Assert.That(Call(gear,"TryAttachHook",true,solid,solid.bounds.center),Is.True);
+        rock.transform.position+=Vector3.forward*5;Call(gear,"RefreshHookAnchors");
+        Assert.That(Vector3.Distance((Vector3)gear.GetType().GetProperty("RightAnchor").GetValue(gear),solid.transform.position),Is.LessThan(.0001f));
+        body.ApplyDamage(TitanHitRegion.LeftArm,1000,shape.bounds.center,Vector3.zero);Call(gear,"RefreshHookAnchors");
+        Assert.That(Get<bool>(gear,"leftGrappled"),Is.False);Assert.That(Get<bool>(gear,"rightGrappled"),Is.True);
+        solid.enabled=false;Call(gear,"RefreshHookAnchors");Assert.That(Get<bool>(gear,"rightGrappled"),Is.False);
+        var torso=body.ragdollBones.First(e=>e.collider!=null && e.body.transform==body.hips).collider;
+        Assert.That(Call(gear,"TryAttachHook",true,torso,torso.bounds.center),Is.True);body.Die();Call(gear,"RefreshHookAnchors");Assert.That(Get<bool>(gear,"rightGrappled"),Is.False);
+        yield return null;
+    }
+    [UnityTest] public IEnumerator CaptureImmediatelyCancelsCommittedSlashAndCannotReopenAfterAnticipation()
+    {
+        var attack=Add("Attack");var window=new GameObject("Attack window");window.transform.SetParent(player.transform,false);window.SetActive(false);
+        var dealer=window.AddComponent(Legacy("DamageDealer"));Set(attack,"damageDealer",dealer);Set(attack,"strikeDelay",.075f);Set(attack,"activeDuration",.12f);
+        Assert.That(Call(attack,"TryBeginCharge"),Is.True);Assert.That((bool)attack.GetType().GetProperty("IsAttacking").GetValue(attack),Is.True);
+        Hold();Assert.That((bool)attack.GetType().GetProperty("IsAttacking").GetValue(attack),Is.False);Assert.That(window.activeSelf,Is.False);
+        Assert.That(Call(attack,"TryBeginCharge"),Is.False);yield return new WaitForSeconds(.12f);
+        Assert.That(window.activeSelf,Is.False,"Cancelled anticipation cannot resurrect a damage window");target.EscapeHold();
+        Assert.That(Call(attack,"TryBeginCharge"),Is.True,"Only a fresh request after safe release can start another attack");Call(attack,"CancelAttack");
+    }
+    [UnityTest] public IEnumerator HeldAndReleasePendingRejectEvenForcedBaseDamageContacts()
+    {
+        var body=HookTitan();var limb=body.limbs.First(l=>l.region==TitanHitRegion.RightArm);var zone=limb.hitZones[0].GetComponent<Collider>();float before=limb.health;
+        var box=new GameObject("Release-obstructing gear");box.transform.SetParent(player.transform,false);box.transform.localPosition=Vector3.right*2;box.AddComponent<BoxCollider>().size=Vector3.one*.5f;
+        var window=new GameObject("Forced rogue damage window");window.transform.SetParent(player.transform,false);var dealer=window.AddComponent(Legacy("DamageDealer"));Set(dealer,"baseDamage",1000f);
+        Hold();dealer.GetType().GetMethod("ProcessContact",new[]{typeof(Collider)}).Invoke(dealer,new object[]{zone});Assert.That(limb.health,Is.EqualTo(before));
+        var wall=new GameObject("Release blocker");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=box.transform.position;wall.AddComponent<BoxCollider>();Physics.SyncTransforms();
+        target.EscapeHold();Assert.That(target.ReleasePending,Is.True);dealer.GetType().GetMethod("ProcessContact",new[]{typeof(Collider)}).Invoke(dealer,new object[]{zone});Assert.That(limb.health,Is.EqualTo(before));
+        Object.Destroy(wall);yield return null;target.TickHold(0);Assert.That(target.ReleasePending,Is.False);
+    }
     void GravityOnly(float acceleration)
     {
         // Exercise the REAL CharacterController/motor, without input or automatic

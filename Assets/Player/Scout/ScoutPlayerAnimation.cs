@@ -95,7 +95,7 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     }
     void OnStrike()
     {
-        if(animator==null)return;
+        if(animator==null || PlayerCombatPermission.IsBlocked(this))return;
         bool held=(walking!=null&&walking.TitanSuspended)||(gear!=null&&gear.TitanSuspended);
         if(!attackVariantChosen)OnChargeStarted();
         string clip=AttackAnimationState(held?"AttackHeld":Grounded?"AttackGround":"AttackAir");

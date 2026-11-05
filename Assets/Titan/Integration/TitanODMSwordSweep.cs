@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>Opt-in real sword mesh sweeps. Active only during Attack's existing .6s
-/// damage window (Scout .12s, legacy .6s). No native victim collider needed: sword counters remain active
-/// while movement is held. DamageDealer owns exact per-swing region deduplication.</summary>
+/// damage window (Scout .12s, legacy .6s). DamageDealer owns exact per-swing region
+/// deduplication and rejects all contacts while held, pending release or dead.</summary>
 [DefaultExecutionOrder(110)]
 [RequireComponent(typeof(DamageDealer))]
 public class TitanODMSwordSweep : MonoBehaviour

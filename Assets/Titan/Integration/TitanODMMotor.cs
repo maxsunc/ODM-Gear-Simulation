@@ -58,7 +58,9 @@ public class TitanODMMotor : TitanAerialMotor
         foreach(var c in FindObjectsOfType<ThirdPersonCam>())
             if(c.enabled && c.movementRotator!=null && c.movementRotator.IsChildOf(transform))
             { stoppedRotators.Add(c);c.enabled=false; }
-        Suspended=true;player.isGrabbed=true;return true;
+        Suspended=true;player.isGrabbed=true;
+        var attack=GetComponent<Attack>();if(attack!=null)attack.CancelAttack();
+        return true;
     }
     public override bool TryRelease(Vector3 ownerPosition,Transform ownerRoot,Vector3 carryVelocity,float age,out Vector3 position,out Vector3 velocity)
     {
