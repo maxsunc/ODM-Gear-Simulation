@@ -28,9 +28,11 @@ safe jump-away and one-second re-grab protection; explicitly chose **3 seconds**
   Damage/death remain exclusively real PlayerHealth ownership. No delayed kill
   timer, forced death, resurrected HP or post-escape asynchronous bite callback.
 
-HUD: dark high-contrast center-lower panel, large current key, progress count,
-remaining seconds and shrinking gold bar. Wrong-key flash/reset, failure and success
-messages. No cursor capture, root motion, shared GUI skin edits or audio retuning.
+HUD (user-requested minimal revision): only the large current key, three-segment
+progress bar and shrinking time bar. Compact260x128 panel with32% background alpha;
+no headings, instructions, numeric counts/time or outcome text. Wrong-key reset
+flashes red; successful progress flashes green. No cursor capture, root motion,
+shared GUI skin edits or audio retuning.
 QTE movement/Q/E inputs remain quarantined through release until keys come UP,
 so the final success key does not also move/strafe/fire an ODM hook. Fresh gameplay
 inputs work normally after release. Existing F release/repress rule remains.

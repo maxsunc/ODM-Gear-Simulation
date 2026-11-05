@@ -21,7 +21,7 @@ public sealed class TitanGrabEscape : MonoBehaviour
     TitanGrabAttack attacker;
     int previousButtons, blockedButtons, startFrame;
     float age, startedAt, resultAt, wrongAt = -10;
-    GUIStyle titleStyle, keyStyle, textStyle;
+    GUIStyle keyStyle;
     public TitanGrabEscapeState State { get; private set; }
     public int Progress { get; private set; }
     public int WrongPresses { get; private set; }
@@ -107,34 +107,23 @@ public sealed class TitanGrabEscape : MonoBehaviour
     {
         if(!showHud || target.IsDead || State==TitanGrabEscapeState.Idle || State==TitanGrabEscapeState.Cancelled)return;
         if(State!=TitanGrabEscapeState.Running && !target.IsHeld && !target.ReleasePending && Time.time-resultAt>1.2f)return;
-        if(titleStyle==null)
-        {
-            titleStyle=new GUIStyle(GUI.skin.label){fontSize=24,alignment=TextAnchor.MiddleCenter,fontStyle=FontStyle.Bold};
-            keyStyle=new GUIStyle(titleStyle){fontSize=44};textStyle=new GUIStyle(titleStyle){fontSize=16,fontStyle=FontStyle.Normal};
-        }
+        if(keyStyle==null)keyStyle=new GUIStyle(GUI.skin.label){fontSize=44,alignment=TextAnchor.MiddleCenter,fontStyle=FontStyle.Bold};
         var oldMatrix=GUI.matrix;var oldColor=GUI.color;
         float scale=Mathf.Min(1.4f,Mathf.Min(Screen.width/600f,Screen.height/440f));
         GUI.matrix=Matrix4x4.TRS(new Vector3(Screen.width*.5f,Screen.height*.68f,0),Quaternion.identity,Vector3.one*scale);
-        GUI.color=new Color(.05f,.07f,.1f,.96f);GUI.DrawTexture(new Rect(-270,-100,540,200),Texture2D.whiteTexture);
-        GUI.color=Color.white;
-        if(State==TitanGrabEscapeState.Running)
+        GUI.color=new Color(.05f,.07f,.1f,.32f);GUI.DrawTexture(new Rect(-130,-60,260,128),Texture2D.whiteTexture);
+        bool running=State==TitanGrabEscapeState.Running;
+        Color accent=State==TitanGrabEscapeState.Succeeded?new Color(.4f,1,.6f):
+            (!running || Time.time-wrongAt<.35f?new Color(1,.4f,.35f):new Color(1,.85f,.25f));
+        GUI.color=accent;
+        if(running)GUI.Label(new Rect(-40,-50,80,70),CurrentKey.ToString(),keyStyle);
+        for(int i=0;i<RequiredPresses;i++)
         {
-            GUI.Label(new Rect(-260,-94,520,36),"BREAK FREE",titleStyle);
-            GUI.color=Time.time-wrongAt<.35f?new Color(1,.4f,.35f):new Color(1,.85f,.25f);
-            GUI.Box(new Rect(-44,-52,88,76),GUIContent.none);GUI.Label(new Rect(-44,-52,88,76),CurrentKey.ToString(),keyStyle);
-            GUI.color=Color.white;
-            GUI.Label(new Rect(-260,26,520,30),Progress+" / 3 correct   •   "+Remaining.ToString("F1")+"s",textStyle);
-            GUI.color=new Color(.2f,.23f,.28f);GUI.DrawTexture(new Rect(-235,61,470,8),Texture2D.whiteTexture);
-            GUI.color=new Color(1,.75f,.2f);GUI.DrawTexture(new Rect(-235,61,470*Remaining/Window,8),Texture2D.whiteTexture);
-            GUI.color=Color.white;GUI.Label(new Rect(-260,72,520,24),Time.time-wrongAt<.35f?"Wrong key — progress reset!":"Press the shown key. Wrong key resets progress, not time.",textStyle);
+            GUI.color=i<Progress?accent:new Color(.25f,.28f,.33f,.55f);
+            GUI.DrawTexture(new Rect(-112+i*76,30,70,7),Texture2D.whiteTexture);
         }
-        else
-        {
-            bool success=State==TitanGrabEscapeState.Succeeded;
-            GUI.color=success?new Color(.4f,1,.6f):new Color(1,.4f,.35f);
-            GUI.Label(new Rect(-260,-45,520,45),success?"ESCAPED!":"TOO SLOW!",titleStyle);
-            GUI.color=Color.white;GUI.Label(new Rect(-260,3,520,40),success?(target.ReleasePending?"Bite cancelled — waiting for a clear exit…":"Jump away! 1 second of re-grab protection."):"The Titan is bringing you to its mouth…",textStyle);
-        }
+        GUI.color=new Color(.25f,.28f,.33f,.55f);GUI.DrawTexture(new Rect(-112,47,222,5),Texture2D.whiteTexture);
+        GUI.color=accent;GUI.DrawTexture(new Rect(-112,47,222*Remaining/Window,5),Texture2D.whiteTexture);
         GUI.color=oldColor;GUI.matrix=oldMatrix;
     }
 }

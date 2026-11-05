@@ -768,7 +768,7 @@ public class TitanODMIntegrationPlayModeTests
         for(int i=0;i<120 && !System.IO.File.Exists(path);i++)yield return null;
         Assert.That(System.IO.File.Exists(path),Is.True,"No actual completed-frame HUD screenshot");
         var image=new Texture2D(2,2);image.LoadImage(System.IO.File.ReadAllBytes(path));
-        Assert.That(image.GetPixels32().Count(c=>(c.r>170 && c.g>150 && c.b<120)||(c.g>170 && c.r<160 && c.b<190)),Is.GreaterThan(20),"Actual gold prompt/progress or green outcome pixels must render");
+        Assert.That(image.GetPixels32().Count(c=>(c.r>170 && c.g>150 && c.b<120)||(c.g>170 && c.r<160 && c.b<190)||(c.r>170 && c.g<140 && c.b<140)),Is.GreaterThan(20),"Actual gold prompt/time, red reset or green progress pixels must render");
         Object.Destroy(image);
     }
     [UnityTest] public IEnumerator ChompCanRenderRealScoutRagdollAndBloodInOwnedGraphicsPreview()

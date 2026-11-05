@@ -586,5 +586,51 @@
     "Assets/Titan/Integration/TitanShiganshinaIntegration.cs",
     "Assets/Tests/TitanPrototype/PlayMode/TitanODMIntegrationPlayModeTests.cs"
   ],
-  "limits": "No full crowd FPS/WebGL/device/subjective difficulty certification. Early reach overlaps disclosed separately. Native HUD fixture is explicitly gated; actual rendering was additionally verified in owned non-batch GameView, not claimed from headless run."
+  "limits": "No full crowd FPS/WebGL/device/subjective difficulty certification. Early reach overlaps disclosed separately. Native HUD fixture is explicitly gated; actual rendering was additionally verified in owned non-batch GameView, not claimed from headless run.",
+  "minimalHudRevision": {
+    "elements": [
+      "Current key",
+      "Three-segment progress bar",
+      "Time bar"
+    ],
+    "backgroundAlpha": 0.32,
+    "panelLogicalSize": [
+      260,
+      128
+    ],
+    "instructionsRemoved": true,
+    "automatedTestsRetained": true,
+    "fullRun": {
+      "id": "2",
+      "testcasecount": "300",
+      "result": "Failed(Child)",
+      "total": "300",
+      "passed": "292",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:07:04Z",
+      "end-time": "2026-11-05 23:07:38Z",
+      "duration": "34.1007429"
+    },
+    "nativeHud": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:08:01Z",
+      "end-time": "2026-11-05 23:08:03Z",
+      "duration": "1.0432679"
+    }
+  }
 }
