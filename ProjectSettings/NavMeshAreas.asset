@@ -69,7 +69,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  m_LastAgentTypeID: 1479372276
+  m_LastAgentTypeID: -902729914
   m_Settings:
   - serializedVersion: 2
     agentTypeID: 0
@@ -143,8 +143,46 @@ NavMeshProjectSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
+  - serializedVersion: 2
+    agentTypeID: -1923039037
+    agentRadius: 12.599999
+    agentHeight: 84
+    agentSlope: 40
+    agentClimb: 4.2000003
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  - serializedVersion: 2
+    agentTypeID: -902729914
+    agentRadius: 18
+    agentHeight: 120
+    agentSlope: 40
+    agentClimb: 6
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
   m_SettingNames:
   - Humanoid
   - ODM Titan FreeRoam 3x
   - ODM Titan FreeRoam 5x
   - ODM Titan GiantForest2 6x
+  - ODM Titan GiantForest2 7x
+  - ODM Titan GiantForest2 10x

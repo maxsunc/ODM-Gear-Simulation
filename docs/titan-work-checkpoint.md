@@ -14,7 +14,44 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: supplied Titan SFX; pre-work checkpoint PUSH authorized and completed
+## Current: GiantForest2 7x/10x bakes + unbaked-size quick fix
+
+User added7x(weight1) and10x(weight3) among3x/5x/6x, then explicitly asked to bake
+and add the quick fix. Runtime spawner skips only unsupported size choices, warns
+in custom Inspector (SizeWarning), preserves relative supported weights and still
+blocks an ALL-unsupported configuration. Invalid size/weight numbers remain errors.
+It never substitutes smaller clearance data or bypasses physical spawn checks.
+
+Owned snapshot of CURRENT saved user scene/assets; no map rebuild. New data7x/10x
+uses radius12.6/18, height84/120, IDs-1923039037/-902729914 (valid negative IDs).
+Refined new-profile voxel sampling radius/8 (not smaller clearance) resolves a
+coarse10x eastern disconnect. All25/25 full routes + wall obstruction checks pass;
+3/3 actual native navigation/spawn tests pass, including full-rig-clear7x/10x births
+and current weighted random warning/arrival. All old3x/5x/6x assets/types unchanged.
+Published ONLY two new nav assets/metas, appended NavMeshAreas types and merged ONLY
+navigation component into original saved scene bytes. All other user scene bytes,
+settings, audio palette edits and geometry preserved. Backup path in
+Library/GiantForest2NavigationRun.json. No live Editor stop/reload/save/input.
+
+Menu for future sizes: Tools > Environment > Giant Forest 2 > Bake missing requested
+navigation sizes (saved scene/Edit Mode, no map build). CLI owned workflow:
+tools/bake_giant_forest_sizes.py. Docs/evidence:
+docs/giant-forest-navigation-sizes.md and ArtSource/Environment/GiantForest2/NavigationReview/.
+Source change/fresh tests/old-data/settings guards before publication. New work LOCAL
+incremental commit, NO new push authorized (last pushed still4d425ace).
+
+Two new quickfix regression cases pass. Current user assets now have ONE scream
+clip and .3 palette volumes; preserve these choices. Original audio fixtures still
+expect2 clips, so there are now TWO additional preexisting fixture failures vs SFX
+checkpoint. Pre-change policy/current user assets:255pass/7fail/1skip,263 total.
+With fix:257pass/SAME7fail/1skip,265 total. Do NOT restore user clips/tuning or relax
+old assertions to hide failures. Enlarged face-bounds measurement varies2.205–2.263
+with the per-instance idle pose; all strict
+physical arm/mouth/corpse regressions remain unchanged. Native nav tests are separate,
+not included in the265-case Titan suite.50-NPC/FPS/WebGL/10x bite feel not certified.
+Reload saved scene/fresh Play manually when ready to pick up externally added data.
+
+## Previous: supplied Titan SFX; pre-work checkpoint PUSH authorized and completed
 
 User explicitly requested committing/pushing current work BEFORE adding new audio.
 Checkpoint **4d425aceee151cc020cf1079b437d7949ae415bd** committed exact saved

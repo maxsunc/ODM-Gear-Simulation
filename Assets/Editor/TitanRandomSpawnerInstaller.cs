@@ -50,10 +50,11 @@ public sealed class TitanRandomSpawnerEditor : Editor
     {
         DrawDefaultInspector();var s=(TitanRandomSpawner)target;
         EditorGUILayout.Space();
-        EditorGUILayout.HelpBox("Sizes are weighted scale categories (Titan height is about 12m x scale). New positive-weight sizes are automatically included in the next FreeRoam rebake. Bake once after changing supported sizes, never per spawn. Spawn Sound is optional: drag your own AudioClip into that field.",MessageType.Info);
+        EditorGUILayout.HelpBox("Sizes are weighted scale categories (Titan height is about 12m x scale). Unbaked sizes are skipped, not allowed to block other spawns. Positive-weight sizes join the next scene navigation bake. Bake once after adding sizes, never per spawn. Spawn Sound is optional: drag your own AudioClip into that field.",MessageType.Info);
         if(!EditorApplication.isPlaying)return;
         EditorGUILayout.LabelField("Spawned / owned alive",s.SpawnedCount+" / "+s.OwnedAliveCount);
         EditorGUILayout.LabelField("Preparing strike",s.HasPendingSpawn?"Yes":"No");
+        if(!string.IsNullOrEmpty(s.SizeWarning))EditorGUILayout.HelpBox(s.SizeWarning,MessageType.Warning);
         if(!string.IsNullOrEmpty(s.LastError))EditorGUILayout.HelpBox(s.LastError,MessageType.Warning);
         using(new EditorGUI.DisabledScope(!s.isActiveAndEnabled))
         {

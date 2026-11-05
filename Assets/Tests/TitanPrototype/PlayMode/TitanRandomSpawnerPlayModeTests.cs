@@ -133,6 +133,22 @@ public class TitanRandomSpawnerPlayModeTests
         object[] bake={null,null};Assert.That((bool)Call(manager,"TryGetBakeScales",bake),Is.True);CollectionAssert.Contains((float[])bake[0],2f);Assert.That(nav.ForScale(2),Is.Null);
         Choices(new[]{3f},new[]{0f});args=new object[]{null};Assert.That((bool)Call(spawner,"ValidateConfiguration",args),Is.False);yield return null;
     }
+    [UnityTest]public IEnumerator UnbakedSizesAreSkippedWithoutBlockingBakedSpawnsOrBorrowingClearance()
+    {
+        Choices(new[]{1f,7f,10f},new[]{1f,1000f,1000f});object[] config={null};Assert.That((bool)Call(spawner,"ValidateConfiguration",config),Is.True,(string)config[0]);
+        StringAssert.Contains("7x",Prop<string>(spawner,"SizeWarning"));StringAssert.Contains("10x",Prop<string>(spawner,"SizeWarning"));
+        for(int i=0;i<100;i++){object[] pick={0f,null};Assert.That((bool)Call(spawner,"TryChooseScale",pick),Is.True);Assert.That((float)pick[0],Is.EqualTo(1));}
+        string error;Assert.That(Queue(out error),Is.True,error);Assert.That(Pending.transform.lossyScale.x,Is.EqualTo(1).Within(.0001f));
+        yield return new WaitForSeconds(.09f);Assert.That(Prop<int>(spawner,"SpawnedCount"),Is.EqualTo(1));
+        Choices(new[]{1f,7f},new[]{1f,0f});config=new object[]{null};Assert.That((bool)Call(spawner,"ValidateConfiguration",config),Is.True);Assert.That(Prop<string>(spawner,"SizeWarning"),Is.Null);
+    }
+    [UnityTest]public IEnumerator SkippingMissingSizesPreservesRelativeWeightsAndStillRequestsThemForNextBake()
+    {
+        Choices(new[]{3f,7f,5f},new[]{1f,1000f,3f});int small=0;
+        for(int i=0;i<1000;i++){object[] pick={0f,null};Assert.That((bool)Call(spawner,"TryChooseScale",pick),Is.True);float size=(float)pick[0];if(size==3)small++;else Assert.That(size,Is.EqualTo(5));}
+        Assert.That(small,Is.InRange(180,320));object[] bake={null,null};Assert.That((bool)Call(manager,"TryGetBakeScales",bake),Is.True);CollectionAssert.Contains((float[])bake[0],7f);Assert.That(nav.ForScale(7),Is.Null);
+        Choices(new[]{7f,10f});object[] config={null};Assert.That((bool)Call(spawner,"ValidateConfiguration",config),Is.False);StringAssert.Contains("profile",(string)config[0]);yield return null;
+    }
     [UnityTest]public IEnumerator ImpossibleBoundsUseBoundedAttemptsWithoutClonesEffectsOrHiddenBake()
     {
         Set(spawner,"candidateAttempts",8);Set(spawner,"useCustomBounds",true);Set(spawner,"spawnBounds",new Bounds(Vector3.one*10000,Vector3.one));int triangles=NavMesh.CalculateTriangulation().indices.Length;

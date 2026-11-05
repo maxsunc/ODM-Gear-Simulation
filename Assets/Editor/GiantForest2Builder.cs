@@ -266,6 +266,31 @@ public static class GiantForest2Builder
             Place("GF2_FallenTrunk_32",Point(p)-Vector3.up*.2f,Range(0,360),Range(1,1.7f),parent);report.logs++;
         }
     }
+    public static void BakeMissingNavigationBatch()
+    {
+        RequireOwned();EditorSceneManager.OpenScene(ScenePath,OpenSceneMode.Single);BakeMissingNavigation();
+        EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
+    }
+    [MenuItem("Tools/Environment/Giant Forest 2/Bake missing requested navigation sizes")]
+    public static void BakeMissingNavigation()
+    {
+        var scene=SceneManager.GetActiveScene();
+        if(Application.unityVersion!="2021.3.25f1" || EditorApplication.isPlayingOrWillChangePlaymode || scene.path!=ScenePath || scene.isDirty)
+            throw new InvalidOperationException("Use Unity2021.3.25f1 and the SAVED GiantForest2 scene in Edit Mode");
+        environment=scene.GetRootGameObjects().Single(r=>r.name==RootName).transform;terrain=environment.GetComponentInChildren<Terrain>();
+        var setup=scene.GetRootGameObjects().SelectMany(r=>r.GetComponentsInChildren<TitanFreeRoamIntegration>(true)).Single();
+        float[] scales;string error;if(!setup.TryGetBakeScales(out scales,out error))throw new InvalidOperationException(error);
+        Directory.CreateDirectory("Library/GiantForest2");EditorSceneManager.SaveScene(scene,"Library/GiantForest2/before-navigation.unity",true);
+        report=new Report{scene=ScenePath,unity=Application.unityVersion,builtAt=DateTime.UtcNow.ToString("O")};
+        // Append only: no map rebuild, actor repositioning, size-weight/tuning edits,
+        // shared old profile rebakes or renderer/build-index changes.
+        Bake(setup,scales,true);
+        if(!setup.navigation.Register())throw new InvalidOperationException(setup.navigation.Error);
+        try{ValidatePaths(setup.navigation);}finally{setup.navigation.Release();}
+        File.WriteAllText("Library/GiantForest2/navigation-build-report.json",JsonUtility.ToJson(report,true));
+        AssetDatabase.SaveAssets();EditorSceneManager.MarkSceneDirty(scene);
+        Debug.Log("GF2_NAVIGATION_COMPLETE "+JsonUtility.ToJson(report));
+    }
     // Scoped iteration: preserve trees, terrain, logs, actor poses, cameras and all
     // user tuning. Only wall/rock transforms + their own pre-baked data change.
     public static void ResizeBatch()
@@ -357,14 +382,22 @@ public static class GiantForest2Builder
         var sky=new Material(Shader.Find("Skybox/Procedural")){name="GF2_Sky"};sky.SetFloat("_AtmosphereThickness",.8f);sky.SetColor("_SkyTint",new Color(.46f,.53f,.57f));sky.SetColor("_GroundColor",new Color(.25f,.27f,.21f));RenderSettings.skybox=Store(sky,Art+"/Materials/Sky.mat");
         // Existing shared URP renderer/shadow distance/quality asset left untouched.
     }
-    static void Bake(TitanFreeRoamIntegration setup)
+    static void Bake(TitanFreeRoamIntegration setup,float[] requested=null,bool retainExisting=false)
     {
         var sources=new List<NavMeshBuildSource>();Bounds bounds;string error;
         if(!TitanNavigationGeometry.Collect(setup.gameObject.scene,new[]{environment},sources,out bounds,out error))throw new InvalidOperationException(error);
         bounds.Expand(new Vector3(100,160,100));var profiles=new List<TitanWorldNavigation.Profile>();
-        foreach(float scale in new[]{3f,5f,6f})
+        foreach(float scale in requested??new[]{3f,5f,6f})
         {
-            string typeName=scale==6?"ODM Titan GiantForest2 6x":"ODM Titan FreeRoam "+scale+"x";int id=-1;
+            var existing=setup.navigation.ForScale(scale);
+            if(retainExisting && existing!=null && existing.data!=null)
+            {
+                var old=NavMesh.GetSettingsByID(existing.agentTypeID);
+                if(old.agentTypeID==-1 || Mathf.Abs(old.agentRadius-1.8f*scale)>.01f || Mathf.Abs(old.agentHeight-12*scale)>.01f)
+                    throw new InvalidOperationException("Existing size settings mismatch: "+scale);
+                profiles.Add(existing);continue;
+            }
+            string typeName=scale==3 || scale==5?"ODM Titan FreeRoam "+scale+"x":"ODM Titan GiantForest2 "+scale+"x";int id=-1;
             for(int i=0;i<NavMesh.GetSettingsCount();i++){var s=NavMesh.GetSettingsByIndex(i);if(NavMesh.GetSettingsNameFromID(s.agentTypeID)==typeName){id=s.agentTypeID;break;}}
             if(id==-1)
             {
@@ -374,7 +407,8 @@ public static class GiantForest2Builder
                 so.ApplyModifiedPropertiesWithoutUndo();EditorUtility.SetDirty(obj);AssetDatabase.SaveAssets();
             }
             var settings=NavMesh.GetSettingsByID(id);if(Mathf.Abs(settings.agentRadius-1.8f*scale)>.01||Mathf.Abs(settings.agentHeight-12*scale)>.01)throw new InvalidOperationException("Refusing to mutate mismatched existing agent settings");
-            settings.overrideVoxelSize=true;settings.voxelSize=settings.agentRadius/4;settings.overrideTileSize=true;settings.tileSize=128;
+            // New append-only giant profiles get finer sampling, not reduced clearance.
+            settings.overrideVoxelSize=true;settings.voxelSize=settings.agentRadius/(retainExisting?8:4);settings.overrideTileSize=true;settings.tileSize=128;
             var data=NavMeshBuilder.BuildNavMeshData(settings,sources,bounds,Vector3.zero,Quaternion.identity);if(data==null)throw new InvalidOperationException("Forest bake failed "+scale);
             data.name="GiantForest2 Titan "+scale+"x";data=Store(data,NavFolder+"/Titan_"+scale+"x.asset");
             profiles.Add(new TitanWorldNavigation.Profile{label=scale+"x",scale=scale,radius=settings.agentRadius,height=settings.agentHeight,agentTypeID=id,data=data});

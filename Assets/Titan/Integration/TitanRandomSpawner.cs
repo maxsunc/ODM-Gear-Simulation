@@ -48,6 +48,7 @@ public sealed class TitanRandomSpawner : MonoBehaviour
     [Min(0)]public int maximumRetainedCorpses=6;
     public bool despawnOwnedOnDestroy=true;
     public string LastError {get;private set;}
+    public string SizeWarning {get;private set;}
     public int SpawnedCount {get;private set;}
     public int CancelledCount {get;private set;}
     public int OwnedAliveCount {get{int n=0;foreach(var e in owned)if(e.body!=null&&!e.body.IsDead&&e.body.gameObject.activeInHierarchy)n++;return n;}}
@@ -94,26 +95,28 @@ public sealed class TitanRandomSpawner : MonoBehaviour
         else if(useCustomBounds && (!TitanSpawnPlacement.Finite(spawnBounds.center)||!TitanSpawnPlacement.Finite(spawnBounds.size)||spawnBounds.size.x<=0||spawnBounds.size.y<=0||spawnBounds.size.z<=0))error="Custom world-space bounds must be finite with positive size";
         else if(effectsEnabled && (lightningMaterial==null||particleMaterial==null))error="Assign the strike lightning and particle materials, or disable effects";
         if(error!=null)return false;
-        double total=0;
+        double total=0;var skipped=new List<string>();SizeWarning=null;
         if(sizes!=null)foreach(var s in sizes)
         {
             if(s==null)continue;
             if(!TitanSpawnPlacement.Finite(s.weight)||s.weight<0){error="Size weights must be finite and nonnegative";return false;}
             if(s.weight==0)continue;
-            if(!TitanSpawnPlacement.Finite(s.scale)||s.scale<=0 || sceneManager.navigation.ForScale(s.scale)==null)
-            {error="Size "+s.scale+" has no matching navigation profile; rebake the requested sizes once in Edit Mode";return false;}
+            if(!TitanSpawnPlacement.Finite(s.scale)||s.scale<=0){error="Size scales must be finite and positive";return false;}
+            if(!Supported(s)){skipped.Add(s.scale+"x");continue;}
             total+=s.weight;
         }
-        if(total<=0){error="Enable at least one weighted Titan size";return false;}
+        if(skipped.Count>0)SizeWarning="Skipping unbaked Titan sizes: "+string.Join(", ",skipped)+". Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.";
+        if(total<=0){error="No enabled Titan size has a matching navigation profile. Enable a baked size or bake the requested sizes in Edit Mode.";return false;}
         return true;
     }
     static bool FiniteNonnegative(params float[] values){foreach(float f in values)if(!TitanSpawnPlacement.Finite(f)||f<0)return false;return true;}
+    bool Supported(SizeChoice s){return s!=null && s.weight>0 && sceneManager.navigation.ForScale(s.scale)!=null;}
     public bool TryChooseScale(out float scale,out string error)
     {
         scale=0;if(!ValidateConfiguration(out error))return false;if(random==null)RestartSchedule();
-        double total=0;foreach(var s in sizes)if(s!=null&&s.weight>0)total+=s.weight;
+        double total=0;foreach(var s in sizes)if(Supported(s))total+=s.weight;
         double value=random.NextDouble()*total;
-        foreach(var s in sizes)if(s!=null&&s.weight>0){value-=s.weight;if(value<=0){scale=s.scale;return true;}}
+        foreach(var s in sizes)if(Supported(s)){value-=s.weight;if(value<=0){scale=s.scale;return true;}}
         error="Could not select a weighted size";return false;
     }
     bool Allowed(Vector3 point,ModularTitanBody ignore=null)

@@ -5,6 +5,15 @@ Titan art/hitboxes, Scout animation, player controls, catch geometry, global Phy
 timescale, pipeline or shared prefabs. No new commit/push: HEAD/origin remainb6447972;
 this and the preceding runtime-registration work are uncommitted for review.
 
+## Current size fallback / GiantForest2 update
+
+Unbaked positive-weight sizes are now SKIPPED with an Inspector warning, not allowed
+to block other supported sizes. Selection renormalizes valid weights; ALL unbaked
+still errors safely. Current GiantForest2 supports3x/5x/6x/7x/10x. See
+[7x/10x navigation and safe fallback](giant-forest-navigation-sizes.md) for current
+bake-only workflow, preservation guards and validation. Older implementation evidence
+below is historical. No runtime/per-enemy bake.
+
 ## Enable in FreeRoam
 
 After Unity imports/recompiles, EXIT Play and choose:
@@ -28,7 +37,8 @@ The one-time menu installation is required before this scene starts spawning.
 - **Sizes**: weighted scale choices, defaults3x and5x with equal weights. Scale3 means
   about36m tall,5 about60m. Add choices/change weights;0 weight disables an entry.
   This is random selection among editable categories, NOT arbitrary unbaked continuous
-  scaling. Every positive-weight choice must have a matching clearance profile.
+  scaling. Only choices with matching baked clearance profiles participate; missing
+  profiles show SizeWarning and do not block supported choices.
 - **Initial Spawn Count**4, **Initial Delay**2s. Initial burst is staggered, one warning
   at a time. After it, **Minimum/Maximum Spawn Interval**8–16s. Initial count0 skips
   the burst and waits an ordinary randomized interval after initial delay.
@@ -88,7 +98,8 @@ conservative near rotated arms; fail safely rather than overlap delayed spawns.
 Production data still supports3x/5x. Spawner choices automatically join the requested
 sizes in **Rebake full-map navigation** (alongside existing profiles/placed/extra sizes).
 For a new size, save in Edit Mode then rebake ONCE; unsupported positive-weight choice
-reports an explicit error and blocks scheduling until baked/corrected. No runtime bake,
+is skipped with SizeWarning; scheduling continues for valid sizes. If none are
+supported, it reports an error and waits until baked/corrected. No runtime bake,
 no size borrowing, no per-spawn bake. Removing size choices doesn't delete existing
 profiles. Static map changes still need their usual rebake. Distribution may include
 disconnected walkable islands; it doesn't invent climbing/jumping or guarantee a path
