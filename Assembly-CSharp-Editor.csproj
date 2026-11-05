@@ -44,6 +44,7 @@
      <Compile Include="Assets\Editor\TitanAISandboxBuilder.cs" />
      <Compile Include="Assets\Editor\ScoutPlayerBuilder.cs" />
      <Compile Include="Assets\Editor\TitanMotionClipBuilder.cs" />
+     <Compile Include="Assets\Editor\GiantForest2Builder.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

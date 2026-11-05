@@ -1,0 +1,260 @@
+{
+  "source": {
+    "GF2_Tree_A_Sentinel": {
+      "meshes": 352,
+      "closed_solid_components": 351,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Tree_B_Leaning": {
+      "meshes": 352,
+      "closed_solid_components": 351,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Tree_C_OldFork": {
+      "meshes": 353,
+      "closed_solid_components": 352,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Wall_Straight_24x60": {
+      "meshes": 439,
+      "closed_solid_components": 439,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Wall_Corner_24x60": {
+      "meshes": 877,
+      "closed_solid_components": 877,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Wall_Gateway_48x60": {
+      "meshes": 664,
+      "closed_solid_components": 664,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Ground_Loam_32": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Ground_MossBank_32": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Ground_WornTrail_32": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_FallenTrunk_32": {
+      "meshes": 22,
+      "closed_solid_components": 20,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Boulder_A": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Boulder_B": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    },
+    "GF2_Boulder_C": {
+      "meshes": 1,
+      "closed_solid_components": 1,
+      "nonmanifold_solid_edges": 0,
+      "uv_and_paint": "finite, valid"
+    }
+  },
+  "fbx_roundtrip": {
+    "GF2_Tree_A_Sentinel": {
+      "meshes": 1,
+      "max_bounds_error_m": 1.9073486328125e-05,
+      "material_images": {
+        "GF2_Bark_FBX.001": [
+          "GF2_Bark_BaseColor.png.001",
+          "GF2_Bark_Normal.png.001",
+          "GF2_Bark_Roughness.png.001"
+        ],
+        "GF2_Leaves_FBX.001": [
+          "GF2_Foliage_BaseColorAlpha.png.001",
+          "GF2_Foliage_BaseColorAlpha.png.003"
+        ]
+      },
+      "sha256": "2dfb914258cd49db01a8c3d0a13cbd9e9b589cd381a0cf71681713aab5f166c8"
+    },
+    "GF2_Tree_B_Leaning": {
+      "meshes": 1,
+      "max_bounds_error_m": 1.71661376953125e-05,
+      "material_images": {
+        "GF2_Bark_FBX.002": [
+          "GF2_Bark_BaseColor.png.002",
+          "GF2_Bark_Normal.png.002",
+          "GF2_Bark_Roughness.png.002"
+        ],
+        "GF2_Leaves_FBX.002": [
+          "GF2_Foliage_BaseColorAlpha.png.004",
+          "GF2_Foliage_BaseColorAlpha.png.006"
+        ]
+      },
+      "sha256": "c476e7cb7cfab0edceaaa1e3e95e080f1800fb39eb01039e854e748d2e49b4fc"
+    },
+    "GF2_Tree_C_OldFork": {
+      "meshes": 1,
+      "max_bounds_error_m": 1.9073486328125e-05,
+      "material_images": {
+        "GF2_Bark_FBX.003": [
+          "GF2_Bark_BaseColor.png.003",
+          "GF2_Bark_Normal.png.003",
+          "GF2_Bark_Roughness.png.003"
+        ],
+        "GF2_Leaves_FBX.003": [
+          "GF2_Foliage_BaseColorAlpha.png.007",
+          "GF2_Foliage_BaseColorAlpha.png.009"
+        ]
+      },
+      "sha256": "519e04741188276affc2dad5238b96979c66300efe22553900fe8dee95700059"
+    },
+    "GF2_Wall_Straight_24x60": {
+      "meshes": 1,
+      "max_bounds_error_m": 1.0013580322265625e-05,
+      "material_images": {
+        "GF2_RecessStone_FBX.001": [],
+        "GF2_Limestone_FBX.001": [
+          "GF2_Stone_BaseColor.png.001",
+          "GF2_Stone_Normal.png.001",
+          "GF2_Stone_Roughness.png.001"
+        ]
+      },
+      "sha256": "82856d2d2b3c98bf1252dbc23301a8e8ab07e30dadbadfee138a14811125375b"
+    },
+    "GF2_Wall_Corner_24x60": {
+      "meshes": 1,
+      "max_bounds_error_m": 9.5367431640625e-06,
+      "material_images": {
+        "GF2_RecessStone_FBX.002": [],
+        "GF2_Limestone_FBX.002": [
+          "GF2_Stone_BaseColor.png.002",
+          "GF2_Stone_Normal.png.002",
+          "GF2_Stone_Roughness.png.002"
+        ]
+      },
+      "sha256": "868982117339fa644ce132a9312dd59c9c141beeb759313077252f77b31839b5"
+    },
+    "GF2_Wall_Gateway_48x60": {
+      "meshes": 1,
+      "max_bounds_error_m": 1.0013580322265625e-05,
+      "material_images": {
+        "GF2_RecessStone_FBX.003": [],
+        "GF2_Limestone_FBX.003": [
+          "GF2_Stone_BaseColor.png.003",
+          "GF2_Stone_Normal.png.003",
+          "GF2_Stone_Roughness.png.003"
+        ]
+      },
+      "sha256": "22416c233145aabf81d439a427710d9721f783643a7dfd34b0a6bc523cb933b8"
+    },
+    "GF2_Ground_Loam_32": {
+      "meshes": 1,
+      "max_bounds_error_m": 2.6226043701171875e-06,
+      "material_images": {
+        "GF2_ForestFloor_FBX.001": [
+          "GF2_Floor_BaseColor.png.001",
+          "GF2_Floor_Normal.png.001",
+          "GF2_Floor_Roughness.png.001"
+        ]
+      },
+      "sha256": "2cd20e8eaebb9bc5f5a0aa6bce2d612d775852a10bb09c75c7b0107238ac5033"
+    },
+    "GF2_Ground_MossBank_32": {
+      "meshes": 1,
+      "max_bounds_error_m": 2.6226043701171875e-06,
+      "material_images": {
+        "GF2_ForestFloor_FBX.002": [
+          "GF2_Floor_BaseColor.png.002",
+          "GF2_Floor_Normal.png.002",
+          "GF2_Floor_Roughness.png.002"
+        ]
+      },
+      "sha256": "56679f2ab6245f9cedf20182bc27aabc341c3bc99f4989385b9c3602ec05be59"
+    },
+    "GF2_Ground_WornTrail_32": {
+      "meshes": 1,
+      "max_bounds_error_m": 2.6226043701171875e-06,
+      "material_images": {
+        "GF2_ForestFloor_FBX.003": [
+          "GF2_Floor_BaseColor.png.003",
+          "GF2_Floor_Normal.png.003",
+          "GF2_Floor_Roughness.png.003"
+        ]
+      },
+      "sha256": "05f5d840beb1225cd298ceec3591d51b45deb06c0b70bc6e6fbe160a9348390a"
+    },
+    "GF2_FallenTrunk_32": {
+      "meshes": 1,
+      "max_bounds_error_m": 9.5367431640625e-07,
+      "material_images": {
+        "GF2_Bark_FBX.004": [
+          "GF2_Bark_BaseColor.png.004",
+          "GF2_Bark_Normal.png.004",
+          "GF2_Bark_Roughness.png.004"
+        ],
+        "GF2_Heartwood_FBX.001": [
+          "GF2_EndGrain_BaseColor.png.001",
+          "GF2_EndGrain_Normal.png.001",
+          "GF2_EndGrain_Roughness.png.001"
+        ]
+      },
+      "sha256": "30ca697cc6cdff5d70baa6409b04d67861c304a668cd42c1ccd38ab55dfc3155"
+    },
+    "GF2_Boulder_A": {
+      "meshes": 1,
+      "max_bounds_error_m": 4.76837158203125e-07,
+      "material_images": {
+        "GF2_Limestone_FBX.004": [
+          "GF2_Stone_BaseColor.png.004",
+          "GF2_Stone_Normal.png.004",
+          "GF2_Stone_Roughness.png.004"
+        ]
+      },
+      "sha256": "4fadac61534b5b105410cbf22f5ccf966d96cfe5abec4e74e474432f729be7cc"
+    },
+    "GF2_Boulder_B": {
+      "meshes": 1,
+      "max_bounds_error_m": 7.152557373046875e-07,
+      "material_images": {
+        "GF2_Limestone_FBX.005": [
+          "GF2_Stone_BaseColor.png.005",
+          "GF2_Stone_Normal.png.005",
+          "GF2_Stone_Roughness.png.005"
+        ]
+      },
+      "sha256": "41e4098ac713ec85270dece90ed8bf46563b8f6630f50e4ec991a3ff22b44c33"
+    },
+    "GF2_Boulder_C": {
+      "meshes": 1,
+      "max_bounds_error_m": 7.152557373046875e-07,
+      "material_images": {
+        "GF2_Limestone_FBX.006": [
+          "GF2_Stone_BaseColor.png.006",
+          "GF2_Stone_Normal.png.006",
+          "GF2_Stone_Roughness.png.006"
+        ]
+      },
+      "sha256": "50821ce1ed9bfb8f6a3183e696dea150db1cdef8becebb0fa12d60299c20dcee"
+    }
+  }
+}

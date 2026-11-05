@@ -1,0 +1,331 @@
+{
+  "units": "metres, Blender Z-up; FBX Y-up, -Z forward",
+  "status": "art review only; no LOD/collider/nav/prefab/map integration",
+  "assets": {
+    "GF2_Tree_A_Sentinel": {
+      "kind": "tree",
+      "description": "High clear bole; buttress roots; asymmetrical branch-spray crown. No collider/LOD yet.",
+      "mesh_objects": 352,
+      "source_vertices": 57032,
+      "source_triangles_before_bevel": 66886,
+      "bounds_min": [
+        -26.731285095214844,
+        -29.51583480834961,
+        -0.24043254554271698
+      ],
+      "bounds_max": [
+        30.79564666748047,
+        29.15319061279297,
+        121.68158721923828
+      ],
+      "size": [
+        57.52693176269531,
+        58.66902542114258,
+        121.922019764781
+      ],
+      "export_meshes": 1,
+      "export_triangles": 66886,
+      "export_materials": 2
+    },
+    "GF2_Tree_B_Leaning": {
+      "kind": "tree",
+      "description": "High clear bole; buttress roots; asymmetrical branch-spray crown. No collider/LOD yet.",
+      "mesh_objects": 352,
+      "source_vertices": 57032,
+      "source_triangles_before_bevel": 66886,
+      "bounds_min": [
+        -20.46346092224121,
+        -26.666698455810547,
+        -0.2356891930103302
+      ],
+      "bounds_max": [
+        29.371278762817383,
+        27.178537368774414,
+        106.20777893066406
+      ],
+      "size": [
+        49.834739685058594,
+        53.84523582458496,
+        106.44346812367439
+      ],
+      "export_meshes": 1,
+      "export_triangles": 66886,
+      "export_materials": 2
+    },
+    "GF2_Tree_C_OldFork": {
+      "kind": "tree",
+      "description": "High clear bole; buttress roots; asymmetrical branch-spray crown. No collider/LOD yet.",
+      "mesh_objects": 353,
+      "source_vertices": 56512,
+      "source_triangles_before_bevel": 67012,
+      "bounds_min": [
+        -26.363555908203125,
+        -27.884342193603516,
+        -0.24443750083446503
+      ],
+      "bounds_max": [
+        26.860437393188477,
+        29.154802322387695,
+        114.0
+      ],
+      "size": [
+        53.2239933013916,
+        57.03914451599121,
+        114.24443750083447
+      ],
+      "export_meshes": 1,
+      "export_triangles": 67012,
+      "export_materials": 2
+    },
+    "GF2_Wall_Straight_24x60": {
+      "kind": "wall",
+      "description": "24m center-to-center repeat, 60m wall, 8m core; shallow cap/walkway.",
+      "mesh_objects": 439,
+      "source_vertices": 3512,
+      "source_triangles_before_bevel": 5268,
+      "bounds_min": [
+        -12.550000190734863,
+        -5.599999904632568,
+        0.0
+      ],
+      "bounds_max": [
+        12.550000190734863,
+        5.599999904632568,
+        60.54999923706055
+      ],
+      "size": [
+        25.100000381469727,
+        11.199999809265137,
+        60.54999923706055
+      ],
+      "export_meshes": 1,
+      "export_triangles": 19316,
+      "export_materials": 2
+    },
+    "GF2_Wall_Corner_24x60": {
+      "kind": "wall",
+      "description": "L corner on 24m centerline grid; origin at intersection.",
+      "mesh_objects": 877,
+      "source_vertices": 7024,
+      "source_triangles_before_bevel": 10540,
+      "bounds_min": [
+        -5.599999904632568,
+        -5.599999904632568,
+        0.0
+      ],
+      "bounds_max": [
+        24.549999237060547,
+        24.549999237060547,
+        60.54999923706055
+      ],
+      "size": [
+        30.149999141693115,
+        30.149999141693115,
+        60.54999923706055
+      ],
+      "export_meshes": 1,
+      "export_triangles": 38540,
+      "export_materials": 2
+    },
+    "GF2_Wall_Gateway_48x60": {
+      "kind": "wall",
+      "description": "48m module with real arched opening: 26m clear width, 39m crown.",
+      "mesh_objects": 664,
+      "source_vertices": 5312,
+      "source_triangles_before_bevel": 7968,
+      "bounds_min": [
+        -24.549999237060547,
+        -5.599999904632568,
+        0.0
+      ],
+      "bounds_max": [
+        24.549999237060547,
+        5.599999904632568,
+        60.54999923706055
+      ],
+      "size": [
+        49.099998474121094,
+        11.199999809265137,
+        60.54999923706055
+      ],
+      "export_meshes": 1,
+      "export_triangles": 27680,
+      "export_materials": 2
+    },
+    "GF2_Ground_Loam_32": {
+      "kind": "ground",
+      "description": "32x32m closed review patch. Equal zero-height boundaries; no Unity Terrain yet.",
+      "mesh_objects": 1,
+      "source_vertices": 2593,
+      "source_triangles_before_bevel": 5182,
+      "bounds_min": [
+        -16.0,
+        -16.0,
+        -1.2000000476837158
+      ],
+      "bounds_max": [
+        16.0,
+        16.0,
+        0.24517400562763214
+      ],
+      "size": [
+        32.0,
+        32.0,
+        1.445174053311348
+      ],
+      "export_meshes": 1,
+      "export_triangles": 5182,
+      "export_materials": 1
+    },
+    "GF2_Ground_MossBank_32": {
+      "kind": "ground",
+      "description": "32x32m closed review patch. Equal zero-height boundaries; no Unity Terrain yet.",
+      "mesh_objects": 1,
+      "source_vertices": 2593,
+      "source_triangles_before_bevel": 5182,
+      "bounds_min": [
+        -16.0,
+        -16.0,
+        -1.2000000476837158
+      ],
+      "bounds_max": [
+        16.0,
+        16.0,
+        0.9015209674835205
+      ],
+      "size": [
+        32.0,
+        32.0,
+        2.1015210151672363
+      ],
+      "export_meshes": 1,
+      "export_triangles": 5182,
+      "export_materials": 1
+    },
+    "GF2_Ground_WornTrail_32": {
+      "kind": "ground",
+      "description": "32x32m closed review patch. Equal zero-height boundaries; no Unity Terrain yet.",
+      "mesh_objects": 1,
+      "source_vertices": 2593,
+      "source_triangles_before_bevel": 5182,
+      "bounds_min": [
+        -16.0,
+        -16.0,
+        -1.2000000476837158
+      ],
+      "bounds_max": [
+        16.0,
+        16.0,
+        0.24517400562763214
+      ],
+      "size": [
+        32.0,
+        32.0,
+        1.445174053311348
+      ],
+      "export_meshes": 1,
+      "export_triangles": 5182,
+      "export_materials": 1
+    },
+    "GF2_FallenTrunk_32": {
+      "kind": "prop",
+      "description": "32m snapped section of giant trunk; closed splintered end grain.",
+      "mesh_objects": 22,
+      "source_vertices": 1834,
+      "source_triangles_before_bevel": 3500,
+      "bounds_min": [
+        -17.746313095092773,
+        -3.2500500679016113,
+        -0.3239893913269043
+      ],
+      "bounds_max": [
+        18.040912628173828,
+        3.1704461574554443,
+        6.017908573150635
+      ],
+      "size": [
+        35.7872257232666,
+        6.420496225357056,
+        6.341897964477539
+      ],
+      "export_meshes": 1,
+      "export_triangles": 3500,
+      "export_materials": 2
+    },
+    "GF2_Boulder_A": {
+      "kind": "prop",
+      "description": "Weathered rock, low broad silhouette; moss paint on top.",
+      "mesh_objects": 1,
+      "source_vertices": 162,
+      "source_triangles_before_bevel": 320,
+      "bounds_min": [
+        -3.986621856689453,
+        -2.7182211875915527,
+        -0.8210917711257935
+      ],
+      "bounds_max": [
+        4.157790184020996,
+        2.997715473175049,
+        3.319472074508667
+      ],
+      "size": [
+        8.14441204071045,
+        5.715936660766602,
+        4.1405638456344604
+      ],
+      "export_meshes": 1,
+      "export_triangles": 320,
+      "export_materials": 1
+    },
+    "GF2_Boulder_B": {
+      "kind": "prop",
+      "description": "Weathered rock, low broad silhouette; moss paint on top.",
+      "mesh_objects": 1,
+      "source_vertices": 162,
+      "source_triangles_before_bevel": 320,
+      "bounds_min": [
+        -4.374209880828857,
+        -2.9699082374572754,
+        -1.0424455404281616
+      ],
+      "bounds_max": [
+        4.5620198249816895,
+        3.2752819061279297,
+        4.018243789672852
+      ],
+      "size": [
+        8.936229705810547,
+        6.245190143585205,
+        5.060689330101013
+      ],
+      "export_meshes": 1,
+      "export_triangles": 320,
+      "export_materials": 1
+    },
+    "GF2_Boulder_C": {
+      "kind": "prop",
+      "description": "Weathered rock, low broad silhouette; moss paint on top.",
+      "mesh_objects": 1,
+      "source_vertices": 162,
+      "source_triangles_before_bevel": 320,
+      "bounds_min": [
+        -4.76179838180542,
+        -3.221595525741577,
+        -1.2637991905212402
+      ],
+      "bounds_max": [
+        4.966249465942383,
+        3.5528481006622314,
+        4.717015266418457
+      ],
+      "size": [
+        9.728047847747803,
+        6.774443626403809,
+        5.980814456939697
+      ],
+      "export_meshes": 1,
+      "export_triangles": 320,
+      "export_materials": 1
+    }
+  }
+}

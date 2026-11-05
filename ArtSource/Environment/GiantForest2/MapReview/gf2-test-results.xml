@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Skipped:Ignored" total="7" passed="6" failed="0" inconclusive="0" skipped="1" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-05 15:20:49Z" end-time="2026-11-05 15:21:00Z" duration="11.5512546">
+  <test-suite type="TestSuite" id="1000" name="ODM Attempt # 1" fullname="ODM Attempt # 1" runstate="Runnable" testcasecount="231" result="Skipped" label="Ignored" start-time="2026-11-05 15:20:49Z" end-time="2026-11-05 15:21:00Z" duration="11.551255" total="7" passed="6" failed="0" inconclusive="0" skipped="1" asserts="0">
+    <properties />
+    <reason>
+      <message><![CDATA[One or more child tests were ignored]]></message>
+    </reason>
+    <test-suite type="Assembly" id="1009" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="7" result="Skipped" label="Ignored" start-time="2026-11-05 15:20:49Z" end-time="2026-11-05 15:21:00Z" duration="11.545192" total="7" passed="6" failed="0" inconclusive="0" skipped="1" asserts="0">
+      <properties>
+        <property name="_PID" value="20832" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <reason>
+        <message><![CDATA[One or more child tests were ignored]]></message>
+      </reason>
+      <test-suite type="TestFixture" id="1001" name="GiantForest2PlayModeTests" fullname="GiantForest2PlayModeTests" classname="GiantForest2PlayModeTests" runstate="Runnable" testcasecount="7" result="Skipped" label="Ignored" start-time="2026-11-05 15:20:49Z" end-time="2026-11-05 15:21:00Z" duration="11.543895" total="7" passed="6" failed="0" inconclusive="0" skipped="1" asserts="0">
+        <properties />
+        <reason>
+          <message><![CDATA[One or more child tests were ignored]]></message>
+        </reason>
+        <test-case id="1002" name="ApprovedTreesVaryAndAreTwoToThreeTimesTheLargestSavedTitan" fullname="GiantForest2PlayModeTests.ApprovedTreesVaryAndAreTwoToThreeTimesTheLargestSavedTitan" methodname="ApprovedTreesVaryAndAreTwoToThreeTimesTheLargestSavedTitan" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="815690809" result="Passed" start-time="2026-11-05 15:20:49Z" end-time="2026-11-05 15:20:57Z" duration="8.145236" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[Actual LOD0 tree heights: 150.5208 to 215.4757m; Titan reference: 72m
+]]></output>
+        </test-case>
+        <test-case id="1007" name="FreshActorsAtEverySupportedSizeAndRandomWarningSpawnUseExistingData" fullname="GiantForest2PlayModeTests.FreshActorsAtEverySupportedSizeAndRandomWarningSpawnUseExistingData" methodname="FreshActorsAtEverySupportedSizeAndRandomWarningSpawnUseExistingData" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="2060896699" result="Passed" start-time="2026-11-05 15:20:57Z" end-time="2026-11-05 15:20:58Z" duration="1.167604" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1005" name="MapSpecificThreeFiveSixNavigationCrossesTheForestButNotSolidWalls" fullname="GiantForest2PlayModeTests.MapSpecificThreeFiveSixNavigationCrossesTheForestButNotSolidWalls" methodname="MapSpecificThreeFiveSixNavigationCrossesTheForestButNotSolidWalls" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="1671377071" result="Passed" start-time="2026-11-05 15:20:58Z" end-time="2026-11-05 15:20:58Z" duration="0.346125" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1008" name="NativeGraphicsShowTheActualPlayableScene" fullname="GiantForest2PlayModeTests.NativeGraphicsShowTheActualPlayableScene" methodname="NativeGraphicsShowTheActualPlayableScene" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="952469400" result="Skipped" label="Ignored" start-time="2026-11-05 15:20:58Z" end-time="2026-11-05 15:20:59Z" duration="0.341924" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <reason>
+            <message><![CDATA[Use owned graphics action]]></message>
+          </reason>
+        </test-case>
+        <test-case id="1003" name="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" fullname="GiantForest2PlayModeTests.PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" methodname="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="181544894" result="Passed" start-time="2026-11-05 15:20:59Z" end-time="2026-11-05 15:20:59Z" duration="0.346361" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="SavedPlayerAndAllPlacedSizesInitializeWithUnchangedGravityAndOneAgentEach" fullname="GiantForest2PlayModeTests.SavedPlayerAndAllPlacedSizesInitializeWithUnchangedGravityAndOneAgentEach" methodname="SavedPlayerAndAllPlacedSizesInitializeWithUnchangedGravityAndOneAgentEach" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="80807888" result="Passed" start-time="2026-11-05 15:20:59Z" end-time="2026-11-05 15:21:00Z" duration="0.833907" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" fullname="GiantForest2PlayModeTests.WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" methodname="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="1964236385" result="Passed" start-time="2026-11-05 15:21:00Z" end-time="2026-11-05 15:21:00Z" duration="0.351839" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[ROCK_HEIGHTS 4.281498..30.14747m; tiers8/16/16. WALL_HEIGHT121.1m, base12m
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,35 @@
+{
+    "scene": "Assets/Scenes/GiantForest2.unity",
+    "unity": "2021.3.25f1",
+    "builtAt": "2026-11-05T15:20:16.8574385Z",
+    "treeCount": 208,
+    "wallBays": 254,
+    "rocks": 40,
+    "logs": 9,
+    "navSources": 2549,
+    "placedTitans": 6,
+    "treeMinimum": 150.69210815429688,
+    "treeMaximum": 215.8821258544922,
+    "terrainSize": 2048.0,
+    "highestTitan": 72.0,
+    "wallHeightMultiplier": 2.0,
+    "rockMinimum": 4.281498432159424,
+    "rockMaximum": 30.147464752197267,
+    "smallRocks": 8,
+    "mediumRocks": 16,
+    "largeRocks": 16,
+    "navigationScales": [
+        3.0,
+        5.0,
+        6.0
+    ],
+    "playerSpawn": {
+        "x": 0.0,
+        "y": 12.0,
+        "z": -550.0
+    },
+    "completePaths": 15,
+    "removedRoots": [
+        "Giant Forest 2.0 [generated environment]"
+    ]
+}

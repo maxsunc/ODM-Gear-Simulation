@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FreeRoam (Shiganshina.unity
     guid: b9d95b7a511c21247b6340524ba3ff90
+  - enabled: 1
+    path: Assets/Scenes/GiantForest2.unity
+    guid: b518c3e1bf644076a3fc6994130348c0
   m_configObjects: {}

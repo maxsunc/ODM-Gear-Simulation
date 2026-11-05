@@ -14,7 +14,64 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: authorized Scout bite commit and branch push
+## Current: Giant Forest 2.0 — larger rocks / doubled walls / local commit authorized
+
+User requested more varied, much larger rocks and walls2x their current height,
+then explicitly authorized **committing what we have**. Completed scoped resize:
+40 rocks now8 small4–8m /16 medium10–17m /16 large22–32m targets, native saved mesh
+heights4.28–30.15m; uniform collision scales,12% ground embed, bounded scenery-clear
+placement. All254 wall bays/gateway/four piers double HEIGHT ONLY (~121.1m visible,
+120m piers); same widths/thickness/base12m, arch now~78m high/26m wide. Tree/terrain/
+log/actor/camera/tuning preserved. Own3/5/6 navigation rebaked;15 routes still complete.
+**6/6 headless map cases pass** (graphics intentionally skipped),2026-11-05
+15:20:49–15:21:00UTC/11.551s; **1/1 native graphics pass**15:21:51–15:22:05UTC/13.944s.
+New rock/wall native preview in ArtSource/.../MapReview, including RuntimeRocks.png.
+Helper now supports explicit `snapshot` current-saved-source protected baseline and
+`resize` scoped worker action. No live Play/scene reload/save/input. Local forest
+checkpoint includes prior source art/models/map + iteration; **NO PUSH authorized**.
+See git log for local commit SHA; latest published origin remains3e9a738d.
+
+### Original assembled-map delivery (now includes scale iteration above)
+
+User APPROVED first models and authorized building GiantForest2, with varied trees
+about2–3x Titan height. Earlier models-only boundary superseded. Full contract:
+**docs/giant-forest-2-map.md**. Native preview:
+**ArtSource/Environment/GiantForest2/MapReview/GiantForest2_MapPreview.png**.
+**Assets/Scenes/GiantForest2.unity** now has the new environment, not the old clone:
+2048m heightfield,208 trees (actual native LOD0 heights150.52–215.48m,2.09–2.99x
+largest6x/72m Titan), winding route/glade,1536m enclosure/254 wall bays/open gateway,
+40 rocks/9 fallen logs. Three tree LODs, wood-only mesh collision, physical terrain,
+layer9 hook masks, shared vertex-painted URP materials/alpha-clip foliage. Art in
+Assets/Art/Environment/GiantForest2, terrain in Assets/Environment/GiantForest2.
+Original editable art/studio scales unchanged; prefab instances supply larger sizes.
+Own map-specific3x/5x/6x NavMesh assets in Assets/Navigation/Titans/GiantForest2,
+2549 real collider sources,15/15 cross-forest paths complete. New6x agent1479372276
+appended only; old agents/data unchanged. FreeRoam STILL only has3x/5x data.
+Six copied actor scales3/5/6/6/6/6 and existing combat/HP/sight/player tuning preserved,
+relocated to clear sites. Player `(0,12,-550)`. Spawner uses new bounded forest volume.
+New scene appended to BuildSettings, no old index changes. Old Map Control/Cube removed
+ONLY from this scene. Original FreeRoam still SHA2564409c076...da7bfa, unchanged.
+Original delivery: **5/5 headless map cases PASS** (graphics intentionally skipped),14:33:40–50UTC;
+**1/1 native graphics PASS**,14:34:20–28UTC2026-11-05, Intel Iris Xe/DX11; superseded
+by the later6-case/native scale-iteration results above. All208 bole
+rays, decreasing LODs, own data/wall blockage, all saved actors/real floor support,
+new3/5/6 spawns + warning/arrival/no runtime bake.142 published generated files+scene/
+meta byte-match worker. Native captures use actual animated actors/pipeline, no HUD;
+overview alone temporarily fog-off. No full-speed traversal/FPS/WebGL build claim.
+Full prior Titan222/224 suite NOT rerun for art/map-only work; same protected Run
+failures historical. No runtime combat sources/approved character art/clips changed.
+Owned full-project worker: AppData/Local/Temp/ODM-GiantForest2-iwrxdlei; helper
+**tools/build_giant_forest_map.py**, Editor builder **GiantForest2Builder.cs**.
+At publication the live Editor already had GiantForest2 open (title not dirty);
+saved-source hashes matched. Published tested files ON DISK; did not stop Play,
+reload/switch/save live scenes or send input/physics. User must reopen when ready;
+preserve any later unsaved work as copy before external reload. Live Blender untouched.
+No impostors/wind/baked occlusion/lightmaps/UV2/performance certification; shared URP
+quality/shadow distance/global Physics unchanged. Published origin **3e9a738d**;
+forest follow-up local commit explicitly authorized after the scale iteration.
+No new push authorized. Caches left untouched.
+
+## Previous: authorized Scout bite commit and branch push
 
 After reviewing the completed follow-up, user requested **"commit and push this"**.
 Commit the bite presentation/runtime/tests/docs/preview/helper and tracked C# source
