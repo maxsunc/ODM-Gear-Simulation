@@ -72,6 +72,11 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     {
         walking=GetComponent<Movement>();gear=GetComponent<ODM_Movement>();attack=GetComponent<Attack>();health=GetComponent<PlayerHealth>();
         lastPosition=previousFlipPosition=transform.position;
+        if(Application.isPlaying)
+        {
+            var cloth=GetComponent<ScoutCapeCloth>();if(cloth==null)cloth=gameObject.AddComponent<ScoutCapeCloth>();
+            if(model!=null && cloth.isActiveAndEnabled)cloth.Initialize(model);
+        }
         if(animator!=null) { animator.applyRootMotion=false;animator.cullingMode=AnimatorCullingMode.AlwaysAnimate; }
         // Swords extend along each hand's anatomical rest axis (pistol-grip design).
         if(leftHand!=null)leftAimAxis=leftHand.InverseTransformDirection((leftHand.position-leftLower.position).normalized);

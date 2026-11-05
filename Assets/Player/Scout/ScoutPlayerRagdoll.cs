@@ -76,6 +76,7 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
             if(bones.Length!=positions.Length)throw new InvalidOperationException("Scout hierarchy changed during death callback");
             copy.transform.SetPositionAndRotation(rootPosition,rootRotation);copy.transform.localScale=rootScale;
             for(int i=1;i<bones.Length;i++) {bones[i].localPosition=positions[i];bones[i].localRotation=rotations[i];bones[i].localScale=scales[i];}
+            ScoutCapeCloth.PreserveCorpseMesh(copy,root);
             foreach(var skin in copy.GetComponentsInChildren<SkinnedMeshRenderer>(true))skin.updateWhenOffscreen=true;
             var named=new Dictionary<string,Transform>();foreach(var bone in bones)if(!named.ContainsKey(bone.name))named.Add(bone.name,bone);
             var rigid=new Dictionary<string,Rigidbody>();var shapes=new List<Collider>();

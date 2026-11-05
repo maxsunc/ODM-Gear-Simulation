@@ -205,6 +205,14 @@ public class TitanODMIntegrationPlayModeTests
         prime();Hold();Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);target.EscapeHold();Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);
         Object.Destroy(wall.gameObject);yield return null;
     }
+    [UnityTest] public IEnumerator TangentialFootContactDoesNotEraseTrustedWalkingSpeed()
+    {
+        MonoBehaviour attack;var fx=DamageMemory(out attack);
+        for(int i=0;i<2;i++){player.transform.position+=Vector3.right*.6f;Call(fx,"SampleDamageMotion",.02f);}
+        var floor=new GameObject("Foot support not a blocking wall").AddComponent<BoxCollider>();
+        Call(fx,"RecordSolidContact",floor,Vector3.down,Vector3.up);
+        Assert.That((float)fx.GetType().GetProperty("CurrentDamageSpeed").GetValue(fx),Is.EqualTo(30).Within(.02f));Object.Destroy(floor.gameObject);yield return null;
+    }
     void GravityOnly(float acceleration)
     {
         // Exercise the REAL CharacterController/motor, without input or automatic
@@ -491,6 +499,16 @@ public class TitanODMIntegrationPlayModeTests
         wall.transform.position=biteGrab.MouthBitePoint;wall.AddComponent<BoxCollider>().size=Vector3.one*2;Physics.SyncTransforms();FinishScoutBite();
         Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(100));Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);
         Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);yield return null;
+    }
+    [UnityTest] public IEnumerator LongClothSurvivesRealBiteAsAnIndependentOwnedCorpseSnapshot()
+    {
+        ScoutBiteSetup();var cloth=Add("ScoutCapeCloth");Assert.That(Call(cloth,"Initialize",biteModel),Is.True);
+        var live=Property<Mesh>(cloth,"FabricMesh");CaptureScout();FinishScoutBite();
+        var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));
+        var snapshot=corpse.GetComponentsInChildren<MeshFilter>().First(f=>f.name=="Scout simulated fabric").sharedMesh;
+        Assert.That(snapshot,Is.Not.SameAs(live));Assert.That(snapshot.vertexCount,Is.EqualTo(586));Assert.That(corpse.GetComponentsInChildren<CharacterJoint>().Length,Is.EqualTo(12));
+        Assert.That(biteModel.GetComponentsInChildren<Renderer>().All(r=>!r.enabled),Is.True);Object.Destroy(cloth);yield return null;
+        Assert.That(snapshot!=null,Is.True);Assert.That(snapshot.vertices.Length,Is.EqualTo(586));Assert.That(corpse.transform.parent,Is.Null);
     }
     [UnityTest] public IEnumerator ActualScoutCorpsePhysicsHasCoincidentAnchorsAndNoLaunchExplosion()
     {

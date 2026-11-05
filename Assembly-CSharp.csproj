@@ -65,12 +65,17 @@
      <Compile Include="Assets\PlayerHealth.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMSwordSweep.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMMotor.cs" />
+     <Compile Include="Assets\Titan\Integration\ODMHookAnchor.cs" />
+     <Compile Include="Assets\Titan\Integration\PlayerCombatPermission.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSwordAudioPalette.cs" />
      <Compile Include="Assets\RagdollController.cs" />
      <Compile Include="Assets\SceneManagement.cs" />
      <Compile Include="Assets\DamageDealer.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
      <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
      <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeCloth.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeMeshLifetime.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />

@@ -28,7 +28,25 @@ Run failures unchanged. Stage2 now implemented: dedicated Scout native box sweep
 rejection), .18s same-Titan physical-impact speed grace (no wall/hold/teleport banking),
 confirmed1.5s kill toast and supplied blood1/blood2 audio layer via small Resources
 palette, no scene rewrites. Full suite **235/237**,16:35:51–16:36:11UTC2026-11-05;
-only same Run failures. Stage3 longer cape + native visual/stress review pending.
+only same Run failures. Stage3 now COMPLETE: ScoutCapeCloth render-only managed
+particle fabric, .98m vs.62m source length (~58% longer), original atlas/wing forms,
+273particles/586vertices/1000triangles, pinned shoulders + fixed120Hz constraint/
+airflow/body-gear proxy simulation. Not bone flutter; no native Cloth dependency,
+colliders/RBs/globalPhysics/root/bone/clip writes. Source art/prefab/Run unchanged.
+Auto-add via Scout driver; add persistent component on player root for Inspector
+tuning. Dead player stops cloth; corpse owns independent folded mesh snapshot,
+following copied physical chest with proper lifetime cleanup. No self/scenerycloth
+collision or WebGL/FPS certification. Native sheet/GIF:
+ArtSource/Player/Scout/CombatUX/Scout_LongCape_Unity.png / Scout_LongCape_Wind_Unity.gif.
+Final full suite TWICE **242passed/2knownRunfailures/1graphics-onlyskip**:
+2026-11-05 17:15:11–40UTC/28.611s and17:17:58–18:26UTC/28.505s. Twenty new non-graphics
+cases pass; all strict original physics bounds retained. Separate actual native
+cape1/1pass17:15:51–54UTC,3.529s,Intel Iris Xe/DX11; actual gas-flight pose visual
+transport80m/s maxclothstretch1.06917. Old bite/blood graphics also rerun1/1.
+Stage1 localcommit56261300;Stage2 local314eb2ae;finalclothcheckpoint see gitlog.
+No push. Existing user scene edits + caches remain excluded. Further ordinary
+playtesting: fixed slash feel, audio levels, full-speed forest traversal, WebGL /
+performance. Native screenshots are owned fixtures and omit screen-space HUD.
 The user's GiantForest2 scene has NEW saved edits after346c85c0: preserve, don't
 rewrite/stage it. Baseline recorded in Library/CombatUXBaseline.json. Live Editor
 untouched. Source audio supplied Assets/Audio/blood{1,2}.wav now integrated without

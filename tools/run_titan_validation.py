@@ -15,6 +15,7 @@ root = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--wait', action='store_true')
 parser.add_argument('--reuse', type=Path)
+parser.add_argument('--filter', help='Optional targeted diagnostics, NOT a full-suite result')
 args = parser.parse_args()
 if args.reuse:
     project = args.reuse.resolve()
@@ -92,11 +93,12 @@ if results.exists():
 command = [str(editor), '-batchmode', '-nographics', '-projectPath', str(project),
            '-runTests', '-testPlatform', 'PlayMode', '-testResults', str(results),
            '-logFile', str(project / 'validation.log')]
+if args.filter:command+=['-testFilter',args.filter]
 process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL,
                            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0)
 report = {'project': str(project), 'pid': process.pid, 'results': str(results),
-          'log': str(project / 'validation.log')}
+          'log': str(project / 'validation.log'), 'testFilter': args.filter}
 (root / 'Library').mkdir(exist_ok=True)
 (root / 'Library/TitanValidationRun.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
 print(json.dumps(report, indent=2), flush=True)

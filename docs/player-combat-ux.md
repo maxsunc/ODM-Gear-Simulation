@@ -53,10 +53,70 @@ Titan structure/physics, live Editor and later user scene edits.
   wall/hold rejection, audio references/layering and kill-toast lifetime. Only the
   established two protected Run failures remain. All strict physics tests retained.
 
-## Remaining authorized stage
+## Stage 3 — longer, genuinely simulated fabric cape
 
-Longer cape-only fabric simulation and native visual/stress review. No full-speed/
-WebGL/performance claims until independently exercised.
+- `ScoutCapeCloth` auto-installs once on the existing Scout driver. No scene/prefab
+  reinstall needed next Play. Original FBX, packed Blender source, bones, material,
+  body/gear/swords and ALL animation clips (including Run) are unchanged.
+- New cape-only runtime mesh is **.98m shoulder-to-hem at source scale1**, versus
+  original.62m: **58% longer**, about1.96m at scene visual scale2, near the knees.
+ 13x21 /273 particles,586 render vertices/1,000 triangles, two-sided cloth using
+  the approved atlas. Original ten wing shapes interpolate on the moving fabric.
+- Actual free-particle fabric: pinned shoulder row, fixed120Hz substeps (max6/frame),
+  stretch/shear/bend constraints, non-compressive multiresolution strain limits,
+  gravity, spatial gust forces, relative airflow and bounded inertial loading.
+  Not two-bone flutter and not a sine-deformed rigid cape. CPU managed solver avoids
+  a dependency on platform-native Unity Cloth support; WebGL performance still untested.
+- Eight default solver iterations. Cached capsule transforms/matrices avoid per-node
+  native Transform/Quaternion calls. Aerodynamic load bounded24m/s² (porous material),
+  narrow collar strain constraint independent of character ragdoll velocity safety.
+- Seven render-only body/gear proxies (broad/shallow torso cross-section, thighs,
+  neck, canisters/back unit) keep fabric away from those forms. No native collider,
+  Rigidbody, global Physics/wind/time changes or second Animator/root writer.
+  **No cloth self-collision or scenery collision claim.** Fast visual transport uses
+  a transported simulation frame; abrupt teleports, >120° frame discontinuities,
+  invalid dt or >.2s hitch reset locally instead of throwing the mesh across the map.
+- Death snapshots clone the current cape mesh into the independent corpse, bind its
+  render transform to copied chest and reclaim its mesh with the corpse. Destroying
+  live cloth cannot invalidate the corpse's mesh. Corpse fabric is a frozen folded
+  snapshot following the physical chest, not a second ongoing cloth simulation.
+- For persistent Inspector tuning, add ScoutCapeCloth to the PLAYER root in Edit
+  Mode: capeLength (source metres), ambientWind, gustStrength, airDrag,
+  solverIterations, bodyCollision. Auto-installer respects an existing component,
+  including disabled; disabling restores the original passive cape. No new keys.
+- Also corrected tangential foot-contact handling: ordinary grounded foot moves
+  don't clear trusted horizontal walking samples, while blocking walls/landings
+  still invalidate collision-speed grace.
+
+### Final evidence / local publication
+
+- **242 passed,2 established Run failures,1 native-graphics-only skip**, TWICE:
+  2026-11-05 **17:15:11–17:15:40UTC**,28.611s;
+  **17:17:58–17:18:26UTC**,28.505s. Unity2021.3.25f1 owned worker, no live Editor input.
+  Twenty new non-graphics cases across this follow-up pass. Strict arm<8°/120Hz,
+  mouth/carry distal penetration<.005m, corpse speed<40m/s assertions retained.
+- Cape cases include pinned anchors, wind deformation with no cape-bone writes,
+  bounded structural stretch<1.2,80m/s transported flight/turns/hitches, torso
+  exclusion, no native physics additions, independent snapshot cleanup and an
+  actual confirmed bite with a long-cloth corpse snapshot. Established character
+  physics bounds unchanged; the cloth structural-stretch bound1.2 was retained.
+- **1/1 native cape graphics pass**,17:15:51–17:15:54UTC/3.529s,
+  **Intel Iris Xe/DX11**. Original Scout/approved Idle/GasBoth pose, original URP
+  material/atlas, warm completed camera frames. Flight structural stretch1.06917.
+  Native old bite/blood graphics regression also rerun1/1,17:18:37UTC/.894s.
+- [Native cape sheet](../ArtSource/Player/Scout/CombatUX/Scout_LongCape_Unity.png),
+  [wind GIF](../ArtSource/Player/Scout/CombatUX/Scout_LongCape_Wind_Unity.gif), raw selected
+  native frames and fresh XML summaries in the same folder. These are owned render
+  fixtures, not full-speed gameplay footage; camera readbacks omit screen-space HUD.
+- Full ordinary forest traversal/combat feel, WebGL build/FPS/memory, crowded cloth/
+  corpse/carry scenery clearance and audio loudness remain user playtest items.
+- Local checkpoints: **56261300** moving hooks/hold cancellation;
+  **314eb2ae** slash/impact grace/kill/audio; final cloth checkpoint see `git log`.
+  **No push requested or performed.** User scene/cache changes excluded.
+
+Reproduce: `python tools/run_titan_validation.py --wait` (or owned `--reuse PATH`),
+then `python tools/capture_scout_combat_ux.py`. Optional `--filter NAME` is targeted
+DIAGNOSTICS, not a full-suite result; the run-state JSON labels the filter explicitly.
 
 The user's saved `GiantForest2.unity` was already modified after the forest commit.
 It is neither rewritten nor staged by these runtime fixes. Baseline hash lives in

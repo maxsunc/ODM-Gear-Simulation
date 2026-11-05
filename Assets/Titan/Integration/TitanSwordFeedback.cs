@@ -102,7 +102,13 @@ public class TitanSwordFeedback : MonoBehaviour
         if(MovementBlocked()){ResetDamageHistory();return;}
         if(solid==null || solid.isTrigger || solid.transform.IsChildOf(transform) || direction.sqrMagnitude<.0001f || Vector3.Dot(direction.normalized,normal)>=-.05f)return;
         var body=solid.GetComponentInParent<ModularTitanBody>();
-        if(body==null || body.IsDead){ResetDamageHistory();return;} // A wall cannot bank approach speed.
+        if(body==null || body.IsDead)
+        {
+            // Blocking walls/landings invalidate grace. Tangential grounded foot
+            // moves must not erase otherwise continuous walking samples every tick.
+            if(Mathf.Abs(normal.y)<.7f || (lastMotion.sqrMagnitude>.000001f && Vector3.Dot(lastMotion.normalized,normal)<-.05f))ResetDamageHistory();
+            return;
+        }
         if(lastMotion.sqrMagnitude<.000001f || Vector3.Dot(lastMotion.normalized,normal)>=-.05f || validMotionSamples<2 || damageSpeed<=0)return;
         float now=Time.time,grace=Mathf.Clamp(impactSpeedGrace,0,.25f);int slot=0;
         for(int i=0;i<impacts.Length;i++)

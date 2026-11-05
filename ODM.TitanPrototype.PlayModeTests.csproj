@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanGrabPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutPlayerPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutCapeClothPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAerialGrabPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanRandomSpawnerPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanSwordImpactPlayModeTests.cs" />
