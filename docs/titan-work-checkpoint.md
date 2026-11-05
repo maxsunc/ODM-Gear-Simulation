@@ -14,7 +14,42 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: approved combat UX / longer cloth cape — staged local commits
+## Current: supplied Titan SFX; pre-work checkpoint PUSH authorized and completed
+
+User explicitly requested committing/pushing current work BEFORE adding new audio.
+Checkpoint **4d425aceee151cc020cf1079b437d7949ae415bd** committed exact saved
+GiantForest2/ModularTitanPrototype user edits + seven new clips/metas, then pushed
+origin/titan-combat-updates (remote verified equal). This also pushed prior forest,
+combat UX, cloth and mixer commits through cede85eb. **Earlier no-push statements
+below are historical, superseded for that checkpoint only.** New SFX feature remains
+separate LOCAL commit; do not assume permission to push later work.
+
+New Resources/TitanAudioPalette.asset references titanScream.wav (first scream,
+not named titanScream1), titanScream2.mp3, titanFootstep1/2/3.mp3,
+titanLightning.mp3 and bloodSplat.mp3; original bytes/import settings preserved.
+RuntimeActor adds cosmetic-only TitanAudioEmitter: new-blind-event random screams;
+actual animated sole lift/plant ground-observed randomized walk/run footsteps,
+no bone/Animator/agent/force/globalPhysics writes and private RNG. Existing spawner
+uses default lightning only AFTER successful activation; custom spawnSound overrides,
+useDefaultSpawnSound=false restores silent empty slot. Real ODM health bridge layers
+independent 2D eaten cue once on confirmed real lethal bite HP loss/death, not
+nonlethal/escaped/blocked bites or generic death. All new sources immediately SFX.
+Runtime-only attachment; no further scene/prefab saves/edits/bakes/live Editor input.
+
+Pre-code suite with CURRENT user prefab:248pass/5fail/1graphics skip. Three NEW
+preexisting fixture conflicts vs older checkpoint: IntactBodyHasWorkingAnimationAndKinematicPhysics
+(enlarged face trigger2.20538 vs<2), BlindnessAndEitherLegLossCancelAndReleaseImmediately
+(saved12s stun vs older5s fixture), GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace
+(saved8/16 reference speeds vs old4.6/9.5 fixture). Plus two protected Scout Run failures.
+Preserve user tuning AND original assertions; do not silently reset/relax either.
+Latest SFX full suite:257pass/SAME5fail/1graphics skip,263 total. Nine new cases pass;
+existing real bite left/right/nonlethal/escape/obstruction cases also assert eaten cue.
+Docs/evidence: docs/game-audio.md and ArtSource/Audio/GameAudio/titan-sfx-validation-summary.json.
+Library/TitanSoundBaseline.json records user scene/prefab/audio hashes + exact pre-code
+failure messages. Retain strict arm<8deg/120Hz, later mouth<.005m, corpse<40m/s.
+No listening balance/full-map/WebGL certification from headless dispatch assertions.
+
+## Previous: approved combat UX / longer cloth cape — originally local commits
 
 User approved dedicated hit volumes, same-Titan impact-speed grace, Option B true
 cloth with LONGER cape, kill text, blood1/blood2 WAV layering and fixes for moving

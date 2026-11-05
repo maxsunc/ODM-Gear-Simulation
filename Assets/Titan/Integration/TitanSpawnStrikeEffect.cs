@@ -13,6 +13,7 @@ public sealed class TitanSpawnStrikeEffect : MonoBehaviour
     public bool IsPlaying {get{return warning||impact;}}
     public int ImpactCount {get;private set;}
     public int SoundCount {get;private set;}
+    public AudioClip LastSoundClip {get;private set;}
     public void Configure(Material lightning,Material particles)
     {
         bolts=new LineRenderer[4];
@@ -67,7 +68,7 @@ public sealed class TitanSpawnStrikeEffect : MonoBehaviour
     }
     public void PlaySound(AudioClip clip,float volume,float maxDistance)
     {
-        if(sound!=null && clip!=null && volume>0){sound.volume=Mathf.Clamp01(volume);sound.minDistance=10;sound.maxDistance=Mathf.Max(11,maxDistance);sound.PlayOneShot(clip);SoundCount++;}
+        if(sound!=null && clip!=null && volume>0){sound.volume=Mathf.Clamp01(volume);sound.minDistance=10;sound.maxDistance=Mathf.Max(11,maxDistance);sound.PlayOneShot(clip);LastSoundClip=clip;SoundCount++;}
     }
     void Emit(ParticleSystem ps,int count,Color color,float minSize,float maxSize,float minLife,float maxLife,float spread,float speed,System.Random rng,bool upward=false)
     {

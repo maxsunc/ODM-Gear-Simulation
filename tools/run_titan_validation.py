@@ -37,10 +37,12 @@ for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Asset
                  'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player',
                  'Assets/Art/Effects', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
-# Real user-supplied finisher clips and their small Resources reference palette.
+# Real user-supplied finisher/NPC clips and their small Resources reference palettes.
 for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
                  'Assets/Audio/blood2.wav','Assets/Audio/blood2.wav.meta',
-                 'Assets/Resources/TitanSwordAudioPalette.asset','Assets/Resources/TitanSwordAudioPalette.asset.meta']:
+                 'Assets/Resources/TitanSwordAudioPalette.asset','Assets/Resources/TitanSwordAudioPalette.asset.meta',
+                 'Assets/Resources/TitanAudioPalette.asset','Assets/Resources/TitanAudioPalette.asset.meta',
+                 *[str(p.relative_to(root)) for p in (root/'Assets/Audio').iterdir() if p.is_file() and (p.name.startswith(('titanScream','titanFootstep','titanLightning','bloodSplat')))]]:
     target=project / relative;target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(root / relative,target)
 # Compile the real opt-in adapter and its narrow legacy dependencies as the default

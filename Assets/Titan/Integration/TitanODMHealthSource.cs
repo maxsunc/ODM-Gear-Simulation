@@ -5,6 +5,8 @@ using UnityEngine;
 public class TitanODMHealthSource : TitanHealthSource
 {
     PlayerHealth player;
+    bool eatenSoundPlayed;
+    public int EatenSoundCount {get;private set;}
     void Awake() { player=GetComponent<PlayerHealth>(); }
     void OnEnable() { if(player==null) player=GetComponent<PlayerHealth>();player.Died+=OnDeath; }
     void OnDisable() { if(player!=null) player.Died-=OnDeath; }
@@ -12,6 +14,7 @@ public class TitanODMHealthSource : TitanHealthSource
     public override bool UsesMouthInsertion { get { return player != null && player.EnsureScoutRagdoll() != null; } }
     public override void PrepareBite(TitanBiteImpact impact)
     {
+        if(player!=null && !player.isDead)eatenSoundPlayed=false;
         var presentation = player != null ? player.EnsureScoutRagdoll() : null;
         if (presentation != null) presentation.PrepareBite(impact);
     }
@@ -21,6 +24,8 @@ public class TitanODMHealthSource : TitanHealthSource
         if (presentation != null) presentation.CompleteBite();
         var feedback = GetComponent<TitanSwordFeedback>();
         if (damaged && feedback != null) feedback.PlayBiteBlood(impact.Point, impact.Direction);
+        if(damaged && impact.Lethal && player!=null && player.isDead && !eatenSoundPlayed && TitanAudioPalette.PlayEaten(gameObject,impact.Point)!=null)
+        {eatenSoundPlayed=true;EatenSoundCount++;}
     }
     public override bool IsBodyCollider(Collider shape) { return shape==GetComponent<CharacterController>(); }
     public override float CurrentHealth { get { return isActiveAndEnabled && player!=null && !player.isDead?player.currentHP:0; } }

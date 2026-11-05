@@ -35,8 +35,10 @@ public sealed class TitanRandomSpawner : MonoBehaviour
     [Min(0)]public float warningDuration=.65f;
     public bool effectsEnabled=true,localFlashLight=true;
     public Material lightningMaterial,particleMaterial;
-    [Tooltip("Optional: drag your own Titan strike AudioClip here. Empty means silent.")]
+    [Tooltip("Optional override. Empty uses the supplied titanLightning sound when useDefaultSpawnSound is enabled.")]
     public AudioClip spawnSound;
+    public bool useDefaultSpawnSound=true;
+    public AudioClip EffectiveSpawnSound {get{var p=TitanAudioPalette.Load();return spawnSound!=null?spawnSound:useDefaultSpawnSound && p!=null?p.spawnLightning:null;}}
     [Range(0,1)]public float soundVolume=.7f;
     [Min(11)]public float soundMaxDistance=600;
     [Range(1,8)]public int effectPoolSize=4;
@@ -137,7 +139,7 @@ public sealed class TitanRandomSpawner : MonoBehaviour
             if(!sceneManager.TryPrepareSpawn(titanPrefab,point,Quaternion.Euler(0,(float)random.NextDouble()*360,0),size,out body,out last))continue;
             if(!Allowed(body.transform.position,body)){sceneManager.Despawn(body);continue;}
             pending=body;due=Time.time+warningDuration;
-            if(effectsEnabled || spawnSound!=null)
+            if(effectsEnabled || EffectiveSpawnSound!=null)
             {
                 pendingEffect=GetEffect();
                 if(effectsEnabled)pendingEffect.Warn(body.transform.position,size,random.Next());
@@ -177,8 +179,8 @@ public sealed class TitanRandomSpawner : MonoBehaviour
             pending=null;owned.Add(new Entry{body=body});SpawnedCount++;initialRemaining=Mathf.Max(0,initialRemaining-1);
             if(pendingEffect!=null)
             {
-                if(effectsEnabled)pendingEffect.Strike(spawnSound,soundVolume,soundMaxDistance,localFlashLight);
-                else pendingEffect.PlaySound(spawnSound,soundVolume,soundMaxDistance);
+                if(effectsEnabled)pendingEffect.Strike(EffectiveSpawnSound,soundVolume,soundMaxDistance,localFlashLight);
+                else pendingEffect.PlaySound(EffectiveSpawnSound,soundVolume,soundMaxDistance);
                 pendingEffect=null;
             }
             nextAttempt=Time.time+(initialRemaining>0?0:Mathf.Lerp(minimumSpawnInterval,maximumSpawnInterval,(float)random.NextDouble()));return;

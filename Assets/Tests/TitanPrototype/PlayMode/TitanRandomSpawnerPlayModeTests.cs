@@ -98,6 +98,17 @@ public class TitanRandomSpawnerPlayModeTests
         Assert.That(player.transform.position,Is.EqualTo(root));Assert.That(Physics.gravity,Is.EqualTo(gravity));Assert.That(Time.timeScale,Is.EqualTo(timeScale));
         spawner.enabled=false;yield return null;Assert.That(Fx().Length,Is.Zero);Object.Destroy(clip);
     }
+    [UnityTest]public IEnumerator SuppliedLightningPlaysOnlyAtSuccessfulArrivalEvenWithVisualEffectsDisabled()
+    {
+        var expected=AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/titanLightning.mp3");Assert.That(Prop<AudioClip>(spawner,"EffectiveSpawnSound"),Is.SameAs(expected));
+        string error;Assert.That(Queue(out error),Is.True,error);Assert.That(Fx().Sum(f=>Prop<int>(f,"SoundCount")),Is.Zero);
+        yield return new WaitForSeconds(.09f);Assert.That(Prop<int>(spawner,"SpawnedCount"),Is.EqualTo(1));Assert.That(Fx().Sum(f=>Prop<int>(f,"SoundCount")),Is.EqualTo(1));
+        var fx=Fx().Single(f=>Prop<int>(f,"SoundCount")==1);Assert.That(Prop<AudioClip>(fx,"LastSoundClip"),Is.SameAs(expected));Assert.That(fx.GetComponent<AudioSource>().outputAudioMixerGroup.name,Is.EqualTo("SFX"));
+        Assert.That(Pending,Is.Null);
+        var actor=scene.GetRootGameObjects().SelectMany(o=>o.GetComponentsInChildren<ModularTitanBody>()).Single(b=>!b.IsDead);
+        Assert.That(actor.GetComponent(Real("TitanAudioEmitter")),Is.Not.Null,"Ready spawned Titans automatically get footsteps and blind screams");
+        Set(spawner,"useDefaultSpawnSound",false);Assert.That(Prop<AudioClip>(spawner,"EffectiveSpawnSound"),Is.Null);
+    }
     [UnityTest]public IEnumerator PlacedTitansConsumeCapAndAreNeverCleanedUpByThisSpawner()
     {
         object[] args={Prefab,Vector3.zero,Quaternion.identity,1f,null,null};Assert.That((bool)Call(manager,"TrySpawn",args),Is.True,(string)args[5]);var placed=(ModularTitanBody)args[4];

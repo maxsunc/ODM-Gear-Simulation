@@ -1,8 +1,9 @@
 # Shared game audio mixer
 
 Unity **2021.3.25f1** / URP12.1.11, no upgrades, scene/prefab rewrite or live Editor
-input. Follow-up to `docs/player-combat-ux.md`; local commit permission continues,
-no push authorized.
+input. Follow-up to `docs/player-combat-ux.md`. Mixer follow-up originally local;
+user subsequently authorized the pre-SFX checkpoint push through **4d425ace**.
+New NPC SFX implementation remains a separate local commit.
 
 ## Player controls
 
@@ -58,7 +59,61 @@ using the same alternation/coalescing as arm severs and kills. Existing sever/ki
 sounds are retained. Ordinary leg damage, face blindness and misses still do not
 trigger the additional layer. WAV bytes/import settings unchanged. All layers use SFX.
 
-## Validation
+## Supplied Titan SFX follow-up
+
+`Assets/Resources/TitanAudioPalette.asset` references the seven new supplied clips,
+without renaming, converting or changing their imports:
+
+| Event | Clips / behavior |
+|---|---|
+| New blindness | Random `titanScream.wav` (the first supplied scream) or `titanScream2.mp3`; once on entry, not ordinary face hits or repeated already-blind damage. |
+| Walk/run footfalls | Random `titanFootstep1/2/3.mp3` on each lifted sole's return to real support. |
+| Successful random-spawn arrival | `titanLightning.mp3` after actual activation, never during warning or cancellation. |
+| Confirmed lethal bite | `bloodSplat.mp3` once; no cue on nonlethal, blocked or escaped bites, or generic deaths. |
+
+`TitanRuntimeActor` installs a runtime-only `TitanAudioEmitter` on registered placed
+and spawned gameplay Titans. Passive prefab and legacy standalone labs are not
+rewritten. Scream + left/right foot sources are spatial SFX; the personal eaten cue
+is independent 2D SFX, not parented to the player, catcher or corpse. All route to the
+same Master/SFX mixer immediately. Existing blood/kill/slash layers remain.
+
+Footsteps observe animated foot-box soles and scene-local ground queries, with
+lift/plant hysteresis. No approximate time interval, modified clip/events, root motion,
+Animator/bone writes, global Physics synchronization or collision/force changes.
+This naturally follows authored walk/run blending, randomized cycle offsets and
+cadence. Idle, blindness, missing legs, unready actors, teleports/hitches and absent
+support cannot manufacture steps. Emitters use their own RNG, never Unity's gameplay
+RNG. Sources stop on disable/death and are cleaned up with the emitter.
+
+Tune `screamVolume`, `footstepVolume`, `eatenVolume` on the palette; spawn loudness
+still uses the spawner's existing `soundVolume`/distance fields. An assigned
+`spawnSound` still overrides the default. Turn off `useDefaultSpawnSound` for an
+intentionally silent empty slot. Global balancing stays in J/main-menu SFX.
+
+Pre-feature checkpoint **4d425ace** includes the user's exact saved taller-wall scene,
+Titan prefab tuning and new clips; pushed to `origin/titan-combat-updates` BEFORE any
+SFX code changes. No further scene/prefab edits, navigation bake or live Editor input.
+
+### Current SFX validation
+
+Before implementation, current saved prefab already produced **248 pass / 5 fail /
+1 graphics skip**: two protected Scout Run failures plus three fixture conflicts with
+user-authored enlarged face triggers, 12s blindness and changed gait speed references.
+The saved tuning and original assertions were preserved, not reverted/relaxed.
+
+After integration: **257 pass / same 5 fail / 1 graphics skip**, 263 cases total.
+Nine added SFX cases pass: exact asset references/routing; real blind-event filtering
+and private RNG; four real animated walk/run/cycle-offset/1x/3x/5x sole tests;
+idle/blind/injured/hitch/no-ground exclusion; lethal-bite deduplication/independence;
+and actual spawner's default lightning with visuals disabled. Existing real left/right
+Scout bite, escape, obstruction and nonlethal fixtures additionally assert the new eaten
+cue. Strict existing arm/late-mouth/corpse-speed regression assertions remain unchanged.
+Evidence: `ArtSource/Audio/GameAudio/titan-sfx-validation-summary.json`.
+
+Listening/loudness balance, live full-map feel and WebGL audio-device behavior still
+need player playtesting; automated routing/cue dispatch is not measured DSP output.
+
+## Original mixer validation (before the user's newer prefab tuning)
 
 Owned Unity2021 worker full PlayMode suite: **251 passed / 2 existing Run failures /
 1 graphics-only skip**. Nine audio-specific cases pass, covering real Master-group

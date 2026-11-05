@@ -455,6 +455,7 @@ public class TitanODMIntegrationPlayModeTests
         Assert.That(biteGrab.BiteContactCount,Is.EqualTo(1),biteGrab.LastResult);
     }
     T Property<T>(object o,string name){return (T)o.GetType().GetProperty(name).GetValue(o);}
+    int EatenSoundCount {get{return Property<int>(player.GetComponent(Legacy("TitanODMHealthSource")),"EatenSoundCount");}}
     IEnumerator RealScoutBite(bool left)
     {
         ScoutBiteSetup();CaptureScout(left);
@@ -462,7 +463,7 @@ public class TitanODMIntegrationPlayModeTests
         Vector3 outside=target.transform.position;float outsideDepth=Vector3.Dot(outside-biteTitan.mouthSocket.position,biteTitan.transform.forward);
         // Wait through insertion, stopping before the closure contact event.
         for(int i=0;i<60 && biteGrab.Stage!=TitanGrabStage.Bite;i++)BiteFrame(1f/120);
-        Assert.That(biteGrab.BiteContactCount,Is.Zero);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+        Assert.That(biteGrab.BiteContactCount,Is.Zero);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);
         Assert.That(Vector3.Dot(target.transform.position-biteTitan.mouthSocket.position,biteTitan.transform.forward),Is.LessThan(outsideDepth-.3f),"Feed the torso inward before biting; don't just kill outside the lips");
         FinishScoutBite();Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);Assert.That(Get<bool>(hp,"isDead"),Is.True);
         var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));
@@ -474,7 +475,7 @@ public class TitanODMIntegrationPlayModeTests
         foreach(var skin in corpse.GetComponentsInChildren<SkinnedMeshRenderer>())Assert.That(skin.bones.All(b=>b.IsChildOf(corpse.transform)),Is.True,"Skin remains bound to copied physical bones");
         var alivePosition=corpse.transform.GetChild(0).position;player.transform.position+=Vector3.right*50;Call(corpsePresentation,"LateUpdate");
         Assert.That(Vector3.Distance(corpse.transform.GetChild(0).position,alivePosition),Is.LessThan(.0001f),"Pending release/motor root cannot drag corpse out of mouth");
-        BiteFrame(5);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));
+        BiteFrame(5);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));Assert.That(EatenSoundCount,Is.EqualTo(1));
         yield return null;
     }
     [UnityTest] public IEnumerator LeftHandFeedsRealScoutIntoMouthThenRagdollsAndBleedsOnce(){yield return RealScoutBite(true);}
@@ -484,13 +485,13 @@ public class TitanODMIntegrationPlayModeTests
         ScoutBiteSetup(40);CaptureScout();FinishScoutBite();
         Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(60));Assert.That(target.Health,Is.EqualTo(60));Assert.That(Get<bool>(hp,"isDead"),Is.False);
         Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.EqualTo(1));
-        Assert.That(biteModel.GetComponentsInChildren<Renderer>().Any(r=>r.enabled),Is.True);Assert.That(target.IsHeld,Is.False);yield return null;
+        Assert.That(biteModel.GetComponentsInChildren<Renderer>().Any(r=>r.enabled),Is.True);Assert.That(target.IsHeld,Is.False);Assert.That(EatenSoundCount,Is.Zero);yield return null;
     }
     [UnityTest] public IEnumerator EscapeBeforeChompNeverSpawnsBloodOrRagdoll()
     {
         ScoutBiteSetup();CaptureScout();BiteFrame(1.5f);target.EscapeHold();BiteFrame(5);
         Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(100));Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
-        Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);yield return null;
+        Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);Assert.That(EatenSoundCount,Is.Zero);yield return null;
     }
     [UnityTest] public IEnumerator NewMouthObstructionCancelsRealBiteEffectsAndDamage()
     {
@@ -498,7 +499,7 @@ public class TitanODMIntegrationPlayModeTests
         var wall=new GameObject("Solid at final feeding path");SceneManager.MoveGameObjectToScene(wall,scene);
         wall.transform.position=biteGrab.MouthBitePoint;wall.AddComponent<BoxCollider>().size=Vector3.one*2;Physics.SyncTransforms();FinishScoutBite();
         Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(100));Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);
-        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);yield return null;
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);yield return null;
     }
     [UnityTest] public IEnumerator LongClothSurvivesRealBiteAsAnIndependentOwnedCorpseSnapshot()
     {
