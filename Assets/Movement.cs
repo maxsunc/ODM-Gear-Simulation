@@ -175,7 +175,7 @@ public class Movement : MonoBehaviour
         jumpForce = JumpLaunchSpeed;
         _velocity.y = 0; titanReleaseUp = 0;
         jumpCooldownRemaining = JumpSeconds(jumpCooldown, .15f);
-        if (jumpSfx != null) jumpSfx.Play();
+        if (jumpSfx != null) { GameAudio.Route(jumpSfx);jumpSfx.Play(); }
     }
 
     void AdvanceJump(float dt)

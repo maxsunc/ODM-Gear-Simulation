@@ -167,7 +167,7 @@ public class TitanSwordImpactPlayModeTests
         for(int i=0;i<70;i++){var clutter=new GameObject("Saturation probe");clutter.transform.SetParent(root.transform,false);clutter.AddComponent<BoxCollider>().isTrigger=true;}
         Physics.SyncTransforms();dealer.gameObject.SetActive(true);Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.RightArm),Is.EqualTo(900),"Saturation fails the whole query, not just later candidates");Object.DestroyImmediate(root);
     }
-    [UnityTest] public IEnumerator KillToastIsConfirmedOnceAndUserFinisherClipsLayerOnlyOnArmSeverOrKill()
+    [UnityTest] public IEnumerator KillToastIsConfirmedOnceAndUserFinisherClipsLayerOnlyOnLimbSeverOrKill()
     {
         var root=new GameObject("Owned kill/audio feedback");var fx=(MonoBehaviour)root.AddComponent(Real("TitanSwordFeedback"));
         var palette=Resources.Load("TitanSwordAudioPalette");Assert.That(palette,Is.Not.Null);
@@ -177,8 +177,14 @@ public class TitanSwordImpactPlayModeTests
         Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.Zero);Assert.That(Prop<int>(fx,"KillNotificationCount"),Is.Zero);
         result.Outcome=TitanDamageOutcome.Blinded;result.Region=TitanHitRegion.Eyes;Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.Zero);
         result.Outcome=TitanDamageOutcome.Severed;result.Region=TitanHitRegion.LeftArm;Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(1));
+        foreach(var leg in new[]{TitanHitRegion.LeftLeg,TitanHitRegion.RightLeg})
+        {
+            int before=Prop<int>(fx,"FinisherSoundCount");result.Region=leg;result.Outcome=TitanDamageOutcome.Hit;Call(fx,"OnHit",result);Call(fx,"LateUpdate");
+            Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(before),"Ordinary leg damage is not a sever");
+            result.Outcome=TitanDamageOutcome.Severed;Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(before+1));
+        }
         result.Outcome=TitanDamageOutcome.Killed;result.Region=TitanHitRegion.Nape;Call(fx,"OnHit",result);Call(fx,"OnHit",result);Call(fx,"LateUpdate");
-        Assert.That(Prop<int>(fx,"KillNotificationCount"),Is.EqualTo(1));Assert.That(Prop<bool>(fx,"KillNotificationVisible"),Is.True);Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(2),"Same-frame outcomes coalesce extra audio without replacing existing impact audio");
+        Assert.That(Prop<int>(fx,"KillNotificationCount"),Is.EqualTo(1));Assert.That(Prop<bool>(fx,"KillNotificationVisible"),Is.True);Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(4),"Same-frame outcomes coalesce extra audio without replacing existing impact audio");
         yield return new WaitForSecondsRealtime(1.6f);Assert.That(Prop<bool>(fx,"KillNotificationVisible"),Is.False);Object.Destroy(root);
     }
     [UnityTest] public IEnumerator CutImpulseLaunchesWholeBranchesWithoutJointEnergyAtOneThreeAndFiveScale()

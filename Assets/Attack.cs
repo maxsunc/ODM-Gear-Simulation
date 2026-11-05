@@ -93,6 +93,7 @@ public class Attack : MonoBehaviour
 
     void PlayAudio(AudioSource audio, float startPitch, float endPitch)
     {
+        GameAudio.Route(audio);
         audio.pitch = Random.Range(startPitch, endPitch);
         audio.Play();
     }

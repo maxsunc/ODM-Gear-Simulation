@@ -69,7 +69,7 @@ public class TitanSwordFeedback : MonoBehaviour
         if(attack!=null){attack.Released+=OnSlash;attack.Cancelled+=ResetDamageHistory;}
         if(audioPalette==null)audioPalette=Resources.Load<TitanSwordAudioPalette>("TitanSwordAudioPalette");
         if(!Application.isPlaying)return;
-        audioSource=NewObject("Sword feedback audio").AddComponent<AudioSource>();audioSource.playOnAwake=false;audioSource.spatialBlend=0;
+        audioSource=NewObject("Sword feedback audio").AddComponent<AudioSource>();audioSource.playOnAwake=false;audioSource.spatialBlend=0;GameAudio.Route(audioSource);
         if(playerCamera==null)playerCamera=GetComponentInChildren<Camera>();
         if(playerCamera==null && Camera.main!=null && Camera.main.gameObject.scene==gameObject.scene)playerCamera=Camera.main;
         if(effectMaterial!=null) { CreateSprays();CreateTrails(); }
@@ -203,7 +203,7 @@ public class TitanSwordFeedback : MonoBehaviour
             killOrder.Enqueue(hit.Body.GetInstanceID());if(killOrder.Count>64)killIds.Remove(killOrder.Dequeue());
             KillNotificationCount++;killToastUntil=Time.unscaledTime+1.5f;
         }
-        if(hit.Outcome==TitanDamageOutcome.Killed || (hit.Outcome==TitanDamageOutcome.Severed && (hit.Region==TitanHitRegion.LeftArm || hit.Region==TitanHitRegion.RightArm)))pendingFinisher=true;
+        if(hit.Outcome==TitanDamageOutcome.Killed || (hit.Outcome==TitanDamageOutcome.Severed && (hit.Region==TitanHitRegion.LeftArm || hit.Region==TitanHitRegion.RightArm || hit.Region==TitanHitRegion.LeftLeg || hit.Region==TitanHitRegion.RightLeg)))pendingFinisher=true;
         int severity=hit.Outcome==TitanDamageOutcome.Killed?2:hit.Outcome==TitanDamageOutcome.Hit?0:1;
         Color color=OutcomeColor(hit.Outcome);float now=Time.unscaledTime;
         if(numbersEnabled)

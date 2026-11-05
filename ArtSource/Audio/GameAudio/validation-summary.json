@@ -1,0 +1,88 @@
+{
+  "unity": "2021.3.25f1",
+  "fullSuite": {
+    "id": "2",
+    "testcasecount": "254",
+    "result": "Failed(Child)",
+    "total": "254",
+    "passed": "251",
+    "failed": "2",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 19:02:41Z",
+    "end-time": "2026-11-05 19:03:14Z",
+    "duration": "32.9908146"
+  },
+  "previousIdenticalSourceRun": {
+    "start": "2026-11-05 19:01:12Z",
+    "end": "2026-11-05 19:01:45Z",
+    "passed": 251,
+    "failed": 2,
+    "skipped": 1
+  },
+  "knownFailures": [
+    "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+    "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso"
+  ],
+  "audioCases": [
+    {
+      "name": "DuplicateManagerCannotDestroyAnUnrelatedPlayerOrMenuObject",
+      "result": "Passed"
+    },
+    {
+      "name": "ExistingMainMenuSoundtrackUsesMusicBusAndKeepsItsAuthoredPitch",
+      "result": "Passed"
+    },
+    {
+      "name": "GainsAreIndependentMusicMuteRemembersLevelAndAuthoredSourceSettingsRemainIntact",
+      "result": "Passed"
+    },
+    {
+      "name": "NewSwordAndSpawnAudioRouteImmediatelyWithoutWaitingForFallbackScan",
+      "result": "Passed"
+    },
+    {
+      "name": "PlaylistWithOneTrackDoesNotHangAndMusicStartupPreservesAuthoredVolume",
+      "result": "Passed"
+    },
+    {
+      "name": "PreferencesReloadAndSavedMusicChoiceOverridesLegacyInitialMute",
+      "result": "Passed"
+    },
+    {
+      "name": "RealMixerContainsMusicAndSfxUnderOneMasterWithNoGainAtDefaults",
+      "result": "Passed"
+    },
+    {
+      "name": "RoutingFindsInactiveAuthoredMusicAndFallbackSfxWithoutMovingOrPlayingThem",
+      "result": "Passed"
+    },
+    {
+      "name": "VolumeGainAndDebouncedSaveStillWorkWhileTheMenuPausesGameplay",
+      "result": "Passed"
+    }
+  ],
+  "limbSeverAudioCase": "Passed",
+  "sourceWorkerByteMatchSHA256": {
+    "Assets/Scripts/GameAudio.cs": "e318882d0cbb5c20f6e2afc492b40a0d9680ee3324d2ad2819b4390a47b6fa2a",
+    "Assets/Editor/GameAudioMixerBuilder.cs": "6b4b4b12446136de7af4d84990743a955073de403d1b4a1d061d04583e240b35",
+    "Assets/GameElements.cs": "05c690c4d770495b28e45887cd5f2724f929777c68534e690237f0605f938988",
+    "Assets/SceneManagement.cs": "a7bdd2169ae344de54f533baeb627b8204c97a5d4f279206ff821ad6a463b984",
+    "Assets/Attack.cs": "d932a2e85858955b5b8ec04b12a76a81220ce640d1ade5cc59bd686dfb5a7d08",
+    "Assets/Movement.cs": "c1c93570618a9b2441afbf38856da116cce8fb97d326f0ce120af006a3b5b2e1",
+    "Assets/ODM_Movement.cs": "e5281d0d615870ea95b976c5e0be61615f385309d1b1187cf59ee714571176e5",
+    "Assets/Titan/Integration/TitanSwordFeedback.cs": "02f5606b287f7172c51e22d371253ebff62395c1c47c40cbe18bc0efa4666c05",
+    "Assets/Titan/Integration/TitanSpawnStrikeEffect.cs": "281690a7d8fc47dcf30140af8583eb180bbcd6fa823993f2e116c318120c6e11",
+    "Assets/Tests/TitanPrototype/PlayMode/GameAudioPlayModeTests.cs": "1340be57d8a4963329c882b968b26b5f9ef55fbe87f3c40b30a5ed928cfc64b9",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanSwordImpactPlayModeTests.cs": "e695ca55131e61e8d391c68488e8acdd0e600cd9999e9ee842eec4c277386ce2",
+    "Assets/Resources/Audio/GameAudio.mixer": "fce108e73b17c8c84ab2b2385433b275da6cc031f22baa2493146a21e15f14c8",
+    "Assets/Resources/Audio/GameAudio.mixer.meta": "9d232056ff8cd443bbd6267b7ebf546c5c48b9c759898c642aa1ada3ced6ccf9",
+    "Assets/Audio/blood1.wav": "8096a7d6236e4d52d5c6df87c07c6d6df68e95e3e8112e0a0fe8a0876389a5ed",
+    "Assets/Audio/blood2.wav": "3688e2ef65f0e6fa8a705ce518fcd1a977d1b54c91037185b2ebed9d15137657"
+  },
+  "userSceneUnchanged": true,
+  "scope": "Mixer structure, real exposed gain/routing/preferences behavior, not measured DSP output or listening balance."
+}

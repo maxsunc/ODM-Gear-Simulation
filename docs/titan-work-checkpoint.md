@@ -50,7 +50,17 @@ performance. Native screenshots are owned fixtures and omit screen-space HUD.
 The user's GiantForest2 scene has NEW saved edits after346c85c0: preserve, don't
 rewrite/stage it. Baseline recorded in Library/CombatUXBaseline.json. Live Editor
 untouched. Source audio supplied Assets/Audio/blood{1,2}.wav now integrated without
-replacing current effects; only confirmed arm sever/kill adds the extra layer.
+replacing current effects. NEW approved follow-up: extra blood layer now ALSO on
+confirmed left/right LEG severs (not ordinary hits/blindness/misses). One real mixer
+at Assets/Resources/Audio/GameAudio.mixer: Master with SFX/Music children; existing
+sources route without source volume/pitch/spatial changes. GameAudio persistent
+auto-manager, main Menu + existing J-menu sliders; central M music-only mute restores
+previous nonzero level, prefs persist independently and on unscaled-time debounce.
+GameElements music arrays and Menu SceneManagement soundtrack route Music; remaining
+scene sources + immediate sword/jump/ODM/spawn runtime audio route SFX. Source scene
+assets remain untouched. Nine new audio cases + expanded leg finisher test pass;
+latest full suite251passed/2knownRunfailures/1graphics-onlyskip, same strict bounds.
+Full contract/evidence: docs/game-audio.md. No push; incremental local commit see gitlog.
 
 ## Previous: Giant Forest 2.0 — larger rocks / doubled walls / local commit authorized
 

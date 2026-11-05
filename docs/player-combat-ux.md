@@ -7,6 +7,10 @@ Titan hooks and attacks during holds. Commit each validated stage locally; no pu
 Unity **2021.3.25f1**, preserve approved Scout clips/Run, gameplay tuning, shared
 Titan structure/physics, live Editor and later user scene edits.
 
+**Later audio follow-up:** blood layer now also covers confirmed leg severs; shared
+Master/SFX/Music mixer + main/J-menu controls. See [game audio](game-audio.md) for
+current wiring, controls and newer validation. Stage histories below remain historical.
+
 ## Stage 1 — moving anchors and held attack exclusion
 
 - Each ODM hook stores the actual hit collider and collider-local point. Its world

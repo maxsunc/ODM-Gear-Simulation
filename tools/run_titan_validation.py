@@ -35,7 +35,7 @@ else:
 
 for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Assets/Tests/TitanPrototype',
                  'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player',
-                 'Assets/Art/Effects', 'Assets/Audio/TitanCombat']:
+                 'Assets/Art/Effects', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
 # Real user-supplied finisher clips and their small Resources reference palette.
 for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
@@ -48,12 +48,12 @@ for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
 shutil.copytree(root / 'Assets/Titan/Integration', project / 'Assets/Titan/Integration', dirs_exist_ok=True)
 # Compile the scoped bake-size UI as well; it never autoruns or bakes in tests.
 (project / 'Assets/Editor').mkdir(exist_ok=True)
-for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller']:
+for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'GameAudioMixerBuilder']:
     for suffix in ['', '.meta']:
         relative='Assets/Editor/'+name+'.cs'+suffix
         shutil.copy2(root / relative, project / relative)
 legacy = ['Movement.cs','ODM_Movement.cs','PlayerHealth.cs','Attack.cs','DamageDealer.cs',
-          'RagdollController.cs','ThirdPersonCam.cs','Scripts/Audio.cs',
+          'RagdollController.cs','ThirdPersonCam.cs','Scripts/Audio.cs','Scripts/GameAudio.cs','GameElements.cs','SceneManagement.cs',
           'Titan/TitanController.cs','Titan/TitanAttack.cs','Titan/TitanLimb.cs',
           'Titan/TitanNape.cs','Titan/TitanState.cs']
 for relative in legacy:
@@ -70,6 +70,9 @@ for relative in ['Assets/Prefabs/Titans/ModularTitanPrototype.prefab',
 (project / 'Packages' / 'manifest.json').write_text(json.dumps({'dependencies': {
     'com.unity.render-pipelines.universal': '12.1.11',
     'com.unity.test-framework': '1.1.31',
+    'com.unity.textmeshpro': '3.0.6',
+    'com.unity.ugui': '1.0.0',
+    'com.unity.modules.ui': '1.0.0',
     'com.unity.modules.ai': '1.0.0',
     'com.unity.modules.animation': '1.0.0',
     'com.unity.modules.audio': '1.0.0',

@@ -25,7 +25,7 @@ public sealed class TitanSpawnStrikeEffect : MonoBehaviour
         sparks=Particles("Warning sparks",particles,48);steam=Particles("Rising steam",particles,128);
         dust=Particles("Ground burst",particles,64);flash=Particles("Strike flash",particles,4);
         glow=gameObject.AddComponent<Light>();glow.type=LightType.Point;glow.shadows=LightShadows.None;glow.color=new Color(1,.65f,.18f);glow.enabled=false;
-        sound=gameObject.AddComponent<AudioSource>();sound.playOnAwake=false;sound.loop=false;sound.spatialBlend=1;sound.rolloffMode=AudioRolloffMode.Linear;
+        sound=gameObject.AddComponent<AudioSource>();sound.playOnAwake=false;sound.loop=false;sound.spatialBlend=1;sound.rolloffMode=AudioRolloffMode.Linear;GameAudio.Route(sound);
     }
     ParticleSystem Particles(string name,Material material,int max)
     {

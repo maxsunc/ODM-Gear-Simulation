@@ -16,17 +16,13 @@ public class GameElements : MonoBehaviour
 
     private void Start()
     {
-        currentInd = Random.Range(0, musics.Length);
-        // start the current song
-        musics[currentInd].Play();
-        StartCoroutine(RotateSun());
-        if(isMuted)
+        GameAudio.InitializeMusicDefault(isMuted);
+        if(musics!=null)
         {
-            for (int i = 0; i < musics.Length; i++)
-            {
-                musics[i].volume = (musics[i].volume == 0.05f) ? 0f : 0.05f;
-            }
+            foreach(var source in musics)GameAudio.Route(source,true);
+            if(musics.Length>0){currentInd=Random.Range(0,musics.Length);if(musics[currentInd]!=null)musics[currentInd].Play();}
         }
+        if(sun!=null)StartCoroutine(RotateSun());
     }
     IEnumerator RotateSun()
     {
@@ -51,11 +47,11 @@ public class GameElements : MonoBehaviour
     void Update()
     {
         // check if the song is finished playing
-        if (!musics[currentInd].isPlaying || Input.GetKeyDown(KeyCode.T))
+        if (musics!=null && musics.Length>0 && musics[currentInd]!=null && (!musics[currentInd].isPlaying || Input.GetKeyDown(KeyCode.T)))
         {
             // swithc to a new song, not the same one
             int nextInd = Random.Range(0, musics.Length);
-            while(nextInd == currentInd)
+            while(musics.Length>1 && nextInd == currentInd)
             {
                 // swithc it
                 nextInd = Random.Range(0, musics.Length);
@@ -64,26 +60,20 @@ public class GameElements : MonoBehaviour
             musics[currentInd].Stop();
             currentInd = nextInd;
             // start the song
-            musics[currentInd].Play();
+            if(musics[currentInd]!=null)musics[currentInd].Play();
         }
-        if(player.transform.position.y <= -25f && reloadScene == false)
+        if(player!=null && player.transform.position.y <= -25f && reloadScene == false)
         {
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
 
             reloadScene = true;
         }
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            for (int i = 0; i<musics.Length; i++){
-                musics[i].volume = (musics[i].volume == 0.05f) ? 0f : 0.05f;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
+        if (panel!=null && Input.GetKeyDown(KeyCode.J))
         {
             if(panel.activeSelf == true)
             {
                 panel.SetActive(false);
+                GameAudio.Save();
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1;
             }
@@ -96,4 +86,5 @@ public class GameElements : MonoBehaviour
         }
 
     }
+    void OnGUI(){if(panel!=null && panel.activeInHierarchy)GameAudio.DrawMenu();}
 }

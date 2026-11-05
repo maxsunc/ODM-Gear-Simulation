@@ -133,6 +133,7 @@ public class ODM_Movement : MonoBehaviour
 
     void Start()
     {
+        if(audio!=null && audio.container!=null)foreach(var source in audio.container)GameAudio.Route(source);
         movement = GetComponent<Movement>();
         accelCopy = acceleration;
         playerAnimator = visualAnimator!=null?visualAnimator:GetComponentInChildren<Animator>();
