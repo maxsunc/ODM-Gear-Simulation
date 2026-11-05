@@ -286,7 +286,7 @@ MonoBehaviour:
   severLaunchSpeed: 7
   severUpwardSpeed: 0.65
   severSpinSpeed: 0.8
-  eyeStunDuration: 5
+  eyeStunDuration: 12
   detachedLifetime: 30
 --- !u!114 &175780621415915748
 MonoBehaviour:
@@ -304,10 +304,10 @@ MonoBehaviour:
   automaticTick: 1
   previewRun: 0
   varyPace: 1
-  walkReferenceSpeed: 4.6
-  runReferenceSpeed: 9.5
+  walkReferenceSpeed: 8
+  runReferenceSpeed: 16
   walkTurnSpeed: 210
-  runTurnSpeed: 330
+  runTurnSpeed: 160
   headLeadTime: 0.085
 --- !u!114 &152838467166530141
 MonoBehaviour:
@@ -664,8 +664,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4488014, y: 0.8720331, z: 0.35}
-  m_Center: {x: -0.06265658, y: -0.1351018, z: 0}
+  m_Size: {x: 1.4488014, y: 1.5514994, z: 0.59794503}
+  m_Center: {x: -0.06265658, y: -0.23363543, z: 0.123972505}
 --- !u!114 &511141683721163916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,8 +1567,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5241466, y: 0.9197006, z: 0.32}
-  m_Center: {x: 0.00488317, y: -0.19239521, z: 0}
+  m_Size: {x: 2.2924886, y: 1.5564213, z: 0.6112512}
+  m_Center: {x: 0.001275301, y: -0.33848476, z: -0.14562556}
 --- !u!114 &7743559947257905480
 MonoBehaviour:
   m_ObjectHideFlags: 0
