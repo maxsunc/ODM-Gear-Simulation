@@ -23,10 +23,16 @@ and evidence: **docs/player-combat-ux.md**. Stage1 implemented/validated: collid
 independent moving anchors, invalid/sever/death release, hard held/ReleasePending/
 dead input + damage gates, synchronous capture cancellation and held visual priority.
 Full owned suite **226/228**,2026-11-05 16:22:58–16:23:16UTC; only established two
-Run failures unchanged. Stage2 hitboxes/speed/feedback and Stage3 cape still pending.
+Run failures unchanged. Stage2 now implemented: dedicated Scout native box sweep
+(rear nape/front eyes + obstruction checks, fixed player reach, teleport/saturation
+rejection), .18s same-Titan physical-impact speed grace (no wall/hold/teleport banking),
+confirmed1.5s kill toast and supplied blood1/blood2 audio layer via small Resources
+palette, no scene rewrites. Full suite **235/237**,16:35:51–16:36:11UTC2026-11-05;
+only same Run failures. Stage3 longer cape + native visual/stress review pending.
 The user's GiantForest2 scene has NEW saved edits after346c85c0: preserve, don't
 rewrite/stage it. Baseline recorded in Library/CombatUXBaseline.json. Live Editor
-untouched. Source audio supplied Assets/Audio/blood{1,2}.wav, not yet integrated.
+untouched. Source audio supplied Assets/Audio/blood{1,2}.wav now integrated without
+replacing current effects; only confirmed arm sever/kill adds the extra layer.
 
 ## Previous: Giant Forest 2.0 — larger rocks / doubled walls / local commit authorized
 

@@ -41,9 +41,9 @@ public class DamageDealer : MonoBehaviour
     {
         if(!isActiveAndEnabled||other==null||PlayerCombatPermission.IsBlocked(this))return;
         ResolvePlayer();
-        float damage=speedScaledDamage ? CalculateDamage(feedback!=null?feedback.CurrentDamageSpeed:0) :
-            baseDamage+(odmMovement!=null?(odmMovement.CurrentSpeed+odmMovement.ResidualSpeed)*momentumMultiplier:0);
         var zone=other.GetComponent<TitanHitZone>();
+        float damage=speedScaledDamage ? CalculateDamage(feedback!=null?feedback.DamageSpeedFor(zone!=null?zone.owner:null):0) :
+            baseDamage+(odmMovement!=null?(odmMovement.CurrentSpeed+odmMovement.ResidualSpeed)*momentumMultiplier:0);
         if(zone!=null && zone.owner!=null)
         {
             long key=((long)zone.owner.GetInstanceID()<<32)|(uint)zone.region;

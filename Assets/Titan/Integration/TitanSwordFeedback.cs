@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-/// <summary>Scene-only sword presentation. Damage comes from confirmed physical blade contacts.
+/// <summary>Scene-only sword presentation and continuous real-root speed sampling.
+/// Confirmed volume/blade contacts alone authorize feedback.
 /// Render-only shake never writes the motor, camera transform, aiming or global time.</summary>
 [DefaultExecutionOrder(120)]
 [DisallowMultipleComponent]
@@ -14,6 +15,12 @@ public class TitanSwordFeedback : MonoBehaviour
     public Camera playerCamera;
     public Material effectMaterial;
     public AudioClip slashSound, hitSound, severSound, killSound;
+    public TitanSwordAudioPalette audioPalette;
+    [Header("Same-Titan physical impact grace")]
+    [Range(0,.25f)] public float impactSpeedGrace=.18f;
+    public int FinisherSoundCount { get; private set; }
+    public int KillNotificationCount { get; private set; }
+    public bool KillNotificationVisible { get { return Time.unscaledTime<killToastUntil; } }
     [Header("Feedback")]
     [Range(0,1)] public float shakeIntensity=.65f;
     [Range(0,1)] public float soundVolume=.65f;
@@ -26,6 +33,14 @@ public class TitanSwordFeedback : MonoBehaviour
     public int ConfirmedHitCount { get; private set; }
     public TitanDamageResult LastHit { get; private set; }
     public float CurrentDamageSpeed { get { return MovementBlocked()?0:damageSpeed; } }
+    struct Impact { public ModularTitanBody body;public float speed,time; }
+    readonly Impact[] impacts=new Impact[4];
+    readonly HashSet<int> killIds=new HashSet<int>();
+    readonly Queue<int> killOrder=new Queue<int>();
+    Vector3 lastMotion;
+    float killToastUntil;
+    bool pendingFinisher;
+    int finisherIndex;
 
     struct Number { public Vector3 point,viewport;public float born;public string text;public Color color; }
     sealed class Spray { public ParticleSystem particles;public Transform follow;public float followUntil; }
@@ -51,7 +66,8 @@ public class TitanSwordFeedback : MonoBehaviour
         motor=GetComponent<TitanODMMotor>();target=GetComponent<TitanCombatTarget>();health=GetComponent<PlayerHealth>();
         lastPosition=transform.position;validMotionSamples=0;damageSpeed=0;
         if(dealer!=null)dealer.HitConfirmed+=OnHit;
-        if(attack!=null)attack.Released+=OnSlash;
+        if(attack!=null){attack.Released+=OnSlash;attack.Cancelled+=ResetDamageHistory;}
+        if(audioPalette==null)audioPalette=Resources.Load<TitanSwordAudioPalette>("TitanSwordAudioPalette");
         if(!Application.isPlaying)return;
         audioSource=NewObject("Sword feedback audio").AddComponent<AudioSource>();audioSource.playOnAwake=false;audioSource.spatialBlend=0;
         if(playerCamera==null)playerCamera=GetComponentInChildren<Camera>();
@@ -71,8 +87,47 @@ public class TitanSwordFeedback : MonoBehaviour
         Vector3 delta=transform.position-lastPosition;lastPosition=transform.position;
         float speed=dt>0?delta.magnitude/dt:float.PositiveInfinity;
         if(MovementBlocked()||dt<=0||dt>.1f||float.IsNaN(speed)||float.IsInfinity(speed)||speed>Mathf.Max(1,maximumTrustedMotionSpeed))
-        { validMotionSamples=0;damageSpeed=0;return; }
-        validMotionSamples=Mathf.Min(2,validMotionSamples+1);damageSpeed=validMotionSamples>=2?speed:0;
+        { ResetDamageHistory();return; }
+        validMotionSamples=Mathf.Min(2,validMotionSamples+1);damageSpeed=validMotionSamples>=2?speed:0;lastMotion=delta;
+    }
+    public void ResetDamageHistory()
+    {
+        validMotionSamples=0;damageSpeed=0;lastMotion=Vector3.zero;lastPosition=transform.position;
+        for(int i=0;i<impacts.Length;i++)impacts[i]=default(Impact);
+    }
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    { RecordSolidContact(hit.collider,hit.moveDirection,hit.normal); }
+    public void RecordSolidContact(Collider solid,Vector3 direction,Vector3 normal)
+    {
+        if(MovementBlocked()){ResetDamageHistory();return;}
+        if(solid==null || solid.isTrigger || solid.transform.IsChildOf(transform) || direction.sqrMagnitude<.0001f || Vector3.Dot(direction.normalized,normal)>=-.05f)return;
+        var body=solid.GetComponentInParent<ModularTitanBody>();
+        if(body==null || body.IsDead){ResetDamageHistory();return;} // A wall cannot bank approach speed.
+        if(lastMotion.sqrMagnitude<.000001f || Vector3.Dot(lastMotion.normalized,normal)>=-.05f || validMotionSamples<2 || damageSpeed<=0)return;
+        float now=Time.time,grace=Mathf.Clamp(impactSpeedGrace,0,.25f);int slot=0;
+        for(int i=0;i<impacts.Length;i++)
+        {
+            if(impacts[i].body==body && now-impacts[i].time<=grace)
+            {
+                // Repeated pushing must not keep refreshing an old high-speed receipt.
+                if(damageSpeed>impacts[i].speed+.1f)impacts[i]=new Impact{body=body,speed=damageSpeed,time=now};
+                return;
+            }
+            if(impacts[i].body==null || impacts[i].time<impacts[slot].time)slot=i;
+        }
+        impacts[slot]=new Impact{body=body,speed=damageSpeed,time=now};
+    }
+    public float DamageSpeedFor(ModularTitanBody body)
+    {
+        if(MovementBlocked()){ResetDamageHistory();return 0;}
+        float speed=damageSpeed;
+        if(body==null || body.IsDead || attack==null || !attack.IsAttacking || !attack.CanAttack)return speed;
+        float now=Time.time,grace=Mathf.Clamp(impactSpeedGrace,0,.25f);
+        if(now-attack.LastReleaseTime>attack.strikeDelay+attack.activeDuration+.05f)return speed;
+        foreach(var impact in impacts)
+            if(impact.body==body && now-impact.time<=grace && impact.time>=attack.LastReleaseTime-.12f)
+                speed=Mathf.Max(speed,impact.speed);
+        return speed;
     }
     GameObject NewObject(string label)
     {
@@ -137,6 +192,12 @@ public class TitanSwordFeedback : MonoBehaviour
     void OnHit(TitanDamageResult hit)
     {
         if(!hit.Accepted)return;ConfirmedHitCount++;LastHit=hit;
+        if(hit.Outcome==TitanDamageOutcome.Killed && hit.Body!=null && killIds.Add(hit.Body.GetInstanceID()))
+        {
+            killOrder.Enqueue(hit.Body.GetInstanceID());if(killOrder.Count>64)killIds.Remove(killOrder.Dequeue());
+            KillNotificationCount++;killToastUntil=Time.unscaledTime+1.5f;
+        }
+        if(hit.Outcome==TitanDamageOutcome.Killed || (hit.Outcome==TitanDamageOutcome.Severed && (hit.Region==TitanHitRegion.LeftArm || hit.Region==TitanHitRegion.RightArm)))pendingFinisher=true;
         int severity=hit.Outcome==TitanDamageOutcome.Killed?2:hit.Outcome==TitanDamageOutcome.Hit?0:1;
         Color color=OutcomeColor(hit.Outcome);float now=Time.unscaledTime;
         if(numbersEnabled)
@@ -164,6 +225,15 @@ public class TitanSwordFeedback : MonoBehaviour
         {
             AudioClip clip=pendingSound==2?killSound:pendingSound==1?severSound:hitSound;
             if(audioSource!=null && clip!=null)audioSource.PlayOneShot(clip,soundVolume);pendingSound=-1;
+        }
+        if(pendingFinisher)
+        {
+            if(audioSource!=null && audioPalette!=null && audioPalette.finisherSounds!=null && audioPalette.finisherSounds.Length>0)
+            {
+                var clip=audioPalette.finisherSounds[finisherIndex++%audioPalette.finisherSounds.Length];
+                if(clip!=null){audioSource.PlayOneShot(clip,soundVolume*Mathf.Clamp01(audioPalette.volume));FinisherSoundCount++;}
+            }
+            pendingFinisher=false;
         }
         for(int i=numbers.Count-1;i>=0;i--)if(Time.unscaledTime-numbers[i].born>numberLifetime)numbers.RemoveAt(i);
         if(Time.unscaledTime>=shakeUntil)shakePower=0;
@@ -211,15 +281,23 @@ public class TitanSwordFeedback : MonoBehaviour
         }
         if(hitMarkerEnabled && Time.unscaledTime<markerUntil)
         { textStyle.fontSize=25;GUI.color=markerColor;GUI.Label(new Rect(Screen.width/2f-20,Screen.height/2f-20,40,40),"×",textStyle); }
+        if(KillNotificationVisible)
+        {
+            float alpha=Mathf.Clamp01((killToastUntil-Time.unscaledTime)/.35f);textStyle.fontSize=28;
+            var rect=new Rect(Screen.width*.5f-170,Screen.height*.18f,340,44);
+            GUI.color=new Color(0,0,0,alpha);GUI.Label(new Rect(rect.x+2,rect.y+2,rect.width,rect.height),"+Titan Kill",textStyle);
+            GUI.color=new Color(1,.91f,.65f,alpha);GUI.Label(rect,"+Titan Kill",textStyle);
+        }
         GUI.color=oldColor;
     }
     void OnDisable()
     {
-        if(dealer!=null)dealer.HitConfirmed-=OnHit;if(attack!=null)attack.Released-=OnSlash;
+        if(dealer!=null)dealer.HitConfirmed-=OnHit;if(attack!=null){attack.Released-=OnSlash;attack.Cancelled-=ResetDamageHistory;}
         if(shakingCamera!=null)EndShake(shakingCamera);
         RenderPipelineManager.beginCameraRendering-=BeginCamera;RenderPipelineManager.endCameraRendering-=EndCamera;
         Camera.onPreCull-=BeginBuiltin;Camera.onPostRender-=EndBuiltin;
         foreach(var go in owned)if(go!=null)Destroy(go);owned.Clear();trails.Clear();numbers.Clear();sprays=null;
-        shakeUntil=shakePower=markerUntil=0;pendingSound=-1;
+        shakeUntil=shakePower=markerUntil=killToastUntil=0;pendingSound=-1;pendingFinisher=false;
+        ResetDamageHistory();killIds.Clear();killOrder.Clear();
     }
 }

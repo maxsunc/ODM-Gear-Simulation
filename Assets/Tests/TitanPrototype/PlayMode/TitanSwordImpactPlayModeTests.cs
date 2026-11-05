@@ -123,6 +123,64 @@ public class TitanSwordImpactPlayModeTests
         camera.fieldOfView+=10;Assert.That(camera.projectionMatrix.m11,Is.Not.EqualTo(matrix.m11),"Shake must not freeze automatic FOV projection");matrix=camera.projectionMatrix;
         Call(fx,"BeginShake",camera);fx.enabled=false;Assert.That(camera.projectionMatrix,Is.EqualTo(matrix));Object.DestroyImmediate(root);
     }
+    GameObject DedicatedWindow(Vector3 origin,Quaternion rotation,out MonoBehaviour dealer,out MonoBehaviour sweep)
+    {
+        var root=new GameObject("Owned dedicated slash player");root.transform.SetPositionAndRotation(origin,rotation);
+        var window=new GameObject("Dedicated active window");window.transform.SetParent(root.transform,false);window.SetActive(false);
+        dealer=(MonoBehaviour)window.AddComponent(Real("DamageDealer"));Set(dealer,"baseDamage",100f);Set(dealer,"speedScaledDamage",true);
+        sweep=(MonoBehaviour)window.AddComponent(Real("TitanODMSwordSweep"));Set(sweep,"useDedicatedVolume",true);return root;
+    }
+    [TestCase(1f)][TestCase(3f)][TestCase(5f)][TestCase(6f)]
+    public void DedicatedVolumeReachesRearNapeWithoutAnyBladeAnimationAndOnlyOnce(float scale)
+    {
+        body.GetComponent<TitanMotionStyle>().automaticTick=false;body.animator.enabled=false;body.transform.localScale=Vector3.one*scale;Physics.SyncTransforms();
+        var zone=body.hitZones.First(z=>z.region==TitanHitRegion.Nape);var col=zone.GetComponent<Collider>();
+        Vector3 rear=col.ClosestPoint(col.bounds.center-zone.transform.forward*100)-zone.transform.forward;
+        MonoBehaviour dealer,sweep;var root=DedicatedWindow(rear,Quaternion.LookRotation(zone.transform.forward),out dealer,out sweep);
+        try
+        {
+            dealer.gameObject.SetActive(true);Assert.That(Prop<bool>(sweep,"DedicatedVolumeActive"),Is.True);Call(sweep,"LateUpdate");Call(sweep,"LateUpdate");
+            Assert.That(body.GetHealth(TitanHitRegion.Nape),Is.EqualTo(400),"Reach must not depend on which mirrored sword animation happened to play");
+        }
+        finally{Object.DestroyImmediate(root);}
+    }
+    [Test] public void DedicatedVolumeCannotHitNapeFromTheFrontOrThroughAWall()
+    {
+        body.GetComponent<TitanMotionStyle>().automaticTick=false;body.animator.enabled=false;Physics.SyncTransforms();
+        var zone=body.hitZones.First(z=>z.region==TitanHitRegion.Nape);var col=zone.GetComponent<Collider>();
+        MonoBehaviour dealer,sweep;var root=DedicatedWindow(col.bounds.center+zone.transform.forward,Quaternion.LookRotation(-zone.transform.forward),out dealer,out sweep);
+        dealer.gameObject.SetActive(true);Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.Nape),Is.EqualTo(500));
+        dealer.gameObject.SetActive(false);root.transform.SetPositionAndRotation(col.bounds.center-zone.transform.forward*2,Quaternion.LookRotation(zone.transform.forward));
+        var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.name="Real physical slash occluder";wall.transform.position=col.bounds.center-zone.transform.forward;wall.transform.rotation=zone.transform.rotation;wall.transform.localScale=new Vector3(5,5,.1f);
+        Physics.SyncTransforms();dealer.gameObject.SetActive(true);Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.Nape),Is.EqualTo(500));Object.DestroyImmediate(root);Object.DestroyImmediate(wall);
+    }
+    [Test] public void DedicatedVolumeCastsAcrossThinZonesButRejectsTeleportsAndSaturatedQueries()
+    {
+        var probe=new GameObject("Thin physical damage trigger");probe.transform.SetParent(body.transform,false);probe.transform.position=body.transform.position+Vector3.right*20;
+        var col=probe.AddComponent<BoxCollider>();col.isTrigger=true;col.size=Vector3.one*.04f;var zone=probe.AddComponent<TitanHitZone>();zone.owner=body;zone.region=TitanHitRegion.RightArm;
+        MonoBehaviour dealer,sweep;var root=DedicatedWindow(probe.transform.position-Vector3.right*.5f,Quaternion.identity,out dealer,out sweep);
+        Set(sweep,"slashCenter",Vector3.zero);Set(sweep,"slashHalfExtents",Vector3.one*.1f);dealer.gameObject.SetActive(true);
+        root.transform.position+=Vector3.right;Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.RightArm),Is.EqualTo(900),"Both endpoint boxes miss this thin zone; native box cast must catch the crossing");
+        dealer.gameObject.SetActive(false);root.transform.position=probe.transform.position-Vector3.right*50;dealer.gameObject.SetActive(true);
+        root.transform.position+=Vector3.right*100;Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.RightArm),Is.EqualTo(900));Assert.That(Prop<int>(sweep,"RejectedSweeps"),Is.GreaterThan(0));
+        dealer.gameObject.SetActive(false);root.transform.position=probe.transform.position;
+        for(int i=0;i<70;i++){var clutter=new GameObject("Saturation probe");clutter.transform.SetParent(root.transform,false);clutter.AddComponent<BoxCollider>().isTrigger=true;}
+        Physics.SyncTransforms();dealer.gameObject.SetActive(true);Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.RightArm),Is.EqualTo(900),"Saturation fails the whole query, not just later candidates");Object.DestroyImmediate(root);
+    }
+    [UnityTest] public IEnumerator KillToastIsConfirmedOnceAndUserFinisherClipsLayerOnlyOnArmSeverOrKill()
+    {
+        var root=new GameObject("Owned kill/audio feedback");var fx=(MonoBehaviour)root.AddComponent(Real("TitanSwordFeedback"));
+        var palette=Resources.Load("TitanSwordAudioPalette");Assert.That(palette,Is.Not.Null);
+        var clips=(AudioClip[])palette.GetType().GetField("finisherSounds").GetValue(palette);Assert.That(clips.Length,Is.EqualTo(2));
+        Assert.That(AssetDatabase.GetAssetPath(clips[0]),Is.EqualTo("Assets/Audio/blood1.wav"));Assert.That(AssetDatabase.GetAssetPath(clips[1]),Is.EqualTo("Assets/Audio/blood2.wav"));
+        var result=new TitanDamageResult{Body=body,Outcome=TitanDamageOutcome.Hit,Region=TitanHitRegion.LeftArm,Damage=100,Point=body.leftHand.position};
+        Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.Zero);Assert.That(Prop<int>(fx,"KillNotificationCount"),Is.Zero);
+        result.Outcome=TitanDamageOutcome.Blinded;result.Region=TitanHitRegion.Eyes;Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.Zero);
+        result.Outcome=TitanDamageOutcome.Severed;result.Region=TitanHitRegion.LeftArm;Call(fx,"OnHit",result);Call(fx,"LateUpdate");Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(1));
+        result.Outcome=TitanDamageOutcome.Killed;result.Region=TitanHitRegion.Nape;Call(fx,"OnHit",result);Call(fx,"OnHit",result);Call(fx,"LateUpdate");
+        Assert.That(Prop<int>(fx,"KillNotificationCount"),Is.EqualTo(1));Assert.That(Prop<bool>(fx,"KillNotificationVisible"),Is.True);Assert.That(Prop<int>(fx,"FinisherSoundCount"),Is.EqualTo(2),"Same-frame outcomes coalesce extra audio without replacing existing impact audio");
+        yield return new WaitForSecondsRealtime(1.6f);Assert.That(Prop<bool>(fx,"KillNotificationVisible"),Is.False);Object.Destroy(root);
+    }
     [UnityTest] public IEnumerator CutImpulseLaunchesWholeBranchesWithoutJointEnergyAtOneThreeAndFiveScale()
     {
         Object.Destroy(body.gameObject);yield return null;

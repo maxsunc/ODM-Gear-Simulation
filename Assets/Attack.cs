@@ -21,6 +21,8 @@ public class Attack : MonoBehaviour
     public event System.Action Released;
     public event System.Action Cancelled;
     public bool CanAttack { get { return isActiveAndEnabled && !PlayerCombatPermission.IsBlocked(this); } }
+    public Quaternion StrikeRotation { get; private set; } = Quaternion.identity;
+    public float LastReleaseTime { get; private set; } = float.NegativeInfinity;
     private bool nextAttackReady = true;
     
 
@@ -72,6 +74,9 @@ public class Attack : MonoBehaviour
         }
         if(!CanAttack){CancelAttack();yield break;}
         IsCharging=false;IsAttacking=true;
+        var gear=GetComponent<ODM_Movement>();Vector3 aim=gear!=null && gear.camTransform!=null?gear.camTransform.forward:transform.forward;
+        StrikeRotation=Quaternion.LookRotation(aim,Mathf.Abs(Vector3.Dot(aim,Vector3.up))>.98f?Vector3.forward:Vector3.up);
+        LastReleaseTime=Time.time;
         if(armatureAnimator!=null)armatureAnimator.SetBool("holdingAttack", false);
         if(Released!=null)Released();
         if(slashSfx!=null)PlayAudio(slashSfx, 0.8f, 1.2f);

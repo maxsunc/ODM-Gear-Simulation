@@ -25,11 +25,38 @@ Titan structure/physics, live Editor and later user scene edits.
   All four new integration cases pass. Only the two established protected Run
   cadence/stance failures remain unchanged; no tolerances or clips modified.
 
-## Remaining authorized stages
+## Stage 2 — dedicated slash, impact grace, kill text and supplied audio
 
-Dedicated bounded slash + target-specific collision speed grace, confirmed kill
-text and audio layer; then longer cape-only fabric simulation, native visual/stress
-review. No full-speed/WebGL/performance claims until independently exercised.
+- Installed Scout + speed-damage scenes automatically use a dedicated slash volume;
+  legacy blade labs remain unchanged. Root-relative box centre(0,.15,1.35), half
+  extents(1.8,1.2,1.45) WORLD metres. Attack aim locks on F release; the box follows
+  real player translation through the .12s active window, never the sword pose.
+- Native overlap + box cast catches thin crossed zones, once per region/swing.
+  Rear-only nape / front-only eyes; physical line-of-sight rejects walls and body
+  obstruction. Size does not scale with Titan size. Reach<=4.5m, teleport rejection,
+  query64 / occlusion32 saturation fails closed. Inspector-selected debug volume.
+- Real native CCT contact records that Titan's last valid continuous root speed for
+  .18s. Only a committed attack close to the contact can use it; preserved damage
+  curve and native body collision. Four bounded receipts; no global speed bank.
+  Lower-speed repeated pushing cannot refresh the high-speed timestamp. Walls,
+  teleport, cancel, hold, death and invalid sampling clear history. Other Titans
+  cannot borrow it. No artificial impulses, post-simulation clipping or passthrough.
+- Confirmed player kill shows outlined gold `+Titan Kill` upper-centre for1.5s.
+  Bounded64 recent IDs prevent duplicate notifications; no score-system change.
+- Original blood1(3.049s)/blood2(2.022s), mono48k WAV bytes/import settings preserved.
+  A tiny Resources palette references them without editing existing saved scenes.
+  Alternating clips layer over existing sounds ONLY on actual arm sever / kill;
+  same-frame outcomes coalesce, not on face blindness, ordinary damage or misses.
+- Owned full suite **235/237 pass**,2026-11-05 16:35:51–16:36:11UTC,20.282s. Nine
+  new cases include rear nape hits1/3/5/6x, occlusion/front rejection, native thin-zone
+  crossing, teleport/saturation, real CCT slowdown/target-specific expiry, cancellation/
+  wall/hold rejection, audio references/layering and kill-toast lifetime. Only the
+  established two protected Run failures remain. All strict physics tests retained.
+
+## Remaining authorized stage
+
+Longer cape-only fabric simulation and native visual/stress review. No full-speed/
+WebGL/performance claims until independently exercised.
 
 The user's saved `GiantForest2.unity` was already modified after the forest commit.
 It is neither rewritten nor staged by these runtime fixes. Baseline hash lives in

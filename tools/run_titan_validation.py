@@ -36,6 +36,12 @@ for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Asset
                  'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player',
                  'Assets/Art/Effects', 'Assets/Audio/TitanCombat']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
+# Real user-supplied finisher clips and their small Resources reference palette.
+for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
+                 'Assets/Audio/blood2.wav','Assets/Audio/blood2.wav.meta',
+                 'Assets/Resources/TitanSwordAudioPalette.asset','Assets/Resources/TitanSwordAudioPalette.asset.meta']:
+    target=project / relative;target.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copy2(root / relative,target)
 # Compile the real opt-in adapter and its narrow legacy dependencies as the default
 # assembly. Tests access that assembly by reflection (Unity asmdefs cannot reference it).
 shutil.copytree(root / 'Assets/Titan/Integration', project / 'Assets/Titan/Integration', dirs_exist_ok=True)

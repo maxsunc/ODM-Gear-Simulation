@@ -167,6 +167,44 @@ public class TitanODMIntegrationPlayModeTests
         target.EscapeHold();Assert.That(target.ReleasePending,Is.True);dealer.GetType().GetMethod("ProcessContact",new[]{typeof(Collider)}).Invoke(dealer,new object[]{zone});Assert.That(limb.health,Is.EqualTo(before));
         Object.Destroy(wall);yield return null;target.TickHold(0);Assert.That(target.ReleasePending,Is.False);
     }
+    MonoBehaviour DamageMemory(out MonoBehaviour attack)
+    {
+        walk.enabled=false;gear.enabled=false;attack=Add("Attack");Set(attack,"strikeDelay",.075f);Set(attack,"activeDuration",.12f);Set(attack,"recoveryDuration",.195f);
+        var fx=Add("TitanSwordFeedback");fx.enabled=false;Set(fx,"attack",attack);fx.enabled=true;return fx;
+    }
+    [UnityTest] public IEnumerator NativeTitanCollisionPreservesApproachDamageBrieflyForThatTitanOnly()
+    {
+        var body=HookTitan();MonoBehaviour attack;var fx=DamageMemory(out attack);
+        var physicalPart=new GameObject("Owned Titan physical contact surface");physicalPart.transform.SetParent(body.transform,false);physicalPart.transform.position=new Vector3(3,8,0);
+        physicalPart.AddComponent<BoxCollider>().size=new Vector3(1,5,5);Physics.SyncTransforms();
+        for(int i=0;i<3;i++){cc.Move(Vector3.right*.6f);Call(fx,"SampleDamageMotion",.02f);}
+        Assert.That((float)fx.GetType().GetProperty("CurrentDamageSpeed").GetValue(fx),Is.EqualTo(30).Within(.01f));
+        Assert.That(Call(attack,"TryBeginCharge"),Is.True);
+        cc.Move(Vector3.right*.6f);Call(fx,"SampleDamageMotion",.02f);cc.Move(Vector3.right*.6f);Call(fx,"SampleDamageMotion",.02f);
+        Assert.That(player.transform.position.x,Is.LessThan(2.1f),"Native CCT still collides; no pass-through/velocity injection");
+        Assert.That((float)fx.GetType().GetProperty("CurrentDamageSpeed").GetValue(fx),Is.LessThan(1));
+        Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.EqualTo(30).Within(.02f),"Native impact must preserve actual approach speed despite the following stopped sample");
+        var other=HookTitan();Assert.That((float)Call(fx,"DamageSpeedFor",other),Is.LessThan(1),"No borrowing another target's collision receipt");
+        yield return new WaitForSeconds(.21f);Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.LessThan(1),"Repeated pushing/late attacks cannot bank speed indefinitely");
+    }
+    [UnityTest] public IEnumerator WallTeleportCancellationAndCaptureInvalidateImpactReceipts()
+    {
+        var body=HookTitan();MonoBehaviour attack;var fx=DamageMemory(out attack);var solid=body.ragdollBones.First(e=>e.collider!=null).collider;
+        Action prime=()=>
+        {
+            Call(fx,"ResetDamageHistory");for(int i=0;i<2;i++){player.transform.position+=Vector3.right*.6f;Call(fx,"SampleDamageMotion",.02f);}
+            Call(fx,"RecordSolidContact",solid,Vector3.right,Vector3.left);Call(fx,"SampleDamageMotion",.02f);
+            Call(attack,"CancelAttack"); // Cancellation intentionally clears the first receipt.
+            for(int i=0;i<2;i++){player.transform.position+=Vector3.right*.6f;Call(fx,"SampleDamageMotion",.02f);}
+            Call(fx,"RecordSolidContact",solid,Vector3.right,Vector3.left);Call(fx,"SampleDamageMotion",.02f);Assert.That(Call(attack,"TryBeginCharge"),Is.True);
+            Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.EqualTo(30).Within(.02f));
+        };
+        prime();var wall=new GameObject("Ordinary blocking wall").AddComponent<BoxCollider>();Call(fx,"RecordSolidContact",wall,Vector3.right,Vector3.left);Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);
+        prime();player.transform.position+=Vector3.right*100;Call(fx,"SampleDamageMotion",.02f);Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);
+        prime();Call(attack,"CancelAttack");Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);
+        prime();Hold();Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);target.EscapeHold();Assert.That((float)Call(fx,"DamageSpeedFor",body),Is.Zero);
+        Object.Destroy(wall.gameObject);yield return null;
+    }
     void GravityOnly(float acceleration)
     {
         // Exercise the REAL CharacterController/motor, without input or automatic
