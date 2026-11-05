@@ -26,10 +26,11 @@ public class TitanAudioPlayModeTests
         SceneManager.SetActiveScene(previous);Physics.SyncTransforms();yield return null;
     }
     [UnityTearDown]public IEnumerator Cleanup(){SceneManager.SetActiveScene(previous);yield return SceneManager.UnloadSceneAsync(scene);}
-    void Pose(float gait,float phase)
+    void Pose(float gait,float phase,float? offset=null,float dt=1f/120)
     {
-        body.SetWalking(true);motion.TickMotion(.02f,4.6f,false,0);body.animator.SetFloat("Gait",gait);
-        body.animator.Play("Locomotion",0,phase);body.animator.Update(0);Call(emitter,"SampleFeet",1f/120);
+        body.SetWalking(true);motion.TickMotion(dt,4.6f,false,0);body.animator.SetFloat("Gait",gait);
+        if(offset.HasValue)body.animator.SetFloat("CycleOffset",offset.Value);
+        body.animator.Play("Locomotion",0,phase);body.animator.Update(0);Call(emitter,"SampleFeet",dt);
     }
     [Test]public void PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics()
     {
@@ -61,12 +62,82 @@ public class TitanAudioPlayModeTests
         int previousCount=0;
         for(int cycle=0;cycle<5;cycle++)
         {
-            for(int i=0;i<120;i++){Pose(gait,cycle+i/120f);var clip=Prop<AudioClip>(emitter,"LastFootstep");if(clip!=null)seen.Add(clip);}
+            for(int i=0;i<120;i++){Pose(gait,cycle+i/120f,offset);var clip=Prop<AudioClip>(emitter,"LastFootstep");if(clip!=null)seen.Add(clip);}
             int count=Prop<int>(emitter,"FootstepCount");
             if(cycle>0)Assert.That(count-previousCount,Is.EqualTo(2),"Exactly two planted soles per full gait cycle, not a timer or per-frame playback");previousCount=count;
         }
         Assert.That(seen.Count,Is.GreaterThanOrEqualTo(2));Assert.That(UnityEngine.Random.state,Is.EqualTo(global));
         int before=Prop<int>(emitter,"FootstepCount");for(int i=0;i<20;i++)Call(emitter,"SampleFeet",1f/120);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.EqualTo(before));
+    }
+    static BoxCollider Sole(ModularTitanBody b,int foot)
+    {
+        var leg=b.limbs.First(l=>l.region==(foot==0?TitanHitRegion.LeftLeg:TitanHitRegion.RightLeg));
+        return leg.bodies[2].GetComponentsInChildren<BoxCollider>().First(s=>!s.isTrigger && s.attachedRigidbody==leg.bodies[2]);
+    }
+    static float SoleBottom(BoxCollider s)
+    {
+        float y=float.PositiveInfinity;
+        for(int x=-1;x<=1;x+=2)for(int a=-1;a<=1;a+=2)for(int z=-1;z<=1;z+=2)
+            y=Mathf.Min(y,s.transform.TransformPoint(s.center+Vector3.Scale(s.size*.5f,new Vector3(x,a,z))).y);
+        return y;
+    }
+    [TestCase(0f,0f,1f,0f)] [TestCase(1f,0f,1f,0f)] [TestCase(.5f,.23f,3f,0f)]
+    [TestCase(0f,.71f,5f,.25f)] [TestCase(1f,.13f,10f,.25f)]
+    [TestCase(.1f,.17f,7f,.4f)] [TestCase(.25f,.37f,3f,.4f)] [TestCase(.75f,.51f,5f,.4f)] [TestCase(.9f,.93f,10f,.4f)]
+    public void FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(float gait,float offset,float size,float rootHeight)
+    {
+        body.transform.localScale=Vector3.one*size;body.transform.position=Vector3.up*rootHeight*size;body.animator.SetFloat("CycleOffset",offset);
+        var soles=new[]{Sole(body,0),Sole(body,1)};var rows=new System.Text.StringBuilder("phase,left,right,eventFoot\n");int count=0;
+        for(int i=0;i<720;i++)
+        {
+            float phase=i/240f;Pose(gait,phase,offset);int now=Prop<int>(emitter,"FootstepCount");
+            if(now>count)Assert.That(SoleBottom(soles[Prop<int>(emitter,"LastFoot")])/size-rootHeight,Is.LessThanOrEqualTo(.0401f),"Sound must coincide with the visible sole plant, not early descent");
+            rows.AppendLine(phase+","+(SoleBottom(soles[0])/size)+","+(SoleBottom(soles[1])/size)+","+(now>count?Prop<int>(emitter,"LastFoot"):-1));count=now;
+        }
+        System.IO.File.WriteAllText("Library/FootstepTiming-"+gait+"-"+offset+"-"+size+"-"+rootHeight+".csv",rows.ToString());
+        Assert.That(count,Is.InRange(5,6),"Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain");
+    }
+    [TestCase(30,0f,.35f,1f)] [TestCase(30,1f,1.65f,10f)] [TestCase(30,.5f,1.65f,7f)]
+    [TestCase(60,0f,1f,3f)] [TestCase(60,1f,1.65f,5f)] [TestCase(120,1f,1.65f,10f)] [TestCase(120,.75f,.6f,7f)]
+    public void RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(int fps,float gait,float rate,float size)
+    {
+        body.transform.localScale=Vector3.one*size;body.transform.position=Vector3.up*(size*.25f);body.SetWalking(true);motion.TickMotion(.1f,16,true,0);
+        body.animator.SetFloat("Gait",gait);body.animator.SetFloat("StrideRate",rate);body.animator.SetFloat("CycleOffset",.17f);
+        body.animator.Play("Locomotion",0,0);body.animator.Update(0);
+        var soles=new[]{Sole(body,0),Sole(body,1)};float dt=1f/fps;var last=new float[2];var older=new float[2];int previousCount=0,boundaryCount=0,previousCycle=0;
+        for(int frame=0;frame<10000;frame++)
+        {
+            body.animator.Update(dt);Call(emitter,"SampleFeet",dt);int count=Prop<int>(emitter,"FootstepCount");
+            var heights=new[]{SoleBottom(soles[0])/size-.25f,SoleBottom(soles[1])/size-.25f};
+            if(count>previousCount)
+            {
+                int foot=Prop<int>(emitter,"LastFoot");
+                Assert.That(heights[foot]<=.0401f || (frame>1 && last[foot]<=.0601f && last[foot]<older[foot] && heights[foot]>last[foot]),Is.True,"Dispatch must be at the visible plant or the first observed frame after its minimum, not early descent");
+            }
+            older=last;last=heights;previousCount=count;
+            int cycle=Mathf.FloorToInt(body.animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            if(cycle!=previousCycle)
+            {
+                if(previousCycle>=1)Assert.That(count-boundaryCount,Is.EqualTo(2),"No missing/double impacts at real Animator speed and display frame rate");
+                boundaryCount=count;previousCycle=cycle;if(cycle>=6)break;
+            }
+        }
+        Assert.That(previousCycle,Is.GreaterThanOrEqualTo(6));
+    }
+    [Test]public void LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike()
+    {
+        for(int i=0;i<240;i++)Pose(0,i/240f,0);int count=Prop<int>(emitter,"FootstepCount");
+        var support=scene.GetRootGameObjects().Single(g=>g.name=="Real support").GetComponent<BoxCollider>();
+        support.enabled=false;Physics.SyncTransforms();Pose(0,1,0);support.enabled=true;Physics.SyncTransforms();
+        for(int i=0;i<20;i++)Pose(0,1,0);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.EqualTo(count));
+    }
+    [Test]public void NearbyButAirborneRootCannotEmitAndAudioObserverCannotAlterAnimationOrGameplayRandom()
+    {
+        body.transform.position=Vector3.up;var global=UnityEngine.Random.state;
+        for(int i=0;i<360;i++)Pose(1,i/120f,.37f);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.Zero);
+        var rotations=body.hips.GetComponentsInChildren<Transform>().Select(t=>t.rotation).ToArray();var position=body.transform.position;var state=body.animator.GetCurrentAnimatorStateInfo(0);float gait=body.animator.GetFloat("Gait"),rate=body.animator.GetFloat("StrideRate");
+        Call(emitter,"SampleFeet",1f/120);Assert.That(body.hips.GetComponentsInChildren<Transform>().Select(t=>t.rotation),Is.EqualTo(rotations));Assert.That(body.transform.position,Is.EqualTo(position));
+        Assert.That(body.animator.GetCurrentAnimatorStateInfo(0).normalizedTime,Is.EqualTo(state.normalizedTime));Assert.That(body.animator.GetFloat("Gait"),Is.EqualTo(gait));Assert.That(body.animator.GetFloat("StrideRate"),Is.EqualTo(rate));Assert.That(UnityEngine.Random.state,Is.EqualTo(global));
     }
     [Test]public void IdleBlindLegLossHitchesAndMissingGroundCannotManufactureFootsteps()
     {

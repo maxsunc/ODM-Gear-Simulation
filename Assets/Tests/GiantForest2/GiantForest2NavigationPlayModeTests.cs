@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using Object=UnityEngine.Object;
 
-/// <summary>Navigation-only tests of the CURRENT saved user map, not a map rebuild.</summary>
+/// <summary>Navigation/runtime tests of the CURRENT saved user map, not a map rebuild.</summary>
 public class GiantForest2NavigationPlayModeTests
 {
     Scene scene;TitanWorldNavigation nav;Component manager,spawner;Terrain terrain;
@@ -67,6 +67,34 @@ public class GiantForest2NavigationPlayModeTests
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
         Assert.That(NavMesh.CalculateTriangulation().indices.Length,Is.EqualTo(triangles));
+    }
+    [UnityTest]public IEnumerator AllSavedSizesProduceSynchronizedWalkRunImpactsAtTheirActualBakedTerrainHeight()
+    {
+        var prefab=Field<GameObject>(spawner,"titanPrefab");var report=new System.Text.StringBuilder();
+        foreach(float size in new[]{3f,5f,6f,7f,10f})
+        {
+            ModularTitanBody body=null;string error="";
+            for(int z=-600;z<=600&&body==null;z+=100)for(int x=-600;x<=600&&body==null;x+=100)
+            {
+                object[] args={prefab,Point(x,z),Quaternion.identity,size,null,null};if((bool)Call(manager,"TrySpawn",args))body=(ModularTitanBody)args[4];error=(string)args[5];
+            }
+            Assert.That(body,Is.Not.Null,error);body.GetComponent<TitanPatrolChaseAI>().enabled=false;
+            var motion=body.GetComponent<TitanMotionStyle>();motion.automaticTick=false;
+            var emitter=(Behaviour)body.GetComponent(Real("TitanAudioEmitter"));emitter.GetType().GetField("automaticSampling").SetValue(emitter,false);
+            foreach(float gait in new[]{0f,1f})
+            {
+                emitter.enabled=false;emitter.enabled=true;int before=Prop<int>(emitter,"FootstepCount");
+                for(int i=0;i<720;i++)
+                {
+                    body.SetWalking(true);motion.TickMotion(1f/120,gait==0?4.6f:16f,gait==1,0);body.animator.SetFloat("Gait",gait);body.animator.SetFloat("CycleOffset",.23f);
+                    body.animator.Play("Locomotion",0,i/240f);body.animator.Update(0);Call(emitter,"SampleFeet",1f/120);
+                }
+                int strikes=Prop<int>(emitter,"FootstepCount")-before;report.AppendLine("size="+size+" gait="+gait+" navRootAboveTerrain="+(body.transform.position.y-Point(body.transform.position.x,body.transform.position.z).y)+" strikes="+strikes);
+                Assert.That(strikes,Is.InRange(5,6),report.ToString());
+            }
+            Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
+        }
+        Debug.Log("NATIVE_FOREST_FOOTSTEPS\n"+report);File.WriteAllText("Library/GiantForest2/footstep-terrain-report.txt",report.ToString());
     }
     [UnityTest]public IEnumerator CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives()
     {

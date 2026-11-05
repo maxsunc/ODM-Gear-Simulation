@@ -77,6 +77,10 @@ rewritten. Scream + left/right foot sources are spatial SFX; the personal eaten 
 is independent 2D SFX, not parented to the player, catcher or corpse. All route to the
 same Master/SFX mixer immediately. Existing blood/kill/slash layers remain.
 
+**Synchronization follow-up:** see [Titan footstep sync](titan-footstep-sync.md)
+for the corrected plant threshold, baked-terrain elevation handling and real
+frame-rate regression evidence. No supplied clip/import/palette retuning.
+
 Footsteps observe animated foot-box soles and scene-local ground queries, with
 lift/plant hysteresis. No approximate time interval, modified clip/events, root motion,
 Animator/bone writes, global Physics synchronization or collision/force changes.

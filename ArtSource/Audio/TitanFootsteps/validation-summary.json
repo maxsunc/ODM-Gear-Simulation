@@ -1,0 +1,653 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "changes": {
+    "oldPlantThresholdPerScale": 0.1,
+    "newPlantThresholdPerScale": 0.04,
+    "authoredSolePadPerScale": 0.035,
+    "retainedLiftThresholdPerScale": 0.2,
+    "maximumNearbyRootSupportGapPerScale": 0.75,
+    "missedMinimumFallbackPreviousHeightPerScale": 0.06,
+    "instructionsOrSoundFileEdits": false
+  },
+  "protectedSourceUnchanged": {
+    "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "70ddb0b9647d9eaf35b7a9ad6ffc7e517f3d3d70567d9b3180552d458305f2ed",
+    "Assets/Resources/TitanAudioPalette.asset": "3ba577f226281d983c3f15c63cab8811191baf1826fc4d43db2855c78a865dc0",
+    "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+    "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+    "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675"
+  },
+  "originalFootstepFilesAndImportsUnmodified": {
+    "Assets/Audio/titanFootstep1.mp3": "d597a9697e316e676a8c5c839b5a1771cbef2773251b999561271181ec20e5d5",
+    "Assets/Audio/titanFootstep1.mp3.meta": "7fbc69a48279f95c575936c6e5b7ba07d6a0e000c28e596c1a8bf6e9c26830e3",
+    "Assets/Audio/titanFootstep2.mp3": "74b502fcb98d038c274b260a2b4446c36e70daace0580568a6a1543d2d40a872",
+    "Assets/Audio/titanFootstep2.mp3.meta": "25836b94d5f80953864f6de5539d20edd31e8c87698d9689b74fc58dd2e4bee7",
+    "Assets/Audio/titanFootstep3.mp3": "abca3d709767643c2bebbfe197acfff3e65596a92667a5a32626f595c16de1fa",
+    "Assets/Audio/titanFootstep3.mp3.meta": "e6f209ac4db18e30c3c123e04811c55661b3e57b9b6c97157bb193361dcedcac"
+  },
+  "allSnapshotAssetsAndSettingsUnchanged": 1170,
+  "sourceByteMatchedBothWorkers": [
+    "Assets/Titan/Integration/TitanAudioEmitter.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanAudioPlayModeTests.cs"
+  ],
+  "oldEmitterWithNewTests": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "26",
+      "result": "Failed(Child)",
+      "total": "26",
+      "passed": "7",
+      "failed": "19",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:19:38Z",
+      "end-time": "2026-11-05 23:19:39Z",
+      "duration": "0.7564107"
+    },
+    "failures": [
+      {
+        "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+        "message": "  Expected: 2\n  But was:  1\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.0f,1.0f,0.0f)",
+        "message": "  Sound must coincide with the visible sole plant, not early descent\n  Expected: less than or equal to 0.0401000008f\n  But was:  0.0846493766f\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.0f,1.0f,0.0f)",
+        "message": "  Sound must coincide with the visible sole plant, not early descent\n  Expected: less than or equal to 0.0401000008f\n  But was:  0.0999979973f\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.5f,0.23f,3.0f,0.0f)",
+        "message": "  Sound must coincide with the visible sole plant, not early descent\n  Expected: less than or equal to 0.0401000008f\n  But was:  0.0945135951f\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.71f,5.0f,0.25f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.13f,10.0f,0.25f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.1f,0.17f,7.0f,0.4f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.25f,0.37f,3.0f,0.4f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.75f,0.51f,5.0f,0.4f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.9f,0.93f,10.0f,0.4f)",
+        "message": "  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain\n  Expected: in range (5,6)\n  But was:  0\n"
+      },
+      {
+        "name": "LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike",
+        "message": "  Expected: 2\n  But was:  4\n"
+      },
+      {
+        "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+        "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.0f,0.35f,1.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,1.0f,1.65f,10.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.5f,1.65f,7.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,0.0f,1.0f,3.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,1.0f,1.65f,5.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,1.0f,1.65f,10.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      },
+      {
+        "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,0.75f,0.6f,7.0f)",
+        "message": "  No missing/double impacts at real Animator speed and display frame rate\n  Expected: 2\n  But was:  0\n"
+      }
+    ],
+    "oldEmitterCommit": "da1e366cc5e4fe49d0d83bbafba3f9c006dde06c"
+  },
+  "firstFullRegression": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "318",
+      "result": "Failed(Child)",
+      "total": "318",
+      "passed": "310",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:21:57Z",
+      "end-time": "2026-11-05 23:22:33Z",
+      "duration": "35.2365197"
+    },
+    "failures": [
+      "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace"
+    ]
+  },
+  "secondFullRegression": {
+    "id": "2",
+    "testcasecount": "318",
+    "result": "Failed(Child)",
+    "total": "318",
+    "passed": "310",
+    "failed": "7",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 23:25:21Z",
+    "end-time": "2026-11-05 23:25:58Z",
+    "duration": "36.1710632"
+  },
+  "sameExistingFullFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    }
+  ],
+  "newTests": [
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.0f,1.0f,0.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.0f,1.0f,0.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.5f,0.23f,3.0f,0.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.71f,5.0f,0.25f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.13f,10.0f,0.25f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.1f,0.17f,7.0f,0.4f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.25f,0.37f,3.0f,0.4f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.75f,0.51f,5.0f,0.4f)",
+      "result": "Passed"
+    },
+    {
+      "name": "FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.9f,0.93f,10.0f,0.4f)",
+      "result": "Passed"
+    },
+    {
+      "name": "LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike",
+      "result": "Passed"
+    },
+    {
+      "name": "NearbyButAirborneRootCannotEmitAndAudioObserverCannotAlterAnimationOrGameplayRandom",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.0f,0.35f,1.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,1.0f,1.65f,10.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.5f,1.65f,7.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,0.0f,1.0f,3.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,1.0f,1.65f,5.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,1.0f,1.65f,10.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,0.75f,0.6f,7.0f)",
+      "result": "Passed"
+    }
+  ],
+  "nativeMapCurrentScene": {
+    "id": "2",
+    "testcasecount": "4",
+    "result": "Failed(Child)",
+    "total": "4",
+    "passed": "3",
+    "failed": "1",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 23:25:25Z",
+    "end-time": "2026-11-05 23:25:33Z",
+    "duration": "8.2432831"
+  },
+  "nativeMapPriorFixtureBaseline": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "3",
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "2",
+      "failed": "1",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:21:58Z",
+      "end-time": "2026-11-05 23:22:05Z",
+      "duration": "7.2858319"
+    },
+    "failures": [
+      {
+        "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+        "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+      }
+    ]
+  },
+  "nativeMapSameExistingFailure": [
+    {
+      "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+      "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+    }
+  ],
+  "geometryEvents": [
+    {
+      "case": "FootstepTiming-0-0-1-0",
+      "strikes": [
+        {
+          "phase": 0.4291667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.0397701
+        },
+        {
+          "phase": 0.9291667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03976825
+        },
+        {
+          "phase": 1.429167,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03976861
+        },
+        {
+          "phase": 1.929167,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03976825
+        },
+        {
+          "phase": 2.429167,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03976861
+        },
+        {
+          "phase": 2.929167,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03976861
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0-0.71-5-0.25",
+      "strikes": [
+        {
+          "phase": 0.2166667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2899947
+        },
+        {
+          "phase": 0.7166666,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2899951
+        },
+        {
+          "phase": 1.216667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2899947
+        },
+        {
+          "phase": 1.716667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2899947
+        },
+        {
+          "phase": 2.216667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2899947
+        },
+        {
+          "phase": 2.716667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2899947
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0.1-0.17-7-0.4",
+      "strikes": [
+        {
+          "phase": 0.2541667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4371989
+        },
+        {
+          "phase": 0.7541667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4371985
+        },
+        {
+          "phase": 1.254167,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4371989
+        },
+        {
+          "phase": 1.754167,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4371985
+        },
+        {
+          "phase": 2.254167,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4371989
+        },
+        {
+          "phase": 2.754167,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4371989
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0.25-0.37-3-0.4",
+      "strikes": [
+        {
+          "phase": 0.05,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4369877
+        },
+        {
+          "phase": 0.55,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4369877
+        },
+        {
+          "phase": 1.05,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.436987
+        },
+        {
+          "phase": 1.55,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.436987
+        },
+        {
+          "phase": 2.05,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.436987
+        },
+        {
+          "phase": 2.55,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.436987
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0.5-0.23-3-0",
+      "strikes": [
+        {
+          "phase": 0.1916667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03765416
+        },
+        {
+          "phase": 0.6916667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03765416
+        },
+        {
+          "phase": 1.191667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03765416
+        },
+        {
+          "phase": 1.691667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03765452
+        },
+        {
+          "phase": 2.191667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.0376538
+        },
+        {
+          "phase": 2.691667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.0376538
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0.75-0.51-5-0.4",
+      "strikes": [
+        {
+          "phase": 0.4375,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4390478
+        },
+        {
+          "phase": 0.9375,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4390478
+        },
+        {
+          "phase": 1.4375,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4390482
+        },
+        {
+          "phase": 1.9375,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4390478
+        },
+        {
+          "phase": 2.4375,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4390486
+        },
+        {
+          "phase": 2.9375,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4390482
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-0.9-0.93-10-0.4",
+      "strikes": [
+        {
+          "phase": 0.5333334,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4392792
+        },
+        {
+          "phase": 1.033333,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4392792
+        },
+        {
+          "phase": 1.533333,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4392792
+        },
+        {
+          "phase": 2.033333,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.4392773
+        },
+        {
+          "phase": 2.533333,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.4392792
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-1-0-1-0",
+      "strikes": [
+        {
+          "phase": 0.4708333,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03935814
+        },
+        {
+          "phase": 0.9708334,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03935707
+        },
+        {
+          "phase": 1.470833,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03935778
+        },
+        {
+          "phase": 1.970833,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03935814
+        },
+        {
+          "phase": 2.470833,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.03935814
+        },
+        {
+          "phase": 2.970833,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.03935707
+        }
+      ]
+    },
+    {
+      "case": "FootstepTiming-1-0.13-10-0.25",
+      "strikes": [
+        {
+          "phase": 0.3416667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2891246
+        },
+        {
+          "phase": 0.8416666,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2891243
+        },
+        {
+          "phase": 1.341667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2891246
+        },
+        {
+          "phase": 1.841667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2891239
+        },
+        {
+          "phase": 2.341667,
+          "foot": 1,
+          "soleHeightPerTitanScale": 0.2891246
+        },
+        {
+          "phase": 2.841667,
+          "foot": 0,
+          "soleHeightPerTitanScale": 0.2891239
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Event dispatch/native evaluated geometry verified; subjective listening/device DSP/WebGL/crowd performance not certified.",
+    "Existing map no-warning fixture fails on user-added unbaked4x; safe fallback remains. No bake or settings edit authorized/performed.",
+    "Original clips retain15-35ms attack lead-in and .5-.7s texture/tails."
+  ]
+}

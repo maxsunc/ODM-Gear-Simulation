@@ -14,7 +14,36 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current:3-second hand-grab escape QTE
+## Current follow-up: minimal QTE HUD + footstep synchronization
+
+User requested minimal HUD: only key, segmented progress and time bar, no prose;
+compact260x128 background alpha.32. Gameplay unchanged, tests retained. Full292/7/1
+of300 and nativeHUD1/1; actual updated screenshots. Committed FIRST as da1e366c,
+LOCAL, not pushed.
+
+Then investigated walk/run sound mismatch. Old sole/ground threshold.10*size
+fired early and missed all steps when baked nav root sat above terrain. Native
+forest roots sampled +.35/.54/1.46/.35/.11m for3/5/6/7/10x. Observer now compares
+with higher of root and real ground (only nearby support<=.75*size), .04*size plant
+threshold against authored.035 pad, same.20 lift hysteresis, down→up minimum
+fallback for skipped low-FPS samples, reset history on lost support. No timer,
+gait/clip/source/palette retuning, Animator/root/physics/global-sync writer.
+
+18 added audio cases:9 geometry/offset/baked-height,7 actual Animator30/60/120FPS
+with cadence.35–1.65 and walk/run/blends,2 safety/observer cases. Old emitter with
+same tests7pass/19fail; fixed24pass/2existing one-scream palette failures of26.
+Full310pass/SAME7fail/1skip of318. Original assertions preserved. Existing offset
+fixture now sets requested offset AFTER TickMotion so it is really exercised.
+Native mapnew all-five-size footstep test passes plus old route and clear-birth
+cases. Saved user changed sizes3/5/6/4(initial5,max15): existing no-SizeWarning
+fixture now fails on unbaked4x. Prior unchanged map tests reproduce same failure:
+2/1 of3 ->3/1 of4, no new failing map case.4x still safely skipped; NO bake or
+config edits made. User scene/palette edits remain uncommitted and preserved.
+Docs/titan-footstep-sync.md, ArtSource/Audio/TitanFootsteps/ evidence. No live
+Editor stop/reload/save/input, no new push. Device/subjective audio/crowd FPS not
+certified; original15–35ms clip lead-in/.5–.7s tails left intact.
+
+## Previous:3-second hand-grab escape QTE
 
 User approved3 random W/A/S/D/Q/E prompts, no consecutive repeats, one at a time;
 3s TOTAL (not2.5), wrong key resets progress NOT clock. Fresh edges only, pre-held

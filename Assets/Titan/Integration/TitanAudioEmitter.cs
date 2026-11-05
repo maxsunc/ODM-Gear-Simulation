@@ -17,7 +17,8 @@ public sealed class TitanAudioEmitter : MonoBehaviour
     public int LastFoot {get;private set;}
     ModularTitanBody body;TitanMotionStyle motion;TitanRuntimeActor actor;
     AudioSource voice;readonly AudioSource[] steps=new AudioSource[2];
-    readonly BoxCollider[] soles=new BoxCollider[2];readonly bool[] lifted=new bool[2];
+    readonly BoxCollider[] soles=new BoxCollider[2];readonly bool[] lifted=new bool[2], footSampled=new bool[2], descending=new bool[2];
+    readonly float[] previousClearance=new float[2];
     readonly RaycastHit[] hits=new RaycastHit[16];
     System.Random random;Vector3 lastRoot;bool sampled;
     static readonly int Walking=Animator.StringToHash("IsWalking");
@@ -51,7 +52,8 @@ public sealed class TitanAudioEmitter : MonoBehaviour
         voice.transform.position=body.head!=null?body.head.position:transform.position;
         voice.PlayOneShot(clip,palette.screamVolume);LastScream=clip;ScreamCount++;
     }
-    void ResetFeet(){lifted[0]=lifted[1]=false;sampled=false;lastRoot=transform.position;}
+    void ResetFoot(int foot){lifted[foot]=footSampled[foot]=descending[foot]=false;}
+    void ResetFeet(){ResetFoot(0);ResetFoot(1);sampled=false;lastRoot=transform.position;}
     void StopSounds(){ResetFeet();if(voice!=null)voice.Stop();foreach(var source in steps)if(source!=null)source.Stop();}
     void LateUpdate(){if(automaticSampling)SampleFeet(Time.deltaTime);}
     public void SampleFeet(float dt)
@@ -71,7 +73,7 @@ public sealed class TitanAudioEmitter : MonoBehaviour
         lastRoot=transform.position;sampled=true;
         for(int i=0;i<2;i++)
         {
-            var sole=soles[i];if(sole==null || !sole.enabled){lifted[i]=false;continue;}
+            var sole=soles[i];if(sole==null || !sole.enabled){ResetFoot(i);continue;}
             // Compute current animated box bounds analytically, not stale native
             // Collider.bounds and not a global Physics.SyncTransforms() write.
             var matrix=sole.transform.localToWorldMatrix;var half=sole.size*.5f;
@@ -79,12 +81,24 @@ public sealed class TitanAudioEmitter : MonoBehaviour
             float extentY=Mathf.Abs(matrix.m10)*half.x+Mathf.Abs(matrix.m11)*half.y+Mathf.Abs(matrix.m12)*half.z;
             Vector3 point=center-Vector3.up*extentY;
             float height;
-            if(!GroundHeight(point,size,out height)){lifted[i]=true;continue;}
-            float clearance=point.y-height;
-            // Hysteresis: planted/bouncing support feet cannot fire every frame.
-            // Uses real soles, so walk/run blending, cadence and cycle offsets follow automatically.
+            if(!GroundHeight(point,size,out height)){ResetFoot(i);continue;}
+            // Baked navigation is voxelized: the root can ride slightly ABOVE
+            // scenery. Animation plants at root-relative .035m, not at NavMesh Y0.
+            // Accept only nearby real support; do not turn airborne/missing ground
+            // into a landing, nor re-arm merely because a query lost its support.
+            if(transform.position.y-height>size*.75f){ResetFoot(i);continue;}
+            float clearance=point.y-Mathf.Max(height,transform.position.y);
+            // Low frame rates can skip the narrow minimum-height interval. Detect
+            // the observed down-to-up turn as a fallback, never an elapsed timer.
+            bool crossedPlant=footSampled[i] && descending[i] && clearance>previousClearance[i]+size*.0001f && previousClearance[i]<=size*.06f;
+            if(footSampled[i])descending[i]=clearance<previousClearance[i]-size*.0001f;
+            previousClearance[i]=clearance;footSampled[i]=true;
+            // The old .10m threshold fired during descent, well before the visible
+            // plant. .04m follows the authored .035m sole pad plus sampling epsilon.
+            // Keep .20m lift hysteresis above ALL stance bounce, so one swing can
+            // produce only one strike even while the planted sole rocks/rolls.
             if(clearance>=size*.20f){lifted[i]=true;continue;}
-            if(clearance>size*.10f || clearance< -size*.15f)continue;
+            if((clearance>size*.04f && !crossedPlant) || clearance< -size*.15f)continue;
             if(lifted[i])
             {
                 var clip=Choose(palette.footsteps);
