@@ -14,7 +14,43 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: player-only respawn, preserve running map/Titans/music
+## Current: bounded Titan corpse/loose-limb steam, darkening and transparency
+
+User confirmed player-only respawn (already LOCAL ca20e655), asked for anime-style
+Titan death decomposition instead of permanent corpses. Runtime-only universal
+ModularTitanBody.Die/Sever install TitanCorpseDecomposition. Real native ragdoll
+unchanged; steam from CURRENT physical collider surfaces, gradual55% tint darkening
+about1–6s, real URP Lit transparency6–17.5s, root/colliders removed18 scaled seconds.
+Loose limbs independently steam/fade for min(positive detachedLifetime,18), zero
+uses18 not permanent. Survivor keeps injury/HP and can later die with old limb gone.
+No sinking/shrinking/root or bone writes/forces/velocity clipping/global physics.
+
+Dedup per-corpse cloned original Lit materials retain exact shader/maps; original
+assets/other Titans untouched. Switch only fading clones' transparency/queue/ZWrite/
+shadow+depth flags. New Resources Steam mat/shader and transparent Lit variant ref.
+One world-space PS128 main /32 per branch (256 total body+4); private RNG, scaled
+pause, fixed PSseed, manual bounded hitch emission, no native physics/lights/audio.
+Dispose owned materials and restore original refs if observer removed. Detached
+roots own finite scene-local lifetimes. Existing spawner25s / retainedcap6 and
+shorter custom cleanup are untouched hard resource overrides; may preempt FX.
+
+Fresh baseline413/8/1 of422 ->429pass/SAME8fail/1skip of438 twice,16new cases. Real
+original skin texture/shader preservation, monotonic shade/alpha1/3/5/10x, no physical
+state writes, private RNG/bounded FX, pause/invalid delta, current physical emissions,
+full body/branch/material/PS cleanup, survivor death after branch gone. Native1/1
+actual same3x rig/pose/camera Fresh/Dark/Steam/Fading/Gone captures; pixel darkening/
+steam/true background transparency verified, native4s fall speed<40. Saved CURRENT
+GiantForest2 native6pass/1SAME unbaked4x warning failure of7: actual4s steam+dark,10s
+fade,18s corpse/PS gone, injured survivor stillsevered leg/arm950, player100/sameIDs/
+nav66651 triangles. Previous real player-only respawn stillpasses. No4x bake.
+Protected saved assets/tuning/palettes/Run/nape/sword/player sources unchanged, both
+owned workers current-byte matched. No live Editor input/stop/save/reload/switch/
+physicsautomation, no scene/prefab/art publication. Subjective density/fade pace,
+FPS/devices/WebGL/long-duration10x safety not certified. LOCAL only, not pushed.
+See docs/titan-corpse-decomposition.md, tools/capture_titan_decomposition.py and
+ArtSource/Titan/Decomposition/validation-summary.json plus full/native/map XML/PNGs.
+
+## Previous: player-only respawn, preserve running map/Titans/music
 
 User confirmed nape pose and asked to commit (already LOCAL c8a17afc), then requested
 respawn player instead of restarting scene. PlayerHealth remains sole HP/death,

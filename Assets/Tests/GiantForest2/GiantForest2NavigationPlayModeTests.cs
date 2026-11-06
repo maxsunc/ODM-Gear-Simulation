@@ -130,6 +130,19 @@ public class GiantForest2NavigationPlayModeTests
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
     }
+    [UnityTest]public IEnumerator RealForestCorpsesSteamFadeAndDisappearWithoutResettingPlayerWorldOrInjuredSurvivor()
+    {
+        Call(manager,"SetCombatEnabled",false);var player=Field<Component>(manager,"player");var health=player.GetComponent(Real("PlayerHealth"));var prefab=Field<GameObject>(spawner,"titanPrefab");int triangles=NavMesh.CalculateTriangulation().indices.Length,playerId=player.GetInstanceID(),handle=scene.handle;float hp=Field<float>(health,"currentHP");
+        ModularTitanBody injured=null,dead=null;
+        for(int z=-600;z<=600&&(injured==null||dead==null);z+=100)for(int x=-600;x<=600&&(injured==null||dead==null);x+=100)
+        {object[] args={prefab,Point(x,z),Quaternion.identity,3f,null,null};if((bool)Call(manager,"TrySpawn",args)){if(injured==null)injured=(ModularTitanBody)args[4];else dead=(ModularTitanBody)args[4];}}
+        Assert.That(injured!=null&&dead!=null,Is.True);injured.Sever(TitanHitRegion.RightLeg,Vector3.zero);injured.ReceiveDamage(TitanHitRegion.LeftArm,50,injured.leftHand.position,Vector3.zero);dead.Die();var fx=dead.GetComponent<TitanCorpseDecomposition>();var steam=fx.Steam;Assert.That(fx,Is.Not.Null);float start=Time.time;
+        while(Time.time-start<4)yield return null;Assert.That(fx.Shade,Is.LessThan(.9f));Assert.That(fx.Opacity,Is.EqualTo(1));Assert.That(steam.particleCount,Is.GreaterThan(0));
+        while(Time.time-start<10)yield return null;Assert.That(fx.Opacity,Is.InRange(.1f,.95f));Assert.That(dead.IsDead,Is.True);
+        while(dead!=null&&Time.time-start<20)yield return null;Assert.That(dead==null,Is.True);Assert.That(steam==null,Is.True);yield return new WaitForSeconds(1.1f);
+        Assert.That(injured!=null&&!injured.IsDead,Is.True);Assert.That(injured.IsSevered(TitanHitRegion.RightLeg),Is.True);Assert.That(injured.GetHealth(TitanHitRegion.LeftArm),Is.EqualTo(950));Assert.That(player.GetInstanceID(),Is.EqualTo(playerId));Assert.That(Field<float>(health,"currentHP"),Is.EqualTo(hp));Assert.That(scene.handle,Is.EqualTo(handle));Assert.That(NavMesh.CalculateTriangulation().indices.Length,Is.EqualTo(triangles));
+        Debug.Log("NATIVE_FOREST_DECOMPOSITION lifetime="+fx+" elapsed="+(Time.time-start)+" survivorArmHp="+injured.GetHealth(TitanHitRegion.LeftArm)+" playerHp="+hp+" navigationTriangles="+triangles);
+    }
     [UnityTest]public IEnumerator PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic()
     {
         var player=Field<Component>(manager,"player");var health=(MonoBehaviour)player.GetComponent(Real("PlayerHealth"));var target=player.GetComponent<TitanCombatTarget>();var prefab=Field<GameObject>(spawner,"titanPrefab");

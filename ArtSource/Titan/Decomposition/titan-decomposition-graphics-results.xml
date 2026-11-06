@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 13:59:58Z" end-time="2026-11-06 13:59:59Z" duration="1.208935">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="438" result="Passed" start-time="2026-11-06 13:59:58Z" end-time="2026-11-06 13:59:59Z" duration="1.208935" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1475" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="438" result="Passed" start-time="2026-11-06 13:59:58Z" end-time="2026-11-06 13:59:59Z" duration="1.184840" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="33784" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1134" name="TitanCorpseDecompositionPlayModeTests" fullname="TitanCorpseDecompositionPlayModeTests" classname="TitanCorpseDecompositionPlayModeTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-06 13:59:58Z" end-time="2026-11-06 13:59:59Z" duration="1.173433" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1152" name="CorpseDecompositionRendersDarkSteamAndTrueFadeInOwnedNativeGraphics" fullname="TitanCorpseDecompositionPlayModeTests.CorpseDecompositionRendersDarkSteamAndTrueFadeInOwnedNativeGraphics" methodname="CorpseDecompositionRendersDarkSteamAndTrueFadeInOwnedNativeGraphics" classname="TitanCorpseDecompositionPlayModeTests" runstate="Runnable" seed="584215324" result="Passed" start-time="2026-11-06 13:59:58Z" end-time="2026-11-06 13:59:59Z" duration="1.159832" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[TITAN_DECOMPOSITION_NATIVE bodyPixels=51833 darker=47150 steam=10651 translucent=29916 corpsePeak=15.72837 device=Intel(R) Iris(R) Xe Graphics
+Cleanup Blit
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

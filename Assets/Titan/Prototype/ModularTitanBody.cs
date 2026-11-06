@@ -53,6 +53,7 @@ public class ModularTitanBody : MonoBehaviour
     [Range(0,3)] public float severUpwardSpeed = .65f;
     [Range(0,1.5f)] public float severSpinSpeed = .8f;
     [Min(0.1f)] public float eyeStunDuration = 5f;
+    [Tooltip("Detached-part lifetime upper bound. Steam/fade finishes within18 scaled seconds; 0 uses that default instead of permanent loose limbs.")]
     [Min(0)] public float detachedLifetime = 30f;
 
     public bool IsDead { get; private set; }
@@ -311,7 +312,9 @@ public class ModularTitanBody : MonoBehaviour
             if (useRegionalHealth) LaunchSeveredBranch(limb,impulse);
             else if (limb.bodies.Length > 0 && limb.bodies[0] != null)
                 limb.bodies[0].AddForce(Vector3.ClampMagnitude(impulse, 250), ForceMode.Impulse);
-            if (Application.isPlaying && detachedLifetime > 0) Destroy(detached, detachedLifetime);
+            // Severed physical branches own the same bounded steam/fade lifecycle.
+            // No scheduled Destroy can pop a branch midway through decomposition.
+            if (Application.isPlaying) TitanCorpseDecomposition.BeginBranch(this,limb,detached);
             UpdateLocomotion();
             if (LimbSevered != null) LimbSevered(region);
             return true;
@@ -400,6 +403,7 @@ public class ModularTitanBody : MonoBehaviour
         IgnoreInternalCollisions();
         var hipsBody = hips != null ? hips.GetComponent<Rigidbody>() : null;
         if (hipsBody != null) hipsBody.AddForce(Vector3.ClampMagnitude(impulse, 600), ForceMode.Impulse);
+        if (Application.isPlaying) TitanCorpseDecomposition.BeginDeath(this);
         if (Died != null) Died();
     }
 
