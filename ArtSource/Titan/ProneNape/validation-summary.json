@@ -1,0 +1,319 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "request": "Pose-only exposure of the real nape after both legs severed; no hitbox, reach, sword timing, velocity damage, HP, finisher or root/physics settings changes",
+  "runtimeDiff": "TitanInjuryPose.BuildProne hips78deg instead90, Spine-6/Chest-4/Neck+6/Head+26; prone arm elbows(x3.1,y1,z2.6) and palms(x3.6,y.6,z4.2), mirrored",
+  "preserved": [
+    "Single-leg kneels",
+    ".58/.76s timing and original FallWeight",
+    "Bone lengths and detached branches",
+    "Root position/heading and helpless/no-grab/no-walk state",
+    "Actual current-pose death physics, masses, joints, solver12/4 and angular4",
+    "All nape dimensions/local center, region health, rear-vs-front/cover and sword reach/damage curve",
+    "User saved prefab/scene/palettes/navigation/Run/Scout sources and original clips"
+  ],
+  "fullBaseline": {
+    "id": "2",
+    "testcasecount": "386",
+    "result": "Failed(Child)",
+    "total": "386",
+    "passed": "377",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 03:20:56Z",
+    "end-time": "2026-11-06 03:21:33Z",
+    "duration": "36.9612713"
+  },
+  "fullFirst": {
+    "id": "2",
+    "testcasecount": "410",
+    "result": "Failed(Child)",
+    "total": "410",
+    "passed": "401",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 03:35:36Z",
+    "end-time": "2026-11-06 03:36:19Z",
+    "duration": "42.8132492"
+  },
+  "fullFinal": {
+    "id": "2",
+    "testcasecount": "410",
+    "result": "Failed(Child)",
+    "total": "410",
+    "passed": "401",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 03:38:15Z",
+    "end-time": "2026-11-06 03:38:59Z",
+    "duration": "44.6344977"
+  },
+  "addedCases": 24,
+  "sameBaselineFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.264853f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.349999994f\n"
+    },
+    {
+      "name": "HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  4.63918114f\n"
+    }
+  ],
+  "native": {
+    "before-graphics-results.xml": {
+      "stats": {
+        "id": "2",
+        "testcasecount": "1",
+        "result": "Passed",
+        "total": "1",
+        "passed": "1",
+        "failed": "0",
+        "inconclusive": "0",
+        "skipped": "0",
+        "asserts": "0",
+        "engine-version": "3.5.0.0",
+        "clr-version": "4.0.30319.42000",
+        "start-time": "2026-11-06 03:39:55Z",
+        "end-time": "2026-11-06 03:39:56Z",
+        "duration": "1.2755832"
+      },
+      "outputs": [
+        "PRONE_NAPE_RENDER center=(0.00, 5.48, 8.61) hips=(0.00, 3.36, -2.40) head=(0.00, 3.36, 11.40)\nCleanup Blit\n"
+      ]
+    },
+    "after-graphics-results.xml": {
+      "stats": {
+        "id": "2",
+        "testcasecount": "1",
+        "result": "Passed",
+        "total": "1",
+        "passed": "1",
+        "failed": "0",
+        "inconclusive": "0",
+        "skipped": "0",
+        "asserts": "0",
+        "engine-version": "3.5.0.0",
+        "clr-version": "4.0.30319.42000",
+        "start-time": "2026-11-06 03:40:16Z",
+        "end-time": "2026-11-06 03:40:16Z",
+        "duration": "0.5564726"
+      },
+      "outputs": [
+        "PRONE_NAPE_RENDER center=(0.00, 9.16, 7.46) hips=(0.00, 3.71, -2.40) head=(0.00, 7.89, 10.72)\nCleanup Blit\n"
+      ]
+    }
+  },
+  "actual3xNapeCenterHeight": {
+    "beforeMeters": 5.48,
+    "afterMeters": 9.16,
+    "gainMeters": 3.68
+  },
+  "tested": {
+    "geometryCases": 16,
+    "sizes": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "armStates": [
+      "both present",
+      "left missing",
+      "right missing",
+      "both missing"
+    ],
+    "rootHeadingsDegrees": [
+      37,
+      217
+    ],
+    "secondCutAges": [
+      0,
+      0.31,
+      0.68
+    ],
+    "nativeSwordCases": 4,
+    "nativeSwordFixtureHp": "500->400 original100 damage once per swing, no shortcut",
+    "nativeLargeDeathSizes": [
+      3,
+      5,
+      10
+    ],
+    "largeDeathSecondsPerSize": 5,
+    "strictSpeedMps": 40,
+    "strictArmDegreesAt120Hz": 8,
+    "maxArmDegreesAt120Hz": 7.785993,
+    "metrics": [
+      {
+        "test": "NapeDeathDuringProneCollapseDoesNotResumeAlivePoseAnimation",
+        "measurement": "TITAN_INJURY_DEATH_METRICS state=Prone maxSpeed=5.64 hipsY=0.90"
+      },
+      {
+        "test": "NapeDeathFromKneelingHandsCurrentPoseToStablePhysics",
+        "measurement": "TITAN_INJURY_DEATH_METRICS state=KneelingOnLeft maxSpeed=12.78 hipsY=0.55"
+      },
+      {
+        "test": "RaisedProneDeathAtLargeSizesKeepsNativeSpeedBound",
+        "measurement": "TITAN_INJURY_DEATH_METRICS state=Prone maxSpeed=9.35 hipsY=2.33"
+      },
+      {
+        "test": "RaisedProneDeathAtLargeSizesKeepsNativeSpeedBound",
+        "measurement": "TITAN_INJURY_DEATH_METRICS state=Prone maxSpeed=11.97 hipsY=3.88"
+      },
+      {
+        "test": "RaisedProneDeathAtLargeSizesKeepsNativeSpeedBound",
+        "measurement": "TITAN_INJURY_DEATH_METRICS state=Prone maxSpeed=16.64 hipsY=7.75"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(1.0f,0)",
+        "measurement": "RAISED_PRONE size=1 missingArms=0 napeHeightPerSize=3.09306 maxArmStep=7.785591"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(3.0f,0)",
+        "measurement": "RAISED_PRONE size=3 missingArms=0 napeHeightPerSize=3.05306 maxArmStep=7.785993"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(5.0f,0)",
+        "measurement": "RAISED_PRONE size=5 missingArms=0 napeHeightPerSize=3.04506 maxArmStep=7.785792"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(10.0f,0)",
+        "measurement": "RAISED_PRONE size=10 missingArms=0 napeHeightPerSize=3.03906 maxArmStep=7.785591"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(1.0f,1)",
+        "measurement": "RAISED_PRONE size=1 missingArms=1 napeHeightPerSize=3.093059 maxArmStep=7.658187"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(3.0f,1)",
+        "measurement": "RAISED_PRONE size=3 missingArms=1 napeHeightPerSize=3.05306 maxArmStep=7.658187"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(5.0f,1)",
+        "measurement": "RAISED_PRONE size=5 missingArms=1 napeHeightPerSize=3.045059 maxArmStep=7.658597"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(10.0f,1)",
+        "measurement": "RAISED_PRONE size=10 missingArms=1 napeHeightPerSize=3.03906 maxArmStep=7.658187"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(1.0f,2)",
+        "measurement": "RAISED_PRONE size=1 missingArms=2 napeHeightPerSize=3.093059 maxArmStep=7.658495"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(3.0f,2)",
+        "measurement": "RAISED_PRONE size=3 missingArms=2 napeHeightPerSize=3.05306 maxArmStep=7.657881"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(5.0f,2)",
+        "measurement": "RAISED_PRONE size=5 missingArms=2 napeHeightPerSize=3.045059 maxArmStep=7.658086"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(10.0f,2)",
+        "measurement": "RAISED_PRONE size=10 missingArms=2 napeHeightPerSize=3.03906 maxArmStep=7.658086"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(1.0f,3)",
+        "measurement": "RAISED_PRONE size=1 missingArms=3 napeHeightPerSize=2.702043 maxArmStep=0"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(3.0f,3)",
+        "measurement": "RAISED_PRONE size=3 missingArms=3 napeHeightPerSize=2.662043 maxArmStep=0"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(5.0f,3)",
+        "measurement": "RAISED_PRONE size=5 missingArms=3 napeHeightPerSize=2.654043 maxArmStep=0"
+      },
+      {
+        "test": "RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(10.0f,3)",
+        "measurement": "RAISED_PRONE size=10 missingArms=3 napeHeightPerSize=2.648043 maxArmStep=0"
+      },
+      {
+        "test": "RapidAndSettledSecondCutsKeepProneArmsContinuous(0.0f)",
+        "measurement": "PRONE_SECOND_CUT age=0 maxArmStep=6.942493"
+      },
+      {
+        "test": "RapidAndSettledSecondCutsKeepProneArmsContinuous(0.68f)",
+        "measurement": "PRONE_SECOND_CUT age=0.68 maxArmStep=7.785289"
+      }
+    ]
+  },
+  "nativeCaptureMethod": "Real completed GameView ScreenCapture frames in marker-owned nonbatch Editor. Same3x model/cameras/light/ground. Only detached leg roots/skins hidden for comparison; no runtime/severing/debris changes or gameplay debug markers. Before uses original ef405492 injury runtime, all other C# current; after all current.",
+  "audit": {
+    "protectedHashesUnchanged": {
+      "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "571644b48a8d9e83d9272d666968bbf2fa024e854f1cf7af61bfde8c9eadaa34",
+      "Assets/Resources/TitanAudioPalette.asset": "a781e26daf151158209bb86075dc53bee5aadc40dc3a666056a34200d28d92ae",
+      "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+      "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+      "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+      "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+      "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675",
+      "Assets/Audio/boneCrush.wav": "dba7dba66869fa8c06221e22b1b1e000c193567f70673a3b6fc21d80ee3377aa",
+      "Assets/Audio/boneCrush.wav.meta": "15a20be1dee4d71d0da008a64bbdcebcd0e8a6ffc4ddf463563b7cc21d3a2e42",
+      "Assets/Titan/Prototype/TitanStompAttack.cs": "4a25b3821667ab9ac84fe13d891ac1f7f50a7ca26ec081dcf8c3bd31010ae0c5",
+      "Assets/Titan/Integration/TitanODMSwordSweep.cs": "e6c45faf6efd4eac32dd873bef1e41eeac26bffe172fd6643d9349aaae0325d0",
+      "Assets/Attack.cs": "d932a2e85858955b5b8ec04b12a76a81220ce640d1ade5cc59bd686dfb5a7d08",
+      "Assets/Player/Scout/ScoutAnimationBrain.cs": "512b021b963b6f7e8e03f5998486cf64d7c6ff35dc78be1d6ae12278a6dade08",
+      "Assets/Player/Scout/ScoutPlayerAnimation.cs": "bed646870ff846fa24ea4d67b32ba8a6bd2ecb32451ca97058aec1e858adf2df",
+      "Assets/Player/Scout/ScoutPlayerRagdoll.cs": "6d6a5ce582358af5eead72503eba0b3b232c280c178e3ca1d0bfbc475a164a6a"
+    },
+    "sourceFilesMatched": 69,
+    "worker": "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+    "noLiveEditorStopInputSaveReloadSceneSwitchOrPhysicsAutomation": true,
+    "noPrefabSceneOrNavigationPublication": true,
+    "intentionalExpectationChange": "Old horizontal torso/head<2 replaced with raised torso/head<3.2; ground/skin/arm/speed and existing carry/grip thresholds unchanged"
+  },
+  "notCertified": [
+    "Subjective ease/one-hit kill consistency",
+    "Crowd/device/WebGL performance",
+    "Comprehensive long-duration10x corpse safety",
+    "Early grab takeover clearance"
+  ],
+  "git": "Local selective checkpoint only, no push"
+}

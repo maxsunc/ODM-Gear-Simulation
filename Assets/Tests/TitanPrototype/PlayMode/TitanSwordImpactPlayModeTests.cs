@@ -144,6 +144,16 @@ public class TitanSwordImpactPlayModeTests
         }
         finally{Object.DestroyImmediate(root);}
     }
+    [TestCase(1f)][TestCase(3f)][TestCase(5f)][TestCase(10f)]
+    public void RaisedProneNapeUsesRealRearSwordContactAndUnchangedDamage(float scale)
+    {
+        body.GetComponent<TitanMotionStyle>().automaticTick=false;body.transform.localScale=Vector3.one*scale;var injury=body.GetComponent<TitanInjuryPose>();injury.automaticTick=false;
+        body.Sever(TitanHitRegion.LeftLeg,Vector3.zero);injury.TickPose(.3f);body.Sever(TitanHitRegion.RightLeg,Vector3.zero);injury.TickPose(injury.proneDuration+1);Physics.SyncTransforms();
+        var zone=body.hitZones.First(z=>z.region==TitanHitRegion.Nape);var col=zone.GetComponent<Collider>();Vector3 rear=col.ClosestPoint(col.bounds.center-zone.transform.forward*100)-zone.transform.forward;
+        MonoBehaviour dealer,sweep;var root=DedicatedWindow(rear,Quaternion.LookRotation(zone.transform.forward),out dealer,out sweep);
+        try{dealer.gameObject.SetActive(true);Call(sweep,"LateUpdate");Call(sweep,"LateUpdate");Assert.That(body.GetHealth(TitanHitRegion.Nape),Is.EqualTo(400),"Same real rear contact, original100 fixture damage and once-per-swing receipt on a prone target");}
+        finally{Object.DestroyImmediate(root);}
+    }
     [Test] public void DedicatedVolumeCannotHitNapeFromTheFrontOrThroughAWall()
     {
         body.GetComponent<TitanMotionStyle>().automaticTick=false;body.animator.enabled=false;Physics.SyncTransforms();

@@ -192,13 +192,86 @@ public class TitanInjuryPosePlayModeTests
         Debug.Log("TITAN_INJURY_DEATH_METRICS state=" + injury.State + " maxSpeed=" + maxSpeed.ToString("F2") + " hipsY=" + body.hips.position.y.ToString("F2"));
     }
 
+    [TestCase(1f,0)][TestCase(3f,0)][TestCase(5f,0)][TestCase(10f,0)]
+    [TestCase(1f,1)][TestCase(3f,1)][TestCase(5f,1)][TestCase(10f,1)]
+    [TestCase(1f,2)][TestCase(3f,2)][TestCase(5f,2)][TestCase(10f,2)]
+    [TestCase(1f,3)][TestCase(3f,3)][TestCase(5f,3)][TestCase(10f,3)]
+    public void RaisedProneExposesUnchangedNapeAndPreservesBonesRootAndGround(float size,int missingArms)
+    {
+        scene.GetRootGameObjects().Single(g=>g.name=="Injury test floor").GetComponent<BoxCollider>().size=new Vector3(1000,.5f,1000);
+        body.transform.localScale=Vector3.one*size;body.transform.position=new Vector3(4,0,-7);body.transform.rotation=Quaternion.Euler(0,missingArms%2==0?37:217,0);body.GetComponent<TitanMotionStyle>().automaticTick=false;
+        var zone=body.hitZones.Single(z=>z.region==TitanHitRegion.Nape).GetComponent<BoxCollider>();Vector3 zoneSize=zone.size,zoneCenter=zone.center,rootPosition=body.transform.position;Quaternion rootRotation=body.transform.rotation;float napeHp=body.GetHealth(TitanHitRegion.Nape);
+        if((missingArms&1)!=0)body.Sever(TitanHitRegion.LeftArm,Vector3.zero);if((missingArms&2)!=0)body.Sever(TitanHitRegion.RightArm,Vector3.zero);
+        var first=missingArms%2==0?TitanHitRegion.LeftLeg:TitanHitRegion.RightLeg;body.Sever(first,Vector3.zero);injury.TickPose(.31f);body.Sever(first==TitanHitRegion.LeftLeg?TitanHitRegion.RightLeg:TitanHitRegion.LeftLeg,Vector3.zero);
+        var detached=body.ragdollBones.Where(e=>!e.body.transform.IsChildOf(body.transform)).Select(e=>e.body.transform).ToArray();var detachedPositions=detached.Select(t=>t.position).ToArray();var detachedRotations=detached.Select(t=>t.rotation).ToArray();
+        var arms=body.ragdollBones.Where(e=>e.body.transform.IsChildOf(body.transform)&&(e.body.name.Contains("Arm")||e.body.name.Contains("Hand"))).Select(e=>e.body.transform).ToArray();var previousRotations=arms.Select(t=>t.rotation).ToArray();float maxStep=0;
+        for(int step=0;step<100;step++)
+        {
+            injury.TickPose(1f/120);AssertAboveGround();for(int i=0;i<arms.Length;i++){maxStep=Mathf.Max(maxStep,Quaternion.Angle(previousRotations[i],arms[i].rotation));previousRotations[i]=arms[i].rotation;}
+        }
+        Assert.That(maxStep,Is.LessThan(8),"Arm continuity remains strict at120Hz");
+        for(int i=0;i<detached.Length;i++){Assert.That(Vector3.Distance(detached[i].position,detachedPositions[i]),Is.LessThan(.001f));Assert.That(Quaternion.Angle(detached[i].rotation,detachedRotations[i]),Is.LessThan(.1f));}
+        Assert.That(body.IsHelpless&&!body.IsDead&&!body.CanWalk&&!body.CanGrabLeft&&!body.CanGrabRight);Assert.That(Vector3.Distance(rootPosition,body.transform.position),Is.LessThan(.001f));Assert.That(Quaternion.Angle(rootRotation,body.transform.rotation),Is.LessThan(.01f));
+        Assert.That(zone.size,Is.EqualTo(zoneSize));Assert.That(zone.center,Is.EqualTo(zoneCenter));Assert.That(body.GetHealth(TitanHitRegion.Nape),Is.EqualTo(napeHp));
+        Assert.That(zone.bounds.center.y/size,Is.GreaterThan(2.6f),"Actual nape must rise above the old1.83m-per-size flat pose");Assert.That(Vector3.Dot(body.head.forward,Vector3.down),Is.GreaterThan(.9f));AssertSkinAboveGround();
+        Vector3 origin=zone.bounds.center+body.transform.rotation*new Vector3(0,2,-3)*size;var hits=new RaycastHit[128];int count=physics.Raycast(origin,(zone.bounds.center-origin).normalized,hits,Vector3.Distance(origin,zone.bounds.center)+.1f,~0,QueryTriggerInteraction.Collide);
+        var nearest=hits.Take(count).Where(h=>h.collider.transform.IsChildOf(body.transform)).OrderBy(h=>h.distance).First();Assert.That(nearest.collider,Is.EqualTo(zone),"Real nape has an unobstructed rear/above approach, no shoulder/head/arm cover bypass");
+        Debug.Log("RAISED_PRONE size="+size+" missingArms="+missingArms+" napeHeightPerSize="+zone.bounds.center.y/size+" maxArmStep="+maxStep);
+    }
+
+    [TestCase(0f)][TestCase(.68f)]
+    public void RapidAndSettledSecondCutsKeepProneArmsContinuous(float firstAge)
+    {
+        body.GetComponent<TitanMotionStyle>().automaticTick=false;body.Sever(TitanHitRegion.LeftLeg,Vector3.zero);injury.TickPose(firstAge);body.Sever(TitanHitRegion.RightLeg,Vector3.zero);
+        var arms=body.ragdollBones.Where(e=>e.body.transform.IsChildOf(body.transform)&&(e.body.name.Contains("Arm")||e.body.name.Contains("Hand"))).Select(e=>e.body.transform).ToArray();var rotations=arms.Select(t=>t.rotation).ToArray();float maxStep=0;
+        for(int step=0;step<100;step++){injury.TickPose(1f/120);for(int i=0;i<arms.Length;i++){maxStep=Mathf.Max(maxStep,Quaternion.Angle(rotations[i],arms[i].rotation));rotations[i]=arms[i].rotation;}}
+        Assert.That(maxStep,Is.LessThan(8));Debug.Log("PRONE_SECOND_CUT age="+firstAge+" maxArmStep="+maxStep);
+    }
+    [UnityTest] public IEnumerator RaisedProneDeathAtLargeSizesKeepsNativeSpeedBound()
+    {
+        foreach(float size in new[]{3f,5f,10f})
+        {
+            foreach(var go in scene.GetRootGameObjects().Where(g=>g.name!="Injury test floor"))Object.DestroyImmediate(go);
+            scene.GetRootGameObjects().Single(g=>g.name=="Injury test floor").GetComponent<BoxCollider>().size=new Vector3(1000,.5f,1000);
+            SceneManager.SetActiveScene(scene);body=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Titans/ModularTitanPrototype.prefab")).GetComponent<ModularTitanBody>();SceneManager.SetActiveScene(previous);
+            body.transform.localScale=Vector3.one*size;injury=body.GetComponent<TitanInjuryPose>();injury.automaticTick=false;body.GetComponent<TitanMotionStyle>().automaticTick=false;yield return null;body.animator.Update(0);
+            body.Sever(TitanHitRegion.LeftLeg,Vector3.zero);injury.TickPose(.3f);body.Sever(TitanHitRegion.RightLeg,Vector3.zero);injury.TickPose(injury.proneDuration+1);yield return CheckDeath();
+        }
+    }
+
+    [UnityTest] public IEnumerator ProneNapeRendersInOwnedNativeGraphics()
+    {
+        string folder=System.Environment.GetEnvironmentVariable("ODM_PRONE_NAPE_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        var oldPipeline=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;
+        var type=System.AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var camera=new GameObject("Owned prone comparison camera").AddComponent<Camera>();SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.15f,.19f,.23f);camera.orthographic=true;camera.orthographicSize=13;
+        var ground=GameObject.CreatePrimitive(PrimitiveType.Cube);ground.name="Owned comparison ground";SceneManager.MoveGameObjectToScene(ground,scene);ground.transform.position=new Vector3(0,-.25f,0);ground.transform.localScale=new Vector3(80,.5f,80);ground.GetComponent<Renderer>().sharedMaterial=Resources.Load<Material>("TitanStompChunks");
+        var sun=new GameObject("Owned prone sun").AddComponent<Light>();SceneManager.MoveGameObjectToScene(sun.gameObject,scene);sun.type=LightType.Directional;sun.intensity=1.5f;sun.transform.rotation=Quaternion.Euler(45,-35,0);
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;body.transform.localScale=Vector3.one*3;
+            body.Sever(TitanHitRegion.LeftLeg,Vector3.zero);injury.TickPose(injury.kneelDuration+1);body.Sever(TitanHitRegion.RightLeg,Vector3.zero);injury.TickPose(injury.proneDuration+1);
+            foreach(var limb in body.limbs.Where(l=>l.region==TitanHitRegion.LeftLeg||l.region==TitanHitRegion.RightLeg))limb.rootBone.parent.gameObject.SetActive(false);
+            var nape=body.hitZones.Single(z=>z.region==TitanHitRegion.Nape).GetComponent<BoxCollider>();Physics.SyncTransforms();Debug.Log("PRONE_NAPE_RENDER center="+nape.bounds.center+" hips="+body.hips.position+" head="+body.head.position);
+            camera.transform.position=new Vector3(-25,18,-17);camera.transform.LookAt(new Vector3(0,4.5f,5));yield return null;yield return null;yield return CaptureProne(folder+"/Rear.png");
+            camera.transform.position=new Vector3(-28,11,8);camera.transform.LookAt(new Vector3(0,4.5f,5));yield return null;yield return null;yield return CaptureProne(folder+"/Side.png");
+        }
+        finally{UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(sun.gameObject);Object.Destroy(ground);Object.Destroy(pipeline);}
+    }
+    static IEnumerator CaptureProne(string path)
+    {
+        System.IO.File.Delete(path);ScreenCapture.CaptureScreenshot(path);for(int i=0;i<120&&!System.IO.File.Exists(path);i++)yield return null;Assert.That(System.IO.File.Exists(path),Is.True);
+    }
+
     void AssertProne()
     {
         Assert.That(injury.State, Is.EqualTo(TitanInjuryState.Prone));
         Assert.That(body.IsHelpless && !body.IsDead && !body.CanWalk && !body.CanGrabLeft && !body.CanGrabRight);
         Assert.That(body.hips.position.y, Is.InRange(.6f,1.6f));
-        Assert.That(body.head.position.y, Is.LessThan(2));
-        Assert.That(Mathf.Abs(Vector3.Dot((body.head.position-body.hips.position).normalized, Vector3.up)), Is.LessThan(.1f), "Torso lies horizontally");
+        Assert.That(body.head.position.y, Is.LessThan(3.2f));
+        Assert.That(Vector3.Dot((body.head.position-body.hips.position).normalized, Vector3.up), Is.InRange(.2f,.6f), "Prone upper back is lifted, not flat or standing");
         Assert.That(Vector3.Dot(body.head.forward, Vector3.down), Is.GreaterThan(.9f));
         Assert.That(body.ragdollBones.Where(b => b.body.transform.IsChildOf(body.transform)).All(b => b.body.isKinematic));
         AssertAboveGround();

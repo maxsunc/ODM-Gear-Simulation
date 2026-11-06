@@ -4,8 +4,10 @@ The user requested an alive injury response before the attack phase:
 
 - **One leg gone:** collapse onto the remaining knee, fold its shin behind the body,
   bow the torso/head and hold the kneeling pose. Mirrored for either surviving leg.
-- **Both legs gone:** fall forward from the current pose into a flat, face-down,
-  helpless pose. Cutting both legs rapidly also works; no forced standing reset.
+- **Both legs gone:** fall forward from the current pose into a low, helpless pose,
+  with the upper back raised, head bowed and arms spread. The REAL nape is now more
+  exposed for an airborne finishing approach instead of lying flat behind the
+  shoulders. Cutting both legs rapidly also works; no forced standing reset.
 
 These are procedural animated pose blends on the existing 22-bone rig, not imported
 motion-capture clips or a Humanoid retarget. They are deliberately separate from
@@ -26,8 +28,12 @@ Use either `Assets/Scenes/TitanAISandbox.unity` or the original
 The lab HUDs report `KneelingOnLeft`, `KneelingOnRight`, or `Prone` and the AI lab
 reports when the pose is still transitioning.
 
-Actual Unity captures:
+Current before/after actual Unity captures:
 
+- `ArtSource/Titan/ProneNape/before_Rear.png`, `before_Side.png` (old flat pose)
+- `ArtSource/Titan/ProneNape/after_Rear.png`, `after_Side.png` (raised/exposed nape)
+
+Historical injury-phase captures (old flat prone pose is superseded):
 - `ArtSource/Titan/Reference/TitanInjury_KneelingRight_Unity.png`
 - `ArtSource/Titan/Reference/TitanInjury_Prone_Unity.png`
 
@@ -70,7 +76,60 @@ require future contact-aware posing.
 single-legged kneeling Titan retains its arms/capability flags for later attack
 work, but still cannot walk. No attacks are added in this phase.
 
-## Verification
+## Raised-nape follow-up
+
+The player could still hit the old prone nape, but usually had to land on the Titan,
+losing velocity and needing multiple hits. The chosen fix is **pose only**: no new
+finisher/attack animation, free kill, enlarged/remote damage target or damage bonus.
+
+`BuildProne` now uses pelvis pitch78deg instead of90, Spine-6/Chest-4,
+Neck+6/Head+26. This produces a low inclined back and downward head, not a standing
+or crawling Titan. Prone elbows aim wider at x+/-3.1/y1/z2.6; palms x+/-3.6/y.6/z4.2
+in the existing size-relative root space. IK still only rotates existing bones;
+no limb length change, new bones, root translation, collider-size/center edit or
+saved prefab/scene rebuild. Missing arms are still skipped. One-leg kneels,
+.58/.76s timing, FallWeight/settle curve and ownership remain unchanged.
+
+At3x the actual nape center rose **5.48m ->9.16m**, while the bowed head remains
+below it. The intended benefit is clearer rear/above fly-by access while retaining
+ODM speed, not a guaranteed one-hit kill. Actual sword timing/reach/cover/front-vs-
+rear checks and the trusted speed-damage curve are untouched. The existing
+helpless/no-walk/no-grab state and500 regional nape HP remain.
+
+Evidence: **`ArtSource/Titan/ProneNape/validation-summary.json`**, full XML and native
+before/after images. All work in marker-owned disposable Unity2021 workers; no
+live Editor input/stop/save/reload/scene switch or physics automation.
+
+- Fresh baseline377pass/8fail/1skip of386; final **401pass/SAME8fail/1skip of410**,
+  twice. **24 added cases**, no new full-suite failures.
+-16 size/arm-state combinations (1/3/5/10x, both arms/left/right/neither), both leg
+  cut orders/headings, partial kneel capture, no root motion/detached-bone writes,
+  actual collider AND world-space skin ground clearance, identical nape shape/HP,
+  unobstructed real nape approach from rear/above.
+- Native actual sword contact at1/3/5/10x still applies the original100 fixture
+  damage once per swing (500->400), not a synthetic ReceiveDamage shortcut.
+- Rapid and settled second-leg cuts as well as mid-collapse continuity: strict
+  arm step<8deg at120Hz. Existing grab/carry/grip/penetration bounds unchanged.
+- Five-second native injury-death tests include3/5/10x full new pose; peak<40m/s
+  remains strict (about9.35/11.97/16.64m/s respectively in first complete run).
+  Existing kneel/mid-collapse death tests pass too. No velocity clipping, masses,
+  joints, solver, angular caps or global Physics setting changes.
+- Native graphics before/after1/1 each, same3x model/camera/light/ground. For clear
+  comparison ONLY detached leg roots/skins are hidden in this owned render fixture;
+  production severing/physics unchanged. No hitbox/debug marker added to gameplay.
+- Intentional old posture expectations changed from horizontal torso/head<2 to a
+  low inclined torso/head<3.2. Ground/skin/speed/grip/arm tolerances NOT weakened.
+- Protected user prefab/scene/palettes/navigation/settings/Run and sword/Scout
+  sources remain byte-identical to task start. Subjective ease/kill consistency,
+  crowd FPS and comprehensive long-duration10x corpse safety remain playtests.
+
+Reproduce final full run via `tools/run_titan_validation.py`, then
+`python tools/capture_prone_nape.py`. Optional `--label before` verifies the owned
+worker's injury runtime against the original `ef405492` revision (not current
+runtime); all other script sources must match current. Never use the live project
+as the worker. No navigation bake, scene save, asset rebuild or push.
+
+## Historical verification
 
 The later [motion overhaul](titan-motion-overhaul.md) passes **28 tests**, including
 all checks here and the faster injury timing/impact curve.

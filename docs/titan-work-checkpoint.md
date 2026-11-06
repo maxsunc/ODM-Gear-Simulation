@@ -14,7 +14,31 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: universal death blood/audio + recoverable stomp knockback ragdoll
+## Current: raised/exposed nape in double-leg-loss pose
+
+User chose pose-only fix for hard-to-hit nape on legless Titans (standing on it lost
+ODM velocity). TitanInjuryPose.BuildProne now low inclined upper back, bowed head,
+wider supporting arms: hips78deg, Spine-6/Chest-4/Neck+6/Head+26, elbow x3.1/y1/z2.6,
+palm x3.6/y.6/z4.2 mirrored. Existing bone lengths/.76s curve/root/ownership unchanged.
+No bigger nape trigger, damage/speed curve/reach/timing/cover changes, auto finisher,
+root movement, limb/physics settings, scene/prefab rebuild or navigation bake.
+One-leg kneels and both-legs helpless/no-walk/no-grab/death handoff preserved.
+
+Fresh source baseline377/8/1 of386 -> final401pass/SAME8fail/1skip of410 twice,
+24 new cases. Geometry/scenery/skin/nape shape+HP/root/detached-pose checks across
+1/3/5/10x and all4 arm states; both cut orders/headings. Real rear sword slash at
+these sizes does original100 fixture damage once (500->400). Rapid/mid/settled
+cuts preserve arm<8deg/120Hz; full-pose3/5/10x native deaths5s retain<40m/s (first
+complete run peaks9.35/11.97/16.64). All existing grip/carry bounds untouched.
+Native before/after graphics1/1 each actual3x pose: nape center5.48->9.16m, clear
+rear/above approach. Fixture hides ONLY detached leg debris for comparison, not
+production. Before runtime is original ef405492 in owned worker; after matches
+current. Protected source/tuning/scene/palettes unchanged, no live Editor takeover.
+See docs/titan-injury-animation.md, tools/capture_prone_nape.py,
+ArtSource/Titan/ProneNape/. Subjective ease/kill consistency remains fresh-Play
+assessment; no crowd/device/long-duration10x certification. LOCAL only, no push.
+
+## Previous: universal death blood/audio + recoverable stomp knockback ragdoll
 
 User requested ragdoll/blood/bloodSplat AND supplied Assets/Audio/boneCrush.wav on
 ALL deaths; surviving stomps throw player backward, ragdoll temporarily, get up.

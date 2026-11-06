@@ -155,7 +155,11 @@ public class TitanInjuryPose : MonoBehaviour
     {
         float floorLocal = transform.InverseTransformPoint(new Vector3(transform.position.x, floorY, transform.position.z)).y;
         body.hips.position = Point(0, floorLocal + 1.02f, -.80f);
-        body.hips.rotation = transform.rotation * Quaternion.Euler(90, 0, 0) * RestRoot("Hips");
+        // A low forward collapse, not a flat neck buried between the shoulders.
+        // Raise the upper back while bowing the head to expose the REAL nape.
+        // Keep the same root, skeleton lengths, damage zone and helpless state.
+        body.hips.rotation = transform.rotation * Quaternion.Euler(78, 0, 0) * RestRoot("Hips");
+        Tilt("Spine", -6); Tilt("Chest", -4); Tilt("Neck", 6); Tilt("Head", 26);
         PoseArm("Left", -1, floorLocal, true);
         PoseArm("Right", 1, floorLocal, true);
     }
@@ -165,8 +169,8 @@ public class TitanInjuryPose : MonoBehaviour
         var region = sign < 0 ? TitanHitRegion.LeftArm : TitanHitRegion.RightArm;
         if (body.IsSevered(region)) return;
         var upper = Bone(side + "UpperArm"); var lower = Bone(side + "LowerArm"); var hand = Bone(side + "Hand");
-        Vector3 elbow = prone ? Point(sign * 2.7f, floorLocal + .70f, 3.4f) : Point(sign * 2.2f, floorLocal + 4.4f, 1.1f);
-        Vector3 palm = prone ? Point(sign * 2.25f, floorLocal + .60f, 4.4f) : Point(sign * 1.3f, floorLocal + 2.9f, .7f);
+        Vector3 elbow = prone ? Point(sign * 3.1f, floorLocal + 1.0f, 2.6f) : Point(sign * 2.2f, floorLocal + 4.4f, 1.1f);
+        Vector3 palm = prone ? Point(sign * 3.6f, floorLocal + .60f, 4.2f) : Point(sign * 1.3f, floorLocal + 2.9f, .7f);
         Aim(upper, lower, elbow);
         Aim(lower, hand, palm);
     }

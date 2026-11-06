@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 03:40:16Z" end-time="2026-11-06 03:40:16Z" duration="0.5564726">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="410" result="Passed" start-time="2026-11-06 03:40:16Z" end-time="2026-11-06 03:40:16Z" duration="0.556473" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1444" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="410" result="Passed" start-time="2026-11-06 03:40:16Z" end-time="2026-11-06 03:40:16Z" duration="0.526360" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="31004" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1165" name="TitanInjuryPosePlayModeTests" fullname="TitanInjuryPosePlayModeTests" classname="TitanInjuryPosePlayModeTests" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-11-06 03:40:16Z" end-time="2026-11-06 03:40:16Z" duration="0.516680" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1194" name="ProneNapeRendersInOwnedNativeGraphics" fullname="TitanInjuryPosePlayModeTests.ProneNapeRendersInOwnedNativeGraphics" methodname="ProneNapeRendersInOwnedNativeGraphics" classname="TitanInjuryPosePlayModeTests" runstate="Runnable" seed="2036074169" result="Passed" start-time="2026-11-06 03:40:16Z" end-time="2026-11-06 03:40:16Z" duration="0.501341" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[PRONE_NAPE_RENDER center=(0.00, 9.16, 7.46) hips=(0.00, 3.71, -2.40) head=(0.00, 7.89, 10.72)
+Cleanup Blit
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
