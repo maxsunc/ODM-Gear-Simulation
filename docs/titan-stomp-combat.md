@@ -1,8 +1,9 @@
 # Titan combat, first slice — telegraphed stomp
 
 **Current gameplay follow-up:** [Player health and sized stomps](player-health-and-stomps.md)
-repairs size geometry/chase stops, uses60HP/1.6s gameplay stomps, adds regenerating
-real HP HUD and removes gameplay circles/debug console. The40HP lab timing and
+repairs size geometry/chase stops, uses60HP/1.6s gameplay stomps with pooled dust
+and rock debris, adds the real HP HUD and removes gameplay circles/debug console.
+Latest follow-up REMOVES regeneration and adds10HP/s confirmed grab damage. The40HP lab timing and
 verification below remain historical/standalone defaults, not current gameplay UI.
 
 Implemented only in `Assets/Scenes/TitanAISandbox.unity`, through its runtime demo

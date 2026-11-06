@@ -123,8 +123,10 @@ public class GiantForest2NavigationPlayModeTests
             for(int i=0;i<97;i++){body.animator.Update(0);stomp.TickAttack(1f/120);stomp.ApplyPose();}
             Assert.That(victim.Health,Is.EqualTo(40),"Actual60HP stomp at"+size+"x");Assert.That(Field<float>(health,"currentHP"),Is.EqualTo(40));
             Assert.That(Prop<int>(audio,"FootstepCount"),Is.EqualTo(sounds+1));Assert.That(body.GetComponentsInChildren<LineRenderer>(),Is.Empty);
-            Call(health,"TickRegeneration",4f);Assert.That(victim.Health,Is.EqualTo(40));Call(health,"TickRegeneration",2f);Assert.That(victim.Health,Is.EqualTo(50));
-            Debug.Log("NATIVE_SIZED_STOMP size="+size+" stop="+brain.chaseStoppingDistance+" damage="+stomp.damage+" hpAfterRegen="+victim.Health);
+            Assert.That(health.GetType().GetMethod("TickRegeneration"),Is.Null);Assert.That(victim.Health,Is.EqualTo(40));
+            var debris=body.GetComponent(Real("TitanStompDebris"));Assert.That(debris,Is.Not.Null);Assert.That(Prop<int>(debris,"BurstCount"),Is.EqualTo(1));Assert.That(Vector3.Distance(Prop<Vector3>(debris,"LastPoint"),stomp.LockedPoint),Is.LessThan(.001f));
+            Assert.That(body.GetComponent<TitanGrabAttack>().holdDamagePerSecond,Is.EqualTo(10));
+            Debug.Log("NATIVE_SIZED_STOMP size="+size+" stop="+brain.chaseStoppingDistance+" damage="+stomp.damage+" persistentHp="+victim.Health);
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
     }

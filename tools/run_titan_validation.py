@@ -42,6 +42,8 @@ for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
                  'Assets/Audio/blood2.wav','Assets/Audio/blood2.wav.meta',
                  'Assets/Resources/TitanSwordAudioPalette.asset','Assets/Resources/TitanSwordAudioPalette.asset.meta',
                  'Assets/Resources/TitanAudioPalette.asset','Assets/Resources/TitanAudioPalette.asset.meta',
+                 'Assets/Resources/TitanStompDust.mat','Assets/Resources/TitanStompDust.mat.meta',
+                 'Assets/Resources/TitanStompChunks.mat','Assets/Resources/TitanStompChunks.mat.meta',
                  *[str(p.relative_to(root)) for p in (root/'Assets/Audio').iterdir() if p.is_file() and (p.name.startswith(('titanScream','titanFootstep','titanLightning','bloodSplat')))]]:
     target=project / relative;target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(root / relative,target)

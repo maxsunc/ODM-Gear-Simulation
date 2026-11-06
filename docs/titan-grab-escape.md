@@ -13,7 +13,11 @@ safe jump-away and one-second re-grab protection; explicitly chose **3 seconds**
   Wrong legal key resets progress to0, not time. Unsupported keys are ignored.
 - Only fresh key-down edges count. Pre-held keys, auto-repeat and simultaneous
   six-button mashing cannot advance the sequence. Releasing between presses works.
-- On success BEFORE the deadline, bite is cancelled synchronously. Titan blends
+- Gameplay holds now drain **10HP/second** through the real health bridge, including
+  the QTE, with **no regeneration**. A low-health player can die from the squeeze
+  before3s; the input window is not invulnerability. Damage persists across escapes.
+  No pre-capture/warning/proximity drain. See [current health/stomps](player-health-and-stomps.md).
+- On success BEFORE the deadline, bite and hold damage are cancelled synchronously. Titan blends
   its arm back through recovery; no late damage, bite blood, eaten cue or corpse.
 - The existing whole-gear, WORLD-UP native CCT clearance/exit sweep must succeed
   before restoring physics. Blocked escape stays `ReleasePending`, with controls
@@ -42,7 +46,7 @@ inputs work normally after release. Existing F release/repress rule remains.
 `Assets/Titan/Prototype/TitanGrabEscape.cs` owns prompts/input/HUD; no controller,
 rig, bone, native body or global Physics writer. `TitanGrabAttack` owns damage and
 its single logical timeline. Only opted-in captured victims extend the existing
-holding phase enough to guarantee3s BEFORE mouth transfer. Lift speed/reach/grip
+holding phase enough to allow3s BEFORE mouth transfer (unless real HP loss kills the victim first). Lift speed/reach/grip
 and the transfer/bite/recovery durations are not retimed globally.
 
 `TitanCombatTarget` keeps the exclusive lease, granting a bounded QTE budget

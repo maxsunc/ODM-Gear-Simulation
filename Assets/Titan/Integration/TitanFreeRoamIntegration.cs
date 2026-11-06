@@ -22,6 +22,7 @@ public class TitanFreeRoamIntegration : MonoBehaviour
     public bool enableCombat;
     [Header("Ground combat")]
     [Min(0)] public float stompDamage=60;
+    [Min(0)] public float grabDamagePerSecond=10;
     [Min(.2f)] public float stompCooldown=1.6f;
     [Range(0,1)] public float groundStompChance=.75f;
     [Header("Runtime actors")]

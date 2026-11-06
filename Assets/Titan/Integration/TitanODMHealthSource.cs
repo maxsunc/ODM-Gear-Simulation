@@ -12,6 +12,11 @@ public class TitanODMHealthSource : TitanHealthSource
     void OnDisable() { if(player!=null) player.Died-=OnDeath; }
     void OnDeath() { var target=GetComponent<TitanCombatTarget>();if(target!=null) target.EscapeHold(); }
     public override bool UsesMouthInsertion { get { return player != null && player.EnsureScoutRagdoll() != null; } }
+    public override void PrepareHeldDeath(Transform attacker,Vector3 velocity)
+    {
+        var presentation=player!=null?player.EnsureScoutRagdoll():null;
+        if(presentation!=null)presentation.PrepareHeldDeath(attacker,velocity);
+    }
     public override void PrepareBite(TitanBiteImpact impact)
     {
         if(player!=null && !player.isDead)eatenSoundPlayed=false;

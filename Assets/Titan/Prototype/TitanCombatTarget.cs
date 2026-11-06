@@ -51,7 +51,7 @@ public class TitanCombatTarget : MonoBehaviour
     Transform grip;
     Vector3 releasePosition, centerOffset;
     Quaternion releaseRotation;
-    float holdAge, leaseDuration;
+    float holdAge, leaseDuration,holdDamageAge;
     Collider[] colliders;
     bool[] colliderStates;
     BodyState[] bodyStates;
@@ -92,11 +92,12 @@ public class TitanCombatTarget : MonoBehaviour
         var impact = new TitanBiteImpact { Attacker = owner.transform, Point = point, Direction = direction,
             Velocity = handVelocity, Damage = damage, Lethal = damage >= before };
         if (healthSource != null) healthSource.PrepareBite(impact);
-        try { TakeDamage(damage, point); }
+        try { ApplyDamage(damage, point,true); }
         finally { if (healthSource != null) healthSource.CompleteBite(impact, Health < before); }
     }
 
-    public void TakeDamage(float damage, Vector3 impact)
+    public void TakeDamage(float damage, Vector3 impact) {ApplyDamage(damage,impact,false);}
+    void ApplyDamage(float damage,Vector3 impact,bool bite)
     {
         if (IsDead || !isActiveAndEnabled || damage <= 0 || !Finite(damage)) return;
         if(damage>=Health) {escapeJumpPending=false;escapeGrabGrace=0;}
@@ -104,7 +105,11 @@ public class TitanCombatTarget : MonoBehaviour
         // player ragdoll. Never restore cached animation flags over a new death.
         if(healthSource!=null)
         {
-            if(damage>=Health) ReleaseInternal("Target died");
+            if(damage>=Health)
+            {
+                if(!bite && IsHeld && holdOwner!=null)healthSource.PrepareHeldDeath(holdOwner.transform,handVelocity);
+                ReleaseInternal("Target died");
+            }
             healthSource.ApplyDamage(damage);
         }
         else Health = Mathf.Max(0, Health - damage);
@@ -161,7 +166,7 @@ public class TitanCombatTarget : MonoBehaviour
         }
         foreach (var col in colliders) col.enabled = false;
         if(airborne) transform.SetPositionAndRotation(capturePosition,captureRotation); // physical CCD time, not detection aim
-        holdOwner = owner; grip = socket; holdAge = 0;
+        holdOwner = owner; grip = socket; holdAge = holdDamageAge = 0;
         leaseDuration = Finite(maximumHoldDuration) ? Mathf.Clamp(maximumHoldDuration, .5f, 10) : 4;
         IsHeld = true;
         FollowGrip();
@@ -171,6 +176,7 @@ public class TitanCombatTarget : MonoBehaviour
     public void TickHold(float deltaTime)
     {
         if (!Finite(deltaTime) || deltaTime < 0) return;
+        if(Time.timeScale<=0)deltaTime=0;
         bool wasPending=ReleasePending;
         if(ReleasePending) TryCompleteAerialRelease();
         if(IsDead) {escapeGrabGrace=0;escapeJumpPending=false;}
@@ -187,8 +193,20 @@ public class TitanCombatTarget : MonoBehaviour
         if(deltaTime>0) handVelocity=(desired-previousHeldPosition)/deltaTime;
         previousHeldPosition=desired; lastOwnerPosition=holdOwner.transform.position;
         holdAge += deltaTime;
+        AdvanceHoldDamage(holdOwner,holdAge);
+        if(!IsHeld)return;
         if (holdAge >= leaseDuration) { ReleaseInternal("Hold lease expired"); return; }
         FollowGrip();
+    }
+    // One cumulative clock shared with the attack's logical timeline. Native
+    // LateUpdate and explicit attack advancement must NEVER charge the same time twice.
+    public void AdvanceHoldDamage(MonoBehaviour owner,float minimumAge)
+    {
+        var attack=owner as TitanGrabAttack;
+        if(Time.timeScale<=0 || !IsHeldBy(owner) || IsDead || attack==null || healthSource==null || !Finite(minimumAge) || minimumAge<0)return;
+        float age=Mathf.Min(leaseDuration,Mathf.Max(holdAge,minimumAge)),dt=Mathf.Max(0,age-holdDamageAge);
+        holdDamageAge=Mathf.Max(holdDamageAge,age);
+        if(Finite(attack.holdDamagePerSecond) && attack.holdDamagePerSecond>0 && dt>0)TakeDamage(attack.holdDamagePerSecond*dt,grip.position);
     }
     void FollowGrip()
     {

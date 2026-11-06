@@ -533,19 +533,19 @@ public class TitanODMIntegrationPlayModeTests
         Call(hp,"Die");hp.CancelInvoke();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
         StringAssert.Contains("intersects",Property<string>(corpsePresentation,"Error"));Assert.That(Property<Rigidbody[]>(corpsePresentation,"Bodies").Length,Is.Zero);yield return null;
     }
-    IEnumerator ScaledRealScoutBite(float scale,bool left,bool escapeWindow=false,bool escapeSuccess=false)
+    IEnumerator ScaledRealScoutBite(float scale,bool left,bool escapeWindow=false,bool escapeSuccess=false,float holdDrain=0)
     {
-        ScoutBiteSetup();var escape=escapeWindow?AddEscape():null;biteTitan.transform.localScale=Vector3.one*scale;
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=holdDrain;var escape=escapeWindow?AddEscape():null;biteTitan.transform.localScale=Vector3.one*scale;
         cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*scale;cc.enabled=true;Call(motor,"ResetMotionHistory");
         biteTitan.animator.Update(0);Physics.SyncTransforms();
         var upper=left?biteTitan.leftUpperArm:biteTitan.rightUpperArm;var lower=left?biteTitan.leftLowerArm:biteTitan.rightLowerArm;var hand=left?biteTitan.leftHand:biteTitan.rightHand;
         Assert.That(biteGrab.TryBeginAerialGrab(target,left),Is.True,"scale="+scale+" canWalk="+biteTitan.CanWalk+" canSuspend="+motor.CanSuspend+" plants="+Call(biteGrab,"CachePlants")+" head="+biteTitan.head.position+" target="+player.transform.position+" upper="+upper.position+" reach="+(Vector3.Distance(upper.position,lower.position)+Vector3.Distance(lower.position,hand.position))+" ray="+Call(biteGrab,"ClearRay",biteTitan.head.position,player.transform.position+Vector3.up,player.transform));
         var bones=new[]{left?biteTitan.leftUpperArm:biteTitan.rightUpperArm,left?biteTitan.leftLowerArm:biteTitan.rightLowerArm,left?biteTitan.leftHand:biteTitan.rightHand};
-        var previous=bones.Select(b=>b.rotation).ToArray();float maximum=0,penetration=0,earlyPenetration=0,gripRadius=0;int steps=0;string worst="";bool gripRecorded=false;Vector3 localGrip=Vector3.zero;
+        var previous=bones.Select(b=>b.rotation).ToArray();float maximum=0,penetration=0,earlyPenetration=0,gripRadius=0;int steps=0;string worst="";bool gripRecorded=false;Vector3 localGrip=Vector3.zero;float expectedHealth=100;
         while(biteGrab.BiteContactCount==0 && biteGrab.IsBusy && steps++<(escapeWindow?700:500))
         {
             BiteFrame(1f/120);
-            if(escapeSuccess && target.IsHeldBy(biteGrab) && biteGrab.Elapsed>=1.5f)WinEscape(escape);
+            if(escapeSuccess && target.IsHeldBy(biteGrab) && biteGrab.Elapsed>=1.5f){expectedHealth=100-holdDrain*(TitanGrabEscape.Window-escape.Remaining);WinEscape(escape);}
             if(target.IsHeldBy(biteGrab))
             {
                 var grip=left?biteTitan.leftGripSocket:biteTitan.rightGripSocket;
@@ -576,7 +576,7 @@ public class TitanODMIntegrationPlayModeTests
         Assert.That(biteGrab.CaptureCount,Is.EqualTo(1));
         if(escapeSuccess)
         {
-            Assert.That(escape.State,Is.EqualTo(TitanGrabEscapeState.Succeeded));Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(target.Health,Is.EqualTo(100));
+            Assert.That(escape.State,Is.EqualTo(TitanGrabEscapeState.Succeeded));Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(target.Health,Is.EqualTo(expectedHealth).Within(.002f));
             Assert.That(target.ReleasePending,Is.False,"Arm recovery must eventually clear the actual supported-size escape");Assert.That(cc.enabled,Is.True);
             Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);
         }
@@ -595,26 +595,25 @@ public class TitanODMIntegrationPlayModeTests
     [UnityTest] public IEnumerator SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(7,false);}
     [UnityTest] public IEnumerator TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,true);}
     [UnityTest] public IEnumerator TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,false);}
-    [UnityTest] public IEnumerator PlayerHealthRegenerationWaitsRestartsAfterDamageAndClampsAtMaximum()
+    [UnityTest] public IEnumerator PlayerHealthDamagePersistsAndRegenerationApiIsRemoved()
     {
-        target.TakeDamage(60,player.transform.position);Assert.That(target.Health,Is.EqualTo(40));
-        Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));Call(hp,"TickRegeneration",2f);Assert.That(target.Health,Is.EqualTo(50));
-        target.TakeDamage(10,player.transform.position);Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));
-        Call(hp,"TickRegeneration",2f);Assert.That(target.Health,Is.EqualTo(50));Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(100));yield return null;
+        target.TakeDamage(60,player.transform.position);yield return null;Assert.That(target.Health,Is.EqualTo(40));
+        Assert.That(hp.GetType().GetMethod("TickRegeneration"),Is.Null);Assert.That(hp.GetType().GetField("regenerationPerSecond"),Is.Null);
+        target.TakeDamage(10,player.transform.position);yield return null;Assert.That(target.Health,Is.EqualTo(30));
     }
-    [UnityTest] public IEnumerator PlayerHealthCannotRegenerateWhileHeldPausedPendingOrDeadAndRejectsInvalidDamage()
+    [UnityTest] public IEnumerator PlayerHealthNeverHealsOnHoldReleasePauseOrDeathAndRejectsInvalidDamage()
     {
-        target.TakeDamage(60,player.transform.position);Hold();Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));
-        target.EscapeHold();Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));
-        float old=Time.timeScale;try{Time.timeScale=0;Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));}finally{Time.timeScale=old;}
+        target.TakeDamage(60,player.transform.position);Hold();yield return null;Assert.That(target.Health,Is.EqualTo(40));
+        target.EscapeHold();yield return null;Assert.That(target.Health,Is.EqualTo(40));
+        float old=Time.timeScale;try{Time.timeScale=0;yield return null;Assert.That(target.Health,Is.EqualTo(40));}finally{Time.timeScale=old;}
         foreach(float damage in new[]{-20f,float.NaN,float.PositiveInfinity,0f})Call(hp,"TakeDamage",damage);Assert.That(target.Health,Is.EqualTo(40));
-        target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True);yield return null;
+        target.TakeDamage(100,player.transform.position);hp.CancelInvoke();yield return null;Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True);
     }
-    [UnityTest] public IEnumerator PlayerHealthRegenerationCannotHealThroughBlockedRelease()
+    [UnityTest] public IEnumerator PlayerHealthDamagePersistsThroughBlockedRelease()
     {
         target.TakeDamage(60,player.transform.position);Hold();var wall=new GameObject("Blocked health release");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*10;Physics.SyncTransforms();
-        target.EscapeHold();Assert.That(target.ReleasePending,Is.True);Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));
-        Object.DestroyImmediate(wall);Physics.SyncTransforms();target.TickHold(0);Assert.That(target.ReleasePending,Is.False);Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));yield return null;
+        target.EscapeHold();Assert.That(target.ReleasePending,Is.True);yield return null;Assert.That(target.Health,Is.EqualTo(40));
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();target.TickHold(0);Assert.That(target.ReleasePending,Is.False);yield return null;Assert.That(target.Health,Is.EqualTo(40));
     }
     [TestCase(1f)] [TestCase(3f)] [TestCase(5f)] [TestCase(6f)] [TestCase(7f)] [TestCase(10f)]
     public void SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(float size)
@@ -629,6 +628,77 @@ public class TitanODMIntegrationPlayModeTests
         stomp.TickAttack(2);stomp.TickAttack(2);Assert.That(stomp.TryBeginStomp(target,false),Is.True);stomp.TickAttack(.8f);hp.CancelInvoke();
         Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True,"Two gameplay stomps must kill a100HP player before regeneration begins");
         Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(EatenSoundCount,Is.Zero,"Stomp death is not a bite/eaten cue");
+    }
+    [UnityTest] public IEnumerator GrabDrainThreeTimesLeftPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(3,true,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainThreeTimesRightPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(3,false,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainFiveTimesLeftPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(5,true,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainFiveTimesRightPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(5,false,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainSevenTimesLeftPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(7,true,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainSevenTimesRightPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(7,false,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainTenTimesLeftPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(10,true,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainTenTimesRightPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(10,false,true,true,10);}
+    [UnityTest] public IEnumerator GrabDrainStartsOnlyOnCaptureAndSharesOneClockWithoutDoubleChargingOrPauseDebt()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();Assert.That(target.Health,Is.EqualTo(100));CaptureScout();
+        Assert.That(target.Health,Is.EqualTo(100),"No charging pre-capture time from the catch frame");
+        biteGrab.TickAttack(1);target.TickHold(1);target.AdvanceHoldDamage(biteGrab,1);Assert.That(target.Health,Is.EqualTo(90).Within(.001f));
+        biteGrab.TickAttack(.5f);target.TickHold(.5f);Assert.That(target.Health,Is.EqualTo(85).Within(.001f));
+        float old=Time.timeScale;try{Time.timeScale=0;target.TickHold(1);Assert.That(target.Health,Is.EqualTo(85).Within(.001f));}finally{Time.timeScale=old;}
+        biteGrab.TickAttack(.5f);target.TickHold(.5f);Assert.That(target.Health,Is.EqualTo(80).Within(.001f));yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainStopsOnSuccessfulEscapeEvenWhenPhysicalReleaseIsBlocked()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;var q=AddEscape();CaptureScout();BiteFrame(1);Assert.That(target.Health,Is.EqualTo(90).Within(.001f));
+        var wall=new GameObject("Drain blocked exit");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*10;Physics.SyncTransforms();
+        WinEscape(q);Assert.That(target.ReleasePending,Is.True);BiteFrame(10);Assert.That(target.Health,Is.EqualTo(90).Within(.001f));Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(EatenSoundCount,Is.Zero);
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();FinishEscapeRelease();target.TickHold(20);Assert.That(target.Health,Is.EqualTo(90).Within(.001f));yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainAccumulatesAcrossEscapesAndNeverRefillsHealth()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;var q=AddEscape();
+        for(int attempt=0;attempt<2;attempt++)
+        {
+            if(attempt>0){biteGrab.TickAttack(4);target.TickHold(4);cc.enabled=false;player.transform.SetPositionAndRotation(new Vector3(.7f,1.8f,5.7f),Quaternion.identity);cc.enabled=true;biteTitan.animator.Play("Idle",0,0);biteTitan.animator.Update(0);Physics.SyncTransforms();}
+            CaptureScout();BiteFrame(1);WinEscape(q);FinishEscapeRelease();Assert.That(target.Health,Is.EqualTo(90-10*attempt).Within(.001f));
+        }
+        yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainCancellationCannotLeaveDamageOrBloodCallbacksBehind()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();CaptureScout();BiteFrame(.5f);float hpBefore=target.Health;
+        biteTitan.StunEyes();Assert.That(target.IsHeld,Is.False);target.AdvanceHoldDamage(biteGrab,100);BiteFrame(100);Assert.That(target.Health,Is.EqualTo(hpBefore));
+        Assert.That(EatenSoundCount,Is.Zero);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainLethalSqueezeCapturesIndependentCorpseBeforeReleaseWithoutBiteEffects()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();Set(hp,"currentHP",1f);CaptureScout();BiteFrame(.12f);hp.CancelInvoke();
+        Assert.That(target.IsDead,Is.True);Assert.That(target.IsHeld,Is.False);Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(EatenSoundCount,Is.Zero);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);
+        var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(corpse.transform.IsChildOf(biteTitan.transform),Is.False);
+        var bodies=Property<Rigidbody[]>(corpsePresentation,"Bodies");float peak=0;
+        for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in bodies)peak=Mathf.Max(peak,rb.velocity.magnitude);}
+        Assert.That(peak,Is.LessThan(40));Debug.Log("GRAB_DRAIN_CORPSE peak="+peak);yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainThreeTimesLeftSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(3,true);}
+    [UnityTest] public IEnumerator GrabDrainThreeTimesRightSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(3,false);}
+    [UnityTest] public IEnumerator GrabDrainFiveTimesLeftSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(5,true);}
+    [UnityTest] public IEnumerator GrabDrainFiveTimesRightSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(5,false);}
+    [UnityTest] public IEnumerator GrabDrainTenTimesLeftSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(10,true);}
+    [UnityTest] public IEnumerator GrabDrainTenTimesRightSqueezeCorpseKeepsOriginalSpeedBound(){yield return ScaledSqueezeCorpse(10,false);}
+    IEnumerator ScaledSqueezeCorpse(float scale,bool left)
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();biteTitan.transform.localScale=Vector3.one*scale;
+        cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*scale;cc.enabled=true;Call(motor,"ResetMotionHistory");biteTitan.animator.Update(0);Physics.SyncTransforms();
+        Assert.That(biteGrab.TryBeginAerialGrab(target,left),Is.True);for(int i=0;i<50&&!target.IsHeld;i++)BiteFrame(1f/120);Assert.That(target.IsHeld,Is.True);
+        Set(hp,"currentHP",1f);BiteFrame(.12f);hp.CancelInvoke();Assert.That(target.IsDead,Is.True);Assert.That(target.IsHeld,Is.False);Assert.That(biteGrab.BiteHitCount,Is.Zero);Assert.That(EatenSoundCount,Is.Zero);Assert.That(Property<int>(biteFeedback,"BiteBloodCount"),Is.Zero);
+        var corpse=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(corpse,Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(corpse.transform.parent,Is.Null);
+        var bodies=Property<Rigidbody[]>(corpsePresentation,"Bodies");float peak=0;
+        for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in bodies)peak=Mathf.Max(peak,rb.velocity.magnitude);}
+        Assert.That(peak,Is.LessThan(40));Debug.Log("GRAB_DRAIN_SCALED_CORPSE scale="+scale+" left="+left+" peak="+peak);yield return null;
+    }
+    [UnityTest] public IEnumerator GrabDrainTimeoutRetainsActualBiteAndCannotChargeTimeAfterItsEarlierContact()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();CaptureScout();BiteFrame(1);Assert.That(target.Health,Is.EqualTo(90).Within(.001f));
+        FinishScoutBite();Assert.That(Get<bool>(hp,"isDead"),Is.True);Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1));Assert.That(EatenSoundCount,Is.EqualTo(1));yield return null;
     }
     TitanGrabEscape AddEscape()
     {var q=player.AddComponent<TitanGrabEscape>();q.automaticInput=false;q.ResetVariation(241);return q;}
@@ -806,7 +876,7 @@ public class TitanODMIntegrationPlayModeTests
         Assert.That(image.GetPixels32().Count(c=>(c.r>170 && c.g>150 && c.b<120)||(c.g>170 && c.r<160 && c.b<190)||(c.r>170 && c.g<140 && c.b<140)),Is.GreaterThan(20),"Actual gold prompt/time, red reset or green progress pixels must render");
         Object.Destroy(image);
     }
-    [UnityTest] public IEnumerator PlayerHealthBarRendersDamageAndRegenerationInOwnedNativeGraphics()
+    [UnityTest] public IEnumerator PlayerHealthBarRendersPersistentDamageInOwnedNativeGraphics()
     {
         string folder=Environment.GetEnvironmentVariable("ODM_PLAYER_HEALTH_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
         Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
@@ -822,8 +892,8 @@ public class TitanODMIntegrationPlayModeTests
             camera.transform.position=player.transform.position+new Vector3(6,4,10);camera.transform.LookAt(player.transform.position);camera.fieldOfView=55;camera.backgroundColor=new Color(.04f,.065f,.08f);
             yield return null;yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_Full.png"));
             target.TakeDamage(60,player.transform.position);yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_StompDamage.png"));
-            Time.timeScale=1;yield return new WaitForSeconds(8f);Time.timeScale=0;Assert.That(target.Health,Is.EqualTo(70).Within(1));
-            yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_Regenerating.png"));
+            Time.timeScale=1;yield return new WaitForSeconds(8f);Time.timeScale=0;Assert.That(target.Health,Is.EqualTo(40));
+            yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_Persistent.png"));
             Debug.Log("PLAYER_HEALTH_NATIVE "+SystemInfo.graphicsDeviceName+" "+SystemInfo.graphicsDeviceType+" "+Screen.width+"x"+Screen.height);
         }
         finally{Time.timeScale=oldTime;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(pipeline);}

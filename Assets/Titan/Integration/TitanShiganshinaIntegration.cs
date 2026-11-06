@@ -28,7 +28,8 @@ public class TitanShiganshinaIntegration : MonoBehaviour
             brain.patrolPoints=new[]{origin,origin+Vector3.right*16,origin+Vector3.forward*16};
             brain.chaseStoppingDistance*=Mathf.Abs(titan.transform.lossyScale.y);
             var stomp=titan.gameObject.AddComponent<TitanStompAttack>();stomp.damage=60;stomp.cooldownDuration=1.6f;stomp.drawTelegraph=false;
-            var grab=titan.gameObject.AddComponent<TitanGrabAttack>();grab.enableBite=true;grab.drawTelegraph=false;
+            titan.gameObject.AddComponent<TitanStompDebris>();
+            var grab=titan.gameObject.AddComponent<TitanGrabAttack>();grab.enableBite=true;grab.drawTelegraph=false;grab.holdDamagePerSecond=10;
             titan.gameObject.AddComponent<TitanCombatDirector>().groundStompChance=.75f;
         }
     }

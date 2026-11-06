@@ -13,6 +13,7 @@ public class TitanGrabAttack : MonoBehaviour
 {
     public bool automaticTick = true;
     public bool drawTelegraph = false;
+    [Min(0)] public float holdDamagePerSecond; // Gameplay opt-in; legacy laboratory holds retain their original contract.
     [Min(.3f)] public float windupDuration = .65f;
     [Min(.1f)] public float reachDuration = .18f;
     [Min(.3f)] public float holdDuration = 1.5f;
@@ -249,6 +250,11 @@ public class TitanGrabAttack : MonoBehaviour
             // This frame's pre-contact time cannot consume a newly displayed QTE.
             if(!hadCapture && captured)elapsed=captureTime;
             escape.Advance(elapsed-captureTime);
+        }
+        if(captured && victim!=null && victim.IsHeldBy(this))
+        {
+            victim.AdvanceHoldDamage(this,Mathf.Max(0,Mathf.Min(elapsed,eating?BiteTime:RecoveryStart)-captureTime));
+            if(!IsBusy || victim==null || victim.IsDead)return;
         }
         if (captured && eating && !biteResolved && elapsed >= BiteTime)
         {

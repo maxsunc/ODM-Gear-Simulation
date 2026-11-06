@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 01:23:23Z" end-time="2026-11-06 01:23:24Z" duration="0.5434769">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="366" result="Passed" start-time="2026-11-06 01:23:23Z" end-time="2026-11-06 01:23:24Z" duration="0.543477" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1396" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="366" result="Passed" start-time="2026-11-06 01:23:23Z" end-time="2026-11-06 01:23:24Z" duration="0.524194" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="8032" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1333" name="TitanStompDebrisPlayModeTests" fullname="TitanStompDebrisPlayModeTests" classname="TitanStompDebrisPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-06 01:23:23Z" end-time="2026-11-06 01:23:24Z" duration="0.516676" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1337" name="DebrisRendersRealDustAndFacetedFragmentsInOwnedNativeGraphics" fullname="TitanStompDebrisPlayModeTests.DebrisRendersRealDustAndFacetedFragmentsInOwnedNativeGraphics" methodname="DebrisRendersRealDustAndFacetedFragmentsInOwnedNativeGraphics" classname="TitanStompDebrisPlayModeTests" runstate="Runnable" seed="1933149969" result="Passed" start-time="2026-11-06 01:23:23Z" end-time="2026-11-06 01:23:24Z" duration="0.506238" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[STOMP_DEBRIS_NATIVE changedPixels=11560 device=Intel(R) Iris(R) Xe Graphics Direct3D11
+Cleanup Blit
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

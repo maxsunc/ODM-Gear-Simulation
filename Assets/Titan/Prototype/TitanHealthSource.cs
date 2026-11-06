@@ -6,6 +6,7 @@ public abstract class TitanHealthSource : MonoBehaviour
 {
     public virtual bool IsBodyCollider(Collider shape) { return true; }
     public virtual bool UsesMouthInsertion { get { return false; } }
+    public virtual void PrepareHeldDeath(Transform attacker,Vector3 velocity) { }
     public virtual void PrepareBite(TitanBiteImpact impact) { }
     public virtual void CompleteBite(TitanBiteImpact impact, bool damaged) { }
     public abstract float CurrentHealth { get; }

@@ -6,11 +6,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public float maxHP = 100f;
     public float currentHP;
-    [Min(0)] public float regenerationDelay=5f;
-    [Min(0)] public float regenerationPerSecond=10f;
     public bool showHealthBar=true;
-    float regenerationAge,lastDamageAt=-10;
-    TitanCombatTarget combatTarget;
+    float lastDamageAt=-10;
     GUIStyle healthText;
 
     [Header("References")]
@@ -36,19 +33,6 @@ public class PlayerHealth : MonoBehaviour
         EnsureScoutRagdoll();
     }
 
-    void Update(){TickRegeneration(Time.deltaTime);}
-
-    public void TickRegeneration(float dt)
-    {
-        if(isDead || Time.timeScale<=0 || dt<=0 || !Finite(dt))return;
-        if(combatTarget==null)combatTarget=GetComponent<TitanCombatTarget>();
-        if(isGrabbed || (combatTarget!=null && (combatTarget.IsHeld || combatTarget.ReleasePending))) {regenerationAge=0;return;}
-        if(!Finite(regenerationDelay) || !Finite(regenerationPerSecond) || !Finite(maxHP) || maxHP<=0)return;
-        float delay=Mathf.Max(0,regenerationDelay),waiting=Mathf.Max(0,delay-regenerationAge);
-        regenerationAge=Mathf.Min(delay,regenerationAge+dt);
-        float healingTime=Mathf.Max(0,dt-waiting);
-        if(regenerationPerSecond>0 && currentHP<maxHP)currentHP=Mathf.Min(maxHP,currentHP+healingTime*regenerationPerSecond);
-    }
     static bool Finite(float value){return !float.IsNaN(value) && !float.IsInfinity(value);}
     void OnGUI()
     {
@@ -77,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (isDead || !Finite(damage) || damage<=0) return;
-        regenerationAge=0;lastDamageAt=Time.time;
+        lastDamageAt=Time.time;
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
 

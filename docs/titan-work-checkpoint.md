@@ -14,7 +14,50 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: sized ground stomps + regenerating player health
+## Current: stomp debris / NO regeneration / continuous grab damage
+
+Latest user follow-up implemented: pooled dust and faceted rock fragments on the
+ACTUAL stomp impact, removed health regeneration completely,10HP/s during confirmed
+real gameplay grabs (including QTE). Sole PlayerHealth100HP/death/3s respawn remains.
+No warning/miss/proximity damage. One cumulative charged age reconciles attack and
+native hold clocks; no double charge, pre-capture charge or paused drain. Stops
+immediately on success/release/cancel/death, even ReleasePending. No healing between
+escapes. Low-health squeeze death may precede3s QTE; this is not invulnerability.
+Manager Inspector grabDamagePerSecond=10 (0 disables); integrated actors/Shiganshina
+assign rate, standalone lab rate0 retains old HP contracts. Later bites unchanged.
+
+Lethal held non-bite damage snapshots Scout BEFORE release and hands off independent
+corpse using original bounded input/joints/local catcher ignores; no bite tumble,
+bite blood/eaten cue, root warp, unsafe scenery birth or post-step clipping. Debris
+is a read-only impact subscriber, scene pool4slots/8ParticleSystems, max448 configured
+particles, world-space/unscaled-time FALSE,<=2s lifetime. No colliders/RBs/lights,
+ring/LineRenderer, gameplay RNG use, root/physics/nav writes. Tail survives Titan
+removal, mesh/root cleaned on scene unload. New Resources materials/custom shader;
+original approved assets and existing impact materials/shader untouched.
+
+Fresh BEFORE baseline with CURRENT user turn speeds50walk/5run:333pass/8fail/1skip342.
+Final full357pass/SAME8fail/1skip366, repeated (24 added cases); newest preexisting
+failure HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning expected>15, actual
+~1.31 because user's turn tuning. Preserve it; prior7 other failures unchanged.
+Both hands3/5/7/10x drain+escape keep arm<8deg/120Hz, grip<.003m, later penetration
+<.005m unchanged. Early takeover overlap still separately disclosed. New squeeze
+corpse1.5s:1x8.11509m/s, both hands3/5/10x max14.715<40m/s. No thresholds weakened. Regen scenarios intentionally
+replaced with persistent-HP assertions per user request, not deleted as failures.
+
+Native debris1/1 actual GameView same-pose disabled/enabled pixel comparison,
+no pink/cyan placeholder shaders; native health1/1 actual100->40 then REAL8s still40.
+Owned native saved-map4pass/1SAME unbaked4x warning fixture of5; actual AI stomps,
+real HP/SFX/no circles/new debris and assigned10HP/s across3/5/6/7/10x verified.
+No4x bake/config changes.18 protected hashes unchanged: scene3/5/6/4 initial5/max15,
+user prefab50/5 turning, palettes, original art/audio/animation/nav/settings.
+No live Editor interruption/input/save/switch/reload/physics automation.
+Evidence ArtSource/Titan/StompDebris/, docs/player-health-and-stomps.md.
+Helpers tools/capture_stomp_debris.py and tools/capture_player_health.py require fresh
+source-matched full worker; use marker-owned non-batch Editor, no fake painted UI.
+No subjective threat/crowd FPS/WebGL/device/long-duration10x certification.
+Work LOCAL only; do not push without approval (last authorized push4d425ace).
+
+## Previous: sized ground stomps + regenerating player health (regen superseded)
 
 User requested fix ground stomps/sizing, stronger threat, top-left regenerating
 health bar instead of runtime console, no attack circles. Existing PlayerHealth

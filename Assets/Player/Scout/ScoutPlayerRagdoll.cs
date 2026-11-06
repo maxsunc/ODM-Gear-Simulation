@@ -26,7 +26,7 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     Vector3 rootPosition, rootScale;
     Quaternion rootRotation;
     TitanBiteImpact bite;
-    bool prepared;
+    bool prepared,bitten;
     readonly Collider[] overlaps = new Collider[64];
 
     bool FindVisual()
@@ -40,10 +40,15 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     }
     public void PrepareBite(TitanBiteImpact impact)
     {
-        positions = null; bite = impact; prepared = impact.Lethal;
+        positions = null; bite = impact; prepared = impact.Lethal;bitten=impact.Lethal;
         if (prepared) CaptureDeathPose();
     }
-    public void CompleteBite() { prepared = false; positions = null; }
+    public void PrepareHeldDeath(Transform attacker,Vector3 velocity)
+    {
+        positions=null;prepared=true;bitten=false;
+        bite=new TitanBiteImpact{Attacker=attacker,Velocity=velocity};CaptureDeathPose();
+    }
+    public void CompleteBite() { prepared = bitten = false; positions = null; }
     public bool CaptureDeathPose()
     {
         if (!FindVisual()) return false;
@@ -136,7 +141,7 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
                 // Uniform gravity alone leaves a floating ragdoll rigid-looking.
                 // Bounded opposite chest/hip impulses make the bitten body fold.
                 float bend=rb.name=="Chest"?1:rb.name=="Head"?-.8f:rb.name=="Hips"?-.65f:rb.name.Contains("LowerLeg")?.65f:-.35f;
-                rb.angularVelocity=prepared?right*(tumble*bend):Vector3.zero;rb.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
+                rb.angularVelocity=prepared && bitten?right*(tumble*bend):Vector3.zero;rb.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
             }
             Corpse=root;ActivationCount++;Error=null;
             var driver=GetComponent<ScoutPlayerAnimation>();if(driver!=null)driver.enabled=false;

@@ -42,8 +42,9 @@ public sealed class TitanRuntimeActor : MonoBehaviour
                 position-Vector3.right*r,position-Vector3.forward*r};
             stomp=gameObject.AddComponent<TitanStompAttack>();stomp.enabled=false;stomp.drawTelegraph=false;
             stomp.damage=owner.stompDamage;stomp.cooldownDuration=owner.stompCooldown;
+            gameObject.AddComponent<TitanStompDebris>();
             Brain.chaseStoppingDistance*=registeredScale.y;
-            grab=gameObject.AddComponent<TitanGrabAttack>();grab.enabled=false;grab.enableBite=true;grab.drawTelegraph=false;
+            grab=gameObject.AddComponent<TitanGrabAttack>();grab.enabled=false;grab.enableBite=true;grab.drawTelegraph=false;grab.holdDamagePerSecond=owner.grabDamagePerSecond;
             director=gameObject.AddComponent<TitanCombatDirector>();director.enabled=false;director.groundStompChance=owner.groundStompChance;
             if(owner.configureTitanLayer)foreach(var t in GetComponentsInChildren<Transform>(true))t.gameObject.layer=owner.titanLayer;
             transform.position=position;
