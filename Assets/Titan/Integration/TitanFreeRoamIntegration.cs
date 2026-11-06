@@ -20,6 +20,10 @@ public class TitanFreeRoamIntegration : MonoBehaviour
     [Min(1)] public float patrolRadius=200;
     [Min(.1f)] public float spawnProjectionDistance=3;
     public bool enableCombat;
+    [Header("Ground combat")]
+    [Min(0)] public float stompDamage=60;
+    [Min(.2f)] public float stompCooldown=1.6f;
+    [Range(0,1)] public float groundStompChance=.75f;
     [Header("Runtime actors")]
     [Tooltip("Discover active scene Titans once, then register new/enabled bodies through lifecycle events; no recurring world scan.")]
     public bool autoRegisterSceneTitans=true;
@@ -28,7 +32,7 @@ public class TitanFreeRoamIntegration : MonoBehaviour
     public bool useRegionalHealth=true;
     public bool configureTitanLayer=true;
     [Range(0,31)] public int titanLayer=9;
-    public bool showDiagnostics=true;
+    [HideInInspector] public bool showDiagnostics=false; // Serialized compatibility; gameplay console removed.
     public string SetupError { get; private set; }
     public int RegisteredCount { get { return actors.Count; } }
     public int ActiveCount { get { int n=0;foreach(var a in actors.Values)if(a!=null&&a.IsReady)n++;return n; } }
@@ -244,17 +248,6 @@ public class TitanFreeRoamIntegration : MonoBehaviour
         if(body==null || !actors.TryGetValue(body,out actor) || actor==null || actor.Owner!=this)return false;
         actor.Suspend();pending.Remove(body);prepared.Remove(body);actors.Remove(body);errors.Remove(body);
         body.gameObject.SetActive(false);Destroy(body.gameObject);return true;
-    }
-    void OnGUI()
-    {
-        if(!showDiagnostics)return;
-        GUILayout.BeginArea(new Rect(12,12,560,220),GUI.skin.box);
-        GUILayout.Label("FREEROAM TITAN RUNTIME / combat "+(enableCombat?"ON":"OFF")+" | active "+ActiveCount+" / registered "+RegisteredCount);
-        if(SetupError!=null)GUILayout.Label(SetupError);
-        GUILayout.Label("Existing baked profiles shared by all actors; no per-spawn bake. Failures: "+FailureCount);
-        int rows=0;foreach(var p in errors)if(p.Key!=null && rows++<3)GUILayout.Label(p.Key.name+": "+p.Value);
-        foreach(var a in actors.Values)if(a!=null && a.IsReady && rows++<6)GUILayout.Label(a.name+": "+a.Brain.State+" / "+a.Brain.NavigationStatus);
-        GUILayout.EndArea();
     }
     void OnDrawGizmos()
     {

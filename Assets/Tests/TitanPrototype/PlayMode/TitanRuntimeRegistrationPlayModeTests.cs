@@ -170,7 +170,8 @@ public class TitanRuntimeRegistrationPlayModeTests
         player.transform.position=new Vector3(.7f,1,5.7f);b.animator.Update(0);Physics.SyncTransforms();brain.TickAI(.2f);
         Assert.That(brain.CanSeeTarget);Assert.That(brain.State,Is.EqualTo(TitanAwarenessState.Chase));director.TickSelection(.2f);
         var stomp=b.GetComponent<TitanStompAttack>();Assert.That(stomp.IsBusy,Is.True,director.LastChoice);stomp.TickAttack(.81f);
-        Assert.That(human.HitCount,Is.EqualTo(1));Assert.That(human.Health,Is.EqualTo(60));yield return null;
+        Assert.That(stomp.damage,Is.EqualTo(60),"Gameplay stomp is intentionally stronger than the historical40HP lab attack");Assert.That(stomp.cooldownDuration,Is.EqualTo(1.6f));
+        Assert.That(human.HitCount,Is.EqualTo(1));Assert.That(human.Health,Is.EqualTo(40));yield return null;
     }
     [UnityTest]public IEnumerator DespawningHoldingActorReleasesLeaseAndDeadActorsAreNotResurrected()
     {

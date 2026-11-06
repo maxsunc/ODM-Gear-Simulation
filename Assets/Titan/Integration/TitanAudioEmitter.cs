@@ -15,7 +15,7 @@ public sealed class TitanAudioEmitter : MonoBehaviour
     public AudioClip LastScream {get;private set;}
     public AudioClip LastFootstep {get;private set;}
     public int LastFoot {get;private set;}
-    ModularTitanBody body;TitanMotionStyle motion;TitanRuntimeActor actor;
+    ModularTitanBody body;TitanMotionStyle motion;TitanRuntimeActor actor;TitanStompAttack stomp;
     AudioSource voice;readonly AudioSource[] steps=new AudioSource[2];
     readonly BoxCollider[] soles=new BoxCollider[2];readonly bool[] lifted=new bool[2], footSampled=new bool[2], descending=new bool[2];
     readonly float[] previousClearance=new float[2];
@@ -37,8 +37,15 @@ public sealed class TitanAudioEmitter : MonoBehaviour
         }
     }
     public void ResetVariation(int seed){random=new System.Random(seed);}
-    void OnEnable(){body.BlindnessChanged+=OnBlind;body.Died+=StopSounds;ResetFeet();}
-    void OnDisable(){if(body!=null){body.BlindnessChanged-=OnBlind;body.Died-=StopSounds;}StopSounds();}
+    void OnEnable(){body.BlindnessChanged+=OnBlind;body.Died+=StopSounds;stomp=GetComponent<TitanStompAttack>();if(stomp!=null)stomp.Impacted+=OnStomp;ResetFeet();}
+    void OnDisable(){if(body!=null){body.BlindnessChanged-=OnBlind;body.Died-=StopSounds;}if(stomp!=null)stomp.Impacted-=OnStomp;StopSounds();}
+    void OnStomp(Vector3 point,bool left)
+    {
+        if(body.IsDead || palette==null || !isActiveAndEnabled)return;
+        var clip=Choose(palette.footsteps);if(clip==null)return;int foot=left?0:1;
+        steps[foot].transform.position=point;steps[foot].PlayOneShot(clip,palette.footstepVolume);
+        LastFootstep=clip;LastFoot=foot;FootstepCount++;ResetFeet();
+    }
     void OnDestroy()
     {
         if(voice!=null)Destroy(voice.gameObject);foreach(var source in steps)if(source!=null)Destroy(source.gameObject);

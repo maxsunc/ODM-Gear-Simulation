@@ -595,6 +595,41 @@ public class TitanODMIntegrationPlayModeTests
     [UnityTest] public IEnumerator SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(7,false);}
     [UnityTest] public IEnumerator TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,true);}
     [UnityTest] public IEnumerator TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,false);}
+    [UnityTest] public IEnumerator PlayerHealthRegenerationWaitsRestartsAfterDamageAndClampsAtMaximum()
+    {
+        target.TakeDamage(60,player.transform.position);Assert.That(target.Health,Is.EqualTo(40));
+        Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));Call(hp,"TickRegeneration",2f);Assert.That(target.Health,Is.EqualTo(50));
+        target.TakeDamage(10,player.transform.position);Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));
+        Call(hp,"TickRegeneration",2f);Assert.That(target.Health,Is.EqualTo(50));Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(100));yield return null;
+    }
+    [UnityTest] public IEnumerator PlayerHealthCannotRegenerateWhileHeldPausedPendingOrDeadAndRejectsInvalidDamage()
+    {
+        target.TakeDamage(60,player.transform.position);Hold();Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));
+        target.EscapeHold();Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));
+        float old=Time.timeScale;try{Time.timeScale=0;Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));}finally{Time.timeScale=old;}
+        foreach(float damage in new[]{-20f,float.NaN,float.PositiveInfinity,0f})Call(hp,"TakeDamage",damage);Assert.That(target.Health,Is.EqualTo(40));
+        target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True);yield return null;
+    }
+    [UnityTest] public IEnumerator PlayerHealthRegenerationCannotHealThroughBlockedRelease()
+    {
+        target.TakeDamage(60,player.transform.position);Hold();var wall=new GameObject("Blocked health release");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*10;Physics.SyncTransforms();
+        target.EscapeHold();Assert.That(target.ReleasePending,Is.True);Call(hp,"TickRegeneration",100f);Assert.That(target.Health,Is.EqualTo(40));
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();target.TickHold(0);Assert.That(target.ReleasePending,Is.False);Call(hp,"TickRegeneration",4f);Assert.That(target.Health,Is.EqualTo(40));yield return null;
+    }
+    [TestCase(1f)] [TestCase(3f)] [TestCase(5f)] [TestCase(6f)] [TestCase(7f)] [TestCase(10f)]
+    public void SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(float size)
+    {
+        ScoutBiteSetup();biteTitan.transform.localScale=Vector3.one*size;
+        scene.GetRootGameObjects().Single(g=>g.name=="Owned real Scout bite floor").GetComponent<BoxCollider>().size=new Vector3(400,.5f,400);
+        cc.enabled=false;player.transform.position=new Vector3(.7f*size,1.8f,5.7f*size);cc.enabled=true;
+        var stomp=biteTitan.gameObject.AddComponent<TitanStompAttack>();stomp.automaticTick=false;stomp.damage=60;stomp.cooldownDuration=1.6f;Physics.SyncTransforms();
+        Assert.That(stomp.TryBeginStomp(target,true),Is.True);stomp.TickAttack(.8f);
+        Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(40));Assert.That(target.Health,Is.EqualTo(40));Assert.That(target.HitCount,Is.EqualTo(1));Assert.That(Get<bool>(hp,"showHealthBar"),Is.True);
+        Assert.That(stomp.drawTelegraph || biteGrab.drawTelegraph,Is.False);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);
+        stomp.TickAttack(2);stomp.TickAttack(2);Assert.That(stomp.TryBeginStomp(target,false),Is.True);stomp.TickAttack(.8f);hp.CancelInvoke();
+        Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True,"Two gameplay stomps must kill a100HP player before regeneration begins");
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(EatenSoundCount,Is.Zero,"Stomp death is not a bite/eaten cue");
+    }
     TitanGrabEscape AddEscape()
     {var q=player.AddComponent<TitanGrabEscape>();q.automaticInput=false;q.ResetVariation(241);return q;}
     void EscapePress(TitanGrabEscape q,KeyCode key)
@@ -770,6 +805,37 @@ public class TitanODMIntegrationPlayModeTests
         var image=new Texture2D(2,2);image.LoadImage(System.IO.File.ReadAllBytes(path));
         Assert.That(image.GetPixels32().Count(c=>(c.r>170 && c.g>150 && c.b<120)||(c.g>170 && c.r<160 && c.b<190)||(c.r>170 && c.g<140 && c.b<140)),Is.GreaterThan(20),"Actual gold prompt/time, red reset or green progress pixels must render");
         Object.Destroy(image);
+    }
+    [UnityTest] public IEnumerator PlayerHealthBarRendersDamageAndRegenerationInOwnedNativeGraphics()
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_PLAYER_HEALTH_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        float oldTime=Time.timeScale;var oldPipeline=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");
+        var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var camera=new GameObject("Owned health review camera").AddComponent<Camera>();camera.gameObject.AddComponent<AudioListener>();var light=new GameObject("Owned health review sun").AddComponent<Light>();
+        light.type=LightType.Directional;light.intensity=1.5f;light.transform.rotation=Quaternion.Euler(35,160,0);
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;ScoutBiteSetup();Time.timeScale=0;
+            camera.transform.position=player.transform.position+new Vector3(6,4,10);camera.transform.LookAt(player.transform.position);camera.fieldOfView=55;camera.backgroundColor=new Color(.04f,.065f,.08f);
+            yield return null;yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_Full.png"));
+            target.TakeDamage(60,player.transform.position);yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_StompDamage.png"));
+            Time.timeScale=1;yield return new WaitForSeconds(8f);Time.timeScale=0;Assert.That(target.Health,Is.EqualTo(70).Within(1));
+            yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Health_Regenerating.png"));
+            Debug.Log("PLAYER_HEALTH_NATIVE "+SystemInfo.graphicsDeviceName+" "+SystemInfo.graphicsDeviceType+" "+Screen.width+"x"+Screen.height);
+        }
+        finally{Time.timeScale=oldTime;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(pipeline);}
+    }
+    static IEnumerator SaveHealthScreen(string path)
+    {
+        if(System.IO.File.Exists(path))System.IO.File.Delete(path);ScreenCapture.CaptureScreenshot(path);
+        for(int i=0;i<120&&!System.IO.File.Exists(path);i++)yield return null;Assert.That(System.IO.File.Exists(path),Is.True);
+        var image=new Texture2D(2,2);image.LoadImage(System.IO.File.ReadAllBytes(path));int colored=0;
+        for(int y=image.height-70;y<image.height-10;y++)for(int x=10;x<Mathf.Min(image.width,400);x++)
+        {var c=image.GetPixel(x,y);if(Mathf.Max(c.r,c.g,c.b)-Mathf.Min(c.r,c.g,c.b)>.2f && Mathf.Max(c.r,c.g,c.b)>.4f)colored++;}
+        Object.Destroy(image);Assert.That(colored,Is.GreaterThan(100),"Actual top-left health fill must render, not just a health counter");
     }
     [UnityTest] public IEnumerator ChompCanRenderRealScoutRagdollAndBloodInOwnedGraphicsPreview()
     {

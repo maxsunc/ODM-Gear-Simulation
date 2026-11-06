@@ -64,6 +64,9 @@ public class GiantForest2NavigationPlayModeTests
             var agent=body.GetComponent<NavMeshAgent>();Assert.That(agent.isOnNavMesh,Is.True);Assert.That(agent.agentTypeID,Is.EqualTo(nav.ForScale(size).agentTypeID));
             Assert.That(agent.radius,Is.EqualTo(1.8f).Within(.001f));Assert.That(agent.height,Is.EqualTo(12).Within(.001f));Assert.That(body.transform.lossyScale.x,Is.EqualTo(size));
             Assert.That(Prop<bool>(body.GetComponent(Real("TitanRuntimeActor")),"IsReady"),Is.True);
+            Assert.That(body.GetComponent<TitanPatrolChaseAI>().chaseStoppingDistance,Is.EqualTo(6*size));
+            Assert.That(body.GetComponent<TitanStompAttack>().damage,Is.EqualTo(60));Assert.That(body.GetComponent<TitanStompAttack>().cooldownDuration,Is.EqualTo(1.6f));
+            Assert.That(body.GetComponent<TitanGrabAttack>().drawTelegraph || body.GetComponent<TitanStompAttack>().drawTelegraph,Is.False);
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
         Assert.That(NavMesh.CalculateTriangulation().indices.Length,Is.EqualTo(triangles));
@@ -95,6 +98,35 @@ public class GiantForest2NavigationPlayModeTests
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
         Debug.Log("NATIVE_FOREST_FOOTSTEPS\n"+report);File.WriteAllText("Library/GiantForest2/footstep-terrain-report.txt",report.ToString());
+    }
+    [UnityTest]public IEnumerator GameplayDirectorSelectsSizedGroundStompsAndDamagesTheRealHealthBar()
+    {
+        var player=Field<Component>(manager,"player");var health=player.GetComponent(Real("PlayerHealth"));
+        Assert.That(Field<bool>(health,"showHealthBar"),Is.True);Assert.That(manager.GetType().GetMethod("OnGUI",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic),Is.Null);
+        ((Behaviour)player).enabled=false;((Behaviour)player.GetComponent(Real("ODM_Movement"))).enabled=false;
+        var cc=player.GetComponent<CharacterController>();var victim=player.GetComponent<TitanCombatTarget>();var prefab=Field<GameObject>(spawner,"titanPrefab");
+        foreach(float size in new[]{3f,5f,6f,7f,10f})
+        {
+            ModularTitanBody body=null;string error="";
+            for(int z=-600;z<=600&&body==null;z+=100)for(int x=-600;x<=600&&body==null;x+=100)
+            {object[] args={prefab,Point(x,z),Quaternion.identity,size,null,null};if((bool)Call(manager,"TrySpawn",args))body=(ModularTitanBody)args[4];error=(string)args[5];}
+            Assert.That(body,Is.Not.Null,error);var brain=body.GetComponent<TitanPatrolChaseAI>();brain.automaticTick=false;
+            var director=body.GetComponent<TitanCombatDirector>();director.automaticTick=false;director.ResetDecisions(2);var stomp=body.GetComponent<TitanStompAttack>();stomp.automaticTick=false;
+            health.GetType().GetField("currentHP").SetValue(health,100f);
+            foreach(float distance in new[]{5.7f,5.2f,4.7f})
+            {
+                if(stomp.IsBusy)break;var p=body.transform.position+Vector3.forward*(size*distance);p.y=Point(p.x,p.z).y+cc.height*.5f;
+                cc.enabled=false;player.transform.position=p;cc.enabled=true;Physics.SyncTransforms();brain.TickAI(.2f);director.TickSelection(.3f);
+            }
+            Assert.That(stomp.IsBusy,Is.True,"size="+size+" "+director.LastChoice+" / "+brain.NavigationStatus);
+            Assert.That(brain.IsMovementLocked,Is.True);var audio=body.GetComponent(Real("TitanAudioEmitter"));int sounds=Prop<int>(audio,"FootstepCount");
+            for(int i=0;i<97;i++){body.animator.Update(0);stomp.TickAttack(1f/120);stomp.ApplyPose();}
+            Assert.That(victim.Health,Is.EqualTo(40),"Actual60HP stomp at"+size+"x");Assert.That(Field<float>(health,"currentHP"),Is.EqualTo(40));
+            Assert.That(Prop<int>(audio,"FootstepCount"),Is.EqualTo(sounds+1));Assert.That(body.GetComponentsInChildren<LineRenderer>(),Is.Empty);
+            Call(health,"TickRegeneration",4f);Assert.That(victim.Health,Is.EqualTo(40));Call(health,"TickRegeneration",2f);Assert.That(victim.Health,Is.EqualTo(50));
+            Debug.Log("NATIVE_SIZED_STOMP size="+size+" stop="+brain.chaseStoppingDistance+" damage="+stomp.damage+" hpAfterRegen="+victim.Health);
+            Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
+        }
     }
     [UnityTest]public IEnumerator CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives()
     {

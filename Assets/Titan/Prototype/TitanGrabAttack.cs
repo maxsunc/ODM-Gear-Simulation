@@ -12,7 +12,7 @@ public enum TitanGrabStage { Idle, Windup, Reach, Holding, Recovery, ToMouth, Bi
 public class TitanGrabAttack : MonoBehaviour
 {
     public bool automaticTick = true;
-    public bool drawTelegraph = true;
+    public bool drawTelegraph = false;
     [Min(.3f)] public float windupDuration = .65f;
     [Min(.1f)] public float reachDuration = .18f;
     [Min(.3f)] public float holdDuration = 1.5f;

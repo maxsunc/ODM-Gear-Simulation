@@ -148,6 +148,18 @@ public class TitanAudioPlayModeTests
         body.TickStatus(body.eyeStunDuration+.01f);body.Sever(TitanHitRegion.LeftLeg,Vector3.zero);
         for(int i=0;i<240;i++)Pose(0,i/120f);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.Zero);
     }
+    [Test]public void StompImpactSoundFiresOnceAtContactNotDuringWindupOrAfterCancellation()
+    {
+        var stomp=body.gameObject.AddComponent<TitanStompAttack>();stomp.automaticTick=false;
+        ((Behaviour)emitter).enabled=false;((Behaviour)emitter).enabled=true;
+        var go=new GameObject("Stomp sound target");SceneManager.MoveGameObjectToScene(go,scene);go.transform.position=new Vector3(.7f,0,5.7f);
+        go.AddComponent<BoxCollider>().center=Vector3.up;var target=go.AddComponent<TitanCombatTarget>();Physics.SyncTransforms();
+        Assert.That(stomp.TryBeginStomp(target,true),Is.True);stomp.TickAttack(.6f);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.Zero);
+        stomp.TickAttack(.21f);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.EqualTo(1));Assert.That(Prop<int>(emitter,"LastFoot"),Is.Zero);
+        stomp.TickAttack(5);stomp.TickAttack(3);Assert.That(Prop<int>(emitter,"FootstepCount"),Is.EqualTo(1));
+        Assert.That(stomp.TryBeginStomp(target,false),Is.True);stomp.TickAttack(.3f);body.StunEyes();stomp.TickAttack(10);
+        Assert.That(Prop<int>(emitter,"FootstepCount"),Is.EqualTo(1));Assert.That(stomp.GetComponentsInChildren<LineRenderer>(),Is.Empty);
+    }
     [UnityTest]public IEnumerator EatenCueRequiresRealLethalBiteDamageDeduplicatesAndDoesNotFollowReleasedPlayer()
     {
         var go=new GameObject("Real player health");SceneManager.MoveGameObjectToScene(go,scene);

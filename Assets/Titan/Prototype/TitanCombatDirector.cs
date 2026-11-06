@@ -11,6 +11,7 @@ public class TitanCombatDirector : MonoBehaviour
     public bool automaticTick = true;
     public bool automaticAttack = true;
     public int decisionSeed;
+    [Range(0,1)] public float groundStompChance=.45f;
     public string LastChoice { get; private set; }
     TitanGrabAttack grab;
     TitanStompAttack stomp;
@@ -59,7 +60,7 @@ public class TitanCombatDirector : MonoBehaviour
         // Do not lose the brief aerial reach window to a ground-choice retry
         // delay or stationary-age gate. Grab's own cooldown still rate-limits it.
         if(decisionDelay>0 || stationaryAge<.12f) return;
-        bool preferGrab = random.NextDouble() < .55;
+        bool preferGrab = random.NextDouble() < 1-Mathf.Clamp01(groundStompChance);
         bool started;
         if (preferGrab)
         {

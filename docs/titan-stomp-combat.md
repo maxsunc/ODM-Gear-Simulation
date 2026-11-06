@@ -1,5 +1,10 @@
 # Titan combat, first slice — telegraphed stomp
 
+**Current gameplay follow-up:** [Player health and sized stomps](player-health-and-stomps.md)
+repairs size geometry/chase stops, uses60HP/1.6s gameplay stomps, adds regenerating
+real HP HUD and removes gameplay circles/debug console. The40HP lab timing and
+verification below remain historical/standalone defaults, not current gameplay UI.
+
 Implemented only in `Assets/Scenes/TitanAISandbox.unity`, through its runtime demo
 setup. The reusable body prefab and passive body lab do **not** acquire attack AI.
 Legacy gameplay scenes/player wiring are not modified by this phase.

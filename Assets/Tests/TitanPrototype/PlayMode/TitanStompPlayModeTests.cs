@@ -203,6 +203,38 @@ public class TitanStompPlayModeTests
         }
         yield return null;
     }
+    [TestCase(3f,true)] [TestCase(3f,false)] [TestCase(5f,true)] [TestCase(5f,false)] [TestCase(6f,true)] [TestCase(6f,false)]
+    [TestCase(7f,true)] [TestCase(7f,false)] [TestCase(10f,true)] [TestCase(10f,false)]
+    public void SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(float size,bool left)
+    {
+        scene.GetRootGameObjects().Single(g=>g.name=="Stomp floor").GetComponent<BoxCollider>().size=new Vector3(400,.5f,400);
+        body.transform.localScale=Vector3.one*size;body.transform.position=Vector3.up*(.25f*size);
+        human.transform.position=new Vector3(.7f*size,0,5.7f*size);attack.damage=60;attack.cooldownDuration=1.6f;
+        body.animator.SetFloat("CycleOffset",0);body.animator.Play("Idle",0,0);body.animator.Update(0);Begin(left);
+        Assert.That(attack.EffectiveAttackRange,Is.EqualTo(6.4f*size).Within(.001f));var locked=attack.LockedPoint;
+        var flyer=Target(locked+Vector3.up*3.2f);var leg=body.limbs.First(l=>l.region==(left?TitanHitRegion.LeftLeg:TitanHitRegion.RightLeg));
+        var support=body.limbs.First(l=>l.region==(left?TitanHitRegion.RightLeg:TitanHitRegion.LeftLeg));var root=body.transform.position;
+        for(int i=0;i<97;i++)
+        {
+            body.animator.Update(0);attack.TickAttack(1f/120);attack.ApplyPose();Physics.SyncTransforms();
+            var sole=support.bodies[2].GetComponentsInChildren<BoxCollider>().First(c=>!c.isTrigger && c.attachedRigidbody==support.bodies[2]);
+            Assert.That(sole.bounds.min.y,Is.GreaterThan(-.12f),"Keep the same strict world-space floor bound, not a size-relaxed one");
+        }
+        var shape=leg.bodies[2].GetComponentsInChildren<BoxCollider>().First(c=>!c.isTrigger && c.attachedRigidbody==leg.bodies[2]);
+        Assert.That(shape.bounds.min.y,Is.InRange(-.1f,.25f));Assert.That(Vector3.Distance(shape.ClosestPoint(locked+Vector3.up*.05f),locked+Vector3.up*.05f),Is.LessThan(.25f),"Damage must agree with the real planted foot, not a remote aim point");
+        Assert.That(body.transform.position,Is.EqualTo(root));Assert.That(attack.LockedPoint,Is.EqualTo(locked));
+        Assert.That(human.Health,Is.EqualTo(40));Assert.That(human.HitCount,Is.EqualTo(1));Assert.That(flyer.Health,Is.EqualTo(100),"Do not scale the human-height danger column into the sky");
+        Assert.That(body.GetComponentsInChildren<LineRenderer>(),Is.Empty);
+    }
+    [TestCase(3f)] [TestCase(5f)] [TestCase(10f)]
+    public void SizedLoadedStompDeathRetainsOriginalFortyMetrePerSecondBound(float size)
+    {
+        scene.GetRootGameObjects().Single(g=>g.name=="Stomp floor").GetComponent<BoxCollider>().size=new Vector3(400,.5f,400);
+        body.transform.localScale=Vector3.one*size;human.transform.position=new Vector3(.7f*size,0,5.7f*size);
+        body.animator.Play("Idle",0,0);body.animator.Update(0);Begin();attack.TickAttack(.55f);body.animator.Update(0);attack.ApplyPose();body.Die();
+        float peak=0;for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var bone in body.ragdollBones)peak=Mathf.Max(peak,bone.body.velocity.magnitude);}
+        Debug.Log("SIZED_STOMP_DEATH size="+size+" peak="+peak);Assert.That(peak,Is.LessThan(40));Assert.That(attack.ImpactCount,Is.Zero);
+    }
     [UnityTest]
     public IEnumerator CurrentPoseJointFramesDoNotGenerateEnergyWithoutExternalForces()
     {

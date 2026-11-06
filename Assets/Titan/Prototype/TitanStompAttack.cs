@@ -14,7 +14,7 @@ public class TitanStompAttack : MonoBehaviour
 {
     public bool automaticTick = true;
     public bool automaticAttack = true;
-    public bool drawTelegraph = true;
+    public bool drawTelegraph = false;
     [Min(.3f)] public float windupDuration = .65f;
     [Min(.08f)] public float strikeDuration = .14f;
     [Min(.2f)] public float recoveryDuration = .5f;
@@ -34,6 +34,9 @@ public class TitanStompAttack : MonoBehaviour
     public int ImpactCount { get; private set; }
     public bool LastQueryOverflow { get; private set; }
     public string LastResult { get; private set; }
+    public event System.Action<Vector3,bool> Impacted;
+    public float GeometryScale { get { return Mathf.Abs(transform.lossyScale.y); } }
+    public float EffectiveAttackRange { get { return attackRange*GeometryScale; } }
 
     ModularTitanBody body;
     TitanPatrolChaseAI brain;
@@ -42,7 +45,7 @@ public class TitanStompAttack : MonoBehaviour
     Transform upper, lower, foot, supportUpper, supportLower, supportFoot, chest, spine, neck;
     Quaternion footFlat, supportFlat;
     Vector3 startFoot, startSupport, landingFoot, plantedSupport;
-    float elapsed, windup, strike, recovery, radius, height, attackDamage, groundY, stationaryAge;
+    float elapsed, windup, strike, recovery, radius, height, attackDamage, groundY, stationaryAge, size=1;
     bool impacted;
     int sequence, beginFrame = -1;
     LineRenderer ring;
@@ -115,12 +118,19 @@ public class TitanStompAttack : MonoBehaviour
         if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh && agent.velocity.sqrMagnitude > 1) return false;
         Vector3 delta = target.transform.position - transform.position;
         Vector3 horizontal = Vector3.ProjectOnPlane(delta, Vector3.up);
-        if (horizontal.magnitude > attackRange || Mathf.Abs(delta.y) > 2.2f ||
+        float scale=GeometryScale;
+        if(float.IsNaN(scale) || float.IsInfinity(scale) || scale<=0)return false;
+        if (horizontal.magnitude > attackRange*scale ||
             Vector3.Angle(transform.forward, horizontal) > 65 ||
             !ClearRay(body.head.position, target.transform.position + Vector3.up, target.transform)) return false;
-        Vector3 point = transform.position + Vector3.ClampMagnitude(horizontal, 4.1f);
+        Vector3 point = transform.position + Vector3.ClampMagnitude(horizontal, 4.1f*scale);
         Vector3 ground;
         if (!FindGround(point, out ground)) return false;
+        // The real player's root is its capsule CENTER, unlike a lab proxy's feet.
+        // Test human ground height, not a Titan-scaled airborne damage column.
+        var controller=target.GetComponent<CharacterController>();
+        float feetY=controller!=null?controller.transform.TransformPoint(controller.center).y-controller.height*Mathf.Abs(controller.transform.lossyScale.y)*.5f:target.transform.position.y;
+        if(Mathf.Abs(feetY-ground.y)>2.2f)return false;
         TitanDetachableLimb attackLeg = FindLeg(leftFoot), otherLeg = FindLeg(!leftFoot);
         if (attackLeg == null || otherLeg == null) return false;
         if (brain != null && !brain.TryAcquireMovementLock(this)) return false;
@@ -133,10 +143,10 @@ public class TitanStompAttack : MonoBehaviour
         if (!FindGround(supportFoot.position, out supportGround)) supportGround = new Vector3(supportFoot.position.x, groundY, supportFoot.position.z);
         plantedSupport = SolePosition(supportGround, supportFoot, otherLeg.bodies[2], supportFlat);
         startFoot = foot.position; startSupport = supportFoot.position;
-        victim = target; UsesLeftFoot = leftFoot;
+        victim = target; UsesLeftFoot = leftFoot;size=scale;
         elapsed = 0; impacted = false; LastQueryOverflow = false;
         windup = Mathf.Max(.3f, windupDuration); strike = Mathf.Max(.08f, strikeDuration);
-        recovery = Mathf.Max(.2f, recoveryDuration); radius = Mathf.Max(.1f, impactRadius);
+        recovery = Mathf.Max(.2f, recoveryDuration); radius = Mathf.Max(.1f, impactRadius)*size;
         height = Mathf.Max(.1f, impactHeight); attackDamage = Mathf.Max(0, damage);
         Stage = TitanStompStage.Windup; beginFrame = Time.frameCount; sequence++; LastResult = "Wind-up / landing point locked";
         body.SetWalking(false);
@@ -217,10 +227,10 @@ public class TitanStompAttack : MonoBehaviour
         Vector3 baseFoot = foot.position, baseSupport = supportFoot.position;
         Quaternion baseFootRotation = foot.rotation, baseSupportRotation = supportFoot.rotation;
         Vector3 toward = Vector3.ProjectOnPlane(LockedPoint - transform.position, Vector3.up).normalized;
-        body.hips.position += (toward * 1.25f - Vector3.up * 1.2f) * load * weight;
+        body.hips.position += (toward * 1.25f - Vector3.up * 1.2f) * (size*load*weight);
         Tilt(spine, 9 * load * weight); Tilt(chest, 10 * load * weight); Tilt(neck, 8 * load * weight); Tilt(body.head, 17 * load * weight);
         // The support leg remains planted while the striking knee loads high.
-        Vector3 lifted = landingFoot + Vector3.up * 2.7f - toward * .6f;
+        Vector3 lifted = landingFoot + (Vector3.up * 2.7f - toward * .6f)*size;
         Vector3 attackPoint = Vector3.Lerp(startFoot, lifted, load);
         if (elapsed >= windup) attackPoint = Vector3.Lerp(lifted, landingFoot, drop * drop);
         // Blend the IK TARGETS home, not the solver weight: fading a plant solver
@@ -239,7 +249,7 @@ public class TitanStompAttack : MonoBehaviour
     void Brace(Transform arm, Transform elbow, Transform hand, float side, float weight)
     {
         if (arm == null || !arm.IsChildOf(transform)) return;
-        Aim(arm, elbow, arm.position + transform.right * side * 2.2f - Vector3.up * .3f + transform.forward * .45f, weight);
+        Aim(arm, elbow, arm.position + (transform.right * side * 2.2f - Vector3.up * .3f + transform.forward * .45f)*size, weight);
         // Bend in the rig's elbow hinge plane, within its existing ragdoll limits.
         // A world-space forearm target introduced excessive sideways elbow swing
         // and unstable contact configurations when this loaded pose was killed.
@@ -272,6 +282,7 @@ public class TitanStompAttack : MonoBehaviour
     void Impact()
     {
         impacted = true; ImpactCount++; LastResult = "Impact";
+        if(Impacted!=null)Impacted(LockedPoint,UsesLeftFoot);
         Physics.SyncTransforms();
         int count = gameObject.scene.GetPhysicsScene().OverlapSphere(LockedPoint + Vector3.up * height * .5f,
             Mathf.Sqrt(radius*radius + height*height), overlaps, victimMask, QueryTriggerInteraction.Ignore);
@@ -308,14 +319,14 @@ public class TitanStompAttack : MonoBehaviour
     }
     bool FindGround(Vector3 point, out Vector3 ground)
     {
-        int count = gameObject.scene.GetPhysicsScene().Raycast(point + Vector3.up * 8, Vector3.down, rays, 16, sceneryMask, QueryTriggerInteraction.Ignore);
+        int count = gameObject.scene.GetPhysicsScene().Raycast(point + Vector3.up * (8*GeometryScale), Vector3.down, rays, 16*GeometryScale, sceneryMask, QueryTriggerInteraction.Ignore);
         ground = Vector3.zero; float best = float.NegativeInfinity;
         if (count == rays.Length) return false;
         for (int i = 0; i < count; i++)
         {
             var hit = rays[i];
             if (hit.transform.gameObject.scene != gameObject.scene || hit.transform.IsChildOf(transform) || hit.rigidbody != null || hit.normal.y < .65f ||
-                hit.point.y > transform.position.y + 1.2f || hit.transform.GetComponentInParent<TitanCombatTarget>() != null) continue;
+                hit.point.y > transform.position.y + 1.2f*GeometryScale || hit.transform.GetComponentInParent<TitanCombatTarget>() != null) continue;
             if (hit.point.y > best) { best = hit.point.y; ground = hit.point; }
         }
         return !float.IsNegativeInfinity(best);

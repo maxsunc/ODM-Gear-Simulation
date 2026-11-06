@@ -14,7 +14,42 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current follow-up: minimal QTE HUD + footstep synchronization
+## Current: sized ground stomps + regenerating player health
+
+User requested fix ground stomps/sizing, stronger threat, top-left regenerating
+health bar instead of runtime console, no attack circles. Existing PlayerHealth
+is still sole100HP/death/3s-respawn authority. Default10HP/s after5s without damage;
+re-hit restarts wait, only post-delay fraction heals, caps atmax; no healing while
+paused/held/ReleasePending/dead. Invalid damage rejected. Compact health bar/pulse.
+No saved scene/player-prefab rewrite required. FreeRoam/Shiganshina OnGUI consoles
+removed (old showDiagnostics serialized field kept compatible but no display).
+
+Stomp6.4range/4.1lockedreach/2.4groundradius, support probes and proportional pose
+loads now scale with uniform Titan size. Runtime chase stop6*size (18/30/36/42/60
+for3/5/6/7/10). Human centered WORLD-UP CCT bottom used for ground-selection height.
+Damage column stays1.8WORLD meters so high flyers/jumps remain safe. Windup.65 /
+strike.14 /recovery.5 untouched; locked location, cover/overflow/dedup/cancel leases
+retained. Gameplay damage60, cooldown1.6, ground stomp preference.75 (Inspector
+manager fields). Historical1x lab40HP/2.2s remains. Stomp/grab/bite circles OFF in
+all gameplay; wind-up BODY motion retained. Exactly one real impact supplied-footstep
+cue, no windup/cancel cue, same existing volume/files/imports. No agent fallback,
+nav bake, new roots/forces/physics/clipping or damage through walls.
+
+24 added full-suite cases: real CCT1/3/5/6/7/10x two-hit death, no eaten cue; both
+feet3/5/6/7/10x supported contact/locked miss/highflyer/root/ring invariants;
+scaled3/5/10x loaded death1.5s peaks~13.5–14.1<40m/s; regen/pause/hold/pending/death,
+actual stomp SFX and gated native HUD. Full334pass/SAME7fail/1skip342 vs310/7/1
+318. Updated ONE old gameplay fixture deliberately40damage->60: explicitdamage60,
+cooldown1.6 andremainingHP40; no physical thresholds weakened. Nativecurrent-map
+new actual director/HP/regen/no-ring/SFX case passes forALLfive sizes; map4/1 of5
+vs3/1 of4 (same unbaked user4x warning failure). NativeHUD1/1 actual full/damage/real
+8s regen GameView images. Current scene/palettes/prefab/art/animation/nav/settings
+preserved, including user's3/5/6/4/initial5/max15. No new4x bake, no live Editor
+stop/reload/save/input or live physics automation. No long-duration10x/crowd/device
+certification; see docs/player-health-and-stomps.md and ArtSource/Titan/StompHealth/.
+Work LOCAL only, do not push without approval.
+
+## Previous: minimal QTE HUD + footstep synchronization
 
 User requested minimal HUD: only key, segmented progress and time bar, no prose;
 compact260x128 background alpha.32. Gameplay unchanged, tests retained. Full292/7/1

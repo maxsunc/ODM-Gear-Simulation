@@ -1,0 +1,289 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "health": {
+    "authority": "Existing PlayerHealth",
+    "defaultMax": 100,
+    "regenerationDelay": 5,
+    "regenerationPerSecond": 10,
+    "noRegenerationWhile": [
+      "Dead",
+      "Paused",
+      "Held",
+      "ReleasePending"
+    ],
+    "HUD": "Top-left bar replaces removed gameplay console"
+  },
+  "gameplayStomp": {
+    "damage": 60,
+    "cooldown": 1.6,
+    "groundPreference": 0.75,
+    "windup": 0.65,
+    "strike": 0.14,
+    "recovery": 0.5,
+    "scaledGeometry": [
+      "Chase stop6",
+      "Selection6.4",
+      "Locked reach4.1",
+      "Radius2.4",
+      "Support probes",
+      "Pose linear offsets"
+    ],
+    "humanDangerHeightUnscaledMetres": 1.8,
+    "attackCircles": false,
+    "impactSound": "One supplied footstep clip at actual impact, existing volume and routing"
+  },
+  "originalProtectedSourceUnchanged": {
+    "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "70ddb0b9647d9eaf35b7a9ad6ffc7e517f3d3d70567d9b3180552d458305f2ed",
+    "Assets/Resources/TitanAudioPalette.asset": "3ba577f226281d983c3f15c63cab8811191baf1826fc4d43db2855c78a865dc0",
+    "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+    "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+    "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675"
+  },
+  "byteMatchedBothOwnedWorkers": [
+    "Assets/PlayerHealth.cs",
+    "Assets/Titan/Prototype/TitanStompAttack.cs",
+    "Assets/Titan/Prototype/TitanGrabAttack.cs",
+    "Assets/Titan/Prototype/TitanCombatDirector.cs",
+    "Assets/Titan/Integration/TitanFreeRoamIntegration.cs",
+    "Assets/Titan/Integration/TitanShiganshinaIntegration.cs",
+    "Assets/Titan/Integration/TitanRuntimeActor.cs",
+    "Assets/Titan/Integration/TitanAudioEmitter.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanStompPlayModeTests.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanODMIntegrationPlayModeTests.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanAudioPlayModeTests.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanRuntimeRegistrationPlayModeTests.cs"
+  ],
+  "baselineBeforeFeature": {
+    "total": 318,
+    "passed": 310,
+    "failed": 7,
+    "skipped": 1
+  },
+  "fullResults": {
+    "id": "2",
+    "testcasecount": "342",
+    "result": "Failed(Child)",
+    "total": "342",
+    "passed": "334",
+    "failed": "7",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 00:00:35Z",
+    "end-time": "2026-11-06 00:01:08Z",
+    "duration": "33.1266798"
+  },
+  "sameExistingFullFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    }
+  ],
+  "addedCases": [
+    {
+      "name": "StompImpactSoundFiresOnceAtContactNotDuringWindupOrAfterCancellation",
+      "result": "Passed"
+    },
+    {
+      "name": "PlayerHealthBarRendersDamageAndRegenerationInOwnedNativeGraphics",
+      "result": "Passed"
+    },
+    {
+      "name": "PlayerHealthCannotRegenerateWhileHeldPausedPendingOrDeadAndRejectsInvalidDamage",
+      "result": "Passed"
+    },
+    {
+      "name": "PlayerHealthRegenerationCannotHealThroughBlockedRelease",
+      "result": "Passed"
+    },
+    {
+      "name": "PlayerHealthRegenerationWaitsRestartsAfterDamageAndClampsAtMaximum",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(1.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(3.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(5.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(6.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(7.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompDamagesActualControllerAndRealPlayerHealthInsteadOfASecondPool(10.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedLoadedStompDeathRetainsOriginalFortyMetrePerSecondBound(3.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedLoadedStompDeathRetainsOriginalFortyMetrePerSecondBound(5.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedLoadedStompDeathRetainsOriginalFortyMetrePerSecondBound(10.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(3.0f,True)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(3.0f,False)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(5.0f,True)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(5.0f,False)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(6.0f,True)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(6.0f,False)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(7.0f,True)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(7.0f,False)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(10.0f,True)",
+      "result": "Passed"
+    },
+    {
+      "name": "SizedStompsReachTheirGroundTargetKeepRealSupportedFeetAndDoNotHitHighFlyers(10.0f,False)",
+      "result": "Passed"
+    }
+  ],
+  "intentionalBalanceFixtureUpdate": "SpawnedDirectorActuallySelectsAndLandsAGroundAttack now explicitly asserts damage60,cooldown1.6,HP40 instead of historicalHP60; stronger requested gameplay balance, no physical bound relaxed",
+  "sizedLoadedDeath": [
+    {
+      "size": 3.0,
+      "peakMetresPerSecond": 13.76118,
+      "durationSeconds": 1.5
+    },
+    {
+      "size": 5.0,
+      "peakMetresPerSecond": 14.002,
+      "durationSeconds": 1.5
+    },
+    {
+      "size": 10.0,
+      "peakMetresPerSecond": 13.47082,
+      "durationSeconds": 1.5
+    }
+  ],
+  "savedMap": {
+    "id": "2",
+    "testcasecount": "5",
+    "result": "Failed(Child)",
+    "total": "5",
+    "passed": "4",
+    "failed": "1",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 00:00:37Z",
+    "end-time": "2026-11-06 00:00:44Z",
+    "duration": "7.5704037"
+  },
+  "nativeEndToEndStomps": [
+    "NATIVE_SIZED_STOMP size=3 stop=18 damage=60 hpAfterRegen=50",
+    "NATIVE_SIZED_STOMP size=5 stop=30 damage=60 hpAfterRegen=50",
+    "NATIVE_SIZED_STOMP size=6 stop=36 damage=60 hpAfterRegen=50",
+    "NATIVE_SIZED_STOMP size=7 stop=42 damage=60 hpAfterRegen=50",
+    "NATIVE_SIZED_STOMP size=10 stop=60 damage=60 hpAfterRegen=50"
+  ],
+  "savedMapSamePreexistingFailure": [
+    {
+      "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+      "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+    }
+  ],
+  "healthGraphics": {
+    "id": "2",
+    "testcasecount": "1",
+    "result": "Passed",
+    "total": "1",
+    "passed": "1",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 00:01:36Z",
+    "end-time": "2026-11-06 00:01:45Z",
+    "duration": "8.7834911"
+  },
+  "graphicsDevice": "Intel(R) Iris(R) Xe Graphics / Direct3D11 /979x507",
+  "limitations": [
+    "No live Editor control/input/physics automation.",
+    "No subjective difficulty, crowdedFPS, WebGL/device audio or long-duration10x corpse certification.",
+    "User4x remains unbaked/safely skipped; no navigation rebuild or spawn-setting changes."
+  ]
+}

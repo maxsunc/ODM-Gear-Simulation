@@ -26,20 +26,10 @@ public class TitanShiganshinaIntegration : MonoBehaviour
             brain.targetSightOffset=Vector3.zero; // This player's CC is centered on its ROOT, not feet.
             Vector3 origin=titan.transform.position;
             brain.patrolPoints=new[]{origin,origin+Vector3.right*16,origin+Vector3.forward*16};
-            titan.gameObject.AddComponent<TitanStompAttack>();
-            var grab=titan.gameObject.AddComponent<TitanGrabAttack>();grab.enableBite=true;
-            titan.gameObject.AddComponent<TitanCombatDirector>();
+            brain.chaseStoppingDistance*=Mathf.Abs(titan.transform.lossyScale.y);
+            var stomp=titan.gameObject.AddComponent<TitanStompAttack>();stomp.damage=60;stomp.cooldownDuration=1.6f;stomp.drawTelegraph=false;
+            var grab=titan.gameObject.AddComponent<TitanGrabAttack>();grab.enableBite=true;grab.drawTelegraph=false;
+            titan.gameObject.AddComponent<TitanCombatDirector>().groundStompChance=.75f;
         }
-    }
-    void OnGUI()
-    {
-        if(player==null) return;var health=player.GetComponent<PlayerHealth>();var target=player.GetComponent<TitanCombatTarget>();
-        GUILayout.BeginArea(new Rect(12,12,390,100),GUI.skin.box);
-        GUILayout.Label(SetupError!=null?SetupError:"ODM / MODULAR TITAN COMBAT");
-        if(health!=null) GUILayout.Label("HP "+health.currentHP.ToString("F0")+" / "+health.maxHP.ToString("F0")+
-            (health.isDead?" — respawning":target!=null && target.ReleasePending?" — clearing release":target!=null && target.IsHeld?" — HELD: swords blocked":""));
-        GUILayout.Label("Mouse / Q,E: hooks | Space: gas | Shift: boost | C: jump");
-        GUILayout.Label("Hold/release F: swords | J: existing menu | T: music");
-        GUILayout.EndArea();
     }
 }
