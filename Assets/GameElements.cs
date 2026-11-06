@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameElements : MonoBehaviour
 {
     public Transform player;
-    private bool reloadScene = false;
+    private bool warnedMissingHealth;
     public AudioSource[] musics;
     public GameObject panel;
     public Transform sun;
@@ -62,12 +61,11 @@ public class GameElements : MonoBehaviour
             // start the song
             if(musics[currentInd]!=null)musics[currentInd].Play();
         }
-        if(player!=null && player.transform.position.y <= -25f && reloadScene == false)
+        if(player!=null && player.transform.position.y <= -25f)
         {
-            reloadScene = true;
             var health=player.GetComponent<PlayerHealth>();
-            if(health!=null)health.Die();
-            else {Scene scene = SceneManager.GetActiveScene();SceneManager.LoadScene(scene.name);}
+            if(health!=null){if(!health.isDead)health.Die();}
+            else if(!warnedMissingHealth){warnedMissingHealth=true;Debug.LogWarning("Void death needs PlayerHealth; refusing to reset the whole scene",this);}
         }
         if (panel!=null && Input.GetKeyDown(KeyCode.J))
         {

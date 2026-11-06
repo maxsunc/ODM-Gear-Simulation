@@ -12,7 +12,9 @@ blood + bloodSplat/boneCrush sounds on EVERY death. Original HP/balance remains.
 
 - Existing `PlayerHealth` remains the ONE100HP/death/3s-respawn authority. Compact
   top-left health bar/numeric current/max and damage pulse remain. Damage persists
-  between attacks and escapes until ordinary death/scene respawn; no passive heal.
+  between attacks and escapes until ordinary death/player-only respawn; no passive heal.
+  Latest [player-only respawn](player-only-respawn.md) keeps the running map/Titans/music
+  and restores the SAME player at a clear start after3s, NOT a scene reload.
   Regeneration fields, Update ticker and `TickRegeneration` are removed, not merely
   hidden or set to zero. Invalid/nonpositive/nonfinite damage still cannot heal HP.
 - Gameplay stomps deal **60HP**, **1.6s cooldown**, **75% ground-stomp preference**

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -24,8 +23,11 @@ public class PlayerHealth : MonoBehaviour
     private ODM_Movement odmMovement;
     private Attack attack;
 
-    void Start()
+    bool initialized;
+    void Start(){Initialize();EnsureRespawn();}
+    void Initialize()
     {
+        if(initialized)return;initialized=true;
         currentHP = maxHP;
         movement = GetComponent<Movement>();
         odmMovement = GetComponent<ODM_Movement>();
@@ -33,6 +35,10 @@ public class PlayerHealth : MonoBehaviour
         EnsureScoutRagdoll();
     }
 
+    PlayerRespawn EnsureRespawn()
+    {var respawn=GetComponent<PlayerRespawn>();if(respawn==null)respawn=gameObject.AddComponent<PlayerRespawn>();respawn.Initialize();return respawn;}
+    internal void CompleteRespawn()
+    {currentHP=Finite(maxHP)&&maxHP>0?maxHP:100;isDead=isGrabbed=false;grabbedByTitan=null;lastDamageAt=-10;}
     static bool Finite(float value){return !float.IsNaN(value) && !float.IsInfinity(value);}
     void OnGUI()
     {
@@ -75,6 +81,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        Initialize();
         if (isDead || !Finite(damage) || damage<=0) return;
         lastDamageAt=Time.time;
         currentHP -= damage;
@@ -89,6 +96,7 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         if (isDead) return;
+        Initialize();var respawn=EnsureRespawn();respawn.CaptureLivingState();
         var presentation = EnsureScoutRagdoll();
         if (presentation != null)
         {
@@ -110,8 +118,9 @@ public class PlayerHealth : MonoBehaviour
         if (!scoutCorpse && ragdollController != null) ragdollController.EnableRagdoll();
         var feedback=GetComponent<PlayerDeathFeedback>();if(feedback==null)feedback=gameObject.AddComponent<PlayerDeathFeedback>();feedback.PlayDeath(presentation);
 
-        // One death path, including the void boundary; scene respawn remains3s.
-        Invoke(nameof(ReloadScene), 3f);
+        // SAME scene and player references survive. Scaled-time3s delay; blocked
+        // births retry safely rather than reloading or enabling overlapping physics.
+        respawn.BeginDeath();InvokeRepeating(nameof(RespawnPlayer),PlayerRespawn.Delay,.25f);
     }
 
     public void OnGrabbed(Transform hand)
@@ -144,9 +153,6 @@ public class PlayerHealth : MonoBehaviour
         if (odmMovement != null) odmMovement.enabled = true;
     }
 
-    private void ReloadScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-    }
+    private void RespawnPlayer()
+    {if(!isDead || EnsureRespawn().TryRespawn())CancelInvoke(nameof(RespawnPlayer));}
 }

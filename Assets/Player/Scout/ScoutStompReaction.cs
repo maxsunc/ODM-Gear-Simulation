@@ -100,6 +100,11 @@ public sealed class ScoutStompReaction : MonoBehaviour
         for(int i=0;i<visualScripts.Length;i++)if(visualScripts[i]!=null)visualScripts[i].enabled=scriptStates[i];
         for(int i=0;i<bodies.Length;i++)if(bodies[i]!=null){bodies[i].isKinematic=kinematic[i];bodies[i].useGravity=gravity[i];bodies[i].detectCollisions=contacts[i];}
     }
+    internal void ResetForRespawn()
+    {
+        // Respawn restores the healthy snapshot, never the old knockdown flags.
+        IsActive=GetUpPending=false;age=0;presentation=null;clearance=null;Error=null;
+    }
     void OnDisable()
     {
         if(IsActive&&motor!=null){age=10;motor.ContinueRelease(()=>{TickReaction(0);return !IsActive;});}

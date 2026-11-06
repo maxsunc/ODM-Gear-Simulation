@@ -50,6 +50,7 @@ public class TitanODMMotor : TitanAerialMotor
         foreach(var c in GetComponentsInChildren<Collider>()) if(c.enabled && !c.isTrigger)
         { if(!TitanReleaseClearance.Supported(c)) return false;solids.Add(c); }
         if(!solids.Contains(controller)) return false;
+        var respawn=GetComponent<PlayerRespawn>();if(respawn!=null)respawn.CaptureLivingState();
         incoming=measured;walkingEnabled=walking.enabled;gearEnabled=gear.enabled;
         if(!walking.SuspendForTitan(this)) return false;
         if(!gear.SuspendForTitan(this)) { walking.ResumeAfterTitan(this,Vector3.zero);return false; }
@@ -67,6 +68,11 @@ public class TitanODMMotor : TitanAerialMotor
         velocity=incoming*Mathf.Exp(-2*Mathf.Max(0,age))+carryVelocity;
         position=transform.position;
         return clearance!=null && clearance.TryFindExit(ownerPosition,ownerRoot,out position);
+    }
+    internal void ResetForRespawn()
+    {
+        ClearReleaseContinuation();Suspended=false;incoming=measured=Vector3.zero;lastPosition=transform.position;clearance=null;
+        foreach(var c in stoppedRotators)if(c!=null)c.enabled=true;stoppedRotators.Clear();
     }
     public override void Resume(Vector3 velocity)
     {

@@ -97,8 +97,16 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     }
     public bool Activate()
     {
-        if(Corpse!=null){if(Temporary){Temporary=false;Destroy(Corpse,SafeLifetime());}return true;}
+        if(Corpse!=null){if(Temporary){Temporary=false;var proxy=Corpse.GetComponent<TitanCombatProxy>();if(proxy!=null)proxy.target=null;Destroy(Corpse,SafeLifetime());}return true;}
         return CreatePhysical(false);
+    }
+    internal void ResetForRespawn()
+    {
+        // Independent permanent corpse keeps its original bounded lifetime. It
+        // MUST NOT keep a temporary proxy pointing at the revived real player.
+        if(Corpse!=null){var proxy=Corpse.GetComponent<TitanCombatProxy>();if(proxy!=null)proxy.target=null;if(Temporary){Corpse.SetActive(false);Destroy(Corpse);}}
+        Corpse=null;Bodies=new Rigidbody[0];Hips=null;Temporary=prepared=bitten=impactTumble=false;
+        positions=null;physicalShapes=ignoredAttacker=null;Error=null;
     }
     float SafeLifetime(){return float.IsNaN(corpseLifetime)||float.IsInfinity(corpseLifetime)?8:Mathf.Clamp(corpseLifetime,1,30);}
     bool CreatePhysical(bool temporary)

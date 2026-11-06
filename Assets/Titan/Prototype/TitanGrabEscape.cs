@@ -30,6 +30,11 @@ public sealed class TitanGrabEscape : MonoBehaviour
     public TitanGrabAttack Attacker { get { return attacker; } }
     public static int Button(KeyCode key) { int i = Array.IndexOf(keys,key); return i < 0 ? 0 : 1 << i; }
     public void ResetVariation(int seed) { random = new System.Random(seed); }
+    public void ResetForRespawn()
+    {
+        if(!target.IsDead)return;State=TitanGrabEscapeState.Idle;attacker=null;Progress=WrongPresses=0;
+        age=0;wrongAt=-10;resultAt=-10;previousButtons=automaticInput?ReadButtons():0;blockedButtons=previousButtons;
+    }
     void Awake() { target = GetComponent<TitanCombatTarget>(); ResetVariation(Environment.TickCount ^ GetInstanceID()); }
     void OnEnable() { target.HoldReleased += OnReleased; }
     void OnDisable()

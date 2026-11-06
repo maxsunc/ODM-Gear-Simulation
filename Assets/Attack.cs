@@ -59,6 +59,8 @@ public class Attack : MonoBehaviour
         if(damageDealer!=null) damageDealer.gameObject.SetActive(false);
         if(Cancelled!=null)Cancelled();
     }
+    internal void ResetForRespawn()
+    {CancelAttack();StrikeRotation=Quaternion.identity;LastReleaseTime=float.NegativeInfinity;}
     void OnDisable() { CancelAttack(); }
 
     IEnumerator ChargeAttack()

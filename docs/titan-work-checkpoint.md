@@ -14,7 +14,44 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: raised/exposed nape in double-leg-loss pose
+## Current: player-only respawn, preserve running map/Titans/music
+
+User confirmed nape pose and asked to commit (already LOCAL c8a17afc), then requested
+respawn player instead of restarting scene. PlayerHealth remains sole HP/death,
+3s SCALED delay, now invokes PlayerRespawn rather than LoadScene. SAME player/target
+and references survive. Full maxHP/new life at authored start; blockedstart tiny
+lift then deterministic grounded4/8/12m alternatives, full WORLD-UP CCT/solid gear
+clearance; unsupported/query-overflow/all-blocked staysdead/retry.25s, no unsafe
+fallback. Above-original-foot/step ceilings not used as new floor. Void deaths work
+repeatedly; no one-scene latch or missing-health whole-map reload. No invulnerability
+or passive healing. Existing bodies/blood/bloodSplat/boneCrush preserved per death;
+old independent corpse stays8s while original player restores, no duplicate root.
+
+Snapshot pristine first-seen child poses/active states, healthy renderer/script/
+physics flags outside held/reaction phases. Before motor suspend saves alive state.
+Reset DEAD hold/releasepending, motor continuations, knockdown, jump/gravity/hook/
+gas/boost/inertia/F window/QTE/sword-trusted-speed/animation/cloth/camera histories.
+Authored movement permission NOT flight/inertia's transient false flag. Dead pending
+callbacks cannot move new life; old temporary corpse proxy nulled on death/reset
+so it cannot remotely damage revived health. Exact same live IDs, originaldisabled
+component/renderer states honored; legacy RagdollController reset too. Normal LIVE
+release/getup/physics bounds unchanged; no scene/prefab/bake/palette/clip publication.
+
+Fresh baseline401/8/1 of410 -> final413pass/SAME8fail/1skip of422 twice;12new cases.
+Actual3s clock + zero sceneLoaded + sameplayer/world IDs, real restored HP/controls,
+failed fullgear/ceiling/pause/no rootdrift/groundedfallback/unsupportedshape/repeated
+void/downed death and oldproxy/flag tests. Native graphics1/1 actual death0HP ->3s
+100HP restored visible Scout plus old fallen corpse/sameTitan/world; speed<40.
+Saved CURRENT GiantForest2 native5pass/1SAME4x warning failure of6 (one added test):
+injured Titan stillmissingleg/armHP950, dead Titan staysdead, same player/manager/
+spawner/music/nav triangle count/AI target; no scene reload. Worker scripts matched,
+protected assets/user settings/nape pose/sword sources unchanged. No live Editor
+input/stop/save/reload/scene switch/physicsautomation. Subjective camera/spawn feel,
+FPS/device/WebGL/long-duration10x safety not certified. LOCAL only, no push.
+See docs/player-only-respawn.md, tools/capture_player_respawn.py,
+ArtSource/Player/Scout/Respawn/. Nape pose c8a17afc remains unchanged.
+
+## Previous: raised/exposed nape in double-leg-loss pose
 
 User chose pose-only fix for hard-to-hit nape on legless Titans (standing on it lost
 ODM velocity). TitanInjuryPose.BuildProne now low inclined upper back, bowed head,

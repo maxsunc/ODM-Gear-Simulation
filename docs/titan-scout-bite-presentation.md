@@ -75,7 +75,9 @@ No animation writes corpse bones, forces attached to Titans or full corpse pooli
 Defaults on optional Edit Mode **Scout Player Ragdoll** component (add on player to
 persist custom settings; otherwise auto runtime defaults):
 
-- Corpse Lifetime8s (bounded1–30); original scene respawn remains3s, destroys old scene.
+- Corpse Lifetime8s (bounded1–30). Latest [player-only respawn](player-only-respawn.md)
+  retains the3s delay WITHOUT destroying/reloading the scene. Independent corpse
+  finishes its existing lifetime; the same live player resets safely for a new life.
 - Maximum Inherited Speed12m/s, bounded input only0–20, not post-simulation clipping.
 - Bite Outward Speed2.5m/s,0–6; small outward slump so loose body leaves the jaw rather
   than dropping straight through Titan chest.

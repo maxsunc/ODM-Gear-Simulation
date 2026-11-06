@@ -7,6 +7,8 @@ public abstract class TitanAerialMotor : MonoBehaviour
 {
     System.Func<bool> releasePoll;
     public void ContinueRelease(System.Func<bool> poll) { releasePoll=poll; }
+    // New-life owner clears dead release continuations before restoring live controls.
+    public void ClearReleaseContinuation() { releasePoll=null; }
     void LateUpdate() { if(releasePoll!=null && releasePoll()) releasePoll=null; }
     void OnDisable() { var target=GetComponent<TitanCombatTarget>(); if(target!=null) target.EscapeHold(); }
     // Production ODM can tilt its root during flight. Native Unity CCT axis stays

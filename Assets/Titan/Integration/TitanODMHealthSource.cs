@@ -33,7 +33,7 @@ public class TitanODMHealthSource : TitanHealthSource
         if (presentation != null) presentation.CompleteBite();
         var feedback = GetComponent<TitanSwordFeedback>();
         if (damaged && feedback != null) feedback.PlayBiteBlood(impact.Point, impact.Direction);
-        if(damaged && impact.Lethal && player!=null && player.isDead && !eatenSoundPlayed && player.GetComponent<PlayerDeathFeedback>()!=null && player.GetComponent<PlayerDeathFeedback>().BloodSoundCount>0)
+        if(damaged && impact.Lethal && player!=null && player.isDead && !eatenSoundPlayed && player.GetComponent<PlayerDeathFeedback>()!=null && player.GetComponent<PlayerDeathFeedback>().BloodSource!=null)
         {eatenSoundPlayed=true;EatenSoundCount++;}
     }
     public override bool IsBodyCollider(Collider shape) { return shape==GetComponent<CharacterController>(); }

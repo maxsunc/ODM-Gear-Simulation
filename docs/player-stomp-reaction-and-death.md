@@ -15,7 +15,9 @@ bake, animation-asset rebuild or live Editor automation.
   untouched. Actual audible mix/device timing is a playtest, not a dispatch test.
 - Generic HP damage, confirmed bite, squeeze, lethal stomp and the void boundary
   all reach the SAME guarded `PlayerHealth.Die`. The old immediate void reload now
-  calls Die and uses the existing3s respawn delay. Late legacy hand release cannot
+  calls Die and uses the existing3s respawn delay. Latest
+  [player-only respawn](player-only-respawn.md) replaces the scene reload with a
+  safe new life on the SAME player; world/Titans/music persist. Late legacy hand release cannot
   re-enable dead controls. Existing legacy RagdollController remains the fallback
   for non-Scout players; no duplicate live rig physics is injected.
 - The already-approved real bite feedback remains, including its directional mouth

@@ -85,6 +85,12 @@ public class Movement : MonoBehaviour
     }
 
 
+    internal void ResetForRespawn(bool allowMovement)
+    {
+        StopAllCoroutines();titanOwner=null;titanSuspended=false;enabledMovement=allowMovement;
+        CancelJump();jumpCooldownRemaining=0;titanReleaseUp=0;_velocity=move=Vector3.zero;
+        gravity=true;resetXRot=false;smoothVelocity=0;
+    }
     void OnDisable() { CancelJump(); }
 
     void Start()

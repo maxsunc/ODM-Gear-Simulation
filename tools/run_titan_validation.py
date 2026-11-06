@@ -59,7 +59,8 @@ for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'G
     for suffix in ['', '.meta']:
         relative='Assets/Editor/'+name+'.cs'+suffix
         shutil.copy2(root / relative, project / relative)
-legacy = ['Movement.cs','ODM_Movement.cs','PlayerHealth.cs','Attack.cs','DamageDealer.cs',
+legacy = ['Movement.cs','ODM_Movement.cs','PlayerHealth.cs','PlayerRespawn.cs','Attack.cs','DamageDealer.cs',
+          'ThirdPersonCameraController.cs','CameraJitterFix.cs','Scripts/FollowPos.cs',
           'RagdollController.cs','ThirdPersonCam.cs','Scripts/Audio.cs','Scripts/GameAudio.cs','GameElements.cs','SceneManagement.cs',
           'Titan/TitanController.cs','Titan/TitanAttack.cs','Titan/TitanLimb.cs',
           'Titan/TitanNape.cs','Titan/TitanState.cs']

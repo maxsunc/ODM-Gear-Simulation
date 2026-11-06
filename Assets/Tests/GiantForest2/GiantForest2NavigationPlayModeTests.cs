@@ -130,6 +130,28 @@ public class GiantForest2NavigationPlayModeTests
             Assert.That((bool)Call(manager,"Despawn",body),Is.True);yield return null;
         }
     }
+    [UnityTest]public IEnumerator PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic()
+    {
+        var player=Field<Component>(manager,"player");var health=(MonoBehaviour)player.GetComponent(Real("PlayerHealth"));var target=player.GetComponent<TitanCombatTarget>();var prefab=Field<GameObject>(spawner,"titanPrefab");
+        int rootId=player.GetInstanceID(),managerId=manager.GetInstanceID(),spawnerId=spawner.GetInstanceID(),sceneHandle=scene.handle,triangles=NavMesh.CalculateTriangulation().indices.Length;var music=All<AudioSource>().Where(a=>a.outputAudioMixerGroup!=null&&a.outputAudioMixerGroup.name=="Music").Select(a=>a.GetInstanceID()).ToArray();
+        ModularTitanBody injured=null,dead=null;
+        for(int z=-600;z<=600&&(injured==null||dead==null);z+=100)for(int x=-600;x<=600&&(injured==null||dead==null);x+=100)
+        {object[] args={prefab,Point(x,z),Quaternion.identity,3f,null,null};if((bool)Call(manager,"TrySpawn",args)){if(injured==null)injured=(ModularTitanBody)args[4];else dead=(ModularTitanBody)args[4];}}
+        Assert.That(injured!=null&&dead!=null,Is.True);injured.ReceiveDamage(TitanHitRegion.LeftArm,50,injured.leftHand.position,Vector3.zero);injured.Sever(TitanHitRegion.RightLeg,Vector3.zero);dead.Die();int injuredId=injured.GetInstanceID(),deadId=dead.GetInstanceID();float armHp=injured.GetHealth(TitanHitRegion.LeftArm);
+        int loads=0;UnityEngine.Events.UnityAction<Scene,LoadSceneMode> loaded=(s,m)=>loads++;SceneManager.sceneLoaded+=loaded;
+        try
+        {
+            target.TakeDamage(100,player.transform.position);Assert.That(Field<bool>(health,"isDead"),Is.True);float at=Time.time;
+            while(Field<bool>(health,"isDead")&&Time.time-at<5)yield return null;
+            Assert.That(Field<bool>(health,"isDead"),Is.False,Prop<string>(player.GetComponent(Real("PlayerRespawn")),"Error"));Assert.That(target.Health,Is.EqualTo(100));Assert.That(Time.time-at,Is.GreaterThanOrEqualTo(2.99f));Assert.That(loads,Is.Zero);
+            Assert.That(player.GetInstanceID(),Is.EqualTo(rootId));Assert.That(manager.GetInstanceID(),Is.EqualTo(managerId));Assert.That(spawner.GetInstanceID(),Is.EqualTo(spawnerId));Assert.That(scene.handle,Is.EqualTo(sceneHandle));
+            Assert.That(injured.GetInstanceID(),Is.EqualTo(injuredId));Assert.That(injured.IsSevered(TitanHitRegion.RightLeg),Is.True);Assert.That(injured.GetHealth(TitanHitRegion.LeftArm),Is.EqualTo(armHp));Assert.That(dead.GetInstanceID(),Is.EqualTo(deadId));Assert.That(dead.IsDead,Is.True);
+            Assert.That(injured.GetComponent<TitanPatrolChaseAI>().target,Is.EqualTo(player.transform));Assert.That(NavMesh.CalculateTriangulation().indices.Length,Is.EqualTo(triangles));Assert.That(All<AudioSource>().Where(a=>a.outputAudioMixerGroup!=null&&a.outputAudioMixerGroup.name=="Music").Select(a=>a.GetInstanceID()),Is.EquivalentTo(music));
+            Assert.That(player.GetComponent<CharacterController>().enabled,Is.True);Assert.That(((Behaviour)player).enabled,Is.True);Assert.That(((Behaviour)player.GetComponent(Real("ODM_Movement"))).enabled,Is.True);
+            Debug.Log("NATIVE_FOREST_PLAYER_ONLY_RESPAWN seconds="+(Time.time-at)+" sameScene="+sceneHandle+" samePlayer="+rootId+" injuredHp="+armHp+" deadTitanStillDead="+dead.IsDead);
+        }
+        finally{SceneManager.sceneLoaded-=loaded;health.CancelInvoke();}
+    }
     [UnityTest]public IEnumerator CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives()
     {
         var player=Field<Component>(manager,"player");Assert.That(player.GetComponents<TitanGrabEscape>().Length,Is.EqualTo(1),"Current saved map auto-installs one player QTE without changing its scene asset");

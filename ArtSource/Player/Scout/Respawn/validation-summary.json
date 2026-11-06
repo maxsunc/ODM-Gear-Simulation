@@ -1,0 +1,215 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "napePoseAlreadyCommitted": "c8a17afc, unchanged by this request",
+  "behavior": {
+    "death": "Existing blood/ragdoll/bloodSplat+boneCrush remain once per life",
+    "respawn": "Same player/health/target and reference identity after3 scaled seconds, full maxHP, authored start or bounded supported4/8/12m fallback; blocked/unsupported/saturated remains dead, retries.25s",
+    "world": "No scene reload, no actor/AI/music/spawner/navigation regeneration; all running world state persists naturally",
+    "ownership": "Only DEAD life can retire pending held/reaction motor callbacks; all LIVE exit/getup clearance rules unchanged. Pristine transforms/active flags + healthy enable flags restored. Original movement permission retained, not gas/inertia false flag.",
+    "newLifeReset": "Jump/gravity/boost/hooks/anchors/gas/inertia/coroutines, attack charge/window, QTE attacker/HUD/quarantined keys, sword trusted motion/grace/shake and animation/cloth/camera interpolation; no teleport-speed damage bank",
+    "oldCorpse": "Independent permanent body keeps original8s bounded lifetime, no temporary proxy to resurrected real HP. New death rearms feedback without duplicate same-life receipts",
+    "safety": "Full WORLD-UP CCT + every enabled supported solid gear shape, scene-local bounded queries fail closed; static support/slope/foot-height bounds for nearby spawn, no ceiling-as-ground, no post-simulation clipping or global Physics/time changes",
+    "void": "Repeatable same-health death path, removed one-scene latch; missing-health object warns once instead of whole-scene reset",
+    "notAdded": [
+      "Passive regeneration",
+      "Respawn invulnerability",
+      "World/Titan heal/reset",
+      "Nape hitbox/reach/speed-curve changes",
+      "New normal camera/motor owner"
+    ]
+  },
+  "defaultBaseline": {
+    "id": "2",
+    "testcasecount": "410",
+    "result": "Failed(Child)",
+    "total": "410",
+    "passed": "401",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 04:39:35Z",
+    "end-time": "2026-11-06 04:40:18Z",
+    "duration": "42.8080073"
+  },
+  "defaultFirst": {
+    "id": "2",
+    "testcasecount": "422",
+    "result": "Failed(Child)",
+    "total": "422",
+    "passed": "413",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 05:14:26Z",
+    "end-time": "2026-11-06 05:15:04Z",
+    "duration": "37.9913892"
+  },
+  "defaultFinal": {
+    "id": "2",
+    "testcasecount": "422",
+    "result": "Failed(Child)",
+    "total": "422",
+    "passed": "413",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 05:15:59Z",
+    "end-time": "2026-11-06 05:16:37Z",
+    "duration": "37.4965032"
+  },
+  "addedDefaultCases": 12,
+  "sameBaselineFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.349999994f\n"
+    },
+    {
+      "name": "HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  4.57699919f\n"
+    }
+  ],
+  "savedMap": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "6",
+      "result": "Failed(Child)",
+      "total": "6",
+      "passed": "5",
+      "failed": "1",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 05:14:00Z",
+      "end-time": "2026-11-06 05:14:11Z",
+      "duration": "10.8189822"
+    },
+    "sameBaselineConfigurationFailure": [
+      {
+        "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+        "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+      }
+    ],
+    "newCase": "PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic",
+    "outputs": [
+      "Animator is not playing an AnimatorController\nAnimator is not playing an AnimatorController\nNATIVE_FOREST_PLAYER_ONLY_RESPAWN seconds=3.254037 sameScene=-107484 samePlayer=39396 injuredHp=950 deadTitanStillDead=True\n"
+    ]
+  },
+  "nativeGraphics": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 05:17:02Z",
+      "end-time": "2026-11-06 05:17:05Z",
+      "duration": "3.6475403"
+    },
+    "captures": [
+      "Player_Dead.png",
+      "Player_Respawned.png"
+    ],
+    "outputs": [
+      "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_ONLY_RESPAWN_NATIVE seconds=3.281312 sameScene=-2448 sameTitan=-2878 peak=6.406858 hp=100\nCleanup Blit\n"
+    ],
+    "method": "Nonbatch completed GameView ScreenCapture in owned worker, real scaled3s wait; original live HUD colored-fill assertion stays on100HP frame, zeroHP death frame intentionally has no fill."
+  },
+  "tests": [
+    "Real3s and pause/no-early gate",
+    "Same scene/player/target IDs and zero sceneLoaded callbacks",
+    "Powered-flight walking-lock reset, HP100, controls, hooks/jump/trusted-speed reset with original tuning",
+    "Whole solid gear/headroom, dead root no drift when blocked",
+    "Bounded grounded fallback, unsupported solid fails closed",
+    "Dead pending release and old motor callbacks cannot move new life",
+    "Repeated void deaths and per-life feedback receipts",
+    "Downed corpse promotion/proxy clearance and repeat fresh corpse",
+    "Intentionally disabled renderer/motor flags honored",
+    "External existing follow/camera interpolation reset without replacing target",
+    "Actual saved map injured leg/armHP950 and dead actor remain, same spawner/music/nav/target IDs",
+    "Existing physical strict arm<8deg/120Hz, speed<40m/s, grip<.003m and later carry/mouth penetration<.005m unchanged"
+  ],
+  "audit": {
+    "protectedHashesUnchanged": {
+      "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "571644b48a8d9e83d9272d666968bbf2fa024e854f1cf7af61bfde8c9eadaa34",
+      "Assets/Resources/TitanAudioPalette.asset": "a781e26daf151158209bb86075dc53bee5aadc40dc3a666056a34200d28d92ae",
+      "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+      "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+      "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+      "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+      "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675",
+      "Assets/Audio/boneCrush.wav": "dba7dba66869fa8c06221e22b1b1e000c193567f70673a3b6fc21d80ee3377aa",
+      "Assets/Audio/boneCrush.wav.meta": "15a20be1dee4d71d0da008a64bbdcebcd0e8a6ffc4ddf463563b7cc21d3a2e42",
+      "Assets/Titan/Prototype/TitanInjuryPose.cs": "ade48f27b558b153614260996c611b50550422d615043dabde4551c0be1f69ba",
+      "Assets/Titan/Integration/TitanODMSwordSweep.cs": "e6c45faf6efd4eac32dd873bef1e41eeac26bffe172fd6643d9349aaae0325d0",
+      "Assets/DamageDealer.cs": "70d14148039924a7f75a48fbec5252650bad7b71ac53d3c50216129bb3aa0ad0"
+    },
+    "commonSourceFilesMatchedPerWorker": 76,
+    "workers": [
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei"
+    ],
+    "forestTestAndNewScriptMetaMatched": true,
+    "noLiveEditorInputStopSaveReloadSceneSwitchOrPhysicsAutomation": true,
+    "noScenePrefabBakePaletteClipSourcePublication": true
+  },
+  "notCertified": [
+    "Subjective camera/spawn feel and device audio",
+    "Crowd FPS/WebGL builds",
+    "Comprehensive long-duration10x corpse safety",
+    "Early grab takeover clearance"
+  ],
+  "git": "Selective LOCAL checkpoint, no push authorization"
+}

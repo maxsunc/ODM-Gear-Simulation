@@ -14,10 +14,13 @@ public sealed class PlayerDeathFeedback : MonoBehaviour
     public ParticleSystem Blood {get;private set;}
     public AudioSource BloodSource {get;private set;}
     public AudioSource BoneSource {get;private set;}
-    Transform follow;float sprayUntil;GameObject effect;
+    Transform follow;float sprayUntil;GameObject effect;bool playedThisLife;
+    public bool PlayedThisLife {get{return playedThisLife;}}
+    internal void ResetForRespawn()
+    {playedThisLife=false;follow=null;effect=null;Blood=null;BloodSource=BoneSource=null;}
     public void PlayDeath(ScoutPlayerRagdoll ragdoll)
     {
-        if(DeathCount!=0)return;DeathCount++;
+        if(playedThisLife)return;playedThisLife=true;DeathCount++;
         if(palette==null)palette=Resources.Load<PlayerImpactPalette>("PlayerImpactPalette");
         if(palette==null)return;
         if(ragdoll!=null && ragdoll.Corpse!=null)

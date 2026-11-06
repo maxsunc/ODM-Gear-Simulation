@@ -70,6 +70,14 @@ public class ThirdPersonCameraController : MonoBehaviour
         // Cursor.visible = false;
     }
     
+    public void ResetAfterTeleport()
+    {
+        if(target==null)return;lastTargetPosition=target.position;currentSpeed=0;
+        var rotation=Quaternion.Euler(currentY,currentX,0);Vector3 origin=target.position+offset;
+        currentDistance=CheckCollision(origin,rotation*Vector3.back);
+        transform.SetPositionAndRotation(origin+rotation*Vector3.back*currentDistance,rotation);
+        if(cam!=null)cam.fieldOfView=baseFOV;
+    }
     void Update()
     {
         if (target == null) return;

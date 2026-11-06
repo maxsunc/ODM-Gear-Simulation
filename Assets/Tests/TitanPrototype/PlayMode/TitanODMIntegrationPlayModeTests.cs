@@ -595,6 +595,131 @@ public class TitanODMIntegrationPlayModeTests
     [UnityTest] public IEnumerator SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(7,false);}
     [UnityTest] public IEnumerator TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,true);}
     [UnityTest] public IEnumerator TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(10,false);}
+    MonoBehaviour Respawner {get{return (MonoBehaviour)player.GetComponent(Legacy("PlayerRespawn"));}}
+    void ReadyRespawn(){hp.CancelInvoke();Set(Respawner,"readyAt",Time.time-1);}
+    void MoveRespawnTestPlayer(Vector3 point){cc.enabled=false;player.transform.position=point;cc.enabled=true;Physics.SyncTransforms();}
+    [UnityTest] public IEnumerator PlayerOnlyRespawnUsesRealThreeSecondDelayAndKeepsSceneAndReferences()
+    {
+        int sceneHandle=scene.handle,playerId=player.GetInstanceID(),targetId=target.GetInstanceID();Vector3 spawn=Property<Vector3>(Respawner,"SpawnPosition");
+        var sentinel=new GameObject("World survives player death");SceneManager.MoveGameObjectToScene(sentinel,scene);sentinel.transform.position=new Vector3(25,7,30);
+        int loads=0;UnityEngine.Events.UnityAction<Scene,LoadSceneMode> loaded=(s,m)=>loads++;SceneManager.sceneLoaded+=loaded;
+        try
+        {
+            MoveRespawnTestPlayer(new Vector3(30,8,30));target.TakeDamage(100,player.transform.position);float at=Time.time;
+            Assert.That(Call(Respawner,"TryRespawn"),Is.False);yield return new WaitForSeconds(2.7f);Assert.That(Get<bool>(hp,"isDead"),Is.True,"Never revive before3 scaled seconds");
+            while(Get<bool>(hp,"isDead")&&Time.time-at<4)yield return null;
+            Assert.That(Get<bool>(hp,"isDead"),Is.False,Property<string>(Respawner,"Error"));Assert.That(Time.time-at,Is.GreaterThanOrEqualTo(2.99f));Assert.That(target.Health,Is.EqualTo(100));
+            Assert.That(player.GetInstanceID(),Is.EqualTo(playerId));Assert.That(target.GetInstanceID(),Is.EqualTo(targetId));Assert.That(player.scene.handle,Is.EqualTo(sceneHandle));Assert.That(loads,Is.Zero);
+            Assert.That(Vector2.Distance(new Vector2(player.transform.position.x,player.transform.position.z),new Vector2(spawn.x,spawn.z)),Is.LessThan(.01f));Assert.That(sentinel.transform.position,Is.EqualTo(new Vector3(25,7,30)));
+            Assert.That(walk.enabled&&gear.enabled&&cc.enabled,Is.True);Assert.That(motor.CanSuspend,Is.True);Assert.That(Property<int>(Respawner,"RespawnCount"),Is.EqualTo(1));
+        }
+        finally{SceneManager.sceneLoaded-=loaded;}
+    }
+    [Test] public void PlayerOnlyRespawnResetsHpHooksBoostJumpInputAndTrustedSpeedWithoutChangingTuning()
+    {
+        Add("Attack");var sword=Add("TitanSwordFeedback");Set(walk,"gravityConstant",16f);Set(walk,"jumpForce",35f);Set(walk,"jumpDelayRemaining",.2f);Set(gear,"gasing",true);Set(gear,"currentSpeed",70f);Set(gear,"residualSpeed",40f);Set(walk,"enabledMovement",false);
+        MoveRespawnTestPlayer(new Vector3(100,8,100));target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.True,Property<string>(Respawner,"Error"));
+        Assert.That(target.Health,Is.EqualTo(100));Assert.That(Get<bool>(walk,"enabledMovement"),Is.True,"Gas/inertia's temporary walking lock cannot carry into a new life");Assert.That(Get<bool>(walk,"titanSuspended")||Get<bool>(gear,"titanSuspended"),Is.False);Assert.That(Get<bool>(gear,"leftGrappled")||Get<bool>(gear,"rightGrappled")||Get<bool>(gear,"gasing"),Is.False);
+        Assert.That(Get<float>(walk,"jumpForce"),Is.Zero);Assert.That(Get<float>(walk,"jumpDelayRemaining"),Is.EqualTo(-1));Assert.That(Get<float>(gear,"currentSpeed")+Get<float>(gear,"residualSpeed"),Is.Zero);Assert.That(motor.Velocity,Is.EqualTo(Vector3.zero));Assert.That(Property<float>(sword,"CurrentDamageSpeed"),Is.Zero);
+        Assert.That(Get<float>(walk,"gravityConstant"),Is.EqualTo(16));Assert.That(Get<float>(walk,"moveSpeed"),Is.EqualTo(15));Assert.That(Get<float>(gear,"maxSpeed"),Is.EqualTo(80));Assert.That(target.IsHeld||target.ReleasePending,Is.False);
+    }
+    [Test] public void PlayerOnlyRespawnBlockedWholeGearWaitsWithoutMovingDeadRootThenRestoresAllShapes()
+    {
+        var gearBox=new GameObject("Additional supported gear");gearBox.transform.SetParent(player.transform,false);gearBox.transform.localPosition=Vector3.right*2;var shape=gearBox.AddComponent<BoxCollider>();shape.size=Vector3.one*.5f;
+        Vector3 spawn=Property<Vector3>(Respawner,"SpawnPosition");MoveRespawnTestPlayer(new Vector3(30,8,30));var wall=new GameObject("Spawn blocks gear only");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=spawn+Vector3.right*2;wall.AddComponent<BoxCollider>();
+        target.TakeDamage(100,player.transform.position);ReadyRespawn();Vector3 dead=player.transform.position;Assert.That(Call(Respawner,"TryRespawn"),Is.False);Assert.That(Vector3.Distance(player.transform.position,dead),Is.LessThan(.001f));Assert.That(cc.enabled,Is.False);Assert.That(target.Health,Is.Zero);
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();Assert.That(Call(Respawner,"TryRespawn"),Is.True);Assert.That(cc.enabled&&shape.enabled,Is.True);
+    }
+    [Test] public void PlayerOnlyRespawnCeilingUsesWorldUpCapsuleNotDeathTiltAndPauseCannotRevive()
+    {
+        Vector3 spawn=Property<Vector3>(Respawner,"SpawnPosition");var ceiling=new GameObject("Spawn headroom");SceneManager.MoveGameObjectToScene(ceiling,scene);ceiling.transform.position=spawn+Vector3.up*1.7f;ceiling.AddComponent<BoxCollider>().size=new Vector3(40,.1f,40);
+        MoveRespawnTestPlayer(new Vector3(30,8,30));player.transform.rotation=Quaternion.Euler(0,0,60);target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.False);
+        Object.DestroyImmediate(ceiling);Physics.SyncTransforms();float old=Time.timeScale;
+        try{Time.timeScale=0;Assert.That(Call(Respawner,"TryRespawn"),Is.False);Assert.That(target.Health,Is.Zero);}finally{Time.timeScale=old;}
+        Assert.That(Call(Respawner,"TryRespawn"),Is.True);Assert.That(Quaternion.Angle(player.transform.rotation,Quaternion.identity),Is.LessThan(.01f));
+    }
+    [Test] public void PlayerOnlyRespawnRetiresBlockedDeadHoldAndOldReleasePollCannotMoveTheNewLife()
+    {
+        Hold();var wall=new GameObject("Old hold exits blocked");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*20;
+        target.TakeDamage(100,player.transform.position);Assert.That(target.ReleasePending,Is.True);ReadyRespawn();Object.DestroyImmediate(wall);Physics.SyncTransforms();
+        Assert.That(Call(Respawner,"TryRespawn"),Is.True);Vector3 born=player.transform.position;target.TickHold(10);typeof(TitanAerialMotor).GetMethod("LateUpdate",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(motor,null);
+        Assert.That(Vector3.Distance(player.transform.position,born),Is.LessThan(.001f));Assert.That(target.IsHeld||target.ReleasePending,Is.False);Assert.That(Get<bool>(walk,"titanSuspended")||Get<bool>(gear,"titanSuspended"),Is.False);Assert.That(motor.CanSuspend,Is.True);
+    }
+    [Test] public void PlayerOnlyRespawnRepeatedVoidDeathsUseNewLifeFeedbackAndNoSceneLatch()
+    {
+        var elements=Add("GameElements");Set(elements,"player",player.transform);
+        for(int i=1;i<=2;i++)
+        {
+            MoveRespawnTestPlayer(new Vector3(30,-26,30));Call(elements,"Update");Assert.That(Get<bool>(hp,"isDead"),Is.True);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.True);
+            Assert.That(target.Health,Is.EqualTo(100));Assert.That(Property<int>(player.GetComponent(Legacy("PlayerDeathFeedback")),"DeathCount"),Is.EqualTo(i));Assert.That(Property<int>(Respawner,"RespawnCount"),Is.EqualTo(i));
+        }
+    }
+    [Test] public void PlayerOnlyRespawnAfterDownedDeathLeavesCorpseWithoutARemoteDamageProxy()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);var physical=Property<GameObject>(corpsePresentation,"Corpse");Assert.That(physical,Is.Not.Null);
+        target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);ReadyRespawn();Assert.That(physical.GetComponent<TitanCombatProxy>().target,Is.Null);Assert.That(Call(Respawner,"TryRespawn"),Is.True,Property<string>(Respawner,"Error"));
+        Assert.That(physical,Is.Not.Null);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(TitanCombatProxy.Resolve(physical.GetComponentInChildren<Collider>()),Is.Null);Assert.That(target.Health,Is.EqualTo(100));
+        Assert.That(Call(Respawner,"TryRespawn"),Is.False);target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(2));Assert.That(Property<int>(player.GetComponent(Legacy("PlayerDeathFeedback")),"DeathCount"),Is.EqualTo(2));
+    }
+    [Test] public void PlayerOnlyRespawnUsesBoundedSupportedFallbackInsteadOfAnOccupiedStart()
+    {
+        var floor=new GameObject("Respawn static support");SceneManager.MoveGameObjectToScene(floor,scene);floor.transform.position=Vector3.down*.25f;floor.AddComponent<BoxCollider>().size=new Vector3(100,.5f,100);
+        var block=new GameObject("Start is occupied");SceneManager.MoveGameObjectToScene(block,scene);block.transform.position=Property<Vector3>(Respawner,"SpawnPosition");block.AddComponent<BoxCollider>().size=new Vector3(3,4,3);
+        MoveRespawnTestPlayer(new Vector3(30,8,30));target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.True);
+        Assert.That(Vector3.ProjectOnPlane(player.transform.position-Property<Vector3>(Respawner,"SpawnPosition"),Vector3.up).magnitude,Is.InRange(3.9f,12.01f));Assert.That(cc.bounds.min.y,Is.InRange(.08f,.15f));Assert.That(target.Health,Is.EqualTo(100));
+    }
+    [Test] public void PlayerOnlyRespawnUnsupportedSolidFailsClosedWithoutEnablingControls()
+    {
+        var unsupported=GameObject.CreatePrimitive(PrimitiveType.Cube);SceneManager.MoveGameObjectToScene(unsupported,scene);Object.DestroyImmediate(unsupported.GetComponent<BoxCollider>());unsupported.transform.SetParent(player.transform,false);unsupported.AddComponent<MeshCollider>().sharedMesh=unsupported.GetComponent<MeshFilter>().sharedMesh;
+        target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.False);Assert.That(Property<string>(Respawner,"Error"),Does.Contain("Unsupported"));Assert.That(target.Health,Is.Zero);Assert.That(walk.enabled||gear.enabled||cc.enabled,Is.False);
+    }
+    [Test] public void PlayerOnlyRespawnResetsExistingExternalFollowAndCameraHistoriesWithoutReplacingTargets()
+    {
+        var followRoot=new GameObject("External follow owner");SceneManager.MoveGameObjectToScene(followRoot,scene);var follow=followRoot.AddComponent(Legacy("FollowPos"));Set(follow,"target",player.transform);Set(follow,"offset",Vector3.up*2);
+        var jitter=(Behaviour)followRoot.AddComponent(Legacy("CameraJitterFix"));jitter.enabled=false;Set(jitter,"lastPosition",Vector3.one*999);
+        var cameraRoot=new GameObject("External orbit owner");SceneManager.MoveGameObjectToScene(cameraRoot,scene);cameraRoot.AddComponent<Camera>().enabled=false;var camera=cameraRoot.AddComponent(Legacy("ThirdPersonCameraController"));Set(camera,"target",player.transform);Set(camera,"lastTargetPosition",Vector3.one*999);Set(camera,"currentSpeed",900f);
+        MoveRespawnTestPlayer(new Vector3(30,8,30));target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.True);
+        Assert.That(Get<Transform>(camera,"target"),Is.EqualTo(player.transform));Assert.That(Get<Vector3>(camera,"lastTargetPosition"),Is.EqualTo(player.transform.position));Assert.That(Get<float>(camera,"currentSpeed"),Is.Zero);
+        Assert.That(followRoot.transform.position,Is.EqualTo(player.transform.position+Vector3.up*2));Assert.That(Get<Vector3>(jitter,"lastPosition"),Is.EqualTo(followRoot.transform.position));Assert.That(jitter.enabled,Is.False);
+    }
+    [Test] public void PlayerOnlyRespawnPreservesIntentionallyDisabledMovementAndRendererFlags()
+    {
+        ScoutBiteSetup();var renderer=biteModel.GetComponentsInChildren<Renderer>().First();renderer.enabled=false;walk.enabled=false;gear.enabled=false;
+        target.TakeDamage(100,player.transform.position);ReadyRespawn();Assert.That(Call(Respawner,"TryRespawn"),Is.True);Assert.That(renderer.enabled,Is.False);Assert.That(walk.enabled||gear.enabled,Is.False);Assert.That(biteModel.GetComponentsInChildren<Renderer>().Any(r=>r.enabled),Is.True);
+    }
+
+    [UnityTest] public IEnumerator PlayerOnlyRespawnRendersDeathAndRestoredScoutInOwnedNativeGraphics()
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_PLAYER_RESPAWN_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        ScoutBiteSetup();biteTitan.transform.position=Vector3.forward*30;var actorId=biteTitan.GetInstanceID();MoveRespawnTestPlayer(new Vector3(.7f,1.91f,5.7f));var visualAnimator=biteModel.GetComponent<Animator>();visualAnimator.enabled=true;visualAnimator.Play("Idle",0,0);visualAnimator.Update(0);
+        Object.DestroyImmediate(Respawner);var respawn=Add("PlayerRespawn");Call(respawn,"Initialize");walk.enabled=true;gear.enabled=true;var handle=scene.handle;
+        var oldPipeline=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var camera=new GameObject("Owned respawn camera").AddComponent<Camera>();SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.gameObject.AddComponent<AudioListener>();camera.orthographic=true;camera.orthographicSize=8;camera.transform.position=new Vector3(14,8,-10);camera.transform.LookAt(new Vector3(5,2,5.7f));camera.backgroundColor=new Color(.1f,.15f,.19f);camera.clearFlags=CameraClearFlags.SolidColor;
+        var sun=new GameObject("Owned respawn sun").AddComponent<Light>();SceneManager.MoveGameObjectToScene(sun.gameObject,scene);sun.type=LightType.Directional;sun.intensity=1.5f;sun.transform.rotation=Quaternion.Euler(45,-35,0);
+        var ground=GameObject.CreatePrimitive(PrimitiveType.Cube);SceneManager.MoveGameObjectToScene(ground,scene);ground.transform.position=new Vector3(0,-.25f,0);ground.transform.localScale=new Vector3(80,.5f,80);ground.GetComponent<Renderer>().sharedMaterial=Resources.Load<Material>("TitanStompChunks");
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;
+            MoveRespawnTestPlayer(new Vector3(10,1.91f,5.7f));target.TakeDamage(100,player.transform.position);float at=Time.time;
+            // Zero health intentionally has NO colored fill; the existing health
+            // capture assertion is appropriate only for the restored100HP frame.
+            string deathPath=folder+"/Player_Dead.png";System.IO.File.Delete(deathPath);yield return null;ScreenCapture.CaptureScreenshot(deathPath);
+            for(int i=0;i<120&&!System.IO.File.Exists(deathPath);i++)yield return null;Assert.That(System.IO.File.Exists(deathPath),Is.True);float peak=0;
+            while(Get<bool>(hp,"isDead")&&Time.time-at<5)
+            {
+                scene.GetPhysicsScene().Simulate(1f/60);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);yield return null;
+            }
+            Assert.That(target.Health,Is.EqualTo(100),Property<string>(respawn,"Error"));Assert.That(Time.time-at,Is.GreaterThanOrEqualTo(2.99f));Assert.That(peak,Is.LessThan(40));Assert.That(scene.handle,Is.EqualTo(handle));Assert.That(biteTitan.GetInstanceID(),Is.EqualTo(actorId));Assert.That(cc.enabled&&walk.enabled&&gear.enabled,Is.True);
+            yield return null;yield return null;yield return SaveHealthScreen(folder+"/Player_Respawned.png");
+            Assert.That(biteModel.GetComponentsInChildren<Renderer>().Any(r=>r.enabled),Is.True);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+            Debug.Log("PLAYER_ONLY_RESPAWN_NATIVE seconds="+(Time.time-at)+" sameScene="+handle+" sameTitan="+actorId+" peak="+peak+" hp="+target.Health);
+        }
+        finally{hp.CancelInvoke();UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(sun.gameObject);Object.Destroy(ground);Object.Destroy(pipeline);}
+    }
+
     [UnityTest] public IEnumerator PlayerHealthDamagePersistsAndRegenerationApiIsRemoved()
     {
         target.TakeDamage(60,player.transform.position);yield return null;Assert.That(target.Health,Is.EqualTo(40));

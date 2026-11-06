@@ -95,6 +95,13 @@ public class TitanSwordFeedback : MonoBehaviour
         validMotionSamples=0;damageSpeed=0;lastMotion=Vector3.zero;lastPosition=transform.position;
         for(int i=0;i<impacts.Length;i++)impacts[i]=default(Impact);
     }
+    internal void ResetForRespawn()
+    {
+        ResetDamageHistory();numbers.Clear();pendingSound=-1;pendingFinisher=false;
+        killToastUntil=markerUntil=shakeUntil=shakePower=0;
+        if(shakingCamera!=null)EndShake(shakingCamera);
+        foreach(var trail in trails)if(trail!=null){trail.emitting=false;trail.Clear();}
+    }
     void OnControllerColliderHit(ControllerColliderHit hit)
     { RecordSolidContact(hit.collider,hit.moveDirection,hit.normal); }
     public void RecordSolidContact(Collider solid,Vector3 direction,Vector3 normal)

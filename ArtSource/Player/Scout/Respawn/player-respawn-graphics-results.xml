@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 05:17:02Z" end-time="2026-11-06 05:17:05Z" duration="3.6475403">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="422" result="Passed" start-time="2026-11-06 05:17:02Z" end-time="2026-11-06 05:17:05Z" duration="3.647540" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1456" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="422" result="Passed" start-time="2026-11-06 05:17:02Z" end-time="2026-11-06 05:17:05Z" duration="3.627434" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="57988" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1203" name="TitanODMIntegrationPlayModeTests" fullname="TitanODMIntegrationPlayModeTests" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" testcasecount="141" result="Passed" start-time="2026-11-06 05:17:02Z" end-time="2026-11-06 05:17:05Z" duration="3.619588" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1261" name="PlayerOnlyRespawnRendersDeathAndRestoredScoutInOwnedNativeGraphics" fullname="TitanODMIntegrationPlayModeTests.PlayerOnlyRespawnRendersDeathAndRestoredScoutInOwnedNativeGraphics" methodname="PlayerOnlyRespawnRendersDeathAndRestoredScoutInOwnedNativeGraphics" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="1394231409" result="Passed" start-time="2026-11-06 05:17:02Z" end-time="2026-11-06 05:17:05Z" duration="3.605377" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+PLAYER_ONLY_RESPAWN_NATIVE seconds=3.281312 sameScene=-2448 sameTitan=-2878 peak=6.406858 hp=100
+Cleanup Blit
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

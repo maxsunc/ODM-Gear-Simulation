@@ -86,6 +86,17 @@ public class TitanCombatTarget : MonoBehaviour
         ReleaseInternal("Reset");
         Health = Mathf.Max(1, maxHealth); HitCount = 0;
     }
+    public bool ResetForRespawn()
+    {
+        // Only the dead real-health bridge can retire an old life's lease. Normal
+        // live releases still require their original whole-gear exit/sweep.
+        if(healthSource==null || !IsDead)return false;
+        ReleaseInternal("Player respawning");IsHeld=ReleasePending=aerialHold=false;
+        holdOwner=null;grip=releaseOwner=null;aerialMotor=null;colliders=null;colliderStates=null;bodyStates=null;
+        escapeGrabGrace=0;escapeJumpPending=freshEscapeLease=false;escapeGraceFrame=-1;
+        holdAge=holdDamageAge=leaseDuration=0;handVelocity=Vector3.zero;carryRotation=Quaternion.identity;
+        HitCount=0;LastImpact=Vector3.zero;LastReleaseReason="Player respawned";return true;
+    }
     public void TakeBiteDamage(MonoBehaviour owner, float damage, Vector3 point, Vector3 direction)
     {
         if (!IsHeldBy(owner) || IsDead || !isActiveAndEnabled || !Finite(damage) || damage <= 0 || !Finite(point) || !Finite(direction)) return;

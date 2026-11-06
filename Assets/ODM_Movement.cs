@@ -121,6 +121,21 @@ public class ODM_Movement : MonoBehaviour
         if(planar.sqrMagnitude>.0001f && gameObject.activeInHierarchy) StartCoroutine(Deaccelerate(planar.normalized,planar.magnitude));
     }
 
+    internal void ResetForRespawn()
+    {
+        // Explicit new-life reset, not a release over a foreign hold owner.
+        StopAllCoroutines();titanOwner=null;titanSuspended=false;
+        ReleaseHook(false);ReleaseHook(true);
+        leftGrappled=rightGrappled=qPress=ePress=gasing=isInertia=checkingStuck=superGasing=false;
+        currentSpeed=residualSpeed=currentBurstSpeed=strafeDir=additionalAccel=0;burstMeter=100;
+        direction=residualDir=burstDirection=pastForce=pointLeft=pointRight=Vector3.zero;acceleration=accelCopy;
+        if(gasTrail!=null){gasTrail.emitting=false;gasTrail.Clear();}
+        if(gasParticle!=null)gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        if(audio!=null&&audio.container!=null&&audio.container.Length>3&&audio.container[3]!=null)
+        {audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1;}
+        if(camAnim!=null)camAnim.SetBool("StartGas",false);
+    }
+
     //POA:
     /*
      Super gas:
