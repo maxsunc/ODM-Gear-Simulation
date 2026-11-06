@@ -9,6 +9,7 @@ public static class PlayerCombatPermission
         if(source==null)return true;
         var health=source.GetComponentInParent<PlayerHealth>();
         if(health!=null && (health.isDead || health.isGrabbed))return true;
+        var reaction=source.GetComponentInParent<ScoutStompReaction>();if(reaction!=null && reaction.IsActive)return true;
         var target=source.GetComponentInParent<TitanCombatTarget>();
         if(target!=null && (target.IsHeld || target.ReleasePending))return true;
         var walking=source.GetComponentInParent<Movement>();

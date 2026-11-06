@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 02:52:23Z" end-time="2026-11-06 02:52:25Z" duration="1.3005937">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="386" result="Passed" start-time="2026-11-06 02:52:23Z" end-time="2026-11-06 02:52:25Z" duration="1.300594" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1417" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="386" result="Passed" start-time="2026-11-06 02:52:23Z" end-time="2026-11-06 02:52:25Z" duration="1.270949" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7980" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1181" name="TitanODMIntegrationPlayModeTests" fullname="TitanODMIntegrationPlayModeTests" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" testcasecount="129" result="Passed" start-time="2026-11-06 02:52:23Z" end-time="2026-11-06 02:52:25Z" duration="1.261530" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1258" name="PlayerStompAndUniversalDeathRenderInOwnedNativeGraphics" fullname="TitanODMIntegrationPlayModeTests.PlayerStompAndUniversalDeathRenderInOwnedNativeGraphics" methodname="PlayerStompAndUniversalDeathRenderInOwnedNativeGraphics" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="1953428299" result="Passed" start-time="2026-11-06 02:52:23Z" end-time="2026-11-06 02:52:25Z" duration="1.245531" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+PLAYER_IMPACT_NATIVE bloodPixels=620 peak=12.03429 device=Intel(R) Iris(R) Xe Graphics
+Cleanup Blit
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

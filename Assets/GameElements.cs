@@ -64,9 +64,10 @@ public class GameElements : MonoBehaviour
         }
         if(player!=null && player.transform.position.y <= -25f && reloadScene == false)
         {
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
-
             reloadScene = true;
+            var health=player.GetComponent<PlayerHealth>();
+            if(health!=null)health.Die();
+            else {Scene scene = SceneManager.GetActiveScene();SceneManager.LoadScene(scene.name);}
         }
         if (panel!=null && Input.GetKeyDown(KeyCode.J))
         {

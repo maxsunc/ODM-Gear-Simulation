@@ -58,6 +58,21 @@ public class PlayerHealth : MonoBehaviour
         return scout != null && scout.model != null ? gameObject.AddComponent<ScoutPlayerRagdoll>() : null;
     }
 
+    public void PrepareStomp(Transform attacker,Vector3 point,float damage)
+    {
+        if(isDead || damage<currentHP)return;
+        var presentation=EnsureScoutRagdoll();if(presentation==null)return;
+        var reaction=GetComponent<ScoutStompReaction>();
+        if(reaction!=null && reaction.IsActive){reaction.Begin(point,attacker);return;}
+        Vector3 away=Vector3.ProjectOnPlane(transform.position-point,Vector3.up).normalized;if(away.sqrMagnitude<.5f)away=-transform.forward;
+        var motor=GetComponent<TitanODMMotor>();Vector3 incoming=motor!=null?Vector3.ClampMagnitude(motor.Velocity,6):Vector3.zero;
+        presentation.PrepareImpactDeath(attacker,incoming+away*9+Vector3.up*3);
+    }
+    public void ReactToStomp(Transform attacker,Vector3 point)
+    {
+        if(isDead || EnsureScoutRagdoll()==null || GetComponent<TitanODMMotor>()==null)return;
+        var reaction=GetComponent<ScoutStompReaction>();if(reaction==null)reaction=gameObject.AddComponent<ScoutStompReaction>();reaction.Begin(point,attacker);
+    }
     public void TakeDamage(float damage)
     {
         if (isDead || !Finite(damage) || damage<=0) return;
@@ -75,7 +90,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
         var presentation = EnsureScoutRagdoll();
-        if (presentation != null) presentation.CaptureDeathPose();
+        if (presentation != null)
+        {
+            var motor=GetComponent<TitanODMMotor>();var target=GetComponent<TitanCombatTarget>();
+            bool held=target!=null&&target.IsHeld&&target.HoldOwner!=null;
+            presentation.PrepareNaturalDeath(held?target.CurrentHoldVelocity:motor!=null?motor.Velocity:Vector3.zero,held?target.HoldOwner.transform:null);presentation.CaptureDeathPose();
+        }
         isDead = true;
         if(Died!=null) Died();
 
@@ -86,9 +106,11 @@ public class PlayerHealth : MonoBehaviour
 
         // Enable ragdoll on player
         bool scoutCorpse = presentation != null && presentation.Activate();
+        if(ragdollController==null)ragdollController=GetComponent<RagdollController>();
         if (!scoutCorpse && ragdollController != null) ragdollController.EnableRagdoll();
+        var feedback=GetComponent<PlayerDeathFeedback>();if(feedback==null)feedback=gameObject.AddComponent<PlayerDeathFeedback>();feedback.PlayDeath(presentation);
 
-        // Reload scene after a short delay (matches GameElements.cs pattern)
+        // One death path, including the void boundary; scene respawn remains3s.
         Invoke(nameof(ReloadScene), 3f);
     }
 
@@ -115,6 +137,8 @@ public class PlayerHealth : MonoBehaviour
         // Unparent from titan
         transform.SetParent(null);
 
+        // A late legacy hand callback must not resurrect dead controls.
+        if(isDead)return;
         // Re-enable movement
         if (movement != null) movement.enabledMovement = true;
         if (odmMovement != null) odmMovement.enabled = true;

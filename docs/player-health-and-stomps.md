@@ -4,6 +4,10 @@ Unity **2021.3.25f1 / URP12.1.11**. Current follow-up supersedes the earlier
 regeneration request: **health regeneration is removed**, stomps throw up debris,
 and confirmed gameplay holds drain **10 HP/second**.
 
+**Latest follow-up:** [Player stomp reaction and universal death](player-stomp-reaction-and-death.md)
+adds temporary physical knockback ragdoll/safe recovery on surviving stomps, and
+blood + bloodSplat/boneCrush sounds on EVERY death. Original HP/balance remains.
+
 ## Player-facing behavior
 
 - Existing `PlayerHealth` remains the ONE100HP/death/3s-respawn authority. Compact
@@ -18,7 +22,7 @@ and confirmed gameplay holds drain **10 HP/second**.
   cancellation or a missed attack that never reaches impact. A completed ground
   strike can throw debris even if the player successfully dodged its damage area.
 - Full **.65s body wind-up / .14s strike / .5s recovery** remain. Landing point stays
-  locked; no homing foot or root relocation. Gameplay stomp/grab/bite circles and
+  locked; no homing foot or Titan-root relocation. Gameplay stomp/grab/bite circles and
   old FreeRoam/Shiganshina console remain removed. Body motion communicates danger.
 - Only a **confirmed physical Titan capture** starts grab damage. No damage during
   warning/reach, misses, proximity, or the catch frame's pre-capture interval.
@@ -68,8 +72,8 @@ pool. It cannot keep damaging a released or foreign-owner target.
 Lethal non-bite damage during a hold snapshots the actual Scout pose/velocity and
 catching Titan BEFORE release callbacks can move the live root. The independent
 corpse keeps existing bounded initial velocity, joints and local catching-Titan
-collision exclusions. **No chomp impulse, bite blood or eaten sound** for squeeze
-death. Scenery-blocked births still fail closed; no safe-looking warp or post-step
+collision exclusions. No chomp impulse or fake bite contact for squeeze death;
+latest universal death blood/bloodSplat/boneCrush feedback DOES play for all causes. Scenery-blocked births still fail closed; no safe-looking warp or post-step
 clipping. Actual later lethal bites retain their existing blood/eaten feedback.
 
 ## Sized stomp geometry retained

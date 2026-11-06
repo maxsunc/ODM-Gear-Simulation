@@ -14,7 +14,48 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: stomp debris / NO regeneration / continuous grab damage
+## Current: universal death blood/audio + recoverable stomp knockback ragdoll
+
+User requested ragdoll/blood/bloodSplat AND supplied Assets/Audio/boneCrush.wav on
+ALL deaths; surviving stomps throw player backward, ragdoll temporarily, get up.
+Implemented through existing PlayerHealth death authority (3s respawn preserved).
+Generic/bite/squeeze/stomp/direct held Die/void boundary all share once-only new
+PlayerDeathFeedback:100 blood particles plus brief spray, two personal2D SFX sources
+on mixer. New PlayerImpactPalette resource references originals unchanged; .85blood/
+.8bone volume. Old bite-only bloodSplat source suppressed (legacy EatenSoundCount
+still counts confirmed lethal bites), directional bite blood retained. No double
+corpse; die while knocked down promotes the SAME moving native body. Generic death
+and impact get bounded initial tipping momentum; bite/carry mechanics unchanged.
+
+Surviving actual stomp -> ScoutStompReaction + existing independent13body/12joint
+ScoutPlayerRagdoll temporary mode.9m/s away +3up, incoming<=6; bounded BIRTH force/
+coherent angular momentum, no post-step clipping. Existing motor suspension stops
+hooks/boost/jump/input/F and rotators, original disabled CCT/root follows native hips
+for existing camera follow (no second active motor or camera-transform writer).
+At least2 scaled seconds, settled speeds<=3, real support, full WORLD-UP CCT AND
+solid gear clearance before standing exactly at physical body. Ceiling/wall keeps
+GetUpPending, no lateral warp. Original enable flags restored; speed/animation
+history flushed so no stale flip, hook lines or banked damage. Native proxy shapes
+still route actual stomp hits to ONE real health; no invulnerability. Re-hit reuses
+body/bounded impulse; death prevents recovery. Disable/destroy reaction hands safe
+exit polling to existing motor. No regen restored. No saved scene/prefab rebuild.
+
+Current-tuning old-HEAD policy baseline357/8/1 of366. New full377pass/SAME8fail/1skip
+of386 twice;20 added cases. One parallel-load existing authored lab aerial-proxy
+miss is recorded separately, passes both following solo FULL runs; no interception
+or physical assertion weakened. New normal/reaction/lethal1/3/5/10x death speed<40,
+ceilings/solid gear/native wall/repeat/death/disable/destroy/paused/recovery tests.
+Native graphics1/1 actual hit/down/get-up40HP/blood/fallen corpse. Savedmap4/1 of5,
+SAME unbaked4x fixture; no bake. Both workers current sources/resources matched.
+Preserved evolving user prefab: references16/45, turning75/35 (changed DURING task),
+NOT old8/16 or50/5. Current user palette four B-series WAV steps/.25 and one scream/
+.3 preserved; B WAVs/unrelated edits NOT staged. Supplied boneCrush original/import
+unchanged. No live Editor stop/input/save/reload/scene switch/physics automation.
+No subjective balance/audio/device/WebGL/crowd/long-duration10x certification.
+See docs/player-stomp-reaction-and-death.md, ArtSource/Player/Scout/StompDeath/,
+tools/capture_player_impact.py. LOCAL only, no push beyond authorized4d425ace.
+
+## Previous: stomp debris / NO regeneration / continuous grab damage
 
 Latest user follow-up implemented: pooled dust and faceted rock fragments on the
 ACTUAL stomp impact, removed health regeneration completely,10HP/s during confirmed

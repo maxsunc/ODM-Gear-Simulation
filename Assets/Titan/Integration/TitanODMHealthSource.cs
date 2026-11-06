@@ -12,6 +12,10 @@ public class TitanODMHealthSource : TitanHealthSource
     void OnDisable() { if(player!=null) player.Died-=OnDeath; }
     void OnDeath() { var target=GetComponent<TitanCombatTarget>();if(target!=null) target.EscapeHold(); }
     public override bool UsesMouthInsertion { get { return player != null && player.EnsureScoutRagdoll() != null; } }
+    public override void PrepareStomp(Transform attacker,Vector3 point,float damage)
+    {if(player!=null)player.PrepareStomp(attacker,point,damage);}
+    public override void StompApplied(Transform attacker,Vector3 point)
+    {if(player!=null && !player.isDead)player.ReactToStomp(attacker,point);}
     public override void PrepareHeldDeath(Transform attacker,Vector3 velocity)
     {
         var presentation=player!=null?player.EnsureScoutRagdoll():null;
@@ -29,7 +33,7 @@ public class TitanODMHealthSource : TitanHealthSource
         if (presentation != null) presentation.CompleteBite();
         var feedback = GetComponent<TitanSwordFeedback>();
         if (damaged && feedback != null) feedback.PlayBiteBlood(impact.Point, impact.Direction);
-        if(damaged && impact.Lethal && player!=null && player.isDead && !eatenSoundPlayed && TitanAudioPalette.PlayEaten(gameObject,impact.Point)!=null)
+        if(damaged && impact.Lethal && player!=null && player.isDead && !eatenSoundPlayed && player.GetComponent<PlayerDeathFeedback>()!=null && player.GetComponent<PlayerDeathFeedback>().BloodSoundCount>0)
         {eatenSoundPlayed=true;EatenSoundCount++;}
     }
     public override bool IsBodyCollider(Collider shape) { return shape==GetComponent<CharacterController>(); }

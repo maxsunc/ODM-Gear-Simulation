@@ -93,6 +93,11 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
         attackVariantChosen=false;
         if(flipPivot!=null)flipPivot.localRotation=Quaternion.identity;
     }
+    public void ResetMotionHistory()
+    {
+        lastPosition=previousFlipPosition=transform.position;sampled=false;MeasuredVelocity=Vector3.zero;
+        brain.Step(new ScoutAnimationBrain.Frame{held=true},0);playing=null;dualEntryAge=DualHookReclineDuration;
+    }
     void FixedUpdate()
     {
         if(sampled)MeasuredVelocity=(transform.position-lastPosition)/Time.fixedDeltaTime;

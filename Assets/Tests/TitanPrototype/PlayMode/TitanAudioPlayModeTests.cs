@@ -169,9 +169,11 @@ public class TitanAudioPlayModeTests
         impact.Lethal=false;source.PrepareBite(impact);source.ApplyDamage(1);source.CompleteBite(impact,true);Assert.That(Prop<int>(source,"EatenSoundCount"),Is.Zero);
         impact.Lethal=true;source.PrepareBite(impact);source.ApplyDamage(100);health.CancelInvoke();source.CompleteBite(impact,true);source.CompleteBite(impact,true);
         Assert.That(Prop<int>(source,"EatenSoundCount"),Is.EqualTo(1));
-        var cue=scene.GetRootGameObjects().Single(o=>o.name=="[Titan SFX] Eaten").GetComponent<AudioSource>();
+        var death=go.GetComponent(Real("PlayerDeathFeedback"));Assert.That(Prop<int>(death,"BloodSoundCount"),Is.EqualTo(1));Assert.That(Prop<int>(death,"BoneSoundCount"),Is.EqualTo(1));
+        var cue=Prop<AudioSource>(death,"BloodSource");
         Assert.That(AssetDatabase.GetAssetPath(cue.clip),Is.EqualTo("Assets/Audio/bloodSplat.mp3"));Assert.That(cue.outputAudioMixerGroup.name,Is.EqualTo("SFX"));Assert.That(cue.spatialBlend,Is.Zero);
-        go.transform.position+=Vector3.right*50;Assert.That(cue.transform.position,Is.EqualTo(impact.Point));Assert.That(cue.transform.parent,Is.Null);
+        Vector3 point=cue.transform.position;go.transform.position+=Vector3.right*50;Assert.That(cue.transform.position,Is.EqualTo(point));Assert.That(cue.transform.IsChildOf(go.transform),Is.False);
+        Assert.That(scene.GetRootGameObjects().Count(o=>o.name=="[Titan SFX] Eaten"),Is.Zero,"Universal death audio must not double-play the old bite-only bloodSplat cue");
     }
 }
 #endif

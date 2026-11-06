@@ -25,6 +25,10 @@ public sealed class TitanReleaseClearance
         }
         return false;
     }
+    // Standing up at the physical ragdoll's supported location: no relocation
+    // search through walls. Test every configured solid, ignoring only that copy.
+    public bool CanStandAt(Vector3 point,Transform ragdoll)
+    {return Clear(point-root.position,ragdoll);}
     bool Ignore(Transform t,Transform owner) { return t.IsChildOf(root) || (owner!=null && t.IsChildOf(owner)); }
     static Vector3 Abs(Vector3 v) { return new Vector3(Mathf.Abs(v.x),Mathf.Abs(v.y),Mathf.Abs(v.z)); }
     void Capsule(Collider c,Vector3 delta,out Vector3 a,out Vector3 b,out float r)

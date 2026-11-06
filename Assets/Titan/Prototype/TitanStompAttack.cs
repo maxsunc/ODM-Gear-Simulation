@@ -293,13 +293,13 @@ public class TitanStompAttack : MonoBehaviour
         {
             if (!IsBusy || !body.CanWalk) break;
             var col = overlaps[i];
-            var receiver = col.GetComponentInParent<TitanCombatTarget>();
+            var receiver = TitanCombatProxy.Resolve(col);
             if (receiver == null || receiver.gameObject.scene != gameObject.scene || !receiver.isActiveAndEnabled || receiver.IsDead || damaged.Contains(receiver)) continue;
             Vector3 closest = TitanCombatTarget.ClosestCombatPoint(col, LockedPoint + Vector3.up * height * .5f);
             Vector3 offset = closest - LockedPoint;
             if (offset.y < -.35f || offset.y > height || Vector3.ProjectOnPlane(offset, Vector3.up).sqrMagnitude > radius*radius) continue;
             if (!ClearRay(LockedPoint + Vector3.up * .35f, col.bounds.center, receiver.transform)) continue;
-            damaged.Add(receiver); receiver.TakeDamage(attackDamage, LockedPoint);
+            damaged.Add(receiver); receiver.TakeStompDamage(attackDamage, LockedPoint,transform);
         }
     }
     bool ClearRay(Vector3 from, Vector3 to, Transform allowed)
@@ -312,7 +312,7 @@ public class TitanStompAttack : MonoBehaviour
         {
             Transform hit = rays[i].transform;
             if (hit.gameObject.scene != gameObject.scene) continue;
-            if (hit.IsChildOf(transform) || hit == allowed || hit.IsChildOf(allowed) || hit.GetComponentInParent<TitanCombatTarget>() != null) continue;
+            if (hit.IsChildOf(transform) || hit == allowed || hit.IsChildOf(allowed) || TitanCombatProxy.Resolve(rays[i].collider) != null) continue;
             return false;
         }
         return true;

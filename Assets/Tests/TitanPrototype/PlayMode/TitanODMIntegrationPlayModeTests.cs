@@ -624,10 +624,166 @@ public class TitanODMIntegrationPlayModeTests
         var stomp=biteTitan.gameObject.AddComponent<TitanStompAttack>();stomp.automaticTick=false;stomp.damage=60;stomp.cooldownDuration=1.6f;Physics.SyncTransforms();
         Assert.That(stomp.TryBeginStomp(target,true),Is.True);stomp.TickAttack(.8f);
         Assert.That(Get<float>(hp,"currentHP"),Is.EqualTo(40));Assert.That(target.Health,Is.EqualTo(40));Assert.That(target.HitCount,Is.EqualTo(1));Assert.That(Get<bool>(hp,"showHealthBar"),Is.True);
-        Assert.That(stomp.drawTelegraph || biteGrab.drawTelegraph,Is.False);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);Assert.That(EatenSoundCount,Is.Zero);
+        Assert.That(stomp.drawTelegraph || biteGrab.drawTelegraph,Is.False);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null);Assert.That(Property<bool>(corpsePresentation,"Temporary"),Is.True);Assert.That(EatenSoundCount,Is.Zero);
         stomp.TickAttack(2);stomp.TickAttack(2);Assert.That(stomp.TryBeginStomp(target,false),Is.True);stomp.TickAttack(.8f);hp.CancelInvoke();
-        Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True,"Two gameplay stomps must kill a100HP player before regeneration begins");
+        Assert.That(target.Health,Is.Zero);Assert.That(Get<bool>(hp,"isDead"),Is.True,"Two gameplay stomps must kill a100HP player, even during knockdown");
+        Assert.That(Property<bool>(corpsePresentation,"Temporary"),Is.False);Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1),"Death promotes the SAME moving ragdoll instead of spawning a second body");
         Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(EatenSoundCount,Is.Zero,"Stomp death is not a bite/eaten cue");
+    }
+    Component Reaction {get{return player.GetComponent(Legacy("ScoutStompReaction"));}}
+    void CheckUniversalDeath()
+    {
+        var fx=player.GetComponent(Legacy("PlayerDeathFeedback"));Assert.That(fx,Is.Not.Null);
+        Assert.That(Property<int>(fx,"DeathCount"),Is.EqualTo(1));Assert.That(Property<int>(fx,"BloodSoundCount"),Is.EqualTo(1));Assert.That(Property<int>(fx,"BoneSoundCount"),Is.EqualTo(1));
+        Assert.That(UnityEditor.AssetDatabase.GetAssetPath(Property<AudioSource>(fx,"BloodSource").clip),Is.EqualTo("Assets/Audio/bloodSplat.mp3"));
+        Assert.That(UnityEditor.AssetDatabase.GetAssetPath(Property<AudioSource>(fx,"BoneSource").clip),Is.EqualTo("Assets/Audio/boneCrush.wav"));
+        Assert.That(Property<AudioSource>(fx,"BloodSource").outputAudioMixerGroup.name,Is.EqualTo("SFX"));Assert.That(Property<AudioSource>(fx,"BoneSource").outputAudioMixerGroup.name,Is.EqualTo("SFX"));
+        Assert.That(Property<ParticleSystem>(fx,"Blood").particleCount,Is.GreaterThanOrEqualTo(90));
+    }
+    [UnityTest]public IEnumerator UniversalDeathGenericDamageAndDuplicateDieUseOneBloodBoneAndCorpse()
+    {
+        ScoutBiteSetup();var random=UnityEngine.Random.state;target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Call(hp,"Die");CheckUniversalDeath();
+        Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));Assert.That(UnityEngine.Random.state,Is.EqualTo(random));yield return null;
+    }
+    [TestCase(1f)][TestCase(3f)][TestCase(5f)][TestCase(10f)]
+    public void UniversalDeathFirstLethalStompKeepsOriginalCorpseSpeedBound(float size)
+    {
+        ScoutBiteSetup();biteTitan.transform.localScale=Vector3.one*size;scene.GetRootGameObjects().Single(g=>g.name=="Owned real Scout bite floor").GetComponent<BoxCollider>().size=new Vector3(400,.5f,400);
+        cc.enabled=false;player.transform.position=new Vector3(.7f*size,1.8f,5.7f*size);cc.enabled=true;var stomp=biteTitan.gameObject.AddComponent<TitanStompAttack>();stomp.automaticTick=false;stomp.damage=100;Physics.SyncTransforms();
+        Assert.That(stomp.TryBeginStomp(target,true),Is.True);stomp.TickAttack(.8f);hp.CancelInvoke();CheckUniversalDeath();float peak=0;
+        for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);}
+        Assert.That(peak,Is.LessThan(40));Assert.That(Property<bool>(corpsePresentation,"Temporary"),Is.False);Debug.Log("PLAYER_LETHAL_STOMP scale="+size+" peak="+peak);
+    }
+    [UnityTest]public IEnumerator UniversalDeathBiteHasBothLayersWithoutADuplicateOldEatenSource()
+    {
+        ScoutBiteSetup();CaptureScout();FinishScoutBite();CheckUniversalDeath();Assert.That(EatenSoundCount,Is.EqualTo(1));
+        Assert.That(scene.GetRootGameObjects().Any(g=>g.name=="[Titan SFX] Eaten"),Is.False);yield return null;
+    }
+    [UnityTest]public IEnumerator UniversalDeathSqueezeHasBothLayersAndNoFakeBiteContact()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();CaptureScout();Set(hp,"currentHP",1f);BiteFrame(.2f);hp.CancelInvoke();CheckUniversalDeath();Assert.That(biteGrab.BiteHitCount,Is.Zero);yield return null;
+    }
+    [UnityTest]public IEnumerator UniversalDeathDirectHealthCallWhileHeldCapturesBeforeReleaseAndCannotResurrect()
+    {
+        ScoutBiteSetup();CaptureScout();BiteFrame(1);Call(hp,"Die");hp.CancelInvoke();CheckUniversalDeath();
+        Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(target.IsHeld,Is.False);Call(hp,"OnReleased");Assert.That(walk.enabled||gear.enabled,Is.False);yield return null;
+    }
+    [UnityTest]public IEnumerator UniversalDeathVoidUsesHealthDeathInsteadOfBypassingItWithImmediateReload()
+    {
+        ScoutBiteSetup();var elements=Add("GameElements");Set(elements,"player",player.transform);player.transform.position=Vector3.down*26;Call(elements,"Update");hp.CancelInvoke();CheckUniversalDeath();Assert.That(Get<bool>(hp,"isDead"),Is.True);yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionNativeKnockbackFallsThenGetsUpWithOriginalControlFlags()
+    {
+        ScoutBiteSetup();Vector3 start=player.transform.position;target.TakeStompDamage(60,start-Vector3.forward*2,biteTitan.transform);
+        Assert.That(target.Health,Is.EqualTo(40));Assert.That(Property<bool>(Reaction,"IsActive"),Is.True);Assert.That(motor.CanSuspend,Is.False);Assert.That(cc.enabled,Is.False);
+        Assert.That(Property<bool>(corpsePresentation,"Temporary"),Is.True);Assert.That(Property<bool>(walk,"TitanSuspended"),Is.True);Assert.That(Property<bool>(gear,"TitanSuspended"),Is.True);
+        yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionNativeRecoveryAndSpeedBound()
+    {
+        ScoutBiteSetup();Vector3 start=player.transform.position;target.TakeStompDamage(60,start-Vector3.forward*2,biteTitan.transform);float peak=0;
+        for(int i=0;i<960&&Property<bool>(Reaction,"IsActive");i++)
+        {
+            scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);Call(Reaction,"TickReaction",1f/120);
+        }
+        Debug.Log("SCOUT_STOMP_REACTION peak="+peak+" travel="+(player.transform.position-start));Assert.That(peak,Is.LessThan(40));Assert.That(Property<bool>(Reaction,"IsActive"),Is.False,Property<string>(Reaction,"Error"));
+        Assert.That(Vector3.Dot(player.transform.position-start,Vector3.forward),Is.GreaterThan(2));Assert.That(cc.enabled,Is.True);Assert.That(Property<bool>(walk,"TitanSuspended"),Is.False);Assert.That(Property<bool>(gear,"TitanSuspended"),Is.False);
+        Assert.That(walk.enabled||gear.enabled,Is.False,"Restore original disabled fixture flags, not unconditionally enable gameplay");Assert.That(target.Health,Is.EqualTo(40));Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);yield return null;
+    }
+    void SettleReaction()
+    {
+        for(int i=0;i<360;i++){scene.GetPhysicsScene().Simulate(1f/120);Call(Reaction,"TickReaction",0f);}
+        foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies")){rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;rb.isKinematic=true;}
+    }
+    [UnityTest]public IEnumerator StompReactionWaitsForWorldUpHeadroomAndCannotStandThroughACeiling()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);SettleReaction();
+        var ceiling=new GameObject("Blocked get-up headroom");SceneManager.MoveGameObjectToScene(ceiling,scene);ceiling.transform.position=Property<Transform>(corpsePresentation,"Hips").position+Vector3.up*2;
+        ceiling.AddComponent<BoxCollider>().size=new Vector3(12,.2f,12);Physics.SyncTransforms();Vector3 before=player.transform.position;Call(Reaction,"TickReaction",3f);
+        Assert.That(Property<bool>(Reaction,"IsActive"),Is.True);Assert.That(Property<bool>(Reaction,"GetUpPending"),Is.True);Assert.That(cc.enabled,Is.False);Assert.That(player.transform.position,Is.EqualTo(before));
+        Object.DestroyImmediate(ceiling);Physics.SyncTransforms();Call(Reaction,"TickReaction",0f);Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(cc.enabled,Is.True);yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionWholeGearClearanceAlsoBlocksStandUp()
+    {
+        ScoutBiteSetup();var box=new GameObject("Solid gear outside capsule");box.transform.SetParent(player.transform,false);box.transform.localPosition=Vector3.right*2;box.AddComponent<BoxCollider>().size=Vector3.one*.5f;
+        target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);SettleReaction();
+        var wall=new GameObject("Blocks only standing gear");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=new Vector3(player.transform.position.x+2,1.91f,player.transform.position.z);wall.AddComponent<BoxCollider>().size=Vector3.one*.5f;Physics.SyncTransforms();
+        Call(Reaction,"TickReaction",3f);Assert.That(Property<bool>(Reaction,"GetUpPending"),Is.True);Assert.That(cc.enabled,Is.False);
+        Object.DestroyImmediate(wall);Physics.SyncTransforms();Call(Reaction,"TickReaction",0f);Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(box.GetComponent<BoxCollider>().enabled,Is.True);yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionCannotThrowThePhysicalPlayerThroughASolidWall()
+    {
+        ScoutBiteSetup();var wall=new GameObject("Native knockback wall");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position+Vector3.forward*4;wall.transform.position=new Vector3(wall.transform.position.x,4,wall.transform.position.z);wall.AddComponent<BoxCollider>().size=new Vector3(40,10,1);Physics.SyncTransforms();
+        target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);float maxZ=float.NegativeInfinity,peak=0;
+        for(int i=0;i<480&&Property<bool>(Reaction,"IsActive");i++)
+        {
+            scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies")){peak=Mathf.Max(peak,rb.velocity.magnitude);maxZ=Mathf.Max(maxZ,rb.position.z);}Call(Reaction,"TickReaction",1f/120);
+        }
+        Assert.That(peak,Is.LessThan(40));Assert.That(maxZ,Is.LessThan(wall.GetComponent<BoxCollider>().bounds.min.z+.05f));Assert.That(target.Health,Is.EqualTo(40));yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionDisabledComponentHandsSafeRecoveryToExistingMotorPoll()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);SettleReaction();((Behaviour)Reaction).enabled=false;yield return null;yield return null;
+        Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(cc.enabled,Is.True);Assert.That(Property<bool>(walk,"TitanSuspended"),Is.False);Assert.That(walk.enabled||gear.enabled,Is.False);
+    }
+    [UnityTest]public IEnumerator StompReactionDestroyingTheReactionComponentStillFinishesSafeRecovery()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);SettleReaction();Object.Destroy(Reaction);yield return null;yield return null;
+        Assert.That(cc.enabled,Is.True);Assert.That(Property<bool>(walk,"TitanSuspended"),Is.False);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
+    }
+    [UnityTest]public IEnumerator StompReactionDeathPromotesSamePhysicalBodyAndNeverGetsBackUp()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);var same=Property<GameObject>(corpsePresentation,"Corpse");
+        target.TakeStompDamage(60,player.transform.position-Vector3.forward*2,biteTitan.transform);hp.CancelInvoke();CheckUniversalDeath();Call(Reaction,"TickReaction",100f);
+        Assert.That(target.Health,Is.Zero);Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.SameAs(same));Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));Assert.That(Property<bool>(corpsePresentation,"Temporary"),Is.False);
+        Assert.That(cc.enabled,Is.False);Assert.That(walk.enabled||gear.enabled,Is.False);yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionRefusedUnsafeBirthCannotPoisonALaterDeathSnapshot()
+    {
+        ScoutBiteSetup();var obstruction=new GameObject("Unsafe live knockdown birth");SceneManager.MoveGameObjectToScene(obstruction,scene);obstruction.transform.position=player.transform.position;obstruction.AddComponent<BoxCollider>().size=Vector3.one*8;Physics.SyncTransforms();
+        target.TakeStompDamage(10,player.transform.position-Vector3.forward*2,biteTitan.transform);Assert.That(target.Health,Is.EqualTo(90));Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(cc.enabled,Is.True);Assert.That(motor.CanSuspend,Is.True);
+        Object.DestroyImmediate(obstruction);cc.enabled=false;player.transform.position+=Vector3.forward*15;cc.enabled=true;Physics.SyncTransforms();Vector3 expected=biteModel.position;
+        target.TakeDamage(100,player.transform.position);hp.CancelInvoke();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));Assert.That(Vector3.Distance(Property<Vector3>(corpsePresentation,"CapturedPosition"),expected),Is.LessThan(.001f));yield return null;
+    }
+    [UnityTest]public IEnumerator StompReactionRepeatedDamageUsesSamePoolAndPhysicalShapesResolveToRealHealth()
+    {
+        ScoutBiteSetup();target.TakeStompDamage(10,player.transform.position-Vector3.forward*2,biteTitan.transform);target.TakeStompDamage(10,player.transform.position-Vector3.forward*2,biteTitan.transform);
+        Assert.That(target.Health,Is.EqualTo(80));Assert.That(Property<int>(corpsePresentation,"ActivationCount"),Is.EqualTo(1));Assert.That(Property<int>(Reaction,"ReactionCount"),Is.EqualTo(2));
+        var shape=Property<GameObject>(corpsePresentation,"Corpse").GetComponentInChildren<Collider>();Assert.That(TitanCombatProxy.Resolve(shape),Is.SameAs(target));
+        float scale=Time.timeScale;try{Time.timeScale=0;Call(Reaction,"TickReaction",100f);Assert.That(Property<bool>(Reaction,"GetUpPending"),Is.False);}finally{Time.timeScale=scale;}yield return null;
+    }
+    [UnityTest]public IEnumerator PlayerStompAndUniversalDeathRenderInOwnedNativeGraphics()
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_PLAYER_IMPACT_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        var oldPipeline=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;float oldTime=Time.timeScale;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);
+        var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{renderer});
+        var camera=new GameObject("Owned player impact camera").AddComponent<Camera>();SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.gameObject.AddComponent<AudioListener>();camera.fieldOfView=50;
+        var light=new GameObject("Owned impact sun").AddComponent<Light>();SceneManager.MoveGameObjectToScene(light.gameObject,scene);light.type=LightType.Directional;light.intensity=1.5f;light.transform.rotation=Quaternion.Euler(45,-35,0);
+        var material=new Material(Resources.Load<Material>("TitanStompChunks"));material.SetColor("_Color",new Color(.38f,.36f,.32f));
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;ScoutBiteSetup();var animator=biteModel.GetComponent<Animator>();animator.Play("Idle",0,0);animator.Update(0);
+            var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);SceneManager.MoveGameObjectToScene(floor,scene);Object.DestroyImmediate(floor.GetComponent<Collider>());floor.transform.position=Vector3.down*.25f;floor.transform.localScale=new Vector3(80,.5f,80);floor.GetComponent<Renderer>().sharedMaterial=material;
+            camera.transform.position=player.transform.position+new Vector3(-7,5,-12);camera.transform.LookAt(player.transform.position);
+            var stomp=biteTitan.gameObject.AddComponent<TitanStompAttack>();stomp.automaticTick=false;stomp.damage=60;Physics.SyncTransforms();Assert.That(stomp.TryBeginStomp(target,true),Is.True);
+            for(int i=0;i<97;i++){biteTitan.animator.Update(0);stomp.TickAttack(1f/120);stomp.ApplyPose();}Assert.That(Property<bool>(Reaction,"IsActive"),Is.True);Time.timeScale=0;
+            float peak=0;for(int i=0;i<108;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);Call(Reaction,"TickReaction",0f);}
+            camera.transform.position=player.transform.position+new Vector3(-7,5,-12);camera.transform.LookAt(Property<Transform>(corpsePresentation,"Hips").position);yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Stomp_Knockdown.png"));
+            Time.timeScale=1;for(int i=0;i<960&&Property<bool>(Reaction,"IsActive");i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);Call(Reaction,"TickReaction",1f/120);}
+            Time.timeScale=0;Assert.That(Property<bool>(Reaction,"IsActive"),Is.False);Assert.That(target.Health,Is.EqualTo(40));Assert.That(cc.enabled,Is.True);Assert.That(peak,Is.LessThan(40));
+            camera.transform.position=player.transform.position+new Vector3(-7,5,-12);camera.transform.LookAt(player.transform.position);yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Stomp_Recovered.png"));
+            target.TakeDamage(100,player.transform.position);hp.CancelInvoke();CheckUniversalDeath();var fx=player.GetComponent(Legacy("PlayerDeathFeedback"));var blood=Property<ParticleSystem>(fx,"Blood");
+            for(int i=0;i<14;i++){scene.GetPhysicsScene().Simulate(1f/120);fx.SendMessage("LateUpdate");blood.Simulate(1f/120,false,false);}
+            camera.transform.LookAt(Property<Transform>(corpsePresentation,"Hips").position+Vector3.up*.3f);
+            yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Death_Blood.png"));
+            var image=new Texture2D(2,2);Assert.That(image.LoadImage(System.IO.File.ReadAllBytes(System.IO.Path.Combine(folder,"Death_Blood.png"))),Is.True);var pixels=image.GetPixels32();int red=0;for(int i=0;i<pixels.Length-image.width*80;i++)if(pixels[i].r>35&&pixels[i].r>pixels[i].g*1.5f&&pixels[i].r>pixels[i].b*1.4f)red++;
+            Object.Destroy(image);Assert.That(red,Is.GreaterThan(60),"Actual blood spray must render, not just increment an effect counter");
+            for(int i=0;i<120;i++){scene.GetPhysicsScene().Simulate(1f/120);fx.SendMessage("LateUpdate");blood.Simulate(1f/120,false,false);}
+            camera.transform.LookAt(Property<Transform>(corpsePresentation,"Hips").position+Vector3.up*.3f);yield return null;yield return SaveHealthScreen(System.IO.Path.Combine(folder,"Death_Fallen.png"));Debug.Log("PLAYER_IMPACT_NATIVE bloodPixels="+red+" peak="+peak+" device="+SystemInfo.graphicsDeviceName);
+        }
+        finally{Time.timeScale=oldTime;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=oldPipeline;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(material);Object.Destroy(pipeline);}
     }
     [UnityTest] public IEnumerator GrabDrainThreeTimesLeftPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(3,true,true,true,10);}
     [UnityTest] public IEnumerator GrabDrainThreeTimesRightPreservesArmGripAndClearance(){yield return ScaledRealScoutBite(3,false,true,true,10);}

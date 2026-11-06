@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>Death-only, independent physical copy of the real Scout skin/held pose.
+/// <summary>Independent death or recoverable-stomp physical copy of the real Scout skin/held pose.
 /// No live skeleton physics, parenting into a Titan, or takeover of the motor root.
 /// Safe-release callbacks can finish on the hidden player without moving this corpse.</summary>
 [DisallowMultipleComponent]
@@ -19,6 +19,9 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     public GameObject Corpse { get; private set; }
     public Rigidbody[] Bodies { get; private set; } = new Rigidbody[0];
     public string Error { get; private set; }
+    public bool Temporary {get;private set;}
+    public Transform Hips {get;private set;}
+    Collider[] physicalShapes,ignoredAttacker;
     public int ActivationCount { get; private set; }
     public Vector3 CapturedPosition { get { return rootPosition; } }
     Vector3[] positions, scales;
@@ -26,7 +29,7 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     Vector3 rootPosition, rootScale;
     Quaternion rootRotation;
     TitanBiteImpact bite;
-    bool prepared,bitten;
+    bool prepared,bitten,impactTumble;
     readonly Collider[] overlaps = new Collider[64];
 
     bool FindVisual()
@@ -40,13 +43,19 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
     }
     public void PrepareBite(TitanBiteImpact impact)
     {
-        positions = null; bite = impact; prepared = impact.Lethal;bitten=impact.Lethal;
+        positions = null; bite = impact; prepared = impact.Lethal;bitten=impact.Lethal;impactTumble=false;
         if (prepared) CaptureDeathPose();
     }
     public void PrepareHeldDeath(Transform attacker,Vector3 velocity)
     {
-        positions=null;prepared=true;bitten=false;
+        positions=null;prepared=true;bitten=impactTumble=false;
         bite=new TitanBiteImpact{Attacker=attacker,Velocity=velocity};CaptureDeathPose();
+    }
+    public void PrepareImpactDeath(Transform attacker,Vector3 velocity)
+    {PrepareHeldDeath(attacker,velocity);impactTumble=true;}
+    public void PrepareNaturalDeath(Vector3 velocity,Transform holder=null)
+    {
+        if(prepared || Corpse!=null)return;prepared=true;bitten=false;impactTumble=holder==null;bite=new TitanBiteImpact{Velocity=velocity,Attacker=holder};CaptureDeathPose();
     }
     public void CompleteBite() { prepared = bitten = false; positions = null; }
     public bool CaptureDeathPose()
@@ -61,9 +70,39 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
         rootPosition=visualRoot.position;rootRotation=visualRoot.rotation;rootScale=visualRoot.lossyScale;
         return true;
     }
+    public bool ActivateTemporary(Transform attacker,Vector3 velocity)
+    {
+        if(Corpse!=null)return false;PrepareHeldDeath(attacker,velocity);
+        if(CreatePhysical(true))return true;
+        // A refused live knockdown must not leave a stale pre-impact DEATH pose
+        // armed for some later unrelated death after the player has moved away.
+        prepared=bitten=impactTumble=false;positions=null;return false;
+    }
+    public void EndTemporary()
+    {
+        if(!Temporary)return;
+        if(Corpse!=null){Corpse.SetActive(false);Destroy(Corpse);}Corpse=null;Bodies=new Rigidbody[0];Hips=null;
+        Temporary=prepared=bitten=impactTumble=false;positions=null;physicalShapes=ignoredAttacker=null;
+    }
+    public void RestoreAttackerContactsWhenClear()
+    {
+        if(!Temporary || ignoredAttacker==null || physicalShapes==null)return;
+        foreach(var shape in physicalShapes)foreach(var other in ignoredAttacker)
+        {
+            if(shape==null || other==null || !other.enabled || other.isTrigger || !other.gameObject.activeInHierarchy)continue;
+            Vector3 normal;float depth;if(Physics.ComputePenetration(shape,shape.transform.position,shape.transform.rotation,other,other.transform.position,other.transform.rotation,out normal,out depth)&&depth>.001f)return;
+        }
+        foreach(var shape in physicalShapes)foreach(var other in ignoredAttacker)if(shape!=null&&other!=null)Physics.IgnoreCollision(shape,other,false);
+        ignoredAttacker=null;
+    }
     public bool Activate()
     {
-        if (Corpse != null) return true;
+        if(Corpse!=null){if(Temporary){Temporary=false;Destroy(Corpse,SafeLifetime());}return true;}
+        return CreatePhysical(false);
+    }
+    float SafeLifetime(){return float.IsNaN(corpseLifetime)||float.IsInfinity(corpseLifetime)?8:Mathf.Clamp(corpseLifetime,1,30);}
+    bool CreatePhysical(bool temporary)
+    {
         if (!FindVisual() || positions == null) { Error="No captured Scout visual pose";return false; }
         // The approved Scout visual is passive. Never clone/take over foreign physics.
         if (visualRoot.GetComponentsInChildren<Rigidbody>(true).Length != 0 || visualRoot.GetComponentsInChildren<Collider>(true).Length != 0)
@@ -137,19 +176,28 @@ public sealed class ScoutPlayerRagdoll : MonoBehaviour
             Vector3 right=prepared && bite.Direction.sqrMagnitude>.0001f?Vector3.Cross(Vector3.up,bite.Direction).normalized:Vector3.right;
             foreach(var rb in Bodies)
             {
-                rb.position=rb.transform.position;rb.rotation=rb.transform.rotation;rb.isKinematic=false;rb.detectCollisions=true;rb.useGravity=true;rb.velocity=velocity;
+                rb.position=rb.transform.position;rb.rotation=rb.transform.rotation;rb.isKinematic=false;rb.detectCollisions=true;rb.useGravity=true;rb.velocity=temporary?Vector3.zero:velocity;if(temporary)rb.AddForce(velocity,ForceMode.VelocityChange);
                 // Uniform gravity alone leaves a floating ragdoll rigid-looking.
                 // Bounded opposite chest/hip impulses make the bitten body fold.
                 float bend=rb.name=="Chest"?1:rb.name=="Head"?-.8f:rb.name=="Hips"?-.65f:rb.name.Contains("LowerLeg")?.65f:-.35f;
-                rb.angularVelocity=prepared && bitten?right*(tumble*bend):Vector3.zero;rb.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
+                Vector3 fallAxis=Vector3.Cross(Vector3.up,velocity).normalized;if(fallAxis.sqrMagnitude<.5f)fallAxis=rootRotation*Vector3.right;
+                rb.angularVelocity=temporary||impactTumble?fallAxis*((temporary?2.1f:1.4f)+.35f*bend):prepared && bitten?right*(tumble*bend):Vector3.zero;
+                if(temporary||impactTumble)
+                {
+                    // Coherent whole-body angular momentum, not isolated spins
+                    // that the joints immediately cancel. Birth impulse ONLY.
+                    Vector3 tipping=Vector3.Cross(fallAxis*(temporary?2.1f:1.4f),rb.worldCenterOfMass-rigid["Hips"].worldCenterOfMass);
+                    Vector3 launch=Vector3.ClampMagnitude(velocity+tipping,18);
+                    if(temporary)rb.AddForce(launch-velocity,ForceMode.VelocityChange);else rb.velocity=launch;
+                }
+                rb.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
             }
-            Corpse=root;ActivationCount++;Error=null;
+            Corpse=root;Temporary=temporary;Hips=rigid["Hips"].transform;physicalShapes=shapes.ToArray();ignoredAttacker=temporary?attacker:null;ActivationCount++;Error=null;
             var driver=GetComponent<ScoutPlayerAnimation>();if(driver!=null)driver.enabled=false;
             HideOriginal();
-            float lifetime=float.IsNaN(corpseLifetime)||float.IsInfinity(corpseLifetime)?8:Mathf.Clamp(corpseLifetime,1,30);
-            Destroy(root,lifetime);return true;
+            if(!temporary)Destroy(root,SafeLifetime());return true;
         }
-        catch(Exception e){Error=e.Message;root.SetActive(false);Destroy(root);Bodies=new Rigidbody[0];return false;}
+        catch(Exception e){Error=e.Message;root.SetActive(false);Destroy(root);Corpse=null;Temporary=false;Hips=null;physicalShapes=ignoredAttacker=null;Bodies=new Rigidbody[0];return false;}
     }
     static bool Finite(Vector3 v){return !(float.IsNaN(v.x)||float.IsNaN(v.y)||float.IsNaN(v.z)||float.IsInfinity(v.x)||float.IsInfinity(v.y)||float.IsInfinity(v.z));}
     static void AddBody(Dictionary<string,Transform> bones,Dictionary<string,Rigidbody> bodies,List<Collider> shapes,string name,string end,float radius,float mass,float size)

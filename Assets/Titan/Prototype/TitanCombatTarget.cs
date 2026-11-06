@@ -43,6 +43,7 @@ public class TitanCombatTarget : MonoBehaviour
         carryRotation = rotation; return true;
     }
     public MonoBehaviour HoldOwner { get { return holdOwner; } }
+    public Vector3 CurrentHoldVelocity {get{return IsHeld?handVelocity:Vector3.zero;}}
     public string LastReleaseReason { get; private set; }
     public event Action<float> Damaged;
     public event Action HoldReleased;
@@ -96,6 +97,13 @@ public class TitanCombatTarget : MonoBehaviour
         finally { if (healthSource != null) healthSource.CompleteBite(impact, Health < before); }
     }
 
+    public void TakeStompDamage(float damage,Vector3 impact,Transform attacker)
+    {
+        if(IsDead || !isActiveAndEnabled || !Finite(damage) || damage<=0 || !Finite(impact))return;
+        float before=Health;if(healthSource!=null)healthSource.PrepareStomp(attacker,impact,damage);
+        ApplyDamage(damage,impact,false);
+        if(healthSource!=null && Health<before)healthSource.StompApplied(attacker,impact);
+    }
     public void TakeDamage(float damage, Vector3 impact) {ApplyDamage(damage,impact,false);}
     void ApplyDamage(float damage,Vector3 impact,bool bite)
     {

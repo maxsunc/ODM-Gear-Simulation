@@ -1,0 +1,282 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "features": {
+    "death": "One PlayerHealth.Die receipt, independent13body/12joint Scout ragdoll, 100-particle blood burst + brief spray, exact bloodSplat.mp3 + boneCrush.wav clips, two SFX-routed personal sources; void now enters same3s death/respawn path",
+    "stomp": "Actual accepted low-cylinder hit only;9m/s away+3up, bounded incoming/tipping birth momentum; native temporary body, minimum2s then settled+support+full world-up CCT/solid gear clearance. No post-step clipping.",
+    "ownership": "Native body moves independently; existing suspended motors/ghost disabled CCT follow hips, no active controller competition or camera-transform writer; restore original flags/history only after safe get-up",
+    "deathWhileDown": "Same moving body promoted, no recovery/resurrection or duplicate clone/audio; actual proxy shape hits retain one real HP pool",
+    "unsafeBirth": "Fail closed; refused temporary birth clears pre-impact snapshot so later deaths capture actual new pose"
+  },
+  "baselineCurrentUserAssetsOldHeadCode": {
+    "id": "2",
+    "testcasecount": "366",
+    "result": "Failed(Child)",
+    "total": "366",
+    "passed": "357",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 02:33:25Z",
+    "end-time": "2026-11-06 02:34:01Z",
+    "duration": "35.4183407"
+  },
+  "fullFirstFinalSource": {
+    "id": "2",
+    "testcasecount": "386",
+    "result": "Failed(Child)",
+    "total": "386",
+    "passed": "377",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 02:50:06Z",
+    "end-time": "2026-11-06 02:50:42Z",
+    "duration": "35.9981359"
+  },
+  "fullSecondFinalSource": {
+    "id": "2",
+    "testcasecount": "386",
+    "result": "Failed(Child)",
+    "total": "386",
+    "passed": "377",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 02:51:14Z",
+    "end-time": "2026-11-06 02:51:51Z",
+    "duration": "36.4721967"
+  },
+  "addedCases": 20,
+  "sameBaselineFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.349999994f\n"
+    },
+    {
+      "name": "HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  4.8054657f\n"
+    }
+  ],
+  "parallelRunOutlier": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "385",
+      "result": "Failed(Child)",
+      "total": "385",
+      "passed": "375",
+      "failed": "9",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 02:35:52Z",
+      "end-time": "2026-11-06 02:36:32Z",
+      "duration": "39.764075"
+    },
+    "extraFailure": "AuthoredLabInterceptsItsMovingAirborneProxyThenResets",
+    "note": "One parallel-worker run; no interception code/bounds/assertion changed. It passed both final complete solo runs; source and outlier evidence retained."
+  },
+  "nativeGraphics": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 02:52:23Z",
+      "end-time": "2026-11-06 02:52:25Z",
+      "duration": "1.3005937"
+    },
+    "output": [
+      "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_IMPACT_NATIVE bloodPixels=620 peak=12.03429 device=Intel(R) Iris(R) Xe Graphics\nCleanup Blit\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+    ],
+    "captures": [
+      "Stomp_Knockdown.png",
+      "Stomp_Recovered.png",
+      "Death_Blood.png",
+      "Death_Fallen.png"
+    ]
+  },
+  "nativeSavedMap": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "5",
+      "result": "Failed(Child)",
+      "total": "5",
+      "passed": "4",
+      "failed": "1",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 02:49:42Z",
+      "end-time": "2026-11-06 02:49:50Z",
+      "duration": "7.873165"
+    },
+    "sameUnbaked4xWarningFailure": [
+      {
+        "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+        "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+      }
+    ],
+    "noBakeNoConfigPublication": true
+  },
+  "physics": {
+    "outputs": [
+      {
+        "name": "StompReactionNativeRecoveryAndSpeedBound",
+        "output": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_STOMP_REACTION peak=12.07621 travel=(0.03, 0.11, 10.76)\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+      },
+      {
+        "name": "UniversalDeathFirstLethalStompKeepsOriginalCorpseSpeedBound(1.0f)",
+        "output": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_LETHAL_STOMP scale=1 peak=12.50073\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+      },
+      {
+        "name": "UniversalDeathFirstLethalStompKeepsOriginalCorpseSpeedBound(3.0f)",
+        "output": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_LETHAL_STOMP scale=3 peak=12.41957\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+      },
+      {
+        "name": "UniversalDeathFirstLethalStompKeepsOriginalCorpseSpeedBound(5.0f)",
+        "output": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_LETHAL_STOMP scale=5 peak=12.46801\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+      },
+      {
+        "name": "UniversalDeathFirstLethalStompKeepsOriginalCorpseSpeedBound(10.0f)",
+        "output": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nPLAYER_LETHAL_STOMP scale=10 peak=12.42974\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+      }
+    ],
+    "unchangedSpeedBoundMps": 40,
+    "lethalStompSeconds": 1.5,
+    "recoveryMaximumTestSeconds": 8,
+    "otherBoundsPreserved": {
+      "armDegreesAt120Hz": 8,
+      "sameGripErrorMeters": 0.003,
+      "laterCarryMouthPenetrationMeters": 0.005
+    },
+    "earlyTakeoverClearanceNotCertified": true
+  },
+  "audit": {
+    "sourceFilesByteMatchedPerWorker": 69,
+    "workers": [
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei"
+    ],
+    "resourcesAndOriginalClipImportsMatched": [
+      "Assets/Resources/PlayerImpactPalette.asset",
+      "Assets/Resources/PlayerImpactPalette.asset.meta",
+      "Assets/Resources/PlayerDeathBlood.mat",
+      "Assets/Resources/PlayerDeathBlood.mat.meta",
+      "Assets/Audio/boneCrush.wav",
+      "Assets/Audio/boneCrush.wav.meta",
+      "Assets/Audio/bloodSplat.mp3",
+      "Assets/Audio/bloodSplat.mp3.meta",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab",
+      "Assets/Resources/TitanAudioPalette.asset"
+    ],
+    "protectedInitialCount": 20,
+    "unchangedFromTaskStart": [
+      "Assets/Scenes/GiantForest2.unity",
+      "Assets/Resources/TitanAudioPalette.asset",
+      "Assets/Resources/TitanSwordAudioPalette.asset",
+      "Assets/Art/Player/Scout/Animations/Run.anim",
+      "ProjectSettings/NavMeshAreas.asset",
+      "ProjectSettings/ProjectVersion.txt",
+      "Packages/manifest.json",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta",
+      "Assets/Audio/boneCrush.wav",
+      "Assets/Audio/boneCrush.wav.meta"
+    ],
+    "concurrentUserChangesPreserved": {
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": {
+        "initial": "ef6a0afa6935f98654150bf7ee732cc20a8301879f9c65ffb6015c6f77a2399b",
+        "current": "571644b48a8d9e83d9272d666968bbf2fa024e854f1cf7af61bfde8c9eadaa34"
+      }
+    },
+    "currentProtectedHashes": {
+      "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "571644b48a8d9e83d9272d666968bbf2fa024e854f1cf7af61bfde8c9eadaa34",
+      "Assets/Resources/TitanAudioPalette.asset": "a781e26daf151158209bb86075dc53bee5aadc40dc3a666056a34200d28d92ae",
+      "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+      "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+      "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+      "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+      "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675",
+      "Assets/Audio/boneCrush.wav": "dba7dba66869fa8c06221e22b1b1e000c193567f70673a3b6fc21d80ee3377aa",
+      "Assets/Audio/boneCrush.wav.meta": "15a20be1dee4d71d0da008a64bbdcebcd0e8a6ffc4ddf463563b7cc21d3a2e42"
+    },
+    "userPrefab": "Current references16/45, turns75/35 preserved, not staged",
+    "userPalette": "Four B-series WAV footsteps at.25 and one scream at.3 preserved; B files and palettes not staged",
+    "noLiveEditorInputStopSaveReloadSceneSwitchOrPhysicsAutomation": true
+  },
+  "intentionalFixtureUpdates": [
+    "Surviving actual stomp now MUST have temporary ragdoll; second hit promotes SAME body",
+    "Old bite-only blood sound fixture now checks one universal blood+bone layer and NO duplicate old Eaten source; confirmed bite counter retained"
+  ],
+  "notCertified": [
+    "Subjective force/get-up feel/audio balance",
+    "Device/DSP/WebGL build timing",
+    "Crowd FPS",
+    "Comprehensive long-duration10x corpse safety"
+  ],
+  "git": "Local-only selective checkpoint; no push authorization"
+}
