@@ -1,7 +1,10 @@
 # Player grab escape QTE
 
 Unity **2021.3.25f1 / URP12.1.11**. User approved three prompts, wrong-key reset,
-safe jump-away and one-second re-grab protection; explicitly chose **3 seconds**.
+safe jump-away and re-grab protection; explicitly chose **3 seconds** for the QTE.
+Later user tuning increased post-escape re-grab grace from1 to **4 seconds** in
+`TitanCombatTarget.TryEscapeGrab`. The original validation/evidence below predates
+that tuning; it is not a new comprehensive timing certificate.
 
 ## Gameplay
 
@@ -26,7 +29,8 @@ safe jump-away and one-second re-grab protection; explicitly chose **3 seconds**
   This is a small bounded escape launch instead of a carry-speed slingshot. It uses
   normal CharacterController/inertia/gravity movement and native ceiling collision,
   not new parenting, collider ignores, warping through walls or a second root writer.
-- **1 second re-grab immunity**, including other Titans/hands, starts at safe exit.
+- **4 seconds re-grab immunity** (current user tuning; originally1s), including
+  other Titans/hands, starts at safe exit.
   Pending release does not consume it. It is NOT general damage immunity.
 - Failure at>=3s leaves the normal carry→mouth→contact-validated bite to finish.
   Damage/death remain exclusively real PlayerHealth ownership. No delayed kill

@@ -1,0 +1,1063 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-maxsu"
+[Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 58388, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] Error: LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              578211e6b84e4bfc83b5b0bb82408eb5
+  Correlation Id:          63686a741c87ce8492fe0dddda82c72a
+  External correlation Id: 8384992454114201883
+  Machine Id:              NXzKx2x2M5w9QqjEpeybWleQj6w=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-maxsu" (connect: 0.00s, validation: 0.01s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-maxsu-notifications"
+Entitlement-based licensing initiated
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2021.3/staging' branch; Version is '2021.3.25f1 (68ef2c4f8861) revision 6876972'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Core' Language: 'en' Physical Memory: 32452 MB
+[Licensing::Client] Successfully resolved entitlements
+[Licensing::Module] Serial number assigned to: "F4-EC84-BUTJ-PZME-BMSJ-XXXX"
+BatchMode: 0, IsHumanControllingUs: 1, StartBugReporterOnCrash: 1, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 57748 was selected
+
+COMMAND LINE ARGUMENTS:
+C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Unity.exe
+-quit
+-projectPath
+C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d
+-executeMethod
+OwnedEyePosePreview.Render
+-logFile
+C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\eye-pose-after.log
+Successfully changed project path to: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d
+C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [44360] Host "[IP] 10.0.0.164 [Port] 55497 [Flags] 2 [Guid] 2618019781 [EditorId] 2618019781 [Version] 1048832 [Id] WindowsEditor(7,max) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [44360] Host "[IP] 10.0.0.164 [Port] 55497 [Flags] 2 [Guid] 2618019781 [EditorId] 2618019781 [Version] 1048832 [Id] WindowsEditor(7,max) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Licensing::Client] Successfully resolved entitlements
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] 
+Registered 24 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.test-framework@1.1.31 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.test-framework@1.1.31)
+    com.unity.textmeshpro@3.0.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.textmeshpro@3.0.6)
+    com.unity.ext.nunit@1.0.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.ext.nunit@1.0.6)
+    com.unity.mathematics@1.2.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.mathematics@1.2.6)
+    com.unity.burst@1.8.4 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.burst@1.8.4)
+    com.unity.searcher@4.9.1 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.searcher@4.9.1)
+  Built-in packages:
+    com.unity.render-pipelines.universal@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.render-pipelines.universal@12.1.11)
+    com.unity.ugui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.ugui@1.0.0)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.ui@1.0.0)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.ai@1.0.0)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.animation@1.0.0)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.audio@1.0.0)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.imgui@1.0.0)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.imageconversion@1.0.0)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.screencapture@1.0.0)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.physics@1.0.0)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.uielements@1.0.0)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.particlesystem@1.0.0)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.terrain@1.0.0)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0)
+    com.unity.modules.uielementsnative@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.modules.uielementsnative@1.0.0)
+    com.unity.render-pipelines.core@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.render-pipelines.core@12.1.11)
+    com.unity.shadergraph@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.shadergraph@12.1.11)
+
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.78s seconds
+Refreshing native plugins compatible for Editor in 2.38 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.25f1 (68ef2c4f8861)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Assets
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Xe Graphics (ID=0xa7a0)
+    Vendor:   Intel
+    VRAM:     16226 MB
+    Driver:   32.0.101.7085
+[Licensing::Client] Successfully resolved entitlements
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56376
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004885 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.360 seconds
+Domain Reload Profiling:
+	ReloadAssembly (361ms)
+		BeginReloadAssembly (57ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (240ms)
+			LoadAssemblies (56ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (64ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (16ms)
+			SetupLoadedEditorAssemblies (126ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (88ms)
+				ProcessInitializeOnLoadMethodAttributes (30ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+[Licensing::Client] Successfully resolved entitlements
+Application.AssetDatabase Initial Refresh Start
+Registering precompiled user dll's ...
+Registered in 0.001719 seconds.
+Start importing Assets/Titan/Prototype/ModularTitanBody.cs using Guid(7bf7f15b1a6d61c49ba3b3fc7d9d0c9b) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'cee3092dbe93d5efbd438c84de71d5e3') in 0.018278 seconds 
+Start importing Assets/Editor/OwnedEyePosePreview.cs using Guid(9d646e81732cde548b98f503c29f0b15) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '2f7dc2dc6dc9f8f1ac9ab408b1a06fb3') in 0.035974 seconds 
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\bee_backend.exe --profile="Library/Bee/backend_profiler0.traceevents" --stdin-canary --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure ScriptAssemblies
+WorkingDir: C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d
+ExitCode: 4 Duration: 0s51ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/1900b0aE-inputdata.json
+*** Tundra requires additional run (0.01 seconds), 0 items updated, 0 evaluated
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Tools\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library/Bee/buildprogram0.traceevents"
+WorkingDir: C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d
+ExitCode: 0 Duration: 0s273ms
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\bee_backend.exe --profile="Library/Bee/backend_profiler1.traceevents" --stdin-canary --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library/Bee/1900b0aE.dag.json" ScriptAssemblies
+WorkingDir: C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d
+ExitCode: 0 Duration: 2s411ms
+Finished compiling graph: 352 nodes, 3260 flattened edges (3260 ToBuild, 0 ToUse), maximum node priority 200
+[199/351    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp
+[335/351    0s] Csc Library/Bee/artifacts/1900b0aE.dag/ODM.TitanPrototype.dll (+2 others)
+[338/351    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[339/351    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/ODM.TitanPrototype.PlayModeTests.dll (+pdb)
+- Starting ILPostProcessorRunner
+
+- Starting ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on ODM.TitanPrototype.PlayModeTests.dll
+
+- Finished ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on ODM.TitanPrototype.PlayModeTests.dll in 0.000219 seconds
+
+- Finished ILPostProcessorRunner in 0.019818 seconds
+[340/351    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/ODM.TitanPrototype.dll (+pdb)
+- Starting ILPostProcessorRunner
+
+- Starting ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on ODM.TitanPrototype.dll
+
+- Finished ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on ODM.TitanPrototype.dll in 0.000224 seconds
+
+- Finished ILPostProcessorRunner in 0.019221 seconds
+[342/351    0s] CopyFiles Library/ScriptAssemblies/ODM.TitanPrototype.pdb
+[343/351    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+- Starting ILPostProcessorRunner
+
+- Starting ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp.dll
+
+- Finished ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp.dll in 0.079787 seconds
+
+- Finished ILPostProcessorRunner in 0.097911 seconds
+[345/351    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+- Starting ILPostProcessorRunner
+
+- Starting ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp-Editor.dll
+
+- Finished ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp-Editor.dll in 0.070699 seconds
+
+- Finished ILPostProcessorRunner in 0.090581 seconds
+[346/351    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[347/351    0s] CopyFiles Library/ScriptAssemblies/ODM.TitanPrototype.dll
+[350/351    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (2.39 seconds), 11 items updated, 351 evaluated
+AssetDatabase: script compilation time: 2.926442s
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 20.84 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.349 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2350ms)
+		BeginReloadAssembly (83ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (15ms)
+		EndReloadAssembly (2210ms)
+			LoadAssemblies (1160ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (104ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (893ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (21ms)
+				BeforeProcessingInitializeOnLoad (35ms)
+				ProcessInitializeOnLoadAttributes (764ms)
+				ProcessInitializeOnLoadMethodAttributes (63ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001543 seconds.
+Refreshing native plugins compatible for Editor in 0.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 6.034 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=2 (actual=2, local cache=0, cache server=0)
+		Asset DB Process Time: managed=1 ms, native=252 ms
+		Asset DB Callback time: managed=75 ms, native=1 ms
+		Scripting: domain reloads=1, domain reload time=2393 ms, compile time=2928 ms, other=381 ms
+		Project Asset Count: scripts=2911, non-scripts=1034
+		Asset File Changes: new=1, changed=2, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokeBeforeRefreshCallbacks: 0.478ms
+	ApplyChangesToAssetFolders: 0.027ms
+	Scan: 124.611ms
+	OnSourceAssetsModified: 0.577ms
+	InitializeImportedAssetsSnapshot: 3.408ms
+	GetAllGuidsForCategorization: 0.244ms
+	CategorizeAssets: 47.737ms
+	ImportOutOfDateAssets: 5768.613ms (2783.830ms without children)
+		ImportManagerImport: 56.054ms (1.311ms without children)
+			ImportInProcess: 54.708ms
+			UpdateCategorizedAssets: 0.036ms
+		CompileScripts: 2927.729ms
+		ReloadImportedAssets: 0.002ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.515ms
+		InitializingProgressBar: 0.028ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.307ms
+		OnDemandSchedulerStart: 0.148ms
+	ReloadSourceAssets: 0.252ms
+	UnloadImportedAssets: 7.875ms
+	PostProcessAllAssets: 74.347ms
+	Hotreload: 1.824ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.000ms
+	UnloadStreamsBegin: 0.737ms
+	LoadedImportedAssetsSnapshotReleaseGCHandles: 0.669ms
+	GetLoadedSourceAssetsIDs: 0.041ms
+	GetLoadedSourceAssetsSnapshot: 0.235ms
+	PersistCurrentRevisions: 0.176ms
+	UnloadStreamsEnd: 0.014ms
+	GenerateScriptTypeHashes: 4.489ms
+	Untracked: 76.587ms
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Scanning for USB devices : 1.407ms
+Initializing Unity extensions:
+[Licensing::Client] Successfully resolved entitlements
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-ODM-TitanValidation-fh_v2o9d
+ProgressiveSceneManager::Cancel()
+Unloading 156 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 176 unused Assets / (1.3 MB). Loaded Objects now: 2984.
+Memory consumption went from 128.9 MB to 127.7 MB.
+Total: 3.189200 ms (FindLiveObjects: 0.138300 ms CreateObjectMapping: 0.048900 ms MarkObjects: 2.601000 ms  DeleteObjects: 0.400300 ms)
+
+[LAYOUT] About to load UserSettings\Layouts\default-2021.dwlt, keepMainWindow=False
+<RI> Initialized touch support.
+<RI> Initialized touch support.
+<RI> Initialized touch support.
+<RI> Initialized touch support.
+<RI> Initialized touch support.
+<RI> Initialized touch support.
+[MODES] ModeService[default].InitializeCurrentMode
+[MODES] ModeService[default].RaiseModeChanged(default, default)
+EYE_POSE_ART scale=1 yaw=0 face=0 elbowFold=86.25108 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=0 face=0 maxWorldArmStep120=7.001355 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=1 yaw=0 face=1 elbowFold=86.25108 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=0 face=1 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=1 yaw=0 face=2 elbowFold=86.25108 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=0 face=2 maxWorldArmStep120=7.001355 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+Registering precompiled user dll's ...
+Registered in 0.001591 seconds.
+Start importing Assets/UniversalRenderPipelineGlobalSettings.asset using Guid(5e918e4ab3f0c12428bf2d17f8e0e75f) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '72388c8930a19ef275f18806e0b7def9') in 0.005047 seconds 
+Refreshing native plugins compatible for Editor in 0.29 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.083 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.001982 seconds.
+Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '326c96a506c07ce3a097c164a3b8e682') in 0.002878 seconds 
+Refreshing native plugins compatible for Editor in 0.26 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.026 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh: Total: 0.003 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+EYE_POSE_ART scale=1 yaw=40 face=0 elbowFold=86.25118 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=40 face=0 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=1 yaw=40 face=1 elbowFold=86.25118 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=40 face=1 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=1 yaw=40 face=2 elbowFold=86.25118 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=1 yaw=40 face=2 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=0 face=0 elbowFold=86.25113 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=0 face=0 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=0 face=1 elbowFold=86.25114 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=0 face=1 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=0 face=2 elbowFold=86.25113 maxWorldArmStep120=7.001467 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=0 face=2 maxWorldArmStep120=7.001467 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=40 face=0 elbowFold=86.25117 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=40 face=0 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=40 face=1 elbowFold=86.25116 maxWorldArmStep120=7.001019 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=40 face=1 maxWorldArmStep120=7.001019 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=3 yaw=40 face=2 elbowFold=86.25113 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=3 yaw=40 face=2 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=0 face=0 elbowFold=86.25113 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=0 face=0 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=0 face=1 elbowFold=86.2511 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=0 face=1 maxWorldArmStep120=7.001355 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=0 face=2 elbowFold=86.2512 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=0 face=2 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=40 face=0 elbowFold=86.25114 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=40 face=0 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=40 face=1 elbowFold=86.25121 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=40 face=1 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=5 yaw=40 face=2 elbowFold=86.25111 maxWorldArmStep120=7.001019 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=5 yaw=40 face=2 maxWorldArmStep120=7.001019 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=0 face=0 elbowFold=86.25113 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=0 face=0 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=0 face=1 elbowFold=86.2511 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=0 face=1 maxWorldArmStep120=7.001355 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=0 face=2 elbowFold=86.2512 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=0 face=2 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=40 face=0 elbowFold=86.25114 maxWorldArmStep120=7.001131 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=40 face=0 maxWorldArmStep120=7.001131 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=40 face=1 elbowFold=86.25121 maxWorldArmStep120=7.001243 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=40 face=1 maxWorldArmStep120=7.001243 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+EYE_POSE_ART scale=10 yaw=40 face=2 elbowFold=86.25111 maxWorldArmStep120=7.001019 forearmPalmTorsoOverlapModelUnits=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:60)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 60)
+
+EYE_POSE_RECOVERY scale=10 yaw=40 face=2 maxWorldArmStep120=7.001019 residualIdleDegrees=0
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Picture (string,single,single) (at Assets/Editor/OwnedEyePosePreview.cs:75)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:17)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 75)
+
+Cleanup Blit
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEngine.Rendering.Blitter:Cleanup () (at Library/PackageCache/com.unity.render-pipelines.core@12.1.11/Runtime/Utilities/Blitter.cs:158)
+UnityEngine.Rendering.Universal.UniversalRenderer:Dispose (bool) (at Library/PackageCache/com.unity.render-pipelines.universal@12.1.11/Runtime/UniversalRenderer.cs:361)
+UnityEngine.Rendering.Universal.ScriptableRenderer:Dispose () (at Library/PackageCache/com.unity.render-pipelines.universal@12.1.11/Runtime/ScriptableRenderer.cs:565)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:DestroyRenderer (UnityEngine.Rendering.Universal.ScriptableRenderer&) (at Library/PackageCache/com.unity.render-pipelines.universal@12.1.11/Runtime/Data/UniversalRenderPipelineAsset.cs:493)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:DestroyRenderers () (at Library/PackageCache/com.unity.render-pipelines.universal@12.1.11/Runtime/Data/UniversalRenderPipelineAsset.cs:486)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:OnDisable () (at Library/PackageCache/com.unity.render-pipelines.universal@12.1.11/Runtime/Data/UniversalRenderPipelineAsset.cs:509)
+UnityEngine.Object:DestroyImmediate (UnityEngine.Object)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:18)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.core@12.1.11/Runtime/Utilities/Blitter.cs Line: 158)
+
+EYE_POSE_NATIVE_PREVIEW_COMPLETED device=Intel(R) Iris(R) Xe Graphics
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OwnedEyePosePreview:Render () (at Assets/Editor/OwnedEyePosePreview.cs:19)
+
+(Filename: Assets/Editor/OwnedEyePosePreview.cs Line: 19)
+
+Batchmode quit successfully invoked - shutting down!
+Registering precompiled user dll's ...
+Registered in 0.001706 seconds.
+Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'de85fb17accca87685e58cff30d4bd74') in 0.002842 seconds 
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.050 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[Licensing::IpcConnector] License Notification channel disconnected successfully.
+[Licensing::IpcConnector] License Client channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+debugger-agent: Unable to listen on 5436
+[Performance] WinEditorMain                                                                                              :        1 samples, Peak.  1.37 s (1.0x), Avg.  1.37 s, Total. 1.367 s (10.9%)
+[Performance] WinEditorMain.ConfigureCrashHandler                                                                        :        1 samples, Peak.  14.8 us (1.0x), Avg.  14.8 us, Total. 14.80 us (0.0%)
+[Performance] WinEditorMain.CurlRequestInitialize                                                                        :        1 samples, Peak.   951 us (1.0x), Avg.   951 us, Total. 950.9 us (0.0%)
+[Performance] WinEditorMain.SetupLogFile                                                                                 :        1 samples, Peak.   314 us (1.0x), Avg.   314 us, Total. 314.1 us (0.0%)
+[Performance] WinEditorMain.RunNativeTestsIfRequiredAndExit                                                              :        1 samples, Peak. 100.0 ns (1.0x), Avg. 100.0 ns, Total. 100.00 ns (0.0%)
+[Performance] WinEditorMain.Licensing                                                                                    :        1 samples, Peak.  1.20 s (1.0x), Avg.  1.20 s, Total. 1.201 s (9.6%)
+[Performance] WinEditorMain.InitializeCrashHandler                                                                       :        1 samples, Peak.  21.7 ms (1.0x), Avg.  21.7 ms, Total. 21.66 ms (0.2%)
+[Performance] WinEditorMain.CreateApplication                                                                            :        1 samples, Peak.   172 us (1.0x), Avg.   172 us, Total. 172.2 us (0.0%)
+[Performance] Application.InitializeProject                                                                              :        1 samples, Peak.  8.96 s (1.0x), Avg.  8.96 s, Total. 8.964 s (71.4%)
+[Performance] Application.PackageManager.StartServer                                                                     :        1 samples, Peak.  10.8 ms (1.0x), Avg.  10.8 ms, Total. 10.76 ms (0.1%)
+[Performance] Application.AcquireProjectLock                                                                             :        1 samples, Peak.  3.98 ms (1.0x), Avg.  3.98 ms, Total. 3.981 ms (0.0%)
+[Performance] Application.InitializeEngineNoGraphics                                                                     :        1 samples, Peak.  40.2 ms (1.0x), Avg.  40.2 ms, Total. 40.16 ms (0.3%)
+[Performance] Application.PackageManager.Initialize                                                                      :        1 samples, Peak.   527 ms (1.0x), Avg.   527 ms, Total. 526.8 ms (4.2%)
+[Performance] CurlRequestCheck                                                                                           :       10 samples, Peak.  1.61 ms (9.2x), Avg.   174 us, Total. 1.741 ms (0.0%)
+[Performance] Application.EngineGraphics.Initialize                                                                      :        1 samples, Peak.   252 ms (1.0x), Avg.   252 ms, Total. 252.5 ms (2.0%)
+[Performance] Application.GI.Initialize                                                                                  :        1 samples, Peak.  2.44 ms (1.0x), Avg.  2.44 ms, Total. 2.440 ms (0.0%)
+[Performance] Application.LoadAllDefaultResourcesFromEditor                                                              :        1 samples, Peak.  1.37 ms (1.0x), Avg.  1.37 ms, Total. 1.367 ms (0.0%)
+[Performance] Application.LoadMonoAssemblies                                                                             :        1 samples, Peak.   367 ms (1.0x), Avg.   367 ms, Total. 366.8 ms (2.9%)
+[Performance] RestoreManagedReferences                                                                                   :        2 samples, Peak.  22.2 ms (2.0x), Avg.  11.1 ms, Total. 22.24 ms (0.2%)
+[Performance] InitializeOnLoad LayerSettingsWindow                                                                       :        2 samples, Peak.   140 us (1.0x), Avg.   138 us, Total. 276.0 us (0.0%)
+[Performance] InitializeOnLoad ParameterControllerEditor                                                                 :        2 samples, Peak.  10.2 us (1.0x), Avg.  9.80 us, Total. 19.60 us (0.0%)
+[Performance] InitializeOnLoad ServicesRepository                                                                        :        2 samples, Peak.   591 us (1.1x), Avg.   523 us, Total. 1.045 ms (0.0%)
+[Performance] InitializeOnLoad AdsService                                                                                :        2 samples, Peak.  2.96 ms (1.4x), Avg.  2.17 ms, Total. 4.332 ms (0.0%)
+[Performance] InitializeOnLoad AnalyticsService                                                                          :        2 samples, Peak.   218 us (1.4x), Avg.   154 us, Total. 307.4 us (0.0%)
+[Performance] InitializeOnLoad BuildService                                                                              :        2 samples, Peak.   166 us (1.4x), Avg.   122 us, Total. 243.0 us (0.0%)
+[Performance] InitializeOnLoad CloudBuildPoller                                                                          :        2 samples, Peak.   144 us (1.4x), Avg.   103 us, Total. 206.8 us (0.0%)
+[Performance] InitializeOnLoad CollabService                                                                             :        2 samples, Peak.   109 us (1.0x), Avg.   105 us, Total. 210.4 us (0.0%)
+[Performance] InitializeOnLoad CrashService                                                                              :        2 samples, Peak.   189 us (1.4x), Avg.   135 us, Total. 270.2 us (0.0%)
+[Performance] InitializeOnLoad PurchasingService                                                                         :        2 samples, Peak.  5.61 ms (1.2x), Avg.  4.69 ms, Total. 9.376 ms (0.1%)
+[Performance] InitializeOnLoad UDPService                                                                                :        2 samples, Peak.  1.64 ms (1.9x), Avg.   866 us, Total. 1.731 ms (0.0%)
+[Performance] InitializeOnLoad UIDocumentHierarchyWatcher                                                                :        2 samples, Peak.   461 us (1.5x), Avg.   317 us, Total. 633.6 us (0.0%)
+[Performance] InitializeOnLoad RetainedMode                                                                              :        2 samples, Peak.  1.20 ms (1.0x), Avg.  1.20 ms, Total. 2.407 ms (0.0%)
+[Performance] InitializeOnLoad EditorMonitor                                                                             :        2 samples, Peak.   102 us (1.0x), Avg.  99.6 us, Total. 199.3 us (0.0%)
+[Performance] InitializeOnLoad EditorShaderLoader                                                                        :        2 samples, Peak.   533 us (1.1x), Avg.   500 us, Total. 1.000 ms (0.0%)
+[Performance] InitializeOnLoad UXMLEditorFactories                                                                       :        2 samples, Peak.  32.6 ms (1.0x), Avg.  31.5 ms, Total. 62.98 ms (0.5%)
+[Performance] InitializeOnLoad SearchMonitor                                                                             :        2 samples, Peak.  15.7 ms (1.3x), Avg.  12.2 ms, Total. 24.45 ms (0.2%)
+[Performance] InitializeOnLoad PlayModeDownload                                                                          :        2 samples, Peak.  1.40 ms (1.9x), Avg.   744 us, Total. 1.487 ms (0.0%)
+[Performance] InitializeOnLoad SearchWindow                                                                              :        2 samples, Peak.  81.1 us (1.0x), Avg.  78.6 us, Total. 157.1 us (0.0%)
+[Performance] InitializeOnLoad EditMode                                                                                  :        2 samples, Peak.   270 us (1.0x), Avg.   266 us, Total. 532.3 us (0.0%)
+[Performance] InitializeOnLoad AssetStoreContext                                                                         :        2 samples, Peak.  3.32 ms (1.1x), Avg.  2.93 ms, Total. 5.863 ms (0.0%)
+[Performance] InitializeOnLoad DrivenRectTransformUndo                                                                   :        2 samples, Peak.   183 us (1.0x), Avg.   174 us, Total. 348.6 us (0.0%)
+[Performance] InitializeOnLoad CacheServerWindow                                                                         :        2 samples, Peak.  8.00 us (1.0x), Avg.  7.70 us, Total. 15.40 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebuggerWindow                                                                     :        2 samples, Peak.  3.64 ms (1.8x), Avg.  2.01 ms, Total. 4.014 ms (0.0%)
+[Performance] InitializeOnLoad WindowLayout                                                                              :        2 samples, Peak.  15.9 ms (1.1x), Avg.  13.9 ms, Total. 27.77 ms (0.2%)
+[Performance] InitializeOnLoad PrefabInstanceChangedListener                                                             :        2 samples, Peak.   112 us (1.3x), Avg.  83.4 us, Total. 166.8 us (0.0%)
+[Performance] InitializeOnLoad SettingsService                                                                           :        2 samples, Peak.   150 us (1.9x), Avg.  77.1 us, Total. 154.2 us (0.0%)
+[Performance] InitializeOnLoad NativeFormatImporterUtility                                                               :        2 samples, Peak.  1.90 ms (1.1x), Avg.  1.69 ms, Total. 3.389 ms (0.0%)
+[Performance] InitializeOnLoad UISystemProfilerRenderService                                                             :        2 samples, Peak.  9.60 us (1.2x), Avg.  7.70 us, Total. 15.40 us (0.0%)
+[Performance] InitializeOnLoad ShortcutIntegration                                                                       :        2 samples, Peak.  74.6 us (1.2x), Avg.  62.2 us, Total. 124.4 us (0.0%)
+[Performance] InitializeOnLoad UnityConnect                                                                              :        2 samples, Peak.  34.9 us (1.0x), Avg.  34.1 us, Total. 68.10 us (0.0%)
+[Performance] InitializeOnLoad ObjectSelectorSearch                                                                      :        2 samples, Peak.   220 us (1.8x), Avg.   124 us, Total. 247.7 us (0.0%)
+[Performance] InitializeOnLoad ProjectSearch                                                                             :        2 samples, Peak.  34.0 us (1.1x), Avg.  31.4 us, Total. 62.80 us (0.0%)
+[Performance] InitializeOnLoad SceneSearch                                                                               :        2 samples, Peak.  19.7 us (1.1x), Avg.  18.8 us, Total. 37.50 us (0.0%)
+[Performance] InitializeOnLoad SearchService                                                                             :        2 samples, Peak.   110 us (1.2x), Avg.  88.4 us, Total. 176.7 us (0.0%)
+[Performance] InitializeOnLoad AddComponentWindow                                                                        :        2 samples, Peak.  70.6 us (1.1x), Avg.  64.2 us, Total. 128.4 us (0.0%)
+[Performance] InitializeOnLoad Collab                                                                                    :        2 samples, Peak.  7.16 ms (1.4x), Avg.  5.11 ms, Total. 10.22 ms (0.1%)
+[Performance] InitializeOnLoad CloudBuild                                                                                :        2 samples, Peak.  3.10 us (1.1x), Avg.  2.80 us, Total. 5.600 us (0.0%)
+[Performance] InitializeOnLoad MixerEffectDefinitionReloader                                                             :        2 samples, Peak.  1.43 ms (1.1x), Avg.  1.31 ms, Total. 2.628 ms (0.0%)
+[Performance] InitializeOnLoad MenuItems                                                                                 :        2 samples, Peak.  77.2 us (1.1x), Avg.  68.4 us, Total. 136.8 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebugger                                                                           :        2 samples, Peak.   600 ns (1.1x), Avg.   550 ns, Total. 1.100 us (0.0%)
+[Performance] InitializeOnLoad EditorDragAndDrop.RegisterEditorClient                                                    :        2 samples, Peak.   640 us (1.6x), Avg.   394 us, Total. 788.4 us (0.0%)
+[Performance] InitializeOnLoad EditorDelegateRegistration.Initialize                                                     :        2 samples, Peak.   271 us (1.0x), Avg.   270 us, Total. 540.9 us (0.0%)
+[Performance] InitializeOnLoad LiveReloadTrackerCreator.Initialize                                                       :        2 samples, Peak.   124 us (1.1x), Avg.   114 us, Total. 228.6 us (0.0%)
+[Performance] InitializeOnLoad PackageManagerHookGUIDConverter.RegisterPackagesEventHandler                              :        2 samples, Peak.  78.1 us (1.1x), Avg.  74.3 us, Total. 148.5 us (0.0%)
+[Performance] InitializeOnLoad RuntimeEditorDelegateRegistration.Initialize                                              :        2 samples, Peak.   116 us (1.0x), Avg.   116 us, Total. 231.7 us (0.0%)
+[Performance] InitializeOnLoad EditorEventCallbacks.InitializeFontAssetResourceChangeCallBacks                           :        2 samples, Peak.   708 us (1.0x), Avg.   704 us, Total. 1.407 ms (0.0%)
+[Performance] InitializeOnLoad SceneTemplateService.Init                                                                 :        2 samples, Peak.   299 us (1.3x), Avg.   226 us, Total. 451.9 us (0.0%)
+[Performance] InitializeOnLoad EntitlementsErrorChecker.OpenFirstEntitlementError                                        :        2 samples, Peak.  17.0 ms (1.4x), Avg.  12.0 ms, Total. 24.09 ms (0.2%)
+[Performance] InitializeOnLoad ScopedRegistryAddedPopup.SubscribeToRegistriesAdded                                       :        2 samples, Peak.   519 us (1.0x), Avg.   501 us, Total. 1.003 ms (0.0%)
+[Performance] InitializeOnLoad DiagnosticSwitchesConsoleMessage.Init                                                     :        2 samples, Peak.  3.95 ms (1.8x), Avg.  2.23 ms, Total. 4.457 ms (0.0%)
+[Performance] InitializeOnLoad SysrootManager.Initialize                                                                 :        2 samples, Peak.  9.70 us (1.1x), Avg.  9.00 us, Total. 18.00 us (0.0%)
+[Performance] InitializeOnLoad AssetPostprocessingInternal.RefreshCustomDependencies                                     :        2 samples, Peak.  1.07 ms (1.2x), Avg.   857 us, Total. 1.713 ms (0.0%)
+[Performance] InitializeOnLoad EditorWindow.Initialize                                                                   :        2 samples, Peak.   139 us (1.1x), Avg.   127 us, Total. 253.1 us (0.0%)
+[Performance] InitializeOnLoad SceneVisibilityManager.Initialize                                                         :        2 samples, Peak.  4.16 ms (1.8x), Avg.  2.38 ms, Total. 4.758 ms (0.0%)
+[Performance] InitializeOnLoad MemoryProfilerCompilationGuard.InjectCompileGuard                                         :        2 samples, Peak.  97.0 us (1.4x), Avg.  71.5 us, Total. 143.1 us (0.0%)
+[Performance] ProcessService.EditorAfterLoadAllAssemblies                                                                :        2 samples, Peak.   201 us (1.1x), Avg.   181 us, Total. 362.1 us (0.0%)
+[Performance] Application.ReadLicenseInfo                                                                                :        1 samples, Peak.  19.7 ms (1.0x), Avg.  19.7 ms, Total. 19.72 ms (0.2%)
+[Performance] Application.InitialRefresh                                                                                 :        1 samples, Peak.  6.04 s (1.0x), Avg.  6.04 s, Total. 6.035 s (48.1%)
+[Performance] BuilderAssetModificationProcessor.OnWillCreateAsset                                                        :        3 samples, Peak.   670 us (2.1x), Avg.   317 us, Total. 951.7 us (0.0%)
+[Performance] ShaderImporter.SourceAssetModified                                                                         :        5 samples, Peak.  1.10 us (1.4x), Avg.   760 ns, Total. 3.800 us (0.0%)
+[Performance] ShaderIncludeImporter.SourceAssetModified                                                                  :        5 samples, Peak.  1000 ns (1.1x), Avg.   920 ns, Total. 4.600 us (0.0%)
+[Performance] PresetManagerPostProcessor.OnPreprocessAsset                                                               :        5 samples, Peak.   195 us (1.3x), Avg.   150 us, Total. 751.5 us (0.0%)
+[Performance] CancelSplashScreenOnAssetChange.OnPreprocessAsset                                                          :        5 samples, Peak.  91.8 us (2.4x), Avg.  38.3 us, Total. 191.6 us (0.0%)
+[Performance] BuilderAssetModificationProcessor.OnWillSaveAssets                                                         :        3 samples, Peak.   720 us (1.6x), Avg.   448 us, Total. 1.343 ms (0.0%)
+[Performance] TerrainModificationProcessor.OnWillSaveAssets                                                              :        3 samples, Peak.   468 us (1.5x), Avg.   303 us, Total. 909.2 us (0.0%)
+[Performance] VersionControl.Task.Wait                                                                                   :        1 samples, Peak.  8.40 us (1.0x), Avg.  8.40 us, Total. 8.400 us (0.0%)
+[Performance] Compiling Scripts                                                                                          :        1 samples, Peak.  2.93 s (1.0x), Avg.  2.93 s, Total. 2.927 s (23.3%)
+[Performance] InitializeOnLoad ProbeGIBaking                                                                             :        1 samples, Peak.   294 us (1.0x), Avg.   294 us, Total. 294.1 us (0.0%)
+[Performance] InitializeOnLoad FilterWindow                                                                              :        1 samples, Peak.  23.1 us (1.0x), Avg.  23.1 us, Total. 23.10 us (0.0%)
+[Performance] InitializeOnLoad RealtimeProbeSubdivisionDebug                                                             :        1 samples, Peak.   109 us (1.0x), Avg.   109 us, Total. 108.8 us (0.0%)
+[Performance] InitializeOnLoad PrefabLayoutRebuilder                                                                     :        1 samples, Peak.   148 us (1.0x), Avg.   148 us, Total. 148.0 us (0.0%)
+[Performance] InitializeOnLoad RerunCallbackInitializer                                                                  :        1 samples, Peak.  2.43 ms (1.0x), Avg.  2.43 ms, Total. 2.425 ms (0.0%)
+[Performance] InitializeOnLoad UnityTestProtocolStarter                                                                  :        1 samples, Peak.   363 us (1.0x), Avg.   363 us, Total. 363.4 us (0.0%)
+[Performance] InitializeOnLoad TestStarter                                                                               :        1 samples, Peak.   418 us (1.0x), Avg.   418 us, Total. 417.9 us (0.0%)
+[Performance] InitializeOnLoad BackgroundWatcher                                                                         :        1 samples, Peak.   384 us (1.0x), Avg.   384 us, Total. 383.7 us (0.0%)
+[Performance] InitializeOnLoad ShadowCasterGroup2DManager                                                                :        1 samples, Peak.   121 us (1.0x), Avg.   121 us, Total. 121.1 us (0.0%)
+[Performance] InitializeOnLoad ShaderGraphMaterialsUpdater                                                               :        2 samples, Peak.   231 us (1.4x), Avg.   160 us, Total. 319.6 us (0.0%)
+[Performance] InitializeOnLoad EditorToolManager                                                                         :        1 samples, Peak.  1.42 ms (1.0x), Avg.  1.42 ms, Total. 1.422 ms (0.0%)
+[Performance] InitializeOnLoad Renderer2DAnalytics                                                                       :        1 samples, Peak.  52.9 us (1.0x), Avg.  52.9 us, Total. 52.90 us (0.0%)
+[Performance] InitializeOnLoad BurstLoader                                                                               :        1 samples, Peak.   675 ms (1.0x), Avg.   675 ms, Total. 675.3 ms (5.4%)
+[Performance] InitializeOnLoad NodeClassCache                                                                            :        1 samples, Peak.  9.40 us (1.0x), Avg.  9.40 us, Total. 9.400 us (0.0%)
+[Performance] InitializeOnLoad ContextualMenuDispatcher.RegisterAdditionalDataMenus                                      :        1 samples, Peak.  27.5 ms (1.0x), Avg.  27.5 ms, Total. 27.52 ms (0.2%)
+[Performance] Menu.FilterMenuItem                                                                                        :      647 samples, Peak.  26.3 ms (640.1x), Avg.  41.0 us, Total. 26.54 ms (0.2%)
+[Performance] InitializeOnLoad CoreRenderPipelinePreferences.InitPreferenceProviders                                     :        1 samples, Peak.  22.0 ms (1.0x), Avg.  22.0 ms, Total. 21.96 ms (0.2%)
+[Performance] InitializeOnLoad VolumeGizmoDrawer.InitVolumeGizmoCallbacks                                                :        1 samples, Peak.   230 us (1.0x), Avg.   230 us, Total. 230.0 us (0.0%)
+[Performance] InitializeOnLoad TestJobDataHolder.ResumeRunningJobs                                                       :        1 samples, Peak.   464 us (1.0x), Avg.   464 us, Total. 464.0 us (0.0%)
+[Performance] InitializeOnLoad AnalyticsReporter.RegisterCallbacks                                                       :        1 samples, Peak.   147 us (1.0x), Avg.   147 us, Total. 147.0 us (0.0%)
+[Performance] InitializeOnLoad MaterialReimporter.RegisterUpgraderReimport                                               :        2 samples, Peak.   130 us (1.8x), Avg.  72.7 us, Total. 145.4 us (0.0%)
+[Performance] DidReloadScriptsDebugWindow.OnEditorReload                                                                 :        1 samples, Peak.  2.10 ms (1.0x), Avg.  2.10 ms, Total. 2.104 ms (0.0%)
+[Performance] DidReloadScriptsVolumeComponentEditor.OnEditorReload                                                       :        1 samples, Peak.  11.0 ms (1.0x), Avg.  11.0 ms, Total. 11.05 ms (0.1%)
+[Performance] DidReloadScriptsLookDev.OnEditorReload                                                                     :        1 samples, Peak.   172 us (1.0x), Avg.   172 us, Total. 172.3 us (0.0%)
+[Performance] DidReloadScriptsTestListCache.ScriptReloaded                                                               :        1 samples, Peak.   700 us (1.0x), Avg.   700 us, Total. 700.4 us (0.0%)
+[Performance] DidReloadScriptsTestRunnerWindow.CompilationCallback                                                       :        1 samples, Peak.   389 us (1.0x), Avg.   389 us, Total. 389.1 us (0.0%)
+[Performance] DidReloadScriptsAdvancedDropdownWindow.OnScriptReload                                                      :        1 samples, Peak.   157 us (1.0x), Avg.   157 us, Total. 157.1 us (0.0%)
+[Performance] AssetDatabase.ImportAssets                                                                                 :        8 samples, Peak.  50.1 ms (5.2x), Avg.  9.56 ms, Total. 76.47 ms (0.6%)
+[Performance] TMPro_TexturePostProcessor.OnPostprocessAllAssets                                                          :        8 samples, Peak.   484 us (4.0x), Avg.   122 us, Total. 979.0 us (0.0%)
+[Performance] BuilderAssetPostprocessor.OnPostprocessAllAssets                                                           :        8 samples, Peak.  6.77 ms (3.9x), Avg.  1.72 ms, Total. 13.75 ms (0.1%)
+[Performance] ArtifactBrowserPostProcessor.OnPostprocessAllAssets                                                        :        8 samples, Peak.   366 us (3.9x), Avg.  92.9 us, Total. 742.8 us (0.0%)
+[Performance] AssetEvents.OnPostprocessAllAssets                                                                         :       16 samples, Peak.   170 us (3.8x), Avg.  44.9 us, Total. 718.0 us (0.0%)
+[Performance] AudioMixerPostprocessor.OnPostprocessAllAssets                                                             :        8 samples, Peak.   206 us (3.9x), Avg.  53.0 us, Total. 424.3 us (0.0%)
+[Performance] StyleCatalogPostProcessor.OnPostprocessAllAssets                                                           :        8 samples, Peak.  16.3 ms (4.0x), Avg.  4.08 ms, Total. 32.61 ms (0.3%)
+[Performance] BuildCatalog                                                                                               :        1 samples, Peak.  15.5 ms (1.0x), Avg.  15.5 ms, Total. 15.50 ms (0.1%)
+[Performance] ModelImporterPostProcessor.OnPostprocessAllAssets                                                          :        8 samples, Peak.  6.60 ms (3.0x), Avg.  2.20 ms, Total. 17.56 ms (0.1%)
+[Performance] MaterialPostprocessor.OnPostprocessAllAssets                                                               :       16 samples, Peak.   561 us (4.3x), Avg.   131 us, Total. 2.098 ms (0.0%)
+[Performance] RetainedModeAssetPostprocessor.OnPostprocessAllAssets                                                      :        8 samples, Peak.  1.14 ms (3.9x), Avg.   294 us, Total. 2.349 ms (0.0%)
+[Performance] AssetChangedListener.OnPostprocessAllAssets                                                                :        8 samples, Peak.  5.36 ms (3.6x), Avg.  1.48 ms, Total. 11.82 ms (0.1%)
+[Performance] PostProcessor.OnPostprocessAllAssets                                                                       :        8 samples, Peak.   182 us (3.1x), Avg.  58.1 us, Total. 464.6 us (0.0%)
+[Performance] ShaderGraphAssetPostProcessor.OnPostprocessAllAssets                                                       :        8 samples, Peak.  1.10 ms (3.3x), Avg.   331 us, Total. 2.651 ms (0.0%)
+[Performance] SpeedTreePostProcessor.OnPostprocessAllAssets                                                              :        8 samples, Peak.   132 us (3.4x), Avg.  38.2 us, Total. 305.7 us (0.0%)
+[Performance] TextAssetPostProcessor.OnPostprocessAllAssets                                                              :        8 samples, Peak.   241 us (3.6x), Avg.  67.5 us, Total. 540.3 us (0.0%)
+[Performance] UIDocumentAssetPostProcessor.OnPostprocessAllAssets                                                        :        8 samples, Peak.   513 us (3.9x), Avg.   132 us, Total. 1.054 ms (0.0%)
+[Performance] SyncVS.PostprocessSyncProject                                                                              :        4 samples, Peak.  1.22 ms (4.0x), Avg.   305 us, Total. 1.219 ms (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.Audio.MixerEffectDefinitionReloader.OnProjectChanged         :        2 samples, Peak.   343 us (1.2x), Avg.   292 us, Total. 583.7 us (0.0%)
+[Performance] Application.ImportPackagesAndSetTemplateWhenCreatingProject                                                :        1 samples, Peak.  9.35 ms (1.0x), Avg.  9.35 ms, Total. 9.347 ms (0.1%)
+[Performance] Application.SyncCurrentColorSpace                                                                          :        1 samples, Peak.   139 ms (1.0x), Avg.   139 ms, Total. 138.9 ms (1.1%)
+[Performance] Application.OnUsbDevicesChanged                                                                            :        1 samples, Peak.  1.47 ms (1.0x), Avg.  1.47 ms, Total. 1.466 ms (0.0%)
+[Performance] Application.AssetInstanceCacheUpdate                                                                       :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] Application.UnityExtensions.Initialize                                                                     :        1 samples, Peak.   651 us (1.0x), Avg.   651 us, Total. 650.6 us (0.0%)
+[Performance] Application.InitializeManagedCompilationPipeline                                                           :        1 samples, Peak.  58.1 ms (1.0x), Avg.  58.1 ms, Total. 58.08 ms (0.5%)
+[Performance] Application.ExecuteStartups                                                                                :        1 samples, Peak.  30.5 ms (1.0x), Avg.  30.5 ms, Total. 30.53 ms (0.2%)
+[Performance] Menu.RegisterMenuInterface                                                                                 :       26 samples, Peak.  1.60 us (9.2x), Avg.   173 ns, Total. 4.500 us (0.0%)
+[Performance] Gizmo.RebuildRenderers                                                                                     :        1 samples, Peak.  29.8 ms (1.0x), Avg.  29.8 ms, Total. 29.78 ms (0.2%)
+[Performance] Gizmo.AddGizmoRenderers                                                                                    :       51 samples, Peak.  1.19 ms (32.3x), Avg.  36.9 us, Total. 1.882 ms (0.0%)
+[Performance] Application.editorInitializingProject                                                                      :        1 samples, Peak.   410 ms (1.0x), Avg.   410 ms, Total. 410.0 ms (3.3%)
+[Performance] Application.InitializeMenu                                                                                 :        1 samples, Peak.   140 ms (1.0x), Avg.   140 ms, Total. 140.2 ms (1.1%)
+[Performance] Menu.RebuildAll                                                                                            :        1 samples, Peak.   140 ms (1.0x), Avg.   140 ms, Total. 140.1 ms (1.1%)
+[Performance] Menu.BuildRegisteredMenuInterfaces                                                                         :        1 samples, Peak.   138 ms (1.0x), Avg.   138 ms, Total. 138.2 ms (1.1%)
+[Performance] UpdateAllMenus                                                                                             :        1 samples, Peak.   405 us (1.0x), Avg.   405 us, Total. 405.2 us (0.0%)
+[Performance] Menu.RebuildOSMainMenu                                                                                     :        2 samples, Peak.  3.65 ms (1.4x), Avg.  2.54 ms, Total. 5.089 ms (0.0%)
+[Performance] Application.RestoreLastOpenedScenes                                                                        :        1 samples, Peak.  24.4 ms (1.0x), Avg.  24.4 ms, Total. 24.43 ms (0.2%)
+[Performance] EditorSceneManager.sceneClosing: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneClosing       :        1 samples, Peak.   244 us (1.0x), Avg.   244 us, Total. 244.5 us (0.0%)
+[Performance] EditorSceneManager.activeSceneChangedInEditMode: callback in UnityEditor.Search.SearchMonitor              :        1 samples, Peak.  54.8 us (1.0x), Avg.  54.8 us, Total. 54.80 us (0.0%)
+[Performance] GUIView.RepaintAll.PlayerLoopController                                                                    :        1 samples, Peak.  1.40 us (1.0x), Avg.  1.40 us, Total. 1.400 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnNewSceneCreated :        1 samples, Peak.   239 us (1.0x), Avg.   239 us, Total. 238.9 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneManagement.StageNavigationManager.OnNewSceneCreated   :        1 samples, Peak.  45.4 us (1.0x), Avg.  45.4 us, Total. 45.40 us (0.0%)
+[Performance] Toolbar.OnBackingScaleFactorChanged                                                                        :        1 samples, Peak.  23.4 ms (1.0x), Avg.  23.4 ms, Total. 23.44 ms (0.2%)
+[Performance] SceneHierarchyWindow.OnBackingScaleFactorChanged                                                           :        1 samples, Peak.   652 us (1.0x), Avg.   652 us, Total. 652.3 us (0.0%)
+[Performance] SceneView.OnBackingScaleFactorChanged                                                                      :        1 samples, Peak.  12.1 us (1.0x), Avg.  12.1 us, Total. 12.10 us (0.0%)
+[Performance] ProjectBrowser.OnBackingScaleFactorChanged                                                                 :        1 samples, Peak.  11.6 us (1.0x), Avg.  11.6 us, Total. 11.60 us (0.0%)
+[Performance] InspectorWindow.OnBackingScaleFactorChanged                                                                :        1 samples, Peak.  6.90 us (1.0x), Avg.  6.90 us, Total. 6.900 us (0.0%)
+[Performance] AppStatusBar.OnBackingScaleFactorChanged                                                                   :        1 samples, Peak.  45.8 us (1.0x), Avg.  45.8 us, Total. 45.80 us (0.0%)
+[Performance] Application.InvokeFinishedLoadingProject                                                                   :        1 samples, Peak.  3.16 ms (1.0x), Avg.  3.16 ms, Total. 3.160 ms (0.0%)
+[Performance] ProcessService.OnProjectLoaded                                                                             :        1 samples, Peak.  33.1 us (1.0x), Avg.  33.1 us, Total. 33.10 us (0.0%)
+[Performance] MaterialModificationProcessor.OnWillCreateAsset                                                            :        4 samples, Peak.   158 us (2.2x), Avg.  70.6 us, Total. 282.6 us (0.0%)
+[Performance] Toolbar.OnProjectChange                                                                                    :        1 samples, Peak.  9.70 us (1.0x), Avg.  9.70 us, Total. 9.700 us (0.0%)
+[Performance] SceneHierarchyWindow.OnProjectChange                                                                       :        1 samples, Peak.  60.1 us (1.0x), Avg.  60.1 us, Total. 60.10 us (0.0%)
+[Performance] SceneView.OnProjectChange                                                                                  :        1 samples, Peak.  2.30 us (1.0x), Avg.  2.30 us, Total. 2.300 us (0.0%)
+[Performance] ProjectBrowser.OnProjectChange                                                                             :        1 samples, Peak.   900 ns (1.0x), Avg.   900 ns, Total. 900.0 ns (0.0%)
+[Performance] InspectorWindow.OnProjectChange                                                                            :        1 samples, Peak.   700 ns (1.0x), Avg.   700 ns, Total. 700.0 ns (0.0%)
+[Performance] AppStatusBar.OnProjectChange                                                                               :        1 samples, Peak.  6.80 us (1.0x), Avg.  6.80 us, Total. 6.800 us (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.ProjectBrowser.OnProjectChanged                              :        1 samples, Peak.   335 us (1.0x), Avg.   335 us, Total. 334.8 us (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.LabelGUI.InvalidateLabels                                    :        1 samples, Peak.  24.5 us (1.0x), Avg.  24.5 us, Total. 24.50 us (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.SceneHierarchy.ReloadData                                    :        1 samples, Peak.   247 us (1.0x), Avg.   247 us, Total. 247.2 us (0.0%)
+[Performance] AssetDatabase.Refresh                                                                                      :        1 samples, Peak.  2.76 ms (1.0x), Avg.  2.76 ms, Total. 2.758 ms (0.0%)
+[Performance] EditorApplication.quitting: Unity.Burst.Editor.BurstLoader.OnEditorApplicationQuitting                     :        1 samples, Peak.  20.4 us (1.0x), Avg.  20.4 us, Total. 20.40 us (0.0%)
+[Performance] EditorApplication.quitting: UnityEditor.Search.SearchMonitor.OnQuitting                                    :        1 samples, Peak.   854 us (1.0x), Avg.   854 us, Total. 854.4 us (0.0%)
+[Performance] EditorApplication.quitting: callback in UnityEditor.TextCore.Text.EditorEventCallbacks                     :        1 samples, Peak.  11.9 ms (1.0x), Avg.  11.9 ms, Total. 11.90 ms (0.1%)
+[Performance] Application.Shutdown.PauseProfilerSession                                                                  :        1 samples, Peak.  38.1 us (1.0x), Avg.  38.1 us, Total. 38.10 us (0.0%)
+[Performance] Application.Shutdown.PauseAssetImportWorkers                                                               :        1 samples, Peak.   197 us (1.0x), Avg.   197 us, Total. 197.4 us (0.0%)
+[Performance] Application.Shutdown.SaveAssets                                                                            :        1 samples, Peak.  66.3 ms (1.0x), Avg.  66.3 ms, Total. 66.25 ms (0.5%)
+[Performance] Application.Shutdown.CleanupRenderPipeline                                                                 :        1 samples, Peak.  2.20 us (1.0x), Avg.  2.20 us, Total. 2.200 us (0.0%)
+[Performance] Application.Shutdown.StopPreloadManager                                                                    :        1 samples, Peak.  9.83 ms (1.0x), Avg.  9.83 ms, Total. 9.826 ms (0.1%)
+[Performance] Application.Shutdown.DestroyWorld                                                                          :        1 samples, Peak.   924 us (1.0x), Avg.   924 us, Total. 924.5 us (0.0%)
+[Performance] Application.Shutdown.CleanupAfterLoad                                                                      :        1 samples, Peak.  90.3 ms (1.0x), Avg.  90.3 ms, Total. 90.29 ms (0.7%)
+[Performance] Application.Shutdown.Progress                                                                              :        1 samples, Peak.  6.60 us (1.0x), Avg.  6.60 us, Total. 6.600 us (0.0%)
+[Performance] Application.Shutdown.GICleanupManagers                                                                     :        1 samples, Peak.   777 us (1.0x), Avg.   777 us, Total. 777.3 us (0.0%)
+[Performance] Application.Shutdown.MenuCleanupClass                                                                      :        1 samples, Peak.   141 us (1.0x), Avg.   141 us, Total. 141.5 us (0.0%)
+[Performance] Application.Shutdown.ADBSaveStateBeforeShutdown                                                            :        1 samples, Peak.  8.20 us (1.0x), Avg.  8.20 us, Total. 8.200 us (0.0%)
+[Performance] Application.Shutdown.RemoteShutdown                                                                        :        1 samples, Peak.  1000 ns (1.0x), Avg.  1000 ns, Total. 1000.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupVCProvider                                                                     :        1 samples, Peak.  16.9 us (1.0x), Avg.  16.9 us, Total. 16.90 us (0.0%)
+[Performance] Application.Shutdown.InputShutdown                                                                         :        1 samples, Peak.   600 ns (1.0x), Avg.   600 ns, Total. 600.0 ns (0.0%)
+[Performance] Application.Shutdown.GizmoManagerDestroy                                                                   :        1 samples, Peak.   745 us (1.0x), Avg.   745 us, Total. 744.8 us (0.0%)
+[Performance] Application.Shutdown.ProfilerSession                                                                       :        1 samples, Peak.   114 us (1.0x), Avg.   114 us, Total. 113.7 us (0.0%)
+[Performance] Application.Shutdown.ReleaseGfxWindowOnAllGUIViews                                                         :        1 samples, Peak.   710 us (1.0x), Avg.   710 us, Total. 710.1 us (0.0%)
+[Performance] Application.Shutdown.CleanupEngine                                                                         :        1 samples, Peak.   111 ms (1.0x), Avg.   111 ms, Total. 110.5 ms (0.9%)
+[Performance] Application.Shutdown.CleanupAssetDatabase                                                                  :        1 samples, Peak.  4.50 ms (1.0x), Avg.  4.50 ms, Total. 4.504 ms (0.0%)
+[Performance] Application.Shutdown.ScriptCompilationCleanUp                                                              :        1 samples, Peak.  14.8 us (1.0x), Avg.  14.8 us, Total. 14.80 us (0.0%)
+[Performance] Application.Shutdown.DestroyJobSystem                                                                      :        1 samples, Peak.  59.6 us (1.0x), Avg.  59.6 us, Total. 59.60 us (0.0%)
+[Performance] Application.Shutdown.CleanupPersistentManager                                                              :        1 samples, Peak.   592 us (1.0x), Avg.   592 us, Total. 591.8 us (0.0%)
+[Performance] Application.Shutdown.CleanupAsyncReadManager                                                               :        1 samples, Peak.   158 us (1.0x), Avg.   158 us, Total. 158.5 us (0.0%)
+[Performance] Application.Shutdown.CleanupProgressBar                                                                    :        1 samples, Peak.  2.20 us (1.0x), Avg.  2.20 us, Total. 2.200 us (0.0%)
+[Performance] Application.Shutdown.CleanupMono                                                                           :        1 samples, Peak.  57.9 ms (1.0x), Avg.  57.9 ms, Total. 57.87 ms (0.5%)
+[Performance] Application.Shutdown.CleanupStdConverters                                                                  :        1 samples, Peak.  7.20 us (1.0x), Avg.  7.20 us, Total. 7.200 us (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportModuleNativeDlls                                              :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportNativeLibraries                                               :        1 samples, Peak. 0.0 (-nan(ind)x), Avg. 0.0, Total. 0.0 (0.0%)
+[Performance] Application.Shutdown.CleanupAutoDocumentation                                                              :        1 samples, Peak.   274 us (1.0x), Avg.   274 us, Total. 273.7 us (0.0%)
+[Performance] Application.Shutdown.ShaderNameManagerDestroy                                                              :        1 samples, Peak.  34.6 us (1.0x), Avg.  34.6 us, Total. 34.60 us (0.0%)
+[Performance] Application.Shutdown.CleanupCacheServer                                                                    :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] Application.Shutdown.Virtualization_Shutdown                                                               :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.DevConnections                                                                        :        1 samples, Peak.   145 us (1.0x), Avg.   145 us, Total. 145.4 us (0.0%)
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

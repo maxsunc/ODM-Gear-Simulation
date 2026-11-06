@@ -14,7 +14,55 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: approved Titan identity publication checkpoint
+## Current: local eye-hurt pose and re-grab tuning checkpoint (not pushed)
+
+User requested a LOCAL commit of current work, no new push. Include the eye-pose
+revision/palm contact, reviewed art helper/evidence/docs, and user's post-QTE escape
+re-grab grace1->4seconds in TitanCombatTarget.TryEscapeGrab. Stage ONLY that
+one-line logic change from the target file, leaving user formatting-only edits out.
+Unrelated prefab/scene/audio/B-series/IDE/Plastic/cache work remains uncommitted.
+Use Git log for checkpoint SHA. Eye-pose validation below predates the later4s
+user tuning; no fresh full-suite or QTE timing certification is implied.
+
+Follow-up: user wanted the actual palms to touch the eyes rather than float in
+front. Small runtime target-only change: wrist depth1.30->1.18model units; height,
+spacing, elbow pole, timing/recovery unchanged. Current elbow fold~90.11deg (prior
+floating-palm draft86.25deg archived under EyeCover/PreviousFloatingPalms).
+Refreshed native24-config review: torso overlap0, arm step~7.0015deg/120Hz, recovery
+residual0; same2 unchanged eye cases passed. No new tests/scene edits or push.
+
+Prior face identity checkpoint COMMITTED/PUSHED fa9c161c04039d1c1a1e2e2206a0254c38150345,
+remote verified on titan-combat-updates. Unrelated user prefab/scene/audio/IDE/Plastic/
+B-series/cache edits preserved. New request: more natural bent arms covering hurt eyes.
+
+Changed ONLY runtime eye-pose ownership in Prototype/ModularTitanBody.cs (plus art
+review helper/evidence/docs): old unscaled independent aims become actual two-bone
+reach with scaled wrist targets, elbows out/forward, upright palms. Native3x old
+elbowfold~4.1deg -> initially86.25deg, now90.11deg with palm contact. Same head recoil and staggered final palm coverage;
+elbows begin lifting during recoil. Original12s gameplay stun/5s lab default,
+HP/damage, AI, attack cancellation, collider/joints/rig/clips/sounds unchanged.
+Per-bone world rotation history limit840deg/s, sampled~7.0015deg/120Hz (<8); recovery
+to idle bounded and constant-channel-safe. Selectively remove prior local overlay
+in LATEUPDATE then reapply, never restore base during Update gameplay queries.
+Initial Update-restoration draft failed existing fast-cover assertion (4.7m idle
+hand distance); fixed without changing tests/timing thresholds. Cached wrist rest
+poses, no new root/position/scale writer. Skip severed/dead arms; leg injury retains
+later exclusive ownership. Zero/invalid delta leaves presentation unchanged.
+
+Owned native PreviewRenderUtility (worker-only helper, no Assets/Tests edits):
+before1/3x; final1/3/5/10x, front/40deg, all3faces. Settled forearm/palm-vs-torso
+native overlap0 for24 sampled configurations, idle residual0 after constant-channel
+recovery. Not every triangle/transitional/scenery collision or comprehensive native
+physics/corpse/hold-safety certification. Existing eye checks2passed/0failed:
+EyeHitSnapsHeadThenCoversEyesQuickly; EyeStunRecoversAndOnlySurvivingHandsPose.
+Latest validation state FILTERED; no new full-suite/current-map claim/new test code.
+133 current protected paths unchanged; source matches owned compiled worker.
+Evidence ArtSource/Titan/EyeCover; tools/capture_titan_eye_pose.py;
+docs/titan-eye-hurt-pose.md. No live Editor/Blender automation or saved scene changes.
+Eye work included in this approved local checkpoint; not pushed. Fresh Play feel
+review remains subjective. Earlier uncommitted statuses in evidence are capture-time history.
+
+## Previous: approved Titan identity publication checkpoint
 
 User approved these appearances and requested commit + push on titan-combat-updates.
 This checkpoint includes reviewed identity art, runtime selection, owned authoring/

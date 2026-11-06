@@ -249,7 +249,7 @@ public class TitanCombatTarget : MonoBehaviour
     internal bool TryEscapeGrab(TitanGrabAttack owner)
     {
         if(IsDead || !IsHeldBy(owner) || !owner.BeginEscapeRecovery(this))return false;
-        escapeJumpPending=true;escapeGrabGrace=1;escapeGraceFrame=Time.frameCount;
+        escapeJumpPending=true;escapeGrabGrace=4;escapeGraceFrame=Time.frameCount;
         ReleaseInternal("Quick-time escape");return true;
     }
     void ReleaseInternal(string reason)

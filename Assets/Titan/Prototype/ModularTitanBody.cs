@@ -77,6 +77,14 @@ public class ModularTitanBody : MonoBehaviour
     float blindPoseWeight;
     float eyeReactionAge;
     int eyeReactionVariant;
+    Quaternion leftEyeHandRest, rightEyeHandRest;
+    struct EyeArmPose
+    {
+        public bool valid, applied;
+        public Quaternion upper, lower, hand, baseUpper, baseLower, baseHand;
+        public Quaternion appliedUpper, appliedLower, appliedHand;
+    }
+    EyeArmPose leftEyeArm, rightEyeArm;
     static readonly int Walking = Animator.StringToHash("IsWalking");
 
     // Neutral lifecycle notifications: only an opted-in scene manager subscribes.
@@ -97,6 +105,8 @@ public class ModularTitanBody : MonoBehaviour
         if (initialized) return;
         initialized = true;
         if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (leftHand != null) leftEyeHandRest = Quaternion.Inverse(transform.rotation) * leftHand.rotation;
+        if (rightHand != null) rightEyeHandRest = Quaternion.Inverse(transform.rotation) * rightHand.rotation;
         foreach (var limb in limbs) { limb.health = limbHealth; limb.severed = false; }
         EnsureRegionalHealth();
         foreach (var zone in hitZones) if (zone != null) zone.owner = this;
@@ -130,6 +140,30 @@ public class ModularTitanBody : MonoBehaviour
 
     void Update() { TickStatus(Time.deltaTime); }
 
+    // Animator may retain constant channels. In LateUpdate remove only channels
+    // still equal to OUR previous overlay, never a newly evaluated animation pose.
+    // Keep the presented arms intact through Update/gameplay queries.
+    void RestoreEyePose()
+    {
+        RestoreEyeArm(leftUpperArm, leftLowerArm, leftHand, TitanHitRegion.LeftArm, ref leftEyeArm);
+        RestoreEyeArm(rightUpperArm, rightLowerArm, rightHand, TitanHitRegion.RightArm, ref rightEyeArm);
+    }
+    bool CanPoseEyeArm(Transform upper, Transform lower, Transform hand, TitanHitRegion region)
+    {
+        return !IsDead && !IsSevered(TitanHitRegion.LeftLeg) && !IsSevered(TitanHitRegion.RightLeg) &&
+            !IsSevered(region) && upper != null && lower != null && hand != null &&
+            upper.IsChildOf(transform) && lower.IsChildOf(transform) && hand.IsChildOf(transform);
+    }
+    void RestoreEyeArm(Transform upper, Transform lower, Transform hand, TitanHitRegion region, ref EyeArmPose pose)
+    {
+        if (!CanPoseEyeArm(upper,lower,hand,region)) { pose.valid = pose.applied = false; return; }
+        if (!pose.applied) return;
+        if (Mathf.Abs(Quaternion.Dot(upper.localRotation,pose.appliedUpper)) > .999999f) upper.localRotation = pose.baseUpper;
+        if (Mathf.Abs(Quaternion.Dot(lower.localRotation,pose.appliedLower)) > .999999f) lower.localRotation = pose.baseLower;
+        if (Mathf.Abs(Quaternion.Dot(hand.localRotation,pose.appliedHand)) > .999999f) hand.localRotation = pose.baseHand;
+        pose.applied = false;
+    }
+
     public void TickStatus(float deltaTime)
     {
         if (IsDead || blindTimeRemaining <= 0 || deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
@@ -143,29 +177,67 @@ public class ModularTitanBody : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    void LateUpdate() { TickEyePose(Time.deltaTime); }
+
+    public void TickEyePose(float deltaTime)
     {
-        if (IsDead || head == null) return;
-        blindPoseWeight = Mathf.MoveTowards(blindPoseWeight, IsBlind ? 1 : 0, Time.deltaTime * (IsBlind ? 18 : 10));
-        if (blindPoseWeight <= 0) return;
-        // Fast recoil first, then staggered hand coverage. Repeated eye hits restart
-        // the flinch and alternate the leading hand without touching severed arms.
+        if (IsDead || head == null || deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
+        RestoreEyePose();
+        blindPoseWeight = Mathf.MoveTowards(blindPoseWeight, IsBlind ? 1 : 0, deltaTime * (IsBlind ? 18 : 10));
+        if (blindPoseWeight <= 0 && !leftEyeArm.valid && !rightEyeArm.valid) return;
+        // Keep the same initial recoil and stagger; change only the sustained arm fit.
         float flinch = IsBlind ? Mathf.Sin(Mathf.Min(1,eyeReactionAge / .055f) * Mathf.PI * .5f) * Mathf.Exp(-eyeReactionAge * 16) : 0;
         head.rotation = Quaternion.AngleAxis(-18 * flinch, transform.right) * head.rotation;
         float leftDelay = eyeReactionVariant % 2 == 0 ? .025f : .075f;
         float rightDelay = eyeReactionVariant % 2 == 0 ? .075f : .025f;
-        CoverEye(leftUpperArm, leftLowerArm, leftHand, TitanHitRegion.LeftArm, blindPoseWeight * Mathf.Clamp01((eyeReactionAge-leftDelay)/.10f));
-        CoverEye(rightUpperArm, rightLowerArm, rightHand, TitanHitRegion.RightArm, blindPoseWeight * Mathf.Clamp01((eyeReactionAge-rightDelay)/.10f));
+        CoverEye(leftUpperArm, leftLowerArm, leftHand, TitanHitRegion.LeftArm, blindPoseWeight * Mathf.Clamp01((eyeReactionAge-leftDelay)/.10f), deltaTime, leftEyeHandRest, ref leftEyeArm);
+        CoverEye(rightUpperArm, rightLowerArm, rightHand, TitanHitRegion.RightArm, blindPoseWeight * Mathf.Clamp01((eyeReactionAge-rightDelay)/.10f), deltaTime, rightEyeHandRest, ref rightEyeArm);
     }
 
-    void CoverEye(Transform upper, Transform lower, Transform hand, TitanHitRegion region, float weight)
+    void CoverEye(Transform upper, Transform lower, Transform hand, TitanHitRegion region, float weight, float dt, Quaternion restHand, ref EyeArmPose pose)
     {
-        if (upper == null || lower == null || hand == null || IsSevered(region)) return;
-        float side = Mathf.Sign(transform.InverseTransformPoint(upper.position).x);
-        Vector3 eye = head.position + transform.up * 0.65f + transform.forward * 0.77f + transform.right * side * 0.34f;
-        Vector3 elbow = head.position - transform.up * 0.65f + transform.right * side * 1.7f + transform.forward * 0.55f;
-        Aim(upper, lower, elbow, weight);
-        Aim(lower, hand, eye, weight);
+        if (!CanPoseEyeArm(upper,lower,hand,region)) { pose.valid = pose.applied = false; return; }
+        Quaternion baseUpper = upper.rotation, baseLower = lower.rotation, baseHand = hand.rotation;
+        pose.baseUpper = upper.localRotation; pose.baseLower = lower.localRotation; pose.baseHand = hand.localRotation;
+        if (!pose.valid) { pose.upper = baseUpper; pose.lower = baseLower; pose.hand = baseHand; }
+        Quaternion goalUpper = baseUpper, goalLower = baseLower, goalHand = baseHand;
+        // Start lifting the elbows during recoil; stagger the final palm cover,
+        // rather than keeping the trailing arm down until its hand-cover delay.
+        float armWeight = Mathf.Max(weight,blindPoseWeight * .5f);
+        if (armWeight > 0)
+        {
+            float side = Mathf.Sign(transform.InverseTransformPoint(upper.position).x);
+            // World-scaled wrist target, not the old unscaled point inside the face.
+            // Upright mitten center sits above the wrist; bring its rear palm
+            // against the eye surface instead of leaving a visible forward gap.
+            Vector3 wrist = head.position + transform.TransformVector(new Vector3(side * .58f, .04f, 1.18f));
+            float first = Vector3.Distance(upper.position,lower.position), second = Vector3.Distance(lower.position,hand.position);
+            if (first < .0001f || second < .0001f) return;
+            Vector3 direction = wrist - upper.position;
+            float distance = Mathf.Clamp(direction.magnitude, Mathf.Abs(first-second) + (first+second)*.01f, (first+second)*.94f);
+            direction.Normalize(); wrist = upper.position + direction * distance;
+            Vector3 pole = transform.TransformVector(new Vector3(side * 2.5f, -.65f, 1.8f));
+            Vector3 bend = Vector3.ProjectOnPlane(pole,direction).normalized;
+            if (bend.sqrMagnitude < .0001f) bend = Vector3.ProjectOnPlane(transform.forward,direction).normalized;
+            float along = (first*first - second*second + distance*distance) / (2*distance);
+            Vector3 elbow = upper.position + direction*along + bend*Mathf.Sqrt(Mathf.Max(0,first*first-along*along));
+            // Exact two-bone reach keeps elbows bent OUT and FORWARD of the chest.
+            Aim(upper,lower,elbow,1); Aim(lower,hand,wrist,1);
+            goalUpper = Quaternion.Slerp(baseUpper,upper.rotation,armWeight);
+            goalLower = Quaternion.Slerp(baseLower,lower.rotation,armWeight);
+            goalHand = Quaternion.Slerp(baseHand,Quaternion.AngleAxis(side*90,transform.forward)*transform.rotation*restHand,weight);
+        }
+        // Bound each WORLD rotation from the last presented pose, including recovery:
+        // 7 degrees per120Hz sample, rather than an elbow/mitten snap through the torso.
+        float step = 840 * dt;
+        upper.rotation = Quaternion.RotateTowards(pose.upper,goalUpper,step);
+        lower.rotation = Quaternion.RotateTowards(pose.lower,goalLower,step);
+        hand.rotation = Quaternion.RotateTowards(pose.hand,goalHand,step);
+        pose.upper = upper.rotation; pose.lower = lower.rotation; pose.hand = hand.rotation;
+        pose.appliedUpper = upper.localRotation; pose.appliedLower = lower.localRotation; pose.appliedHand = hand.localRotation;
+        pose.applied = true;
+        pose.valid = armWeight > 0 || Quaternion.Angle(pose.upper,baseUpper) > .01f ||
+            Quaternion.Angle(pose.lower,baseLower) > .01f || Quaternion.Angle(pose.hand,baseHand) > .01f;
     }
 
     static void Aim(Transform bone, Transform child, Vector3 target, float weight)

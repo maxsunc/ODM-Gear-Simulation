@@ -1,0 +1,38 @@
+{
+  "feature": "Scale-aware bent-arm eye-hurt pose",
+  "unity": "2021.3.25f1 / URP12.1.11",
+  "runtimeChanged": "Assets/Titan/Prototype/ModularTitanBody.cs",
+  "beforeSource": "fa9c161c:Assets/Titan/Prototype/ModularTitanBody.cs",
+  "nativeArtReview": {
+    "tool": "tools/capture_titan_eye_pose.py",
+    "worker": "marker-owned ODM-TitanValidation-fh_v2o9d; native PreviewRenderUtility, not live Editor",
+    "beforeScales": [1, 3],
+    "afterScales": [1, 3, 5, 10],
+    "yawDegrees": [0, 40],
+    "faces": ["Original", "BaldBeard", "BlondeSmile"],
+    "afterConfigurations": 24,
+    "old3xElbowFoldDegrees": 4.097,
+    "newElbowFoldDegrees": 86.251,
+    "maxFinalPresentedArmStepDegreesPer120Hz": 7.001467,
+    "armStepLimitDegreesPer120Hz": 8,
+    "old3xSettledForearmPalmTorsoOverlapModelUnits": 0.041331,
+    "finalSettledForearmPalmTorsoOverlapModelUnits": 0,
+    "constantAnimatorChannelRecoveryResidualDegrees": 0,
+    "scope": "Real skinned idle poses, original status/eye pose methods, native settled forearm/hand-vs-Hips/Spine/Chest collider queries. Not every mesh triangle, shoulder seam, transient/scenery contact or full gameplay/native corpse certification. Before initial full-weight placement is not a comparable runtime entry-speed sample."
+  },
+  "existingPlayModeDiagnostics": {
+    "filter": "EyeHitSnapsHeadThenCoversEyesQuickly;EyeStunRecoversAndOnlySurvivingHandsPose",
+    "passed": 2,
+    "failed": 0,
+    "results": "final-eye-diagnostics.xml",
+    "newOrChangedTestCode": false,
+    "fullSuite": false,
+    "failedDraftsRetained": ["first-eye-diagnostic-failed.xml", "second-eye-diagnostic-failed.xml"],
+    "draftCorrection": "Do not unapply presentation in Update where gameplay/coroutines see base idle. Selectively restore only unchanged overlay channels and reapply together in LateUpdate. No assertions or thresholds changed."
+  },
+  "protectedCurrentHashesUnchanged": 133,
+  "unchanged": "Original rig/art/faces/clip assets, saved prefab/scene/audio tuning, collider/joint settings, HP/damage/stun clock/AI/cancellation/sounds. No new root, position, scale or competing bone owner.",
+  "limits": "No new full-suite/map/crowd/device/WebGL/comprehensive corpse or carry-penetration claim. New pose appeal remains user Play review.",
+  "committed": false,
+  "pushed": false
+}

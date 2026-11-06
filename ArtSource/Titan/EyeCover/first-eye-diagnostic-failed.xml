@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 21:15:02Z" end-time="2026-11-06 21:15:02Z" duration="0.7315257">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="458" result="Failed" site="Child" start-time="2026-11-06 21:15:02Z" end-time="2026-11-06 21:15:02Z" duration="0.731526" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1496" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="458" result="Failed" site="Child" start-time="2026-11-06 21:15:02Z" end-time="2026-11-06 21:15:02Z" duration="0.722758" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14040" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1218" name="TitanMotionStylePlayModeTests" fullname="TitanMotionStylePlayModeTests" classname="TitanMotionStylePlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-11-06 21:15:02Z" end-time="2026-11-06 21:15:02Z" duration="0.718966" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1225" name="EyeHitSnapsHeadThenCoversEyesQuickly" fullname="TitanMotionStylePlayModeTests.EyeHitSnapsHeadThenCoversEyesQuickly" methodname="EyeHitSnapsHeadThenCoversEyesQuickly" classname="TitanMotionStylePlayModeTests" runstate="Runnable" seed="156733466" result="Failed" start-time="2026-11-06 21:15:02Z" end-time="2026-11-06 21:15:02Z" duration="0.710929" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: less than 3.5f
+  But was:  4.71015024f
+]]></message>
+            <stack-trace><![CDATA[at TitanMotionStylePlayModeTests+<EyeHitSnapsHeadThenCoversEyesQuickly>d__14.MoveNext () [0x000c3] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanMotionStylePlayModeTests.cs:193
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
