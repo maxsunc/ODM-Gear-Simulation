@@ -29,6 +29,7 @@ public sealed class TitanRuntimeActor : MonoBehaviour
             // Add the agent while INACTIVE so it never briefly binds to Humanoid.
             gameObject.SetActive(false);
             if(owner.useRegionalHealth)body.useRegionalHealth=true;
+            TitanFaceAppearance.Install(body);
             if(GetComponent<TitanAudioEmitter>()==null)gameObject.AddComponent<TitanAudioEmitter>();
             Agent=gameObject.AddComponent<NavMeshAgent>();Agent.enabled=false;
             profile.ConfigureAgent(Agent,registeredScale);Agent.acceleration=26;Agent.angularSpeed=330;Agent.baseOffset=0;

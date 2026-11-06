@@ -14,7 +14,75 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Publish checkpoint requested
+## Current: approved Titan identity publication checkpoint
+
+User approved these appearances and requested commit + push on titan-combat-updates.
+This checkpoint includes reviewed identity art, runtime selection, owned authoring/
+publication tools and evidence/docs. Exclude unrelated prefab/scene/audio-tuning/
+IDE/Plastic/cache edits. Earlier uncommitted/not-pushed notes below are history;
+use Git log and the remote branch for actual publication status.
+
+User clarified: bald Titan with beard + blonde smiling Titan, using supplied
+Downloads/titansFromAnime.webp (copy under ArtSource/Titan/FaceVariants/Reference).
+DONE: removed old hair, exposed rounded bald scalp; gray moustache/brows/side beard/
+pointed chin beard; separate blonde cap/fringe/side locks, squint and upturned toothy
+smile. Same22 bone matrices/Head-Jaw binds, original Animator/controller/clips,
+15skins/17RB/16joints/14hit triggers/HP/AI/nav/combat. No extra renderer/bone/physics.
+Original choice unchanged; new choices replace oldsketches. LegacyBroad/Gaunt asset
+keys retained for GUID stability, new catalognames Bald gray beard/Blonde smiling.
+
+Two NEW face-only albedo atlases recolor original hair UV islands; remaining pixels
+unchanged.2 shared new URPLit face materials clone original, normal/metal maps kept.
+FaceAppearance captures/restores original material arrays as well as meshes;
+assigns selected identity shared material to each imported slot only once. New
+closed beard/hair topology means slot counts differ (bald8/5, blonde9/3); no old
+same-topology/same-slot claim applies. Original source assets/materials untouched.
+Native Mesh.CopySerialized draft caused corrupt buffers after topology change;
+FIXED via CreateAsset while asserting sameGUID. Bad draft never published.
+
+Owned Blender4.5 MCP GUI PID18816 / port9877 / ODM-TitanFaces-48n0z869; user's9876
+not edited/opened/saved. Native Unity2021 rest and28degree jaw-only previews show
+original/bald/blonde left-right; real installer exercised, exact binds checked;
+no tests added/changed or fresh suite/map/crowd/WebGL/physicalbounds certification.
+Jaw-only preview is not complete feeding pose; longbeard can be body-occluded on
+jawrotation.105 protected current hashes + original Reference.blend unchanged.
+Reviewed sources/art/logs/report under ArtSource/Titan/FaceVariants; prior drafts
+backed up Library/TitanFaceIdentityBackup. Main only variant folder/catalog updated
+with GUID/concurrent edit guards. See docs/titan-face-variants.md. User approved
+these identities for this publication checkpoint; no additional tests or art changes.
+
+## Superseded: initial two face shape sketches (history only)
+
+Previous requested push COMPLETED/remote verified9cb2396e on titan-combat-updates,
+including earlier local commits. Mixed palette staged only new grab fields; user
+B-series/single-scream/volume/scene/prefab/IDE/Plastic work preserved uncommitted.
+
+New request: two different Titan faces via connected Blender MCP, same animations/
+mechanics. Implemented Broad scowl/shorter side hair + Gaunt narrow/crooked grin/
+swept fringe alongside Original. Actual Blender MCP addon used: live9876 inspected
+READ-ONLY(defaultCube/Camera/Light, emptyfilepath, dirtyfalse), separate OWNED GUI
+Blender4.5 process56804 / port9877 / workspace ODM-TitanFaces-f99hu2y0 for all edits.
+Only Head/Jaw vertices copied/sculpted;22 exact rest bones, UVs/groups/topology,
+zero boundary/nonmanifold edges, sameHead/Jaw weights. Packed editable studio /
+exports / Blender+nativeUnity lineups / import logs under ArtSource/Titan/FaceVariants.
+New assets Assets/Art/Titans/FaceVariants and Resources/TitanFacePalette.asset;
+base FBX/meshes/atlas/rig/controller/clips/prefab/scenes unchanged.
+
+New TitanFaceAppearance and TitanFacePalette in Prototype; one Install call in
+RuntimeActor.Initialize and oldShiganshina.Start. One-time equal privateRNG choice
+Original/Broad/Gaunt, idempotent per enemy; only existing Head/Jaw sharedMesh swaps,
+no new Animator/material/body/physics/collider/hitbox/HP/AI/nav/speed/size/grab/QTE/
+root writer. Native PreviewRenderUtility uses actual installer then explicit0/1/2:
+15skins/17RB/16joints each, original/broad/gaunt left-to-right. Native binding checks
+require exact original single-bone Head/Jaw matrices and9/3 atlas slots. Head
+import vertices32512base/32490broad/32536gaunt (normal split), Jaw2430 each.
+105 protected current hashes unchanged. Original user Blender/source stays intact.
+No new/changed test code, no full-suite/current-map/comprehensive combat/crowd/
+WebGL/physics certification. Future runner copies new assets/resources/editor.
+See docs/titan-face-variants.md; marker-only new author/import/publish helpers.
+Face work NOT committed/pushed; user fresh Play should see random appearances.
+
+## Previous: publish checkpoint requested
 
 User approved committing/pushing the recent held-grip/back-of-sword revision,
 confirmed-grab sound,9.6 walk/run threshold and stationary Search look. Publish

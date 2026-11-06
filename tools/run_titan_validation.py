@@ -35,7 +35,7 @@ else:
 
 for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Assets/Tests/TitanPrototype',
                  'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player',
-                 'Assets/Art/Effects', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio']:
+                 'Assets/Art/Effects', 'Assets/Art/Titans/FaceVariants', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
 # Real user-supplied finisher/NPC clips and their small Resources reference palettes.
 for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
@@ -45,6 +45,7 @@ for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
                  'Assets/Resources/TitanStompDust.mat','Assets/Resources/TitanStompDust.mat.meta',
                  'Assets/Resources/TitanCorpseSteam.mat','Assets/Resources/TitanCorpseSteam.mat.meta',
                  'Assets/Resources/TitanCorpseFadeVariant.mat','Assets/Resources/TitanCorpseFadeVariant.mat.meta',
+                 'Assets/Resources/TitanFacePalette.asset','Assets/Resources/TitanFacePalette.asset.meta',
                  'Assets/Resources/TitanStompChunks.mat','Assets/Resources/TitanStompChunks.mat.meta',
                  'Assets/Resources/PlayerImpactPalette.asset','Assets/Resources/PlayerImpactPalette.asset.meta',
                  'Assets/Resources/PlayerDeathBlood.mat','Assets/Resources/PlayerDeathBlood.mat.meta',
@@ -57,7 +58,7 @@ for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
 shutil.copytree(root / 'Assets/Titan/Integration', project / 'Assets/Titan/Integration', dirs_exist_ok=True)
 # Compile the scoped bake-size UI as well; it never autoruns or bakes in tests.
 (project / 'Assets/Editor').mkdir(exist_ok=True)
-for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'GameAudioMixerBuilder', 'ScoutPlayerBuilder']:
+for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'GameAudioMixerBuilder', 'ScoutPlayerBuilder', 'TitanFaceVariantBuilder']:
     for suffix in ['', '.meta']:
         relative='Assets/Editor/'+name+'.cs'+suffix
         shutil.copy2(root / relative, project / relative)

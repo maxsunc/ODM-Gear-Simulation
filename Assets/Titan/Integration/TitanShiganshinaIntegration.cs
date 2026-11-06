@@ -18,6 +18,7 @@ public class TitanShiganshinaIntegration : MonoBehaviour
         foreach(var titan in titans)
         {
             if(titan==null) continue;
+            TitanFaceAppearance.Install(titan);
             var agent=titan.gameObject.AddComponent<NavMeshAgent>();agent.enabled=false;
             agent.agentTypeID=navigation.agentTypeID;agent.radius=navigation.agentRadius;agent.height=navigation.agentHeight;
             agent.baseOffset=0;agent.acceleration=26;agent.angularSpeed=330;
