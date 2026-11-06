@@ -1,0 +1,328 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "previousAcceptedCommit": "091fe640 already committed locally, no push",
+  "feature": {
+    "clip": "Held.anim same GUID/state/duration1.2s, seamless actual skinned struggle loop",
+    "silhouette": "Hunched/crunched spine+chest, raised tightly folded braced forearms/hands, bowed recoiling/turning/shuddering head, alternating bent knees/ankles. Waist stays pinned.",
+    "notPhysicalSquash": "No bone scale/length or local-position change, root motion, new grip/regrip/catch behavior, collider/joint/force/velocity or camera/motor ownership changes.",
+    "eligibility": "Actual living confirmed target lease owned by TitanGrabAttack AND existing motor suspension. No windup/proximity-only loop. Pending safe release freezes held visual without restoring controls through blockers.",
+    "input": "Restrained/dead flush old hook IK only; normal unrestrained attack/flight IK unchanged. Fresh F/weapon permission/QTE quarantine unchanged. Disable/history reset clears visual receipt/aim weights.",
+    "unchanged": [
+      "10HP/s confirmed hold damage",
+      "3s QTE and normal escape/blocked-exit/grab-only grace",
+      "Current native current-palm catch/grip/yaw/roll/mouth/CCT",
+      "Player death/3s player-only respawn/no regeneration",
+      "Original all other Scout assets/Run1.16666663/controller/prefab/FBX/imports/textures/cape",
+      "Protected user Titan/scene/audio palettes/nav/spawn/turn/speed settings"
+    ]
+  },
+  "scopedBuild": {
+    "worker": "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+    "started": 1793977771.4574006,
+    "publishedOnly": "Assets/Art/Player/Scout/Animations/Held.anim",
+    "before": "9e36f5a3cb353cc39de01620a66c7e0cf7825142936de793489cac3238b2483a",
+    "after": "bcf86915d4836d45160c4c6fcb1effc695c6792c610b2a301666b35e29fea84e",
+    "sameGuid": true,
+    "protectedHashCount": 105,
+    "noScenePrefabControllerOtherClipOrImportPublication": true
+  },
+  "initialHeldClipSha256": "d20b2ea1467a1df2e696c94cbf37d7030109c7c3224c3d15a6e56802dbe6e912",
+  "defaultBefore": {
+    "id": "2",
+    "testcasecount": "438",
+    "result": "Failed(Child)",
+    "total": "438",
+    "passed": "429",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 14:34:24Z",
+    "end-time": "2026-11-06 14:35:01Z",
+    "duration": "37.2969282"
+  },
+  "defaultFirst": {
+    "id": "2",
+    "testcasecount": "458",
+    "result": "Failed(Child)",
+    "total": "458",
+    "passed": "449",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 15:09:57Z",
+    "end-time": "2026-11-06 15:10:41Z",
+    "duration": "44.1347421"
+  },
+  "defaultFinal": {
+    "id": "2",
+    "testcasecount": "458",
+    "result": "Failed(Child)",
+    "total": "458",
+    "passed": "449",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 15:13:15Z",
+    "end-time": "2026-11-06 15:13:59Z",
+    "duration": "43.8784481"
+  },
+  "addedDefaultCases": 20,
+  "sameBaselineFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.349999994f\n"
+    },
+    {
+      "name": "HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  3.89183164f\n"
+    }
+  ],
+  "animatedIntegration": {
+    "cases": 12,
+    "scalesAndHands": "Both3/5/7/10 timeout+bite+current moving corpse; both3/10 QTE success+same cumulative drain",
+    "outputs": {
+      "AnimatedHeldFiveLeftKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=5 left=True qte=True escape=False arm120Hz=6.502976 carryMouthPenetration=0 unchangedEarlyReachPenetration=3.050441\nHELD_STRUGGLE_CORPSE scale=5 left=True peak=14.97663\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldFiveRightKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=5 left=False qte=True escape=False arm120Hz=6.581024 carryMouthPenetration=0 unchangedEarlyReachPenetration=3.083598\nHELD_STRUGGLE_CORPSE scale=5 left=False peak=14.97798\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldSevenLeftKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=7 left=True qte=True escape=False arm120Hz=6.503217 carryMouthPenetration=0 unchangedEarlyReachPenetration=4.270611\nHELD_STRUGGLE_CORPSE scale=7 left=True peak=14.97471\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldSevenRightKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=7 left=False qte=True escape=False arm120Hz=6.580786 carryMouthPenetration=0 unchangedEarlyReachPenetration=4.317036\nHELD_STRUGGLE_CORPSE scale=7 left=False peak=14.97585\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldTenLeftEscapesWithSameHealthAndQte": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=10 left=True qte=True escape=True arm120Hz=6.502976 carryMouthPenetration=0 unchangedEarlyReachPenetration=6.100883\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldTenLeftKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=10 left=True qte=True escape=False arm120Hz=6.502976 carryMouthPenetration=0 unchangedEarlyReachPenetration=6.100883\nHELD_STRUGGLE_CORPSE scale=10 left=True peak=14.97222\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldTenRightEscapesWithSameHealthAndQte": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=10 left=False qte=True escape=True arm120Hz=6.581024 carryMouthPenetration=0 unchangedEarlyReachPenetration=6.167196\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldTenRightKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=10 left=False qte=True escape=False arm120Hz=6.581024 carryMouthPenetration=0 unchangedEarlyReachPenetration=6.167196\nHELD_STRUGGLE_CORPSE scale=10 left=False peak=14.97421\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldThreeLeftEscapesWithSameHealthAndQte": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=3 left=True qte=True escape=True arm120Hz=6.503579 carryMouthPenetration=0 unchangedEarlyReachPenetration=1.973621\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldThreeLeftKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=3 left=True qte=True escape=False arm120Hz=6.503579 carryMouthPenetration=0 unchangedEarlyReachPenetration=1.973621\nHELD_STRUGGLE_CORPSE scale=3 left=True peak=14.98003\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldThreeRightEscapesWithSameHealthAndQte": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=3 left=False qte=True escape=True arm120Hz=6.580905 carryMouthPenetration=0 unchangedEarlyReachPenetration=1.995776\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n",
+      "AnimatedHeldThreeRightKeepsGripArmMouthAndCorpseBounds": "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nSCOUT_REAL_MOUTH scale=3 left=False qte=True escape=False arm120Hz=6.580905 carryMouthPenetration=0 unchangedEarlyReachPenetration=1.995776\nHELD_STRUGGLE_CORPSE scale=3 left=False peak=14.98177\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nThere are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\n"
+    },
+    "corpsePeaks1p5s": [
+      14.97663,
+      14.97798,
+      14.97471,
+      14.97585,
+      14.97222,
+      14.97421,
+      14.98003,
+      14.98177
+    ],
+    "maximumCorpseSpeed": 14.98177,
+    "boundsUnchanged": "Arm<8deg/120Hz, same grip<.003m, later carry/mouth penetration<.005m, corpse<40m/s. Early reach overlap still separately disclosed."
+  },
+  "nativeGraphics": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "2",
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 15:11:07Z",
+      "end-time": "2026-11-06 15:11:08Z",
+      "duration": "1.5605765"
+    },
+    "output": [
+      "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nAnimator does not have an AnimatorController\nHELD_STRUGGLE_NATIVE side=Left changedPixels=3390 hp=90.00041 sameGrip=true device=Intel(R) Iris(R) Xe Graphics\nCleanup Blit\n",
+      "There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene\nHELD_STRUGGLE_NATIVE side=Right changedPixels=5964 hp=90.00041 sameGrip=true device=Intel(R) Iris(R) Xe Graphics\nCleanup Blit\n"
+    ],
+    "method": "Actual3x palm CCD capture then8 original completed GameView ScreenCapture phases per side at paused world time; animation sample never moves gameplay root; native same-grip stays<.003m. Real original QTE/health HUD left visible. Two no-env default-case passes alone are not graphics proof.",
+    "loops": [
+      "Left_Struggle.gif",
+      "Right_Struggle.gif"
+    ],
+    "frameCountPerHand": 8,
+    "durationMsPerFrame": 150
+  },
+  "savedCurrentMap": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "8",
+      "result": "Failed(Child)",
+      "total": "8",
+      "passed": "7",
+      "failed": "1",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 15:11:59Z",
+      "end-time": "2026-11-06 15:12:32Z",
+      "duration": "33.2920275"
+    },
+    "sameConfigurationFailure": [
+      {
+        "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+        "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+      }
+    ],
+    "output": [
+      "Animator is not playing an AnimatorController\nNATIVE_FOREST_HELD_STRUGGLE samePlayer=26476 hp=95.93605 loopDuration=1.2 damagePerSecond=10 navigationTriangles=66651\n"
+    ],
+    "newTest": "Actual saved enabled driver/controller auto-loop and moving head during native Chase/CCD aerial capture and original10HP/s+3sQTE, same player/scene/nav, no parenting intoTitan, cancel stopsstruggle. Existing map respawn/decomposition continuepassing.",
+    "noBakeOrScenePublication": true
+  },
+  "audit": {
+    "protectedCurrentHashesUnchanged": {
+      "Assets/Art/Player/Scout/Animations.meta": "0e6aa465122349485a6bfaea93ad0a25fcdfa8a8e2d56f142041567b419dc8d9",
+      "Assets/Art/Player/Scout/Animations/AirCoast.anim": "e1028ccb9c9d76c6b1acc9169a3b6db361db292564a42db1615cb5bb9f41223f",
+      "Assets/Art/Player/Scout/Animations/AirCoast.anim.meta": "ecdc611e3e99249544651226f3f2c02adf1e9acd2bb5a9a749865acd726749de",
+      "Assets/Art/Player/Scout/Animations/AttachedBoth.anim": "64007e0abb6b431e8c54cd18297b345135d5dc30470dacbb23185ea4d5d3778c",
+      "Assets/Art/Player/Scout/Animations/AttachedBoth.anim.meta": "5c9fe1bd47f5f0a92cabdb03a7f13e53bb84b3ddab2eba44be7598c5f9ab6481",
+      "Assets/Art/Player/Scout/Animations/AttachedLeft.anim": "35de884670e21f6e9cb71d04e61a2577b8f4d2419f0f547b4066ab4046fddc1e",
+      "Assets/Art/Player/Scout/Animations/AttachedLeft.anim.meta": "a25e4f16a709957af4973681740c03f8f0a2d2003a7a7d38a50f8a11aa749972",
+      "Assets/Art/Player/Scout/Animations/AttachedRight.anim": "581efe16c52046c33db9b2d7da7e8c1172fd1212f33f36873df042892515624d",
+      "Assets/Art/Player/Scout/Animations/AttachedRight.anim.meta": "a0213b2904f57201bf3030eca44f68cef9cdec07285d65a5885c35e2ddec6000",
+      "Assets/Art/Player/Scout/Animations/AttackAir.anim": "e98416835bd2f82be0afca9b3e438991bd981da22e823edbc19880b0f8be59f3",
+      "Assets/Art/Player/Scout/Animations/AttackAir.anim.meta": "479d836436dd85617c74d521a5ed6843e526fbf7c7df3345125cfe90f7a2ca9b",
+      "Assets/Art/Player/Scout/Animations/AttackAir_Right.anim": "638fe2e864136df1e67c565dc81919d7a6ced854a20d3448efa676b09bdab5f3",
+      "Assets/Art/Player/Scout/Animations/AttackAir_Right.anim.meta": "477dc51ac600cfbc3c7328046dcd3c08dfe25f7eda62f3b6031d609f23410b30",
+      "Assets/Art/Player/Scout/Animations/AttackGround.anim": "7513e5e1816861985777a282528abc1a333ad1cd3a9e36cfecc8f21e9f1a2105",
+      "Assets/Art/Player/Scout/Animations/AttackGround.anim.meta": "497b9a9c9684b53f085ab93bcc38ee43edf3931d8a7c74cb5f14f832f5c6b1df",
+      "Assets/Art/Player/Scout/Animations/AttackGround_Right.anim": "4cc1c043f8c3844677270fed0cbb77c91444b97b8d801ac2edea890cadcaf59c",
+      "Assets/Art/Player/Scout/Animations/AttackGround_Right.anim.meta": "fce9d3d07d9ac543861f8fb73a061530ea9cb6776f2364cccb181f806b78c214",
+      "Assets/Art/Player/Scout/Animations/AttackHeld.anim": "71239df2b086b3138ed7102953018840a86fc0e20b5a8eb35a045be3c934ee0f",
+      "Assets/Art/Player/Scout/Animations/AttackHeld.anim.meta": "e9c7dc1edfb08fc6c42f283c532d184fed51e7818966553c72aa933949e0dd4a",
+      "Assets/Art/Player/Scout/Animations/AttackHeld_Right.anim": "9e40e7f42b344d3cfdbae1bcb737483e51165e84ef715b2e9dc04074b4013897",
+      "Assets/Art/Player/Scout/Animations/AttackHeld_Right.anim.meta": "d17b3e22b5443080d13f6a69126fda624b4c4695e98f17f194bfaa1f97474628",
+      "Assets/Art/Player/Scout/Animations/ChargeAir.anim": "dd6a6ce8b24247eb3329fc1e06d22207d7e0d7528ac5d321262b290c59f44cca",
+      "Assets/Art/Player/Scout/Animations/ChargeAir.anim.meta": "b7d2f4f3a306c10bd22ce318b0709a9cd75b83305ef11545033a8542463fca1d",
+      "Assets/Art/Player/Scout/Animations/ChargeAir_Right.anim": "f500ad9ce54d56f1d51ff748d00e716cc1475c0a9755344b4c7cb4a7ab79e8c3",
+      "Assets/Art/Player/Scout/Animations/ChargeAir_Right.anim.meta": "272af0bbe5a2f3dab1e7524e5647f274d4d038016789a15d0feafaf88bcca4c7",
+      "Assets/Art/Player/Scout/Animations/ChargeGround.anim": "7cd962586ea5870c8ee36adef33d156df8477bc73251df63953b10cf108ee685",
+      "Assets/Art/Player/Scout/Animations/ChargeGround.anim.meta": "e1e129e830f94cdbfdcba037e6ccfc8afee827c224cad09dd38f31de9acef726",
+      "Assets/Art/Player/Scout/Animations/ChargeGround_Right.anim": "27b1e046e5a06d6edf383d0ca37ea687a1b5705e0c0d0fff3c0cdab1676964e4",
+      "Assets/Art/Player/Scout/Animations/ChargeGround_Right.anim.meta": "23ad6c3d9091db6ded7df4ab7b60eb6c5435e7a408dcdf2faadf138d6a2a6ff4",
+      "Assets/Art/Player/Scout/Animations/ChargeHeld.anim": "238401fbb7ae19f31783449ee63dbc574fe9ecf15a66c99c8a2f8eb638a3c202",
+      "Assets/Art/Player/Scout/Animations/ChargeHeld.anim.meta": "760950b6a9c2acf67edb2241aa3b9d43150804015832a972d858d535430934a1",
+      "Assets/Art/Player/Scout/Animations/ChargeHeld_Right.anim": "ccaf598443f0057152dbe36bce06e115f16b485162520ae70f3d403a5723083a",
+      "Assets/Art/Player/Scout/Animations/ChargeHeld_Right.anim.meta": "ba39753e21213c55a497f187973cf262a357f989a2b754c2eb840328bee843f0",
+      "Assets/Art/Player/Scout/Animations/Dead.anim": "84ccb71eb6304896a5b8444067dd305d22ed81e173b9275e041a9c3d86ce828f",
+      "Assets/Art/Player/Scout/Animations/Dead.anim.meta": "5d7fc7565622ef3c3712b9ecb80a8e50283cae180c45e6287008d7469730c4ce",
+      "Assets/Art/Player/Scout/Animations/Fall.anim": "8e9a5a21a1e2c9354dc236f2059591ae529e0610574473d97f04d1b0c5fd2ff5",
+      "Assets/Art/Player/Scout/Animations/Fall.anim.meta": "c574fdfd54409465d8067f5d0ba537aced4f439515c33feef973f64bae9f1018",
+      "Assets/Art/Player/Scout/Animations/GasBoth.anim": "8b3e7b118f226912b49c65bb8eaf1fa57b3d6c1c45d55405b018fd912d275bc2",
+      "Assets/Art/Player/Scout/Animations/GasBoth.anim.meta": "29932b9bf3c9580ce9afc401ea2ded6ff68297fe38f81cd72ed4ab78c951750b",
+      "Assets/Art/Player/Scout/Animations/GasLeft.anim": "ed5b9813d5382185fddebd0745c8af67397c071f30bdfe7d4f74ab2f7513bc1d",
+      "Assets/Art/Player/Scout/Animations/GasLeft.anim.meta": "5bbfb93044a7d16b085b8c1f1237b6972d0691a3ff5f85a4b2a76474b8207f26",
+      "Assets/Art/Player/Scout/Animations/GasRight.anim": "37e8e1e382b6764964bd27631fc3bd46200aaff79bed725252827a8708971901",
+      "Assets/Art/Player/Scout/Animations/GasRight.anim.meta": "a1871290374ce83e59aacb84695af9b555d03e61d2c7ebc328ca6f2b586ad26a",
+      "Assets/Art/Player/Scout/Animations/Held.anim.meta": "7ccfef27bf77ab85e1bb22cd8b4e893a05b42a038fece4a9e187a7bb82c60230",
+      "Assets/Art/Player/Scout/Animations/Idle.anim": "c4d94a91e1f17400184b3cfd0d8d311668be9cf76e1c0475533152b48ff1c4d3",
+      "Assets/Art/Player/Scout/Animations/Idle.anim.meta": "f9eec002405186db5ce98e589667b67469f23c412da0e057e1c973258cb534d9",
+      "Assets/Art/Player/Scout/Animations/Land.anim": "f11d32c4230f05a6a7f9009707f94df355aaf2efa0b583e7ae1fe0aa7dec8116",
+      "Assets/Art/Player/Scout/Animations/Land.anim.meta": "09792a1506255b441218e9baf2a24c82f74c523eb0837f1b1f5099903f774d93",
+      "Assets/Art/Player/Scout/Animations/ReleaseBoth.anim": "08fb71e9311d6c670065c5935d678933789d342e27402f9bd9aa4be342fa5a56",
+      "Assets/Art/Player/Scout/Animations/ReleaseBoth.anim.meta": "801e2f1edb5ef312f3667649239d6e30d83926dfc3ab57925cd4986824934789",
+      "Assets/Art/Player/Scout/Animations/ReleaseFlip.anim": "3939f488cc95ec4d656933555f5ade2d30227be2c20c3d428dd63935cbaea02d",
+      "Assets/Art/Player/Scout/Animations/ReleaseFlip.anim.meta": "eea532621ba3d54313b7f60b35cafb442c30f5462cc4bb976768af574cf05474",
+      "Assets/Art/Player/Scout/Animations/ReleaseLeft.anim": "14b13904c0949b179eae618d00b76f772a156ed66e0e06ea1623afe92ff60dc5",
+      "Assets/Art/Player/Scout/Animations/ReleaseLeft.anim.meta": "f667f34741d50df89be985eb3587f22f6475d7fcbf9f3247a6dd6103dfefa370",
+      "Assets/Art/Player/Scout/Animations/ReleaseRight.anim": "c1b96520a1871a1404c79bf8a90421b63c1fe8482335a8e48d0524bb4a60f0f8",
+      "Assets/Art/Player/Scout/Animations/ReleaseRight.anim.meta": "a5222274227d2c15008a90a4e1831fb5d7ef6c66b7efddeaf49f4c98de15b656",
+      "Assets/Art/Player/Scout/Animations/Rise.anim": "50e42fea07b4fb7e4f91fa651ca3e7811ac357cca4b9342e1ee014d8e6e0194b",
+      "Assets/Art/Player/Scout/Animations/Rise.anim.meta": "f0ac147bc402f9d3499f99456283dc677e29a2535e9551f3a51e3f1d7d209e10",
+      "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+      "Assets/Art/Player/Scout/Animations/Run.anim.meta": "5aeb3c72d7f967e02870552394481561693ebf12ee394c7f73a07e35fd4207dc",
+      "Assets/Art/Player/Scout/Animations/ScoutPlayer.controller": "92526289308fe0b95fb17ac2af6211c760e782421714cfc75659333b9dcabff8",
+      "Assets/Art/Player/Scout/Animations/ScoutPlayer.controller.meta": "25ea66efe64b48ea90f0bb24d749d621c8dcf7ec2c7312e617291f1282500622",
+      "Assets/Art/Player/Scout/ScoutPlayer.fbx": "25f5d53047fa3440dfac154d17b7686fc53f28ec047eb5a58a79b08cda41d3ce",
+      "Assets/Art/Player/Scout/ScoutPlayer.fbx.meta": "d4816abc08b2bf06a5a02cf209e6e35460ea855cf24ba7ba9c421aaf3eca1bfc",
+      "Assets/Art/Player/Scout/Scout_PBR.mat": "2cecdb3210ab9992bd40aa8fd702148e6cffd9741320d73031cb517d31234427",
+      "Assets/Art/Player/Scout/Scout_PBR.mat.meta": "5e908d1b9f29ea951724e569988c05fba954fc3300253c4f979dce7f69cbea73",
+      "Assets/Art/Player/Scout/Textures.meta": "65c7ee0162307662a129d7bfd94040cb32e5cd7e55fbf8695d9090bde9ac899b",
+      "Assets/Art/Player/Scout/Textures/Scout_BaseColor.png": "88d6fd390cead33368ed71963b4315b969b5c0c17c86c371e41bf31e82700cae",
+      "Assets/Art/Player/Scout/Textures/Scout_BaseColor.png.meta": "2c0e1427dbd22141bc3321f3d10e95a227e2b7fdc3794d63c6af421c2b9b24f6",
+      "Assets/Art/Player/Scout/Textures/Scout_MetallicSmoothness.png": "576b0743f7caf0c23a48f45d8104fb1683263a034d7ab3f375d8c5c0ddf9311d",
+      "Assets/Art/Player/Scout/Textures/Scout_MetallicSmoothness.png.meta": "6ea8d2df0dbcb9656ab414f16d374305f80698f8f6a7ed2b671e4a485c278379",
+      "Assets/Art/Player/Scout/Textures/Scout_Normal.png": "6e25d4752df0bec6b7eedbc32effc9a7bea2299c06bb30845b1910adf4091223",
+      "Assets/Art/Player/Scout/Textures/Scout_Normal.png.meta": "e276706ada9d4e01666eaf111d4f01abf7a157acc70f9807f3364b31ff869a4d",
+      "Assets/Audio/boneCrush.wav": "dba7dba66869fa8c06221e22b1b1e000c193567f70673a3b6fc21d80ee3377aa",
+      "Assets/Audio/boneCrush.wav.meta": "15a20be1dee4d71d0da008a64bbdcebcd0e8a6ffc4ddf463563b7cc21d3a2e42",
+      "Assets/DamageDealer.cs": "70d14148039924a7f75a48fbec5252650bad7b71ac53d3c50216129bb3aa0ad0",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675",
+      "Assets/Player/Scout/ScoutCapeCloth.cs": "9f5945e8dd6f69e801984cd342d158781f5692d5355f939c77bc97b3effdd00b",
+      "Assets/Player/Scout/ScoutPlayerRagdoll.cs": "b7a57edbdc2f5e8812f4f75d4b051ff6a665b7c786076566508a1f9a6061a6df",
+      "Assets/PlayerHealth.cs": "94f11651932dfae5b3250d42204e204cc0df43fabeee20f8881da72e99549272",
+      "Assets/PlayerRespawn.cs": "4948861c464f14a9dd1dfa584b3083629bd84c2e9001b2a1ec19fea4ee071527",
+      "Assets/Prefabs/Player/ScoutVisual.prefab": "c0f40910770a1e847aefa6992411a3be57684460cbaac54299f169c00e176d86",
+      "Assets/Prefabs/Player/ScoutVisual.prefab.meta": "56a2ffd203e0beb66c0c9b5ecfdf2f84b13185bf2e2310c87de8204c268466b5",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "571644b48a8d9e83d9272d666968bbf2fa024e854f1cf7af61bfde8c9eadaa34",
+      "Assets/Resources/TitanAudioPalette.asset": "a781e26daf151158209bb86075dc53bee5aadc40dc3a666056a34200d28d92ae",
+      "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+      "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+      "Assets/Titan/Integration/TitanODMMotor.cs": "c6b3bef82dd8930be073547341889c4a0c60a6871fe375a58a3df310fd0ce5df",
+      "Assets/Titan/Integration/TitanODMSwordSweep.cs": "e6c45faf6efd4eac32dd873bef1e41eeac26bffe172fd6643d9349aaae0325d0",
+      "Assets/Titan/Prototype/TitanCombatTarget.cs": "e21cab757c6f94f6f9d83ed09fd8a54fadbeb615f138514abaf9c43df68a84d0",
+      "Assets/Titan/Prototype/TitanGrabAttack.cs": "22d0939e5ddc999f6bfce9a07b1562d61558cafc2b7fd2f6c4cb9959b76d46b0",
+      "Assets/Titan/Prototype/TitanGrabEscape.cs": "2b83c89d2ec2c78eae6f4aacfce610451cb6baf0784fd21e7db483eb54e5035e",
+      "Assets/Titan/Prototype/TitanInjuryPose.cs": "ade48f27b558b153614260996c611b50550422d615043dabde4551c0be1f69ba",
+      "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+      "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+      "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460"
+    },
+    "commonSourceFileCountPerWorker": 80,
+    "workers": [
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei"
+    ],
+    "currentRuntimeTestBuilderAndHeldBytesMatchBothWorkers": true,
+    "forestTestBytesMatch": true,
+    "noLiveEditorInputPlayStopSaveReloadSceneSwitchOrPhysicsAutomation": true,
+    "publishedOnlyHeldClipFromWorkerNoOtherClipPrefabControllerImporterOrScene": true
+  },
+  "notCertified": [
+    "Subjective restrained/pain/squeeze feel",
+    "Arbitrary world scenery/crowd clipping of visual limbs",
+    "Crowd/device/WebGL performance",
+    "Comprehensive long-duration10x corpse safety",
+    "Early reach takeover clearance"
+  ],
+  "git": "Selective local checkpoint, not pushed"
+}

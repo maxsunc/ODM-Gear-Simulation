@@ -57,7 +57,7 @@ for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',
 shutil.copytree(root / 'Assets/Titan/Integration', project / 'Assets/Titan/Integration', dirs_exist_ok=True)
 # Compile the scoped bake-size UI as well; it never autoruns or bakes in tests.
 (project / 'Assets/Editor').mkdir(exist_ok=True)
-for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'GameAudioMixerBuilder']:
+for name in ['TitanFreeRoamNavigationBuilder', 'TitanRandomSpawnerInstaller', 'GameAudioMixerBuilder', 'ScoutPlayerBuilder']:
     for suffix in ['', '.meta']:
         relative='Assets/Editor/'+name+'.cs'+suffix
         shutil.copy2(root / relative, project / relative)

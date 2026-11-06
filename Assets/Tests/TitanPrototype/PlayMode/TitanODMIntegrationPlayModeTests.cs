@@ -533,9 +533,9 @@ public class TitanODMIntegrationPlayModeTests
         Call(hp,"Die");hp.CancelInvoke();Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Null);
         StringAssert.Contains("intersects",Property<string>(corpsePresentation,"Error"));Assert.That(Property<Rigidbody[]>(corpsePresentation,"Bodies").Length,Is.Zero);yield return null;
     }
-    IEnumerator ScaledRealScoutBite(float scale,bool left,bool escapeWindow=false,bool escapeSuccess=false,float holdDrain=0)
+    IEnumerator ScaledRealScoutBite(float scale,bool left,bool escapeWindow=false,bool escapeSuccess=false,float holdDrain=0,bool animatedStruggle=false)
     {
-        ScoutBiteSetup();biteGrab.holdDamagePerSecond=holdDrain;var escape=escapeWindow?AddEscape():null;biteTitan.transform.localScale=Vector3.one*scale;
+        ScoutBiteSetup();var struggle=animatedStruggle?AnimatedHeldDriver():null;biteGrab.holdDamagePerSecond=holdDrain;var escape=escapeWindow?AddEscape():null;biteTitan.transform.localScale=Vector3.one*scale;
         cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*scale;cc.enabled=true;Call(motor,"ResetMotionHistory");
         biteTitan.animator.Update(0);Physics.SyncTransforms();
         var upper=left?biteTitan.leftUpperArm:biteTitan.rightUpperArm;var lower=left?biteTitan.leftLowerArm:biteTitan.rightLowerArm;var hand=left?biteTitan.leftHand:biteTitan.rightHand;
@@ -544,6 +544,7 @@ public class TitanODMIntegrationPlayModeTests
         var previous=bones.Select(b=>b.rotation).ToArray();float maximum=0,penetration=0,earlyPenetration=0,gripRadius=0;int steps=0;string worst="";bool gripRecorded=false;Vector3 localGrip=Vector3.zero;float expectedHealth=100;
         while(biteGrab.BiteContactCount==0 && biteGrab.IsBusy && steps++<(escapeWindow?700:500))
         {
+            if(animatedStruggle&&target.IsHeld&&!target.IsDead){Call(struggle,"Update");biteModel.GetComponent<Animator>().Update(1f/120);Call(struggle,"LateUpdate");Assert.That(Property<bool>(struggle,"IsStruggling"),Is.True);}
             BiteFrame(1f/120);
             if(escapeSuccess && target.IsHeldBy(biteGrab) && biteGrab.Elapsed>=1.5f){expectedHealth=100-holdDrain*(TitanGrabEscape.Window-escape.Remaining);WinEscape(escape);}
             if(target.IsHeldBy(biteGrab))
@@ -585,7 +586,77 @@ public class TitanODMIntegrationPlayModeTests
             Assert.That(biteGrab.BiteHitCount,Is.EqualTo(1),biteGrab.LastResult);
             Assert.That(Property<GameObject>(corpsePresentation,"Corpse"),Is.Not.Null,Property<string>(corpsePresentation,"Error"));
         }
-        Assert.That(maximum,Is.LessThan(8));Assert.That(penetration,Is.LessThan(.005f));yield return null;
+        Assert.That(maximum,Is.LessThan(8));Assert.That(penetration,Is.LessThan(.005f));
+        if(animatedStruggle&&!escapeSuccess)
+        {
+            float peak=0;for(int i=0;i<180;i++){scene.GetPhysicsScene().Simulate(1f/120);foreach(var rb in Property<Rigidbody[]>(corpsePresentation,"Bodies"))peak=Mathf.Max(peak,rb.velocity.magnitude);}
+            Assert.That(peak,Is.LessThan(40));Debug.Log("HELD_STRUGGLE_CORPSE scale="+scale+" left="+left+" peak="+peak);
+        }
+        yield return null;
+    }
+    MonoBehaviour AnimatedHeldDriver()
+    {
+        var pivot=new GameObject("Owned visual-only struggle pivot").transform;pivot.SetParent(player.transform,false);biteModel.SetParent(pivot,true);
+        var driver=Add("ScoutPlayerAnimation");driver.enabled=false;Set(driver,"animator",biteModel.GetComponent<Animator>());Set(driver,"flipPivot",pivot);Set(driver,"model",biteModel);return driver;
+    }
+    [UnityTest]public IEnumerator AnimatedHeldThreeLeftKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(3,true,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldThreeRightKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(3,false,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldFiveLeftKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(5,true,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldFiveRightKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(5,false,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldSevenLeftKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(7,true,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldSevenRightKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(7,false,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldTenLeftKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(10,true,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldTenRightKeepsGripArmMouthAndCorpseBounds(){yield return ScaledRealScoutBite(10,false,true,false,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldThreeLeftEscapesWithSameHealthAndQte(){yield return ScaledRealScoutBite(3,true,true,true,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldThreeRightEscapesWithSameHealthAndQte(){yield return ScaledRealScoutBite(3,false,true,true,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldTenLeftEscapesWithSameHealthAndQte(){yield return ScaledRealScoutBite(10,true,true,true,10,true);}
+    [UnityTest]public IEnumerator AnimatedHeldTenRightEscapesWithSameHealthAndQte(){yield return ScaledRealScoutBite(10,false,true,true,10,true);}
+    [UnityTest]public IEnumerator HeldStruggleRequiresConfirmedCaptureAndStopsForBlockedReleaseAndHistoryReset()
+    {
+        ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();var driver=AnimatedHeldDriver();Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);
+        Assert.That(biteGrab.TryBeginGrab(target,true),Is.True);BiteFrame(.4f);Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);Assert.That(target.Health,Is.EqualTo(100));BiteFrame(.44f);Assert.That(target.IsHeld,Is.True);
+        Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.True);Assert.That(biteModel.GetComponent<Animator>().speed,Is.EqualTo(1));BiteFrame(.5f);Assert.That(target.Health,Is.EqualTo(95).Within(.001f));
+        var wall=new GameObject("Held visual blocked exit");SceneManager.MoveGameObjectToScene(wall,scene);wall.transform.position=player.transform.position;wall.AddComponent<BoxCollider>().size=Vector3.one*20;Physics.SyncTransforms();biteGrab.Cancel("Visual test cancel");Assert.That(target.ReleasePending,Is.True);Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);Assert.That(biteModel.GetComponent<Animator>().speed,Is.Zero);float hpBefore=target.Health;BiteFrame(2);Assert.That(target.Health,Is.EqualTo(hpBefore));
+        Object.DestroyImmediate(wall);target.TickHold(0);Call(driver,"ResetMotionHistory");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);Call(driver,"Update");Assert.That(biteModel.GetComponent<Animator>().speed,Is.EqualTo(1));yield return null;
+    }
+    [UnityTest]public IEnumerator HeldStrugglePausesWithScaledTimeAndDeathOverridesIt()
+    {
+        ScoutBiteSetup();var driver=AnimatedHeldDriver();CaptureScout();Call(driver,"Update");var animator=biteModel.GetComponent<Animator>();animator.enabled=true;animator.Play("Held",0,.25f);animator.Update(0);Time.timeScale=0;yield return null;float at=animator.GetCurrentAnimatorStateInfo(0).normalizedTime,hpBefore=target.Health;
+        try{yield return new WaitForSecondsRealtime(.12f);Assert.That(animator.GetCurrentAnimatorStateInfo(0).normalizedTime,Is.EqualTo(at).Within(.00001f));Assert.That(target.Health,Is.EqualTo(hpBefore));}
+        finally{Time.timeScale=1;animator.enabled=false;}
+        Call(hp,"Die");hp.CancelInvoke();Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);Assert.That(Property<string>(driver,"State"),Is.EqualTo("Dead"));yield return null;
+    }
+    [UnityTest]public IEnumerator HeldStruggleLeftRendersInOwnedNativeGraphics(){yield return HeldStruggleNative(true);}
+    [UnityTest]public IEnumerator HeldStruggleRightRendersInOwnedNativeGraphics(){yield return HeldStruggleNative(false);}
+    IEnumerator HeldStruggleNative(bool left)
+    {
+        string folder=Environment.GetEnvironmentVariable("ODM_HELD_STRUGGLE_PREVIEW");if(string.IsNullOrEmpty(folder))yield break;
+        Assert.That(System.IO.File.Exists(".titan-validation-owned"));Assert.That(SystemInfo.graphicsDeviceType,Is.Not.EqualTo(UnityEngine.Rendering.GraphicsDeviceType.Null));System.IO.Directory.CreateDirectory(folder);
+        var old=UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset;var oldQuality=QualitySettings.renderPipeline;float oldTime=Time.timeScale;
+        var type=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset")).First(t=>t!=null);var data=UnityEditor.AssetDatabase.LoadAssetAtPath<ScriptableObject>("Packages/com.unity.render-pipelines.universal/Runtime/Data/UniversalRendererData.asset");var pipeline=(UnityEngine.Rendering.RenderPipelineAsset)type.GetMethod("Create").Invoke(null,new object[]{data});
+        var camera=new GameObject("Owned held Scout camera").AddComponent<Camera>();SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.gameObject.AddComponent<AudioListener>();camera.fieldOfView=45;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.15f,.19f,.23f);
+        var light=new GameObject("Owned held Scout sun").AddComponent<Light>();SceneManager.MoveGameObjectToScene(light.gameObject,scene);light.type=LightType.Directional;light.intensity=1.5f;light.transform.rotation=Quaternion.Euler(35,-35,0);
+        try
+        {
+            UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=pipeline;QualitySettings.renderPipeline=pipeline;ScoutBiteSetup();biteGrab.holdDamagePerSecond=10;AddEscape();biteTitan.transform.localScale=Vector3.one*3;cc.enabled=false;player.transform.position=new Vector3(left?-.7f:.7f,8,2.6f)*3;cc.enabled=true;Physics.SyncTransforms();CaptureScout(left,true);
+            for(int i=0;i<120;i++)BiteFrame(1f/120);Assert.That(target.Health,Is.EqualTo(90).Within(.002f));var driver=AnimatedHeldDriver();Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.True);Time.timeScale=0;
+            var animator=biteModel.GetComponent<Animator>();var grip=left?biteTitan.leftGripSocket:biteTitan.rightGripSocket;var root=player.transform.position;var rotation=player.transform.rotation;var localGrip=player.transform.InverseTransformPoint(grip.position);
+            camera.transform.position=root+new Vector3(left?-5:5,2.8f,8);camera.transform.LookAt(root+Vector3.up*.35f);camera.transform.LookAt(root+Vector3.up*.35f+camera.transform.right*2);string side=left?"Left":"Right";
+            for(int i=0;i<8;i++)
+            {
+                Vector3 before=player.transform.position;Quaternion beforeRotation=player.transform.rotation;animator.Play("Held",0,i/8f);animator.Update(0);Call(driver,"LateUpdate");Assert.That(player.transform.position,Is.EqualTo(before));Assert.That(player.transform.rotation,Is.EqualTo(beforeRotation));Assert.That(Vector3.Distance(player.transform.position,root),Is.LessThan(.003f));Assert.That(Quaternion.Angle(player.transform.rotation,rotation),Is.LessThan(.01f));Assert.That(Vector3.Distance(player.transform.TransformPoint(localGrip),grip.position),Is.LessThan(.003f));
+                yield return null;yield return null;string path=folder+"/"+side+"_"+i.ToString("D2")+".png";System.IO.File.Delete(path);ScreenCapture.CaptureScreenshot(path);for(int j=0;j<120&&!System.IO.File.Exists(path);j++)yield return null;Assert.That(System.IO.File.Exists(path),Is.True);
+            }
+            var a=new Texture2D(2,2);var b=new Texture2D(2,2);a.LoadImage(System.IO.File.ReadAllBytes(folder+"/"+side+"_00.png"));b.LoadImage(System.IO.File.ReadAllBytes(folder+"/"+side+"_02.png"));var first=a.GetPixels32();var second=b.GetPixels32();int changed=0;
+            for(int i=0;i<first.Length;i++)if(Mathf.Abs(first[i].r-second[i].r)+Mathf.Abs(first[i].g-second[i].g)+Mathf.Abs(first[i].b-second[i].b)>30)changed++;Object.Destroy(a);Object.Destroy(b);Assert.That(changed,Is.GreaterThan(100),"Actual struggling skin must move in same physical hand, not just a state name");
+            Debug.Log("HELD_STRUGGLE_NATIVE side="+side+" changedPixels="+changed+" hp="+target.Health+" sameGrip=true device="+SystemInfo.graphicsDeviceName);
+        }
+        finally{Time.timeScale=oldTime;UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset=old;QualitySettings.renderPipeline=oldQuality;Object.Destroy(camera.gameObject);Object.Destroy(light.gameObject);Object.Destroy(pipeline);}
+    }
+    [UnityTest]public IEnumerator HeldStruggleFlushesResidualHookIkAndNormalReleaseRestoresAnimationPlayback()
+    {
+        ScoutBiteSetup();var driver=AnimatedHeldDriver();CaptureScout();Call(driver,"Update");Set(driver,"<LeftAimWeight>k__BackingField",1f);Set(driver,"<RightAimWeight>k__BackingField",1f);Call(driver,"LateUpdate");Assert.That(Property<float>(driver,"LeftAimWeight"),Is.Zero);Assert.That(Property<float>(driver,"RightAimWeight"),Is.Zero);
+        biteGrab.Cancel("Release animation test");for(int i=0;i<240&&target.ReleasePending;i++)BiteFrame(1f/120);Call(driver,"Update");Assert.That(Property<bool>(driver,"IsStruggling"),Is.False);Assert.That(biteModel.GetComponent<Animator>().speed,Is.EqualTo(1));yield return null;
     }
     [UnityTest] public IEnumerator ThreeTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,true);}
     [UnityTest] public IEnumerator ThreeTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance(){yield return ScaledRealScoutBite(3,false);}

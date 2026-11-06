@@ -226,8 +226,28 @@ public static class ScoutPlayerBuilder
             recoil.Set("LeftLowerLeg",left?65:30);recoil.Set("RightLowerLeg",right?65:30);
             return f<.4f?Blend(Sample("AirCoast",0,1),recoil,Mathf.SmoothStep(0,1,f/.4f)):Blend(recoil,Sample("Fall",0,1),Mathf.SmoothStep(0,1,(f-.4f)/.6f));
         }
-        else if(state=="Held"||state=="Dead") {p.Arm("Left",65,0,30);p.Arm("Right",65,0,30);p.Set("LeftLowerLeg",35);p.Set("RightLowerLeg",35);}
+        else if(state=="Held")return HeldStruggle(f);
+        else if(state=="Dead") {p.Arm("Left",65,0,30);p.Arm("Right",65,0,30);p.Set("LeftLowerLeg",35);p.Set("RightLowerLeg",35);}
         return p;
+    }
+    // Waist stays pinned at the real grip. A hunched upper body, braced bent
+    // elbows, pained head recoil and out-of-phase leg kicks sell the squeeze
+    // using rotations only: no root/hip translation, bone scaling or physics.
+    static Pose HeldStruggle(float phase)
+    {
+        float a=phase*Mathf.PI*2,w=Mathf.Sin(a),strain=.5f+.5f*Mathf.Cos(a),shake=Mathf.Sin(a*3);
+        float left=.5f+.5f*w,right=1-left;var p=Idle(0);p.hip=Vector3.zero;
+        p.Set("Hips");p.Set("Spine",9+3*strain,3*w);p.Set("Chest",12+4*strain,-4*w,2*shake);
+        p.Set("Neck",-8,-3*w);p.Set("Head",14+6*strain,9*w,2*shake);
+        p.Arm("Left",65+3*w,-18-3*strain,0);p.Arm("Right",65-3*w,-18-3*strain,0);
+        p.Set("LeftLowerArm",0,0,-125-8*strain);p.Set("RightLowerArm",0,0,125+8*strain);
+        p.Set("LeftHand",35,-12-3*w,-20);p.Set("RightHand",-35,12-3*w,20);
+        foreach(string side in new[]{"Left","Right"})
+        {
+            float kick=side=="Left"?left:right;
+            p.Set(side+"UpperLeg",-20-12*kick,0,side=="Left"?-3:3);p.Set(side+"LowerLeg",45+20*kick);p.Set(side+"Foot",5-8*kick);
+        }
+        p.Set("CapeUpper",-10);p.Set("CapeLower",-4);return p;
     }
     static AnimationCurve CompactConstant(AnimationCurve curve)
     {
@@ -263,10 +283,17 @@ public static class ScoutPlayerBuilder
     public static void RebuildFall() { BuildAssets(false,true); }
     [MenuItem("Tools/Player/Scout/Rebuild mirrored attack poses only")]
     public static void RebuildAttacks() { BuildAssets(false,false,true); }
-    static void BuildAssets(bool flightOnly,bool fallOnly=false,bool attackOnly=false)
+    [MenuItem("Tools/Player/Scout/Rebuild held struggle only")]
+    public static void RebuildHeld() { BuildAssets(false,false,false,true); }
+    public static void RebuildHeldOwnedBatch()
+    {
+        if(!Application.isBatchMode||!File.Exists(".titan-validation-owned"))throw new InvalidOperationException("Owned validation worker only");
+        RebuildHeld();
+    }
+    static void BuildAssets(bool flightOnly,bool fallOnly=false,bool attackOnly=false,bool heldOnly=false)
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Exit Play first");
-        bool poseOnly=flightOnly||fallOnly||attackOnly;
+        bool poseOnly=flightOnly||fallOnly||attackOnly||heldOnly;
         AssetDatabase.Refresh();Material material=null;
         if(!poseOnly)
         {
@@ -305,6 +332,7 @@ public static class ScoutPlayerBuilder
                 if(flightOnly&&state!="GasBoth"&&state!="AttachedBoth")continue;
                 if(fallOnly&&state!="Fall")continue;
                 if(attackOnly&&!state.StartsWith("Attack")&&!state.StartsWith("Charge"))continue;
+                if(heldOnly&&state!="Held")continue;
                 float length=state=="Run"?ScoutPlayerAnimation.RunCycleDuration:state.StartsWith("Attack")?.39f:state=="ReleaseFlip"?.48f:state.StartsWith("Release")?.22f:state=="Land"?.12f:1.2f;
                 bool loop=!(state.StartsWith("Attack")||state.StartsWith("Release")||state=="Land");
                 var clip=new AnimationClip {name=state,frameRate=60};int frames=Mathf.CeilToInt(length*60);
@@ -333,8 +361,8 @@ public static class ScoutPlayerBuilder
                 if(st==null)st=controller.layers[0].stateMachine.AddState(state);st.motion=clip;st.writeDefaultValues=true;if(state=="Idle")controller.layers[0].stateMachine.defaultState=st;
                 if(poseOnly)AssetDatabase.SaveAssetIfDirty(clip);
             }
-            EditorUtility.SetDirty(controller);
-            if(poseOnly)AssetDatabase.SaveAssetIfDirty(controller);
+            if(!heldOnly)EditorUtility.SetDirty(controller);
+            if(poseOnly){if(!heldOnly)AssetDatabase.SaveAssetIfDirty(controller);}
             else {animator.runtimeAnimatorController=controller;PrefabUtility.SaveAsPrefabAsset(go,Prefab);AssetDatabase.SaveAssets();}
         }
         finally{UnityEngine.Object.DestroyImmediate(go);}

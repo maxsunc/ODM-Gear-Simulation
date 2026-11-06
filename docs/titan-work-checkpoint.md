@@ -14,7 +14,49 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: bounded Titan corpse/loose-limb steam, darkening and transparency
+## Current: Scout held squeeze / struggle loop, visual-only
+
+User accepted decomposition (already LOCAL091fe640), requested visible struggling/
+squeezing while grabbed to explain10HP/s hold damage. Held.anim now1.2s seamless
+crunched spine/chest, raised tightly bent braced elbows/hands, bowed/shuddering head,
+alternating bent-leg kicks. Hips/waist remainpinned; everybone LOCAL position/scale
+unchanged. SameHeldGUID/controller/state/transition .075s, no rootmotion/physics/
+newgrip/regrip/parenting/collision/force/CCT/control/camera writes, no new slash.
+ScoutPlayerAnimation.IsStruggling onlyreal living confirmed TitanGrabAttack lease
+plus existing motorsuspension. Windup can'tstart. OnRelease/QTE/cancel evenblocked
+ReleasePending stopsloop/freezeHeld, safeexit stillpending, playback resumes only
+withordinarycontrols. Dead overrides, disable/history clearsreceipt/aim weights.
+Restrained residualhookIK immediatelyzero so elbows aren'tfighting oldhookaim;
+nonrestrained attack/flight IK unchanged.10HP/s/3sQTE/freshF/grace/HP/respawnuntouched.
+
+New scoped ScoutPlayerBuilder.RebuildHeld()/HeldStruggle author recipe, markerbatch
+RebuildHeldOwnedBatch. tools/build_scout_held.py hashes105 protected current assets/
+sources, authors inownedUnity2021 andpublishes ONLY Held.anim, originalGUID. No full
+Build, Run still1.16666663s, allotherclips/controller/prefab/FBX/imports/textures/cape/
+userTitanprefab/scene/palettes/nav/sword/physicalgrip/QTE/motor/player sources unchanged.
+
+Freshbaseline429/8/1 of438 ->449pass/SAME8fail/1skip of458 twice;20newcases. Real
+skindeformation/elbowfold/handdistance/head+legmotion, loopseam120Hz, no localpos/
+scale/rootmotion/controller changes. Actualcaptureonly, originalHPdrain, blockedexit
+no continuedstruggle/debt, playback/history/IK/pause/death.12new animatedintegrations
+bothhands3/5/7/10 timeout/bite andbothhands3/10 escape+drain, samegrip<.003m,
+Titanarm<8deg/120Hz,latercarry/mouthpenetration<.005m; actualanimateddeathcorpse1.5s
+speed<40. Earlyreachoverlap remainsseparatelydisclosed. Native2/2 bothactual3xpalms
+currentCCD capture, realScoutloop8frames perhand+GIFs, changedpixels andsamegrip,
+originalminimalQTE/healthHUD remains. Inownedcomparison timepaused whileclipphases
+advance, no animationroot write within eachsample; nativehand re-solves kept<.003m.
+SavedCURRENTforest7pass/1SAMEunbaked4xwarningfail of8: actualsaved enabledScoutdriver
+andAnimatorloop duringnativeChase/aerialcapture+10HP/s, QTE3s/sameplayer/scene/nav;
+release stopsstruggle, previousdecomposition/player-onlyrespawn stillpass. No4xbake.
+
+Currentruntime/test/builder/clip bytes matchedbothownedworkers;105protectedhashes
+unchanged. No liveEditor input/Playstop/sceneswitch/save/reload/physicsautomation.
+Subjective squeezed/strugglingfeel/arbitrarysceneryclipping/FPS/devices/WebGL/
+long-duration10x safety notcertified. LOCAL only, no push. See
+ docs/scout-held-struggle.md, tools/build_scout_held.py, tools/capture_scout_held.py,
+ ArtSource/Player/Scout/HeldStruggle/validation-summary.json plus XML/PNGs/GIFs.
+
+## Previous: bounded Titan corpse/loose-limb steam, darkening and transparency
 
 User confirmed player-only respawn (already LOCAL ca20e655), asked for anime-style
 Titan death decomposition instead of permanent corpses. Runtime-only universal

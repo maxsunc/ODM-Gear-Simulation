@@ -49,10 +49,11 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     public bool Grounded { get; private set; }
     public float LeftAimWeight { get; private set; }
     public float RightAimWeight { get; private set; }
+    public bool IsStruggling { get; private set; }
     readonly ScoutAnimationBrain brain=new ScoutAnimationBrain();
     readonly Collider[] overlaps=new Collider[96];
     readonly RaycastHit[] casts=new RaycastHit[96];
-    Movement walking;ODM_Movement gear;Attack attack;PlayerHealth health;
+    Movement walking;ODM_Movement gear;Attack attack;PlayerHealth health;TitanCombatTarget combatTarget;
     Vector3 lastPosition,previousFlipPosition,leftAimAxis,rightAimAxis;
     string playing;
     float dualEntryAge=DualHookReclineDuration;
@@ -71,7 +72,7 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     void Awake()
     {
         walking=GetComponent<Movement>();gear=GetComponent<ODM_Movement>();attack=GetComponent<Attack>();health=GetComponent<PlayerHealth>();
-        lastPosition=previousFlipPosition=transform.position;
+        lastPosition=previousFlipPosition=transform.position;combatTarget=GetComponent<TitanCombatTarget>();
         if(Application.isPlaying)
         {
             var cloth=GetComponent<ScoutCapeCloth>();if(cloth==null)cloth=gameObject.AddComponent<ScoutCapeCloth>();
@@ -90,13 +91,14 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     void OnDisable()
     {
         if(attack!=null){attack.ChargeStarted-=OnChargeStarted;attack.Released-=OnStrike;}
-        attackVariantChosen=false;
+        attackVariantChosen=false;IsStruggling=false;LeftAimWeight=RightAimWeight=0;
         if(flipPivot!=null)flipPivot.localRotation=Quaternion.identity;
     }
     public void ResetMotionHistory()
     {
         lastPosition=previousFlipPosition=transform.position;sampled=false;MeasuredVelocity=Vector3.zero;
         brain.Step(new ScoutAnimationBrain.Frame{held=true},0);playing=null;dualEntryAge=DualHookReclineDuration;
+        IsStruggling=false;LeftAimWeight=RightAimWeight=0;
     }
     void FixedUpdate()
     {
@@ -121,6 +123,8 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
         if(n<overlaps.Length)for(int i=0;i<n;i++)if(!overlaps[i].transform.IsChildOf(transform))Grounded=true;
         int hooks=(gear.LeftHooked?1:0)|(gear.RightHooked?2:0);
         bool held=walking.TitanSuspended||gear.TitanSuspended;
+        if(combatTarget==null)combatTarget=GetComponent<TitanCombatTarget>();
+        IsStruggling=held&&combatTarget!=null&&combatTarget.IsHeld&&!combatTarget.IsDead&&combatTarget.HoldOwner is TitanGrabAttack;
         bool clear=hooks==0&&!Grounded&&FlipClear();
         string state=brain.Step(new ScoutAnimationBrain.Frame {grounded=Grounded,gas=gear.IsGasing,hooks=hooks,speed=MeasuredVelocity.magnitude,vertical=MeasuredVelocity.y,
             charging=attack.IsCharging,attacking=attack.IsAttacking,dead=health!=null&&health.isDead,held=held,flipClear=clear},Time.deltaTime);
@@ -135,7 +139,9 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
             animator.CrossFadeInFixedTime(visualState,blendDuration,0,0);playing=visualState;
         }
         dualEntryAge=IsDualHookFlight(state)?Mathf.Min(DualHookReclineDuration,dualEntryAge+Time.deltaTime):DualHookReclineDuration;
-        animator.speed=state=="Run"?RunPlaybackSpeed(Vector3.ProjectOnPlane(MeasuredVelocity,Vector3.up).magnitude,model!=null?model.lossyScale.z:2):1;
+        // Suspension alone (blocked safe exit/temporary reaction) is NOT a
+        // squeezing hand. Freeze the held pose immediately after actual release.
+        animator.speed=state=="Held"&&!IsStruggling?0:state=="Run"?RunPlaybackSpeed(Vector3.ProjectOnPlane(MeasuredVelocity,Vector3.up).magnitude,model!=null?model.lossyScale.z:2):1;
         if(state=="ReleaseFlip")
         {
             float f=Mathf.Clamp01(brain.ReleaseAge/.48f);float angle=-360*(f*f*(3-2*f));
@@ -162,7 +168,8 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
     void LateUpdate()
     {
         if(animator==null||gear==null)return;
-        bool blocked=attack.IsCharging||attack.IsAttacking||walking.TitanSuspended||gear.TitanSuspended||(health!=null&&health.isDead)||State=="ReleaseFlip";
+        bool restrained=walking.TitanSuspended||gear.TitanSuspended||(health!=null&&health.isDead);
+        bool blocked=attack.IsCharging||attack.IsAttacking||restrained||State=="ReleaseFlip";
         float blend=1-Mathf.Exp(-25*Time.deltaTime);
         bool leftAim=gear.LeftHooked||Input.GetButton("Fire1")||Input.GetKey(KeyCode.Q);
         bool rightAim=gear.RightHooked||Input.GetButton("Fire2")||Input.GetKey(KeyCode.E);
@@ -174,8 +181,9 @@ public sealed class ScoutPlayerAnimation : MonoBehaviour
                 RaycastHit hit;shot=gameObject.scene.GetPhysicsScene().Raycast(camera.position,camera.forward,out hit,gear.range,gear.targetLayer,QueryTriggerInteraction.Ignore)?hit.point:camera.position+camera.forward*gear.range;
             }
         }
-        LeftAimWeight=Mathf.Lerp(LeftAimWeight,!blocked&&leftAim?1:0,blend);
-        RightAimWeight=Mathf.Lerp(RightAimWeight,!blocked&&rightAim?1:0,blend);
+        // No residual hook/pistol IK fighting the restrained elbows on capture.
+        LeftAimWeight=restrained?0:Mathf.Lerp(LeftAimWeight,!blocked&&leftAim?1:0,blend);
+        RightAimWeight=restrained?0:Mathf.Lerp(RightAimWeight,!blocked&&rightAim?1:0,blend);
         AimArm(leftUpper,leftLower,leftHand,gear.LeftHooked?gear.LeftAnchor:shot,leftAimAxis,LeftAimWeight,-1);
         AimArm(rightUpper,rightLower,rightHand,gear.RightHooked?gear.RightAnchor:shot,rightAimAxis,RightAimWeight,1);
     }
