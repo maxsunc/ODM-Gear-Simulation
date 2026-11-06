@@ -24,3 +24,5 @@ MonoBehaviour:
   screamVolume: 0.8
   footstepVolume: 0.75
   eatenVolume: 0.85
+  grab: {fileID: 8300000, guid: ba46762d293ab984a96b72cb5ac8a3ce, type: 3}
+  grabVolume: 1

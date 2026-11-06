@@ -59,6 +59,24 @@ using the same alternation/coalescing as arm severs and kills. Existing sever/ki
 sounds are retained. Ordinary leg damage, face blindness and misses still do not
 trigger the additional layer. WAV bytes/import settings unchanged. All layers use SFX.
 
+## Confirmed grab sound
+
+`Assets/Audio/titanGrab.mp3` plays once on a successful ground or aerial capture,
+for either hand and placed/spawned Titans. `TitanGrabAttack.CaptureConfirmed`
+fires only after `TryHold` succeeds and the capture/QTE setup is complete; reach,
+miss, carry, repeated hold updates, QTE and feeding do not replay it.
+
+`TitanAudioPalette` subscribes once per Play (including domain reload disabled),
+uses a short-lived spatial source at the capturing hand through the existing SFX
+mixer, and retains the original clip/pitch/importer. Resource palette fields
+`grab` and `grabVolume` (default1) expose the clip/level. The original.528s cue
+cleans up after its tail; scene/parent removal also disposes it. No gameplay or
+other palette tuning changed. Unity2021 compile and the existing both-hand native
+preview completed; no new/changed test code or full-suite claim. Device playback
+and preferred loudness remain a user check. Included in the user-requested publish
+checkpoint after the stationary Search-look revision; unrelated palette tuning is
+left uncommitted.
+
 ## Supplied Titan SFX follow-up
 
 `Assets/Resources/TitanAudioPalette.asset` references the seven new supplied clips,

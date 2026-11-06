@@ -34,7 +34,9 @@ public class TitanMotionStyle : MonoBehaviour
     System.Random random;
     float paceTimer, paceTarget = 1, cadenceBias, turnBias, pivotAge, turnAngle;
     float movingWeight, runWeight, recoilAge = 10, recoilSide;
-    bool turning, ownsRotation, originalUpdateRotation;
+    bool turning, ownsRotation, originalUpdateRotation, searchPoseApplied, searchLookTracking;
+    float searchLookWeight;
+    Quaternion searchBaseChest,searchBaseNeck,searchBaseHead;
     static readonly int Walking = Animator.StringToHash("IsWalking");
     static readonly int GaitParameter = Animator.StringToHash("Gait");
     static readonly int Rate = Animator.StringToHash("StrideRate");
@@ -54,6 +56,7 @@ public class TitanMotionStyle : MonoBehaviour
     void OnDisable()
     {
         if (body != null) body.LimbSevered -= OnSevered;
+        RestoreSearchPose();searchLookWeight=0;searchLookTracking=false;
         if (ownsRotation && agent != null) agent.updateRotation = originalUpdateRotation;
         ownsRotation = false;
     }
@@ -73,6 +76,9 @@ public class TitanMotionStyle : MonoBehaviour
     void Update()
     {
         if (!automaticTick) return;
+        // Remove last frame's overlay BEFORE Animator evaluation, including
+        // constant idle curves which may otherwise retain an additive twist.
+        RestoreSearchPose();
         if (agent == null) agent = GetComponent<NavMeshAgent>();
         if (brain == null) brain = GetComponent<TitanPatrolChaseAI>();
         bool ready = agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh;
@@ -116,7 +122,9 @@ public class TitanMotionStyle : MonoBehaviour
         else if (!varyPace || !available) paceTarget = 1;
         PaceScale = Mathf.MoveTowards(PaceScale, paceTarget, deltaTime * 2.8f);
         CornerSpeedScale = Mathf.Abs(signedTurn) > 105 ? .38f : Mathf.Abs(signedTurn) > 60 ? .68f : 1;
-        float desiredGait = moving ? Mathf.InverseLerp(5.3f, 8.3f, ActualSpeed) : 0;
+        // Walk through 9.6 world units/s; run only ABOVE it. Keep the existing
+        // short gait transition so crossing the threshold does not snap bones.
+        float desiredGait = moving && ActualSpeed > 9.6f ? 1 : 0;
         Gait = Mathf.MoveTowards(Gait, desiredGait, deltaTime * 7);
         float reference = Mathf.Lerp(walkReferenceSpeed, runReferenceSpeed, Gait);
         StrideRate = moving ? Mathf.Clamp(ActualSpeed / Mathf.Max(.1f, reference) * cadenceBias, .35f, 1.65f) : 1;
@@ -139,30 +147,54 @@ public class TitanMotionStyle : MonoBehaviour
         TickTurning(Time.deltaTime, turnAngle, hasHeading);
     }
 
+    void RestoreSearchPose()
+    {
+        if(!searchPoseApplied)return;searchPoseApplied=false;
+        // Never restore an animation pose over a native corpse or injury owner.
+        if(body==null||body.IsDead||!body.CanWalk)return;
+        if(chest!=null)chest.localRotation=searchBaseChest;
+        if(neck!=null)neck.localRotation=searchBaseNeck;
+        if(body.head!=null)body.head.localRotation=searchBaseHead;
+    }
+
     public void TickTurning(float dt, float signedTurn, bool hasHeading)
     {
+        RestoreSearchPose();
         if (body.IsDead || !body.CanWalk || dt < 0 || float.IsNaN(dt) || float.IsInfinity(dt) || float.IsNaN(signedTurn) || float.IsInfinity(signedTurn)) return;
-        float angle = hasHeading ? signedTurn : 0;
+        if(brain==null)brain=GetComponent<TitanPatrolChaseAI>();
+        bool searching=brain!=null&&brain.isActiveAndEnabled&&brain.State==TitanAwarenessState.Search&&!brain.IsMovementLocked;
+        if(searching)searchLookTracking=true;
+        searchLookWeight=Mathf.MoveTowards(searchLookWeight,searching?1:0,dt*7);
+        float angle = hasHeading&&!searching ? signedTurn : 0;
         bool sharp = Mathf.Abs(angle) > 60;
         if (sharp && !turning) pivotAge = 0;
         turning = sharp;
         pivotAge += dt;
         // Head/shoulders lead the pivot briefly; root then commits quickly.
-        HeadYaw = Mathf.Lerp(HeadYaw, Mathf.Clamp(angle * .72f,-58,58), 1 - Mathf.Exp(-dt * 20));
-        if (hasHeading && (!sharp || pivotAge >= headLeadTime))
+        float look=searching?brain.SearchLookYaw:Mathf.Clamp(angle*.72f,-58,58);
+        HeadYaw = Mathf.Lerp(HeadYaw,look,1-Mathf.Exp(-dt*20));
+        if(searchLookTracking&&!searching&&searchLookWeight==0&&Mathf.Abs(HeadYaw)<.01f){HeadYaw=0;searchLookTracking=false;}
+        if (hasHeading && !searching && (!sharp || pivotAge >= headLeadTime))
         {
             float maxTurn = Mathf.Lerp(walkTurnSpeed, runTurnSpeed, runWeight) * turnBias * dt;
             float step = Mathf.Clamp(angle,-maxTurn,maxTurn);
             transform.rotation = Quaternion.AngleAxis(step, Vector3.up) * transform.rotation;
         }
+        if(searchLookTracking)
+        {
+            if(chest!=null)searchBaseChest=chest.localRotation;
+            if(neck!=null)searchBaseNeck=neck.localRotation;
+            if(body.head!=null)searchBaseHead=body.head.localRotation;
+            searchPoseApplied=true;
+        }
         if (chest != null)
         {
             float bank = Mathf.Clamp(angle * -.055f,-7,7) * movingWeight;
-            chest.rotation = Quaternion.AngleAxis(bank, transform.forward) * Quaternion.AngleAxis(HeadYaw * .12f, Vector3.up) * chest.rotation;
+            chest.rotation = Quaternion.AngleAxis(bank, transform.forward) * Quaternion.AngleAxis(HeadYaw * Mathf.Lerp(.12f,.40f,searchLookWeight), Vector3.up) * chest.rotation;
             chest.rotation = Quaternion.AngleAxis(runWeight * 3 * (Personality - 1), transform.right) * chest.rotation;
         }
-        if (neck != null) neck.rotation = Quaternion.AngleAxis(HeadYaw * .30f, Vector3.up) * neck.rotation;
-        if (body.head != null) body.head.rotation = Quaternion.AngleAxis(HeadYaw * .58f, Vector3.up) * body.head.rotation;
+        if (neck != null) neck.rotation = Quaternion.AngleAxis(HeadYaw * Mathf.Lerp(.30f,.25f,searchLookWeight), Vector3.up) * neck.rotation;
+        if (body.head != null) body.head.rotation = Quaternion.AngleAxis(HeadYaw * Mathf.Lerp(.58f,.35f,searchLookWeight), Vector3.up) * body.head.rotation;
         if (recoilAge < .27f && chest != null)
         {
             float impact = Mathf.Sin(Mathf.Min(1,recoilAge / .055f) * Mathf.PI * .5f) * Mathf.Exp(-recoilAge * 13);

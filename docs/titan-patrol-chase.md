@@ -41,7 +41,7 @@ player wiring. Its controls/ownership and health are not changes to your real pl
 | Patrol | Follow assigned world-space points, pause, then advance cyclically. |
 | Chase | Follow the last visually confirmed target position, with a stopping radius. |
 | Investigate | After losing sight, travel to the last seen position, not the hidden player's live location. |
-| Search | Stop and turn/look briefly; reacquire visible targets or return to the nearest patrol waypoint. |
+| Search | Stop with root/feet planted; torso, neck and head look right, left, then center. Reacquire visible targets or return to the nearest patrol waypoint. |
 | Blind | Immediately clear the route and stop; no visual detection. Memory continues aging. |
 | Immobilized | Either missing leg prevents walking. The later [injury animation](titan-injury-animation.md) kneels on the remaining knee or lies prone when both legs are gone. |
 | Dead | Navigation disabled; the existing body owns ragdoll/death. |
@@ -65,6 +65,30 @@ Blindness recovery reacquires sight normally. If the target remains hidden, the
 Titan investigates only remembered information, or returns to patrol if that memory
 has expired. Losing an arm does not stop walking; losing either leg does. Pausing
 the component stops its NavMeshAgent and walking animation immediately.
+
+### Stationary search look
+
+Search no longer calls `transform.Rotate` on the Titan root. The AI provides
+`SearchLookYaw` pose data only; the existing `TitanMotionStyle` visual owner applies
+it across chest40%, neck25%, head35%, with smooth entry/corner/exit blending.
+Hips, legs and feet are not search-animated. Normal path steering still uses the
+existing Walk/Run Turn Speed; this revision changes Search only.
+
+`Search Turn Speed` controls angular travel in degrees/second. New
+`Search Look Angle` limits either side (default30 degrees). Each Search does one
+center -> right -> left -> center sweep, then waits for the remaining search time.
+With the user's current35deg/s and default30degree angle, the sweep takes about
+3.43s plus visual easing, fitting the existing4s Search. Shorter search durations
+or lower speeds can end a sweep early; reacquisition immediately resumes normal AI.
+Perception/FOV/memory/navigation/health/attack rules and the user's8/17.5 movement
+speeds are unchanged. Cached local overlay poses are restored before Animator
+evaluation to prevent stationary constant curves accumulating twist; native death
+and injury owners are never overwritten. The look settles back into ordinary gaze.
+
+No new/changed test code. Current Unity2021 compile and the existing
+`LostTargetIsInvestigatedSearchedThenPatrolResumes` case pass in the marker-owned
+worker; not a full-suite/graphics/physical-bounds certification. Fresh gameplay
+review remains the visual check. No scene/prefab publication or live-editor input.
 
 ## Setup and ownership
 

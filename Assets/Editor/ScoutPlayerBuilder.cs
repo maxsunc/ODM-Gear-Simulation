@@ -236,12 +236,14 @@ public static class ScoutPlayerBuilder
     static Pose HeldStruggle(float phase)
     {
         float a=phase*Mathf.PI*2,w=Mathf.Sin(a),strain=.5f+.5f*Mathf.Cos(a),shake=Mathf.Sin(a*3);
-        float left=.5f+.5f*w,right=1-left;var p=Idle(0);p.hip=Vector3.zero;
-        p.Set("Hips");p.Set("Spine",9+3*strain,3*w);p.Set("Chest",12+4*strain,-4*w,2*shake);
-        p.Set("Neck",-8,-3*w);p.Set("Head",14+6*strain,9*w,2*shake);
-        p.Arm("Left",65+3*w,-18-3*strain,0);p.Arm("Right",65-3*w,-18-3*strain,0);
-        p.Set("LeftLowerArm",0,0,-125-8*strain);p.Set("RightLowerArm",0,0,125+8*strain);
-        p.Set("LeftHand",35,-12-3*w,-20);p.Set("RightHand",-35,12-3*w,20);
+        float left=.5f+.5f*w,right=1-left,hit=ScoutPlayerAnimation.HeldBackStrike(phase);var p=Idle(0);p.hip=Vector3.zero;
+        p.Set("Hips");p.Set("Spine",5+3*strain,3*w);p.Set("Chest",8+4*hit,-4*w-6*hit,shake);
+        p.Set("Neck",-5,-3*w);p.Set("Head",10+5*strain,7*w,shake);
+        p.Arm("Left",68+3*w,-18-3*strain,0);p.Set("LeftLowerArm",0,0,-125-8*strain);p.Set("LeftHand",35,-12-3*w,-20);
+        // Slow cock-back, deliberate blunt back/flat beat, then recoil. The
+        // visual driver fits the contact pose to the CURRENT wrist/forearm.
+        p.Arm("Right",Mathf.Lerp(30,62,hit),Mathf.Lerp(-65,20,hit),0);
+        p.Set("RightLowerArm",0,0,Mathf.Lerp(115,40,hit));p.Set("RightHand",-35,25,30);
         foreach(string side in new[]{"Left","Right"})
         {
             float kick=side=="Left"?left:right;
@@ -333,7 +335,7 @@ public static class ScoutPlayerBuilder
                 if(fallOnly&&state!="Fall")continue;
                 if(attackOnly&&!state.StartsWith("Attack")&&!state.StartsWith("Charge"))continue;
                 if(heldOnly&&state!="Held")continue;
-                float length=state=="Run"?ScoutPlayerAnimation.RunCycleDuration:state.StartsWith("Attack")?.39f:state=="ReleaseFlip"?.48f:state.StartsWith("Release")?.22f:state=="Land"?.12f:1.2f;
+                float length=state=="Held"?ScoutPlayerAnimation.HeldCycleDuration:state=="Run"?ScoutPlayerAnimation.RunCycleDuration:state.StartsWith("Attack")?.39f:state=="ReleaseFlip"?.48f:state.StartsWith("Release")?.22f:state=="Land"?.12f:1.2f;
                 bool loop=!(state.StartsWith("Attack")||state.StartsWith("Release")||state=="Land");
                 var clip=new AnimationClip {name=state,frameRate=60};int frames=Mathf.CeilToInt(length*60);
                 foreach(var pair in bones)

@@ -3,7 +3,34 @@
 Unity2021.3.25f1 / URP12.1.11. Visual-only; the existing physical grip, HP and
 motor remain authoritative. Previous Titan decomposition is LOCAL `091fe640`.
 
-## Presentation
+## Current revision: seated in the hand / slower back-of-sword beats
+
+After `bf77e54c`, the user requested a waist slightly inside the hand, a body
+perpendicular to the forearm, back-of-sword attempts to beat the Titan's arm,
+and slower movement. They also requested no new validation test code.
+
+- Held now lasts **1.8s** rather than1.2s (50% longer, two-thirds the old cadence).
+  Only Held.anim is rebuilt, with the original GUID/controller unchanged.
+- The existing visual-only flip pivot places the Scout waist slightly into the
+  palm's heel, with body-up perpendicular to the current forearm axis and facing
+  toward the wrist. Hips/other bones retain their local lengths/positions/scales.
+  This is a RENDER placement: the actual root/native WORLD-UP controller and CCD
+  grip remain exactly under the existing hold motor. No player reparenting.
+- One bracing arm and one deliberately cocked-back sword beat per loop. Late
+  visual two-bone fitting lays the sword's back/flat diagonally across the
+  wrist/heel surface, followed by recoil. It does not trigger Attack, combat
+  damage, sounds, an extra slash, escape progress or an automatic release.
+- Mounting refuses pivots containing foreign colliders/RBs, resets cape history
+  once on entry, tapers out over.18s as feeding begins to preserve the original
+  native mouth presentation, and retains the existing safe pending exit.
+  Normal release blends the local visual offset away; disable/history reset
+  restores the original position/rotation. No new physical/camera writer.
+- Current Unity2021 compile and the EXISTING owned both-hand graphics preview
+  completed. **No new/changed test code and no fresh full-suite run or claim.**
+  See `ArtSource/Player/Scout/HeldGripRevision/` for reviewed PNG phases/GIFs.
+  Initial `HeldStruggle/` evidence and counts below are historical to bf77e54c.
+
+## Initial presentation (bf77e54c; superseded placement/cadence)
 
 `Assets/Art/Player/Scout/Animations/Held.anim` is now a1.2s seamless struggle loop:
 

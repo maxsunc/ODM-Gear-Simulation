@@ -5,9 +5,28 @@ using UnityEngine;
 public sealed class TitanAudioPalette : ScriptableObject
 {
     public AudioClip[] blindScreams=new AudioClip[0], footsteps=new AudioClip[0];
-    public AudioClip spawnLightning, eaten;
+    public AudioClip spawnLightning, eaten, grab;
     [Range(0,1)] public float screamVolume=.8f, footstepVolume=.75f, eatenVolume=.85f;
+    [Range(0,1)] public float grabVolume=1;
     public static TitanAudioPalette Load(){return Resources.Load<TitanAudioPalette>("TitanAudioPalette");}
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void InstallGrabCue()
+    {
+        // Handles placed/spawned Titans and domain-reload-disabled Play alike.
+        TitanGrabAttack.CaptureConfirmed-=OnGrabCaptured;
+        TitanGrabAttack.CaptureConfirmed+=OnGrabCaptured;
+    }
+    static void OnGrabCaptured(TitanGrabAttack attack,Vector3 point,bool left)
+    {
+        if(attack==null||!attack.isActiveAndEnabled)return;
+        var palette=Load();if(palette==null||palette.grab==null)return;
+        var body=attack.GetComponent<ModularTitanBody>();
+        Transform hand=body==null?null:left?body.leftHand:body.rightHand;
+        var source=CreateSource("Confirmed grab",hand!=null?hand:attack.transform,true);
+        source.transform.position=point;source.clip=palette.grab;source.volume=palette.grabVolume;source.Play();
+        Object.Destroy(source.gameObject,palette.grab.length+.1f);
+    }
 
     public static AudioSource CreateSource(string label,Transform parent,bool spatial)
     {

@@ -51,6 +51,8 @@ public class TitanGrabAttack : MonoBehaviour
     public float Elapsed { get { return elapsed; } }
     public int ContactCount { get; private set; }
     public int CaptureCount { get; private set; }
+    // Presentation receipt shared by all real ground/aerial captures, never reach/miss.
+    public static event System.Action<TitanGrabAttack,Vector3,bool> CaptureConfirmed;
     public int BiteContactCount { get; private set; }
     public int BiteHitCount { get; private set; }
     public Vector3 LastBitePoint { get; private set; }
@@ -416,6 +418,7 @@ public class TitanGrabAttack : MonoBehaviour
             LastResult="Captured / break free: 3 keys in 3 seconds";
         }
         else escape=null;
+        if(CaptureConfirmed!=null)CaptureConfirmed(this,grip.position,UsesLeftHand);
     }
     internal bool BeginEscapeRecovery(TitanCombatTarget target)
     {

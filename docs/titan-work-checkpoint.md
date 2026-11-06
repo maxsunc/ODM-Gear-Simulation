@@ -14,7 +14,93 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: Scout held squeeze / struggle loop, visual-only
+## Publish checkpoint requested
+
+User approved committing/pushing the recent held-grip/back-of-sword revision,
+confirmed-grab sound,9.6 walk/run threshold and stationary Search look. Publish
+on titan-combat-updates, including earlier local checkpoints. Preserve unrelated
+scene/prefab/other audio-tuning/Plastic/IDE/cache work. Stage ONLY the new grab
+reference/volume from the mixed TitanAudioPalette asset; its user scream/footstep
+selection and volume edits remain working-tree-only. Include supplied titanGrab
+MP3/meta unchanged and current related AI defaults8/17.5/Search35. No new tests.
+Prior not-committed/not-pushed notes below describe the state BEFORE this request.
+Next request: two face-only Titan variants using Blender MCP, same mechanics/rig/
+animations. Not implemented yet; inspect available tooling and approved art first.
+
+## Current: stationary torso/head Search glance
+
+User asked to replace planted full-body Search rotation with a quick torso/head
+side-to-side glance driven by Search Turn Speed. TitanPatrolChaseAI no longer
+rotates root in Search; emits SearchLookYaw for one center/right/left/center sweep
+then rests. SearchTurnSpeed retains user's35deg/s; new SearchLookAngle defaults30
+per side (rough3.43s travel in4s search). Movement defaults8/17.5 preserved.
+TitanMotionStyle owns the sole visual look overlay, smooth HeadYaw and chest40%/
+neck25%/head35% distribution, blended back to ordinary gaze. No hip/leg/root Search
+turn. Normal path steering and walk/run speeds/threshold unchanged. Search pose
+cache restored before Animator to prevent constant-idle accumulation; never writes
+an old animated pose over injury/native death. Perception/memory/duration/attack
+locks unchanged. No new/changed test code; Unity2021 compiles and EXISTING search/
+return diagnostic passes in marker-owned worker (not full suite or visual/physical
+certification). No main Editor automation or scene/prefab save/publication. Current
+Library/TitanValidationRun.json is FILTERED to that diagnostic, not a full run.
+Docs: docs/titan-patrol-chase.md. Not committed/pushed; await fresh Play feedback.
+
+## Previous: walk/run threshold at9.6 units/second
+
+User requested walking at9.6 and below, running above. TitanMotionStyle now
+selects desiredGait=1 only when moving AND ActualSpeed>9.6, otherwise0, retaining
+the existing short MoveTowards gait blend. No movement/AI patrol/chase speeds,
+reference cadence, pace variation, saved prefab or scene changes. Threshold uses
+ACTUAL travel speed: pace variation can push a configured9.6 patrol above it.
+Unity2021 marker-owned compile exit0/no compiler errors; no new test code or
+full-suite claim. User's concurrent TitanPatrolChaseAI/prefab tuning preserved.
+Not committed/pushed.
+
+## Previous: supplied confirmed-grab sound
+
+User requested Assets/Audio/titanGrab.mp3 whenever a Titan grabs someone.
+TitanGrabAttack now emits static CaptureConfirmed once only AFTER TryHold and
+capture/QTE setup. TitanAudioPalette subscribes idempotently at subsystem startup
+(domain-reload-off safe), plays original.528s clip at either capturing hand with
+spatial source, unchanged pitch/import and existing SFX mixer; finite tail destroys
+source, scene/parent cleanup remains automatic. Applies to placed/spawned Titans,
+ground/aerial. No windup/miss/carry/feeding/repeated-hold replay, no damage/QTE/
+physics/grip changes. Resource palette appended ONLY grab GUID
+ba46762d293ab984a96b72cb5ac8a3ce and grabVolume1; existing user B-series footsteps,
+single scream, volumes and other settings preserved. Runner includes supplied
+MP3/meta when preparing future workers. Current marker-owned Unity2021 compile
+and EXISTING both-hand graphics preview completed (no new/changed test code,
+no full-suite/current device-audio claim). Library/TitanGrabSoundSourceBaseline.json
+captures exact new cue files; docs/game-audio.md notes. No main Editor automation.
+This and preceding pose revision remain UNCOMMITTED/NOT PUSHED; no new commit
+requested. Previous local HEAD remains bf77e54c.
+
+## Previous: revised in-hand Scout placement / back-of-sword beats
+
+User requested waist slightly inside the Titan hand, character perpendicular to
+forearm, hitting wrist/arm with back of sword, and slower movement. Explicitly
+no new validation test code. Implemented in ScoutPlayerAnimation and scoped
+ScoutPlayerBuilder.HeldStruggle: Held1.2 ->1.8s, no other clip/controller/prefab/
+scene/import publication. Passive visual-only pivot seats waist in palm heel,
+body-up perpendicular to current forearm, faces wrist. Actual root/WORLD-UP CCT/
+CCD grip/contact/release/motor/10HP/s/3sQTE/freshF remain untouched. Back/flat
+sword beat is a cosmetic right-arm cock-back/contact/recoil with mesh-axis
+calibration and late two-bone fit against wrist surface, left arm bracing;
+NO Attack/damage query/escape progress/automatic release. No Titan bone writer.
+
+Visual mount refuses physical children, resets cape history once on entry,
+tapers back to original native feeding pose over.18s on ToMouth; pending exit
+keeps existing safe suspension, ordinary release blends offset away and disable/
+history resets original pivot. Unity2021 compile succeeded, reused EXISTING
+both-hand native preview (2/2 completed) and inspected current PNGs; no new or
+changed test code, NO current full-suite claim. Old449/8/1 counts below refer to
+bf77e54c old pose, not revised placement/cadence.105 protected current hashes
+unchanged; no live Editor automation/input/stop/save/reload/scene switch. Current
+captures ArtSource/Player/Scout/HeldGripRevision/ (eight phases+GIF per hand1.8s),
+notes docs/scout-held-struggle.md. User gameplay feel/other sizes/cameras/scenery
+still for review. This revision is not committed/pushed yet.
+
+## Previous: Scout held squeeze / struggle loop, visual-only
 
 User accepted decomposition (already LOCAL091fe640), requested visible struggling/
 squeezing while grabbed to explain10HP/s hold damage. Held.anim now1.2s seamless
