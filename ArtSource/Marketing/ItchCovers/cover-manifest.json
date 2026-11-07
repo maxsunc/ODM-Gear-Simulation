@@ -1,0 +1,104 @@
+{
+  "purpose": "Locally authored promotional cover options; posed composites, not gameplay screenshots.",
+  "size": [
+    1260,
+    1000
+  ],
+  "previewSize": [
+    315,
+    250
+  ],
+  "sources": {
+    "ArtSource/Marketing/ItchCovers/Subjects/Scout_Slash_Render.png": "713251d3794d20e378ae2613e9de57c10c10009df97b93811f6f43e5664e9fc8",
+    "ArtSource/Marketing/ItchCovers/Subjects/Scout_Flight_Render.png": "a768d1f4ab27dabf56a294f02712768c77b9de5cc82f352a5adc530e3f09af29",
+    "ArtSource/Marketing/ItchCovers/Subjects/Scout_BackFlight_Render.png": "8c0f7614aa4fac4ce491738a41aadd9c7bf3d4704aae10f961a348b2a484c41d",
+    "ArtSource/Marketing/ItchCovers/Subjects/Scout_Guard_Render.png": "bb64341af76195fe083a81204c33c813e2e38ea55cba4b1086ee024f3fe1e6bf",
+    "ArtSource/Marketing/ItchCovers/Subjects/Titan_Beard_Render.png": "124d5f39b7c96ba184a1b46a89aa1866c87e33b5a68413e23eb2a176198c4d50",
+    "ArtSource/Marketing/ItchCovers/Subjects/Titan_Blonde_Render.png": "fa0290fa979c23b9dfc09af8dc9501fa2f4b2b627a1a7ff0afd187c274c29812",
+    "ArtSource/Environment/Shiganshina/MapReview/Rooftop_Route.png": "d91cde537433200ceffb04736f222e11ba57c5588678124a591bc747ba2b889e",
+    "ArtSource/Environment/GiantForest2/MapReview/RuntimeRocks.png": "9507cc8d1ee9ff7428f7851f0a901d44fb7cf0f03b9b467d114eefba5ceac5e9",
+    "ArtSource/Environment/Shiganshina/MapReview/Gate_Avenue.png": "292f5dbc9474925ad0dbd2096e5ff0a34b1e6d11e7c590a875595983f47f1761"
+  },
+  "options": [
+    {
+      "file": "01_Rooftop_Run.png",
+      "label": "01 / ROOFTOP RUN",
+      "description": "City action: Scout, dual blades, teal-and-gold district rooftops.",
+      "layers": [
+        "Actual Shiganshina rooftop plate",
+        "Left and bottom readability",
+        "Warm upper-right haze",
+        "Motion accents",
+        "Scout aerial cut soft shadow",
+        "Scout aerial cut subtle rim",
+        "Scout aerial cut",
+        "Title soft backing",
+        "ODM title",
+        "GEAR SIMULATION subtitle",
+        "Title underline"
+      ]
+    },
+    {
+      "file": "02_Giant_Hunt.png",
+      "label": "02 / GIANT HUNT",
+      "description": "Forest hunt: looming beard Titan and a smaller attacking Scout; olive and parchment.",
+      "layers": [
+        "Actual giant-forest plate",
+        "Forest atmosphere",
+        "Bald-beard Titan portrait soft shadow",
+        "Bald-beard Titan portrait subtle rim",
+        "Bald-beard Titan portrait",
+        "Title-side shadow",
+        "Lower fog",
+        "Scout foreground slash soft shadow",
+        "Scout foreground slash subtle rim",
+        "Scout foreground slash",
+        "Title soft backing",
+        "ODM title",
+        "GEAR SIMULATION subtitle",
+        "Title underline"
+      ]
+    },
+    {
+      "file": "03_Red_Alert.png",
+      "label": "03 / RED ALERT",
+      "description": "Most graphic: red-black diagonal, smiling Titan close-up and armed Scout.",
+      "layers": [
+        "Actual district plate, crimson grade",
+        "Red atmosphere",
+        "Smiling Titan portrait soft shadow",
+        "Smiling Titan portrait subtle rim",
+        "Smiling Titan portrait",
+        "Diagonal alert panel",
+        "Bottom vignette",
+        "Scout aerial guard soft shadow",
+        "Scout aerial guard subtle rim",
+        "Scout aerial guard",
+        "Title soft backing",
+        "ODM title",
+        "GEAR SIMULATION subtitle",
+        "Title underline"
+      ]
+    },
+    {
+      "file": "04_Skybound.png",
+      "label": "04 / SKYBOUND",
+      "description": "Movement first: clean teal forest, flying Scout and long cape; no Titan portrait.",
+      "layers": [
+        "Actual forest architecture",
+        "Teal depth",
+        "Sky glow",
+        "Motion accents",
+        "Scout flight and long cape soft shadow",
+        "Scout flight and long cape subtle rim",
+        "Scout flight and long cape",
+        "Title soft backing",
+        "ODM title",
+        "GEAR SIMULATION subtitle",
+        "Title underline"
+      ]
+    }
+  ],
+  "protectedSourcePathsUnchanged": 1573,
+  "nativeSubjectRenderer": "Unity 2021.3.25f1 / Intel Iris Xe / closed owned worker; no Play, native physics or source scene save."
+}

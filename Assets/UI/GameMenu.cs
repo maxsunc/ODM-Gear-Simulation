@@ -18,6 +18,7 @@ public sealed class GameMenu : MonoBehaviour
     [SerializeField] Text destinationTitle, destinationIntro, locationLabel, destinationDetails, destinationDescription, respawnNote, loadingTitle;
     [SerializeField] Image destinationPhoto, backdropPhoto;
     [SerializeField] Sprite forestImage, townImage;
+    [SerializeField] AudioClip buttonClick;
     bool loading, selectedTown;
     string DestinationPath { get { return selectedTown ? TownScenePath : ForestScenePath; } }
     string DestinationName { get { return selectedTown ? "Shiganshina" : "Giant Forest"; } }
@@ -28,6 +29,9 @@ public sealed class GameMenu : MonoBehaviour
         if (canvasRoot == null) CreateVisuals(null);
         if (EventSystem.current == null) new GameObject("Menu EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
         foreach (var source in FindObjectsOfType<AudioSource>(true)) if (source.gameObject.scene == gameObject.scene) GameAudio.Route(source, true);
+        // Include inactive pages and register before actions that hide UI or load a scene.
+        foreach (var button in canvasRoot.GetComponentsInChildren<Button>(true))
+            button.onClick.AddListener(PlayButtonClick);
         playNavigation.onClick.AddListener(ShowPlay); optionsNavigation.onClick.AddListener(ShowOptions);
         quitNavigation.onClick.AddListener(ShowQuit); back.onClick.AddListener(ShowPlay);
         quitNo.onClick.AddListener(CancelQuit); quitYes.onClick.AddListener(Quit); deploy.onClick.AddListener(Deploy);
@@ -56,6 +60,20 @@ public sealed class GameMenu : MonoBehaviour
         music.SetValueWithoutNotify(GameAudio.MusicVolume);
     }
     static string Percent(float value) { return Mathf.RoundToInt(value * 100) + "%"; }
+    void PlayButtonClick()
+    {
+        if (buttonClick == null) return;
+        var sound = new GameObject("Menu button click");
+        var source = sound.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.spatialBlend = 0;
+        source.clip = buttonClick;
+        GameAudio.Route(source);
+        // Deploy may unload Menu immediately; let the click finish across that transition.
+        DontDestroyOnLoad(sound);
+        source.Play();
+        Destroy(sound, buttonClick.length + .1f);
+    }
     void SyncOptions()
     {
         master.SetValueWithoutNotify(GameAudio.MasterVolume); sfx.SetValueWithoutNotify(GameAudio.SfxVolume); music.SetValueWithoutNotify(GameAudio.MusicVolume);
@@ -89,8 +107,15 @@ public sealed class GameMenu : MonoBehaviour
     void CancelQuit() { quitPage.gameObject.SetActive(false); quitNavigation.Select(); }
     void Quit()
     {
+        if (loading) return;
         Save();
         if (Application.isEditor) { status.text = "Quit is available in the standalone game."; CancelQuit(); return; }
+        loading = true;
+        StartCoroutine(QuitAfterClick());
+    }
+    IEnumerator QuitAfterClick()
+    {
+        if (buttonClick != null) yield return new WaitForSecondsRealtime(buttonClick.length);
         Application.Quit();
     }
     public void SelectDestination(bool town)

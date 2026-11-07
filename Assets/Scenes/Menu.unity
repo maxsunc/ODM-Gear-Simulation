@@ -742,7 +742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &39264438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4861,7 +4861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 44, y: -254}
+  m_AnchoredPosition: {x: 44, y: -146}
   m_SizeDelta: {x: 302, y: 62}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &858519981
@@ -5941,7 +5941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 44, y: -42}
+  m_AnchoredPosition: {x: 44, y: -57}
   m_SizeDelta: {x: 680, y: 66}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1067538941
@@ -5971,13 +5971,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: END THE EXPEDITION?
+  m_Text: Quit game?
 --- !u!222 &1067538942
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8273,7 +8273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382, y: -254}
+  m_AnchoredPosition: {x: 382, y: -146.00002}
   m_SizeDelta: {x: 334, y: 62}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1527142566
@@ -8669,7 +8669,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 580, y: -350}
-  m_SizeDelta: {x: 760, y: 360}
+  m_SizeDelta: {x: 760, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1590707464
 MonoBehaviour:
@@ -9299,7 +9299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1785639367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9431,6 +9431,7 @@ MonoBehaviour:
   backdropPhoto: {fileID: 64066578}
   forestImage: {fileID: 21300000, guid: bbada41e64ed7d34ba704cd231de8df3, type: 3}
   townImage: {fileID: 21300000, guid: de7692d5f6613b04d889a665a1063837, type: 3}
+  buttonClick: {fileID: 8300000, guid: 576238f9a5da36647b15407faa78f412, type: 3}
 --- !u!4 &1786967803
 Transform:
   m_ObjectHideFlags: 0

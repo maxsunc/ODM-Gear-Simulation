@@ -12071,6 +12071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   currentHP: 0
+  showHealthBar: 1
   ragdollController: {fileID: 0}
   isDead: 0
   isGrabbed: 0
@@ -43287,7 +43288,7 @@ MonoBehaviour:
     weight: 1
   automaticSpawning: 1
   initialSpawnCount: 5
-  maximumAlive: 15
+  maximumAlive: 12
   countPlacedTitans: 1
   initialDelay: 2
   minimumSpawnInterval: 2
@@ -54979,6 +54980,10 @@ MonoBehaviour:
   patrolRadius: 300
   spawnProjectionDistance: 3
   enableCombat: 1
+  stompDamage: 60
+  grabDamagePerSecond: 10
+  stompCooldown: 1.6
+  groundStompChance: 0.75
   autoRegisterSceneTitans: 1
   additionalBakeScales:
   - 3

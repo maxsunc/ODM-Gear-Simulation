@@ -1,0 +1,32 @@
+{
+  "source": "Assets/ThirdPersonCameraController.cs",
+  "sourceSHA256": "81a271b0782f6ecf34b9d43c646eb8f9e8fd063dd6afa21ac0963d222e34750f",
+  "validatedWorkerSourceMatches": true,
+  "protectedExistingAssetAndSettingsPaths": 1585,
+  "changedExistingPaths": [
+    "Assets/ThirdPersonCameraController.cs"
+  ],
+  "unchangedExistingPaths": 1584,
+  "scenePrefabAndTestFilesUnchanged": true,
+  "tests": {
+    "passed": "26",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-11-07 16:21:40Z",
+    "end-time": "2026-11-07 16:21:45Z",
+    "duration": "5.1750243"
+  },
+  "scope": "Existing integration regressions only; new camera collision/zoom feel and interaction require fresh Play review. No new test code.",
+  "intentionalWorldSpaceOffsetPreserved": [
+    5,
+    3,
+    0
+  ],
+  "cameraSettingsNotRetuned": [
+    "scene distance/minDistance/maxDistance",
+    "mouseSensitivity/inversion/pitch limits",
+    "FOV settings/curve"
+  ],
+  "committedAtCapture": false,
+  "pushedAtCapture": false
+}

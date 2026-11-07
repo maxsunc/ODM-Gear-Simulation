@@ -44,6 +44,9 @@ public static class FrontendMenuBuilder
         townImporter.sRGBTexture = true; townImporter.mipmapEnabled = false; townImporter.maxTextureSize = 2048; townImporter.SaveAndReimport();
         var menu = new GameObject("ODM Main Menu").AddComponent<GameMenu>();
         menu.CreateVisuals(AssetDatabase.LoadAssetAtPath<Sprite>(backdrop), AssetDatabase.LoadAssetAtPath<Sprite>(townBackdrop));
+        var serializedMenu = new SerializedObject(menu);
+        serializedMenu.FindProperty("buttonClick").objectReferenceValue = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/uiClick.mp3");
+        serializedMenu.ApplyModifiedPropertiesWithoutUndo();
         EditorSceneManager.SaveScene(scene, path);
         if (AssetDatabase.AssetPathToGUID(path) != guid) throw new InvalidOperationException("Menu scene GUID changed");
         Debug.Log("FRONTEND_MENU_AUTHORED guid=" + guid + " forestPath=" + GameMenu.ForestScenePath + " legacyUI=archived originalAudio=retained");

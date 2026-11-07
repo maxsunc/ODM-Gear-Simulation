@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: fd62b76413f902f4890fc9b1961cce3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FreeRoam.unity
     guid: 3fa1939b8999eb34cbd6abb6b2b4bd15
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FreeRoam (Shiganshina.unity
     guid: b9d95b7a511c21247b6340524ba3ff90
   - enabled: 1
