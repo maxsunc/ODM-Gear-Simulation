@@ -44,10 +44,13 @@
      <Compile Include="Assets\Titan\TitanState.cs" />
      <Compile Include="Assets\MenuManager.cs" />
      <Compile Include="Assets\UI\FrontendUI.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerSpeedStreaks.cs" />
      <Compile Include="Assets\GameElements.cs" />
      <Compile Include="Assets\Titan\Integration\TitanRuntimeActor.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerWindAudioPalette.cs" />
      <Compile Include="Assets\Titan\TitanLimb.cs" />
      <Compile Include="Assets\Titan\Integration\TitanSwordAudioPalette.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerFootstepAudio.cs" />
      <Compile Include="Assets\Player\Scout\PlayerDeathFeedback.cs" />
      <Compile Include="Assets\UI\GameOptions.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
@@ -62,6 +65,7 @@
      <Compile Include="Assets\Titan\Integration\ODMHookAnchor.cs" />
      <Compile Include="Assets\CameraJitterFix.cs" />
      <Compile Include="Assets\Player\Scout\ScoutCapeMeshLifetime.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerWindAudio.cs" />
      <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
      <Compile Include="Assets\ODM_Movement.cs" />
      <Compile Include="Assets\UI\GameStats.cs" />
@@ -70,6 +74,7 @@
      <Compile Include="Assets\Scripts\GameAudio.cs" />
      <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
+     <Compile Include="Assets\UI\GamePauseMenu.cs" />
      <Compile Include="Assets\PlayerRespawn.cs" />
      <Compile Include="Assets\Titan\Integration\TitanAudioPalette.cs" />
      <Compile Include="Assets\Movement.cs" />
@@ -84,13 +89,11 @@
      <Compile Include="Assets\RagdollController.cs" />
      <Compile Include="Assets\Titan\Integration\TitanStompDebris.cs" />
      <Compile Include="Assets\SceneManagement.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerFootstepAudioPalette.cs" />
      <Compile Include="Assets\DamageDealer.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
      <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
      <Compile Include="Assets\Titan\Integration\PlayerCombatPermission.cs" />
-     <Compile Include="Assets\Player\Scout\PlayerWindAudioPalette.cs" />
-     <Compile Include="Assets\UI\GamePauseMenu.cs" />
-     <Compile Include="Assets\Player\Scout\PlayerWindAudio.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />

@@ -11,9 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0c02e35ec84219b920b9cba47104db, type: 3}
   m_Name: PlayerWindAudio
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   loop: {fileID: 8300000, guid: 82697b511562eb443b5606ff3217c175, type: 3}
-  maximumVolume: 0.35
+  maximumVolume: 0.15
   minimumSpeed: 8
   fullVolumeSpeed: 55
   fadeInDuration: 0.35

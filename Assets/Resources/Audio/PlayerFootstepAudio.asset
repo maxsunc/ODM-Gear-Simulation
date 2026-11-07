@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d039aa5bc54f8db3696eaeda9bc2b8, type: 3}
+  m_Name: PlayerFootstepAudio
+  m_EditorClassIdentifier: 
+  footsteps:
+  - {fileID: 8300000, guid: 783776107a0d3bc4db2cbec3e3a7510c, type: 3}
+  - {fileID: 8300000, guid: cf0464d0437e0764ca8c8905196e1699, type: 3}
+  volume: 0.35
+  minimumPitch: 0.97
+  maximumPitch: 1.03
+  leftPlantPhase: 0.9666667
+  rightPlantPhase: 0.4666667
+  entryPlantWindow: 0.08
+  minimumPlanarSpeed: 0.6
+  maximumTrustedSpeed: 160
+  skipLeadingSilence: 1

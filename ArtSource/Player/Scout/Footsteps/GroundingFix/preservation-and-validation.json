@@ -1,0 +1,37 @@
+{
+  "scope": "Footstep silence grounding-gate fix; local, not committed/pushed",
+  "unity": "2021.3.25f1",
+  "existingProtectedPaths": 1599,
+  "unchangedExistingPaths": 1598,
+  "onlyChangedExistingAsset": [
+    "Assets/Player/Scout/PlayerFootstepAudio.cs"
+  ],
+  "hashes": {
+    "Assets/Player/Scout/PlayerFootstepAudio.cs": "0478e7e0cf3070958af2fec16db40cf8998a0a68eee9f8d4e6bc4590084012ec",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset": "49533df1d1b396c8e6f401573e92f3e51b176b0a0f6376fae6adc3251fb23a47",
+    "Assets/Resources/TitanAudioPalette.asset": "b2a1046f519ab7a1598333c58e0ce2b3b4913e7ab80a91690067bfbc0f3d7bf7",
+    "Assets/Scenes/GiantForest2.unity": "ec6df08c1050df08a7ffb56475440dc406b8c3691b67bd59d104f81aa41da287",
+    "Assets/Scenes/ShiganshinaDistrict.unity": "1bc5ec1091283b155e42a220831bb4be82ef8736e80faf1e07318d0976cb8c47",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526"
+  },
+  "existingFilteredTests": {
+    "id": "2",
+    "testcasecount": "28",
+    "result": "Passed",
+    "total": "28",
+    "passed": "28",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 19:37:15Z",
+    "end-time": "2026-11-07 19:37:20Z",
+    "duration": "5.1329381"
+  },
+  "filter": "PlayerOnlyRespawn;RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning;RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose;RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll;HeldAndReleasePendingRejectEvenForcedBaseDamageContacts;WallTeleportCancellationAndCaptureInvalidateImpactReceipts;GameAudioPlayModeTests;PowerRunAlternatesSingleFootContactWithClearFlightBetweenSteps;PowerRunExtendsRearLegAndShowsSoleParallelToTorso",
+  "liveEditorManipulated": false,
+  "newTestsOrAssertions": false,
+  "limitation": "Compiled source and existing regression checks only. New support fallback/playback not directly asserted, no reproduction or audio audition in user Play session. Fresh Play feedback still required. Earlier broad-suite failures remain."
+}

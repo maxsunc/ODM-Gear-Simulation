@@ -1,0 +1,114 @@
+{
+  "unity": "2021.3.25f1",
+  "URP": "12.1.11",
+  "scope": "Shared saved gameplay prefabs and two scene instances. Local only; no Git publication.",
+  "protectedInputPaths": 1600,
+  "unchangedInputPaths": 1597,
+  "intendedChangedExistingPaths": [
+    "Assets/Editor/SharedGameplayPrefabBuilder.cs",
+    "Assets/Scenes/GiantForest2.unity",
+    "Assets/Scenes/ShiganshinaDistrict.unity"
+  ],
+  "publishedSha256": {
+    "Assets/Prefabs/SharedGameplay/EventSystem.prefab": "0f5568baee7a19086c7928f40db3208584a59326dbfac1361b6cd1385df41edc",
+    "Assets/Prefabs/SharedGameplay/EventSystem.prefab.meta": "6f0b653e510f3cc177dafa1668c1c627f1887b9280161b7c3608a071eeecd39f",
+    "Assets/Prefabs/SharedGameplay/GameManager.prefab": "28ad54dabee17b346d41e4ad6f5a6e07ad78f99455cfd4ba410c2e180d251edf",
+    "Assets/Prefabs/SharedGameplay/GameManager.prefab.meta": "3ff0adc08a24eefade0d43f47915302edff8b95d51abfd1714920626d1d31077",
+    "Assets/Prefabs/SharedGameplay/HUD.prefab": "1c4cc86bc44ed86763ae4e35cdde38414f01ddd6c7ce0b8f1eaf209d74587a05",
+    "Assets/Prefabs/SharedGameplay/HUD.prefab.meta": "387ad925a2b6dd8997d801f730b4218cc210b39c632aad0100096bb14e7ba69a",
+    "Assets/Prefabs/SharedGameplay/LeftHook.prefab": "9f6c48f828ca7f2d723c20bbb7621d72a7a728d718853b4f81b108b0d44a8ea0",
+    "Assets/Prefabs/SharedGameplay/LeftHook.prefab.meta": "df7faf248ad094bdd1750cc6f44369a619553c33c93c9a5d0332f87f76f30fcc",
+    "Assets/Prefabs/SharedGameplay/MainCamera.prefab": "6755192df85cf66573ab7ff4a63ffdae008786d6a45c000e936615fcd66c4f61",
+    "Assets/Prefabs/SharedGameplay/MainCamera.prefab.meta": "ebc18680b3ed5623bdd084773c646e798b89092775416235b37e571610258733",
+    "Assets/Prefabs/SharedGameplay/MusicSource.prefab": "6c1a787cf705c63e4b7946dafad1de3c867cb6d635d891a19db4a760a1fda212",
+    "Assets/Prefabs/SharedGameplay/MusicSource.prefab.meta": "46d563882f7d69ef0bb6b827e8bf7a311d2b1ba767ad1f13f97cd7ffedf44039",
+    "Assets/Prefabs/SharedGameplay/Player.prefab": "caf39ceecfe6fd5fe55e6b7b8c33120cd88264ab5fff74fd75c9673620fd3dde",
+    "Assets/Prefabs/SharedGameplay/Player.prefab.meta": "2517409cc7e0a6a0186852a3ec290064866d3b8bc4ab5db5ac5946bc3a6a5867",
+    "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab": "0bbb81471c071fb3e67cea01f47fa4f10de5ab74c4687d3d9ad825d47fa496f6",
+    "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab.meta": "ae053d22ad95ca4f51a4b0ccb1a6084cb272214e04bee500ec89d48890e31efc",
+    "Assets/Prefabs/SharedGameplay/RightLine.prefab": "9fc56127b5c8b0fd291076aa5ccee434fb4a6bc0178a474b27cd29d91e73023b",
+    "Assets/Prefabs/SharedGameplay/RightLine.prefab.meta": "03651f733591bfa129ace62be8457359975f94f9871f0637baed2d191a4e3c07",
+    "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab": "18bad57861f7da0b14bb1d87c188fbea408d322ac52fdfe41ae5e621491fe047",
+    "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab.meta": "e8bf722268944452add37641b5b8a8a7a41f93601db4100878a85cc144b630b4",
+    "Assets/Scenes/GiantForest2.unity": "6c0e98680ba97a4fdcaaf2711206990f4ba353aadb4048bd7ec49b55770e4f66",
+    "Assets/Scenes/ShiganshinaDistrict.unity": "8dae816ff057607c0fcf4e7a6503ffe70ddd99fecf1770f90de307a3c1805a43",
+    "Assets/Prefabs/SharedGameplay.meta": "44bd6644abf5da1b6cdef85461cdb67ea61d820ddee7a6382688259779a0cc3f"
+  },
+  "preservedSha256": {
+    "Assets/Scenes/GiantForest2.unity.meta": "1fa19dce4c6173937ae565d6865e53935cfe36af2f5f1926d0afd856c4a1d76e",
+    "Assets/Scenes/ShiganshinaDistrict.unity.meta": "465e70a652a3ed85d5cf35b4203426f1f3877342a354d30e487ababe0a43ee84",
+    "Assets/Resources/TitanAudioPalette.asset": "ef357b3a8e9128d53e337b6ee20d7e731a0f8fc846aa6f67e9b490f0a939bf8e",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset": "e01e44841004fa92305af993c0f1668675c214baee63c9c3f7716867871be70f",
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "Assets/Player/Scout/PlayerFootstepAudio.cs": "0478e7e0cf3070958af2fec16db40cf8998a0a68eee9f8d4e6bc4590084012ec",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "Assets/Prefabs/Player/ScoutVisual.prefab": "c0f40910770a1e847aefa6992411a3be57684460cbaac54299f169c00e176d86",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "38291ad9da22c39d286665cd2aee6688bef09a1a3645fda81541035eb93a9dae"
+  },
+  "linkedInstances": {
+    "GiantForest2": {
+      "EventSystem.prefab": 1,
+      "GameManager.prefab": 1,
+      "HUD.prefab": 1,
+      "LeftHook.prefab": 1,
+      "MainCamera.prefab": 1,
+      "MusicSource.prefab": 1,
+      "Player.prefab": 1,
+      "PlayerFollower.prefab": 1,
+      "RightLine.prefab": 1,
+      "TitanSpawner.prefab": 1
+    },
+    "ShiganshinaDistrict": {
+      "EventSystem.prefab": 1,
+      "GameManager.prefab": 1,
+      "HUD.prefab": 1,
+      "LeftHook.prefab": 1,
+      "MainCamera.prefab": 1,
+      "MusicSource.prefab": 1,
+      "Player.prefab": 1,
+      "PlayerFollower.prefab": 1,
+      "RightLine.prefab": 1,
+      "TitanSpawner.prefab": 1
+    }
+  },
+  "canonicalOwnerCounts": {
+    "Assets/Scenes/GiantForest2.unity": 12970,
+    "Assets/Scenes/ShiganshinaDistrict.unity": 9971
+  },
+  "normalizationExceptions": [
+    "Native prefab identity/file IDs are not gameplay values; references normalized by hierarchy/component or asset GUID/local ID.",
+    "Native screen-space root Canvas driven layout is excluded, while all authored child UI and Canvas/Scaler settings are checked.",
+    "Legacy FBX editor-only BoneRenderer order may normalize; its data/presence and all runtime component ordering are checked."
+  ],
+  "existingRegressions": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 21:02:45Z",
+    "end-time": "2026-11-07 21:02:55Z",
+    "duration": "10.6890413"
+  },
+  "existingFilter": "AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid;SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake;PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic",
+  "workerPlayPreferencesIsolated": true,
+  "sceneSingletonSettingsUnchanged": [
+    "RenderSettings",
+    "LightmapSettings",
+    "NavMeshSettings",
+    "OcclusionCullingSettings"
+  ],
+  "noNewTestsOrAssertionEdits": true,
+  "noLiveEditorControl": true,
+  "limitations": [
+    "No full-suite rerun; earlier broad-suite failures unresolved.",
+    "No new Shiganshina live runtime traversal or crowd checks.",
+    "Fresh user Play on both maps, UI/input/audio/feel and device/build/performance review still required."
+  ]
+}

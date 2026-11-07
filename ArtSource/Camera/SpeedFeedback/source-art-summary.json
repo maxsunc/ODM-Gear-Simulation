@@ -1,0 +1,28 @@
+{
+  "sourceHashes": {
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "Assets/Player/Scout/PlayerSpeedStreaks.cs": "64f5e8eaaa4bbcba2f1a837091d887b26d2714fc6364e83d738f30177df1b27e",
+    "Assets/UI/FrontendUI.cs": "8d6bffa4c17a28cd0030e173c824806ff56a119a8ee999161e8ce1007f19af7b"
+  },
+  "nativeStaticArt": true,
+  "background": "Existing saved frontend map-photo sprites",
+  "gameplayOrInputTested": false,
+  "fovPerspectiveDemonstrated": false,
+  "physicsStepped": false,
+  "prefsWritten": false,
+  "sizes": [
+    [
+      1920,
+      1080
+    ],
+    [
+      1440,
+      1080
+    ]
+  ],
+  "appearance": {
+    "edgeBand": 0.14,
+    "maximumOpacity": 0.16,
+    "peakStrength": 1
+  }
+}

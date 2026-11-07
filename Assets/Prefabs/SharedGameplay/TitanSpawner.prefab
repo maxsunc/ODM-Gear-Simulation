@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3996968183959753175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3996968183959753173}
+  - component: {fileID: 3996968183959753172}
+  m_Layer: 0
+  m_Name: TitanSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3996968183959753173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3996968183959753175}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3996968183959753172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3996968183959753175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02912748046a43cdbab8f9d9feebf30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneManager: {fileID: 0}
+  titanPrefab: {fileID: 488049221726675542, guid: 990bc66ea34e7f4448417b5c71954f8f,
+    type: 3}
+  sizes:
+  - scale: 3
+    weight: 1
+  - scale: 5
+    weight: 1
+  - scale: 6
+    weight: 1
+  - scale: 4
+    weight: 1
+  automaticSpawning: 1
+  initialSpawnCount: 5
+  maximumAlive: 12
+  countPlacedTitans: 1
+  initialDelay: 2
+  minimumSpawnInterval: 2
+  maximumSpawnInterval: 4
+  failedAttemptRetryDelay: 1
+  randomSeed: 0
+  minimumPlayerDistance: 80
+  maximumPlayerDistance: 0
+  minimumTitanSeparation: 15
+  candidateAttempts: 24
+  useCustomBounds: 1
+  spawnBounds:
+    m_Center: {x: 0, y: 100, z: 0}
+    m_Extent: {x: 700, y: 150, z: 700}
+  warningDuration: 0.65
+  effectsEnabled: 1
+  localFlashLight: 1
+  lightningMaterial: {fileID: 2100000, guid: f46b02ccdc0a4121ba9b2b78cdba3b98, type: 2}
+  particleMaterial: {fileID: 2100000, guid: daeaa55db3201684d88ca43165072bfc, type: 2}
+  spawnSound: {fileID: 0}
+  useDefaultSpawnSound: 1
+  soundVolume: 0.1
+  soundMaxDistance: 600
+  effectPoolSize: 4
+  corpseLifetime: 25
+  maximumRetainedCorpses: 6
+  despawnOwnedOnDestroy: 1

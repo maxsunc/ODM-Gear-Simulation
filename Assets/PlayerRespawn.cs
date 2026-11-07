@@ -123,6 +123,7 @@ public sealed class PlayerRespawn : MonoBehaviour
         var feedback=GetComponent<PlayerDeathFeedback>();if(feedback!=null)feedback.ResetForRespawn();
         var sword=GetComponent<TitanSwordFeedback>();if(sword!=null)sword.ResetForRespawn();
         var wind=GetComponent<PlayerWindAudio>();if(wind!=null)wind.ResetMotionHistory();
+        var footsteps=GetComponent<PlayerFootstepAudio>();if(footsteps!=null)footsteps.ResetMotionHistory();
         foreach(var p in GetComponentsInChildren<ParticleSystem>(true))p.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         foreach(var t in GetComponentsInChildren<TrailRenderer>(true)){t.emitting=false;t.Clear();}
         health.CompleteRespawn();

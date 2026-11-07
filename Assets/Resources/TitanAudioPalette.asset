@@ -21,10 +21,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dcb28fdcd9609fb4a8cbd5c6f94437e8, type: 3}
   spawnLightning: {fileID: 8300000, guid: d4a85f01f06a53642bdb9c1d9f8a9900, type: 3}
   eaten: {fileID: 8300000, guid: daa45f9735d6a884c92161780418f884, type: 3}
-  screamVolume: 0.3
-  footstepVolume: 0.25
-  eatenVolume: 0.85
   grab: {fileID: 8300000, guid: ba46762d293ab984a96b72cb5ac8a3ce, type: 3}
-  grabVolume: 1
   stomp: {fileID: 8300000, guid: 4c7da9ae3b9e8514684c509a55d7c2d4, type: 3}
-  stompVolume: 0.25
+  screamVolume: 0.3
+  footstepVolume: 0.1
+  eatenVolume: 0.85
+  grabVolume: 1
+  stompVolume: 0.4

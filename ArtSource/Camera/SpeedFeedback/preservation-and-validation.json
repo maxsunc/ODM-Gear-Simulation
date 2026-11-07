@@ -1,0 +1,37 @@
+{
+  "protectedExistingAssetAndSettingsPaths": 1585,
+  "changedExistingPaths": [
+    "Assets/ThirdPersonCameraController.cs"
+  ],
+  "unchangedExistingPaths": 1584,
+  "newRuntimePaths": [
+    "Assets/Player/Scout/PlayerSpeedStreaks.cs",
+    "Assets/Player/Scout/PlayerSpeedStreaks.cs.meta"
+  ],
+  "windAudioScenePrefabSettingsAndTestBytesUnchanged": true,
+  "tests": {
+    "id": "2",
+    "testcasecount": "26",
+    "result": "Passed",
+    "total": "26",
+    "passed": "26",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 18:26:30Z",
+    "end-time": "2026-11-07 18:26:35Z",
+    "duration": "5.2784012"
+  },
+  "sourceHashes": {
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "Assets/Player/Scout/PlayerSpeedStreaks.cs": "64f5e8eaaa4bbcba2f1a837091d887b26d2714fc6364e83d738f30177df1b27e"
+  },
+  "workerSourcesMatch": true,
+  "fullSuiteRerun": false,
+  "subjectiveGameplayFeelAndInputCertified": false,
+  "committedAtCapture": false,
+  "pushedAtCapture": false
+}

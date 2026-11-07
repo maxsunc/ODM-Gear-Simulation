@@ -1,0 +1,58 @@
+{
+  "scope": "Local player-footstep implementation; no publication performed. Git history is authoritative.",
+  "unity": "2021.3.25f1",
+  "protectedExistingPaths": 1593,
+  "unchangedExistingPaths": 1591,
+  "intendedExistingChanges": [
+    "Assets/PlayerHealth.cs",
+    "Assets/PlayerRespawn.cs"
+  ],
+  "sourceSha256": {
+    "Assets/Player/Scout/PlayerFootstepAudio.cs": "544382e4a67c1605eaebaf3a9cfa9a6760405ceb9ea020ed02b2650405b7f0ae",
+    "Assets/Player/Scout/PlayerFootstepAudio.cs.meta": "035e1d080b55b59b4493cfc6233bd9532d68dbf350e86235b5742678891fe31e",
+    "Assets/Player/Scout/PlayerFootstepAudioPalette.cs": "b361bf59f3b2a2995276bbf832fa9274555f625028ea027679687ef0669d683f",
+    "Assets/Player/Scout/PlayerFootstepAudioPalette.cs.meta": "638e3cf80f941dc504273a56a6dc849ca64a55f341816d82fbf26c2448ffbd02",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset": "892cc54bd5235f51d76fb1d6e1fb1e3158d62dd0a03e32aa5095dfa9c139634e",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset.meta": "1fdf0c48966a5495c2fc01d503a4389ad7f1c8cb1fda15cbb0e4873755cb3008",
+    "Assets/PlayerHealth.cs": "d596890cd0102a2d531f16e44d5300f629706dc596c11504e98b1b4c99ae0807",
+    "Assets/PlayerRespawn.cs": "8d719237c03332b24e80d58b335c61566755cc5fec14f3d3e7f624dde2bcb102",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "Assets/Player/Scout/PlayerWindAudio.cs": "d618c68ab6deb00dafd45723fc6d28061c73bb900eb16a539b9f1d7ec2219ea8",
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "Assets/Audio/yarzur_ofc-st1-footstep-sfx-323053.mp3": "7323ad0d5ab199632685d72460781f9bcd24cf8375ebffb215fa6dd811e27479",
+    "Assets/Audio/yarzur_ofc-st1-footstep-sfx-323053.mp3.meta": "0aabf4086685e8b84c8fd578fb510bf3ee2e52e6e31790ae76477442e4fa715b",
+    "Assets/Audio/yarzur_ofc-st2-footstep-sfx-323055.mp3": "d7e33f98db100d4fbf81bcc3fcaa8e4c49231d759c7522e693db8e1ec18a278f",
+    "Assets/Audio/yarzur_ofc-st2-footstep-sfx-323055.mp3.meta": "ae54ee01901b727d0d41d0625e3534b03795f7274b65ff710f8f412965729af1",
+    "Assets/Audio/yarzur_ofc-st3-footstep-sfx-323056.mp3": "6b7c94897b6de72e8c10b4fb80e71d59ca9dee6acf00e3f40181d73e1987d0c2",
+    "Assets/Audio/yarzur_ofc-st3-footstep-sfx-323056.mp3.meta": "d308200560d205eb316978f530c69779923511fd8b86a8491b8bf049af7d15aa"
+  },
+  "existingTests": {
+    "id": "2",
+    "testcasecount": "28",
+    "result": "Passed",
+    "total": "28",
+    "passed": "28",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 19:19:32Z",
+    "end-time": "2026-11-07 19:19:38Z",
+    "duration": "5.5816828"
+  },
+  "filter": "PlayerOnlyRespawn;RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning;RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose;RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll;HeldAndReleasePendingRejectEvenForcedBaseDamageContacts;WallTeleportCancellationAndCaptureInvalidateImpactReceipts;GameAudioPlayModeTests;PowerRunAlternatesSingleFootContactWithClearFlightBetweenSteps;PowerRunExtendsRearLegAndShowsSoleParallelToTorso",
+  "assetInspection": "Static imported audio and protected visual-only Run samples in closed owned worker. No Play, physics stepping, source scene saves or preferences during asset inspection. Existing PlayMode checks ran only in the disposable worker. No live user Editor manipulated.",
+  "limitations": [
+    "No new tests or assertion edits; existing filtered checks do not directly certify the new footstep lifecycle.",
+    "Not a full-suite rerun; earlier broad-suite failures remain unresolved.",
+    "Fresh Play listening on both maps, timing comfort/balance and device/WebGL/DSP output latency remain manual checks."
+  ],
+  "preserved": [
+    "Supplied MP3 bytes and importer GUID/settings",
+    "Protected Run animation, rig, controller and gait playback",
+    "User scene/prefab/settings edits",
+    "Existing camera/speed feedback and wind/Titan audio"
+  ]
+}

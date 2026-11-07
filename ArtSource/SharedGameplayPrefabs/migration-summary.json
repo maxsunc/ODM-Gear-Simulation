@@ -1,0 +1,2133 @@
+{
+  "unity": "2021.3.25f1",
+  "authoredAt": "2026-11-07T21:00:32.9325264Z",
+  "prefabs": [
+    "Assets/Prefabs/SharedGameplay/Player.prefab",
+    "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+    "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+    "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+    "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+    "Assets/Prefabs/SharedGameplay/HUD.prefab",
+    "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+    "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+    "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+    "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab"
+  ],
+  "scenes": [
+    {
+      "scene": "Assets/Scenes/GiantForest2.unity",
+      "objects": 4095,
+      "components": 8875,
+      "preservedOwners": 12970,
+      "roots": [
+        "GameManager",
+        "Directional Light",
+        "Canvas",
+        "ThirdPeronscam",
+        "Main Camera",
+        "Player",
+        "CollisionParticle",
+        "EventSystem",
+        "RightLine",
+        "LeftHook",
+        "PLayerFollower",
+        "TmpMusicElement",
+        "Giant Forest 2 Titan navigation",
+        "Titan random spawner",
+        "Giant Forest 2.0 [generated environment]"
+      ],
+      "overrides": [
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Movement",
+          "property": "cam",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Movement",
+          "property": "groundCheck",
+          "value": "",
+          "reference": "component:Canvas/6:Groundcheck:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:GameObject",
+          "property": "m_Name",
+          "value": "Player",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "camAnim",
+          "value": "",
+          "reference": "component:ThirdPeronscam:UnityEngine.Animator#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "camTransform",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "lines.Array.data[0]",
+          "value": "",
+          "reference": "component:RightLine:UnityEngine.LineRenderer#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "lines.Array.data[1]",
+          "value": "",
+          "reference": "component:LeftHook:UnityEngine.LineRenderer#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_RootOrder",
+          "value": "5",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "12",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-550",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:TitanSwordFeedback",
+          "property": "playerCamera",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Camera#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:ThirdPersonCameraController",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_RootOrder",
+          "value": "4",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "10.068333",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "13.66973",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-553.5771",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "0.88967144",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.037753943",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "-0.45462856",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.019292545",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:GameObject",
+          "property": "m_Name",
+          "value": "Main Camera",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:GameObject",
+          "property": "m_Name",
+          "value": "PLayerFollower",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_RootOrder",
+          "value": "10",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "-1.4162605",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "11.66973",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-545.9392",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:FollowPos",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_RootOrder",
+          "value": "9",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "1.9110007",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-0.096999794",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0.8000005",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "-0.70649093",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.029507872",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0.029507767",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.7064908",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "90",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:GameObject",
+          "property": "m_Name",
+          "value": "LeftHook",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:GameObject",
+          "property": "m_Name",
+          "value": "RightLine",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_RootOrder",
+          "value": "8",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0.5748109",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-0.17357975",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0.7358453",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "-0.70649093",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.029507872",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0.029507767",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.7064908",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "90",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:GameObject",
+          "property": "m_Name",
+          "value": "Canvas",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_Pivot.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_Pivot.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_RootOrder",
+          "value": "2",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMax.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMax.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMin.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMin.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_SizeDelta.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_SizeDelta.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchoredPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchoredPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "Groundcheck:FollowPos",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:GameObject",
+          "property": "m_Name",
+          "value": "EventSystem",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_RootOrder",
+          "value": "7",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "sun",
+          "value": "",
+          "reference": "component:Directional Light:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "panel",
+          "value": "",
+          "reference": "go:Canvas/5:Menu"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "player",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameObject",
+          "property": "m_Name",
+          "value": "GameManager",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_RootOrder",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "4.091215",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-29.057083",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "61.143513",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_RootOrder",
+          "value": "11",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "-5.205238",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "3.3027384",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "2.5256398",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:GameObject",
+          "property": "m_Name",
+          "value": "TmpMusicElement",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "sceneManager",
+          "value": "",
+          "reference": "component:Giant Forest 2 Titan navigation:TitanFreeRoamIntegration#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_RootOrder",
+          "value": "13",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:GameObject",
+          "property": "m_Name",
+          "value": "Titan random spawner",
+          "reference": "null"
+        }
+      ]
+    },
+    {
+      "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+      "objects": 2747,
+      "components": 7224,
+      "preservedOwners": 9971,
+      "roots": [
+        "GameManager",
+        "Directional Light",
+        "Canvas",
+        "ThirdPeronscam",
+        "Main Camera",
+        "Player",
+        "CollisionParticle",
+        "EventSystem",
+        "RightLine",
+        "LeftHook",
+        "PLayerFollower",
+        "TmpMusicElement",
+        "Shiganshina Titan navigation",
+        "Titan random spawner",
+        "Shiganshina District [owned generated environment]"
+      ],
+      "overrides": [
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Movement",
+          "property": "cam",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Movement",
+          "property": "groundCheck",
+          "value": "",
+          "reference": "component:Canvas/6:Groundcheck:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:GameObject",
+          "property": "m_Name",
+          "value": "Player",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "camAnim",
+          "value": "",
+          "reference": "component:ThirdPeronscam:UnityEngine.Animator#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "camTransform",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "lines.Array.data[0]",
+          "value": "",
+          "reference": "component:RightLine:UnityEngine.LineRenderer#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:ODM_Movement",
+          "property": "lines.Array.data[1]",
+          "value": "",
+          "reference": "component:LeftHook:UnityEngine.LineRenderer#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_RootOrder",
+          "value": "10",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "2",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-585",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/Player.prefab",
+          "target": "Player:TitanSwordFeedback",
+          "property": "playerCamera",
+          "value": "",
+          "reference": "component:Main Camera:UnityEngine.Camera#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:ThirdPersonCameraController",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_RootOrder",
+          "value": "9",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "10.068333",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "3.6697302",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-588.5771",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "0.88967144",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.037753943",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "-0.45462856",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.019292545",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MainCamera.prefab",
+          "target": "MainCamera:GameObject",
+          "property": "m_Name",
+          "value": "Main Camera",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:GameObject",
+          "property": "m_Name",
+          "value": "PLayerFollower",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_RootOrder",
+          "value": "8",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "-1.4162605",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "1.6697302",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "-580.9392",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/PlayerFollower.prefab",
+          "target": "PlayerFollower:FollowPos",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_RootOrder",
+          "value": "7",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "1.9110007",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-0.096999794",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0.8000005",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "-0.70649093",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.029507872",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0.029507767",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.7064908",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "90",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/LeftHook.prefab",
+          "target": "LeftHook:GameObject",
+          "property": "m_Name",
+          "value": "LeftHook",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:GameObject",
+          "property": "m_Name",
+          "value": "RightLine",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_RootOrder",
+          "value": "6",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0.5748109",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-0.17357975",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0.7358453",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "-0.70649093",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0.029507872",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0.029507767",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0.7064908",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "90",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/RightLine.prefab",
+          "target": "RightLine:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:GameObject",
+          "property": "m_Name",
+          "value": "Canvas",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_Pivot.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_Pivot.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_RootOrder",
+          "value": "5",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMax.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMax.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMin.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchorMin.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_SizeDelta.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_SizeDelta.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchoredPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_AnchoredPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "HUD:RectTransform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/HUD.prefab",
+          "target": "Groundcheck:FollowPos",
+          "property": "target",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:GameObject",
+          "property": "m_Name",
+          "value": "EventSystem",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_RootOrder",
+          "value": "4",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/EventSystem.prefab",
+          "target": "EventSystem:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "sun",
+          "value": "",
+          "reference": "component:Directional Light:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "panel",
+          "value": "",
+          "reference": "go:Canvas/5:Menu"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameElements",
+          "property": "player",
+          "value": "",
+          "reference": "component:Player:UnityEngine.Transform#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:GameObject",
+          "property": "m_Name",
+          "value": "GameManager",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_RootOrder",
+          "value": "3",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "4.091215",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "-29.057083",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "61.143513",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/GameManager.prefab",
+          "target": "GameManager:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_RootOrder",
+          "value": "2",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "-5.205238",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "3.3027384",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "2.5256398",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/MusicSource.prefab",
+          "target": "MusicSource:GameObject",
+          "property": "m_Name",
+          "value": "TmpMusicElement",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "soundVolume",
+          "value": "0.25",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "sceneManager",
+          "value": "",
+          "reference": "component:Shiganshina Titan navigation:TitanFreeRoamIntegration#0"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "sizes.Array.size",
+          "value": "3",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "spawnBounds.m_Center.y",
+          "value": "50",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "spawnBounds.m_Center.z",
+          "value": "-50",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "spawnBounds.m_Extent.x",
+          "value": "650",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "spawnBounds.m_Extent.y",
+          "value": "60",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:TitanRandomSpawner",
+          "property": "spawnBounds.m_Extent.z",
+          "value": "600",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_RootOrder",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalPosition.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.w",
+          "value": "1",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalRotation.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.x",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.y",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:Transform",
+          "property": "m_LocalEulerAnglesHint.z",
+          "value": "0",
+          "reference": "null"
+        },
+        {
+          "prefab": "Assets/Prefabs/SharedGameplay/TitanSpawner.prefab",
+          "target": "TitanSpawner:GameObject",
+          "property": "m_Name",
+          "value": "Titan random spawner",
+          "reference": "null"
+        }
+      ]
+    }
+  ]
+}
