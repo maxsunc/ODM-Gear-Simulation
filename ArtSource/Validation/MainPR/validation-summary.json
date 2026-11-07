@@ -1,0 +1,109 @@
+{
+  "scope": "Unfiltered existing Titan worker suite only, not all project/map assemblies or a standalone build. No new test code or assertion edits.",
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "testFilter": null,
+  "unityExitCode": 2,
+  "result": {
+    "id": "2",
+    "testcasecount": "458",
+    "result": "Failed(Child)",
+    "total": "458",
+    "passed": "445",
+    "failed": "12",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 16:34:32Z",
+    "end-time": "2026-11-07 16:35:13Z",
+    "duration": "40.5317827"
+  },
+  "failed": [
+    {
+      "name": "ModularTitanPlayModeTests.IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  3.32189631f\n",
+      "stack": "at ModularTitanPlayModeTests+<IntactBodyHasWorkingAnimationAndKinematicPhysics>d__6.MoveNext () [0x001fb] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\ModularTitanPlayModeTests.cs:59\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    },
+    {
+      "name": "ScoutHeldStrugglePlayModeTests.HeldLoopHasNoSeamSnapAt120HzAndDoesNotModifyTheModelRoot",
+      "message": "  Expected: less than 2\n  But was:  3.93702865f\n",
+      "stack": "at ScoutHeldStrugglePlayModeTests.HeldLoopHasNoSeamSnapAt120HzAndDoesNotModifyTheModelRoot () [0x00137] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\ScoutHeldStrugglePlayModeTests.cs:37\n"
+    },
+    {
+      "name": "ScoutHeldStrugglePlayModeTests.HeldLoopMovesRealSkinAndRestrainedLimbsWithoutTranslatingOrScalingAnyBone",
+      "message": "  Expected: 1.20000005f +/- 0.00100000005f\n  But was:  1.79999995f\n",
+      "stack": "at ScoutHeldStrugglePlayModeTests.HeldLoopMovesRealSkinAndRestrainedLimbsWithoutTranslatingOrScalingAnyBone () [0x0002d] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\ScoutHeldStrugglePlayModeTests.cs:16\n"
+    },
+    {
+      "name": "ScoutPlayerPlayModeTests.NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n",
+      "stack": "at ScoutPlayerPlayModeTests.NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel () [0x00270] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\ScoutPlayerPlayModeTests.cs:461\n"
+    },
+    {
+      "name": "ScoutPlayerPlayModeTests.NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n",
+      "stack": "at ScoutPlayerPlayModeTests.NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso () [0x00102] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\ScoutPlayerPlayModeTests.cs:432\n"
+    },
+    {
+      "name": "TitanAudioPlayModeTests.BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n",
+      "stack": "at TitanAudioPlayModeTests.BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched () [0x00178] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanAudioPlayModeTests.cs:54\n"
+    },
+    {
+      "name": "TitanAudioPlayModeTests.PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n",
+      "stack": "at TitanAudioPlayModeTests.PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics () [0x00052] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanAudioPlayModeTests.cs:39\n"
+    },
+    {
+      "name": "TitanGrabPlayModeTests.BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n",
+      "stack": "at TitanGrabPlayModeTests.Begin (System.Boolean left) [0x0001a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanGrabPlayModeTests.cs:50\nat TitanGrabPlayModeTests+<BlindnessAndEitherLegLossCancelAndReleaseImmediately>d__19.MoveNext () [0x00083] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanGrabPlayModeTests.cs:183\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    },
+    {
+      "name": "TitanMotionStylePlayModeTests.GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.487501413f\n",
+      "stack": "at TitanMotionStylePlayModeTests+<GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace>d__6.MoveNext () [0x00068] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanMotionStylePlayModeTests.cs:45\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    },
+    {
+      "name": "TitanMotionStylePlayModeTests.HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  4.26534796f\n",
+      "stack": "at TitanMotionStylePlayModeTests+<HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning>d__11.MoveNext () [0x00117] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanMotionStylePlayModeTests.cs:145\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    },
+    {
+      "name": "TitanODMIntegrationPlayModeTests.EscapeQteBlockedExitCancelsBiteImmediatelyAndKeepsSuspensionUntilSceneryClears",
+      "message": "  Expected: 1\n  But was:  4.0f\n",
+      "stack": "at TitanODMIntegrationPlayModeTests+<EscapeQteBlockedExitCancelsBiteImmediatelyAndKeepsSuspensionUntilSceneryClears>d__175.MoveNext () [0x00127] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanODMIntegrationPlayModeTests.cs:1099\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    },
+    {
+      "name": "TitanODMIntegrationPlayModeTests.EscapeQteGraceBlocksAllHandsForOneSecondButNeverBlocksDamage",
+      "message": "  Expected: 1\n  But was:  4.0f\n",
+      "stack": "at TitanODMIntegrationPlayModeTests+<EscapeQteGraceBlocksAllHandsForOneSecondButNeverBlocksDamage>d__176.MoveNext () [0x00048] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Assets\\Tests\\TitanPrototype\\PlayMode\\TitanODMIntegrationPlayModeTests.cs:1105\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n"
+    }
+  ],
+  "skipped": [
+    {
+      "name": "ScoutCapeClothPlayModeTests.NativeGraphicsShowLongerSimulatedCapeWithOriginalScoutArt",
+      "reason": "Native capture is explicitly opt-in in the owned worker"
+    }
+  ],
+  "workspaceAndWorkerMatchingSHA256": {
+    "Assets/ThirdPersonCameraController.cs": "81a271b0782f6ecf34b9d43c646eb8f9e8fd063dd6afa21ac0963d222e34750f",
+    "Assets/UI/GameMenu.cs": "c79e673005754e15bd246220ee91ece2546a402e0d6573535539f542a0bc4e43",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "38291ad9da22c39d286665cd2aee6688bef09a1a3645fda81541035eb93a9dae",
+    "Assets/PlayerHealth.cs": "adf2fe942c9be7837c4013374606105572bb266322de5b7b5b7762111dc7d687",
+    "Assets/PlayerRespawn.cs": "9599a1a6bece315495ad8680ca979a8821075b84537c9dc1dee6c70063cdd08a",
+    "Assets/GameElements.cs": "86cacc9c9d21bcc01d0d188207d7ca724da54bfb80758eee8552279c5214c574",
+    "Assets/UI/GamePauseMenu.cs": "547530e1ff261319def4f0981ca40b5c90fc8195744e3435ec54d0dd1da6e38c",
+    "Assets/UI/GameStats.cs": "ad66096466d7e391fb0358f310eb9fbc915070c135a7cca760da96de9a803f89",
+    "Assets/Player/Scout/PlayerWindAudio.cs": "d618c68ab6deb00dafd45723fc6d28061c73bb900eb16a539b9f1d7ec2219ea8",
+    "Assets/Resources/TitanAudioPalette.asset": "f808f18ab06cd30427c4176be72e764ee6fd8d178cd27baee5fa5cdd340e5b95",
+    "Assets/Resources/Audio/PlayerWindAudio.asset": "1f6bd4bb815050c96989c9bca3b6377302b9d7af3b11268e8c6e53091a706135"
+  },
+  "sourceHeadAtRun": "7fe5c488dec0cc3eda6ca88069bd64d8c7fc3634",
+  "workspaceIncludesUncommittedFinalPolish": true,
+  "publishedAtCapture": false,
+  "nativeUserEditorControlled": false,
+  "nativeUserSceneSaved": false
+}

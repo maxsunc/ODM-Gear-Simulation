@@ -1,0 +1,636 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "windowSeconds": 3,
+  "correctPresses": 3,
+  "keys": [
+    "W",
+    "A",
+    "S",
+    "D",
+    "Q",
+    "E"
+  ],
+  "wrongKey": "Reset progress, retain original deadline",
+  "escapeLaunchMetresPerSecond": {
+    "up": 6,
+    "away": 6
+  },
+  "regrabProtectionSecondsAfterSafeRelease": 1,
+  "protectedSourceHashesUnchanged": {
+    "Assets/Scenes/GiantForest2.unity": "5aee8a7592d2e5a979989d942efe2efddeba9768086edc7fc1ce213ff3735123",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "70ddb0b9647d9eaf35b7a9ad6ffc7e517f3d3d70567d9b3180552d458305f2ed",
+    "Assets/Resources/TitanAudioPalette.asset": "3ba577f226281d983c3f15c63cab8811191baf1826fc4d43db2855c78a865dc0",
+    "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+    "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+    "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+    "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+    "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+    "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+    "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+    "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675"
+  },
+  "freshPreCodeBaseline": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "265",
+      "result": "Failed(Child)",
+      "total": "265",
+      "passed": "257",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 21:25:11Z",
+      "end-time": "2026-11-05 21:25:41Z",
+      "duration": "30.0122578"
+    },
+    "failures": [
+      {
+        "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+        "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+      },
+      {
+        "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+        "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+      },
+      {
+        "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+        "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+      },
+      {
+        "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+        "message": "  Expected: 2\n  But was:  1\n"
+      },
+      {
+        "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+        "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+      },
+      {
+        "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+        "message": "  Expected: True\n  But was:  False\n"
+      },
+      {
+        "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+        "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+      }
+    ]
+  },
+  "firstFinalFullRun": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "300",
+      "result": "Failed(Child)",
+      "total": "300",
+      "passed": "292",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 21:55:21Z",
+      "end-time": "2026-11-05 21:55:53Z",
+      "duration": "32.2118303"
+    },
+    "failures": [
+      "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace"
+    ]
+  },
+  "secondFinalFullRun": {
+    "id": "2",
+    "testcasecount": "300",
+    "result": "Failed(Child)",
+    "total": "300",
+    "passed": "292",
+    "failed": "7",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 21:58:33Z",
+    "end-time": "2026-11-05 21:59:04Z",
+    "duration": "30.9511427"
+  },
+  "finalExistingFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    }
+  ],
+  "newCases": [
+    {
+      "name": "EscapeQteBlockedExitCancelsBiteImmediatelyAndKeepsSuspensionUntilSceneryClears",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteCanCompleteJustBeforeDeadlineEvenWithShortConfiguredHoldLease",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteComponentDisableReleasesSafelyAndCannotBiteLater",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteDeadlineRejectsLateThirdPressAndFailureStillUsesConfirmedBiteDeath",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteDeathWhileReleaseIsPendingNeverLaunchesOrResurrectsPlayer",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteFinalButtonsStayQuarantinedUntilReleasedAndDoNotDisableNormalControls",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteFiveTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteFiveTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteFiveTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteFiveTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteGraceBlocksAllHandsForOneSecondButNeverBlocksDamage",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteHudRendersRealPromptsAndOutcomesInOwnedNativeGraphics",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteJumpUsesNativeCeilingCollisionRatherThanMovingThroughScenery",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQtePausesWithGameAndDisableOrInjuryCannotLeaveAStaleChallenge",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSceneInstallationIsIdempotentAndLeavesPassiveTitanPrefabAlone",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSevenTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSevenTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSevenTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSevenTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteStartsOnlyAtActualCaptureAndOffersThreeSecondsEvenAfterALongCatchFrame",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteSuccessCancelsBiteRecoversArmAndLaunchesOnlyAfterNativeClearance",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteTenTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteTenTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteTenTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteTenTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteThreeTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteThreeTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteThreeTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteThreeTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteUsesAllSixKeysWithoutMutatingUnityGameplayRandom",
+      "result": "Passed"
+    },
+    {
+      "name": "EscapeQteWrongKeysResetProgressNotClockAndHeldKeysOrMashingCannotWin",
+      "result": "Passed"
+    },
+    {
+      "name": "SevenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "result": "Passed"
+    },
+    {
+      "name": "SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "result": "Passed"
+    },
+    {
+      "name": "TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "result": "Passed"
+    },
+    {
+      "name": "TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "result": "Passed"
+    }
+  ],
+  "strictNativePhysics": [
+    {
+      "case": "EscapeQteFiveTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 5.0,
+      "left": true,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.050441
+    },
+    {
+      "case": "EscapeQteFiveTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 5.0,
+      "left": true,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.050441
+    },
+    {
+      "case": "EscapeQteFiveTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 5.0,
+      "left": false,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.083598
+    },
+    {
+      "case": "EscapeQteFiveTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 5.0,
+      "left": false,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.083598
+    },
+    {
+      "case": "EscapeQteSevenTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 7.0,
+      "left": true,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.503217,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.270611
+    },
+    {
+      "case": "EscapeQteSevenTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 7.0,
+      "left": true,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.503217,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.270611
+    },
+    {
+      "case": "EscapeQteSevenTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 7.0,
+      "left": false,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.580786,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.317036
+    },
+    {
+      "case": "EscapeQteSevenTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 7.0,
+      "left": false,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.580786,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.317036
+    },
+    {
+      "case": "EscapeQteTenTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 10.0,
+      "left": true,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.100883
+    },
+    {
+      "case": "EscapeQteTenTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 10.0,
+      "left": true,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.100883
+    },
+    {
+      "case": "EscapeQteTenTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 10.0,
+      "left": false,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.167196
+    },
+    {
+      "case": "EscapeQteTenTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 10.0,
+      "left": false,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.167196
+    },
+    {
+      "case": "EscapeQteThreeTimesLeftSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 3.0,
+      "left": true,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.503579,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.973621
+    },
+    {
+      "case": "EscapeQteThreeTimesLeftTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 3.0,
+      "left": true,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.503579,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.973621
+    },
+    {
+      "case": "EscapeQteThreeTimesRightSuccessKeepsStrictArmAndMouthBounds",
+      "scale": 3.0,
+      "left": false,
+      "qte": true,
+      "escaped": true,
+      "armDegreesPer120Hz": 6.580905,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.995776
+    },
+    {
+      "case": "EscapeQteThreeTimesRightTimeoutKeepsStrictArmAndMouthBounds",
+      "scale": 3.0,
+      "left": false,
+      "qte": true,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.580905,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.995776
+    },
+    {
+      "case": "FiveTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 5.0,
+      "left": true,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.050441
+    },
+    {
+      "case": "FiveTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 5.0,
+      "left": false,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 3.083598
+    },
+    {
+      "case": "SevenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 7.0,
+      "left": true,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.503217,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.270611
+    },
+    {
+      "case": "SevenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 7.0,
+      "left": false,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.580786,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 4.317036
+    },
+    {
+      "case": "TenTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 10.0,
+      "left": true,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.502976,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.100883
+    },
+    {
+      "case": "TenTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 10.0,
+      "left": false,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.581024,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 6.167196
+    },
+    {
+      "case": "ThreeTimesLeftScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 3.0,
+      "left": true,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.503579,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.973311
+    },
+    {
+      "case": "ThreeTimesRightScoutFeedingPreservesStrictArmContinuityAndClearance",
+      "scale": 3.0,
+      "left": false,
+      "qte": false,
+      "escaped": false,
+      "armDegreesPer120Hz": 6.580905,
+      "laterPenetrationMetres": 0.0,
+      "disclosedEarlyOverlapMetres": 1.995975
+    }
+  ],
+  "nativeHud": {
+    "id": "2",
+    "testcasecount": "1",
+    "result": "Passed",
+    "total": "1",
+    "passed": "1",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 21:59:30Z",
+    "end-time": "2026-11-05 21:59:31Z",
+    "duration": "0.8381171"
+  },
+  "nativeDevice": "Intel(R) Iris(R) Xe Graphics / Direct3D11 /979x507",
+  "savedMapIntegration": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 21:55:23Z",
+    "end-time": "2026-11-05 21:55:30Z",
+    "duration": "7.1841378"
+  },
+  "sourceWorkerByteMatched": [
+    "Assets/Movement.cs",
+    "Assets/ODM_Movement.cs",
+    "Assets/Titan/Prototype/TitanCombatTarget.cs",
+    "Assets/Titan/Prototype/TitanGrabAttack.cs",
+    "Assets/Titan/Prototype/TitanGrabEscape.cs",
+    "Assets/Titan/Prototype/TitanGrabEscape.cs.meta",
+    "Assets/Titan/Integration/TitanFreeRoamIntegration.cs",
+    "Assets/Titan/Integration/TitanShiganshinaIntegration.cs",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanODMIntegrationPlayModeTests.cs"
+  ],
+  "limits": "No full crowd FPS/WebGL/device/subjective difficulty certification. Early reach overlaps disclosed separately. Native HUD fixture is explicitly gated; actual rendering was additionally verified in owned non-batch GameView, not claimed from headless run.",
+  "minimalHudRevision": {
+    "elements": [
+      "Current key",
+      "Three-segment progress bar",
+      "Time bar"
+    ],
+    "backgroundAlpha": 0.32,
+    "panelLogicalSize": [
+      260,
+      128
+    ],
+    "instructionsRemoved": true,
+    "automatedTestsRetained": true,
+    "fullRun": {
+      "id": "2",
+      "testcasecount": "300",
+      "result": "Failed(Child)",
+      "total": "300",
+      "passed": "292",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:07:04Z",
+      "end-time": "2026-11-05 23:07:38Z",
+      "duration": "34.1007429"
+    },
+    "nativeHud": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 23:08:01Z",
+      "end-time": "2026-11-05 23:08:03Z",
+      "duration": "1.0432679"
+    }
+  }
+}

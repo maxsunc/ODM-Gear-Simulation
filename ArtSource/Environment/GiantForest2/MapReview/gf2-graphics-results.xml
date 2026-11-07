@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-05 15:21:51Z" end-time="2026-11-05 15:22:05Z" duration="13.9437691">
+  <test-suite type="TestSuite" id="1000" name="ODM Attempt # 1" fullname="ODM Attempt # 1" runstate="Runnable" testcasecount="231" result="Passed" start-time="2026-11-05 15:21:51Z" end-time="2026-11-05 15:22:05Z" duration="13.943769" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1009" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-05 15:21:51Z" end-time="2026-11-05 15:22:05Z" duration="13.937509" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="45784" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="GiantForest2PlayModeTests" fullname="GiantForest2PlayModeTests" classname="GiantForest2PlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-05 15:21:51Z" end-time="2026-11-05 15:22:05Z" duration="13.936414" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1008" name="NativeGraphicsShowTheActualPlayableScene" fullname="GiantForest2PlayModeTests.NativeGraphicsShowTheActualPlayableScene" methodname="NativeGraphicsShowTheActualPlayableScene" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="1372527524" result="Passed" start-time="2026-11-05 15:21:51Z" end-time="2026-11-05 15:22:05Z" duration="13.927225" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[Native graphics device: Intel(R) Iris(R) Xe Graphics
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

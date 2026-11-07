@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6ca2e387a64c069b49599ff7e6dce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faces:
+  - name: Bald with gray beard
+    head: {fileID: 4300000, guid: 3e2d90f9715647f4f8f579570349fcbc, type: 2}
+    jaw: {fileID: 4300000, guid: 2eee5440edeee0143884c68f0d88854f, type: 2}
+    material: {fileID: 2100000, guid: a112caf784b6894439049155f6383362, type: 2}
+  - name: Blonde smiling
+    head: {fileID: 4300000, guid: df59b6daf555e8a4ab9a1c2f0cb091f3, type: 2}
+    jaw: {fileID: 4300000, guid: 6f3e6bded6557db4cbcf7c8c8d37d8fc, type: 2}
+    material: {fileID: 2100000, guid: bf187b9e7312d344a8c76704c40ee55b, type: 2}

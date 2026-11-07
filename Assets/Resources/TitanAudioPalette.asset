@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f73213837f44489ceef00d4a2b808d, type: 3}
+  m_Name: TitanAudioPalette
+  m_EditorClassIdentifier: 
+  blindScreams:
+  - {fileID: 8300000, guid: 460747771a7dc704e9893efb96f73662, type: 3}
+  footsteps:
+  - {fileID: 8300000, guid: 7bd399bc137f6d84bbdb03d505b6bb43, type: 3}
+  - {fileID: 8300000, guid: bae9d27dba114794489d1ebfa596bba6, type: 3}
+  - {fileID: 8300000, guid: 586d8a2ed46b73747ad345dc7ab37b97, type: 3}
+  - {fileID: 8300000, guid: dcb28fdcd9609fb4a8cbd5c6f94437e8, type: 3}
+  spawnLightning: {fileID: 8300000, guid: d4a85f01f06a53642bdb9c1d9f8a9900, type: 3}
+  eaten: {fileID: 8300000, guid: daa45f9735d6a884c92161780418f884, type: 3}
+  screamVolume: 0.3
+  footstepVolume: 0.25
+  eatenVolume: 0.85
+  grab: {fileID: 8300000, guid: ba46762d293ab984a96b72cb5ac8a3ce, type: 3}
+  grabVolume: 1
+  stomp: {fileID: 8300000, guid: 4c7da9ae3b9e8514684c509a55d7c2d4, type: 3}
+  stompVolume: 0.25

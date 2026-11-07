@@ -12,6 +12,13 @@ public class SceneManagement : MonoBehaviour
 
     private Coroutine _sorry;
 
+    void Awake()
+    {
+        // Menu's existing autoplaying soundtrack lives on this controller.
+        foreach(var source in GetComponents<AudioSource>())GameAudio.Route(source,true);
+    }
+    void OnGUI(){if(gameObject.scene.name=="Menu")GameAudio.DrawMenu();}
+
     public void GoOpenWorld(bool option)
     {
         scenePickPanel.SetActive(option);

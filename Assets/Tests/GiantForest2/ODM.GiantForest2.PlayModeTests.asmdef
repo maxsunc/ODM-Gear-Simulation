@@ -1,0 +1,15 @@
+{
+  "name": "ODM.GiantForest2.PlayModeTests",
+  "rootNamespace": "",
+  "references": ["ODM.TitanPrototype"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": ["TestAssemblies"]
+}

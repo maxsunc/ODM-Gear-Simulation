@@ -1,0 +1,237 @@
+{
+  "unity": "2021.3.25f1",
+  "urp": "12.1.11",
+  "features": {
+    "stomp": "Real impact-only pooled dust and faceted fragments; 4 scene slots, 8 particle systems, configured capacity448; render-only no physics",
+    "health": "Existing100HP authority and HUD preserved; regeneration fields/function/update removed",
+    "grab": "Integrated confirmed holds10HP/s, scaled-time; shared cumulative age avoids duplicate charge; stops on success even pending; permanent loss across escapes",
+    "death": "Generic held pre-release Scout snapshot; independent corpse, no chomp impulse/bite blood/eaten cue"
+  },
+  "baseline": {
+    "id": "2",
+    "testcasecount": "342",
+    "result": "Failed(Child)",
+    "total": "342",
+    "passed": "333",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 00:43:30Z",
+    "end-time": "2026-11-06 00:44:02Z",
+    "duration": "31.4231972"
+  },
+  "fullFirst": {
+    "id": "2",
+    "testcasecount": "366",
+    "result": "Failed(Child)",
+    "total": "366",
+    "passed": "357",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 01:20:42Z",
+    "end-time": "2026-11-06 01:21:15Z",
+    "duration": "32.4540906"
+  },
+  "fullFinal": {
+    "id": "2",
+    "testcasecount": "366",
+    "result": "Failed(Child)",
+    "total": "366",
+    "passed": "357",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-06 01:22:16Z",
+    "end-time": "2026-11-06 01:22:51Z",
+    "duration": "34.6576979"
+  },
+  "addedCases": 24,
+  "samePreexistingFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    },
+    {
+      "name": "HeadLeadsSharpPivotThenRootCommitsAndInjuryStopsTurning",
+      "message": "  Expected: greater than 15\n  But was:  1.35043335f\n"
+    }
+  ],
+  "baselineNote": "Fresh baseline includes current user prefab walkTurnSpeed50/runTurnSpeed5; existing head-turn test is eighth failure before this task. Prior seven known fixtures unchanged.",
+  "nativeDebris": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 01:23:23Z",
+      "end-time": "2026-11-06 01:23:24Z",
+      "duration": "0.5434769"
+    },
+    "output": [
+      "STOMP_DEBRIS_NATIVE changedPixels=11560 device=Intel(R) Iris(R) Xe Graphics Direct3D11\nCleanup Blit\n"
+    ]
+  },
+  "nativeHealth": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "1",
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 01:23:36Z",
+      "end-time": "2026-11-06 01:23:44Z",
+      "duration": "8.6456959"
+    },
+    "assertion": "Actual8seconds frame/Update-based time after60HP damage remains40HP"
+  },
+  "savedMap": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "5",
+      "result": "Failed(Child)",
+      "total": "5",
+      "passed": "4",
+      "failed": "1",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-06 01:22:22Z",
+      "end-time": "2026-11-06 01:22:31Z",
+      "duration": "8.7367062"
+    },
+    "failures": [
+      {
+        "name": "CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives",
+        "message": "  Expected: null\n  But was:  \"Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these.\"\n"
+      }
+    ],
+    "assertions": "Actual director chooses stomp all3/5/6/7/10x; real HP40, no regeneration API/circles, one sound, one debris burst at locked point, runtime grab10HP/s",
+    "noBakeOrPublication": true
+  },
+  "physics": {
+    "grabDrainEscapeMaxArmDegreesPer120Hz": 6.581024,
+    "armBoundUnchanged": 8,
+    "sameGripBoundMeters": 0.003,
+    "laterPenetrationBoundMeters": 0.005,
+    "squeezeCorpses": [
+      {
+        "name": "GrabDrainFiveTimesLeftSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.71499
+      },
+      {
+        "name": "GrabDrainFiveTimesRightSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.71499
+      },
+      {
+        "name": "GrabDrainLethalSqueezeCapturesIndependentCorpseBeforeReleaseWithoutBiteEffects",
+        "peakMps": 8.11509
+      },
+      {
+        "name": "GrabDrainTenTimesLeftSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.71499
+      },
+      {
+        "name": "GrabDrainTenTimesRightSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.71499
+      },
+      {
+        "name": "GrabDrainThreeTimesLeftSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.715
+      },
+      {
+        "name": "GrabDrainThreeTimesRightSqueezeCorpseKeepsOriginalSpeedBound",
+        "peakMps": 14.71499
+      }
+    ],
+    "corpseBoundUnchangedMps": 40,
+    "durationSeconds": 1.5,
+    "scope": "Early takeover overlap still separate; no comprehensive long-duration10x certification"
+  },
+  "audit": {
+    "protectedFileCount": 18,
+    "protectedHashesUnchanged": {
+      "Assets/Scenes/GiantForest2.unity": "dc936ebcd2a6dd9bf2a49c8a7ba0348f8e83eff3d594203b2d45fcdf51a0e996",
+      "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "ef6a0afa6935f98654150bf7ee732cc20a8301879f9c65ffb6015c6f77a2399b",
+      "Assets/Resources/TitanAudioPalette.asset": "3ba577f226281d983c3f15c63cab8811191baf1826fc4d43db2855c78a865dc0",
+      "Assets/Resources/TitanSwordAudioPalette.asset": "3331cf8c88ea88fc22fbf18bb0dd05e99cb5939adc1eb613f32c1d25be932a1f",
+      "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+      "ProjectSettings/NavMeshAreas.asset": "6779981d54bed64d6568a824a82938380206ddf59843df5a9191608e8954ab6c",
+      "ProjectSettings/ProjectVersion.txt": "5c594cbfa2dc80a89a8daf00d7cddf48c281fdcaffa1bc522aeb89d84d39c460",
+      "Packages/manifest.json": "8a488007ebec606b27e5c7214ac211bc811df5d4679e904787222a46b05eb158",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset": "989614d55bb6b4c80772b8cb0948a2bccfe000de8ae0c6d4858d69506fa24b3e",
+      "Assets/Navigation/Titans/GiantForest2/Titan_10x.asset.meta": "d9e6e3e750150a4ee5f208d5176af20971d1385f4aeae79ba1937eeaa14606b4",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset": "e7a4fbb967c325cfe778af3b207c2c1e2f932ef92c4f1fdb1a2ba0d4e091c925",
+      "Assets/Navigation/Titans/GiantForest2/Titan_3x.asset.meta": "7b67773d74d05cf99cf6667879017fce518db4b0e75c8c1fcb85b16cf2aa6308",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset": "f2ac4d75929b200cc89d653cad2cd8e40d0b5ec249b90d40231e9ecfdc55cccf",
+      "Assets/Navigation/Titans/GiantForest2/Titan_5x.asset.meta": "ea6ebc78e7892ca55ab56c4cbfc037ab2948de370fe3e818a45fbf5eb4ba366b",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset": "95abc25f6e53bc68e4d2068768146155a65a96d0154c613ce1eeaa9ed7a34588",
+      "Assets/Navigation/Titans/GiantForest2/Titan_6x.asset.meta": "c34c2eb1c200e332927498b99ecb52aa979adae1f460ff800524ba70102b96d8",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset": "765ba146457416d97307f2822078684592116323b73b031fe6139bf2c8b20557",
+      "Assets/Navigation/Titans/GiantForest2/Titan_7x.asset.meta": "ffc9056a5497d0ed984289952ff050d63dbbf3330fa4d6e7a92850e4efbfa675"
+    },
+    "byteMatchedCSharpSourcesPerWorker": 64,
+    "workers": [
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-TitanValidation-fh_v2o9d",
+      "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei"
+    ],
+    "newMaterialsAndMapSourceMatched": true,
+    "noLiveEditorOrInputPhysicsAutomation": true,
+    "noScenePalettePrefabArtAudioNavigationSettingsChanges": true
+  },
+  "notCertified": [
+    "Subjective impact/difficulty",
+    "Crowded-map performance",
+    "Device/WebGL latency or build behavior",
+    "Comprehensive long-duration10x corpse safety"
+  ],
+  "git": "Local-only; no push authorization"
+}

@@ -1,0 +1,47 @@
+{
+  "nativeGraphics": {
+    "id": "2",
+    "testcasecount": "1",
+    "result": "Passed",
+    "total": "1",
+    "passed": "1",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 17:15:51Z",
+    "end-time": "2026-11-05 17:15:54Z",
+    "duration": "3.5290089"
+  },
+  "deviceEvidence": "See owned combat-ux-graphics.log / SCOUT_CLOTH_NATIVE",
+  "sourceLength": 0.98,
+  "originalSourceLength": 0.62,
+  "sceneVisualScale": 2,
+  "particles": 273,
+  "triangles": 1000,
+  "vertices": 586,
+  "fullSuite": {
+    "id": "2",
+    "testcasecount": "245",
+    "result": "Failed(Child)",
+    "total": "245",
+    "passed": "242",
+    "failed": "2",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 17:17:58Z",
+    "end-time": "2026-11-05 17:18:26Z",
+    "duration": "28.5051438"
+  },
+  "knownFailures": [
+    "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+    "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso"
+  ],
+  "validatedFilesByteMatched": 301,
+  "userSceneUnchangedSinceTaskStart": true
+}

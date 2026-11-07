@@ -1,0 +1,50 @@
+{
+  "protectedBaselineFiles": 1577,
+  "intentionalExistingPathChanges": [
+    "Assets/GameElements.cs",
+    "Assets/PlayerHealth.cs",
+    "Assets/PlayerRespawn.cs",
+    "Assets/UI/FrontendUI.cs",
+    "Assets/UI/GameStats.cs"
+  ],
+  "unchangedExistingPaths": 1572,
+  "userScenesPrefabsPalettesBuildSettingsUnchanged": true,
+  "windClipAndMetaUnchanged": true,
+  "testsChanged": false,
+  "focusedRegression": {
+    "id": "2",
+    "testcasecount": "26",
+    "result": "Passed",
+    "total": "26",
+    "passed": "26",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 15:23:25Z",
+    "end-time": "2026-11-07 15:23:30Z",
+    "duration": "5.0779854"
+  },
+  "broaderRegression": {
+    "id": "2",
+    "testcasecount": "167",
+    "result": "Failed(Child)",
+    "total": "167",
+    "passed": "165",
+    "failed": "2",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 15:15:13Z",
+    "end-time": "2026-11-07 15:15:24Z",
+    "duration": "10.5785817"
+  },
+  "uiEvidence": "Native static authoring, not input/gameplay proof",
+  "windEvidence": "Imported/compiled and existing integration regressions, not new wind audition/lifecycle certification",
+  "committed": false,
+  "pushed": false
+}

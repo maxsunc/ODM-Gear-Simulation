@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0c02e35ec84219b920b9cba47104db, type: 3}
+  m_Name: PlayerWindAudio
+  m_EditorClassIdentifier:
+  loop: {fileID: 8300000, guid: 82697b511562eb443b5606ff3217c175, type: 3}
+  maximumVolume: 0.35
+  minimumSpeed: 8
+  fullVolumeSpeed: 55
+  fadeInDuration: 0.35
+  fadeOutDuration: 0.25
+  minimumPitch: 0.95
+  maximumPitch: 1.08
+  maximumTrustedSpeed: 160

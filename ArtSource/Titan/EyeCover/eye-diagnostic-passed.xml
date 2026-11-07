@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 21:18:40Z" end-time="2026-11-06 21:18:41Z" duration="0.663939">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="458" result="Passed" start-time="2026-11-06 21:18:40Z" end-time="2026-11-06 21:18:41Z" duration="0.663939" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1496" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="458" result="Passed" start-time="2026-11-06 21:18:40Z" end-time="2026-11-06 21:18:41Z" duration="0.655759" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="13912" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1218" name="TitanMotionStylePlayModeTests" fullname="TitanMotionStylePlayModeTests" classname="TitanMotionStylePlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-06 21:18:40Z" end-time="2026-11-06 21:18:41Z" duration="0.652197" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1225" name="EyeHitSnapsHeadThenCoversEyesQuickly" fullname="TitanMotionStylePlayModeTests.EyeHitSnapsHeadThenCoversEyesQuickly" methodname="EyeHitSnapsHeadThenCoversEyesQuickly" classname="TitanMotionStylePlayModeTests" runstate="Runnable" seed="273985705" result="Passed" start-time="2026-11-06 21:18:40Z" end-time="2026-11-06 21:18:41Z" duration="0.644211" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

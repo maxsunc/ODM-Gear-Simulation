@@ -1,0 +1,121 @@
+{
+  "source": "Original procedural architecture inspired by the Shiganshina district, not ripped game/anime assets",
+  "units": "metres",
+  "assets": {
+    "SG_House_A_Gable": {
+      "LOD0": 6812,
+      "collisionTriangles": 80,
+      "LOD1": 4004,
+      "LOD2": 524
+    },
+    "SG_House_B_Tall": {
+      "LOD0": 8108,
+      "collisionTriangles": 80,
+      "LOD1": 5204,
+      "LOD2": 668
+    },
+    "SG_House_C_Shop": {
+      "LOD0": 7600,
+      "collisionTriangles": 80,
+      "LOD1": 4048,
+      "LOD2": 568
+    },
+    "SG_House_D_Wide": {
+      "LOD0": 8204,
+      "collisionTriangles": 80,
+      "LOD1": 4004,
+      "LOD2": 524
+    },
+    "SG_House_E_Cottage": {
+      "LOD0": 4748,
+      "collisionTriangles": 80,
+      "LOD1": 2804,
+      "LOD2": 380
+    },
+    "SG_House_F_Guild": {
+      "LOD0": 10964,
+      "collisionTriangles": 92,
+      "LOD1": 6464,
+      "LOD2": 872
+    },
+    "SG_Warehouse": {
+      "LOD0": 11284,
+      "collisionTriangles": 80,
+      "LOD1": 5248,
+      "LOD2": 712
+    },
+    "SG_CivicHall": {
+      "LOD0": 16764,
+      "collisionTriangles": 240,
+      "LOD1": 6828,
+      "LOD2": 1068
+    },
+    "SG_Belltower": {
+      "LOD0": 1094,
+      "collisionTriangles": 198,
+      "LOD1": 950,
+      "LOD2": 354
+    },
+    "SG_Windmill": {
+      "LOD0": 828,
+      "collisionTriangles": 200,
+      "LOD1": 780,
+      "LOD2": 612
+    },
+    "SG_Wall_Bay_32x120": {
+      "LOD0": 240,
+      "collisionTriangles": 156,
+      "LOD1": 240,
+      "LOD2": 60
+    },
+    "SG_Gate_Fortress": {
+      "LOD0": 2826,
+      "collisionTriangles": 708,
+      "LOD1": 2442,
+      "LOD2": 906
+    },
+    "SG_Canal_Bridge": {
+      "LOD0": 408,
+      "collisionTriangles": 408,
+      "LOD1": 408,
+      "LOD2": 408
+    },
+    "SG_Rooftop_Gantry": {
+      "LOD0": 72,
+      "collisionTriangles": 48,
+      "LOD1": 72,
+      "LOD2": 72
+    },
+    "SG_Market_Stall": {
+      "LOD0": 176,
+      "collisionTriangles": 44,
+      "LOD1": 176,
+      "LOD2": 176
+    },
+    "SG_Plaza_Fountain": {
+      "LOD0": 412,
+      "collisionTriangles": 320,
+      "LOD1": 412,
+      "LOD2": 412
+    },
+    "SG_Crate": {
+      "LOD0": 36,
+      "collisionTriangles": 12,
+      "LOD1": 36,
+      "LOD2": 36
+    }
+  },
+  "materials": [
+    "SG_Plaster",
+    "SG_Timber",
+    "SG_Roof",
+    "SG_Stone",
+    "SG_Brick",
+    "SG_Window",
+    "SG_Iron",
+    "SG_Cloth",
+    "SG_Paver"
+  ],
+  "lodCount": 3,
+  "collision": "Separate closed structure meshes, roofs shaped to match visible slopes"
+}

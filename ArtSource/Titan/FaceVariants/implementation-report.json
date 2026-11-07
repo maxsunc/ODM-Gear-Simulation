@@ -1,0 +1,21 @@
+{
+  "identities": [
+    "Original dark hair",
+    "Bald gray beard and moustache; heavy lids / prominent nose / bare rounded scalp",
+    "Blonde short fringe; squinting eyes / wider upturned toothy grin"
+  ],
+  "supersedes": "Earlier proportion-only Broad/Gaunt sketches; internal filenames retained to preserve asset GUIDs",
+  "authoring": "Blender4.5 MCP addon9877 in separate marker-owned GUI worker; original user instance9876 read-only",
+  "unity": "2021.3.25f1 URP12.1.11 compile/import + native graphics reviewed; original/bald/blonde left-to-right; existing bite28degree jaw-axis preview",
+  "newArt": "Remove old hair geometry; build closed gray beard/head-sidebeard/moustache and golden cap/fringe/side-lock meshes; head/jaw single original bone weights. No extra renderer or physics",
+  "unchanged": "22 rest bones, Animator/controller/allclips, sockets,15skins/17RB/16joints,14damage triggers, HP/AI/nav/combat/size tuning and original art/audio assets",
+  "textures": "2 new face-only albedo copies recolor original hair UV islands only; skin/eye/teeth pixels outside mask unchanged.2 shared URPLit face materials clone original. Original0 restores original meshes AND material arrays",
+  "runtime": "Same once-per-enemy private-RNG choice; assign existing head/jaw mesh + shared material slots only; beard bottom follows original Jaw; no per-frame writer",
+  "protectedCurrentHashesUnchanged": 105,
+  "previousUncommittedVariantsBackup": "Library/TitanFaceIdentityBackup",
+  "assetGUIDs": "Preserved all previous variant and palette GUIDs. Native Mesh.CreateAsset used instead of CopySerialized after topology change; failed draft preview superseded, not published",
+  "noNewTests": true,
+  "limits": "No new full-suite/gameplay/large-crowd/WebGL/physical-bound certification; approved existing animation rig retained, native rest+jaw-open art previews only",
+  "committedAtArtCapture": false,
+  "pushedAtArtCapture": false
+}

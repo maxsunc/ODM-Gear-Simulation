@@ -1,0 +1,15 @@
+{
+  "skins": 15,
+  "bones": 22,
+  "triangles": 78888,
+  "textureSize": 2048,
+  "maps": [
+    "BaseColor",
+    "Normal",
+    "MetallicSmoothness"
+  ],
+  "rigCompatibility": "Exact rest bone matrices copied from blockout",
+  "openBoundaryEdges": 0,
+  "rigType": "Generic",
+  "fingers": "Reference-style block mittens, hand weighted"
+}

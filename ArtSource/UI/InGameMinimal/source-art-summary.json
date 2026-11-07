@@ -1,0 +1,36 @@
+{
+  "sourceHashes": {
+    "Assets/UI/Frontend.meta": "612d8e1296fd70f27bfa9f5a84ce954e41e4d8379a071d66b256ba62c22b6218",
+    "Assets/UI/FrontendUI.cs": "8d6bffa4c17a28cd0030e173c824806ff56a119a8ee999161e8ce1007f19af7b",
+    "Assets/UI/FrontendUI.cs.meta": "d6915c4f219a3593e7ec5ecce0172997cf5808190d4d6052d3244d258fc1cf40",
+    "Assets/UI/GameMenu.cs": "c79e673005754e15bd246220ee91ece2546a402e0d6573535539f542a0bc4e43",
+    "Assets/UI/GameMenu.cs.meta": "10eea390c0a993cb9ec79b00ce30a3b5f805462ff6d44190eba56c0cefc05afc",
+    "Assets/UI/GameOptions.cs": "2ff8d14580644614b636e16700de27e709ce0466aa92323380d92cc2e4ea895c",
+    "Assets/UI/GameOptions.cs.meta": "65d651e5c53b2a13932a6d72bc9d0eaa32cbf848174eea2f0ef7ada847c8ebaa",
+    "Assets/UI/GamePauseMenu.cs": "547530e1ff261319def4f0981ca40b5c90fc8195744e3435ec54d0dd1da6e38c",
+    "Assets/UI/GamePauseMenu.cs.meta": "123bcb33036c05ad139a5ef3853376aa9f61f81b5aa51839154cb7afc1743187",
+    "Assets/UI/GameStats.cs": "ad66096466d7e391fb0358f310eb9fbc915070c135a7cca760da96de9a803f89",
+    "Assets/UI/GameStats.cs.meta": "d45e7b952d30052ab5209adb3011f56d771d1cea4b77566514e7135532b1b591",
+    "Assets/UI/Frontend/ForestBackdrop.png": "9acabb876102318e0ab7d98f5f191d64ca0e7e541831e52bebd17ef25e6f2445",
+    "Assets/UI/Frontend/ForestBackdrop.png.meta": "0a2bfa8bf4701cd79e6c3eb96b0358b90980fb814cc4780a966079c49dca88cc",
+    "Assets/UI/Frontend/ShiganshinaBackdrop.png": "367cf056cfddde529a9607678c1a38339c12a7e0a15de467becf2cd6a4bbed6a",
+    "Assets/UI/Frontend/ShiganshinaBackdrop.png.meta": "f7d257c77adad75cef33060735d5d5e06fafadfaede0c6bd4576d7b432a153d8"
+  },
+  "nativeStaticArt": true,
+  "gameplayInputTested": false,
+  "prefsWritten": false,
+  "sizes": [
+    [
+      1920,
+      1080
+    ],
+    [
+      1440,
+      1080
+    ]
+  ],
+  "maps": [
+    "GiantForest",
+    "Shiganshina"
+  ]
+}

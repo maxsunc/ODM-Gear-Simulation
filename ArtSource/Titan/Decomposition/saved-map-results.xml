@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Failed(Child)" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 14:03:49Z" end-time="2026-11-06 14:04:24Z" duration="35.5683783">
+  <test-suite type="TestSuite" id="1000" name="ODM Attempt # 1" fullname="ODM Attempt # 1" runstate="Runnable" testcasecount="452" result="Failed" site="Child" start-time="2026-11-06 14:03:49Z" end-time="2026-11-06 14:04:24Z" duration="35.568378" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1017" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="14" result="Failed" site="Child" start-time="2026-11-06 14:03:49Z" end-time="2026-11-06 14:04:24Z" duration="35.559786" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19396" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="GiantForest2NavigationPlayModeTests" fullname="GiantForest2NavigationPlayModeTests" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-11-06 14:03:49Z" end-time="2026-11-06 14:04:24Z" duration="35.558179" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1002" name="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" fullname="GiantForest2NavigationPlayModeTests.AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" methodname="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1049959128" result="Passed" start-time="2026-11-06 14:03:49Z" end-time="2026-11-06 14:03:59Z" duration="9.597533" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="AllSavedSizesProduceSynchronizedWalkRunImpactsAtTheirActualBakedTerrainHeight" fullname="GiantForest2NavigationPlayModeTests.AllSavedSizesProduceSynchronizedWalkRunImpactsAtTheirActualBakedTerrainHeight" methodname="AllSavedSizesProduceSynchronizedWalkRunImpactsAtTheirActualBakedTerrainHeight" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="744119496" result="Passed" start-time="2026-11-06 14:03:59Z" end-time="2026-11-06 14:04:00Z" duration="1.069296" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[NATIVE_FOREST_FOOTSTEPS
+size=3 gait=0 navRootAboveTerrain=0.349803 strikes=6
+size=3 gait=1 navRootAboveTerrain=0.349803 strikes=6
+size=5 gait=0 navRootAboveTerrain=0.541523 strikes=6
+size=5 gait=1 navRootAboveTerrain=0.541523 strikes=6
+size=6 gait=0 navRootAboveTerrain=1.457994 strikes=6
+size=6 gait=1 navRootAboveTerrain=1.457994 strikes=6
+size=7 gait=0 navRootAboveTerrain=0.3472681 strikes=6
+size=7 gait=1 navRootAboveTerrain=0.3472681 strikes=6
+size=10 gait=0 navRootAboveTerrain=0.1079941 strikes=6
+size=10 gait=1 navRootAboveTerrain=0.1079941 strikes=6
+
+]]></output>
+        </test-case>
+        <test-case id="1008" name="CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" fullname="GiantForest2NavigationPlayModeTests.CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" methodname="CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="970533225" result="Failed" start-time="2026-11-06 14:04:00Z" end-time="2026-11-06 14:04:00Z" duration="0.417536" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: null
+  But was:  "Skipping unbaked Titan sizes: 4x. Other baked sizes still spawn; bake the requested sizes once in Edit Mode to enable these."
+]]></message>
+            <stack-trace><![CDATA[at GiantForest2NavigationPlayModeTests+<CurrentUserSizeChoicesAreAllSupportedAndTheActualRandomSpawnerArrives>d__19.MoveNext () [0x0009b] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Assets\Tests\GiantForest2\GiantForest2NavigationPlayModeTests.cs:172
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1005" name="GameplayDirectorSelectsSizedGroundStompsAndDamagesTheRealHealthBar" fullname="GiantForest2NavigationPlayModeTests.GameplayDirectorSelectsSizedGroundStompsAndDamagesTheRealHealthBar" methodname="GameplayDirectorSelectsSizedGroundStompsAndDamagesTheRealHealthBar" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1563389853" result="Passed" start-time="2026-11-06 14:04:00Z" end-time="2026-11-06 14:04:01Z" duration="0.601565" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[Animator is not playing an AnimatorController
+NATIVE_SIZED_STOMP size=3 stop=18 damage=60 persistentHp=40
+NATIVE_SIZED_STOMP size=5 stop=30 damage=60 persistentHp=40
+NATIVE_SIZED_STOMP size=6 stop=36 damage=60 persistentHp=40
+NATIVE_SIZED_STOMP size=7 stop=42 damage=60 persistentHp=40
+NATIVE_SIZED_STOMP size=10 stop=60 damage=60 persistentHp=40
+]]></output>
+        </test-case>
+        <test-case id="1007" name="PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" fullname="GiantForest2NavigationPlayModeTests.PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" methodname="PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1796071797" result="Passed" start-time="2026-11-06 14:04:01Z" end-time="2026-11-06 14:04:04Z" duration="3.799607" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[Animator is not playing an AnimatorController
+Animator is not playing an AnimatorController
+NATIVE_FOREST_PLAYER_ONLY_RESPAWN seconds=3.244702 sameScene=-107488 samePlayer=39420 injuredHp=950 deadTitanStillDead=True
+]]></output>
+        </test-case>
+        <test-case id="1006" name="RealForestCorpsesSteamFadeAndDisappearWithoutResettingPlayerWorldOrInjuredSurvivor" fullname="GiantForest2NavigationPlayModeTests.RealForestCorpsesSteamFadeAndDisappearWithoutResettingPlayerWorldOrInjuredSurvivor" methodname="RealForestCorpsesSteamFadeAndDisappearWithoutResettingPlayerWorldOrInjuredSurvivor" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="1388441134" result="Passed" start-time="2026-11-06 14:04:04Z" end-time="2026-11-06 14:04:24Z" duration="19.542993" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[NATIVE_FOREST_DECOMPOSITION lifetime=null elapsed=19.10404 survivorArmHp=950 playerHp=100 navigationTriangles=66651
+]]></output>
+        </test-case>
+        <test-case id="1003" name="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" fullname="GiantForest2NavigationPlayModeTests.SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" methodname="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="200070985" result="Passed" start-time="2026-11-06 14:04:24Z" end-time="2026-11-06 14:04:24Z" duration="0.517407" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

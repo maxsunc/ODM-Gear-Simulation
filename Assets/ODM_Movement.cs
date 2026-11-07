@@ -32,6 +32,7 @@ public class ODM_Movement : MonoBehaviour
     public LineRenderer[] lines;
     private bool rightGrappled, leftGrappled;
     private Vector3 pointLeft, pointRight;
+    readonly ODMHookAnchor leftAttachment=new ODMHookAnchor(),rightAttachment=new ODMHookAnchor();
     public Transform camTransform;
     public TrailRenderer gasTrail;
     public Animator camAnim;
@@ -40,16 +41,100 @@ public class ODM_Movement : MonoBehaviour
     public GameObject collisionParticle;
 
 
+    [Tooltip("Optional visual-only replacement; null retains the original player.")]
+    public Animator visualAnimator;
     private Animator playerAnimator;
     private Animator swordAnimator;
     private Vector3 residualDir;
     private float residualSpeed;
     private bool superGasing;
+
+    // Public read-only accessors for DamageDealer momentum calculation
+    public float CurrentSpeed => currentSpeed;
+    public float ResidualSpeed => residualSpeed;
     private bool gasing;
     private bool isInertia;
     private bool qPress, ePress;
 
     private Vector3 pastForce;
+    private UnityEngine.Object titanOwner;
+    private bool titanSuspended;
+    public bool TitanSuspended { get { return titanSuspended; } }
+    public bool HasActiveHooks { get { return leftGrappled || rightGrappled; } }
+    public bool LeftHooked { get { return leftGrappled; } }
+    public bool RightHooked { get { return rightGrappled; } }
+    public bool IsGasing { get { return gasing; } }
+    public Vector3 LeftAnchor { get { RefreshHookAnchors();return pointLeft; } }
+    public Vector3 RightAnchor { get { RefreshHookAnchors();return pointRight; } }
+    public bool TryAttachHook(bool right,Collider surface,Vector3 hitPoint)
+    {
+        if(titanSuspended || PlayerCombatPermission.IsBlocked(this))return false;
+        var anchor=right?rightAttachment:leftAttachment;
+        if(!anchor.Bind(surface,hitPoint))return false;
+        if(right){rightGrappled=true;pointRight=hitPoint;}
+        else {leftGrappled=true;pointLeft=hitPoint;}
+        SetHookLine(right,true,hitPoint);return true;
+    }
+    void SetHookLine(bool right,bool enabled,Vector3 point)
+    {
+        int index=right?0:1;
+        if(lines==null || index>=lines.Length || lines[index]==null)return;
+        lines[index].enabled=enabled;
+        if(enabled && lines[index].positionCount>=2)lines[index].SetPosition(1,point);
+    }
+    public void ReleaseHook(bool right)
+    {
+        (right?rightAttachment:leftAttachment).Clear();
+        if(right)rightGrappled=false;else leftGrappled=false;
+        SetHookLine(right,false,Vector3.zero);
+    }
+    public void RefreshHookAnchors()
+    {
+        Vector3 p;
+        if(leftGrappled){if(leftAttachment.TryGetPoint(out p)){pointLeft=p;SetHookLine(false,true,p);}else ReleaseHook(false);}
+        if(rightGrappled){if(rightAttachment.TryGetPoint(out p)){pointRight=p;SetHookLine(true,true,p);}else ReleaseHook(true);}
+    }
+    void OnDisable(){ReleaseHook(false);ReleaseHook(true);}
+    public bool SuspendForTitan(UnityEngine.Object owner)
+    {
+        if(owner==null || titanSuspended) return false;
+        titanOwner=owner;titanSuspended=true;StopAllCoroutines();
+        ReleaseHook(false);ReleaseHook(true);
+        leftGrappled=rightGrappled=qPress=ePress=gasing=isInertia=checkingStuck=false;
+        currentSpeed=residualSpeed=strafeDir=0;direction=residualDir=Vector3.zero;
+        acceleration=accelCopy;additionalAccel=0;superGasing=false;
+        foreach(var line in lines) if(line!=null) line.enabled=false;
+        if(gasTrail!=null) gasTrail.emitting=false;
+        if(gasParticle!=null) gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmitting);
+        if(audio!=null && audio.container!=null && audio.container.Length>3 && audio.container[3]!=null)
+        { audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1; }
+        if(camAnim!=null) camAnim.SetBool("StartGas",false);
+        if(playerAnimator!=null) playerAnimator.SetBool("isGasing",false);
+        return true;
+    }
+    public void ResumeAfterTitan(UnityEngine.Object owner,Vector3 velocity)
+    {
+        if(!titanSuspended || titanOwner!=owner) return;
+        titanOwner=null;titanSuspended=false;
+        if(characterMesh!=null) {var a=characterMesh.localEulerAngles;a.z=0;characterMesh.localEulerAngles=a;}
+        Vector3 planar=Vector3.ProjectOnPlane(velocity,Vector3.up);
+        if(planar.sqrMagnitude>.0001f && gameObject.activeInHierarchy) StartCoroutine(Deaccelerate(planar.normalized,planar.magnitude));
+    }
+
+    internal void ResetForRespawn()
+    {
+        // Explicit new-life reset, not a release over a foreign hold owner.
+        StopAllCoroutines();titanOwner=null;titanSuspended=false;
+        ReleaseHook(false);ReleaseHook(true);
+        leftGrappled=rightGrappled=qPress=ePress=gasing=isInertia=checkingStuck=superGasing=false;
+        currentSpeed=residualSpeed=currentBurstSpeed=strafeDir=additionalAccel=0;burstMeter=100;
+        direction=residualDir=burstDirection=pastForce=pointLeft=pointRight=Vector3.zero;acceleration=accelCopy;
+        if(gasTrail!=null){gasTrail.emitting=false;gasTrail.Clear();}
+        if(gasParticle!=null)gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        if(audio!=null&&audio.container!=null&&audio.container.Length>3&&audio.container[3]!=null)
+        {audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1;}
+        if(camAnim!=null)camAnim.SetBool("StartGas",false);
+    }
 
     //POA:
     /*
@@ -63,9 +148,10 @@ public class ODM_Movement : MonoBehaviour
 
     void Start()
     {
+        if(audio!=null && audio.container!=null)foreach(var source in audio.container)GameAudio.Route(source);
         movement = GetComponent<Movement>();
         accelCopy = acceleration;
-        playerAnimator = GetComponentInChildren<Animator>();
+        playerAnimator = visualAnimator!=null?visualAnimator:GetComponentInChildren<Animator>();
       //  swordAnimator = this.gameObject.transform.GetChild(0).GetChild(3).GetComponent<Animator>();
         // when acceleration is treated as speed
         grappleIndict = GameObject.Find("GrappleIndict").GetComponent<Animator>();
@@ -86,14 +172,19 @@ public class ODM_Movement : MonoBehaviour
 
     void LateUpdate()
     {
-        UpdateLines();
+        if(titanSuspended) return;
+        RefreshHookAnchors();UpdateLines();
     }
 
     void Update()
     {
+        if(titanSuspended) return;
+        RefreshHookAnchors();
         if (movement.CheckGround())
         {
-            movement.zeroGravity();
+            // The generous foot probe may overlap ground before the controller
+            // lands. Don't erase falling speed every render frame in that gap.
+            if (controller.isGrounded) movement.zeroGravity();
             playerAnimator.SetBool("isFalling", false);
         }
         else
@@ -217,6 +308,9 @@ public class ODM_Movement : MonoBehaviour
         residualSpeed = 0;
     }
 
+    bool EscapeKeyBlocked(KeyCode key)
+    { var escape=GetComponent<TitanGrabEscape>();return escape!=null && escape.BlocksKey(key); }
+
     void CheckHooks()
     {
         // check if cant grapple for the sake of UI
@@ -247,7 +341,7 @@ public class ODM_Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !EscapeKeyBlocked(KeyCode.Q))
         {
             qPress = true;
             Grapple("left");
@@ -284,7 +378,7 @@ public class ODM_Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !EscapeKeyBlocked(KeyCode.E))
         {
             ePress = true;
             Grapple();
@@ -304,7 +398,8 @@ public class ODM_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Throttle();
+        if(titanSuspended || controller==null || !controller.enabled) return;
+        RefreshHookAnchors();Throttle();
     }
 
     void Throttle()
@@ -330,7 +425,7 @@ public class ODM_Movement : MonoBehaviour
 
         // Old stuff
         //if(Physics.Raycast(grappleTransform.position, grappleTransform.forward, out hitInfo, range, targetLayer))
-        if(Physics.Raycast(camTransform.position, camTransform.forward, out hitInfo, range, targetLayer))
+        if(gameObject.scene.GetPhysicsScene().Raycast(camTransform.position, camTransform.forward, out hitInfo, range, targetLayer,QueryTriggerInteraction.Ignore) && TryAttachHook(dir=="right",hitInfo.collider,hitInfo.point))
         {
 
             if (dir == "right")
@@ -407,6 +502,8 @@ public class ODM_Movement : MonoBehaviour
             // turn off gravity
         }
         strafeDir = Input.GetAxisRaw("Horizontal");
+        var escape=GetComponent<TitanGrabEscape>();
+        if(escape!=null)strafeDir=escape.FilterAxis(strafeDir,KeyCode.A,KeyCode.D);
         // depending on strafe dir change rotation
         if(strafeDir < 0)
         {

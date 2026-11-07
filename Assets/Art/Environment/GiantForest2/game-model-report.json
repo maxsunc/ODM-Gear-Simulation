@@ -1,0 +1,56 @@
+{
+  "GF2_Tree_A_Sentinel_LOD1": {
+    "triangles": 20232,
+    "materials": 2,
+    "leaf_fraction": 0.34,
+    "wood_ratio": 0.3
+  },
+  "GF2_Tree_A_Sentinel_LOD2": {
+    "triangles": 4878,
+    "materials": 2,
+    "leaf_fraction": 0.105,
+    "wood_ratio": 0.075
+  },
+  "GF2_Tree_A_Sentinel_Collision": {
+    "triangles": 21052,
+    "materials": 0,
+    "leaf_fraction": 1,
+    "wood_ratio": 1
+  },
+  "GF2_Tree_B_Leaning_LOD1": {
+    "triangles": 20232,
+    "materials": 2,
+    "leaf_fraction": 0.34,
+    "wood_ratio": 0.3
+  },
+  "GF2_Tree_B_Leaning_LOD2": {
+    "triangles": 4878,
+    "materials": 2,
+    "leaf_fraction": 0.105,
+    "wood_ratio": 0.075
+  },
+  "GF2_Tree_B_Leaning_Collision": {
+    "triangles": 21052,
+    "materials": 0,
+    "leaf_fraction": 1,
+    "wood_ratio": 1
+  },
+  "GF2_Tree_C_OldFork_LOD1": {
+    "triangles": 20250,
+    "materials": 2,
+    "leaf_fraction": 0.34,
+    "wood_ratio": 0.3
+  },
+  "GF2_Tree_C_OldFork_LOD2": {
+    "triangles": 4856,
+    "materials": 2,
+    "leaf_fraction": 0.105,
+    "wood_ratio": 0.075
+  },
+  "GF2_Tree_C_OldFork_Collision": {
+    "triangles": 21568,
+    "materials": 0,
+    "leaf_fraction": 1,
+    "wood_ratio": 1
+  }
+}

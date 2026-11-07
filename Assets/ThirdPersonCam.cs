@@ -27,8 +27,9 @@ public class ThirdPersonCam : MonoBehaviour
 
    private void CamWork()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mousesense * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mousesense * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mousesense * GameOptions.LookSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mousesense * GameOptions.LookSensitivity * Time.deltaTime;
+        if(GameOptions.InvertY)mouseY=-mouseY;
         // Multiplied by mousesense and time.delta because of update
 
         xRotation -= mouseY;

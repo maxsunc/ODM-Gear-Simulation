@@ -1,0 +1,151 @@
+{
+  "unity": "2021.3.25f1",
+  "preFeaturePushedCheckpoint": "4d425aceee151cc020cf1079b437d7949ae415bd",
+  "baselineFullSuite": {
+    "id": "2",
+    "testcasecount": "254",
+    "result": "Failed(Child)",
+    "total": "254",
+    "passed": "248",
+    "failed": "5",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 19:42:27Z",
+    "end-time": "2026-11-05 19:42:56Z",
+    "duration": "29.0553873"
+  },
+  "finalFullSuite": {
+    "id": "2",
+    "testcasecount": "263",
+    "result": "Failed(Child)",
+    "total": "263",
+    "passed": "257",
+    "failed": "5",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 19:59:54Z",
+    "end-time": "2026-11-05 20:00:24Z",
+    "duration": "29.5770206"
+  },
+  "unchangedBaselineFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    }
+  ],
+  "newSfxCases": [
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "result": "Passed"
+    },
+    {
+      "name": "EatenCueRequiresRealLethalBiteDamageDeduplicatesAndDoesNotFollowReleasedPlayer",
+      "result": "Passed"
+    },
+    {
+      "name": "IdleBlindLegLossHitchesAndMissingGroundCannotManufactureFootsteps",
+      "result": "Passed"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "result": "Passed"
+    },
+    {
+      "name": "RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.13f,1.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.71f,1.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.89f,3.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.31f,5.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "SuppliedLightningPlaysOnlyAtSuccessfulArrivalEvenWithVisualEffectsDisabled",
+      "result": "Passed"
+    }
+  ],
+  "actualBiteCasesWithSoundAssertions": [
+    {
+      "name": "EscapeBeforeChompNeverSpawnsBloodOrRagdoll",
+      "result": "Passed"
+    },
+    {
+      "name": "LeftHandFeedsRealScoutIntoMouthThenRagdollsAndBleedsOnce",
+      "result": "Passed"
+    },
+    {
+      "name": "NewMouthObstructionCancelsRealBiteEffectsAndDamage",
+      "result": "Passed"
+    },
+    {
+      "name": "NonlethalBiteBleedsWithoutDuplicatingHealthOrCreatingACorpse",
+      "result": "Passed"
+    },
+    {
+      "name": "RightHandFeedsRealScoutIntoMouthThenRagdollsAndBleedsOnce",
+      "result": "Passed"
+    }
+  ],
+  "scenePrefabAndSuppliedAudioUnchanged": true,
+  "sourceWorkerByteMatchSHA256": {
+    "Assets/Titan/Integration/TitanAudioEmitter.cs": "0093ef2da86806a3a4a5295de0f4903559f3c47329410a9e4dd7bad6f47ce072",
+    "Assets/Titan/Integration/TitanAudioEmitter.cs.meta": "ae9981262174edc06ab661ba0612aa260d242b88b324a46812c2edafa63d24fe",
+    "Assets/Titan/Integration/TitanAudioPalette.cs": "e077f1368016748855c7cd5030835fa5bba1f2c61bff1a8618413f6431de53ed",
+    "Assets/Titan/Integration/TitanAudioPalette.cs.meta": "eebe20b1f3656a40530feff7a6e107220ea4e2b6c9ff49d0e6eb2938b6128da4",
+    "Assets/Titan/Integration/TitanRuntimeActor.cs": "245db7c235fbd1c02673ea8993b5cac12a4a82ffcd2fa1d153d8df751ee738b0",
+    "Assets/Titan/Integration/TitanODMHealthSource.cs": "95f4976f99b41831a641acfdb1dbf5f21a4a61fa2162c26e5fa4bab8a32451a0",
+    "Assets/Titan/Integration/TitanRandomSpawner.cs": "27de277e2bff66f57ba7bdbb08917c9a6e94cf74102d443317e6f77d666c1851",
+    "Assets/Titan/Integration/TitanSpawnStrikeEffect.cs": "e8ae248d42b40a74733637d8df48cac73df4fafa42de6d2cd9532d943a4394bd",
+    "Assets/Resources/TitanAudioPalette.asset": "fd21809c6d9cc0e20faef5a6584f91857bed7312dddea84fd4bd12bad96a164f",
+    "Assets/Resources/TitanAudioPalette.asset.meta": "34c3d444e7a21991270e4a75b14a8ad82b35f242534b6772b9eba49ca0d42d7a",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanAudioPlayModeTests.cs": "c44c50687138ccc6d9a3f418ee7984849a0e0a41fef698df63423e8770ba078b",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanAudioPlayModeTests.cs.meta": "ff04f004e087b99442b511b5697472dc05fc710f4da83fc221449ba91c5fcb15",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanRandomSpawnerPlayModeTests.cs": "1345716104d3791556d5ae217b8bfe23d7fcf67672565d168a76996a06ba4a01",
+    "Assets/Tests/TitanPrototype/PlayMode/TitanODMIntegrationPlayModeTests.cs": "341bd4ea9a8267220cdff6edbf95ccc9f936a7185b58cbb5b236053c69843590",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "70ddb0b9647d9eaf35b7a9ad6ffc7e517f3d3d70567d9b3180552d458305f2ed",
+    "Assets\\Audio\\bloodSplat.mp3": "927d5ca1cc59e85171618b639236fd5f6070b2ff3ba80b4da7af63f3f657fa23",
+    "Assets\\Audio\\bloodSplat.mp3.meta": "3f2ddf38f68c1e022eff1c832dd8e0cd82ffd34eb76b1734cead62dbce479343",
+    "Assets\\Audio\\titanFootstep1.mp3": "d597a9697e316e676a8c5c839b5a1771cbef2773251b999561271181ec20e5d5",
+    "Assets\\Audio\\titanFootstep1.mp3.meta": "7fbc69a48279f95c575936c6e5b7ba07d6a0e000c28e596c1a8bf6e9c26830e3",
+    "Assets\\Audio\\titanFootstep2.mp3": "74b502fcb98d038c274b260a2b4446c36e70daace0580568a6a1543d2d40a872",
+    "Assets\\Audio\\titanFootstep2.mp3.meta": "25836b94d5f80953864f6de5539d20edd31e8c87698d9689b74fc58dd2e4bee7",
+    "Assets\\Audio\\titanFootstep3.mp3": "abca3d709767643c2bebbfe197acfff3e65596a92667a5a32626f595c16de1fa",
+    "Assets\\Audio\\titanFootstep3.mp3.meta": "e6f209ac4db18e30c3c123e04811c55661b3e57b9b6c97157bb193361dcedcac",
+    "Assets\\Audio\\titanLightning.mp3": "b0ef40f0f783ca866f7eb3871d7b64623ad6fa052f87868622d82945b98d3dcb",
+    "Assets\\Audio\\titanLightning.mp3.meta": "635db7a741d1279fd35e0457c9345bb42db1943cd3dc4239b3e23416f42e55b1",
+    "Assets\\Audio\\titanScream.wav": "a54d909381667c5214f2fc735b87e897765cf5483dd36bdd1f907ea9171579a8",
+    "Assets\\Audio\\titanScream.wav.meta": "d5a5c6584b0c54297bc68681bf4b251e074e5dd91801ec5888377627422d0957",
+    "Assets\\Audio\\titanScream2.mp3": "a654b2073a23c57dbbfc3cec884ba93aa22d07c2df487a1090f8162b01787153",
+    "Assets\\Audio\\titanScream2.mp3.meta": "d84e13ea6ca33ce4c7d614a98e347d3b96ec17ec34454493894d849a87e39150"
+  },
+  "scope": "Real animated foot/ground contact, cue dispatch, routing and accepted outcomes; not measured DSP output/listening balance or WebGL certification."
+}

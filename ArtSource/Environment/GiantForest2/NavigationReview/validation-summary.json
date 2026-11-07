@@ -1,0 +1,154 @@
+{
+  "unity": "2021.3.25f1",
+  "navigationSuite": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 20:47:37Z",
+    "end-time": "2026-11-05 20:47:46Z",
+    "duration": "9.5038082"
+  },
+  "completeRoutes": 25,
+  "bakedSizes": [
+    3,
+    5,
+    6,
+    7,
+    10
+  ],
+  "newProfiles": {
+    "7x": {
+      "radius": 12.6,
+      "height": 84,
+      "voxel": 1.575,
+      "agentTypeID": -1923039037
+    },
+    "10x": {
+      "radius": 18,
+      "height": 120,
+      "voxel": 2.25,
+      "agentTypeID": -902729914
+    }
+  },
+  "nonNavigationSceneBytesPreserved": true,
+  "oldDataAndAllOtherSnapshotAssetsAndSettingsUnchanged": true,
+  "changedExistingSnapshotFiles": [
+    "Assets/Scenes/GiantForest2.unity",
+    "ProjectSettings/NavMeshAreas.asset"
+  ],
+  "fullTitanSuite": {
+    "id": "2",
+    "testcasecount": "265",
+    "result": "Failed(Child)",
+    "total": "265",
+    "passed": "257",
+    "failed": "7",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-05 20:53:35Z",
+    "end-time": "2026-11-05 20:54:06Z",
+    "duration": "30.1609227"
+  },
+  "oldPolicyCurrentUserAssetsBaseline": {
+    "stats": {
+      "id": "2",
+      "testcasecount": "263",
+      "result": "Failed(Child)",
+      "total": "263",
+      "passed": "255",
+      "failed": "7",
+      "inconclusive": "0",
+      "skipped": "1",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-11-05 20:50:13Z",
+      "end-time": "2026-11-05 20:50:42Z",
+      "duration": "28.7767126"
+    },
+    "failures": [
+      {
+        "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+        "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.26311493f\n"
+      },
+      {
+        "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+        "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+      },
+      {
+        "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+        "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+      },
+      {
+        "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+        "message": "  Expected: 2\n  But was:  1\n"
+      },
+      {
+        "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+        "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+      },
+      {
+        "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+        "message": "  Expected: True\n  But was:  False\n"
+      },
+      {
+        "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+        "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+      }
+    ]
+  },
+  "finalExistingFailures": [
+    {
+      "name": "IntactBodyHasWorkingAnimationAndKinematicPhysics",
+      "message": "  Face zones must not inherit 100x FBX scale\n  Expected: less than 2.0f\n  But was:  2.20538354f\n"
+    },
+    {
+      "name": "NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel",
+      "message": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n"
+    },
+    {
+      "name": "NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso",
+      "message": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+    },
+    {
+      "name": "BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched",
+      "message": "  Expected: 2\n  But was:  1\n"
+    },
+    {
+      "name": "PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics",
+      "message": "  Expected: equivalent to < \"Assets/Audio/titanScream.wav\", \"Assets/Audio/titanScream2.mp3\" >\n  But was:  < \"Assets/Audio/titanScream.wav\" >\n"
+    },
+    {
+      "name": "BlindnessAndEitherLegLossCancelAndReleaseImmediately",
+      "message": "  Expected: True\n  But was:  False\n"
+    },
+    {
+      "name": "GaitAndCadenceFollowMeasuredSpeedRatherThanRequestedPace",
+      "message": "  Expected: in range (0.9,1.1)\n  But was:  0.609376788f\n"
+    }
+  ],
+  "failureComparison": "Same seven tests. Six identical messages; per-instance idle head pose varies enlarged face bounds, same original assertion.",
+  "quickfixCases": [
+    {
+      "name": "SkippingMissingSizesPreservesRelativeWeightsAndStillRequestsThemForNextBake",
+      "result": "Passed"
+    },
+    {
+      "name": "UnbakedSizesAreSkippedWithoutBlockingBakedSpawnsOrBorrowingClearance",
+      "result": "Passed"
+    }
+  ],
+  "sourceWorkerVerified": true,
+  "scope": "Native navigation, wall queries, actual spawn clearance/scheduling. Not full-crowd FPS/WebGL/10x bite certification."
+}

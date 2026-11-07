@@ -1,15 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODM.GiantForest2.PlayModeTests", "ODM.GiantForest2.PlayModeTests.csproj", "{8bbc08ec-836c-5d2a-8ad3-c981037270b2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{cb950590-b854-b362-e169-7e855de97728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODM.TitanPrototype.PlayModeTests", "ODM.TitanPrototype.PlayModeTests.csproj", "{dc6518ad-7d24-a282-c202-036eb54ecdc0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODM.TitanPrototype", "ODM.TitanPrototype.csproj", "{917ae359-ff7e-a49b-9e34-fe108c52790f}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2b5cf372-1fa6-2470-aa32-b9da018b7180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8bbc08ec-836c-5d2a-8ad3-c981037270b2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8bbc08ec-836c-5d2a-8ad3-c981037270b2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{cb950590-b854-b362-e169-7e855de97728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{cb950590-b854-b362-e169-7e855de97728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{dc6518ad-7d24-a282-c202-036eb54ecdc0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{dc6518ad-7d24-a282-c202-036eb54ecdc0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917ae359-ff7e-a49b-9e34-fe108c52790f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917ae359-ff7e-a49b-9e34-fe108c52790f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2b5cf372-1fa6-2470-aa32-b9da018b7180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2b5cf372-1fa6-2470-aa32-b9da018b7180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

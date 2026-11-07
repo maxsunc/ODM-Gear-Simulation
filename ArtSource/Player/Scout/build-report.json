@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "heightMetres": 1.83,
+  "triangles": 11520,
+  "bones": 43,
+  "objects": [
+    "ScoutRig",
+    "ScoutBody",
+    "ScoutCape",
+    "ScoutHilt_L",
+    "ScoutBlade_L",
+    "ScoutHilt_R",
+    "ScoutBlade_R",
+    "ScoutLaunch_L",
+    "ScoutLaunch_R",
+    "ScoutForward",
+    "ScoutUp"
+  ],
+  "atlas": 1024,
+  "materials": 1,
+  "front": "-Y",
+  "unityVisualScale": 2,
+  "fbx": "C:\\Users\\maxsu\\OneDrive\\Documents\\ODM Attempt # 1\\Assets\\Art\\Player\\Scout\\ScoutPlayer.fbx"
+}

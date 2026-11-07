@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="26" result="Failed(Child)" total="26" passed="7" failed="19" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:39Z" duration="0.7564107">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="318" result="Failed" site="Child" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:39Z" duration="0.756411" total="26" passed="7" failed="19" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1344" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="318" result="Failed" site="Child" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:39Z" duration="0.745651" total="26" passed="7" failed="19" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18536" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1103" name="TitanAudioPlayModeTests" fullname="TitanAudioPlayModeTests" classname="TitanAudioPlayModeTests" runstate="Runnable" testcasecount="26" result="Failed" site="Child" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:39Z" duration="0.742545" total="26" passed="7" failed="19" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1105" name="BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched" fullname="TitanAudioPlayModeTests.BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched" methodname="BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="2146266977" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.150445" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[  Expected: 2
+  But was:  1
+]]></message>
+            <stack-trace><![CDATA[at TitanAudioPlayModeTests.BlindScreamsOnlyOnNewBlindnessRandomizeBothClipsAndLeaveGameplayRandomUntouched () [0x00178] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:54
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1132" name="EatenCueRequiresRealLethalBiteDamageDeduplicatesAndDoesNotFollowReleasedPlayer" fullname="TitanAudioPlayModeTests.EatenCueRequiresRealLethalBiteDamageDeduplicatesAndDoesNotFollowReleasedPlayer" methodname="EatenCueRequiresRealLethalBiteDamageDeduplicatesAndDoesNotFollowReleasedPlayer" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1448389549" result="Passed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.017984" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1120" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.285416" total="9" passed="0" failed="9" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-case id="1111" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.0f,1.0f,0.0f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.0f,1.0f,0.0f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1734346744" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.016373" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Sound must coincide with the visible sole plant, not early descent
+  Expected: less than or equal to 0.0401000008f
+  But was:  0.0846493766f
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x000c1] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:94
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1112" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.0f,1.0f,0.0f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.0f,1.0f,0.0f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1970466038" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.007554" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Sound must coincide with the visible sole plant, not early descent
+  Expected: less than or equal to 0.0401000008f
+  But was:  0.0999979973f
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x000c1] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:94
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1113" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.5f,0.23f,3.0f,0.0f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.5f,0.23f,3.0f,0.0f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1677695635" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.005967" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Sound must coincide with the visible sole plant, not early descent
+  Expected: less than or equal to 0.0401000008f
+  But was:  0.0945135951f
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x000c1] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:94
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1114" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.71f,5.0f,0.25f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.0f,0.71f,5.0f,0.25f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1456461884" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.036750" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1115" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.13f,10.0f,0.25f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(1.0f,0.13f,10.0f,0.25f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1719143620" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.034194" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1116" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.1f,0.17f,7.0f,0.4f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.1f,0.17f,7.0f,0.4f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1982617670" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.043399" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1117" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.25f,0.37f,3.0f,0.4f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.25f,0.37f,3.0f,0.4f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1045236136" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.042001" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1118" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.75f,0.51f,5.0f,0.4f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.75f,0.51f,5.0f,0.4f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1821479164" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.044729" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1119" name="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.9f,0.93f,10.0f,0.4f)" fullname="TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights(0.9f,0.93f,10.0f,0.4f)" methodname="FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="870873905" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.051643" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  Exactly two observed strikes per full cycle after initial sampling, even above voxelized terrain
+  Expected: in range (5,6)
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.FootstepLandingPhaseTracksVisiblePlantAtRealGaitOffsetsAndNavHeights (System.Single gait, System.Single offset, System.Single size, System.Single rootHeight) [0x001f8] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:98
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-case id="1131" name="IdleBlindLegLossHitchesAndMissingGroundCannotManufactureFootsteps" fullname="TitanAudioPlayModeTests.IdleBlindLegLossHitchesAndMissingGroundCannotManufactureFootsteps" methodname="IdleBlindLegLossHitchesAndMissingGroundCannotManufactureFootsteps" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="191051501" result="Passed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:38Z" duration="0.041326" asserts="0">
+          <properties />
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1129" name="LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike" fullname="TitanAudioPlayModeTests.LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike" methodname="LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="395791187" result="Failed" start-time="2026-11-05 23:19:38Z" end-time="2026-11-05 23:19:39Z" duration="0.015209" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[  Expected: 2
+  But was:  4
+]]></message>
+            <stack-trace><![CDATA[at TitanAudioPlayModeTests.LostSupportReturningUnderAnAlreadyPlantedFootCannotInventAnotherStrike () [0x000d9] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:132
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1130" name="NearbyButAirborneRootCannotEmitAndAudioObserverCannotAlterAnimationOrGameplayRandom" fullname="TitanAudioPlayModeTests.NearbyButAirborneRootCannotEmitAndAudioObserverCannotAlterAnimationOrGameplayRandom" methodname="NearbyButAirborneRootCannotEmitAndAudioObserverCannotAlterAnimationOrGameplayRandom" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="729483389" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.020851" asserts="0">
+          <properties />
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1104" name="PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics" fullname="TitanAudioPlayModeTests.PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics" methodname="PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1966550251" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.008881" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[  Expected: equivalent to < "Assets/Audio/titanScream.wav", "Assets/Audio/titanScream2.mp3" >
+  But was:  < "Assets/Audio/titanScream.wav" >
+]]></message>
+            <stack-trace><![CDATA[at TitanAudioPlayModeTests.PaletteReferencesExactSuppliedFilesAndAllNewActorSourcesUseSfxWithoutPhysics () [0x00052] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:39
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1128" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.069971" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-case id="1121" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.0f,0.35f,1.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.0f,0.35f,1.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="2103637610" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.014704" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1122" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,1.0f,1.65f,10.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,1.0f,1.65f,10.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1254076483" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.004812" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1123" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.5f,1.65f,7.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(30,0.5f,1.65f,7.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="421355461" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.005422" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1124" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,0.0f,1.0f,3.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,0.0f,1.0f,3.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1388198175" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.009236" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1125" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,1.0f,1.65f,5.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(60,1.0f,1.65f,5.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="827388358" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.006183" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1126" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,1.0f,1.65f,10.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,1.0f,1.65f,10.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="923364199" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.010151" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1127" name="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,0.75f,0.6f,7.0f)" fullname="TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences(120,0.75f,0.6f,7.0f)" methodname="RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1459159936" result="Failed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.018157" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[  No missing/double impacts at real Animator speed and display frame rate
+  Expected: 2
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at TitanAudioPlayModeTests.RealAnimatorLandingsStayInSyncAtDifferentFrameRatesAndCadences (System.Int32 fps, System.Single gait, System.Single rate, System.Single size) [0x00233] in C:\Users\maxsu\AppData\Local\Temp\ODM-TitanValidation-fh_v2o9d\Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs:121
+]]></stack-trace>
+            </failure>
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="1110" name="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" fullname="TitanAudioPlayModeTests.RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" classname="TitanAudioPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.120632" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1106" name="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.13f,1.0f)" fullname="TitanAudioPlayModeTests.RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.13f,1.0f)" methodname="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="129784063" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.026876" asserts="0">
+            <properties />
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1107" name="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.71f,1.0f)" fullname="TitanAudioPlayModeTests.RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.71f,1.0f)" methodname="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="598734709" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.033803" asserts="0">
+            <properties />
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1108" name="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.89f,3.0f)" fullname="TitanAudioPlayModeTests.RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(0.0f,0.89f,3.0f)" methodname="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="1220197944" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.030974" asserts="0">
+            <properties />
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+          <test-case id="1109" name="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.31f,5.0f)" fullname="TitanAudioPlayModeTests.RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset(1.0f,0.31f,5.0f)" methodname="RealWalkAndRunSolesPlayOncePerLandingAndFollowCycleOffset" classname="TitanAudioPlayModeTests" runstate="Runnable" seed="2143738067" result="Passed" start-time="2026-11-05 23:19:39Z" end-time="2026-11-05 23:19:39Z" duration="0.027982" asserts="0">
+            <properties />
+            <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+          </test-case>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

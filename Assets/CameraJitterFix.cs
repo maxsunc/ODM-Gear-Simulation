@@ -57,6 +57,7 @@ public class CameraJitterFix : MonoBehaviour
         }
     }
     
+    public void ResetAfterTeleport(){lastPosition=transform.position;lastRotation=transform.rotation;}
     void LateUpdate()
     {
         // Apply interpolation to reduce jitter

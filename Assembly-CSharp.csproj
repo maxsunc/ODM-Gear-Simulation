@@ -36,34 +36,76 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Player\Scout\PlayerImpactPalette.cs" />
      <Compile Include="Assets\Attack.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSpawnStrikeEffect.cs" />
      <Compile Include="Assets\ShowFPS.cs" />
+     <Compile Include="Assets\Titan\TitanAttack.cs" />
+     <Compile Include="Assets\Titan\TitanState.cs" />
      <Compile Include="Assets\MenuManager.cs" />
+     <Compile Include="Assets\UI\FrontendUI.cs" />
      <Compile Include="Assets\GameElements.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanRuntimeActor.cs" />
+     <Compile Include="Assets\Titan\TitanLimb.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSwordAudioPalette.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerDeathFeedback.cs" />
+     <Compile Include="Assets\UI\GameOptions.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
+     <Compile Include="Assets\Titan\TitanController.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutPlayerAnimation.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeCloth.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\Tree_Packs.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanAudioEmitter.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutAnimationBrain.cs" />
      <Compile Include="Assets\ThirdPersonCam.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutStompReaction.cs" />
+     <Compile Include="Assets\Titan\Integration\ODMHookAnchor.cs" />
      <Compile Include="Assets\CameraJitterFix.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeMeshLifetime.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
      <Compile Include="Assets\ODM_Movement.cs" />
+     <Compile Include="Assets\UI\GameStats.cs" />
      <Compile Include="Assets\Scripts\Audio.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanRandomSpawner.cs" />
+     <Compile Include="Assets\Scripts\GameAudio.cs" />
      <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
+     <Compile Include="Assets\PlayerRespawn.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanAudioPalette.cs" />
      <Compile Include="Assets\Movement.cs" />
+     <Compile Include="Assets\Titan\TitanNape.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSwordFeedback.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanShiganshinaIntegration.cs" />
      <Compile Include="Assets\Scripts\FollowPos.cs" />
+     <Compile Include="Assets\PlayerHealth.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMSwordSweep.cs" />
+     <Compile Include="Assets\UI\GameMenu.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMMotor.cs" />
      <Compile Include="Assets\RagdollController.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanStompDebris.cs" />
      <Compile Include="Assets\SceneManagement.cs" />
+     <Compile Include="Assets\DamageDealer.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
+     <Compile Include="Assets\Titan\Integration\PlayerCombatPermission.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerWindAudioPalette.cs" />
+     <Compile Include="Assets\UI\GamePauseMenu.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerWindAudio.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanSpawnLightning.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\2_Notices.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\Art\Environment\GiantForest2\GiantForestLit.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanStompDebris.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -72,6 +114,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanImpact.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -696,6 +739,9 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="MCPForUnity.Runtime">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\MCPForUnity.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
@@ -741,11 +787,11 @@
     <Reference Include="Unity.ShaderGraph.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Cinemachine">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
@@ -794,6 +840,9 @@
     </Reference>
     <Reference Include="Unity.Play.Publisher.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Play.Publisher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="MCPForUnity.Editor">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\MCPForUnity.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
@@ -848,6 +897,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="ODM.TitanPrototype.csproj">
+      <Project>{917ae359-ff7e-a49b-9e34-fe108c52790f}</Project>
+      <Name>ODM.TitanPrototype</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

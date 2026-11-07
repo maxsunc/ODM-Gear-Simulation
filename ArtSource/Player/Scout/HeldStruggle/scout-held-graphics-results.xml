@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 15:11:07Z" end-time="2026-11-06 15:11:08Z" duration="1.5605765">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="458" result="Passed" start-time="2026-11-06 15:11:07Z" end-time="2026-11-06 15:11:08Z" duration="1.560577" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1496" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="458" result="Passed" start-time="2026-11-06 15:11:07Z" end-time="2026-11-06 15:11:08Z" duration="1.533903" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="50812" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1226" name="TitanODMIntegrationPlayModeTests" fullname="TitanODMIntegrationPlayModeTests" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" testcasecount="158" result="Passed" start-time="2026-11-06 15:11:07Z" end-time="2026-11-06 15:11:08Z" duration="1.522228" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1279" name="HeldStruggleLeftRendersInOwnedNativeGraphics" fullname="TitanODMIntegrationPlayModeTests.HeldStruggleLeftRendersInOwnedNativeGraphics" methodname="HeldStruggleLeftRendersInOwnedNativeGraphics" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="361512104" result="Passed" start-time="2026-11-06 15:11:07Z" end-time="2026-11-06 15:11:08Z" duration="1.130287" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+Animator does not have an AnimatorController
+HELD_STRUGGLE_NATIVE side=Left changedPixels=3390 hp=90.00041 sameGrip=true device=Intel(R) Iris(R) Xe Graphics
+Cleanup Blit
+]]></output>
+        </test-case>
+        <test-case id="1280" name="HeldStruggleRightRendersInOwnedNativeGraphics" fullname="TitanODMIntegrationPlayModeTests.HeldStruggleRightRendersInOwnedNativeGraphics" methodname="HeldStruggleRightRendersInOwnedNativeGraphics" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="252743532" result="Passed" start-time="2026-11-06 15:11:08Z" end-time="2026-11-06 15:11:08Z" duration="0.370147" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+HELD_STRUGGLE_NATIVE side=Right changedPixels=5964 hp=90.00041 sameGrip=true device=Intel(R) Iris(R) Xe Graphics
+Cleanup Blit
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
