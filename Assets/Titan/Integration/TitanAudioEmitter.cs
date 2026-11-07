@@ -42,8 +42,11 @@ public sealed class TitanAudioEmitter : MonoBehaviour
     void OnStomp(Vector3 point,bool left)
     {
         if(body.IsDead || palette==null || !isActiveAndEnabled)return;
-        var clip=Choose(palette.footsteps);if(clip==null)return;int foot=left?0:1;
-        steps[foot].transform.position=point;steps[foot].PlayOneShot(clip,palette.footstepVolume);
+        // Dedicated attack impact; walking/running still use the footstep pool.
+        // Older/custom palettes without a stomp clip retain their previous cue.
+        var clip=palette.stomp!=null?palette.stomp:Choose(palette.footsteps);if(clip==null)return;int foot=left?0:1;
+        float volume=palette.stomp!=null?palette.stompVolume:palette.footstepVolume;
+        steps[foot].transform.position=point;steps[foot].PlayOneShot(clip,volume);
         LastFootstep=clip;LastFoot=foot;FootstepCount++;ResetFeet();
     }
     void OnDestroy()

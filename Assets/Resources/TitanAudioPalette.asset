@@ -26,3 +26,5 @@ MonoBehaviour:
   eatenVolume: 0.85
   grab: {fileID: 8300000, guid: ba46762d293ab984a96b72cb5ac8a3ce, type: 3}
   grabVolume: 1
+  stomp: {fileID: 8300000, guid: 4c7da9ae3b9e8514684c509a55d7c2d4, type: 3}
+  stompVolume: 0.25

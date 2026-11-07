@@ -6,6 +6,45 @@ and rock debris, adds the real HP HUD and removes gameplay circles/debug console
 Latest follow-up REMOVES regeneration and adds10HP/s confirmed grab damage. The40HP lab timing and
 verification below remain historical/standalone defaults, not current gameplay UI.
 
+## Current ground-attack reaction tuning
+
+`Assets/Titan/Prototype/TitanCombatDirector.cs` now exposes these Inspector settings:
+
+| Field | Previous hard-coded delay | New default |
+| --- | --- | --- |
+| Ground Settle Duration | .12s | **.06s** |
+| Failed Attack Retry Delay | .2s | **.05s** |
+| Post Attack Decision Delay | .65s | **.2s** |
+
+These control the pause **before selecting** a ground attack, not the stomp motion.
+The post-attack pause begins after recovery; it is not an extra initial-approach wait.
+Fresh gameplay Titans receive these defaults through their runtime-added director.
+Select a live Titan's **Titan Combat Director** to try different values during Play;
+those runtime Inspector edits do not persist after Play. Edit the script defaults
+for a persistent change. Invalid non-finite values fall back to the new defaults;
+negative values clamp to zero, without bypassing the actual stopped/braking check.
+
+**Wait Reason** reports selection status in the Inspector, including braking,
+planting, decision pauses, ongoing attacks and failed ground choices. It identifies
+an active stomp cooldown when a ground choice fails; other failed choices list
+possible eligibility blockers, not a confirmed diagnosis of the user's stall.
+
+Stomp wind-up **.65s**, strike **.14s**, recovery **.5s**, gameplay damage **60HP**,
+gameplay cooldown **1.6s**, attack chance, movement ownership, sight, facing, range,
+physical ground/cover checks and injury cancellation are unchanged. Aerial grab
+opportunities still bypass ground decision/settling delays. Multi-second approach
+stalls can still reflect eligibility or cooldowns, not these short reaction timers.
+
+Validation: **41 existing checks passed / 0 failed / 0 skipped** in the closed
+Unity 2021.3.25f1 worker: `TitanStompPlayModeTests`,
+`DirectorSelectsExclusivelyWithoutConsumingGameplayRandomAndPauseReleasesGrab`,
+`AerialOpportunityBypassesAnExistingGroundDecisionRetryDelay`, and
+`TitanRuntimeRegistrationPlayModeTests`. No test code or assertions changed.
+This is a filtered regression run, not full-suite or hands-on approach-feel proof.
+See `Library/TitanValidationRun.json` for the latest worker/XML/log paths.
+
+## Historical first-slice scope
+
 Implemented only in `Assets/Scenes/TitanAISandbox.unity`, through its runtime demo
 setup. The reusable body prefab and passive body lab do **not** acquire attack AI.
 Legacy gameplay scenes/player wiring are not modified by this phase.

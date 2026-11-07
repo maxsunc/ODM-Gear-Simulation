@@ -5,9 +5,10 @@ using UnityEngine;
 public sealed class TitanAudioPalette : ScriptableObject
 {
     public AudioClip[] blindScreams=new AudioClip[0], footsteps=new AudioClip[0];
-    public AudioClip spawnLightning, eaten, grab;
+    public AudioClip spawnLightning, eaten, grab, stomp;
     [Range(0,1)] public float screamVolume=.8f, footstepVolume=.75f, eatenVolume=.85f;
     [Range(0,1)] public float grabVolume=1;
+    [Range(0,1)] public float stompVolume=.25f;
     public static TitanAudioPalette Load(){return Resources.Load<TitanAudioPalette>("TitanAudioPalette");}
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
