@@ -38,17 +38,22 @@
   <ItemGroup>
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanGrabPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutPlayerPlayModeTests.cs" />
-     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutCapeClothPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\GameAudioPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanCorpseDecompositionPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAerialGrabPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanRandomSpawnerPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanSwordImpactPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanWorldNavigationPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanMotionStylePlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutHeldStrugglePlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanODMIntegrationPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanStompPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAISandboxScenePlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanInjuryPosePlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ScoutCapeClothPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\ModularTitanPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanAudioPlayModeTests.cs" />
+     <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanStompDebrisPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanRuntimeRegistrationPlayModeTests.cs" />
      <Compile Include="Assets\Tests\TitanPrototype\PlayMode\TitanPatrolChasePlayModeTests.cs" />
     <Reference Include="UnityEngine">

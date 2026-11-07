@@ -15,4 +15,4 @@ MonoBehaviour:
   finisherSounds:
   - {fileID: 8300000, guid: a61b5531cfc0c4241b8e2ce2ca0eb5b6, type: 3}
   - {fileID: 8300000, guid: a7deba833527d0e40a89004faf94ff1a, type: 3}
-  volume: 0.65
+  volume: 0.3

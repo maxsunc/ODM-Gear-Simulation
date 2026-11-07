@@ -1,0 +1,276 @@
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_A_Gable_LOD0.fbx'
+export finished in 0.0110 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_A_Gable_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_A_Gable_LOD1.fbx'
+export finished in 0.0090 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_A_Gable_LOD2.fbx'
+export finished in 0.0076 sec.
+SG_ASSET SG_House_A_Gable {"LOD0": 6812, "collisionTriangles": 80, "LOD1": 4004, "LOD2": 524}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_B_Tall_LOD0.fbx'
+export finished in 0.0103 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_B_Tall_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_B_Tall_LOD1.fbx'
+export finished in 0.0100 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_B_Tall_LOD2.fbx'
+export finished in 0.0061 sec.
+SG_ASSET SG_House_B_Tall {"LOD0": 8108, "collisionTriangles": 80, "LOD1": 5204, "LOD2": 668}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_C_Shop_LOD0.fbx'
+export finished in 0.0090 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_C_Shop_Collision.fbx'
+export finished in 0.0021 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_C_Shop_LOD1.fbx'
+export finished in 0.0091 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_C_Shop_LOD2.fbx'
+export finished in 0.0069 sec.
+SG_ASSET SG_House_C_Shop {"LOD0": 7600, "collisionTriangles": 80, "LOD1": 4048, "LOD2": 568}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_D_Wide_LOD0.fbx'
+export finished in 0.0100 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_D_Wide_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_D_Wide_LOD1.fbx'
+export finished in 0.0092 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_D_Wide_LOD2.fbx'
+export finished in 0.0065 sec.
+SG_ASSET SG_House_D_Wide {"LOD0": 8204, "collisionTriangles": 80, "LOD1": 4004, "LOD2": 524}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_E_Cottage_LOD0.fbx'
+export finished in 0.0100 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_E_Cottage_Collision.fbx'
+export finished in 0.0021 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_E_Cottage_LOD1.fbx'
+export finished in 0.0083 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_E_Cottage_LOD2.fbx'
+export finished in 0.0070 sec.
+SG_ASSET SG_House_E_Cottage {"LOD0": 4748, "collisionTriangles": 80, "LOD1": 2804, "LOD2": 380}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_F_Guild_LOD0.fbx'
+export finished in 0.0135 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_F_Guild_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_F_Guild_LOD1.fbx'
+export finished in 0.0088 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_House_F_Guild_LOD2.fbx'
+export finished in 0.0110 sec.
+SG_ASSET SG_House_F_Guild {"LOD0": 10964, "collisionTriangles": 92, "LOD1": 6464, "LOD2": 872}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Warehouse_LOD0.fbx'
+export finished in 0.0112 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Warehouse_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Warehouse_LOD1.fbx'
+export finished in 0.0090 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Warehouse_LOD2.fbx'
+export finished in 0.0150 sec.
+SG_ASSET SG_Warehouse {"LOD0": 11284, "collisionTriangles": 80, "LOD1": 5248, "LOD2": 712}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_CivicHall_LOD0.fbx'
+export finished in 0.0144 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_CivicHall_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_CivicHall_LOD1.fbx'
+export finished in 0.0105 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_CivicHall_LOD2.fbx'
+export finished in 0.0066 sec.
+SG_ASSET SG_CivicHall {"LOD0": 16764, "collisionTriangles": 240, "LOD1": 6828, "LOD2": 1068}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Belltower_LOD0.fbx'
+export finished in 0.0080 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Belltower_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Belltower_LOD1.fbx'
+export finished in 0.0070 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Belltower_LOD2.fbx'
+export finished in 0.0065 sec.
+SG_ASSET SG_Belltower {"LOD0": 1094, "collisionTriangles": 198, "LOD1": 950, "LOD2": 354}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Windmill_LOD0.fbx'
+export finished in 0.0070 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Windmill_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Windmill_LOD1.fbx'
+export finished in 0.0080 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Windmill_LOD2.fbx'
+export finished in 0.0071 sec.
+SG_ASSET SG_Windmill {"LOD0": 828, "collisionTriangles": 200, "LOD1": 780, "LOD2": 612}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Wall_Bay_32x120_LOD0.fbx'
+export finished in 0.0071 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Wall_Bay_32x120_Collision.fbx'
+export finished in 0.0024 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Wall_Bay_32x120_LOD1.fbx'
+export finished in 0.0061 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Wall_Bay_32x120_LOD2.fbx'
+export finished in 0.0060 sec.
+SG_ASSET SG_Wall_Bay_32x120 {"LOD0": 240, "collisionTriangles": 156, "LOD1": 240, "LOD2": 60}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Gate_Fortress_LOD0.fbx'
+export finished in 0.0079 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Gate_Fortress_Collision.fbx'
+export finished in 0.0035 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Gate_Fortress_LOD1.fbx'
+export finished in 0.0080 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Gate_Fortress_LOD2.fbx'
+export finished in 0.0070 sec.
+SG_ASSET SG_Gate_Fortress {"LOD0": 2826, "collisionTriangles": 708, "LOD1": 2442, "LOD2": 906}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Canal_Bridge_LOD0.fbx'
+export finished in 0.0070 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Canal_Bridge_Collision.fbx'
+export finished in 0.0010 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Canal_Bridge_LOD1.fbx'
+export finished in 0.0070 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Canal_Bridge_LOD2.fbx'
+export finished in 0.0067 sec.
+SG_ASSET SG_Canal_Bridge {"LOD0": 408, "collisionTriangles": 408, "LOD1": 408, "LOD2": 408}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Rooftop_Gantry_LOD0.fbx'
+export finished in 0.0061 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Rooftop_Gantry_Collision.fbx'
+export finished in 0.0010 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Rooftop_Gantry_LOD1.fbx'
+export finished in 0.0071 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Rooftop_Gantry_LOD2.fbx'
+export finished in 0.0072 sec.
+SG_ASSET SG_Rooftop_Gantry {"LOD0": 72, "collisionTriangles": 48, "LOD1": 72, "LOD2": 72}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Market_Stall_LOD0.fbx'
+export finished in 0.0060 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Market_Stall_Collision.fbx'
+export finished in 0.0030 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Market_Stall_LOD1.fbx'
+export finished in 0.0070 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Market_Stall_LOD2.fbx'
+export finished in 0.0070 sec.
+SG_ASSET SG_Market_Stall {"LOD0": 176, "collisionTriangles": 44, "LOD1": 176, "LOD2": 176}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Plaza_Fountain_LOD0.fbx'
+export finished in 0.0066 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Plaza_Fountain_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Plaza_Fountain_LOD1.fbx'
+export finished in 0.0075 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Plaza_Fountain_LOD2.fbx'
+export finished in 0.0080 sec.
+SG_ASSET SG_Plaza_Fountain {"LOD0": 412, "collisionTriangles": 320, "LOD1": 412, "LOD2": 412}
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Crate_LOD0.fbx'
+export finished in 0.0060 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Crate_Collision.fbx'
+export finished in 0.0020 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Crate_LOD1.fbx'
+export finished in 0.0060 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\Shiganshina\\Models\\SG_Crate_LOD2.fbx'
+export finished in 0.0060 sec.
+SG_ASSET SG_Crate {"LOD0": 36, "collisionTriangles": 12, "LOD1": 36, "LOD2": 36}
+Blender 4.5.0 (hash 8cb6b388974a built 2025-07-15 01:36:24)
+Fra:1 Mem:51.79M (Peak 51.79M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Studio ground [not exported]
+Fra:1 Mem:51.79M (Peak 51.79M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | SG_Belltower_LOD0.001
+Fra:1 Mem:51.80M (Peak 51.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Afternoon sun
+Fra:1 Mem:55.82M (Peak 55.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:55.79M (Peak 55.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading SG_Cloth_Normal.png
+Fra:1 Mem:55.79M (Peak 55.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading SG_Paver_Normal.png
+Fra:1 Mem:55.79M (Peak 55.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading SG_Plaster_BaseColor.png
+Fra:1 Mem:55.79M (Peak 55.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading SG_Cloth_BaseColor.png
+Fra:1 Mem:126.91M (Peak 147.86M) | Time:00:00.03 | Mem:72.00M, Peak:72.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:126.91M (Peak 147.86M) | Time:00:00.03 | Mem:72.00M, Peak:72.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:126.91M (Peak 147.86M) | Time:00:00.03 | Mem:72.00M, Peak:72.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.00M, Peak:72.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:127.00M (Peak 147.86M) | Time:00:00.03 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:129.25M (Peak 147.86M) | Time:00:00.04 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:129.25M (Peak 147.86M) | Time:00:00.04 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:132.34M (Peak 147.86M) | Time:00:00.05 | Mem:72.01M, Peak:72.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:132.33M (Peak 147.86M) | Time:00:00.05 | Mem:75.09M, Peak:75.09M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:132.33M (Peak 147.86M) | Time:00:00.05 | Mem:75.09M, Peak:75.09M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:132.33M (Peak 147.86M) | Time:00:00.05 | Mem:76.29M, Peak:76.29M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:132.33M (Peak 147.86M) | Time:00:00.05 | Mem:77.73M, Peak:78.93M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:132.33M (Peak 147.86M) | Time:00:00.05 | Mem:77.73M, Peak:78.93M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:77.73M, Peak:78.93M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.09M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.09M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.09M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.09M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.09M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.17M, Peak:79.17M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.17M, Peak:79.17M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.17M, Peak:79.17M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.17M, Peak:79.17M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.09M, Peak:79.17M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.18M, Peak:79.18M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:133.70M (Peak 147.86M) | Time:00:00.05 | Mem:79.18M, Peak:79.18M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:133.71M (Peak 147.86M) | Time:00:00.05 | Mem:79.18M, Peak:79.18M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:133.71M (Peak 147.86M) | Time:00:00.05 | Mem:79.18M, Peak:79.18M | Scene, ViewLayer | Sample 0/24
+Fra:1 Mem:261.55M (Peak 261.55M) | Time:00:00.30 | Remaining:00:05.72 | Mem:206.75M, Peak:206.75M | Scene, ViewLayer | Sample 1/24
+Fra:1 Mem:315.26M (Peak 395.83M) | Time:00:10.12 | Mem:206.75M, Peak:206.75M | Scene, ViewLayer | Sample 24/24
+Fra:1 Mem:315.26M (Peak 395.83M) | Time:00:10.12 | Mem:206.75M, Peak:206.75M | Scene, ViewLayer | Finished
+Saved: 'C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\ArtSource\Environment\Shiganshina\Blender_Street_Architecture.png'
+Time: 00:10.34 (Saving: 00:00.21)
+
+Info: Saved as "Shiganshina_Architecture.blend"
+SG_BLENDER_COMPLETE C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\ArtSource\Environment\Shiganshina
+
+Blender quit

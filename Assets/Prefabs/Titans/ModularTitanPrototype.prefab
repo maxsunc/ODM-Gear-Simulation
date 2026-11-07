@@ -304,10 +304,10 @@ MonoBehaviour:
   automaticTick: 1
   previewRun: 0
   varyPace: 1
-  walkReferenceSpeed: 8
-  runReferenceSpeed: 16
-  walkTurnSpeed: 210
-  runTurnSpeed: 160
+  walkReferenceSpeed: 10
+  runReferenceSpeed: 25
+  walkTurnSpeed: 60
+  runTurnSpeed: 35
   headLeadTime: 0.085
 --- !u!114 &152838467166530141
 MonoBehaviour:
@@ -664,8 +664,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4488014, y: 1.5514994, z: 0.59794503}
-  m_Center: {x: -0.06265658, y: -0.23363543, z: 0.123972505}
+  m_Size: {x: 2.018073, y: 1.7930632, z: 0.8919157}
+  m_Center: {x: 0.02239585, y: -0.23106432, z: 0.06310624}
 --- !u!114 &511141683721163916
 MonoBehaviour:
   m_ObjectHideFlags: 0

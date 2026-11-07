@@ -105,10 +105,10 @@ public class ThirdPersonCameraController : MonoBehaviour
     void HandleInput()
     {
         // Get mouse input
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * GameOptions.LookSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * GameOptions.LookSensitivity;
         
-        if (invertY) mouseY = -mouseY;
+        if (GameOptions.ResolveInvertY(invertY)) mouseY = -mouseY;
         
         // Update rotation
         currentX += mouseX;

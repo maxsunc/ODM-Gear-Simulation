@@ -38,8 +38,10 @@
   <ItemGroup>
      <Compile Include="Assets\Titan\Prototype\TitanStompAttack.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanHitZone.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanFacePalette.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAerialContact.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanGrabAttack.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanCombatProxy.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanDamageResult.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAerialMotor.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSandboxFlight.cs" />
@@ -47,10 +49,12 @@
      <Compile Include="Assets\Titan\Prototype\TitanWorldNavigation.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanCombatDirector.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSpawnSurfaceSampler.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanGrabEscape.cs" />
      <Compile Include="Assets\Titan\Prototype\ModularTitanBody.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSpawnPlacement.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanAISandboxDemo.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanSandboxDemo.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanBiteImpact.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanHealthSource.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanNavigationGeometry.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanReleaseClearance.cs" />
@@ -59,7 +63,9 @@
      <Compile Include="Assets\Titan\Prototype\TitanNavigationSurface.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanInjuryPose.cs" />
      <Compile Include="Assets\Titan\Prototype\TitanPatrolChaseAI.cs" />
-     <Compile Include="Assets\Titan\Prototype\TitanBiteImpact.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanCorpseDecomposition.cs" />
+     <Compile Include="Assets\Titan\Prototype\TitanFaceAppearance.cs" />
+     <None Include="Assets\Titan\Prototype\TitanCorpseSteam.shader" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     private Attack attack;
 
     bool initialized;
-    void Start(){Initialize();EnsureRespawn();}
+    void Start(){Initialize();EnsureRespawn();GameStats.Bind(this);}
     void Initialize()
     {
         if(initialized)return;initialized=true;
@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerRespawn EnsureRespawn()
     {var respawn=GetComponent<PlayerRespawn>();if(respawn==null)respawn=gameObject.AddComponent<PlayerRespawn>();respawn.Initialize();return respawn;}
     internal void CompleteRespawn()
-    {currentHP=Finite(maxHP)&&maxHP>0?maxHP:100;isDead=isGrabbed=false;grabbedByTitan=null;lastDamageAt=-10;}
+    {currentHP=Finite(maxHP)&&maxHP>0?maxHP:100;isDead=isGrabbed=false;grabbedByTitan=null;lastDamageAt=-10;GameStats.BeginLife(this);}
     static bool Finite(float value){return !float.IsNaN(value) && !float.IsInfinity(value);}
     void OnGUI()
     {
@@ -105,6 +105,7 @@ public class PlayerHealth : MonoBehaviour
             presentation.PrepareNaturalDeath(held?target.CurrentHoldVelocity:motor!=null?motor.Velocity:Vector3.zero,held?target.HoldOwner.transform:null);presentation.CaptureDeathPose();
         }
         isDead = true;
+        GameStats.RecordDeath(this);
         if(Died!=null) Died();
 
         // No live gravity/jump/rope coroutine may keep moving a dead controller.

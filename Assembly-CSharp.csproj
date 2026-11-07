@@ -36,27 +36,42 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Player\Scout\PlayerImpactPalette.cs" />
      <Compile Include="Assets\Attack.cs" />
      <Compile Include="Assets\Titan\Integration\TitanSpawnStrikeEffect.cs" />
      <Compile Include="Assets\ShowFPS.cs" />
      <Compile Include="Assets\Titan\TitanAttack.cs" />
      <Compile Include="Assets\Titan\TitanState.cs" />
      <Compile Include="Assets\MenuManager.cs" />
+     <Compile Include="Assets\UI\FrontendUI.cs" />
      <Compile Include="Assets\GameElements.cs" />
      <Compile Include="Assets\Titan\Integration\TitanRuntimeActor.cs" />
      <Compile Include="Assets\Titan\TitanLimb.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanSwordAudioPalette.cs" />
+     <Compile Include="Assets\Player\Scout\PlayerDeathFeedback.cs" />
+     <Compile Include="Assets\UI\GameOptions.cs" />
      <Compile Include="Assets\ThirdPersonCameraController.cs" />
      <Compile Include="Assets\Titan\TitanController.cs" />
      <Compile Include="Assets\Player\Scout\ScoutPlayerAnimation.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeCloth.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\Tree_Packs.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanAudioEmitter.cs" />
      <Compile Include="Assets\Player\Scout\ScoutAnimationBrain.cs" />
      <Compile Include="Assets\ThirdPersonCam.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutStompReaction.cs" />
+     <Compile Include="Assets\Titan\Integration\ODMHookAnchor.cs" />
      <Compile Include="Assets\CameraJitterFix.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutCapeMeshLifetime.cs" />
+     <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
      <Compile Include="Assets\ODM_Movement.cs" />
+     <Compile Include="Assets\UI\GameStats.cs" />
      <Compile Include="Assets\Scripts\Audio.cs" />
      <Compile Include="Assets\Titan\Integration\TitanRandomSpawner.cs" />
+     <Compile Include="Assets\Scripts\GameAudio.cs" />
      <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\Tree_Packs\URP_Tree_Pack\Scripts\LB_CameraMove.cs" />
+     <Compile Include="Assets\PlayerRespawn.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanAudioPalette.cs" />
      <Compile Include="Assets\Movement.cs" />
      <Compile Include="Assets\Titan\TitanNape.cs" />
      <Compile Include="Assets\Titan\Integration\TitanSwordFeedback.cs" />
@@ -64,18 +79,15 @@
      <Compile Include="Assets\Scripts\FollowPos.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMSwordSweep.cs" />
+     <Compile Include="Assets\UI\GameMenu.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMMotor.cs" />
-     <Compile Include="Assets\Titan\Integration\ODMHookAnchor.cs" />
-     <Compile Include="Assets\Titan\Integration\PlayerCombatPermission.cs" />
-     <Compile Include="Assets\Titan\Integration\TitanSwordAudioPalette.cs" />
      <Compile Include="Assets\RagdollController.cs" />
+     <Compile Include="Assets\Titan\Integration\TitanStompDebris.cs" />
      <Compile Include="Assets\SceneManagement.cs" />
      <Compile Include="Assets\DamageDealer.cs" />
      <Compile Include="Assets\Titan\Integration\TitanODMHealthSource.cs" />
      <Compile Include="Assets\Titan\Integration\TitanFreeRoamIntegration.cs" />
-     <Compile Include="Assets\Player\Scout\ScoutPlayerRagdoll.cs" />
-     <Compile Include="Assets\Player\Scout\ScoutCapeCloth.cs" />
-     <Compile Include="Assets\Player\Scout\ScoutCapeMeshLifetime.cs" />
+     <Compile Include="Assets\Titan\Integration\PlayerCombatPermission.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Tree_Packs\URP_Tree_Pack\Doc\1_Readme.txt" />
@@ -90,6 +102,7 @@
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\Titan\Integration\Shaders\TitanStompDebris.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -771,11 +784,11 @@
     <Reference Include="Unity.ShaderGraph.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Cinemachine">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>

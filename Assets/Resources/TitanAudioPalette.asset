@@ -11,18 +11,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45f73213837f44489ceef00d4a2b808d, type: 3}
   m_Name: TitanAudioPalette
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   blindScreams:
   - {fileID: 8300000, guid: 460747771a7dc704e9893efb96f73662, type: 3}
-  - {fileID: 8300000, guid: e178a64e15b0a8a4da59a768b04d6373, type: 3}
   footsteps:
-  - {fileID: 8300000, guid: a2c14150d50a0054494fda4cdeefe23f, type: 3}
-  - {fileID: 8300000, guid: daf2e49996f88ad4e9bea3c174050c26, type: 3}
-  - {fileID: 8300000, guid: dc489c9bcc667014ea607341828b75bd, type: 3}
+  - {fileID: 8300000, guid: 7bd399bc137f6d84bbdb03d505b6bb43, type: 3}
+  - {fileID: 8300000, guid: bae9d27dba114794489d1ebfa596bba6, type: 3}
+  - {fileID: 8300000, guid: 586d8a2ed46b73747ad345dc7ab37b97, type: 3}
+  - {fileID: 8300000, guid: dcb28fdcd9609fb4a8cbd5c6f94437e8, type: 3}
   spawnLightning: {fileID: 8300000, guid: d4a85f01f06a53642bdb9c1d9f8a9900, type: 3}
   eaten: {fileID: 8300000, guid: daa45f9735d6a884c92161780418f884, type: 3}
-  screamVolume: 0.8
-  footstepVolume: 0.75
+  screamVolume: 0.3
+  footstepVolume: 0.25
   eatenVolume: 0.85
   grab: {fileID: 8300000, guid: ba46762d293ab984a96b72cb5ac8a3ce, type: 3}
   grabVolume: 1

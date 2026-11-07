@@ -14,15 +14,98 @@ an overhaul. **That motion overhaul is now implemented and validated.**
 User previously requested conversation compaction; this file preserves the working
 state. No compaction command was executed by the assistant.
 
-## Current: local eye-hurt pose and re-grab tuning checkpoint (not pushed)
+## Current: new Shiganshina district and Blender architecture (local / uncommitted)
 
-User requested a LOCAL commit of current work, no new push. Include the eye-pose
-revision/palm contact, reviewed art helper/evidence/docs, and user's post-QTE escape
-re-grab grace1->4seconds in TitanCombatTarget.TryEscapeGrab. Stage ONLY that
-one-line logic change from the target file, leaving user formatting-only edits out.
-Unrelated prefab/scene/audio/B-series/IDE/Plastic/cache work remains uncommitted.
-Use Git log for checkpoint SHA. Eye-pose validation below predates the later4s
-user tuning; no fresh full-suite or QTE timing certification is implied.
+User requested a Shiganshina/AoT replica-style map, about current map size, useful
+ODM swing routes; explicitly authorized Blender models then an in-game assembly.
+DONE original Shiganshina-inspired first playable (not exact canonical street plan):
+packed ArtSource/Environment/Shiganshina/Shiganshina_Architecture.blend,17archetypes,
+68FBXs (3 visual LODs + structural collision),18portable texture maps/URP12materials.
+303 houses/shops/warehouses,160x120m wall bays,2closed fortified gates,3wide canal
+bridges, bell/clock tower, civic hall,2static windmills, fountain/market/gantries.
+2048x2048physical ground same forest footprint;1400x1388rounded town vs1536squareforest.
+100m main/64m cross-streets for giants,36m residential lots for roof/alley routes.
+Closed exterior buildings, actual sloped roof collisions independent of LOD, real
+layer9 hook surfaces,400m hook range unchanged; no fake hook volumes/motor changes.
+Canal ground is cut, real8m bed/solid stairs/bridges, water visual only; no swimming.
+Map-local native3/5/6bake, existing agent IDs/radius/height unchanged; roofs/bed/outer
+banks Not Walkable for Titans but remain physical/player-hookable.614physicalsources.
+New-map equal3/5/6size choices; inherited5initial/15max. Forest user3/5/6/4untouched.
+
+New Assets/Scenes/ShiganshinaDistrict.unity GUIDb522ce25248da5d4c954d9a46fa87db5,
+appended to Build Settings (old order/flags retained), not overwritten legacy Shig.
+Derived from CURRENT saved forest in closed marker-owned forest worker, additional
+.shiganshina-owned marker. Removes ONLY cloned forest environment, preservingALL
+external real hook lines/particles, player/gear/UI/audio/cameras. No live takeover.
+Native draft caught giant paving UVs/ground normals/gate gaps/overbroad rootfilter;
+fixed BEFORE publication. Source forest/prefab/art/palettes/physics/NavSettingsunchanged.
+
+Menu now GIANT FOREST / SHIGANSHINA selectors, real native-map photo/title/loading/
+deploy route. Forest default retained; named async load only. Actual Menu GUID and
+archived old91objects/music preserved. UI1920x1080/1440x1080native review completed.
+No feature commit/push. Previous frontend/stats work also still uncommitted.
+
+Native Blender Cycles +UnityIntelIris staticart reviewed in ArtSource/Environment/
+Shiganshina/MapReview. NOT a gameplay capture; Scout restposeexpectedEditMode.
+Reused31 EXISTING unchanged checks:7worldnav+14runtimeregistration+9audio+1respawn,
+PASS31/0/0. Fixture regressions NOT newmap route/crowd/roofrelease/perf/fullsuite proof.
+Latest Library/TitanValidationRun.json now that FILTER, NOT full suite. No newtestcode.
+Fresh user Play swing/feel/performance review still pending. SelectMenu→FreeRoam→
+Shiganshina→Deploy; or newscene manually on user's next Play, no forcedscenechange.
+Docs/shiganshina-district.md authoritative; tools/build_shiganshina_map.py and
+Assets/Editor/ShiganshinaDistrictBuilder.cs ownednewmapauthoring; tools/blender/
+build_shiganshina_assets.py source. Published revisions needexplicitfreshbaseline;
+--revise only supports unpublished owned iterations. Do not invoke stale oldforest
+publisher: cached forest worker was refreshed with currentsource/newmap for this task.
+Preservation summary/evidence under ArtSource/Environment/Shiganshina. Keep unrelated
+prefab/scene/palettes/Bfootsteps/targetformat/IDE/Plastic/cache and all prioruncommitted
+stats/options edits. No broad staging. Last actual GitHEADcc26cf0a; no push.
+
+## Previous: hold-Tab stats and primary Giant Forest frontend (local / uncommitted)
+
+User requested kill/death tracking with a HOLD-TAB non-pausing stats board, and an
+actual redesigned Menu with Options/Quit/Free Roam offering the primary forest only.
+Implemented Assets/UI/{GameStats,GameOptions,GameMenu,FrontendUI}.cs plus derivative
+forest backdrop. Stats receive accepted DamageDealer results (only real player lethal
+receipts credit kills, weak body identity dedup, actual AppliedDamage), guarded
+PlayerHealth.Die deaths, safe CompleteRespawn life-only resets. Run totals survive
+player-only respawn; career kills/deaths/best streak saved in separate PlayerPrefs.
+Overlay has no raycaster/cursor/input/time-scale writer; release Tab/focus loss hides.
+Options reuse existing audio mixer; look multiplier/default1x and explicit inversion
+choice apply in both camera scripts without changing authored baseline fields;
+borderless/windowed standalone-only +VSync. No movement/combat/physics changes.
+
+Menu.unity authored ONLY in the owned2021 worker then hash/GUID-guard published.
+All91 original serialized objects and exact AudioSource data retained; old canvas
+inactive/archived and old SceneManagement disabled. New actual uGUI is editable.
+Menu uses named async Assets/Scenes/GiantForest2.unity, already in Build Settings.
+Displayed primary name Giant Forest; physical path/GUID and old legacy scenes retained
+rather than risk references/user current forest edits. Quit confirmation saves; Editor
+Quit deliberately does not stop Play. Existing in-game J menu unchanged.
+
+Native static uGUI art reviewed16:9/4:3 with Intel Iris Xe. Stats art is ZERO DEFAULT
+plate over a forest photo, NOT a live counter or keyboard/no-pause gameplay test.
+No new/modified tests:16 existing filtered audio/contact/kill/health/respawn checks
+PASS16/0/0. Latest Library/TitanValidationRun.json now this FILTER, NOT a full suite.
+553 of555 protected feature-snapshot paths unchanged; intended exceptions PlayerHealth
+and Menu only. DamageDealer/two camera edits source-reviewed/compiled separately.
+Forest/prefab/palettes/B-audio/Titan rigs/face/eye source and GUIDs preserved.
+No live Editor scene/Play/input/physics automation. No fresh full-map/standalone/
+restart persistence/actual Tab interaction certification; user fresh Play review pending.
+Evidence ArtSource/UI/Frontend; docs/frontend-and-field-stats.md; tools/build_game_frontend.py
+(build/publish, --revise explicit future authoring); tools/capture_game_frontend.py.
+Existing validation runner snapshots Assets/UI so default-assembly dependencies compile.
+New stats/menu feature NOT committed/pushed. Index empty after checks. Preserve all
+unrelated user edits, including remaining target formatting and old prefab/scene/audio.
+
+## Previous: local eye-hurt pose and re-grab tuning checkpoint (committed, not pushed)
+
+Completed authorized LOCAL commit cc26cf0a before the new frontend request; no push.
+Includes eye-pose revision/palm contact, reviewed art helper/evidence/docs, and user's
+post-QTE escape re-grab grace1->4seconds in TitanCombatTarget.TryEscapeGrab. Only that
+one-line target logic change was committed, leaving user formatting edits uncommitted.
+Unrelated prefab/scene/audio/B-series/IDE/Plastic/cache work preserved. Eye validation
+below predates later4s tuning; no fresh full-suite or QTE timing certification implied.
 
 Follow-up: user wanted the actual palms to touch the eyes rather than float in
 front. Small runtime target-only change: wrist depth1.30->1.18model units; height,

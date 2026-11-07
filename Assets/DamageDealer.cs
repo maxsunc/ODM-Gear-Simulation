@@ -50,7 +50,11 @@ public class DamageDealer : MonoBehaviour
             if(!hitRegionsThisSwing.Add(key))return;
             Vector3 direction=slashDirection.sqrMagnitude>.000001f?slashDirection.normalized:zone.owner.transform.forward;
             var result=zone.owner.ReceiveDamage(zone.region,damage,point,direction*Mathf.Min(damage,150));
-            if(result.Accepted && HitConfirmed!=null)HitConfirmed(result);
+            if(result.Accepted)
+            {
+                GameStats.RecordHit(this,result);
+                if(HitConfirmed!=null)HitConfirmed(result);
+            }
             return;
         }
         var limb=other.GetComponent<TitanLimb>();if(limb!=null){limb.TakeDamage(damage);return;}

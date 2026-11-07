@@ -1,0 +1,44 @@
+{
+    "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+    "unity": "2021.3.25f1",
+    "authoredAt": "2026-11-06T23:02:14.4213347Z",
+    "sourceScene": "Assets/Scenes/GiantForest2.unity",
+    "sceneGUID": "b522ce25248da5d4c954d9a46fa87db5",
+    "graphicsDevice": "",
+    "buildings": 303,
+    "wallBays": 160,
+    "bridges": 3,
+    "landmarks": 7,
+    "props": 16,
+    "physicalSources": 614,
+    "nonWalkableSources": 493,
+    "groundFootprint": 2048.0,
+    "enclosureWidth": 1400.0,
+    "enclosureDepth": 1388.0,
+    "wallHeight": 120.0,
+    "playerSpawn": {
+        "x": 0.0,
+        "y": 2.0,
+        "z": -585.0
+    },
+    "hookRange": 400.0,
+    "hookMask": 512,
+    "environmentLayer": 9,
+    "removedCloneRoots": [
+        "Giant Forest 2.0 [generated environment]"
+    ],
+    "navigationScales": [
+        3.0,
+        5.0,
+        6.0
+    ],
+    "agentIDs": [
+        -1372625422,
+        -334000983,
+        1479372276
+    ],
+    "initialSpawns": 5,
+    "maximumAlive": 15,
+    "collision": "Closed Blender structure meshes; gabled roofs match slopes; layer9 real physical hook surfaces",
+    "layout": "Rounded south district, straight inner wall, canal, three bridges, 100m main avenue, 64m cross streets, roof/alley routes"
+}

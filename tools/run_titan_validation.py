@@ -35,7 +35,7 @@ else:
 
 for relative in ['Assets/Art/Titans/Prototype', 'Assets/Titan/Prototype', 'Assets/Tests/TitanPrototype',
                  'Assets/Art/Player/Scout', 'Assets/Player/Scout', 'Assets/Prefabs/Player',
-                 'Assets/Art/Effects', 'Assets/Art/Titans/FaceVariants', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio']:
+                 'Assets/Art/Effects', 'Assets/Art/Titans/FaceVariants', 'Assets/Audio/TitanCombat', 'Assets/Resources/Audio', 'Assets/UI']:
     shutil.copytree(root / relative, project / relative, dirs_exist_ok=True)
 # Real user-supplied finisher/NPC clips and their small Resources reference palettes.
 for relative in ['Assets/Audio/blood1.wav','Assets/Audio/blood1.wav.meta',

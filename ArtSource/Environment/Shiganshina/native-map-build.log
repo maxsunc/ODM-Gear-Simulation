@@ -1,0 +1,1114 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-maxsu"
+[Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 58388, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] Error: LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              8fa399b06a3240c29803aec328ec610f
+  Correlation Id:          63686a741c87ce8492fe0dddda82c72a
+  External correlation Id: 5139206290301145845
+  Machine Id:              NXzKx2x2M5w9QqjEpeybWleQj6w=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-maxsu" (connect: 0.00s, validation: 0.01s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-maxsu-notifications"
+Entitlement-based licensing initiated
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2021.3/staging' branch; Version is '2021.3.25f1 (68ef2c4f8861) revision 6876972'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Core' Language: 'en' Physical Memory: 32452 MB
+[Licensing::Client] Successfully resolved entitlements
+[Licensing::Module] Serial number assigned to: "F4-EC84-BUTJ-PZME-BMSJ-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 58045 was selected
+
+COMMAND LINE ARGUMENTS:
+C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Unity.exe
+-batchmode
+-quit
+-projectPath
+C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei
+-executeMethod
+ShiganshinaDistrictBuilder.BuildOwned
+-logFile
+C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\sg-build.log
+-nographics
+Successfully changed project path to: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei
+C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [16624] Host "[IP] 10.0.0.164 [Port] 55497 [Flags] 2 [Guid] 204271965 [EditorId] 204271965 [Version] 1048832 [Id] WindowsEditor(7,max) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [16624] Host "[IP] 10.0.0.164 [Port] 55497 [Flags] 2 [Guid] 204271965 [EditorId] 204271965 [Version] 1048832 [Id] WindowsEditor(7,max) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Licensing::Client] Successfully resolved entitlements
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] 
+Registered 61 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ads@4.4.2 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ads@4.4.2)
+    com.unity.analytics@3.6.12 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.analytics@3.6.12)
+    com.unity.animation.rigging@1.1.1 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.animation.rigging@1.1.1)
+    com.unity.cinemachine@2.8.9 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.cinemachine@2.8.9)
+    com.unity.collab-proxy@2.0.4 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.collab-proxy@2.0.4)
+    com.unity.connect.share@4.2.3 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.connect.share@4.2.3)
+    com.unity.ide.rider@3.0.21 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ide.rider@3.0.21)
+    com.unity.ide.visualstudio@2.0.18 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ide.visualstudio@2.0.18)
+    com.unity.ide.vscode@1.2.5 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ide.vscode@1.2.5)
+    com.unity.purchasing@4.8.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.purchasing@4.8.0)
+    com.unity.test-framework@1.1.31 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.test-framework@1.1.31)
+    com.unity.textmeshpro@3.0.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.textmeshpro@3.0.6)
+    com.unity.timeline@1.6.5 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.timeline@1.6.5)
+    com.unity.xr.legacyinputhelpers@2.1.10 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.xr.legacyinputhelpers@2.1.10)
+    com.unity.ext.nunit@1.0.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ext.nunit@1.0.6)
+    com.unity.mathematics@1.2.6 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.mathematics@1.2.6)
+    com.unity.burst@1.8.4 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.burst@1.8.4)
+    com.unity.services.core@1.8.2 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.services.core@1.8.2)
+    com.unity.editorcoroutines@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.editorcoroutines@1.0.0)
+    com.unity.settings-manager@1.0.3 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.settings-manager@1.0.3)
+    com.unity.searcher@4.9.1 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.searcher@4.9.1)
+    com.unity.nuget.newtonsoft-json@3.2.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.0)
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.2d.sprite@1.0.0)
+    com.unity.2d.tilemap@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.2d.tilemap@1.0.0)
+    com.unity.render-pipelines.universal@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.render-pipelines.universal@12.1.11)
+    com.unity.ugui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.ugui@1.0.0)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.ai@1.0.0)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.androidjni@1.0.0)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.animation@1.0.0)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.assetbundle@1.0.0)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.audio@1.0.0)
+    com.unity.modules.cloth@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.cloth@1.0.0)
+    com.unity.modules.director@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.director@1.0.0)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.imageconversion@1.0.0)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.imgui@1.0.0)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.particlesystem@1.0.0)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.physics@1.0.0)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.physics2d@1.0.0)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.screencapture@1.0.0)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.terrain@1.0.0)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.tilemap@1.0.0)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.ui@1.0.0)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.uielements@1.0.0)
+    com.unity.modules.umbra@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.umbra@1.0.0)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.vehicles@1.0.0)
+    com.unity.modules.video@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.video@1.0.0)
+    com.unity.modules.vr@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.vr@1.0.0)
+    com.unity.modules.wind@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.wind@1.0.0)
+    com.unity.modules.xr@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.xr@1.0.0)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.subsystems@1.0.0)
+    com.unity.modules.uielementsnative@1.0.0 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.modules.uielementsnative@1.0.0)
+    com.unity.render-pipelines.core@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.render-pipelines.core@12.1.11)
+    com.unity.shadergraph@12.1.11 (location: C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.shadergraph@12.1.11)
+
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.47s seconds
+Refreshing native plugins compatible for Editor in 12.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.25f1 (68ef2c4f8861)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0; jobified=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+[Licensing::Client] Successfully resolved entitlements
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56808
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005125 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 3.05 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.385 seconds
+Domain Reload Profiling:
+	ReloadAssembly (385ms)
+		BeginReloadAssembly (57ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (263ms)
+			LoadAssemblies (56ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (66ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (17ms)
+			SetupLoadedEditorAssemblies (141ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (96ms)
+				ProcessInitializeOnLoadMethodAttributes (34ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+[Licensing::Client] Successfully resolved entitlements
+Application.AssetDatabase Initial Refresh Start
+A meta data file (.meta) exists but its folder 'Assets/Art/Environment/Shiganshina/Materials' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/Art/Environment/Shiganshina/Prefabs' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/Environment/Shiganshina' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/Navigation/Titans/Shiganshina' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its asset 'Assets/Scenes/ShiganshinaDistrict.unity' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Registering precompiled user dll's ...
+Registered in 0.005376 seconds.
+Start importing Assets/Editor/ShiganshinaDistrictBuilder.cs using Guid(650d7aece76dd1e4884301bff91105b8) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'ddf6b1f2a6ed7d2dc0b7c0c447d2eaec') in 0.022777 seconds 
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\bee_backend.exe --profile="Library/Bee/backend_profiler0.traceevents" --stdin-canary --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure ScriptAssemblies
+WorkingDir: C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei
+ExitCode: 0 Duration: 4s268ms
+[869/873    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[870/873    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+- Starting ILPostProcessorRunner
+
+- Starting ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp-Editor.dll
+
+- Finished ILPostProcessor 'zzzUnity.Burst.CodeGen.BurstILPostProcessor' on Assembly-CSharp-Editor.dll in 0.07526 seconds
+
+- Finished ILPostProcessorRunner in 0.093656 seconds
+[871/873    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[872/873    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (4.24 seconds), 4 items updated, 873 evaluated
+AssetDatabase: script compilation time: 4.508091s
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 48.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.791 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3791ms)
+		BeginReloadAssembly (89ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (15ms)
+		EndReloadAssembly (3618ms)
+			LoadAssemblies (1691ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (171ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (1663ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (49ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (1359ms)
+				ProcessInitializeOnLoadMethodAttributes (168ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.006485 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Textures/SG_Roof_BaseColor.png using Guid(5e356316df488bd49aadfa82d7e189cb) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '2d55ee41e6e00ec7e9db4e3b13164b5e') in 0.089869 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Canal_Bridge_LOD0.fbx using Guid(108b483a136f2ec43989ccd31ad3eb22) Importer(-1,00000000000000000000000000000000) Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+ -> (artifact id: '4e056d5dfa2291e8929ea2f5d395c8ca') in 0.085905 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Market_Stall_LOD0.fbx using Guid(501767528bd557f46b152d4cc33eb9a3) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '8ce5bc02b575615c585627c85b15a2ea') in 0.101189 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_CivicHall_Collision.fbx using Guid(80cb6e1d2bd474b499c9cc1904beb8ce) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'b393406ecf6f04bea9da3cf5da7d6ed6') in 0.046841 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Crate_LOD1.fbx using Guid(b0deba82697d7994793aa445fd385bc4) Importer(-1,00000000000000000000000000000000) File 'SG_Crate_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'ddc030ab75a0cd0feb07600f35faca70') in 0.049198 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_E_Cottage_Collision.fbx using Guid(01325a013a7c1d845a9960b61e7c81a0) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '91df466dbb4f2177c00b6aacd541f960') in 0.035615 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Rooftop_Gantry_Collision.fbx using Guid(0114c717ce5b0c5448da0582c001d4ee) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e35eb6387162c42c9080c8571e49e5fc') in 0.040589 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Crate_Collision.fbx using Guid(618332ac744981d479abf73e5158e4b7) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'cb5d6a113160db28cf2c231e05c410cb') in 0.035554 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Windmill_LOD1.fbx using Guid(81081deaa5486bb44888aaaa13f0d8d8) Importer(-1,00000000000000000000000000000000) File 'SG_Windmill_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '9509b2c22b82a723cc064beb7d7f3829') in 0.047340 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Warehouse_Collision.fbx using Guid(a123dff6d493d014691d50f4ae773ac4) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'b15902d4b10f5ee0c9188187f5d842d4') in 0.023117 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Wall_Bay_32x120_LOD1.fbx using Guid(b1467f34bdddd8d4a85897f866b5b8bd) Importer(-1,00000000000000000000000000000000) File 'SG_Wall_Bay_32x120_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '4dbda037f8dfd5b2f1fe2e2996d71e81') in 0.046258 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Rooftop_Gantry_LOD2.fbx using Guid(b1490e8eea5b94e4fb8fcb76707b303e) Importer(-1,00000000000000000000000000000000) File 'SG_Rooftop_Gantry_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '3261f81435caa25957e0ab3b3d513f1c') in 0.035851 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_A_Gable_LOD2.fbx using Guid(12ff84e8119907e469d51fe8b9d0b093) Importer(-1,00000000000000000000000000000000) File 'SG_House_A_Gable_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '14aac27334e53771cecc9fe6b7f1bbd3') in 0.053851 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_C_Shop_Collision.fbx using Guid(321ca8f8c98a72d479b76378bba0fd21) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd755d6a003817fb586fb41049e7c53dd') in 0.032493 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Gate_Fortress_LOD1.fbx using Guid(7260ccb944e84234dbb7a947bf87c5ca) Importer(-1,00000000000000000000000000000000) File 'SG_Gate_Fortress_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '65d020e7a7fec9a73281e3fe177fad73') in 0.036762 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Wall_Bay_32x120_LOD0.fbx using Guid(823c95091e6ad184492ec96f9cd58327) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '1bf9b5ea67b85690a72cf2283d0e8a4d') in 0.026321 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_A_Gable_Collision.fbx using Guid(f2e314f28fa01304084ea5ffd3128e80) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd0a3c6129cea2e140d7850e1fe7dd2eb') in 0.034332 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_E_Cottage_LOD0.fbx using Guid(1319d3967282f974cae0c953590b9015) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'de2a7ac9abeebd0d5349678d6b940871') in 0.053838 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_F_Guild_Collision.fbx using Guid(833308d34f279b44f8aac88e12d66de6) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '8c72723606784efd8c6837b7ebd830ce') in 0.041652 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_A_Gable_LOD0.fbx using Guid(d3b7007ca6dde2140a05f33a6849d3b1) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '7ef2ce2b244674053c479177ccd93d9f') in 0.046319 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Plaza_Fountain_LOD0.fbx using Guid(04eaa08aec74133479e509bd6f08ec7b) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'aa4f879154e535abb4521b675c212999') in 0.042056 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_C_Shop_LOD2.fbx using Guid(24f087857e0d38a4e9a44f4f997f9114) Importer(-1,00000000000000000000000000000000) File 'SG_House_C_Shop_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '16af933eefe766db0209a678d92b9b6e') in 0.052472 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_B_Tall_LOD1.fbx using Guid(4403aee88acbf124793f39836e5501b2) Importer(-1,00000000000000000000000000000000) File 'SG_House_B_Tall_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '0aca52b4fe368b1ab167afe3d975b30a') in 0.056747 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Belltower_LOD1.fbx using Guid(64f1cf418ffdcb4409726ced8bd2fd04) Importer(-1,00000000000000000000000000000000) File 'SG_Belltower_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '510d8e2bf528f660aa9b274628d90455') in 0.055910 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Windmill_LOD0.fbx using Guid(64b5c25a2c61f8348973459b5bc9ecc4) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '385e5467752a5d8e8f0d5b7c1fab186d') in 0.052148 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_A_Gable_LOD1.fbx using Guid(74e54fc4e3c2afb4b976340d4a225803) Importer(-1,00000000000000000000000000000000) File 'SG_House_A_Gable_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '2c4bf61fe9684b0644b067eed8d3b586') in 0.042535 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Rooftop_Gantry_LOD1.fbx using Guid(840aa6711a1d4174c85e1e304a2dca6b) Importer(-1,00000000000000000000000000000000) File 'SG_Rooftop_Gantry_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'c18b151351fb1734aa6b670514d732b4') in 0.045615 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Belltower_LOD0.fbx using Guid(94c39269436f6ff41ac048c64d009209) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '542b74ba6af157f218483be79ca9620e') in 0.050229 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Crate_LOD2.fbx using Guid(a42cb27737e29ef498d10a7ef17d3b05) Importer(-1,00000000000000000000000000000000) File 'SG_Crate_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'b73119ab8138c864c612513f1ccaabac') in 0.051145 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_C_Shop_LOD0.fbx using Guid(852153fba22c0e4418ea086659f725a5) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '911d3c0799544c9ecef47e7e61ce9e66') in 0.050871 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Warehouse_LOD0.fbx using Guid(c58a91f9a330f024183cd112389a7a59) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '33125a28473c3f12ff9bfeb8857703ef') in 0.060938 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_D_Wide_LOD2.fbx using Guid(262c7d2dfe16bf347b3f2863751afc5a) Importer(-1,00000000000000000000000000000000) File 'SG_House_D_Wide_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'dadaf838c97c9d29457d04fefd8a8290') in 0.052394 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Market_Stall_Collision.fbx using Guid(5695ab8fc644c804e87cd6a1e09804fc) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '71f53f13617f2ba5ed27dde899416c78') in 0.032707 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Wall_Bay_32x120_LOD2.fbx using Guid(d62a86c467328864b97f82add4e8d2f7) Importer(-1,00000000000000000000000000000000) File 'SG_Wall_Bay_32x120_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'f78cc93d017bfe842ecf7e241030454e') in 0.041589 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_E_Cottage_LOD2.fbx using Guid(77e5eae12dd994f40b2963235c90c2f7) Importer(-1,00000000000000000000000000000000) File 'SG_House_E_Cottage_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'f1c2c74996070694332b50fa605c9f08') in 0.052043 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_D_Wide_LOD1.fbx using Guid(8728018833be6cb4a933783c6c00d77c) Importer(-1,00000000000000000000000000000000) File 'SG_House_D_Wide_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '3c1f93a17c2ecc71dca169a7722d71e3') in 0.056615 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Gate_Fortress_LOD0.fbx using Guid(f7c4192071a34244e982e7bfad8c88e5) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '9f40b2687c153c4f50bdbd5eb77b6099') in 0.041422 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_C_Shop_LOD1.fbx using Guid(189253f97025c7a458a5f60f291b6cc8) Importer(-1,00000000000000000000000000000000) File 'SG_House_C_Shop_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '0900a1a809fb15a35044357d1aa6e978') in 0.056841 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_CivicHall_LOD0.fbx using Guid(38d21f2588f4ac246a143257776dbb62) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '0e07bc9302d80cb1c52c5ea468a7a4f0') in 0.065831 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Windmill_LOD2.fbx using Guid(382ef03c0bb86d049a148765c7b1a587) Importer(-1,00000000000000000000000000000000) File 'SG_Windmill_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '060da217ffae7a1e91da878c1c9740e3') in 0.052559 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Canal_Bridge_Collision.fbx using Guid(78a9feb1b7c89cc419195d136f750a5c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '85118c80411b78b6abcb45db19b733d7') in 0.039354 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_F_Guild_LOD2.fbx using Guid(f867283238592cc40971585a55d3e696) Importer(-1,00000000000000000000000000000000) File 'SG_House_F_Guild_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'cc85c646179566c4608bc4472c4900c3') in 0.050202 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Plaza_Fountain_LOD1.fbx using Guid(09ff02e98aa26ec40be5938be4403ace) Importer(-1,00000000000000000000000000000000) File 'SG_Plaza_Fountain_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: '29feb1942882cf2fe671575e2de5d3bf') in 0.036645 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_D_Wide_Collision.fbx using Guid(1991c55a7d9bb22499e17410f5a4dd86) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '5f0ab222f59d0f16dcec62d21ba8b041') in 0.034461 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Market_Stall_LOD1.fbx using Guid(5912498c82668a84cb85f12ad7c165f3) Importer(-1,00000000000000000000000000000000) File 'SG_Market_Stall_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'b4f9adfebe5ec35aa1bebd7bdd073440') in 0.042490 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_B_Tall_Collision.fbx using Guid(591c033b072fa4d499d35c6ff5abe878) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'bd9e88d225d5a05e0a5465ec0588953d') in 0.042552 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Windmill_Collision.fbx using Guid(795544ef33f3b5645aecdee8a6cc1287) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd85835189c201bf7788b7b1c95e29ca1') in 0.046596 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Belltower_LOD2.fbx using Guid(d92ea58096af3654a8c9032497628775) Importer(-1,00000000000000000000000000000000) File 'SG_Belltower_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'eaf9024417489deb2603fee2ba7d6a33') in 0.047888 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Wall_Bay_32x120_Collision.fbx using Guid(f9403f563ff0ee34ba24f1c1a698210d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'ab6bcec89cdbd968d2bacc7a9ed353ae') in 0.041623 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Gate_Fortress_Collision.fbx using Guid(3a6d39f2eb5c44a42937feb4fe2ed5b7) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'c953d1b961a0a1eea08412eb42c640e7') in 0.045071 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_CivicHall_LOD2.fbx using Guid(fa48428327057d649ad68d8ef557b407) Importer(-1,00000000000000000000000000000000) File 'SG_CivicHall_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '37e759d18c14d0efc541563c5119fdc9') in 0.042265 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Warehouse_LOD1.fbx using Guid(5b2d153424c9ad94fb3dd5bbf0fe2912) Importer(-1,00000000000000000000000000000000) File 'SG_Warehouse_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'c35c1f441b722158c77234cb9c3b24ac') in 0.058303 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_B_Tall_LOD0.fbx using Guid(db7c7624ff83610488bb69001f99b20e) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '2f82ee4d28bc6d3c5151bdb6a6200bb1') in 0.045722 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Belltower_Collision.fbx using Guid(2c44b3df3379e874c93303453a388e77) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'f6918f4b616864837273a807354273cc') in 0.047528 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_CivicHall_LOD1.fbx using Guid(3cee6e5fd316ac542adeaa7a3df6ee8c) Importer(-1,00000000000000000000000000000000) File 'SG_CivicHall_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'f8632474eda68e9fc345bfcf8a851041') in 0.061348 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Gate_Fortress_LOD2.fbx using Guid(6c334106b02bf1d42b44b37e081e3263) Importer(-1,00000000000000000000000000000000) File 'SG_Gate_Fortress_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '1a440e22bca66c063411efeabceca2b5') in 0.060843 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_B_Tall_LOD2.fbx using Guid(6c88f49746365314ab85ad3339979334) Importer(-1,00000000000000000000000000000000) File 'SG_House_B_Tall_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '99919a42b94a1449e2f783946a5336f6') in 0.055515 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Canal_Bridge_LOD1.fbx using Guid(7c1f18260e2e03e4eb2e820d504eb1c7) Importer(-1,00000000000000000000000000000000) File 'SG_Canal_Bridge_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'fa33709d285f9e57f2ca1b2f38388cb6') in 0.047547 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_F_Guild_LOD1.fbx using Guid(acb3346f7c2610549a8983ccaf804bf6) Importer(-1,00000000000000000000000000000000) File 'SG_House_F_Guild_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'dc7fbb3771da5d4b733f3772f55516c2') in 0.047787 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Rooftop_Gantry_LOD0.fbx using Guid(dc20e1bcf335db945adf5532deabcf35) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'df2aa38acdc19be7e79ef74294e369e6') in 0.046196 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Plaza_Fountain_LOD2.fbx using Guid(0d2056899802d154abb92a9ab1d545bd) Importer(-1,00000000000000000000000000000000) File 'SG_Plaza_Fountain_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '76f968d08b70e70e557f4f2a5a3203b4') in 0.035102 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Market_Stall_LOD2.fbx using Guid(4dbf230d20203e0439faa169175b65e3) Importer(-1,00000000000000000000000000000000) File 'SG_Market_Stall_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '8a668b92158cfc827caa92d879fdfa07') in 0.051899 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_D_Wide_LOD0.fbx using Guid(7dd609620577e654ea2efc81e810dace) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'b1637124aa98954fac24cf5989925730') in 0.052673 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Warehouse_LOD2.fbx using Guid(7dfdf16bb1e18354ab4e06bf2839daf6) Importer(-1,00000000000000000000000000000000) File 'SG_Warehouse_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: '464a1b43c83ed5185c1f0e9c28745397') in 0.049541 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Canal_Bridge_LOD2.fbx using Guid(8d6153462b94481408c745fa8c1fed82) Importer(-1,00000000000000000000000000000000) File 'SG_Canal_Bridge_LOD2' has inconsistent LOD naming (_LOD2 found but no _LOD1).
+ -> (artifact id: 'abc0d78d88e0bc71c0f8931ee3351802') in 0.041569 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_E_Cottage_LOD1.fbx using Guid(bddbecc5e9e616341aa7a4afc138533d) Importer(-1,00000000000000000000000000000000) File 'SG_House_E_Cottage_LOD1' has inconsistent LOD naming (_LOD1 found but no _LOD0).
+ -> (artifact id: 'c0609992e9b321b8036baa7497835b4a') in 0.048039 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Crate_LOD0.fbx using Guid(fd0f14902215a7c47a4b9897b7d9456e) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '3a8851ccaa3dc12bf05af8bca64c2d5c') in 0.046924 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_House_F_Guild_LOD0.fbx using Guid(2e534606e59178a4d9d13567f1428acc) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '22f111ce0d0a223962c0d8a418489035') in 0.057317 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Models/SG_Plaza_Fountain_Collision.fbx using Guid(fe6bef0a74dced94db8d9e0fd30683c7) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '50b84f24208e18c33a3b926ae3029ad1') in 0.050595 seconds 
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 13.117 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=1294 (actual=70, local cache=1224, cache server=0)
+		Asset DB Process Time: managed=35 ms, native=3802 ms
+		Asset DB Callback time: managed=81 ms, native=22 ms
+		Scripting: domain reloads=1, domain reload time=3901 ms, compile time=4510 ms, other=764 ms
+		Project Asset Count: scripts=5508, non-scripts=2162
+		Asset File Changes: new=0, changed=70, moved=0, deleted=47
+		Scan Filter Count: 1
+	InvokeBeforeRefreshCallbacks: 0.472ms
+	ApplyChangesToAssetFolders: 0.051ms
+	Scan: 241.661ms
+	OnSourceAssetsModified: 1.397ms
+	UnregisterDeletedAssets: 0.004ms
+	InitializeImportedAssetsSnapshot: 18.520ms
+	GetAllGuidsForCategorization: 0.476ms
+	CategorizeAssets: 100.620ms
+	ImportOutOfDateAssets: 12639.849ms (4709.639ms without children)
+		ImportManagerImport: 3413.201ms (20.728ms without children)
+			ImportInProcess: 3391.210ms
+			UpdateCategorizedAssets: 1.263ms
+		CompileScripts: 4509.854ms
+		ReloadImportedAssets: 4.857ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.268ms
+		InitializingProgressBar: 0.010ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.594ms
+		OnDemandSchedulerStart: 0.425ms
+	ReloadSourceAssets: 0.432ms
+	UnloadImportedAssets: 17.327ms
+	PostProcessAllAssets: 95.257ms
+	Hotreload: 6.821ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.000ms
+	UnloadStreamsBegin: 0.338ms
+	LoadedImportedAssetsSnapshotReleaseGCHandles: 1.054ms
+	GetLoadedSourceAssetsIDs: 0.728ms
+	GetLoadedSourceAssetsSnapshot: 0.595ms
+	PersistCurrentRevisions: 0.650ms
+	UnloadStreamsEnd: 0.024ms
+	GenerateScriptTypeHashes: 2.066ms
+	Untracked: 86.163ms
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 1.548ms
+Initializing Unity extensions:
+Registering precompiled user dll's ...
+Registered in 0.004283 seconds.
+Asset Pipeline Refresh: Total: 0.031 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-ODM Attempt # 1
+ProgressiveSceneManager::Cancel()
+Unloading 221 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 849 unused Assets / (5.2 MB). Loaded Objects now: 4906.
+Memory consumption went from 150.8 MB to 145.6 MB.
+Total: 7.750100 ms (FindLiveObjects: 0.236700 ms CreateObjectMapping: 0.103400 ms MarkObjects: 5.706100 ms  DeleteObjects: 1.703100 ms)
+
+Asset Pipeline Refresh: Total: 0.003 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Opening scene 'Assets/Scenes/GiantForest2.unity'
+Unloading 15 Unused Serialized files (Serialized files now loaded: 0)
+[Licensing::Client] Successfully resolved entitlements
+Loaded scene 'Assets/Scenes/GiantForest2.unity'
+	Deserialize:            53.870 ms
+	Integration:            457.741 ms
+	Integration of assets:  40.785 ms
+	Thread Wait Time:       0.127 ms
+	Total Operation Time:   552.523 ms
+Unloading 8 unused Assets / (0.7 KB). Loaded Objects now: 19143.
+Memory consumption went from 212.0 MB to 212.0 MB.
+Total: 7.632500 ms (FindLiveObjects: 1.057200 ms CreateObjectMapping: 0.327600 ms MarkObjects: 6.204000 ms  DeleteObjects: 0.042600 ms)
+
+Registering precompiled user dll's ...
+Registered in 0.005626 seconds.
+Start importing Assets/Scenes/ShiganshinaDistrict.unity using Guid(b522ce25248da5d4c954d9a46fa87db5) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4a4ff7db4b417519ac366f23795567d5') in 0.002681 seconds 
+Refreshing native plugins compatible for Editor in 0.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.100 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004391 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster.mat using Guid(dfde10798c463b84c9cc48cdb026b4df) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'fef66b7b273d75d9b83a247a981c7cd0') in 0.004528 seconds 
+Refreshing native plugins compatible for Editor in 0.62 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.087 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004360 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Timber.mat using Guid(e1e4fb0f0d03d1046b6db05c508fb586) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4e914de3bbeaa786de188b1284b8583d') in 0.003836 seconds 
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004438 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Roof.mat using Guid(9a98c86f10ccc674990018bc0c44b01f) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4151a96cabb88db03052270582f21b38') in 0.002286 seconds 
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.064 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.005519 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Stone.mat using Guid(7fa1e2f554676b34897bae20234fdcee) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'fc70755508c1d8f50468ca2d156e5e1a') in 0.003078 seconds 
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.073 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004307 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Brick.mat using Guid(a1193dda0c0ce8040b72b8e778633d7d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '5d9bef20b750decf48a414ddec644311') in 0.002325 seconds 
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004368 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Window.mat using Guid(c89d6a653a2e0a740bd269144f4f3446) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'aaae9c281727d232ed534ca3667359bd') in 0.002418 seconds 
+Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.065 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004443 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Iron.mat using Guid(5f0f4691c5206f740a9f8ede6e12a6a8) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd50b01b3c999f74adf59c7973e76b225') in 0.002347 seconds 
+Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004702 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Cloth.mat using Guid(9b543df94158cb74ba6d71f317aa3cfa) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e90541824246e3c2cf929f0c3935e0f6') in 0.002714 seconds 
+Refreshing native plugins compatible for Editor in 0.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004313 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Paver.mat using Guid(7897c930a50eb9d4d8d7b19a2131689d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'ac6cdcd367f55146e8fb6a121468c466') in 0.002582 seconds 
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004339 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_0.mat using Guid(da7399826c2adcb4e8e464608bf4c76d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'acd6d1621e181aed1f5eaa064d2d9595') in 0.002240 seconds 
+Refreshing native plugins compatible for Editor in 0.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004724 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_1.mat using Guid(f0ca448e5ee064d499b185aed261c7ab) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4f0101f8381c6bd32ec73fb7ade6c8b7') in 0.002401 seconds 
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004315 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_2.mat using Guid(9990f83d55119c245bb6f12e2c6f2e6c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '72e81a60cfeba754060bd00620c9a00c') in 0.002565 seconds 
+Refreshing native plugins compatible for Editor in 0.73 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004320 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_3.mat using Guid(ae9da5a2e9c54954a9d4b4fefceed47c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'c8cf1668e63cc73bec7bfe5202245030') in 0.002271 seconds 
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.062 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004554 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Courtyard.mat using Guid(fe06829f260e34a4b95e7f674c9c6f13) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4712c0ad5f36d82a85659290c0351865') in 0.002165 seconds 
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.049 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004540 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Outskirts.mat using Guid(53b94fdbd1e66774ead4572aceba4efe) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'bcfd875c3258470b3cc81c8bc495224e') in 0.002276 seconds 
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.047 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004575 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_CanalWater.mat using Guid(91f3a387397fb1d44b27432b96b6efed) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '36c9fe9fd15d004fcd92a41b20038f98') in 0.002215 seconds 
+Refreshing native plugins compatible for Editor in 0.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.049 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004434 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Belltower.prefab using Guid(44726715d3239bd44aa03b2224cd8b0b) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '912e3ff1ed06a0dc22071f92d59ed4e4') in 0.037707 seconds 
+Refreshing native plugins compatible for Editor in 0.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.106 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004394 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Canal_Bridge.prefab using Guid(9b82cc09dc9eed844b32d8bfd8d0a2ae) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'fc3db30bbd3bece949bc6e4d583d9a49') in 0.038511 seconds 
+Refreshing native plugins compatible for Editor in 0.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.109 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004365 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_CivicHall.prefab using Guid(9a7329c08ea72b74abe5fe3232074285) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '6c764597266cebc37fc9c747b20e7e96') in 0.039041 seconds 
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.108 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004544 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Crate.prefab using Guid(5b8e87a02094f054c9532c0a85073773) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '5c7228160ac7ed9ab141cb22cfb369f9') in 0.026663 seconds 
+Refreshing native plugins compatible for Editor in 0.75 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.077 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004534 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Gate_Fortress.prefab using Guid(c036bc8fab4a965498e6e9512b4d0289) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '2c94ac8334d0bccd5cb05166b24d9384') in 0.036950 seconds 
+Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.104 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004380 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_A_Gable.prefab using Guid(12d6c4700dcc5a34993e1fc9827cf5ae) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'b7a1f7b24c616772b13860f5f3e54073') in 0.036539 seconds 
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.089 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004317 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_B_Tall.prefab using Guid(ed11a5c73424ab6439d0ee94754dc4a3) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'ce991d4a704fdbbd3966094e1d280508') in 0.026806 seconds 
+Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.095 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004307 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_C_Shop.prefab using Guid(ab1fcfd511dadd742b809445d7b3ca71) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd8061c46de0ed5db48cb82dcdb33d932') in 0.041751 seconds 
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.105 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.005137 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_D_Wide.prefab using Guid(0ee46263cad20f94d9a61af15d836f7e) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '48dd64651d0ef4680f9fcf33bc30075b') in 0.048346 seconds 
+Refreshing native plugins compatible for Editor in 0.62 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.109 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004288 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_E_Cottage.prefab using Guid(f78cb197498567048b701a24a3ede3da) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e2582ddeb8d8e80ae14e58a76ff9c015') in 0.037626 seconds 
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.109 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004387 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_House_F_Guild.prefab using Guid(98d4598d55fa5164a933c7ccd6735a13) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '3de7eafedee4430ff00b3f3ae7268fa9') in 0.034084 seconds 
+Refreshing native plugins compatible for Editor in 0.63 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.099 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004347 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Market_Stall.prefab using Guid(a989171e6aa15334fbf0ede81cb9d642) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '158a6bfe3acab49df0b594ace4cb75e2') in 0.039900 seconds 
+Refreshing native plugins compatible for Editor in 0.62 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.110 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004458 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Plaza_Fountain.prefab using Guid(30e4ac7aa528c0f4cb83e4bf04c39c9a) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '1b42dea65e5c93b76e4e2259bc8626f6') in 0.027561 seconds 
+Refreshing native plugins compatible for Editor in 0.62 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.098 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004294 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Rooftop_Gantry.prefab using Guid(b275dc1f11aaa834d977699b6f59ad22) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '86eab1afd7953edf1e7b27cb59a27aa6') in 0.050744 seconds 
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.117 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004693 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Wall_Bay_32x120.prefab using Guid(1af2243698ef0b54493713a26fcab2d7) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'a535395f5e082ade77a6791b1a746c34') in 0.026981 seconds 
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004367 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Warehouse.prefab using Guid(53c907f51ac604241b9dbebf3630acd3) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'ece965a12598c3d213dffa6ba6b8d155') in 0.027447 seconds 
+Refreshing native plugins compatible for Editor in 0.56 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.092 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004730 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Prefabs/SG_Windmill.prefab using Guid(00cb6235070e86f4c9ee3813d5c28b7a) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '450198e006da9c06f594095885c2290d') in 0.013090 seconds 
+Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.006794 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_0_0_-778.asset using Guid(da998b4b03f01314f98bda32cbb3fd36) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'f4775286fcae7dc0b7b98386ac75b94e') in 0.003377 seconds 
+Refreshing native plugins compatible for Editor in 0.55 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004346 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_1_0_126.asset using Guid(74c8a7de21457764f824a986b2a9187c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4e36717cd18036dd16c93d5c7cd69021') in 0.002828 seconds 
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004703 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_0_3_-1024.asset using Guid(225fba51ec3a2e443977ced89ceb511e) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '7541e6784af44443e75f520fe92b3f86') in 0.003245 seconds 
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.050 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004600 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_1_3_630.asset using Guid(66d7b6937542bb0489feed22a12f6e43) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '7d1039610d772592cc41fb046c8e1e21') in 0.002447 seconds 
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004199 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_2_-1_-778.asset using Guid(d1d1d52b88e5d254b9882d1f76ed6398) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '9d6e4fdaa4e1b87496de05314151b7b2') in 0.002747 seconds 
+Refreshing native plugins compatible for Editor in 0.79 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004803 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_3_-1_126.asset using Guid(3521d0e6adc857742bd8cff37146bce3) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '07fd1447ce2fe39d1ac4955722898409') in 0.002726 seconds 
+Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.048 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004322 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_4_1_-778.asset using Guid(4233daf1cd3fb564cb397924e507697b) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4948770c854e4642d307e4cf95de9665') in 0.005380 seconds 
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.057 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004708 seconds.
+Start importing Assets/Environment/Shiganshina/Ground_5_1_126.asset using Guid(5ff1407163972944c9f261a854ff1c52) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'da340a720d34a3ea47b4d58bb7246251') in 0.002869 seconds 
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.050 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004460 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_0.asset using Guid(74b2b6c0fc5b1cb43afbb8bd7fd06c82) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e5c7eb17267e406a923f760773dcfd7a') in 0.002416 seconds 
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004332 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_1.asset using Guid(7f56e1e97c40aba449e96a9010750a7f) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '983c0bb34d8d42f100535869173e8543') in 0.003900 seconds 
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.065 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004251 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_2.asset using Guid(52e0e8eeb50ac16489a7e12241611073) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '7b0935be9624fb3d41aab0e87452e789') in 0.002561 seconds 
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.060 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004398 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_3.asset using Guid(bbd4ad7c9e8eeea4294c1bb6473a2517) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '38c7e5348bc9346641e00920e259ba2f') in 0.002800 seconds 
+Refreshing native plugins compatible for Editor in 1.18 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.061 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004360 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_4.asset using Guid(24a433bfb3c45a44688b43800bbc4428) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'fcbe427c2277fb140b41fa4a6ddb7bb7') in 0.002249 seconds 
+Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004626 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_5.asset using Guid(e1bd5204cbd9aa44eb0024d072582a89) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'c56039c0019aa4163c31325a6766b65b') in 0.003341 seconds 
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004225 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_6.asset using Guid(b8b9ff9f5b27ce04aa46a1e035f29c5c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '347b5786b3a39f297a4ac1dedce7b763') in 0.004773 seconds 
+Refreshing native plugins compatible for Editor in 1.15 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004179 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_7.asset using Guid(eebc056b3386188499763b9877ceab7e) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '58d99530245367b3bcebb5cc083ca0a9') in 0.002433 seconds 
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.060 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004509 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_8.asset using Guid(c0db814188486bd47aa3730fbf288d05) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '77e47e18a00387ff445a033d68cd1f5b') in 0.002134 seconds 
+Refreshing native plugins compatible for Editor in 0.63 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.060 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004206 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_9.asset using Guid(5f097d04c48458041a737b8584895f1f) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '8c2c020f8996c9c78c1997ba38965bc3') in 0.004068 seconds 
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004191 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_13.asset using Guid(0c3e019925258ed42a3a88bb9135082d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'de0a4f26af066c48e1d5de11bd95c7e3') in 0.002720 seconds 
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.064 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004386 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_14.asset using Guid(3a8ce78844989924d8808af6c5ef13f3) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'c332b1cce37b24566867fe18a276e89a') in 0.002539 seconds 
+Refreshing native plugins compatible for Editor in 0.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.061 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004183 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_15.asset using Guid(9f0bb84cb3bf26a49b9f276057166485) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '5346a75f24344ef59ef8a32dfad07f71') in 0.002624 seconds 
+Refreshing native plugins compatible for Editor in 0.54 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.064 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004183 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_16.asset using Guid(db4f629bc3caf5349a2d2892f37065f4) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e4b91cd95cfb5367b3f88361ac09ce11') in 0.002337 seconds 
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.060 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004607 seconds.
+Start importing Assets/Environment/Shiganshina/Paving_17.asset using Guid(8aeeffdbc1d00384ba8520a8b13f1bc0) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'd5d4cbaf7400944d708708a4892a280b') in 0.003351 seconds 
+Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004204 seconds.
+Refreshing native plugins compatible for Editor in 0.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.042 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004764 seconds.
+Start importing Assets/Navigation/Titans/Shiganshina/Titan_3x.asset using Guid(ed02c7b95dfb5b541a45d781e0f665b8) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '5d1427bd4f642464318563e493d2f079') in 0.002250 seconds 
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.060 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004250 seconds.
+Start importing Assets/Navigation/Titans/Shiganshina/Titan_5x.asset using Guid(16615c9e5a5631d4fac30bf28c0b46de) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '4a8cd1899fb18e41a8373b2bbdcf020b') in 0.002417 seconds 
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.062 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004615 seconds.
+Start importing Assets/Navigation/Titans/Shiganshina/Titan_6x.asset using Guid(566eb038fe08a14499cccaf7c69acf8a) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '0183bcd42821688ef1776e49c21fba7d') in 0.002439 seconds 
+Refreshing native plugins compatible for Editor in 0.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.064 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004903 seconds.
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_1.mat using Guid(f0ca448e5ee064d499b185aed261c7ab) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'b910767ce99ae54e60fa7c694e2328bb') in 0.002955 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_CanalWater.mat using Guid(91f3a387397fb1d44b27432b96b6efed) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '82feb8bcf5a074a69a176a5a28116fad') in 0.001706 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Brick.mat using Guid(a1193dda0c0ce8040b72b8e778633d7d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '70a3186a351a21474fa4422e512c8ee2') in 0.001628 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Timber.mat using Guid(e1e4fb0f0d03d1046b6db05c508fb586) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'debe21f2455521c1b1312b577d363dd8') in 0.001752 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Outskirts.mat using Guid(53b94fdbd1e66774ead4572aceba4efe) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '87689b2a89d6b479a07a2dfebc09dce3') in 0.002248 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Paver.mat using Guid(7897c930a50eb9d4d8d7b19a2131689d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '831505ee7304988cdac97b55c3a2d55a') in 0.002606 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Window.mat using Guid(c89d6a653a2e0a740bd269144f4f3446) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'f2cbdddfa865ff68b4067e2db68fe3d8') in 0.001559 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_2.mat using Guid(9990f83d55119c245bb6f12e2c6f2e6c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'cf112bbcfae7d289977c0a572a93e352') in 0.002688 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Roof.mat using Guid(9a98c86f10ccc674990018bc0c44b01f) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '1ba570757aba9cd7755f9644c0df63e5') in 0.001490 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_0.mat using Guid(da7399826c2adcb4e8e464608bf4c76d) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '3b494edfdb64f7a0dc4372932ac59d2b') in 0.001470 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Cloth.mat using Guid(9b543df94158cb74ba6d71f317aa3cfa) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '20581c0f68684cf0effccb0a6f2566cc') in 0.001637 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster_3.mat using Guid(ae9da5a2e9c54954a9d4b4fefceed47c) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '28ec2e4599efd89e4cb0a30e73fb765a') in 0.002200 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Courtyard.mat using Guid(fe06829f260e34a4b95e7f674c9c6f13) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '740a774d36a01567081716c0857a2454') in 0.001371 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Iron.mat using Guid(5f0f4691c5206f740a9f8ede6e12a6a8) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '9394d7774c916f85c8075ac6eeea6b16') in 0.001947 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Stone.mat using Guid(7fa1e2f554676b34897bae20234fdcee) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'e202feced874d2f5c6d41b9661a950ec') in 0.002580 seconds 
+Start importing Assets/Art/Environment/Shiganshina/Materials/SG_Plaster.mat using Guid(dfde10798c463b84c9cc48cdb026b4df) Importer(-1,00000000000000000000000000000000)  -> (artifact id: 'bda81e66db5065c979f7d24098056342') in 0.001434 seconds 
+Refreshing native plugins compatible for Editor in 0.73 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.089 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Registering precompiled user dll's ...
+Registered in 0.004310 seconds.
+Start importing Assets/Scenes/ShiganshinaDistrict.unity using Guid(b522ce25248da5d4c954d9a46fa87db5) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '31037da2cb48b036b05b5553e8989dda') in 0.000593 seconds 
+Refreshing native plugins compatible for Editor in 0.56 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+SG_BUILD_COMPLETE {"scene":"Assets/Scenes/ShiganshinaDistrict.unity","unity":"2021.3.25f1","authoredAt":"2026-11-06T23:02:14.4213347Z","sourceScene":"Assets/Scenes/GiantForest2.unity","sceneGUID":"b522ce25248da5d4c954d9a46fa87db5","graphicsDevice":"","buildings":303,"wallBays":160,"bridges":3,"landmarks":7,"props":16,"physicalSources":614,"nonWalkableSources":493,"groundFootprint":2048.0,"enclosureWidth":1400.0,"enclosureDepth":1388.0,"wallHeight":120.0,"playerSpawn":{"x":0.0,"y":2.0,"z":-585.0},"hookRange":400.0,"hookMask":512,"environmentLayer":9,"removedCloneRoots":["Giant Forest 2.0 [generated environment]"],"navigationScales":[3.0,5.0,6.0],"agentIDs":[-1372625422,-334000983,1479372276],"initialSpawns":5,"maximumAlive":15,"collision":"Closed Blender structure meshes; gabled roofs match slopes; layer9 real physical hook surfaces","layout":"Rounded south district, straight inner wall, canal, three bridges, 100m main avenue, 64m cross streets, roof/alley routes"}
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiganshinaDistrictBuilder:BuildOwned () (at Assets/Editor/ShiganshinaDistrictBuilder.cs:105)
+
+(Filename: Assets/Editor/ShiganshinaDistrictBuilder.cs Line: 105)
+
+Batchmode quit successfully invoked - shutting down!
+[Licensing::IpcConnector] License Notification channel disconnected successfully.
+[Licensing::IpcConnector] License Client channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+debugger-agent: Unable to listen on 5020
+[Performance] WinEditorMain                                                                                              :        1 samples, Peak.  1.47 s (1.0x), Avg.  1.47 s, Total. 1.472 s (6.1%)
+[Performance] WinEditorMain.ConfigureCrashHandler                                                                        :        1 samples, Peak.  56.9 us (1.0x), Avg.  56.9 us, Total. 56.90 us (0.0%)
+[Performance] WinEditorMain.CurlRequestInitialize                                                                        :        1 samples, Peak.  1.23 ms (1.0x), Avg.  1.23 ms, Total. 1.232 ms (0.0%)
+[Performance] WinEditorMain.SetupLogFile                                                                                 :        1 samples, Peak.   383 us (1.0x), Avg.   383 us, Total. 382.9 us (0.0%)
+[Performance] WinEditorMain.RunNativeTestsIfRequiredAndExit                                                              :        1 samples, Peak.   100 ns (1.0x), Avg.   100 ns, Total. 100.0 ns (0.0%)
+[Performance] WinEditorMain.Licensing                                                                                    :        1 samples, Peak.  1.35 s (1.0x), Avg.  1.35 s, Total. 1.352 s (5.6%)
+[Performance] WinEditorMain.InitializeCrashHandler                                                                       :        1 samples, Peak.  14.4 ms (1.0x), Avg.  14.4 ms, Total. 14.37 ms (0.1%)
+[Performance] WinEditorMain.CreateApplication                                                                            :        1 samples, Peak.   179 us (1.0x), Avg.   179 us, Total. 178.7 us (0.0%)
+[Performance] Application.InitializeProject                                                                              :        1 samples, Peak.  15.4 s (1.0x), Avg.  15.4 s, Total. 15.44 s (63.6%)
+[Performance] Application.PackageManager.StartServer                                                                     :        1 samples, Peak.  3.96 ms (1.0x), Avg.  3.96 ms, Total. 3.956 ms (0.0%)
+[Performance] Application.AcquireProjectLock                                                                             :        1 samples, Peak.  4.11 ms (1.0x), Avg.  4.11 ms, Total. 4.106 ms (0.0%)
+[Performance] Application.InitializeEngineNoGraphics                                                                     :        1 samples, Peak.  43.5 ms (1.0x), Avg.  43.5 ms, Total. 43.48 ms (0.2%)
+[Performance] Application.PackageManager.Initialize                                                                      :        1 samples, Peak.   524 ms (1.0x), Avg.   524 ms, Total. 523.9 ms (2.2%)
+[Performance] CurlRequestCheck                                                                                           :       10 samples, Peak.  39.2 us (4.9x), Avg.  7.96 us, Total. 79.60 us (0.0%)
+[Performance] Application.EngineGraphics.Initialize                                                                      :        1 samples, Peak.   273 ms (1.0x), Avg.   273 ms, Total. 273.5 ms (1.1%)
+[Performance] Application.GI.Initialize                                                                                  :        1 samples, Peak.  1.52 ms (1.0x), Avg.  1.52 ms, Total. 1.524 ms (0.0%)
+[Performance] Application.LoadAllDefaultResourcesFromEditor                                                              :        1 samples, Peak.  1.43 ms (1.0x), Avg.  1.43 ms, Total. 1.429 ms (0.0%)
+[Performance] Application.LoadMonoAssemblies                                                                             :        1 samples, Peak.   392 ms (1.0x), Avg.   392 ms, Total. 392.4 ms (1.6%)
+[Performance] RestoreManagedReferences                                                                                   :        2 samples, Peak.  23.5 ms (2.0x), Avg.  11.7 ms, Total. 23.46 ms (0.1%)
+[Performance] InitializeOnLoad LayerSettingsWindow                                                                       :        2 samples, Peak.   156 us (1.9x), Avg.  82.6 us, Total. 165.1 us (0.0%)
+[Performance] InitializeOnLoad ParameterControllerEditor                                                                 :        2 samples, Peak.  11.6 us (1.0x), Avg.  11.1 us, Total. 22.20 us (0.0%)
+[Performance] InitializeOnLoad ServicesRepository                                                                        :        2 samples, Peak.   501 us (1.1x), Avg.   464 us, Total. 927.8 us (0.0%)
+[Performance] InitializeOnLoad AdsService                                                                                :        2 samples, Peak.  2.79 ms (1.7x), Avg.  1.62 ms, Total. 3.235 ms (0.0%)
+[Performance] InitializeOnLoad AnalyticsService                                                                          :        2 samples, Peak.  95.7 us (1.0x), Avg.  93.3 us, Total. 186.7 us (0.0%)
+[Performance] InitializeOnLoad BuildService                                                                              :        2 samples, Peak.  96.4 us (1.1x), Avg.  88.7 us, Total. 177.3 us (0.0%)
+[Performance] InitializeOnLoad CloudBuildPoller                                                                          :        2 samples, Peak.  78.3 us (1.1x), Avg.  70.6 us, Total. 141.2 us (0.0%)
+[Performance] InitializeOnLoad CollabService                                                                             :        2 samples, Peak.  91.2 us (1.1x), Avg.  86.8 us, Total. 173.6 us (0.0%)
+[Performance] InitializeOnLoad CrashService                                                                              :        2 samples, Peak.  78.0 us (1.0x), Avg.  75.0 us, Total. 150.1 us (0.0%)
+[Performance] InitializeOnLoad PurchasingService                                                                         :        2 samples, Peak.  4.09 ms (1.5x), Avg.  2.81 ms, Total. 5.611 ms (0.0%)
+[Performance] InitializeOnLoad UDPService                                                                                :        2 samples, Peak.   106 us (1.0x), Avg.   104 us, Total. 207.4 us (0.0%)
+[Performance] InitializeOnLoad UIDocumentHierarchyWatcher                                                                :        2 samples, Peak.   550 us (1.7x), Avg.   329 us, Total. 659.0 us (0.0%)
+[Performance] InitializeOnLoad RetainedMode                                                                              :        2 samples, Peak.  1.28 ms (1.1x), Avg.  1.17 ms, Total. 2.348 ms (0.0%)
+[Performance] InitializeOnLoad EditorMonitor                                                                             :        2 samples, Peak.   103 us (1.0x), Avg.   101 us, Total. 201.6 us (0.0%)
+[Performance] InitializeOnLoad EditorShaderLoader                                                                        :        2 samples, Peak.   642 us (1.1x), Avg.   578 us, Total. 1.156 ms (0.0%)
+[Performance] InitializeOnLoad UXMLEditorFactories                                                                       :        2 samples, Peak.  34.9 ms (1.1x), Avg.  33.1 ms, Total. 66.18 ms (0.3%)
+[Performance] InitializeOnLoad SearchMonitor                                                                             :        2 samples, Peak.  17.7 ms (1.5x), Avg.  11.9 ms, Total. 23.73 ms (0.1%)
+[Performance] InitializeOnLoad PlayModeDownload                                                                          :        2 samples, Peak.  1.72 ms (1.9x), Avg.   905 us, Total. 1.810 ms (0.0%)
+[Performance] InitializeOnLoad SearchWindow                                                                              :        2 samples, Peak.  87.6 us (1.0x), Avg.  87.2 us, Total. 174.4 us (0.0%)
+[Performance] InitializeOnLoad EditMode                                                                                  :        2 samples, Peak.   306 us (1.2x), Avg.   259 us, Total. 518.8 us (0.0%)
+[Performance] InitializeOnLoad AssetStoreContext                                                                         :        2 samples, Peak.  3.88 ms (1.9x), Avg.  2.07 ms, Total. 4.150 ms (0.0%)
+[Performance] InitializeOnLoad DrivenRectTransformUndo                                                                   :        2 samples, Peak.   151 us (1.5x), Avg.   103 us, Total. 205.3 us (0.0%)
+[Performance] InitializeOnLoad CacheServerWindow                                                                         :        2 samples, Peak.  8.50 us (1.1x), Avg.  7.40 us, Total. 14.80 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebuggerWindow                                                                     :        2 samples, Peak.   422 us (1.5x), Avg.   290 us, Total. 580.1 us (0.0%)
+[Performance] InitializeOnLoad WindowLayout                                                                              :        2 samples, Peak.  17.1 ms (1.6x), Avg.  10.5 ms, Total. 20.97 ms (0.1%)
+[Performance] InitializeOnLoad PrefabInstanceChangedListener                                                             :        2 samples, Peak.   119 us (1.4x), Avg.  82.9 us, Total. 165.8 us (0.0%)
+[Performance] InitializeOnLoad SettingsService                                                                           :        2 samples, Peak.  6.20 us (1.3x), Avg.  4.95 us, Total. 9.900 us (0.0%)
+[Performance] InitializeOnLoad NativeFormatImporterUtility                                                               :        2 samples, Peak.  6.52 ms (1.6x), Avg.  4.07 ms, Total. 8.138 ms (0.0%)
+[Performance] InitializeOnLoad UISystemProfilerRenderService                                                             :        2 samples, Peak.  7.60 us (1.1x), Avg.  6.95 us, Total. 13.90 us (0.0%)
+[Performance] InitializeOnLoad ShortcutIntegration                                                                       :        2 samples, Peak.   111 us (1.4x), Avg.  81.9 us, Total. 163.8 us (0.0%)
+[Performance] InitializeOnLoad UnityConnect                                                                              :        2 samples, Peak.  45.8 us (1.1x), Avg.  41.2 us, Total. 82.40 us (0.0%)
+[Performance] InitializeOnLoad ObjectSelectorSearch                                                                      :        2 samples, Peak.   241 us (1.8x), Avg.   133 us, Total. 266.6 us (0.0%)
+[Performance] InitializeOnLoad ProjectSearch                                                                             :        2 samples, Peak.  44.4 us (1.2x), Avg.  38.0 us, Total. 75.90 us (0.0%)
+[Performance] InitializeOnLoad SceneSearch                                                                               :        2 samples, Peak.  21.4 us (1.1x), Avg.  19.0 us, Total. 38.10 us (0.0%)
+[Performance] InitializeOnLoad SearchService                                                                             :        2 samples, Peak.   154 us (1.3x), Avg.   115 us, Total. 229.3 us (0.0%)
+[Performance] InitializeOnLoad AddComponentWindow                                                                        :        2 samples, Peak.  85.8 us (1.2x), Avg.  72.7 us, Total. 145.4 us (0.0%)
+[Performance] InitializeOnLoad Collab                                                                                    :        2 samples, Peak.  4.28 ms (1.1x), Avg.  3.81 ms, Total. 7.617 ms (0.0%)
+[Performance] InitializeOnLoad CloudBuild                                                                                :        2 samples, Peak.  3.70 us (1.1x), Avg.  3.25 us, Total. 6.500 us (0.0%)
+[Performance] InitializeOnLoad MixerEffectDefinitionReloader                                                             :        2 samples, Peak.  3.87 ms (1.4x), Avg.  2.73 ms, Total. 5.455 ms (0.0%)
+[Performance] InitializeOnLoad MenuItems                                                                                 :        2 samples, Peak.   232 us (1.5x), Avg.   153 us, Total. 306.2 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebugger                                                                           :        2 samples, Peak.  35.6 us (2.0x), Avg.  18.1 us, Total. 36.10 us (0.0%)
+[Performance] InitializeOnLoad EditorDragAndDrop.RegisterEditorClient                                                    :        2 samples, Peak.   703 us (1.5x), Avg.   457 us, Total. 913.1 us (0.0%)
+[Performance] InitializeOnLoad EditorDelegateRegistration.Initialize                                                     :        2 samples, Peak.   303 us (1.0x), Avg.   289 us, Total. 577.4 us (0.0%)
+[Performance] InitializeOnLoad LiveReloadTrackerCreator.Initialize                                                       :        2 samples, Peak.   130 us (1.0x), Avg.   127 us, Total. 253.3 us (0.0%)
+[Performance] InitializeOnLoad PackageManagerHookGUIDConverter.RegisterPackagesEventHandler                              :        2 samples, Peak.  85.8 us (1.4x), Avg.  62.5 us, Total. 125.1 us (0.0%)
+[Performance] InitializeOnLoad RuntimeEditorDelegateRegistration.Initialize                                              :        2 samples, Peak.   128 us (1.0x), Avg.   127 us, Total. 253.9 us (0.0%)
+[Performance] InitializeOnLoad EditorEventCallbacks.InitializeFontAssetResourceChangeCallBacks                           :        2 samples, Peak.   878 us (1.1x), Avg.   827 us, Total. 1.654 ms (0.0%)
+[Performance] InitializeOnLoad SceneTemplateService.Init                                                                 :        2 samples, Peak.   327 us (1.3x), Avg.   244 us, Total. 487.8 us (0.0%)
+[Performance] InitializeOnLoad EntitlementsErrorChecker.OpenFirstEntitlementError                                        :        2 samples, Peak.  18.8 ms (1.6x), Avg.  11.9 ms, Total. 23.85 ms (0.1%)
+[Performance] InitializeOnLoad ScopedRegistryAddedPopup.SubscribeToRegistriesAdded                                       :        2 samples, Peak.  86.3 us (1.1x), Avg.  81.4 us, Total. 162.9 us (0.0%)
+[Performance] InitializeOnLoad DiagnosticSwitchesConsoleMessage.Init                                                     :        2 samples, Peak.  5.29 ms (1.8x), Avg.  2.93 ms, Total. 5.855 ms (0.0%)
+[Performance] InitializeOnLoad SysrootManager.Initialize                                                                 :        2 samples, Peak.  18.0 us (1.3x), Avg.  13.9 us, Total. 27.80 us (0.0%)
+[Performance] InitializeOnLoad AssetPostprocessingInternal.RefreshCustomDependencies                                     :        2 samples, Peak.  1.25 ms (1.2x), Avg.  1.07 ms, Total. 2.132 ms (0.0%)
+[Performance] InitializeOnLoad EditorWindow.Initialize                                                                   :        2 samples, Peak.   169 us (1.1x), Avg.   154 us, Total. 308.7 us (0.0%)
+[Performance] InitializeOnLoad SceneVisibilityManager.Initialize                                                         :        2 samples, Peak.  4.66 ms (1.8x), Avg.  2.65 ms, Total. 5.303 ms (0.0%)
+[Performance] InitializeOnLoad MemoryProfilerCompilationGuard.InjectCompileGuard                                         :        2 samples, Peak.   138 us (1.4x), Avg.   100 us, Total. 200.6 us (0.0%)
+[Performance] ProcessService.EditorAfterLoadAllAssemblies                                                                :        2 samples, Peak.   274 us (1.1x), Avg.   239 us, Total. 478.7 us (0.0%)
+[Performance] Application.ReadLicenseInfo                                                                                :        1 samples, Peak.  18.0 ms (1.0x), Avg.  18.0 ms, Total. 18.01 ms (0.1%)
+[Performance] Application.InitialRefresh                                                                                 :        1 samples, Peak.  13.1 s (1.0x), Avg.  13.1 s, Total. 13.12 s (54.0%)
+[Performance] ShaderImporter.SourceAssetModified                                                                         :       66 samples, Peak.  1.50 us (1.5x), Avg.   980 ns, Total. 64.70 us (0.0%)
+[Performance] ShaderIncludeImporter.SourceAssetModified                                                                  :       66 samples, Peak.  7.00 us (5.8x), Avg.  1.21 us, Total. 80.00 us (0.0%)
+[Performance] PresetManagerPostProcessor.OnPreprocessAsset                                                               :      147 samples, Peak.   257 us (13.5x), Avg.  19.1 us, Total. 2.809 ms (0.0%)
+[Performance] CancelSplashScreenOnAssetChange.OnPreprocessAsset                                                          :      147 samples, Peak.   117 us (32.3x), Avg.  3.62 us, Total. 531.5 us (0.0%)
+[Performance] Compiling Scripts                                                                                          :        1 samples, Peak.  4.51 s (1.0x), Avg.  4.51 s, Total. 4.508 s (18.6%)
+[Performance] InitializeOnLoad AnalyticsImporter                                                                         :        1 samples, Peak.  1.31 ms (1.0x), Avg.  1.31 ms, Total. 1.305 ms (0.0%)
+[Performance] InitializeOnLoad ProbeGIBaking                                                                             :        1 samples, Peak.   325 us (1.0x), Avg.   325 us, Total. 324.5 us (0.0%)
+[Performance] InitializeOnLoad FilterWindow                                                                              :        1 samples, Peak.  27.5 us (1.0x), Avg.  27.5 us, Total. 27.50 us (0.0%)
+[Performance] InitializeOnLoad RealtimeProbeSubdivisionDebug                                                             :        1 samples, Peak.   123 us (1.0x), Avg.   123 us, Total. 123.5 us (0.0%)
+[Performance] InitializeOnLoad PurchasingImporter                                                                        :        1 samples, Peak.   190 us (1.0x), Avg.   190 us, Total. 190.0 us (0.0%)
+[Performance] InitializeOnLoad PurchasingServiceAnalyticsSender                                                          :        1 samples, Peak.  1.29 ms (1.0x), Avg.  1.29 ms, Total. 1.292 ms (0.0%)
+[Performance] InitializeOnLoad UnityPurchasingEditor                                                                     :        1 samples, Peak.   815 us (1.0x), Avg.   815 us, Total. 814.6 us (0.0%)
+[Performance] InitializeOnLoad ShaderGraphMaterialsUpdater                                                               :        2 samples, Peak.   286 us (1.6x), Avg.   176 us, Total. 351.5 us (0.0%)
+[Performance] InitializeOnLoad EditorToolManager                                                                         :        1 samples, Peak.  1.49 ms (1.0x), Avg.  1.49 ms, Total. 1.485 ms (0.0%)
+[Performance] InitializeOnLoad Renderer2DAnalytics                                                                       :        1 samples, Peak.  56.2 us (1.0x), Avg.  56.2 us, Total. 56.20 us (0.0%)
+[Performance] InitializeOnLoad BurstLoader                                                                               :        1 samples, Peak.  1.00 s (1.0x), Avg.  1.00 s, Total. 1.002 s (4.1%)
+[Performance] InitializeOnLoad EditorGameServiceAnalyticsRegistrant                                                      :        1 samples, Peak.  13.3 ms (1.0x), Avg.  13.3 ms, Total. 13.29 ms (0.1%)
+[Performance] InitializeOnLoad PlasticPlugin                                                                             :        1 samples, Peak.   220 ms (1.0x), Avg.   220 ms, Total. 219.7 ms (0.9%)
+[Performance] InitializeOnLoad SpriteEditorWindow                                                                        :        1 samples, Peak.   422 us (1.0x), Avg.   422 us, Total. 422.3 us (0.0%)
+[Performance] InitializeOnLoad VisualStudioEditor                                                                        :        1 samples, Peak.  7.20 ms (1.0x), Avg.  7.20 ms, Total. 7.195 ms (0.0%)
+[Performance] InitializeOnLoad VisualStudioIntegration                                                                   :        1 samples, Peak.   407 us (1.0x), Avg.   407 us, Total. 407.5 us (0.0%)
+[Performance] InitializeOnLoad TestRunnerApiListener                                                                     :        1 samples, Peak.  94.9 us (1.0x), Avg.  94.9 us, Total. 94.90 us (0.0%)
+[Performance] InitializeOnLoad ShadowCasterGroup2DManager                                                                :        1 samples, Peak.   168 us (1.0x), Avg.   168 us, Total. 167.8 us (0.0%)
+[Performance] InitializeOnLoad RigEffectorRenderer                                                                       :        1 samples, Peak.   381 us (1.0x), Avg.   381 us, Total. 381.1 us (0.0%)
+[Performance] InitializeOnLoad AnimationWindowUtils                                                                      :        1 samples, Peak.  3.50 us (1.0x), Avg.  3.50 us, Total. 3.500 us (0.0%)
+[Performance] InitializeOnLoad BoneRendererUtils                                                                         :        1 samples, Peak.  7.55 ms (1.0x), Avg.  7.55 ms, Total. 7.550 ms (0.0%)
+[Performance] InitializeOnLoad ToolbarBootstrap                                                                          :        1 samples, Peak.   478 us (1.0x), Avg.   478 us, Total. 478.2 us (0.0%)
+[Performance] InitializeOnLoad SaveDuringPlay                                                                            :        1 samples, Peak.   177 us (1.0x), Avg.   177 us, Total. 177.4 us (0.0%)
+[Performance] InitializeOnLoad CinemachineColliderPrefs                                                                  :        1 samples, Peak.  1.00 ms (1.0x), Avg.  1.00 ms, Total. 1.002 ms (0.0%)
+[Performance] InitializeOnLoad CinemachineScreenComposerGuidesGlobalDraggable                                            :        1 samples, Peak.   146 us (1.0x), Avg.   146 us, Total. 145.9 us (0.0%)
+[Performance] InitializeOnLoad CinemachineStoryboardMute                                                                 :        1 samples, Peak.  88.1 us (1.0x), Avg.  88.1 us, Total. 88.10 us (0.0%)
+[Performance] InitializeOnLoad CinemachineEditorAnalytics                                                                :        1 samples, Peak.  37.9 us (1.0x), Avg.  37.9 us, Total. 37.90 us (0.0%)
+[Performance] InitializeOnLoad CinemachineSettings                                                                       :        1 samples, Peak.   400 ns (1.0x), Avg.   400 ns, Total. 400.0 ns (0.0%)
+[Performance] InitializeOnLoad EditorInitialize                                                                          :        4 samples, Peak.  9.74 ms (3.4x), Avg.  2.90 ms, Total. 11.58 ms (0.0%)
+[Performance] InitializeOnLoad SyncCacheEnabledSetting                                                                   :        1 samples, Peak.   538 us (1.0x), Avg.   538 us, Total. 538.3 us (0.0%)
+[Performance] InitializeOnLoad CreateRigWithUndo                                                                         :        1 samples, Peak.   145 us (1.0x), Avg.   145 us, Total. 145.4 us (0.0%)
+[Performance] InitializeOnLoad CreatePipelineWithUndo                                                                    :        1 samples, Peak.  94.7 us (1.0x), Avg.  94.7 us, Total. 94.70 us (0.0%)
+[Performance] InitializeOnLoad CollectGizmoDrawers                                                                       :        1 samples, Peak.  8.41 ms (1.0x), Avg.  8.41 ms, Total. 8.410 ms (0.0%)
+[Performance] InitializeOnLoad CanvasesAndTheirOwners                                                                    :        1 samples, Peak.   466 us (1.0x), Avg.   466 us, Total. 466.1 us (0.0%)
+[Performance] InitializeOnLoad OnDomainReload                                                                            :        1 samples, Peak.   304 us (1.0x), Avg.   304 us, Total. 304.3 us (0.0%)
+[Performance] InitializeOnLoad NodeClassCache                                                                            :        1 samples, Peak.  4.00 us (1.0x), Avg.  4.00 us, Total. 4.000 us (0.0%)
+[Performance] InitializeOnLoad AnalyticsEventTrackerEditorCallbacks                                                      :        1 samples, Peak.   210 us (1.0x), Avg.   210 us, Total. 209.6 us (0.0%)
+[Performance] InitializeOnLoad RiderScriptEditor                                                                         :        1 samples, Peak.  4.00 ms (1.0x), Avg.  4.00 ms, Total. 4.004 ms (0.0%)
+[Performance] InitializeOnLoad CallbackInitializer                                                                       :        1 samples, Peak.   847 us (1.0x), Avg.   847 us, Total. 847.1 us (0.0%)
+[Performance] InitializeOnLoad PrefabLayoutRebuilder                                                                     :        1 samples, Peak.   227 us (1.0x), Avg.   227 us, Total. 227.3 us (0.0%)
+[Performance] InitializeOnLoad RerunCallbackInitializer                                                                  :        1 samples, Peak.  1.89 ms (1.0x), Avg.  1.89 ms, Total. 1.887 ms (0.0%)
+[Performance] InitializeOnLoad UnityTestProtocolStarter                                                                  :        1 samples, Peak.  94.3 us (1.0x), Avg.  94.3 us, Total. 94.30 us (0.0%)
+[Performance] InitializeOnLoad TestStarter                                                                               :        1 samples, Peak.   490 us (1.0x), Avg.   490 us, Total. 489.6 us (0.0%)
+[Performance] InitializeOnLoad BackgroundWatcher                                                                         :        1 samples, Peak.  55.8 us (1.0x), Avg.  55.8 us, Total. 55.80 us (0.0%)
+[Performance] InitializeOnLoad VSCodeScriptEditor                                                                        :        1 samples, Peak.  5.02 ms (1.0x), Avg.  5.02 ms, Total. 5.016 ms (0.0%)
+[Performance] InitializeOnLoad TitanPrototypeBuilder                                                                     :        1 samples, Peak.   123 us (1.0x), Avg.   123 us, Total. 123.2 us (0.0%)
+[Performance] InitializeOnLoad Startup                                                                                   :        1 samples, Peak.   257 us (1.0x), Avg.   257 us, Total. 257.1 us (0.0%)
+[Performance] InitializeOnLoad ContextualMenuDispatcher.RegisterAdditionalDataMenus                                      :        1 samples, Peak.  51.8 ms (1.0x), Avg.  51.8 ms, Total. 51.82 ms (0.2%)
+[Performance] Menu.FilterMenuItem                                                                                        :      838 samples, Peak.  35.3 ms (831.4x), Avg.  42.5 us, Total. 35.59 ms (0.1%)
+[Performance] InitializeOnLoad CoreRenderPipelinePreferences.InitPreferenceProviders                                     :        1 samples, Peak.  39.9 ms (1.0x), Avg.  39.9 ms, Total. 39.91 ms (0.2%)
+[Performance] InitializeOnLoad VolumeGizmoDrawer.InitVolumeGizmoCallbacks                                                :        1 samples, Peak.   328 us (1.0x), Avg.   328 us, Total. 328.2 us (0.0%)
+[Performance] InitializeOnLoad ObfuscationMigration.MigrateObfuscations                                                  :        1 samples, Peak.   303 us (1.0x), Avg.   303 us, Total. 302.5 us (0.0%)
+[Performance] InitializeOnLoad ProductCatalogEditor.MigrateProductCatalog                                                :        1 samples, Peak.  51.2 ms (1.0x), Avg.  51.2 ms, Total. 51.22 ms (0.2%)
+[Performance] InitializeOnLoad UnityPurchasingEditor.CheckUdpUmpPackageInstalled                                         :        1 samples, Peak.   757 us (1.0x), Avg.   757 us, Total. 757.3 us (0.0%)
+[Performance] InitializeOnLoad UnityPurchasingEditor.MigrateBillingMode                                                  :        1 samples, Peak.   175 us (1.0x), Avg.   175 us, Total. 175.1 us (0.0%)
+[Performance] InitializeOnLoad MaterialReimporter.RegisterUpgraderReimport                                               :        2 samples, Peak.   176 us (1.7x), Avg.   101 us, Total. 201.9 us (0.0%)
+[Performance] InitializeOnLoad EditorGameServiceRegistry.RegisterAllServices                                             :        1 samples, Peak.  3.99 ms (1.0x), Avg.  3.99 ms, Total. 3.991 ms (0.0%)
+[Performance] InitializeOnLoad ServiceInstallationListener.RegisterToEvents                                              :        1 samples, Peak.   172 us (1.0x), Avg.   172 us, Total. 172.0 us (0.0%)
+[Performance] InitializeOnLoad ActionSchedulerCleaner.RegisterSchedulerCleaner                                           :        1 samples, Peak.   529 us (1.0x), Avg.   529 us, Total. 529.1 us (0.0%)
+[Performance] InitializeOnLoad Localization.ForceEnableLocalization                                                      :        1 samples, Peak.   278 us (1.0x), Avg.   278 us, Total. 278.4 us (0.0%)
+[Performance] InitializeOnLoad SceneViewGridManager.Initialize                                                           :        1 samples, Peak.  3.66 ms (1.0x), Avg.  3.66 ms, Total. 3.664 ms (0.0%)
+[Performance] InitializeOnLoad SceneViewOpenTilePaletteHelper.Initialize                                                 :        1 samples, Peak.   876 us (1.0x), Avg.   876 us, Total. 875.6 us (0.0%)
+[Performance] InitializeOnLoad TileDragAndDropManager.Initialize                                                         :        1 samples, Peak.   535 us (1.0x), Avg.   535 us, Total. 535.4 us (0.0%)
+[Performance] InitializeOnLoad TilemapPrefabStageHelper.Initialize                                                       :        1 samples, Peak.   436 us (1.0x), Avg.   436 us, Total. 436.3 us (0.0%)
+[Performance] InitializeOnLoad CinemachineSettings.OnPackageLoadedInEditor                                               :        1 samples, Peak.   454 us (1.0x), Avg.   454 us, Total. 453.5 us (0.0%)
+[Performance] InitializeOnLoad TestJobDataHolder.ResumeRunningJobs                                                       :        1 samples, Peak.   396 us (1.0x), Avg.   396 us, Total. 396.3 us (0.0%)
+[Performance] InitializeOnLoad AnalyticsReporter.RegisterCallbacks                                                       :        1 samples, Peak.   180 us (1.0x), Avg.   180 us, Total. 180.4 us (0.0%)
+[Performance] DidReloadScriptsDebugWindow.OnEditorReload                                                                 :        1 samples, Peak.  2.34 ms (1.0x), Avg.  2.34 ms, Total. 2.344 ms (0.0%)
+[Performance] DidReloadScriptsVolumeComponentEditor.OnEditorReload                                                       :        1 samples, Peak.  27.5 ms (1.0x), Avg.  27.5 ms, Total. 27.46 ms (0.1%)
+[Performance] DidReloadScriptsLookDev.OnEditorReload                                                                     :        1 samples, Peak.   169 us (1.0x), Avg.   169 us, Total. 168.8 us (0.0%)
+[Performance] DidReloadScriptsCinemachineExtension.OnScriptReload                                                        :        1 samples, Peak.  96.1 us (1.0x), Avg.  96.1 us, Total. 96.10 us (0.0%)
+[Performance] DidReloadScriptsCinemachineVirtualCameraBase.OnScriptReload                                                :        1 samples, Peak.  57.1 us (1.0x), Avg.  57.1 us, Total. 57.10 us (0.0%)
+[Performance] DidReloadScriptsTestListCache.ScriptReloaded                                                               :        1 samples, Peak.   852 us (1.0x), Avg.   852 us, Total. 852.5 us (0.0%)
+[Performance] DidReloadScriptsTestRunnerWindow.CompilationCallback                                                       :        1 samples, Peak.   156 us (1.0x), Avg.   156 us, Total. 155.7 us (0.0%)
+[Performance] DidReloadScriptsAdvancedDropdownWindow.OnScriptReload                                                      :        1 samples, Peak.   171 us (1.0x), Avg.   171 us, Total. 170.8 us (0.0%)
+[Performance] TextureImporter.Import                                                                                     :        1 samples, Peak.  46.6 ms (1.0x), Avg.  46.6 ms, Total. 46.59 ms (0.2%)
+[Performance] GiantForest2AssetImporter.OnPreprocessTexture                                                              :        1 samples, Peak.   229 us (1.0x), Avg.   229 us, Total. 229.3 us (0.0%)
+[Performance] ShiganshinaAssetImporter.OnPreprocessTexture                                                               :        1 samples, Peak.   279 us (1.0x), Avg.   279 us, Total. 279.0 us (0.0%)
+[Performance] ModelImporter.Import                                                                                       :       68 samples, Peak.  72.1 ms (4.4x), Avg.  16.5 ms, Total. 1.119 s (4.6%)
+[Performance] GiantForest2AssetImporter.OnPreprocessModel                                                                :       68 samples, Peak.   293 us (40.6x), Avg.  7.23 us, Total. 491.7 us (0.0%)
+[Performance] ShiganshinaAssetImporter.OnPreprocessModel                                                                 :       68 samples, Peak.   500 us (29.2x), Avg.  17.2 us, Total. 1.166 ms (0.0%)
+[Performance] ModelPostprocessor.OnPostprocessModel                                                                      :       68 samples, Peak.  1.96 ms (48.3x), Avg.  40.6 us, Total. 2.764 ms (0.0%)
+[Performance] TreeAOImporter.OnPostprocessModel                                                                          :       68 samples, Peak.   582 us (39.1x), Avg.  14.9 us, Total. 1.011 ms (0.0%)
+[Performance] AssetDatabase.ImportAssets                                                                                 :       68 samples, Peak.  89.5 ms (68.0x), Avg.  1.32 ms, Total. 89.51 ms (0.4%)
+[Performance] VersionControl.Task.Wait                                                                                   :        1 samples, Peak.  13.3 us (1.0x), Avg.  13.3 us, Total. 13.30 us (0.0%)
+[Performance] TMPro_TexturePostProcessor.OnPostprocessAllAssets                                                          :      128 samples, Peak.  2.20 ms (41.5x), Avg.  52.9 us, Total. 6.767 ms (0.0%)
+[Performance] AssetPostprocessor.OnPostprocessAllAssets                                                                  :      128 samples, Peak.   213 us (33.4x), Avg.  6.38 us, Total. 816.6 us (0.0%)
+[Performance] BuilderAssetPostprocessor.OnPostprocessAllAssets                                                           :      128 samples, Peak.  2.56 ms (40.1x), Avg.  63.7 us, Total. 8.157 ms (0.0%)
+[Performance] ArtifactBrowserPostProcessor.OnPostprocessAllAssets                                                        :      128 samples, Peak.   240 us (38.5x), Avg.  6.23 us, Total. 797.3 us (0.0%)
+[Performance] AssetEvents.OnPostprocessAllAssets                                                                         :      256 samples, Peak.   266 us (44.6x), Avg.  5.96 us, Total. 1.526 ms (0.0%)
+[Performance] AudioMixerPostprocessor.OnPostprocessAllAssets                                                             :      128 samples, Peak.   185 us (39.0x), Avg.  4.75 us, Total. 607.9 us (0.0%)
+[Performance] StyleCatalogPostProcessor.OnPostprocessAllAssets                                                           :      128 samples, Peak.  10.7 ms (61.1x), Avg.   175 us, Total. 22.36 ms (0.1%)
+[Performance] BuildCatalog                                                                                               :        1 samples, Peak.  9.96 ms (1.0x), Avg.  9.96 ms, Total. 9.963 ms (0.0%)
+[Performance] ModelImporterPostProcessor.OnPostprocessAllAssets                                                          :      128 samples, Peak.  26.8 ms (37.4x), Avg.   717 us, Total. 91.73 ms (0.4%)
+[Performance] MaterialPostprocessor.OnPostprocessAllAssets                                                               :      256 samples, Peak.  1.54 ms (18.0x), Avg.  85.8 us, Total. 21.95 ms (0.1%)
+[Performance] RetainedModeAssetPostprocessor.OnPostprocessAllAssets                                                      :      128 samples, Peak.  1.49 ms (44.2x), Avg.  33.8 us, Total. 4.321 ms (0.0%)
+[Performance] AssetChangedListener.OnPostprocessAllAssets                                                                :      128 samples, Peak.  4.06 ms (33.2x), Avg.   122 us, Total. 15.63 ms (0.1%)
+[Performance] PostProcessor.OnPostprocessAllAssets                                                                       :      128 samples, Peak.   738 us (30.6x), Avg.  24.1 us, Total. 3.091 ms (0.0%)
+[Performance] ShaderGraphAssetPostProcessor.OnPostprocessAllAssets                                                       :      128 samples, Peak.  3.28 ms (35.2x), Avg.  93.3 us, Total. 11.94 ms (0.0%)
+[Performance] SpeedTreePostProcessor.OnPostprocessAllAssets                                                              :      128 samples, Peak.   363 us (31.8x), Avg.  11.4 us, Total. 1.462 ms (0.0%)
+[Performance] TextAssetPostProcessor.OnPostprocessAllAssets                                                              :      128 samples, Peak.  1.03 ms (44.0x), Avg.  23.5 us, Total. 3.005 ms (0.0%)
+[Performance] AssetProcessor.OnPostprocessAllAssets                                                                      :      384 samples, Peak.  1.35 ms (90.4x), Avg.  14.9 us, Total. 5.734 ms (0.0%)
+[Performance] SpriteEditorTexturePostprocessor.OnPostprocessAllAssets                                                    :      128 samples, Peak.   248 us (4.7x), Avg.  53.1 us, Total. 6.791 ms (0.0%)
+[Performance] UIDocumentAssetPostProcessor.OnPostprocessAllAssets                                                        :      128 samples, Peak.   516 us (40.1x), Avg.  12.9 us, Total. 1.646 ms (0.0%)
+[Performance] SyncVS.PostprocessSyncProject                                                                              :       64 samples, Peak.  3.07 ms (35.9x), Avg.  85.4 us, Total. 5.468 ms (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.Audio.MixerEffectDefinitionReloader.OnProjectChanged         :       62 samples, Peak.   405 us (1.6x), Avg.   259 us, Total. 16.05 ms (0.1%)
+[Performance] Application.ImportPackagesAndSetTemplateWhenCreatingProject                                                :        1 samples, Peak.  8.90 ms (1.0x), Avg.  8.90 ms, Total. 8.901 ms (0.0%)
+[Performance] Application.SyncCurrentColorSpace                                                                          :        1 samples, Peak.  15.0 ms (1.0x), Avg.  15.0 ms, Total. 14.99 ms (0.1%)
+[Performance] Application.OnUsbDevicesChanged                                                                            :        1 samples, Peak.  1.60 ms (1.0x), Avg.  1.60 ms, Total. 1.599 ms (0.0%)
+[Performance] Application.AssetInstanceCacheUpdate                                                                       :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] Application.UnityExtensions.Initialize                                                                     :        1 samples, Peak.   865 us (1.0x), Avg.   865 us, Total. 864.9 us (0.0%)
+[Performance] Application.InitializeManagedCompilationPipeline                                                           :        1 samples, Peak.   190 ms (1.0x), Avg.   190 ms, Total. 189.6 ms (0.8%)
+[Performance] AssetDatabase.Refresh                                                                                      :        2 samples, Peak.  31.3 ms (1.8x), Avg.  17.2 ms, Total. 34.38 ms (0.1%)
+[Performance] Application.ExecuteStartups                                                                                :        1 samples, Peak.  16.3 ms (1.0x), Avg.  16.3 ms, Total. 16.26 ms (0.1%)
+[Performance] Menu.RegisterMenuInterface                                                                                 :       26 samples, Peak.  1.20 us (7.3x), Avg.   165 ns, Total. 4.300 us (0.0%)
+[Performance] Gizmo.RebuildRenderers                                                                                     :        1 samples, Peak.  15.4 ms (1.0x), Avg.  15.4 ms, Total. 15.38 ms (0.1%)
+[Performance] Gizmo.AddGizmoRenderers                                                                                    :      112 samples, Peak.  1.03 ms (49.3x), Avg.  21.0 us, Total. 2.348 ms (0.0%)
+[Performance] Application.editorInitializingProject                                                                      :        1 samples, Peak.  20.6 us (1.0x), Avg.  20.6 us, Total. 20.60 us (0.0%)
+[Performance] Application.InitializeMenu                                                                                 :        1 samples, Peak.   148 ms (1.0x), Avg.   148 ms, Total. 148.0 ms (0.6%)
+[Performance] Menu.RebuildAll                                                                                            :        1 samples, Peak.   148 ms (1.0x), Avg.   148 ms, Total. 148.0 ms (0.6%)
+[Performance] Menu.BuildRegisteredMenuInterfaces                                                                         :        1 samples, Peak.   146 ms (1.0x), Avg.   146 ms, Total. 146.4 ms (0.6%)
+[Performance] UpdateAllMenus                                                                                             :        1 samples, Peak.   408 us (1.0x), Avg.   408 us, Total. 407.8 us (0.0%)
+[Performance] Menu.RebuildOSMainMenu                                                                                     :        2 samples, Peak.  1.41 ms (1.1x), Avg.  1.29 ms, Total. 2.572 ms (0.0%)
+[Performance] EditorSceneManager.sceneClosing: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneClosing       :        2 samples, Peak.   258 us (2.0x), Avg.   131 us, Total. 262.0 us (0.0%)
+[Performance] EditorSceneManager.activeSceneChangedInEditMode: callback in UnityEditor.Search.SearchMonitor              :        2 samples, Peak.  47.1 us (1.9x), Avg.  24.2 us, Total. 48.40 us (0.0%)
+[Performance] GUIView.RepaintAll.PlayerLoopController                                                                    :        1 samples, Peak.  1.60 us (1.0x), Avg.  1.60 us, Total. 1.600 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnNewSceneCreated :        1 samples, Peak.   241 us (1.0x), Avg.   241 us, Total. 240.7 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneManagement.StageNavigationManager.OnNewSceneCreated   :        1 samples, Peak.  52.1 us (1.0x), Avg.  52.1 us, Total. 52.10 us (0.0%)
+[Performance] Application.InvokeFinishedLoadingProject                                                                   :        1 samples, Peak.   583 ms (1.0x), Avg.   583 ms, Total. 582.6 ms (2.4%)
+[Performance] ProcessService.OnProjectLoaded                                                                             :        1 samples, Peak.  35.6 us (1.0x), Avg.  35.6 us, Total. 35.60 us (0.0%)
+[Performance] EditorSceneManager.sceneOpening: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneOpening       :        1 samples, Peak.   169 us (1.0x), Avg.   169 us, Total. 168.5 us (0.0%)
+[Performance] Inspector.InitOrRebuild                                                                                    :        1 samples, Peak.   493 us (1.0x), Avg.   493 us, Total. 492.6 us (0.0%)
+[Performance] EditorSceneManager.sceneOpened: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneOpened         :        1 samples, Peak.   180 us (1.0x), Avg.   180 us, Total. 180.4 us (0.0%)
+[Performance] EditorSceneManager.sceneOpened: UnityEditor.SceneManagement.StageNavigationManager.OnSceneOpened           :        1 samples, Peak.  45.5 us (1.0x), Avg.  45.5 us, Total. 45.50 us (0.0%)
+[Performance] AssetModificationProcessor.OnWillSaveAssets                                                                :       39 samples, Peak.   222 us (22.1x), Avg.  10.1 us, Total. 392.1 us (0.0%)
+[Performance] PaletteAssetModificationProcessor.OnWillSaveAssets                                                         :       39 samples, Peak.   199 us (25.9x), Avg.  7.67 us, Total. 299.3 us (0.0%)
+[Performance] BuilderAssetModificationProcessor.OnWillSaveAssets                                                         :       39 samples, Peak.   684 us (10.9x), Avg.  62.9 us, Total. 2.453 ms (0.0%)
+[Performance] TerrainModificationProcessor.OnWillSaveAssets                                                              :       39 samples, Peak.   419 us (34.2x), Avg.  12.3 us, Total. 478.8 us (0.0%)
+[Performance] EditorSceneManager.sceneSaving: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneSaving         :        2 samples, Peak.   360 us (2.0x), Avg.   181 us, Total. 361.8 us (0.0%)
+[Performance] AssetDatabase.ImportAsset                                                                                  :        2 samples, Peak.   100 ms (1.2x), Avg.  83.7 ms, Total. 167.4 ms (0.7%)
+[Performance] MaterialModificationProcessor.OnWillCreateAsset                                                            :      242 samples, Peak.   215 us (20.2x), Avg.  10.6 us, Total. 2.573 ms (0.0%)
+[Performance] PaletteAssetModificationProcessor.OnWillCreateAsset                                                        :      121 samples, Peak.  88.5 us (29.7x), Avg.  2.98 us, Total. 360.4 us (0.0%)
+[Performance] BuilderAssetModificationProcessor.OnWillCreateAsset                                                        :      121 samples, Peak.   397 us (32.8x), Avg.  12.1 us, Total. 1.466 ms (0.0%)
+[Performance] EditorSceneManager.sceneSaved: UnityEditor.SceneTemplate.SceneTemplateService.OnSceneSaved                 :        2 samples, Peak.  29.2 ms (1.4x), Avg.  21.1 ms, Total. 42.20 ms (0.2%)
+[Performance] EditorSceneManager.sceneSaved: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneSaved           :        2 samples, Peak.   132 us (2.0x), Avg.  67.0 us, Total. 134.0 us (0.0%)
+[Performance] SceneDataContainer.TransformHierarchyChangedSetParentCallback                                              :     2118 samples, Peak.  22.0 us (57.2x), Avg.   385 ns, Total. 815.3 us (0.0%)
+[Performance] SceneVisibilityState.IsFlagSetInParents                                                                    :     4008 samples, Peak.  21.4 us (156.1x), Avg.   137 ns, Total. 549.6 us (0.0%)
+[Performance] EditorApplication.quitting: Unity.Burst.Editor.BurstLoader.OnEditorApplicationQuitting                     :        1 samples, Peak.  23.0 us (1.0x), Avg.  23.0 us, Total. 23.00 us (0.0%)
+[Performance] EditorApplication.quitting: UnityEditor.Search.SearchMonitor.OnQuitting                                    :        1 samples, Peak.   730 us (1.0x), Avg.   730 us, Total. 730.0 us (0.0%)
+[Performance] EditorApplication.quitting: UnityEditor.Tilemaps.SceneViewGridManager.EditorQuitting                       :        1 samples, Peak.  80.6 us (1.0x), Avg.  80.6 us, Total. 80.60 us (0.0%)
+[Performance] EditorApplication.quitting: callback in UnityEditor.TextCore.Text.EditorEventCallbacks                     :        1 samples, Peak.  6.19 ms (1.0x), Avg.  6.19 ms, Total. 6.186 ms (0.0%)
+[Performance] Application.Shutdown.PauseProfilerSession                                                                  :        1 samples, Peak.  26.3 us (1.0x), Avg.  26.3 us, Total. 26.30 us (0.0%)
+[Performance] Application.Shutdown.PauseAssetImportWorkers                                                               :        1 samples, Peak.   189 us (1.0x), Avg.   189 us, Total. 189.1 us (0.0%)
+[Performance] Application.Shutdown.SaveAssets                                                                            :        1 samples, Peak.   888 us (1.0x), Avg.   888 us, Total. 888.3 us (0.0%)
+[Performance] Application.Shutdown.CleanupRenderPipeline                                                                 :        1 samples, Peak.  2.10 us (1.0x), Avg.  2.10 us, Total. 2.100 us (0.0%)
+[Performance] Application.Shutdown.StopPreloadManager                                                                    :        1 samples, Peak.  9.89 ms (1.0x), Avg.  9.89 ms, Total. 9.888 ms (0.0%)
+[Performance] Application.Shutdown.DestroyWorld                                                                          :        1 samples, Peak.  10.6 ms (1.0x), Avg.  10.6 ms, Total. 10.60 ms (0.0%)
+[Performance] Application.Shutdown.CleanupAfterLoad                                                                      :        1 samples, Peak.   125 ms (1.0x), Avg.   125 ms, Total. 125.4 ms (0.5%)
+[Performance] Application.Shutdown.Progress                                                                              :        1 samples, Peak.  6.40 us (1.0x), Avg.  6.40 us, Total. 6.400 us (0.0%)
+[Performance] Application.Shutdown.GICleanupManagers                                                                     :        1 samples, Peak.   717 us (1.0x), Avg.   717 us, Total. 716.9 us (0.0%)
+[Performance] Application.Shutdown.MenuCleanupClass                                                                      :        1 samples, Peak.   231 us (1.0x), Avg.   231 us, Total. 230.8 us (0.0%)
+[Performance] Application.Shutdown.ADBSaveStateBeforeShutdown                                                            :        1 samples, Peak.  7.60 us (1.0x), Avg.  7.60 us, Total. 7.600 us (0.0%)
+[Performance] Application.Shutdown.RemoteShutdown                                                                        :        1 samples, Peak.   800 ns (1.0x), Avg.   800 ns, Total. 800.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupVCProvider                                                                     :        1 samples, Peak.  13.7 us (1.0x), Avg.  13.7 us, Total. 13.70 us (0.0%)
+[Performance] Application.Shutdown.InputShutdown                                                                         :        1 samples, Peak.   500 ns (1.0x), Avg.   500 ns, Total. 500.0 ns (0.0%)
+[Performance] Application.Shutdown.GizmoManagerDestroy                                                                   :        1 samples, Peak.   655 us (1.0x), Avg.   655 us, Total. 655.2 us (0.0%)
+[Performance] Application.Shutdown.ProfilerSession                                                                       :        1 samples, Peak.   122 us (1.0x), Avg.   122 us, Total. 122.4 us (0.0%)
+[Performance] Application.Shutdown.ReleaseGfxWindowOnAllGUIViews                                                         :        1 samples, Peak.   400 ns (1.0x), Avg.   400 ns, Total. 400.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupEngine                                                                         :        1 samples, Peak.   136 ms (1.0x), Avg.   136 ms, Total. 136.2 ms (0.6%)
+[Performance] Application.Shutdown.CleanupAssetDatabase                                                                  :        1 samples, Peak.  11.5 ms (1.0x), Avg.  11.5 ms, Total. 11.48 ms (0.0%)
+[Performance] Application.Shutdown.ScriptCompilationCleanUp                                                              :        1 samples, Peak.  42.2 us (1.0x), Avg.  42.2 us, Total. 42.20 us (0.0%)
+[Performance] Application.Shutdown.DestroyJobSystem                                                                      :        1 samples, Peak.  35.7 us (1.0x), Avg.  35.7 us, Total. 35.70 us (0.0%)
+[Performance] Application.Shutdown.CleanupPersistentManager                                                              :        1 samples, Peak.  4.04 ms (1.0x), Avg.  4.04 ms, Total. 4.041 ms (0.0%)
+[Performance] Application.Shutdown.CleanupAsyncReadManager                                                               :        1 samples, Peak.  1.02 ms (1.0x), Avg.  1.02 ms, Total. 1.017 ms (0.0%)
+[Performance] Application.Shutdown.CleanupProgressBar                                                                    :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupMono                                                                           :        1 samples, Peak.  66.8 ms (1.0x), Avg.  66.8 ms, Total. 66.79 ms (0.3%)
+[Performance] Application.Shutdown.CleanupStdConverters                                                                  :        1 samples, Peak.  7.40 us (1.0x), Avg.  7.40 us, Total. 7.400 us (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportModuleNativeDlls                                              :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportNativeLibraries                                               :        1 samples, Peak. 0.0 (-nan(ind)x), Avg. 0.0, Total. 0.0 (0.0%)
+[Performance] Application.Shutdown.CleanupAutoDocumentation                                                              :        1 samples, Peak.   292 us (1.0x), Avg.   292 us, Total. 292.1 us (0.0%)
+[Performance] Application.Shutdown.ShaderNameManagerDestroy                                                              :        1 samples, Peak.  35.6 us (1.0x), Avg.  35.6 us, Total. 35.60 us (0.0%)
+[Performance] Application.Shutdown.CleanupCacheServer                                                                    :        1 samples, Peak. 0.0 (-nan(ind)x), Avg. 0.0, Total. 0.0 (0.0%)
+[Performance] Application.Shutdown.Virtualization_Shutdown                                                               :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.DevConnections                                                                        :        1 samples, Peak.   154 us (1.0x), Avg.   154 us, Total. 154.3 us (0.0%)
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

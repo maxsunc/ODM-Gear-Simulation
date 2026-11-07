@@ -36,15 +36,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Editor\GameAudioMixerBuilder.cs" />
      <Compile Include="Assets\Editor\TitanShiganshinaInstaller.cs" />
      <Compile Include="Assets\Editor\TitanCombatEffectsInstaller.cs" />
+     <Compile Include="Assets\Editor\GiantForest2Builder.cs" />
+     <Compile Include="Assets\Editor\TitanFaceVariantBuilder.cs" />
      <Compile Include="Assets\Editor\TitanFreeRoamNavigationBuilder.cs" />
+     <Compile Include="Assets\Editor\ShiganshinaDistrictBuilder.cs" />
      <Compile Include="Assets\Editor\TitanPrototypeBuilder.cs" />
+     <Compile Include="Assets\Editor\FrontendMenuBuilder.cs" />
      <Compile Include="Assets\Editor\TitanRandomSpawnerInstaller.cs" />
      <Compile Include="Assets\Editor\TitanAISandboxBuilder.cs" />
      <Compile Include="Assets\Editor\ScoutPlayerBuilder.cs" />
      <Compile Include="Assets\Editor\TitanMotionClipBuilder.cs" />
-     <Compile Include="Assets\Editor\GiantForest2Builder.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -768,11 +772,11 @@
     <Reference Include="Unity.ShaderGraph.Editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Cinemachine">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
         <HintPath>C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
