@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     private Attack attack;
 
     bool initialized;
-    void Start(){Initialize();EnsureRespawn();GameStats.Bind(this);}
+    void Start(){Initialize();PlayerWindAudio.Install(this);EnsureRespawn();GameStats.Bind(this);}
     void Initialize()
     {
         if(initialized)return;initialized=true;

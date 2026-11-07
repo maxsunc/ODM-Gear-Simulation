@@ -45,7 +45,7 @@ public static class OwnedFrontendPreview
   FrontendUI.Photo(backdrop,"Forest",AssetDatabase.LoadAssetAtPath<Sprite>("Assets/UI/Frontend/ForestBackdrop.png"),new Color(.6f,.7f,.6f));
   var stats=new GameObject("Stats art authoring").AddComponent<GameStats>();
   typeof(GameStats).GetMethod("BuildOverlay",Flags).Invoke(stats,null);
-  Field<Text>(stats,"rows").text="0\n0\n0\n0\n0\n0";Field<Text>(stats,"totals").text="0\n0\n0\n00:00:00\n00:00:00";
+  foreach(string field in new[]{"killsValue","totalKillsValue","damageValue","limbsValue"})Field<Text>(stats,field).text="0";
   var overlay=Field<RectTransform>(stats,"overlay");overlay.gameObject.SetActive(true);
   Capture(overlay.GetComponent<Canvas>(),Field<RectTransform>(stats,"design"),output,"Stats_1920x1080",1920,1080,backdrop.GetComponent<Canvas>());
   Debug.Log("FRONTEND_NATIVE_ART_COMPLETED device="+SystemInfo.graphicsDeviceName+" staticUGUI=true play=false prefsWritten=false");

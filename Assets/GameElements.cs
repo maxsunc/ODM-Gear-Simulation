@@ -11,10 +11,12 @@ public class GameElements : MonoBehaviour
     public Transform sun;
     private int currentInd = 0;
     [SerializeField] private bool isMuted = true;
+    private GamePauseMenu pauseMenu;
 
 
     private void Start()
     {
+        pauseMenu=GamePauseMenu.Install(this);
         GameAudio.InitializeMusicDefault(isMuted);
         if(musics!=null)
         {
@@ -67,23 +69,11 @@ public class GameElements : MonoBehaviour
             if(health!=null){if(!health.isDead)health.Die();}
             else if(!warnedMissingHealth){warnedMissingHealth=true;Debug.LogWarning("Void death needs PlayerHealth; refusing to reset the whole scene",this);}
         }
-        if (panel!=null && Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            if(panel.activeSelf == true)
-            {
-                panel.SetActive(false);
-                GameAudio.Save();
-                Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1;
-            }
-            else
-            {
-                panel.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0;
-            }
+            if(pauseMenu==null)pauseMenu=GamePauseMenu.Install(this);
+            if(pauseMenu!=null)pauseMenu.Toggle();
         }
 
     }
-    void OnGUI(){if(panel!=null && panel.activeInHierarchy)GameAudio.DrawMenu();}
 }

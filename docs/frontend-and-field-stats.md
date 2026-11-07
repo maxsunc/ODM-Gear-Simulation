@@ -1,4 +1,40 @@
-# Main menu and hold-Tab field record
+# Main menu and hold-Tab stats
+
+## Current minimal in-game revision
+
+Both Giant Forest and Shiganshina use the same runtime-built interfaces, without
+resaving either scene or changing its user tuning.
+
+- **Hold Tab:** a compact charcoal card titled **Stats**, containing only **Kills**
+  (current run), **Total kills** (career), **Damage done** (actual applied damage
+  this run), and **Limbs severed** (this run). Four aligned label/value rows, larger
+  numbers, quiet dividers and one restrained accent. No clocks, death/streak/eye
+  rows, duplicated kill headline, section labels or footer hints. No pause/cursor
+  changes or raycaster; it hides while J has paused the game.
+- **J menu:** `GamePauseMenu` replaces only the old panel at runtime. Map name,
+  Resume/Main menu/Quit, Master/SFX/Music sliders and a small resume hint. The old
+  movement-tuning panel and separate IMGUI audio box are no longer displayed.
+  The menu pauses and restores the prior time scale/cursor state. J resumes;
+  Escape cancels confirmation or resumes. Leaving/quit confirms and saves, Menu
+  uses the named async destination, and Editor Quit never stops Play. The actual
+  saved legacy panel remains intact, inactive. No movement settings are rewritten.
+- Wind audio from the preceding request is also installed; see
+  [player-flight-wind.md](player-flight-wind.md).
+
+Native static previews in `ArtSource/UI/InGameMinimal/` cover both maps at
+1920x1080 and1440x1080. These show actual runtime uGUI over saved map photos,
+zero authoring counters and100% authoring audio values—not live input/kill/audio
+proof. `tools/capture_ingame_ui.py` only uses the closed owned Unity2021 worker.
+
+Current focused regression run: **26 passed/0 failed/0 skipped**, covering the
+existing audio mixer, player-only respawn, real motor suspension, health and
+held-damage gates. An earlier broader audio/ODM run was **165 passed/2 failed**:
+`EscapeQteBlockedExitCancelsBiteImmediatelyAndKeepsSuspensionUntilSceneryClears`
+and `EscapeQteGraceBlocksAllHandsForOneSecondButNeverBlocksDamage` still assert
+**1s**, while the already-published target code uses the approved **4s** regrab
+grace. Neither tests nor the4s setting was changed. Both XML/log receipts are
+retained with the previews. No new tests; these are not full-suite, wind-audition
+or hands-on new-menu interaction certifications.
 
 ## Current map extension
 
@@ -12,12 +48,12 @@ revision, not a restriction on the now-expanded selector.
 
 ## Player-facing changes
 
-- In gameplay, **hold Tab** to display the field record; releasing Tab hides it.
+- In gameplay, **hold Tab** to display Stats; releasing Tab hides it.
   It is a read-only overlay: no time-scale change, cursor unlock, input suspension,
   camera override, or gameplay raycaster. Losing application focus hides it too.
-- **This run:** Titan kills, deaths, kills this life, limbs severed, eye stuns,
-  actual applied damage, run time and time alive.
-- **Career:** total Titan kills, total deaths and best kill streak, saved locally
+- **Visible:** kills, total kills, damage done and limbs severed only. The original
+  death/life/eye/time counters continue recording internally; they are not shown.
+- **Stored career data:** total Titan kills, total deaths and best kill streak, saved locally
   across normal application restarts. Totals begin with this feature; past kills
   cannot be reconstructed from old gameplay. This is single-player/local storage.
 - A run is one loaded gameplay world. Player-only respawn keeps run totals and the
@@ -59,7 +95,8 @@ Options apply immediately and save on this device:
   in WebGL, where closing the page is managed by the browser.
 
 The new menu normalizes time scale/cursor **only in the actual Menu scene**.
-The stats overlay never does this. Existing in-game J/audio UI remains intact.
+The stats overlay never does this. The latest shared in-game J menu replaces the
+legacy J/audio presentation at runtime as described above.
 
 ## Ownership and receipts
 
@@ -117,7 +154,8 @@ intentional PlayerHealth and Menu changes differ, with the other553 unchanged,
 including the user's forest, prefab, palettes, audio, Titan rig/art and eye pose.
 DamageDealer and the two camera edits are separately source-reviewed/compiled.
 
-New stats/menu work and the later Shiganshina extension remain local and
-uncommitted/unpushed pending user feedback.
-The earlier eye/grace checkpoint was committed locally as `cc26cf0a` before this
-feature; no push was performed.
+The original stats/frontend and Shiganshina extension were published in `1d8840ab`,
+including the earlier eye/grace checkpoint `cc26cf0a`. Faster attack decisions and
+dedicated stomp audio were subsequently published in `93d8a511`. The current
+minimal in-game UI and flight-wind changes were uncommitted at native-art capture;
+subsequent publication is recorded in Git history.

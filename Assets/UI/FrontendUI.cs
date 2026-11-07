@@ -11,6 +11,11 @@ public static class FrontendUI
     public static readonly Color Gold = new Color(.85f, .73f, .47f);
     public static readonly Color Paper = new Color(.93f, .94f, .88f);
     public static readonly Color Muted = new Color(.61f, .69f, .64f);
+    // Restrained in-game surfaces; the authored main-menu palette stays intact.
+    public static readonly Color MinimalPanel = new Color(.035f, .045f, .055f, .97f);
+    public static readonly Color MinimalMuted = new Color(.64f, .69f, .73f);
+    public static readonly Color MinimalAccent = new Color(.55f, .82f, .76f);
+    public static readonly Color MinimalLine = new Color(.3f, .36f, .4f, .35f);
     static Font font;
     public static Font Font { get { if (font == null) font = Resources.GetBuiltinResource<Font>("Arial.ttf"); return font; } }
 

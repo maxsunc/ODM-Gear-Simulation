@@ -28,7 +28,7 @@ public sealed class GameStats : MonoBehaviour
     float saveAt, nextDisplay;
     ConditionalWeakTable<ModularTitanBody, object> killed = new ConditionalWeakTable<ModularTitanBody, object>();
     RectTransform overlay, design;
-    Text rows, totals, headline;
+    Text killsValue, totalKillsValue, damageValue, limbsValue;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void ResetStatics() { instance = null; }
@@ -113,38 +113,37 @@ public sealed class GameStats : MonoBehaviour
         {
             RunSeconds += Time.deltaTime; if (!player.isDead) LifeSeconds += Time.deltaTime;
         }
-        bool visible = focused && !applicationPaused && player != null && player.gameObject.activeInHierarchy && Input.GetKey(KeyCode.Tab);
+        bool visible = focused && !applicationPaused && Time.timeScale > 0 && player != null && player.gameObject.activeInHierarchy && Input.GetKey(KeyCode.Tab);
         if (visible && overlay == null) BuildOverlay();
         if (overlay == null) return;
         if (overlay.gameObject.activeSelf != visible) { overlay.gameObject.SetActive(visible); nextDisplay = 0; }
         if (!visible) return;
         FrontendUI.Fit(design);
         if (Time.unscaledTime < nextDisplay) return; nextDisplay = Time.unscaledTime + .1f;
-        headline.text = RunKills.ToString("N0") + "  TITAN KILLS";
-        rows.text = RunKills.ToString("N0") + "\n" + RunDeaths.ToString("N0") + "\n" + LifeKills.ToString("N0") + "\n" + LimbsSevered.ToString("N0") + "\n" + EyeStuns.ToString("N0") + "\n" + DamageDealt.ToString("N0");
-        totals.text = TotalKills.ToString("N0") + "\n" + TotalDeaths.ToString("N0") + "\n" + BestStreak.ToString("N0") + "\n" + Clock(RunSeconds) + "\n" + Clock(LifeSeconds);
+        killsValue.text = RunKills.ToString("N0"); totalKillsValue.text = TotalKills.ToString("N0");
+        damageValue.text = DamageDealt.ToString("N0"); limbsValue.text = LimbsSevered.ToString("N0");
     }
     public static string Clock(float seconds)
     { int n = Mathf.FloorToInt(Mathf.Clamp(seconds, 0, 1e8f)); return (n / 3600).ToString("00") + ":" + (n / 60 % 60).ToString("00") + ":" + (n % 60).ToString("00"); }
     void BuildOverlay()
     {
-        overlay = FrontendUI.Canvas(transform, "Hold TAB - Field Record", 200, false);
-        design = FrontendUI.Design(overlay, "Record design");
-        var p = FrontendUI.Image(design, "Record panel", 410, 210, 1100, 650, FrontendUI.Ink);
-        FrontendUI.Image(p, "Accent", 0, 0, 1100, 4, FrontendUI.Gold);
-        FrontendUI.Text(p, "Eyebrow", "FIELD RECORD   /   FREE ROAM", 42, 32, 760, 32, 18, FrontendUI.Gold, FontStyle.Bold);
-        FrontendUI.Text(p, "Live", "LIVE  /  GAME CONTINUES", 770, 32, 290, 32, 16, FrontendUI.Muted);
-        headline = FrontendUI.Text(p, "Kills", "0  TITAN KILLS", 42, 80, 1010, 70, 50, FrontendUI.Paper, FontStyle.Bold);
-        FrontendUI.Image(p, "Rule", 42, 168, 1016, 1, FrontendUI.Line);
-        FrontendUI.Text(p, "Run heading", "THIS RUN", 42, 193, 440, 36, 19, FrontendUI.Gold, FontStyle.Bold);
-        FrontendUI.Text(p, "Lifetime heading", "CAREER & TIME", 590, 193, 440, 36, 19, FrontendUI.Gold, FontStyle.Bold);
-        var labels = FrontendUI.Text(p, "Run labels", "Titan kills\nDeaths\nKills this life\nLimbs severed\nEye stuns\nDamage dealt", 42, 244, 330, 280, 23, FrontendUI.Muted); labels.lineSpacing = 1.5f; labels.alignment = TextAnchor.UpperLeft;
-        rows = FrontendUI.Text(p, "Run values", "", 380, 244, 120, 280, 23, FrontendUI.Paper, FontStyle.Bold); rows.lineSpacing = 1.5f; rows.alignment = TextAnchor.UpperRight;
-        var career = FrontendUI.Text(p, "Career labels", "Total titan kills\nTotal deaths\nBest kill streak\nRun time\nTime alive", 590, 244, 270, 280, 23, FrontendUI.Muted); career.lineSpacing = 1.5f; career.alignment = TextAnchor.UpperLeft;
-        totals = FrontendUI.Text(p, "Career values", "", 870, 244, 188, 280, 23, FrontendUI.Paper, FontStyle.Bold); totals.lineSpacing = 1.5f; totals.alignment = TextAnchor.UpperRight;
-        FrontendUI.Image(p, "Bottom rule", 42, 557, 1016, 1, FrontendUI.Line);
-        FrontendUI.Text(p, "Hint", "HOLD TAB TO VIEW   /   RELEASE TO CLOSE", 42, 582, 1016, 30, 17, FrontendUI.Gold);
+        overlay = FrontendUI.Canvas(transform, "Hold TAB - Stats", 200, false);
+        design = FrontendUI.Design(overlay, "Stats design");
+        var panel = FrontendUI.Image(design, "Stats panel", 580, 260, 760, 560, FrontendUI.MinimalPanel);
+        FrontendUI.Image(panel, "Accent", 48, 44, 4, 40, FrontendUI.MinimalAccent);
+        FrontendUI.Text(panel, "Title", "Stats", 72, 34, 620, 62, 40, FrontendUI.Paper, FontStyle.Bold);
+        killsValue = StatRow(panel, "Kills", 128);
+        totalKillsValue = StatRow(panel, "Total kills", 224);
+        damageValue = StatRow(panel, "Damage done", 320);
+        limbsValue = StatRow(panel, "Limbs severed", 416);
         overlay.gameObject.SetActive(false);
+    }
+    static Text StatRow(Transform panel, string label, float y)
+    {
+        FrontendUI.Image(panel, label + " divider", 48, y - 10, 664, 1, FrontendUI.MinimalLine);
+        FrontendUI.Text(panel, label + " label", label, 48, y, 380, 72, 24, FrontendUI.MinimalMuted);
+        var value = FrontendUI.Text(panel, label + " value", "0", 412, y, 300, 72, 36, FrontendUI.Paper, FontStyle.Bold);
+        value.alignment = TextAnchor.MiddleRight; return value;
     }
     void OnApplicationFocus(bool value) { focused = value; if (!value && overlay != null) overlay.gameObject.SetActive(false); if (!value) SaveAll(); }
     void OnApplicationPause(bool value) { applicationPaused = value; if (value) { if (overlay != null) overlay.gameObject.SetActive(false); SaveAll(); } }
