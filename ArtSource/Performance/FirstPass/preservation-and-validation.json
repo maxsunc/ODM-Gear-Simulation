@@ -1,0 +1,92 @@
+{
+  "scope": "Isolated cloth CPU benchmark plus static geometry estimates; local performance change on main, not a live FPS measurement. Prior project checkpoint is pushed as becdf248.",
+  "unity": "2021.3.25f1",
+  "URP": "12.1.11",
+  "hardwareInventory": {
+    "cpu": "Intel Core i7-13700H",
+    "gpu": "Intel Iris Xe Graphics",
+    "logicalProcessors": 20,
+    "graphicsUsedBySurvey": "Null Device"
+  },
+  "sourceProtectedPaths": 1622,
+  "unchangedSourcePaths": 1621,
+  "onlyChangedExistingAsset": "Assets/Player/Scout/ScoutCapeCloth.cs",
+  "sourceSha256": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+  "workerSha256": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+  "originalCapeSha256": "9f5945e8dd6f69e801984cd342d158781f5692d5355f939c77bc97b3effdd00b",
+  "oldCapeGitRevision": "becdf2489ade12733d807328cb216686805d6669",
+  "timings": [
+    {
+      "mode": "idle",
+      "baselineMeanMs": 8.691149444444447,
+      "optimizedMeanMs": 3.0564722222222214,
+      "savedMeanMs": 5.6346772222222254,
+      "reductionPercent": 64.8323591515737,
+      "trajectorySha256": "d7fda6a9271d66ea0280eef79878680eb51a21519a8958430b10336e9f4c8257",
+      "positionSamplesPerTrajectory": 98280,
+      "bitIdenticalInAllFourRuns": true
+    },
+    {
+      "mode": "forward40",
+      "baselineMeanMs": 8.780248611111112,
+      "optimizedMeanMs": 3.067344722222221,
+      "savedMeanMs": 5.712903888888891,
+      "reductionPercent": 65.06540010335699,
+      "trajectorySha256": "c5f65ff87a8bff5173d0236fb85d30869e776bdf6c64df263795607a4dcefd77",
+      "positionSamplesPerTrajectory": 98280,
+      "bitIdenticalInAllFourRuns": true
+    },
+    {
+      "mode": "turning40",
+      "baselineMeanMs": 8.725932500000004,
+      "optimizedMeanMs": 3.0494062499999997,
+      "savedMeanMs": 5.676526250000005,
+      "reductionPercent": 65.05352006791254,
+      "trajectorySha256": "d27ccd9cd7fa624d3bacb845720c0b2be3a00314d4f1fff6c43b23a976f6cc17",
+      "positionSamplesPerTrajectory": 98280,
+      "bitIdenticalInAllFourRuns": true
+    }
+  ],
+  "sampledPositionsTotal": 294840,
+  "sampledFloatValuesTotal": 884520,
+  "geometryInventory": "inventory-16x9.json",
+  "sourcePreservedSha256": {
+    "Assets/Art/Player/Scout/Animations/Run.anim": "24b27aa811dfcb308672ea305a8d77ccbed6af1b8542e6c3f668645c21d85526",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset": "e01e44841004fa92305af993c0f1668675c214baee63c9c3f7716867871be70f",
+    "Assets/Resources/Audio/PlayerWindAudio.asset": "13c3f9d285bee4f5bebfaa1760535b468a2ae3d9f32268d75afd8488299f36a9",
+    "Assets/Resources/TitanAudioPalette.asset": "ef357b3a8e9128d53e337b6ee20d7e731a0f8fc846aa6f67e9b490f0a939bf8e",
+    "Assets/Scenes/GiantForest2.unity": "6c0e98680ba97a4fdcaaf2711206990f4ba353aadb4048bd7ec49b55770e4f66",
+    "Assets/Scenes/ShiganshinaDistrict.unity": "8dae816ff057607c0fcf4e7a6503ffe70ddd99fecf1770f90de307a3c1805a43",
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "ProjectSettings/DynamicsManager.asset": "88ace3d7317c5012741f8af986c5223696e230d27c46a80b934fc031030839c2",
+    "ProjectSettings/TimeManager.asset": "189be5677190854c2847f2269152d0e3c5fe7711cd9f73137ff1bbd0d1c60bac",
+    "Assets/Renderer/Renderer.asset": "3d165353dec15f9e3cefe1c1938fb05f4f39333715deda81c834df97b02eef48",
+    "ProjectSettings/QualitySettings.asset": "2f1bd08afe3b50f5b554a8c64ca2f9ae2b34f85b6eb1cd530805ed5d107c6e30"
+  },
+  "existingRegressions": {
+    "id": "2",
+    "testcasecount": "34",
+    "result": "Skipped:Ignored",
+    "total": "34",
+    "passed": "33",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-07 23:22:52Z",
+    "end-time": "2026-11-07 23:23:01Z",
+    "duration": "9.3927318"
+  },
+  "noNewTestsOrAssertionEdits": true,
+  "noLiveEditorControl": true,
+  "noSavedGraphicsQualityOrPhysicsChanges": true,
+  "limits": [
+    "No live FPS/GPU capture; geometry values are estimated, not actual draws.",
+    "Before/after CPU values are isolated Editor Mono, not standalone or IL2CPP.",
+    "Particle identity covers sampled scenarios, not universal platform/input proof.",
+    "Prior broad-suite failures remain unresolved; this is not a full-suite rerun."
+  ],
+  "performanceCodePublication": "Uncommitted local work after pushed becdf248, on main."
+}

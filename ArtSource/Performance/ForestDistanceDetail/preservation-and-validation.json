@@ -1,0 +1,129 @@
+{
+  "scope": "Local visual-only Forest distance detail pass on main. No Git publication.",
+  "unity": "2021.3.25f1",
+  "blender": "4.5",
+  "protectedExistingPaths": 1680,
+  "unchangedExistingPaths": 1674,
+  "onlyChangedExistingPaths": [
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_A_Sentinel.prefab",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_B_Leaning.prefab",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_C_OldFork.prefab",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Corner_24x60.prefab",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Gateway_48x60.prefab",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Straight_24x60.prefab"
+  ],
+  "publishedSha256": {
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Straight_24x60.prefab": "dd43ea965da3ff54ec294723f69e9991c9d20930482c9bbe2444d68008615d95",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Corner_24x60.prefab": "7032106ec37ed07a4fc0da92e116eeabe13083a835319c879ebc6a0a9beb4ed0",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Gateway_48x60.prefab": "29057bb53f2572d731a7dab38c30f2770528df3068a292e0c4b9a0580b875095",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_A_Sentinel.prefab": "ee332adb8605119d2ca317cbec9173c80ccfd4e2ad4cf87b005cabd447490fce",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_B_Leaning.prefab": "b0c7a4dbbd152cbb1108110d7ee09820d94ac71cc8f42679812ba7abf5adabe2",
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_C_OldFork.prefab": "a152d679fdc8a6ad32d560d7a0aac82f6bac094dca6abd3eec034001aee406d6",
+    "Assets/Art/Environment/GiantForest2/WallDistance.meta": "4b202674f29e9a02f3fb22d3cae581995321464cdda2f46a762ddcf5097830ed",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD1.fbx": "8621a80cdf725d39d9ba169fb0817ea21854df62f6e3b6a310ed611ebd1405cd",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD1.fbx.meta": "655b4a432aafeef879a575ced73ba0d4c36592873cf5c800b18312f1a43665d3",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD2.fbx": "212dc0d3fe4b06e53f004e5a0365bb1d369fb27a3731a36b5850e176951993f6",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD2.fbx.meta": "f95c34b61d44c2ec1b3be7e92e817d57c2ddfffd2450964e1057bce55a164930",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD1.fbx": "94108ff7c42727d45bc24133c23d082c4eb10da2a21d6ea41b83e1536ad069c2",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD1.fbx.meta": "8523b67813290d8e2a0491f5f7c14272a2f5d058a9340a52491e6d0741e8a639",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD2.fbx": "c6ab5fae8abcb7a83b098516ea74730c6c3ce736cbd6fca39c52a0106db1d08b",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD2.fbx.meta": "cd96c2f2710335b00167fd1bb8190efd3f5767fa730514df3efc7e6da25a66eb",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD1.fbx": "2ae7b8593a0a33b94a3615cc0efed5b40f8b2b77bbfa40887e8f56403e405522",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD1.fbx.meta": "7500d8bd0c15622503e1d22747262e4f53337f40941876354b863559e44e8220",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD2.fbx": "dcb9d9a7d9f9c8b54ade258c701eebb3edb8541e2a262445b0eda9d4766eda42",
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD2.fbx.meta": "c30415254e37eff9d82ecc1e0c1bf0e8c8ecb27071c857a111a5e6decb08b4fa"
+  },
+  "preservedSha256": {
+    "Assets/Scenes/GiantForest2.unity": "6c0e98680ba97a4fdcaaf2711206990f4ba353aadb4048bd7ec49b55770e4f66",
+    "Assets/Scenes/ShiganshinaDistrict.unity": "8dae816ff057607c0fcf4e7a6503ffe70ddd99fecf1770f90de307a3c1805a43",
+    "Assets/Player/Scout/ScoutCapeCloth.cs": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+    "Assets/ThirdPersonCameraController.cs": "12464f67f5d16a2c585bf416cfbcda2cf8ee0fec462716bbd14650d6211bd24c",
+    "ProjectSettings/DynamicsManager.asset": "88ace3d7317c5012741f8af986c5223696e230d27c46a80b934fc031030839c2",
+    "ProjectSettings/QualitySettings.asset": "2f1bd08afe3b50f5b554a8c64ca2f9ae2b34f85b6eb1cd530805ed5d107c6e30",
+    "Assets/Resources/Audio/PlayerFootstepAudio.asset": "e01e44841004fa92305af993c0f1668675c214baee63c9c3f7716867871be70f",
+    "Assets/Resources/Audio/PlayerWindAudio.asset": "13c3f9d285bee4f5bebfaa1760535b468a2ae3d9f32268d75afd8488299f36a9",
+    "Assets/Resources/TitanAudioPalette.asset": "ef357b3a8e9128d53e337b6ee20d7e731a0f8fc846aa6f67e9b490f0a939bf8e",
+    "ArtSource/Environment/GiantForest2/GiantForest2_AssetReview.blend": "570b8aeaf879fef58e9fb0f65c88cf6e2cbdc2855898f0a043dbc5a208dd9e50"
+  },
+  "estimatedGeometryComparison": [
+    {
+      "pitch": 10.0,
+      "lodBias": 1.5,
+      "beforeEstimatedTriangles": 5402864,
+      "afterEstimatedTriangles": 2248446,
+      "reductionPercent": 58.384182907435765,
+      "beforeWallTriangles": 2472448,
+      "afterWallTriangles": 349824,
+      "materialSubmissionProxyUnchanged": true
+    },
+    {
+      "pitch": -25.0,
+      "lodBias": 1.5,
+      "beforeEstimatedTriangles": 6001762,
+      "afterEstimatedTriangles": 2621680,
+      "reductionPercent": 56.31816123331781,
+      "beforeWallTriangles": 2569028,
+      "afterWallTriangles": 376164,
+      "materialSubmissionProxyUnchanged": true
+    }
+  ],
+  "shiganshinaSurveyUnchanged": true,
+  "nearWallPixelsIdentical": true,
+  "physicalSceneDigests": [
+    {
+      "scene": "Assets/Scenes/GiantForest2.unity",
+      "colliders": 2552,
+      "physicalDigest": "10f10ff1d50d7824c0e73ccb41caae21b79caf96e04d4c76ac8f07d30c260611"
+    },
+    {
+      "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+      "colliders": 617,
+      "physicalDigest": "c5232d04d2ac8a89f18d6b1b88dc0bb7ece7958e322fb01e6650dc3e169fbcfc"
+    }
+  ],
+  "selectedExistingRegressions": {
+    "id": "2",
+    "testcasecount": "5",
+    "result": "Failed(Child)",
+    "total": "5",
+    "passed": "3",
+    "failed": "2",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-08 00:01:40Z",
+    "end-time": "2026-11-08 00:01:50Z",
+    "duration": "10.5040463"
+  },
+  "originalPrefabControl": {
+    "id": "2",
+    "testcasecount": "2",
+    "result": "Failed(Child)",
+    "total": "2",
+    "passed": "1",
+    "failed": "1",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-08 00:02:52Z",
+    "end-time": "2026-11-08 00:02:58Z",
+    "duration": "6.1431247"
+  },
+  "regressionLimitations": [
+    "Wall height fixture expects121.1m; current user scale gives211.924988m in BOTH original and changed runs.",
+    "Hook/tree fixture assumes EVERY LODGroup is a tree with MeshCollider; new legitimate wall LODGroup has BoxColliders, causing a test null dereference at line62. Not a passed hook test. No dummy collider/test edits used."
+  ],
+  "noNewTestsOrAssertionEdits": true,
+  "noSavedSceneEdits": true,
+  "noLiveEditorControl": true,
+  "noPhysicsOrNavChanges": true,
+  "limitations": [
+    "Static geometry estimates omit GPU counters, terrain tessellation, runtime Titans, shadows/extra passes and occlusion.",
+    "Static images are posed authoring, not Play or traversal; camera collision was not run.",
+    "No new live FPS/LOD transition/crowd/build/device certification; earlier suite failures unresolved."
+  ]
+}

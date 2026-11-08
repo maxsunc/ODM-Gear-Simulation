@@ -1,0 +1,61 @@
+{
+  "utc": "2026-11-08T00:44:34.320298+00:00",
+  "status": "Local on main; not committed/pushed",
+  "protectedPaths": 1637,
+  "unchangedExistingPaths": 1636,
+  "changedExistingAssetsSettings": [
+    "Assets/ODM_Movement.cs"
+  ],
+  "optimizedAssetChecks": {
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Straight_24x60.prefab": true,
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Corner_24x60.prefab": true,
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Gateway_48x60.prefab": true,
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_A_Sentinel.prefab": true,
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_B_Leaning.prefab": true,
+    "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Tree_C_OldFork.prefab": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD1.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD1.fbx.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD2.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Corner_24x60_LOD2.fbx.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD1.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD1.fbx.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD2.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Gateway_48x60_LOD2.fbx.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD1.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD1.fbx.meta": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD2.fbx": true,
+    "Assets/Art/Environment/GiantForest2/WallDistance/GF2_Wall_Straight_24x60_LOD2.fbx.meta": true
+  },
+  "capeSha256": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+  "sourceSha256": "c8ab580922699ae62c3ff0b20e578db6505a98a23c576f2ff33adf66a680e8be",
+  "testWorkerSourceMatches": true,
+  "preservedCurrentTuning": {
+    "sharedPlayerPrefabSha256": "6cff1de85df16a0b61b8347c547937cd4a95926f3f64277179126fdf7153ff2c",
+    "forestSceneSha256": "488dc4add03052c6faed462201147d6fee135d40856abeab9a232de8666bfae6",
+    "grappleTurnMethodUnchanged": true
+  },
+  "existingRegressions": {
+    "id": "2",
+    "testcasecount": "10",
+    "result": "Skipped:Ignored",
+    "total": "10",
+    "passed": "9",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-08 00:43:20Z",
+    "end-time": "2026-11-08 00:43:25Z",
+    "duration": "5.101245"
+  },
+  "limits": [
+    "Warning spam observed, not measured root cause of all FPS loss",
+    "No live user Play/FPS/CPU/GPU capture",
+    "Focused tests do not directly assert warning output or supersede broad suite failures",
+    "No tests or assertions added/modified",
+    "User Editor was not stopped/saved/reloaded or given synthetic input"
+  ]
+}

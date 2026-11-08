@@ -1,0 +1,76 @@
+{
+  "status": "Local uncommitted measurement; no gameplay changes in this profiling pass",
+  "source": "Actual user Editor Play recording; user moved real mouse; no synthetic input",
+  "userObservedFPS": {
+    "still": "90\u2013110",
+    "mouseMoving": "~45",
+    "stoppedAgain": "90\u2013110",
+    "characterMovement": "User separately reports similar drop; not part of this capture"
+  },
+  "unity": "2021.3.25f1",
+  "capture": {
+    "rawPath": "Library/PerformanceSurvey/MouseMotionLive.raw",
+    "bytes": 1938639432,
+    "retainedFirstFrame": 11266,
+    "retainedLastFrame": 11565,
+    "analyzedFrames": 300,
+    "analyzedSpanSeconds": 7.586775200009346,
+    "limitation": "Native LoadProfile retained the last 300 frames. Cohorts are grouped by observed frame duration, not a precisely annotated full stationary/moving/stationary timeline. Full raw capture retained locally only."
+  },
+  "profiler": {
+    "deepProfiling": false,
+    "profileEditor": false,
+    "GPUAreaEnabled": false,
+    "allocationCallstacks": false
+  },
+  "liveInspection": {
+    "selectedObject": "Player",
+    "quality": "Very High",
+    "vsync": 1,
+    "targetFrameRate": -1,
+    "renderInterval": 1,
+    "note": "Live read-only inspection after recording; user had exited Play by then. Only Main Camera enabled."
+  },
+  "groups": {
+    "fast_6_to_13ms": {
+      "frames": 20,
+      "frameMeanMs": 10.170854854583741,
+      "frameMedianMs": 10.548749923706055,
+      "inclusiveMeanMs": {
+        "InspectorWindow.Repaint": 0,
+        "InspectorWindow.Paint": 0,
+        "PlayerLoop": 7.33423000800758,
+        "ODM.ScoutCape.Simulate": 2.849074995517731,
+        "Assembly-CSharp.dll!::ThirdPersonCameraController.LateUpdate() [Invoke]": 0.03739499934017658,
+        "Assembly-CSharp.dll!::ThirdPersonCameraController.Update() [Invoke]": 0.0023749999585561455,
+        "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]": 0.9975349932909012,
+        "GUIView.RepaintAll.PlayerLoopController": 2.3042799830436707
+      },
+      "renderThreadWaitForMainMeanMs": 8.15456998432892
+    },
+    "slow_18_to_35ms": {
+      "frames": 264,
+      "frameMeanMs": 24.681328347235016,
+      "frameMedianMs": 23.6697998046875,
+      "inclusiveMeanMs": {
+        "InspectorWindow.Repaint": 12.484734069217335,
+        "InspectorWindow.Paint": 12.853080673651261,
+        "PlayerLoop": 9.512865504829499,
+        "ODM.ScoutCape.Simulate": 4.362846957463207,
+        "Assembly-CSharp.dll!::ThirdPersonCameraController.LateUpdate() [Invoke]": 0.040578408844091675,
+        "Assembly-CSharp.dll!::ThirdPersonCameraController.Update() [Invoke]": 0.002652272711698474,
+        "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]": 1.0056257568525546,
+        "GUIView.RepaintAll.PlayerLoopController": 15.159324555686027
+      },
+      "renderThreadWaitForMainMeanMs": 19.826674194333712
+    }
+  },
+  "conclusion": "Dominant observed extra CPU cost is Inspector repaint / IMGUI, not camera code. Close Inspector/deselect heavy Player and repeat to establish causality. No direct GPU timing or standalone certification.",
+  "limits": [
+    "Inclusive nested markers must not be added together",
+    "No game/physics/camera/quality changes applied",
+    "Profiler recording was stopped, not user Play",
+    "No test/assertion code added or changed; analysis helper only in closed marker-owned worker",
+    "Earlier broad regressions not superseded"
+  ]
+}

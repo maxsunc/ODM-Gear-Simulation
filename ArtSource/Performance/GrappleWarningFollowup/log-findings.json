@@ -1,0 +1,12 @@
+{
+  "editorLog": "C:\\Users\\maxsu\\AppData\\Local\\Unity\\Editor\\Editor.log",
+  "lineCount": 93068,
+  "animatorControllerWarningCount": 10998,
+  "recentPlayWarningSample": 145,
+  "warningStack": [
+    "ODM_Movement:Gas () (at Assets/ODM_Movement.cs:475)",
+    "ODM_Movement:Update () (at Assets/ODM_Movement.cs:214)"
+  ],
+  "suspectedWarningCause": "Legacy camAnim points at retired ThirdPeronscam rig; SetBool called every gas frame",
+  "causationLimit": "Warnings are observed; CPU/GPU timing and FPS restoration not measured."
+}

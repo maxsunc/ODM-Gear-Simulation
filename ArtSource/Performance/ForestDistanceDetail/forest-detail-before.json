@@ -1,0 +1,150 @@
+{
+  "unity": "2021.3.25f1",
+  "label": "forest-detail-before",
+  "capeSourceSha256": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+  "gpu": "Null Device",
+  "logicalProcessors": 20,
+  "quality": 4,
+  "lodBias": 1.5,
+  "maps": [
+    {
+      "scene": "Assets/Scenes/GiantForest2.unity",
+      "roots": 15,
+      "colliders": 2552,
+      "rigidbodies": 0,
+      "activeAnimators": 2,
+      "activeSkins": 2,
+      "offscreenSkins": 2,
+      "savedTitans": 0,
+      "enabledCameras": 1,
+      "views": [
+        {
+          "pitch": 10.0,
+          "lodBias": 1.5,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 5402864,
+          "estimatedMaterialSubmissions": 611,
+          "treeTriangles": 2895624,
+          "wallTriangles": 2472448,
+          "otherTriangles": 34792,
+          "selectedLod0": 8,
+          "selectedLod1": 107,
+          "selectedLod2": 40,
+          "candidateRenderers": 324
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.5,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 6001762,
+          "estimatedMaterialSubmissions": 642,
+          "treeTriangles": 3398262,
+          "wallTriangles": 2569028,
+          "otherTriangles": 34472,
+          "selectedLod0": 14,
+          "selectedLod1": 112,
+          "selectedLod2": 40,
+          "candidateRenderers": 339
+        },
+        {
+          "pitch": 10.0,
+          "lodBias": 1.0,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 4371070,
+          "estimatedMaterialSubmissions": 611,
+          "treeTriangles": 1863830,
+          "wallTriangles": 2472448,
+          "otherTriangles": 34792,
+          "selectedLod0": 4,
+          "selectedLod1": 56,
+          "selectedLod2": 95,
+          "candidateRenderers": 324
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.0,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 4767890,
+          "estimatedMaterialSubmissions": 642,
+          "treeTriangles": 2164390,
+          "wallTriangles": 2569028,
+          "otherTriangles": 34472,
+          "selectedLod0": 6,
+          "selectedLod1": 64,
+          "selectedLod2": 96,
+          "candidateRenderers": 339
+        }
+      ]
+    },
+    {
+      "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+      "roots": 15,
+      "colliders": 617,
+      "rigidbodies": 0,
+      "activeAnimators": 2,
+      "activeSkins": 2,
+      "offscreenSkins": 2,
+      "savedTitans": 0,
+      "enabledCameras": 1,
+      "views": [
+        {
+          "pitch": 10.0,
+          "lodBias": 1.5,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 755478,
+          "estimatedMaterialSubmissions": 1860,
+          "treeTriangles": 0,
+          "wallTriangles": 27402,
+          "otherTriangles": 728076,
+          "selectedLod0": 21,
+          "selectedLod1": 217,
+          "selectedLod2": 134,
+          "candidateRenderers": 518
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.5,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 763446,
+          "estimatedMaterialSubmissions": 1861,
+          "treeTriangles": 0,
+          "wallTriangles": 27642,
+          "otherTriangles": 735804,
+          "selectedLod0": 23,
+          "selectedLod1": 217,
+          "selectedLod2": 133,
+          "candidateRenderers": 519
+        },
+        {
+          "pitch": 10.0,
+          "lodBias": 1.0,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 493746,
+          "estimatedMaterialSubmissions": 1860,
+          "treeTriangles": 0,
+          "wallTriangles": 27402,
+          "otherTriangles": 466344,
+          "selectedLod0": 5,
+          "selectedLod1": 167,
+          "selectedLod2": 200,
+          "candidateRenderers": 518
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.0,
+          "cameraAspect": 1.7777777910232544,
+          "estimatedMeshTriangles": 504402,
+          "estimatedMaterialSubmissions": 1861,
+          "treeTriangles": 0,
+          "wallTriangles": 27642,
+          "otherTriangles": 476760,
+          "selectedLod0": 5,
+          "selectedLod1": 170,
+          "selectedLod2": 198,
+          "candidateRenderers": 519
+        }
+      ]
+    }
+  ],
+  "cloth": []
+}

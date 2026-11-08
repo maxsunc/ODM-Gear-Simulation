@@ -1,0 +1,41 @@
+{
+  "status": "Local on main; uncommitted/unpushed",
+  "cameraCollisionEnabled": false,
+  "sharedPrefabExplicitValue": 0,
+  "bothMapsInheritWithoutOverride": true,
+  "protectedPaths": 1637,
+  "unchangedExistingPaths": 1635,
+  "changedExistingPaths": [
+    "Assets/ThirdPersonCameraController.cs",
+    "Assets/Prefabs/SharedGameplay/MainCamera.prefab"
+  ],
+  "sourceHashes": {
+    "Assets/ThirdPersonCameraController.cs": "425f2dc733b3547d81140ba45798f3198779fe817cb0250d753695d8e46c7ef8",
+    "Assets/Prefabs/SharedGameplay/MainCamera.prefab": "eeffdd415b254cab609b78397d9c1d3694c0ec0dea552fd79267012a7706dcea"
+  },
+  "workerSourceMatches": true,
+  "behavior": "No camera physics queries, obstruction retraction or shoulder shortening while off. Original eased follow, legacy FOV and improved scroll zoom retained. Player/hook/physics contacts unchanged.",
+  "optionalCollisionHelpersUnchanged": true,
+  "tests": {
+    "id": "2",
+    "testcasecount": "26",
+    "result": "Passed",
+    "total": "26",
+    "passed": "26",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-08 02:30:45Z",
+    "end-time": "2026-11-08 02:30:50Z",
+    "duration": "4.8234954"
+  },
+  "limits": [
+    "Existing integration regressions only; no new direct camera tests/assertions",
+    "Camera can clip through scenery by explicit user choice",
+    "Fresh Play review needed; no live Play stop, scene switch/reload/save or synthetic input",
+    "Prior broad-suite failures not superseded"
+  ]
+}

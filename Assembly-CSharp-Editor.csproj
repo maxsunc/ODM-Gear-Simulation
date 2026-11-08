@@ -42,14 +42,15 @@
      <Compile Include="Assets\Editor\GiantForest2Builder.cs" />
      <Compile Include="Assets\Editor\TitanFaceVariantBuilder.cs" />
      <Compile Include="Assets\Editor\TitanFreeRoamNavigationBuilder.cs" />
+     <Compile Include="Assets\Editor\SharedGameplayPrefabBuilder.cs" />
      <Compile Include="Assets\Editor\ShiganshinaDistrictBuilder.cs" />
+     <Compile Include="Assets\Editor\ForestDistanceDetailBuilder.cs" />
      <Compile Include="Assets\Editor\TitanPrototypeBuilder.cs" />
      <Compile Include="Assets\Editor\FrontendMenuBuilder.cs" />
      <Compile Include="Assets\Editor\TitanRandomSpawnerInstaller.cs" />
      <Compile Include="Assets\Editor\TitanAISandboxBuilder.cs" />
      <Compile Include="Assets\Editor\ScoutPlayerBuilder.cs" />
      <Compile Include="Assets\Editor\TitanMotionClipBuilder.cs" />
-     <Compile Include="Assets\Editor\SharedGameplayPrefabBuilder.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

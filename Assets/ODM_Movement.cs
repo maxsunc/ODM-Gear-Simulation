@@ -23,6 +23,8 @@ public class ODM_Movement : MonoBehaviour
     private Animator grappleIndict;
 
     public float strafeSpeed;
+    [Tooltip("Maximum turn speed toward the grapple point while gasing, in degrees per second. Higher = snappier; lower = slower/smoother. With two hooks, faces their midpoint. 70 roughly matches the old turning at 60 FPS; 0 disables grapple-facing rotation.")]
+    [Min(0f)] public float grappleTurnSpeed = 70f;
     private float strafeDir;
     private Movement movement;
     public Transform[] raycastShooters;
@@ -108,7 +110,7 @@ public class ODM_Movement : MonoBehaviour
         if(gasParticle!=null) gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmitting);
         if(audio!=null && audio.container!=null && audio.container.Length>3 && audio.container[3]!=null)
         { audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1; }
-        if(camAnim!=null) camAnim.SetBool("StartGas",false);
+        SetCameraGas(false);
         if(playerAnimator!=null) playerAnimator.SetBool("isGasing",false);
         return true;
     }
@@ -133,7 +135,7 @@ public class ODM_Movement : MonoBehaviour
         if(gasParticle!=null)gasParticle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         if(audio!=null&&audio.container!=null&&audio.container.Length>3&&audio.container[3]!=null)
         {audio.container[3].Stop();audio.container[3].volume=.03f;audio.container[3].pitch=1;}
-        if(camAnim!=null)camAnim.SetBool("StartGas",false);
+        SetCameraGas(false);
     }
 
     //POA:
@@ -228,7 +230,7 @@ public class ODM_Movement : MonoBehaviour
                 playerAnimator.SetBool("isGasing", gasing);
                 gasTrail.emitting = false;
                 gasParticle.loop = false;
-                camAnim.SetBool("StartGas", false);
+                SetCameraGas(false);
                 Vector3 forceVector = residualDir * residualSpeed + (transform.forward + transform.right * strafeDir) * currentSpeed;
                 // after gasing start deaccelerating uses latest direction to keep the direction
                 StartCoroutine(Deaccelerate(forceVector.normalized, forceVector.magnitude));
@@ -466,11 +468,21 @@ public class ODM_Movement : MonoBehaviour
 
     }
 
+    void SetCameraGas(bool active)
+    {
+        // The current camera owns its own presentation; saved maps still reference
+        // the retired camera Animator. Do not send parameters to an inactive or
+        // uninitialized rig (Unity otherwise logs a warning/stack every gas frame).
+        if (camAnim != null && camAnim.isActiveAndEnabled &&
+            camAnim.runtimeAnimatorController != null && camAnim.isInitialized)
+            camAnim.SetBool("StartGas", active);
+    }
+
     void Gas()
     {
 
         movement.ResetGravity(false);
-        camAnim.SetBool("StartGas", true);
+        SetCameraGas(true);
         gasTrail.emitting = true;
         gasParticle.loop = true;
         FaceGrapplePoint();
@@ -589,7 +601,11 @@ public class ODM_Movement : MonoBehaviour
         // face point
         Vector3 dir = new Vector3(midpoint.x - transform.position.x, midpoint.y - transform.position.y, midpoint.z - transform.position.z);
 
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, dir, 0.02f, 0.0f);
+        // Gas runs in Update: scale the angular step by render time, not frame count.
+        float turnSpeed = float.IsNaN(grappleTurnSpeed) || float.IsInfinity(grappleTurnSpeed)
+            ? 70f : Mathf.Max(0f, grappleTurnSpeed);
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, dir,
+            turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
 
         transform.rotation = Quaternion.LookRotation(newDirection);
         // transform.forward = dir;

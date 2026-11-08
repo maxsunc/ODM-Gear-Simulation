@@ -1,0 +1,50 @@
+{
+  "GF2_Wall_Straight_24x60_LOD1": {
+    "triangles": 5268,
+    "materials": [
+      "GF2_RecessStone_Distance",
+      "GF2_Limestone_Distance"
+    ],
+    "visualOnly": true
+  },
+  "GF2_Wall_Straight_24x60_LOD2": {
+    "triangles": 2148,
+    "materials": [
+      "GF2_RecessStone_Distance.001",
+      "GF2_Limestone_Distance.001"
+    ],
+    "visualOnly": true
+  },
+  "GF2_Wall_Corner_24x60_LOD1": {
+    "triangles": 10540,
+    "materials": [
+      "GF2_RecessStone_Distance.002",
+      "GF2_Limestone_Distance.002"
+    ],
+    "visualOnly": true
+  },
+  "GF2_Wall_Corner_24x60_LOD2": {
+    "triangles": 4300,
+    "materials": [
+      "GF2_RecessStone_Distance.003",
+      "GF2_Limestone_Distance.003"
+    ],
+    "visualOnly": true
+  },
+  "GF2_Wall_Gateway_48x60_LOD1": {
+    "triangles": 7968,
+    "materials": [
+      "GF2_RecessStone_Distance.004",
+      "GF2_Limestone_Distance.004"
+    ],
+    "visualOnly": true
+  },
+  "GF2_Wall_Gateway_48x60_LOD2": {
+    "triangles": 3312,
+    "materials": [
+      "GF2_RecessStone_Distance.005",
+      "GF2_Limestone_Distance.005"
+    ],
+    "visualOnly": true
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "unity": "2021.3.25f1",
+  "label": "optimized-bounds",
+  "capeSourceSha256": "cf6ccbc680bd52e67cee9f6e886aa10d67c11f102b038a956b74c0128f72808f",
+  "gpu": "Null Device",
+  "logicalProcessors": 20,
+  "quality": 4,
+  "lodBias": 1.5,
+  "maps": [
+    {
+      "scene": "Assets/Scenes/GiantForest2.unity",
+      "roots": 15,
+      "colliders": 2552,
+      "rigidbodies": 0,
+      "activeAnimators": 2,
+      "activeSkins": 2,
+      "offscreenSkins": 2,
+      "savedTitans": 0,
+      "enabledCameras": 1,
+      "views": [
+        {
+          "pitch": 10.0,
+          "lodBias": 1.5,
+          "estimatedMeshTriangles": 4823294,
+          "estimatedMaterialSubmissions": 556,
+          "selectedLod0": 7,
+          "selectedLod1": 96,
+          "selectedLod2": 40,
+          "candidateRenderers": 296
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.5,
+          "estimatedMeshTriangles": 5229128,
+          "estimatedMaterialSubmissions": 576,
+          "selectedLod0": 11,
+          "selectedLod1": 100,
+          "selectedLod2": 40,
+          "candidateRenderers": 305
+        },
+        {
+          "pitch": 10.0,
+          "lodBias": 1.0,
+          "estimatedMeshTriangles": 3884256,
+          "estimatedMaterialSubmissions": 556,
+          "selectedLod0": 4,
+          "selectedLod1": 47,
+          "selectedLod2": 92,
+          "candidateRenderers": 296
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.0,
+          "estimatedMeshTriangles": 4196782,
+          "estimatedMaterialSubmissions": 576,
+          "selectedLod0": 6,
+          "selectedLod1": 53,
+          "selectedLod2": 92,
+          "candidateRenderers": 305
+        }
+      ]
+    },
+    {
+      "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+      "roots": 15,
+      "colliders": 617,
+      "rigidbodies": 0,
+      "activeAnimators": 2,
+      "activeSkins": 2,
+      "offscreenSkins": 2,
+      "savedTitans": 0,
+      "enabledCameras": 1,
+      "views": [
+        {
+          "pitch": 10.0,
+          "lodBias": 1.5,
+          "estimatedMeshTriangles": 693138,
+          "estimatedMaterialSubmissions": 1750,
+          "selectedLod0": 8,
+          "selectedLod1": 207,
+          "selectedLod2": 129,
+          "candidateRenderers": 490
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.5,
+          "estimatedMeshTriangles": 687706,
+          "estimatedMaterialSubmissions": 1726,
+          "selectedLod0": 8,
+          "selectedLod1": 206,
+          "selectedLod2": 126,
+          "candidateRenderers": 486
+        },
+        {
+          "pitch": 10.0,
+          "lodBias": 1.0,
+          "estimatedMeshTriangles": 466914,
+          "estimatedMaterialSubmissions": 1750,
+          "selectedLod0": 5,
+          "selectedLod1": 152,
+          "selectedLod2": 187,
+          "candidateRenderers": 490
+        },
+        {
+          "pitch": -25.0,
+          "lodBias": 1.0,
+          "estimatedMeshTriangles": 470554,
+          "estimatedMaterialSubmissions": 1726,
+          "selectedLod0": 5,
+          "selectedLod1": 153,
+          "selectedLod2": 182,
+          "candidateRenderers": 486
+        }
+      ]
+    }
+  ],
+  "cloth": [
+    {
+      "mode": "idle",
+      "trajectorySha256": "d7fda6a9271d66ea0280eef79878680eb51a21519a8958430b10336e9f4c8257",
+      "warmup": 60,
+      "samples": 360,
+      "meanMs": 3.0762783333333314,
+      "medianMs": 3.0273,
+      "p95Ms": 3.3021,
+      "maximumStretch": 1.0504974126815796
+    },
+    {
+      "mode": "forward40",
+      "trajectorySha256": "c5f65ff87a8bff5173d0236fb85d30869e776bdf6c64df263795607a4dcefd77",
+      "warmup": 60,
+      "samples": 360,
+      "meanMs": 3.064385833333332,
+      "medianMs": 3.0271,
+      "p95Ms": 3.3004,
+      "maximumStretch": 1.0464588403701782
+    },
+    {
+      "mode": "turning40",
+      "trajectorySha256": "d27ccd9cd7fa624d3bacb845720c0b2be3a00314d4f1fff6c43b23a976f6cc17",
+      "warmup": 60,
+      "samples": 360,
+      "meanMs": 3.0477916666666665,
+      "medianMs": 3.0034,
+      "p95Ms": 3.3524,
+      "maximumStretch": 1.039979100227356
+    }
+  ]
+}

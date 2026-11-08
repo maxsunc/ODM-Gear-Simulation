@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Skipped:Ignored" total="10" passed="9" failed="0" inconclusive="0" skipped="1" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-08 00:43:20Z" end-time="2026-11-08 00:43:25Z" duration="5.101245">
+  <test-suite type="TestSuite" id="1000" name="ODM-TitanValidation-fh_v2o9d" fullname="ODM-TitanValidation-fh_v2o9d" runstate="Runnable" testcasecount="458" result="Skipped" label="Ignored" start-time="2026-11-08 00:43:20Z" end-time="2026-11-08 00:43:25Z" duration="5.101245" total="10" passed="9" failed="0" inconclusive="0" skipped="1" asserts="0">
+    <properties />
+    <reason>
+      <message><![CDATA[One or more child tests were ignored]]></message>
+    </reason>
+    <test-suite type="Assembly" id="1496" name="ODM.TitanPrototype.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-TitanValidation-fh_v2o9d/Library/ScriptAssemblies/ODM.TitanPrototype.PlayModeTests.dll" runstate="Runnable" testcasecount="458" result="Skipped" label="Ignored" start-time="2026-11-08 00:43:20Z" end-time="2026-11-08 00:43:25Z" duration="5.091878" total="10" passed="9" failed="0" inconclusive="0" skipped="1" asserts="0">
+      <properties>
+        <property name="_PID" value="33592" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <reason>
+        <message><![CDATA[One or more child tests were ignored]]></message>
+      </reason>
+      <test-suite type="TestFixture" id="1018" name="ScoutCapeClothPlayModeTests" fullname="ScoutCapeClothPlayModeTests" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" testcasecount="6" result="Skipped" label="Ignored" start-time="2026-11-08 00:43:20Z" end-time="2026-11-08 00:43:24Z" duration="4.303175" total="6" passed="5" failed="0" inconclusive="0" skipped="1" asserts="0">
+        <properties />
+        <reason>
+          <message><![CDATA[One or more child tests were ignored]]></message>
+        </reason>
+        <test-case id="1020" name="ActualFreeVerticesRespondToWindAndRemainConstrainedRatherThanRotatingTwoBones" fullname="ScoutCapeClothPlayModeTests.ActualFreeVerticesRespondToWindAndRemainConstrainedRatherThanRotatingTwoBones" methodname="ActualFreeVerticesRespondToWindAndRemainConstrainedRatherThanRotatingTwoBones" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="2026289345" result="Passed" start-time="2026-11-08 00:43:20Z" end-time="2026-11-08 00:43:22Z" duration="1.917817" asserts="0">
+          <properties />
+        </test-case>
+        <test-case id="1022" name="BodyAndGearProxiesKeepFabricOutOfTorsoWithoutNativeColliders" fullname="ScoutCapeClothPlayModeTests.BodyAndGearProxiesKeepFabricOutOfTorsoWithoutNativeColliders" methodname="BodyAndGearProxiesKeepFabricOutOfTorsoWithoutNativeColliders" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="358729137" result="Passed" start-time="2026-11-08 00:43:22Z" end-time="2026-11-08 00:43:23Z" duration="0.921928" asserts="0">
+          <properties />
+        </test-case>
+        <test-case id="1024" name="CorpseCapeSnapshotOwnsItsMeshAndSurvivesLiveClothDestruction" fullname="ScoutCapeClothPlayModeTests.CorpseCapeSnapshotOwnsItsMeshAndSurvivesLiveClothDestruction" methodname="CorpseCapeSnapshotOwnsItsMeshAndSurvivesLiveClothDestruction" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="1085680687" result="Passed" start-time="2026-11-08 00:43:23Z" end-time="2026-11-08 00:43:23Z" duration="0.165290" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1021" name="EightyMetrePerSecondFlightTurnsAndHitchesKeepPinsFiniteAndCannotMovePlayer" fullname="ScoutCapeClothPlayModeTests.EightyMetrePerSecondFlightTurnsAndHitchesKeepPinsFiniteAndCannotMovePlayer" methodname="EightyMetrePerSecondFlightTurnsAndHitchesKeepPinsFiniteAndCannotMovePlayer" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="1385385744" result="Passed" start-time="2026-11-08 00:43:23Z" end-time="2026-11-08 00:43:23Z" duration="0.667977" asserts="0">
+          <properties />
+        </test-case>
+        <test-case id="1019" name="LongerFabricUsesApprovedAtlasAndDoesNotAlterSkeletonPhysicsOrGameplayRoot" fullname="ScoutCapeClothPlayModeTests.LongerFabricUsesApprovedAtlasAndDoesNotAlterSkeletonPhysicsOrGameplayRoot" methodname="LongerFabricUsesApprovedAtlasAndDoesNotAlterSkeletonPhysicsOrGameplayRoot" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="1950089342" result="Passed" start-time="2026-11-08 00:43:23Z" end-time="2026-11-08 00:43:24Z" duration="0.609814" asserts="0">
+          <properties />
+        </test-case>
+        <test-case id="1023" name="NativeGraphicsShowLongerSimulatedCapeWithOriginalScoutArt" fullname="ScoutCapeClothPlayModeTests.NativeGraphicsShowLongerSimulatedCapeWithOriginalScoutArt" methodname="NativeGraphicsShowLongerSimulatedCapeWithOriginalScoutArt" classname="ScoutCapeClothPlayModeTests" runstate="Runnable" seed="910276750" result="Skipped" label="Ignored" start-time="2026-11-08 00:43:24Z" end-time="2026-11-08 00:43:24Z" duration="0.008884" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <reason>
+            <message><![CDATA[Native capture is explicitly opt-in in the owned worker]]></message>
+          </reason>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1226" name="TitanODMIntegrationPlayModeTests" fullname="TitanODMIntegrationPlayModeTests" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" testcasecount="158" result="Passed" start-time="2026-11-08 00:43:24Z" end-time="2026-11-08 00:43:25Z" duration="0.774797" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1233" name="HooksFollowExactAnimatedBoneLocalPointThroughTranslationRotationAndScale" fullname="TitanODMIntegrationPlayModeTests.HooksFollowExactAnimatedBoneLocalPointThroughTranslationRotationAndScale" methodname="HooksFollowExactAnimatedBoneLocalPointThroughTranslationRotationAndScale" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="1161569075" result="Passed" start-time="2026-11-08 00:43:24Z" end-time="2026-11-08 00:43:25Z" duration="0.712437" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1228" name="RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose" fullname="TitanODMIntegrationPlayModeTests.RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose" methodname="RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="760783434" result="Passed" start-time="2026-11-08 00:43:25Z" end-time="2026-11-08 00:43:25Z" duration="0.015314" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1231" name="RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll" fullname="TitanODMIntegrationPlayModeTests.RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll" methodname="RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="1504656282" result="Passed" start-time="2026-11-08 00:43:25Z" end-time="2026-11-08 00:43:25Z" duration="0.020860" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+        <test-case id="1227" name="RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning" fullname="TitanODMIntegrationPlayModeTests.RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning" methodname="RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning" classname="TitanODMIntegrationPlayModeTests" runstate="Runnable" seed="947000880" result="Passed" start-time="2026-11-08 00:43:25Z" end-time="2026-11-08 00:43:25Z" duration="0.007603" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

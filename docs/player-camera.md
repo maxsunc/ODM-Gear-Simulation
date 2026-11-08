@@ -1,111 +1,55 @@
-# Player camera: zoom, render-time follow, collision and speed feedback
+# Player camera: original eased follow, improved scrolling, collision disabled
 
-Implementation: `Assets/ThirdPersonCameraController.cs` (Unity 2021.3.25f1).
+Implementation: `Assets/ThirdPersonCameraController.cs`, Unity 2021.3.25f1.
 
-## Preserved authoring
+## Selective rollback requested by the user
 
-Both gameplay maps retain their intentional world-space pivot offset `(5, 3, 0)`,
-12m starting distance and 2–20m requested zoom range. No scene, prefab or camera
-script GUID was changed. Mouse look sensitivity/inversion, pitch limits and the
-normal `baseFOV` remain unchanged. The speed-feedback revision replaces the old
-0-10m/s FOV ramp with the configurable high-speed curve below. No second camera
-owner, follow delay, player transform writer, root interpolation, global Physics
-setting, timestep or wind-audio change was added.
+The user asked to undo the camera changes except collision protection and improved scrolling. The reference for the earlier camera is **`1d8840ab:Assets/ThirdPersonCameraController.cs`**, before the responsive-follow revision in `4f445167` and speed-feedback revision in `becdf248`.
 
-## Behaviour
+Restored:
 
-- Wheel zoom reads raw `Input.mouseScrollDelta.y`: **1.25m per notch**, including
-  fractional trackpad deltas, rather than the old scaled-axis ~0.2m. No frame-time
-  multiplier or small-delta cutoff. `zoomSmoothTime` defaults to **0.08s**.
-- Input is read in `Update`; pose is applied in **`LateUpdate`**, execution order
-  150, after existing movement/hold/reaction presentation. Target translation is
-  followed directly, removing the old extra position lerp and its speed-dependent
-  trailing. This does not interpolate or modify the player/visual rig itself.
-- Root displacement is measured in `FixedUpdate` after the motors, not from
-  camera motion, orbit, wheel input or render-frame displacement. Two consecutive
-  valid samples are required. FOV is eased in `LateUpdate` **before** collision
-  checks, so near-plane protection uses the current lens.
-- Scene-local nonallocating sphere casts and overlap checks replace the single
-  ray. The sphere is at least `collisionRadius` (**0.3m**) and expands when needed
-  to enclose near-plane corners. The saved collision layer mask is respected;
-  triggers, the player's own hierarchy and the camera's hierarchy are excluded.
-- Collision retracts the camera immediately, including below the requested 2m
-  minimum if necessary. User zoom preference is not overwritten by obstruction.
-  Clearing an obstruction eases outward using `positionSmoothing` (saved rate 8).
-- The authored offset is never rewritten/recentred. Only when obstructed, the
-  path from player centre to the offset pivot may temporarily shorten, preventing
-  a camera boom from starting inside a wall. This temporary displacement also
-  eases away on clearance, rather than popping sideways to the full offset.
-- Saturated query buffers are treated as blocked. If no clear pivot is available,
-  a previously clear camera position is retained when still clear; this is not
-  a guarantee of a perfect view in fully embedded/dense moving geometry.
-- Respawn/retarget reset clears zoom velocity, collision recovery and old safe
-  positions. J-menu/unlocked-cursor input does not alter zoom or look; a paused
-  camera does not continue its pose damping. The camera never owns the cursor.
+- **Fixed-step positional easing/trailing**, rather than instant render-time positional follow. The original follow expression is `Vector3.Lerp(currentPosition, desiredPosition, Time.fixedDeltaTime * positionSmoothing)`; saved smoothing rate remains **8**. Rotation follows the authored orbit directly on that same fixed step; no extra rotation interpolation is introduced.
+- **Original dynamic FOV:** measured target displacement per fixed step, linear speed ramp from `baseFOV` to `maxFOV`, reaching the maximum at `speedThreshold`. Saved values remain **60 → 90 degrees / 10 m/s**, with the original fixed-step `fovSmoothSpeed` easing, saved rate **3**. This again applies to grounded travel as well as flight, unlike the removed airborne-only high-speed effect.
+- Removed camera integration for the later 20–65 m/s / +10-degree FOV curve and peripheral speed streaks. `PlayerSpeedStreaks.cs` and historical art/capture evidence remain as unused assets; the camera no longer creates or updates an overlay. Old serialized speed-effect fields in the untouched prefab are ignored because the runtime camera no longer declares them.
 
-## Speed feedback and Inspector tuning
+This is a **selective rollback**, not a byte-for-byte old-script checkout: retained collision and scroll improvements necessarily remain, together with existing respawn/retarget reset, pause-menu input blocking and shared sensitivity/inversion options. No legacy Cinemachine rig is reactivated.
 
-Select **Main Camera -> Third Person Camera Controller**. Both maps use the same
-runtime implementation; new fields have defaults without requiring a scene save.
+## Preserved saved authoring and other work
 
-| Header / field | Default / meaning |
-| --- | --- |
-| Speed FOV / Speed Fov Enabled | On; independently disable the lens effect. |
-| Base FOV | Existing saved 60 degrees. |
-| Fov Start Speed / Fov Full Speed | 20 / 65m/s, with a SmoothStep ramp. |
-| Speed Fov Increase | +10 degrees: target 60-70 degrees with current saved base. |
-| Max FOV | Existing saved 90 degrees, retained as a safety ceiling, not the target. |
-| Fov Smooth Speed | Existing saved rate 3; exponential, render-time easing. |
-| Peripheral Speed Streaks / Speed Streaks Enabled | On; independently disable streaks. |
-| Streak Start Speed / Streak Full Speed | 35 / 65m/s. |
-| Streak Opacity | 0.16 maximum, with softer per-streak feathering. |
-| Streak Edge Band | Outer 0.14 of each edge; inner 72% width/height is untouched. |
-| Streak Fade In / Out | 0.2 / 0.15 seconds for normal speed changes/landing. |
-| Maximum Feedback Speed | 160m/s rejection threshold **for effects only**, never a velocity cap. |
+Both gameplay maps retain the intentional **world-space offset `(5,3,0)`**, starting distance **12 m**, requested zoom range **2–20 m**, mouse sensitivity/inversion and pitch limits. No scene, prefab, script GUID, root, camera target or map-specific binding was rewritten. The shared MainCamera prefab still serves both maps.
 
-`speedThreshold` is retained hidden for old scene/API serialization compatibility;
-its saved value 10 no longer drives FOV. `positionSmoothing` remains collision
-recovery only. There is no positional follow-smoothing field.
+Forest distance LODs, cape optimization, grapple turn-speed/tuning, audio, player movement, Titan animation/physics/navigation and wind remain unchanged. No player or rig transforms, root interpolation, global physics settings or fixed timestep are changed by the camera.
 
-Both effects use actual **airborne** movement, including fast swings/coasting and
-falls, not boost/hook key state. Grounding reads the existing CharacterController
-and Scout state; it never calls the mutating `Movement.CheckGround()` query.
+## Retained scrolling
 
-Nonfinite motion, fixed deltas >0.1s, render hitches >0.2s, stale samples >0.12s or
-excessive displacement reset presentation. Death, held/release-pending, respawn,
-disabled controls/controller, pause and focus loss immediately clear streaks and
-restore normal FOV. Retarget/teleport reset invalidates samples and requires fresh
-history. This does not add invulnerability, alter velocity or change audio.
+- Raw `Input.mouseScrollDelta.y`, **1.25 m per notch**, including fractional trackpad deltas, with no old scaled-axis cutoff or frame-time multiplier.
+- `zoomSmoothTime` **0.08 s**. Requested zoom remains independent of obstruction and is not overwritten by collision.
+- Input is read in `Update`; follow/zoom/FOV advance in `FixedUpdate`, matching the restored follow cadence. Additional positional easing is intentional legacy behavior, so the total visual response is not identical to the removed instant-follow camera.
+- Pause/J-menu/unlocked-cursor input does not change look or zoom; the camera does not own the cursor.
 
-`Assets/Player/Scout/PlayerSpeedStreaks.cs` is a noninteractive, scene-owned runtime
-uGUI graphic: up to 28 feathered streaks / 252 vertices, no textures, shaders,
-materials, particles, native bodies, raycasters or gameplay-Random consumption
-added. A built-in UI material draws it behind normal HUD/Stats/pause canvases.
-Forward flight flows outward, backward flight inward, and sideways/vertical flight
-opposite the measured camera-space movement. Every stroke is clipped into an
-edge band, with its feather width inset to avoid the protected centre. Viewport
-and display follow the owner camera; offscreen/disabled cameras don't emit FX.
-The camera owns cleanup; no extra scene objects need to be saved.
+## Camera collision toggle — currently disabled
 
-## Verification and remaining review
+The user subsequently requested **camera collision off**. `cameraCollisionEnabled` defaults to false and is explicitly **0** on `Assets/Prefabs/SharedGameplay/MainCamera.prefab`, inherited by both gameplay maps. No scenes were rewritten. In **Main Camera → Third Person Camera Controller → Collision**, enable **Camera Collision Enabled** to restore the retained protection.
 
-The speed-feedback revision compiled in the closed marker-owned Unity2021 worker
-and reran 26 existing audio/respawn/held-motor/free-flight integration checks:
-**26 passed, 0 failed, 0 skipped**. No tests or assertions were added or edited.
-Current receipts, preservation details and static native streak previews are in
-`ArtSource/Camera/SpeedFeedback/`. `tools/capture_speed_feedback.py` renders only
-the actual UI graphic over existing map-photo sprites: no Play, input, native
-physics, camera-controller actor simulation, prefs writes or source scene saves.
-These previews do **not** demonstrate moving gameplay or the FOV perspective.
+While disabled, camera sphere casts/overlaps, shoulder-path shortening, obstruction retraction and render-time safety checks are bypassed completely. The camera keeps its requested zoom and original positional easing and **can pass through walls, trees, Titans and other scenery**. Player collision, hook contacts, combat, navigation and native physics remain unchanged. No camera clip plane, offset, zoom, sensitivity or FOV settings were retuned.
 
-`ArtSource/Camera/Response/` and `ArtSource/Validation/MainPR/` retain earlier
-receipts, including the pre-speed-feedback Titan-worker result **445 passed /
-12 failed / 1 skipped**. A full suite was not rerun or claimed green here.
+The following retained collision implementation applies **only when the toggle is enabled**:
 
-These existing checks verify established integration gates, not the subjective
-feel of FOV/streaks, wheel zoom or new collision-specific camera assertions. A
-fresh Play review is still needed: both maps, accelerating/decelerating across
-thresholds, lateral/backward flight, landing, fine/fractional scrolling, fast swings,
-turning beside walls/trees/roofs/Titans, close obstacles below minimum zoom,
-obstruction clearance, held/release, death/respawn, focus changes and J-menu scrolling. No live user Play session was
-controlled or stopped for this work.
+- Scene-local nonallocating sphere casts and overlaps; original layer mask; triggers and own player/camera hierarchy excluded.
+- Minimum sphere radius **0.3 m**, enlarged for the current near-plane corners. FOV updates before physical clearance checks.
+- Immediate collision retraction, even below minimum requested zoom; eased outward recovery.
+- Player-centre-to-shoulder pivot protection, temporary obstruction-only pivot shortening and smooth recovery. The authored offset is never rewritten/recentred.
+- Full buffers fail closed. An embedded pivot retains a prior safe position when still clear; this is not a perfect-view guarantee in dense moving geometry.
+- **The actual eased camera position is checked after follow smoothing.** Two clear endpoints are not permission to interpolate through a wall/corner: the eased boom is recast and the final volume checked/retracted toward the known-clear pivot.
+- A zero-time `LateUpdate` pass revalidates collision after render-time animation/moving obstacles, but does not advance follow, orbit, zoom or FOV again. This retains per-render safety without restoring the removed render-time follow.
+- Respawn/retarget reset snaps safely to the current target and resets zoom velocity, old safe positions, speed history and FOV; it does not interpolate across the teleport.
+
+## Verification / evidence
+
+Selective-rollback evidence is under **`ArtSource/Camera/SelectiveRollback/`**; the subsequent collision-off change is recorded under **`ArtSource/Camera/CollisionDisabled/`**. Existing audio/respawn/held-motor/free-flight regression checks are reused; no tests/assertions are added or edited. These are integration checks, not direct assertions of the changed follow easing, FOV curve or collision/scroll feel. Earlier broad-suite failures remain unresolved.
+
+Historical response/speed-effect images and receipts in `ArtSource/Camera/Response/` and `ArtSource/Camera/SpeedFeedback/` document superseded behavior, not the current feature set. `tools/capture_speed_feedback.py` can still render the unused standalone graphic for archival purposes; it does not demonstrate active gameplay effects.
+
+**Use a fresh Play session after compilation** to review the rollback and ensure any overlay from an earlier hot-reloaded Play session is gone. Check both maps, high-speed follow, wheel zoom, walls/trees/roofs, obstruction recovery, hold/release, respawn and pause. The live user Editor was not stopped, reloaded, switched or saved, and no synthetic input was supplied for this work.
+
+All selective rollback work is local on `main`, not committed/pushed at capture; Git remains publication authority.

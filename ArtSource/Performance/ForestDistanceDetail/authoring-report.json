@@ -1,0 +1,53 @@
+{
+    "unity": "2021.3.25f1",
+    "play": false,
+    "physicsStepped": false,
+    "navigationBaked": false,
+    "walls": [
+        {
+            "asset": "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Straight_24x60.prefab",
+            "nearTriangles": 19316,
+            "midTriangles": 5268,
+            "farTriangles": 2148,
+            "thresholds": [
+                0.6000000238418579,
+                0.18000000715255738,
+                0.000009999999747378752
+            ]
+        },
+        {
+            "asset": "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Corner_24x60.prefab",
+            "nearTriangles": 38540,
+            "midTriangles": 10540,
+            "farTriangles": 4300,
+            "thresholds": [
+                0.6000000238418579,
+                0.18000000715255738,
+                0.000009999999747378752
+            ]
+        },
+        {
+            "asset": "Assets/Art/Environment/GiantForest2/Prefabs/GF2_Wall_Gateway_48x60.prefab",
+            "nearTriangles": 27680,
+            "midTriangles": 7968,
+            "farTriangles": 3312,
+            "thresholds": [
+                0.6000000238418579,
+                0.18000000715255738,
+                0.000009999999747378752
+            ]
+        }
+    ],
+    "scenes": [
+        {
+            "scene": "Assets/Scenes/GiantForest2.unity",
+            "colliders": 2552,
+            "physicalDigest": "10f10ff1d50d7824c0e73ccb41caae21b79caf96e04d4c76ac8f07d30c260611"
+        },
+        {
+            "scene": "Assets/Scenes/ShiganshinaDistrict.unity",
+            "colliders": 617,
+            "physicalDigest": "c5232d04d2ac8a89f18d6b1b88dc0bb7ece7958e322fb01e6650dc3e169fbcfc"
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-08 00:01:40Z" end-time="2026-11-08 00:01:50Z" duration="10.5040463">
+  <test-suite type="TestSuite" id="1000" name="Shared Gameplay Prefab Validation" fullname="Shared Gameplay Prefab Validation" runstate="Runnable" testcasecount="473" result="Failed" site="Child" start-time="2026-11-08 00:01:40Z" end-time="2026-11-08 00:01:50Z" duration="10.504046" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1018" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-11-08 00:01:40Z" end-time="2026-11-08 00:01:50Z" duration="10.486934" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14136" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="GiantForest2NavigationPlayModeTests" fullname="GiantForest2NavigationPlayModeTests" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-08 00:01:40Z" end-time="2026-11-08 00:01:50Z" duration="9.686947" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" fullname="GiantForest2NavigationPlayModeTests.AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" methodname="AllFiveExactClearanceProfilesHaveCompleteForestRoutesAndWallsStaySolid" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="306530241" result="Passed" start-time="2026-11-08 00:01:40Z" end-time="2026-11-08 00:01:46Z" duration="5.588841" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1008" name="PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" fullname="GiantForest2NavigationPlayModeTests.PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" methodname="PlayerDeathRespawnsOnlyPlayerAndPreservesActualForestActorsNavigationAndMusic" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="690444687" result="Passed" start-time="2026-11-08 00:01:46Z" end-time="2026-11-08 00:01:49Z" duration="3.635127" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <output><![CDATA[Animator is not playing an AnimatorController
+Animator is not playing an AnimatorController
+NATIVE_FOREST_PLAYER_ONLY_RESPAWN seconds=3.248056 sameScene=-31406 samePlayer=31566 injuredHp=950 deadTitanStillDead=True
+]]></output>
+        </test-case>
+        <test-case id="1003" name="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" fullname="GiantForest2NavigationPlayModeTests.SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" methodname="SevenAndTenSpawnWithRealFullRigClearanceAndMatchingNativeAgentsWithoutRuntimeBake" classname="GiantForest2NavigationPlayModeTests" runstate="Runnable" seed="314972954" result="Passed" start-time="2026-11-08 00:01:49Z" end-time="2026-11-08 00:01:50Z" duration="0.452918" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1010" name="GiantForest2PlayModeTests" fullname="GiantForest2PlayModeTests" classname="GiantForest2PlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-11-08 00:01:50Z" end-time="2026-11-08 00:01:50Z" duration="0.798624" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1012" name="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" fullname="GiantForest2PlayModeTests.PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" methodname="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="800518056" result="Failed" label="Error" start-time="2026-11-08 00:01:50Z" end-time="2026-11-08 00:01:50Z" duration="0.431902" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <failure>
+            <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+            <stack-trace><![CDATA[  at GiantForest2PlayModeTests+<PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes>d__16.MoveNext () [0x00129] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Assets\Tests\GiantForest2\GiantForest2PlayModeTests.cs:62 
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46 ]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1013" name="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" fullname="GiantForest2PlayModeTests.WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" methodname="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="41606662" result="Failed" start-time="2026-11-08 00:01:50Z" end-time="2026-11-08 00:01:50Z" duration="0.364514" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <failure>
+            <message><![CDATA[  GF2_Wall_Straight_24x60
+  Expected: 121.099998f +/- 0.0299999993f
+  But was:  211.924988f
+]]></message>
+            <stack-trace><![CDATA[at GiantForest2PlayModeTests+<WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes>d__18.MoveNext () [0x00084] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Assets\Tests\GiantForest2\GiantForest2PlayModeTests.cs:78
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

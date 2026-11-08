@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-08 00:02:52Z" end-time="2026-11-08 00:02:58Z" duration="6.1431247">
+  <test-suite type="TestSuite" id="1000" name="Shared Gameplay Prefab Validation" fullname="Shared Gameplay Prefab Validation" runstate="Runnable" testcasecount="473" result="Failed" site="Child" start-time="2026-11-08 00:02:52Z" end-time="2026-11-08 00:02:58Z" duration="6.143125" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1018" name="ODM.GiantForest2.PlayModeTests.dll" fullname="C:/Users/maxsu/AppData/Local/Temp/ODM-GiantForest2-iwrxdlei/Library/ScriptAssemblies/ODM.GiantForest2.PlayModeTests.dll" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-11-08 00:02:52Z" end-time="2026-11-08 00:02:58Z" duration="6.132649" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="49092" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1010" name="GiantForest2PlayModeTests" fullname="GiantForest2PlayModeTests" classname="GiantForest2PlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-11-08 00:02:52Z" end-time="2026-11-08 00:02:58Z" duration="6.131323" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1012" name="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" fullname="GiantForest2PlayModeTests.PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" methodname="PhysicalHeightfieldWallsAndEveryTrunkCanBeHookedWithoutLeafSolidBoxes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="1646042293" result="Passed" start-time="2026-11-08 00:02:52Z" end-time="2026-11-08 00:02:58Z" duration="5.820026" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+        <test-case id="1013" name="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" fullname="GiantForest2PlayModeTests.WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" methodname="WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes" classname="GiantForest2PlayModeTests" runstate="Runnable" seed="672478311" result="Failed" start-time="2026-11-08 00:02:58Z" end-time="2026-11-08 00:02:58Z" duration="0.301597" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+          <failure>
+            <message><![CDATA[  GF2_Wall_Straight_24x60
+  Expected: 121.099998f +/- 0.0299999993f
+  But was:  211.924988f
+]]></message>
+            <stack-trace><![CDATA[at GiantForest2PlayModeTests+<WallsAreDoubleHeightAndRocksIncludeSmallMediumAndLargeHookableSizes>d__18.MoveNext () [0x00084] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Assets\Tests\GiantForest2\GiantForest2PlayModeTests.cs:78
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in C:\Users\maxsu\AppData\Local\Temp\ODM-GiantForest2-iwrxdlei\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -179,6 +179,7 @@ MonoBehaviour:
   maxVerticalAngle: 70
   rotationSmoothing: 5
   positionSmoothing: 8
+  cameraCollisionEnabled: 0
   collisionLayers:
     serializedVersion: 2
     m_Bits: 4294967295

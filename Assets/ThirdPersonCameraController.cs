@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// <summary>One render-time orbit owner. Authored world-space offset and look/FOV
-/// tuning are retained; collision and zoom never write the player or physics state.</summary>
+/// <summary>Original fixed-step eased follow/FOV, with the retained improved
+/// zoom and render-time collision safety. Never writes the player or physics state.</summary>
 [DefaultExecutionOrder(150)]
 public class ThirdPersonCameraController : MonoBehaviour
 {
@@ -24,38 +24,23 @@ public class ThirdPersonCameraController : MonoBehaviour
     public float maxVerticalAngle = 60f;
 
     [Header("Smoothing")]
-    public float rotationSmoothing = 5f; // Serialized compatibility; orbit remains direct.
-    [Tooltip("Collision recovery rate. Player translation follows directly, without a second positional lag.")]
+    public float rotationSmoothing = 5f; // Serialized compatibility; rotation was always direct.
+    [Tooltip("Original positional follow easing and collision recovery rate.")]
     public float positionSmoothing = 8f;
 
     [Header("Collision")]
+    [Tooltip("When off, the camera can pass through scenery. Does not affect player or hook collisions.")]
+    public bool cameraCollisionEnabled = false;
     public LayerMask collisionLayers = -1;
     public float collisionBuffer = .3f;
     [Tooltip("Minimum camera sphere radius; enlarged if necessary to protect near-plane corners.")]
     [Min(.01f)] public float collisionRadius = .3f;
 
-    [Header("Speed FOV")]
-    public bool speedFovEnabled = true;
+    [Header("Dynamic FOV")]
     public float baseFOV = 60f;
-    [Tooltip("Safety ceiling; high-speed FOV is base FOV + Speed FOV Increase, up to this limit.")]
     public float maxFOV = 90f;
-    [Min(0)] public float fovStartSpeed = 20f;
-    [Min(.1f)] public float fovFullSpeed = 65f;
-    [Range(0, 20)] public float speedFovIncrease = 10f;
+    public float speedThreshold = 10f;
     public float fovSmoothSpeed = 3f;
-    [HideInInspector] public float speedThreshold = 10f; // Legacy scene serialization; no longer the FOV curve.
-
-    [Header("Peripheral Speed Streaks")]
-    public bool speedStreaksEnabled = true;
-    [Min(0)] public float streakStartSpeed = 35f;
-    [Min(.1f)] public float streakFullSpeed = 65f;
-    [Range(0, .35f)] public float streakOpacity = .16f;
-    [Tooltip("Fraction of each screen edge occupied by streaks; the centre stays clear.")]
-    [Range(.05f, .22f)] public float streakEdgeBand = .14f;
-    [Min(.01f)] public float streakFadeIn = .2f;
-    [Min(.01f)] public float streakFadeOut = .15f;
-    [Tooltip("Reject faster displacement for presentation only; never caps player velocity.")]
-    [Min(1)] public float maximumFeedbackSpeed = 160f;
 
     float currentX, currentY, currentDistance, smoothedZoomDistance, zoomVelocity;
     Camera cam;
@@ -65,18 +50,6 @@ public class ThirdPersonCameraController : MonoBehaviour
     CharacterController playerController;
     bool recoveringFromCollision, hasSafePosition;
     Vector3 lastSafePosition, pivotAdjustment;
-    PlayerHealth speedHealth;
-    Movement walking;
-    ODM_Movement gear;
-    ScoutPlayerAnimation scout;
-    TitanODMMotor motor;
-    TitanCombatTarget combatTarget;
-    PlayerRespawn respawn;
-    PlayerSpeedStreaks streaks;
-    Vector3 sampledVelocity;
-    float speedSampledAt, streakAmount;
-    int validSpeedSamples;
-    bool speedPositioned, focusLost, applicationPaused;
     readonly RaycastHit[] hits = new RaycastHit[64];
     readonly Collider[] overlaps = new Collider[64];
 
@@ -96,11 +69,8 @@ public class ThirdPersonCameraController : MonoBehaviour
         playerController = target.GetComponentInParent<CharacterController>();
         var health = target.GetComponentInParent<PlayerHealth>();
         ignoredRoot = health != null ? health.transform : playerController != null ? playerController.transform : target;
-        speedHealth = health;
-        walking = ignoredRoot.GetComponent<Movement>(); gear = ignoredRoot.GetComponent<ODM_Movement>();
-        scout = ignoredRoot.GetComponent<ScoutPlayerAnimation>(); motor = ignoredRoot.GetComponent<TitanODMMotor>();
-        combatTarget = ignoredRoot.GetComponent<TitanCombatTarget>(); respawn = ignoredRoot.GetComponent<PlayerRespawn>();
-        ClearSpeedFeedback();
+        lastTargetPosition = target.position; currentSpeed = 0;
+        if(cam != null) cam.fieldOfView = Safe(baseFOV, 60, 1, 179);
         smoothedZoomDistance = currentDistance = DesiredDistance(); zoomVelocity = 0;
         recoveringFromCollision = false; hasSafePosition = false; pivotAdjustment = Vector3.zero;
         UpdateCamera(0, true);
@@ -113,22 +83,19 @@ public class ThirdPersonCameraController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(target == null || cam == null) return;
+        if(target == null || cam == null || Time.timeScale <= 0) return;
         if(observedTarget != target) ResetAfterTeleport();
-        // Measure after the existing motors; render-frame displacement would
-        // alternate between zero and inflated speed at high frame rates.
         UpdateSpeed();
+        UpdateFOV(); // Final lens before checking near-plane collision clearance.
+        UpdateCamera(Time.fixedDeltaTime, false);
     }
     void LateUpdate()
     {
-        if(target == null || cam == null) { ClearSpeedFeedback(); return; }
+        if(target == null || cam == null || Time.timeScale <= 0 || !cameraCollisionEnabled) return;
         if(observedTarget != target) ResetAfterTeleport();
-        if(Time.timeScale <= 0) { ClearSpeedFeedback(); return; }
-        if(Time.deltaTime > 0 && Finite(Time.deltaTime))
-        {
-            UpdateSpeedFeedback(Time.deltaTime); // Lens is final before near-plane collision sizing.
-            UpdateCamera(Time.deltaTime, false);
-        }
+        // Only safety is rechecked after render-time animation/moving obstacles.
+        // A zero step never advances follow, orbit, zoom or FOV a second time.
+        UpdateCamera(0, false);
     }
     void HandleInput()
     {
@@ -141,96 +108,44 @@ public class ThirdPersonCameraController : MonoBehaviour
         float scroll = Input.mouseScrollDelta.y;
         if(Finite(scroll) && scroll != 0) SetDistance(distance - scroll * Safe(zoomUnitsPerNotch, 1.25f, 0, 100));
     }
-    void RefreshSpeedReferences()
-    {
-        if(ignoredRoot == null) return;
-        if(scout == null) scout = ignoredRoot.GetComponent<ScoutPlayerAnimation>();
-        if(motor == null) motor = ignoredRoot.GetComponent<TitanODMMotor>();
-        if(combatTarget == null) combatTarget = ignoredRoot.GetComponent<TitanCombatTarget>();
-        if(respawn == null) respawn = ignoredRoot.GetComponent<PlayerRespawn>();
-    }
-    bool SpeedFeedbackBlocked()
-    {
-        return !isActiveAndEnabled || focusLost || applicationPaused || Time.timeScale <= 0 ||
-            cam == null || !cam.isActiveAndEnabled || cam.targetTexture != null ||
-            speedHealth == null || !speedHealth.isActiveAndEnabled || speedHealth.isDead || speedHealth.isGrabbed ||
-            playerController == null || !playerController.enabled || walking == null || gear == null ||
-            !walking.isActiveAndEnabled || !gear.isActiveAndEnabled || walking.TitanSuspended || gear.TitanSuspended ||
-            (motor != null && motor.Suspended) || (combatTarget != null && (combatTarget.IsHeld || combatTarget.ReleasePending)) ||
-            (respawn != null && respawn.Pending);
-    }
-    void ClearSpeedFeedback()
-    {
-        currentSpeed = 0; sampledVelocity = Vector3.zero; validSpeedSamples = 0; speedPositioned = false;
-        lastTargetPosition = ignoredRoot != null ? ignoredRoot.position : target != null ? target.position : Vector3.zero;
-        speedSampledAt = Time.time; streakAmount = 0;
-        if(streaks != null) streaks.Hide();
-        if(cam != null) cam.fieldOfView = NeutralFOV();
-    }
     void UpdateSpeed()
     {
-        RefreshSpeedReferences();
-        Vector3 position = ignoredRoot != null ? ignoredRoot.position : target.position;
+        Vector3 position = target.position;
         float dt = Time.fixedDeltaTime;
-        if(SpeedFeedbackBlocked() || !Finite(position) || !Finite(dt) || dt <= 0 || dt > .1f)
-        { ClearSpeedFeedback(); return; }
-        if(!speedPositioned)
-        { lastTargetPosition = position; speedPositioned = true; speedSampledAt = Time.time; return; }
-        Vector3 velocity = (position - lastTargetPosition) / dt;
-        lastTargetPosition = position; speedSampledAt = Time.time;
-        if(!Finite(velocity) || velocity.magnitude > Safe(maximumFeedbackSpeed, 160, 1, 10000))
-        { ClearSpeedFeedback(); return; }
-        validSpeedSamples = Mathf.Min(2, validSpeedSamples + 1);
-        sampledVelocity = validSpeedSamples >= 2 ? velocity : Vector3.zero;
-        currentSpeed = sampledVelocity.magnitude;
+        currentSpeed = Finite(position) && Finite(dt) && dt > 0
+            ? ((position - lastTargetPosition) / dt).magnitude : 0;
+        if(!Finite(currentSpeed)) currentSpeed = 0;
+        lastTargetPosition = position;
     }
-    void UpdateSpeedFeedback(float dt)
+    void UpdateFOV()
     {
-        RefreshSpeedReferences();
-        if(SpeedFeedbackBlocked() || !Finite(Time.unscaledDeltaTime) || Time.unscaledDeltaTime > .2f ||
-            Time.time - speedSampledAt > .12f)
-        { ClearSpeedFeedback(); return; }
-        if(validSpeedSamples < 2)
-        {
-            streakAmount = 0; if(streaks != null) streaks.Hide(); cam.fieldOfView = NeutralFOV(); return;
-        }
-        bool airborne = !playerController.isGrounded && !(scout != null && scout.isActiveAndEnabled && scout.Grounded);
-        float fovAmount = speedFovEnabled && airborne ? SpeedAmount(currentSpeed, fovStartSpeed, fovFullSpeed, 20, 65) : 0;
-        float normal = NeutralFOV(), ceiling = Safe(maxFOV, 90, normal, 179);
-        float fastFOV = Mathf.Min(ceiling, normal + Safe(speedFovIncrease, 10, 0, 20));
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, Mathf.Lerp(normal, fastFOV, fovAmount),
-            1 - Mathf.Exp(-Safe(fovSmoothSpeed, 3, .01f, 1000) * dt));
-        float wanted = speedStreaksEnabled && airborne ? SpeedAmount(currentSpeed, streakStartSpeed, streakFullSpeed, 35, 65) : 0;
-        float fade = wanted > streakAmount ? Safe(streakFadeIn, .2f, .01f, 10) : Safe(streakFadeOut, .15f, .01f, 10);
-        streakAmount = Mathf.MoveTowards(streakAmount, wanted, dt / fade);
-        float opacity = Safe(streakOpacity, .16f, 0, .35f);
-        if(streaks == null && streakAmount > .001f && opacity > 0) streaks = PlayerSpeedStreaks.Create(cam);
-        if(streaks != null)
-        {
-            // Orbit may change this frame; flow follows movement in the final orbit frame, not the old camera pose.
-            Vector3 direction = Quaternion.Inverse(Quaternion.Euler(currentY, currentX, 0)) * sampledVelocity.normalized;
-            streaks.Present(streakAmount, direction, dt, opacity, Safe(streakEdgeBand, .14f, .05f, .22f), cam.rect);
-            if(streaks.Overlay != null) streaks.Overlay.targetDisplay = cam.targetDisplay;
-        }
+        // Restore the original 0..speedThreshold ramp, including grounded travel.
+        float normal = Safe(baseFOV, 60, 1, 179), ceiling = Safe(maxFOV, 90, normal, 179);
+        float ratio = Mathf.Clamp01(currentSpeed / Safe(speedThreshold, 10, .01f, 10000));
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, Mathf.Lerp(normal, ceiling, ratio),
+            Time.fixedDeltaTime * Safe(fovSmoothSpeed, 3, 0, 1000));
     }
-    float NeutralFOV() { return Safe(baseFOV, 60, 1, 179); }
-    static float SpeedAmount(float speed, float start, float full, float defaultStart, float defaultFull)
-    {
-        start = Safe(start, defaultStart, 0, 10000); full = Safe(full, defaultFull, start + .1f, 10001);
-        return Mathf.SmoothStep(0, 1, Mathf.InverseLerp(start, full, speed));
-    }
-    void OnApplicationFocus(bool focused) { focusLost = !focused; if(!focused) ClearSpeedFeedback(); }
-    void OnApplicationPause(bool paused) { applicationPaused = paused; if(paused) ClearSpeedFeedback(); }
-    void OnDisable() { ClearSpeedFeedback(); }
-    void OnDestroy() { if(streaks != null && streaks.Overlay != null) Destroy(streaks.Overlay.gameObject); }
     void UpdateCamera(float dt, bool snap)
     {
         float wanted = DesiredDistance();
-        smoothedZoomDistance = snap ? wanted : Mathf.SmoothDamp(smoothedZoomDistance, wanted, ref zoomVelocity,
+        if(snap) smoothedZoomDistance = wanted;
+        else if(dt > 0) smoothedZoomDistance = Mathf.SmoothDamp(smoothedZoomDistance, wanted, ref zoomVelocity,
             Safe(zoomSmoothTime, .08f, .01f, 10), Mathf.Infinity, dt);
-        var rotation = Quaternion.Euler(currentY, currentX, 0);
+        var rotation = snap || dt > 0 ? Quaternion.Euler(currentY, currentX, 0) : transform.rotation;
         Vector3 authoredPivot = target.position + offset, direction = rotation * Vector3.back;
         if(!Finite(authoredPivot)) return;
+        if(!cameraCollisionEnabled)
+        {
+            // Explicit user choice: no camera casts, overlaps or obstruction retraction.
+            currentDistance = smoothedZoomDistance;
+            recoveringFromCollision = false; hasSafePosition = false; pivotAdjustment = Vector3.zero;
+            Vector3 unobstructed = authoredPivot + direction * currentDistance;
+            if(!snap) unobstructed = dt > 0
+                ? Vector3.Lerp(transform.position, unobstructed, dt * Safe(positionSmoothing, 8, 0, 1000))
+                : transform.position;
+            transform.SetPositionAndRotation(unobstructed, rotation);
+            return;
+        }
         var physics = target.gameObject.scene.GetPhysicsScene();
         if(!physics.IsValid()) return;
         float radius = CameraRadius();
@@ -262,20 +177,30 @@ public class ThirdPersonCameraController : MonoBehaviour
         recoveringFromCollision = blocked || Mathf.Abs(currentDistance - smoothedZoomDistance) > .01f;
         currentDistance = Mathf.Clamp(currentDistance, 0, allowed);
         Vector3 position = pivot + direction * currentDistance;
+        // Restore the old fixed-step positional easing. Collision is resolved
+        // AFTER easing too: interpolating two clear endpoints can cross a corner.
+        if(!snap) position = dt > 0
+            ? Vector3.Lerp(transform.position, position, dt * Safe(positionSmoothing, 8, 0, 1000))
+            : transform.position;
+        Vector3 followDelta = position - pivot;
+        float followLength = followDelta.magnitude;
+        Vector3 followDirection = followLength > .0001f ? followDelta / followLength : direction;
+        float clearLength = CheckCollision(physics, pivot, followDirection, followLength, radius);
+        if(clearLength < followLength)
+        { position = pivot + followDirection * clearLength; recoveringFromCollision = true; }
         // Casts cannot reliably report an initially overlapping sphere. Check
-        // the final volume too, retracting toward the already-clear pivot.
+        // the actual eased position too, retracting to the already-clear pivot.
         if(SolidAt(physics, position, radius))
         {
-            float low = 0, high = currentDistance;
+            float low = 0, high = clearLength;
             for(int i = 0; i < 10; i++)
             {
                 float middle = (low + high) * .5f;
-                if(SolidAt(physics, pivot + direction * middle, radius)) high = middle; else low = middle;
+                if(SolidAt(physics, pivot + followDirection * middle, radius)) high = middle; else low = middle;
             }
-            currentDistance = low; position = pivot + direction * low; recoveringFromCollision = true;
+            currentDistance = Mathf.Min(currentDistance, low);
+            position = pivot + followDirection * low; recoveringFromCollision = true;
         }
-        // Follow the actual target after movement/holds/reactions, rather than
-        // independently lerping its translation and accumulating flight-speed lag.
         transform.SetPositionAndRotation(position, rotation);
         lastSafePosition = position; hasSafePosition = true;
     }

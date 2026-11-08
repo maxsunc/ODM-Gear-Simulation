@@ -1,0 +1,23 @@
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Straight_24x60_LOD1.fbx'
+export finished in 0.0372 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Straight_24x60_LOD2.fbx'
+export finished in 0.0277 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Corner_24x60_LOD1.fbx'
+export finished in 0.0421 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Corner_24x60_LOD2.fbx'
+export finished in 0.0330 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Gateway_48x60_LOD1.fbx'
+export finished in 0.0578 sec.
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-GiantForest2-iwrxdlei\\Assets\\Art\\Environment\\GiantForest2\\WallDistance\\GF2_Wall_Gateway_48x60_LOD2.fbx'
+export finished in 0.0334 sec.
+FOREST_WALL_LOD_ART_COMPLETE {"GF2_Wall_Straight_24x60_LOD1": {"triangles": 5268, "materials": ["GF2_RecessStone_Distance", "GF2_Limestone_Distance"], "visualOnly": true}, "GF2_Wall_Straight_24x60_LOD2": {"triangles": 2148, "materials": ["GF2_RecessStone_Distance.001", "GF2_Limestone_Distance.001"], "visualOnly": true}, "GF2_Wall_Corner_24x60_LOD1": {"triangles": 10540, "materials": ["GF2_RecessStone_Distance.002", "GF2_Limestone_Distance.002"], "visualOnly": true}, "GF2_Wall_Corner_24x60_LOD2": {"triangles": 4300, "materials": ["GF2_RecessStone_Distance.003", "GF2_Limestone_Distance.003"], "visualOnly": true}, "GF2_Wall_Gateway_48x60_LOD1": {"triangles": 7968, "materials": ["GF2_RecessStone_Distance.004", "GF2_Limestone_Distance.004"], "visualOnly": true}, "GF2_Wall_Gateway_48x60_LOD2": {"triangles": 3312, "materials": ["GF2_RecessStone_Distance.005", "GF2_Limestone_Distance.005"], "visualOnly": true}}
+Blender 4.5.0 (hash 8cb6b388974a built 2025-07-15 01:36:24)
+Read blend: "C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\ArtSource\Environment\GiantForest2\GiantForest2_AssetReview.blend"
+
+Blender quit

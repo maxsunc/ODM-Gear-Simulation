@@ -1,0 +1,54 @@
+{
+  "utc": "2026-11-08T02:24:26.523261+00:00",
+  "status": "Local on main; uncommitted/unpushed",
+  "legacyReference": "1d8840ab:Assets/ThirdPersonCameraController.cs",
+  "source": "Assets/ThirdPersonCameraController.cs",
+  "sourceSHA256": "cd2893d6d2806304a52907ca87cf40f3dc0dc648d1d1ba9b1cc21f2a5c2b6d4b",
+  "workerSourceMatches": true,
+  "protectedExistingAssetSettingsPaths": 1637,
+  "unchangedExistingPaths": 1636,
+  "changedExistingPaths": [
+    "Assets/ThirdPersonCameraController.cs"
+  ],
+  "preservedMethods": {
+    "void HandleInput()": true,
+    "bool TryResolvePivot(": true
+  },
+  "restored": [
+    "Fixed-step positional easing at existing positionSmoothing",
+    "Original target-speed FOV ramp to maxFOV at speedThreshold",
+    "Removed camera speed-streak and newer high-speed FOV integration"
+  ],
+  "retained": [
+    "Raw fractional scroll delta and zoom smoothing",
+    "Scene-local sphere/overlap collision safety, radius/layer/own-root filtering",
+    "Immediate inward collision and outward recovery",
+    "Shoulder pivot protection and per-render zero-time safety recheck",
+    "ResetAfterTeleport/SetTarget and sensitivity/inversion/pause integration"
+  ],
+  "collisionAdaptation": "Additional cast/overlap at actual eased position avoids interpolating into geometry. Helpers unchanged. LateUpdate validates safety without a second follow/FOV/zoom/orbit step.",
+  "authoring": "Both scene/prefab/target/offset/GUID settings unchanged. Forest LOD/cape/grapple/audio/physics/animation work unchanged.",
+  "tests": {
+    "id": "2",
+    "testcasecount": "26",
+    "result": "Passed",
+    "total": "26",
+    "passed": "26",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-08 02:23:51Z",
+    "end-time": "2026-11-08 02:23:56Z",
+    "duration": "4.853075"
+  },
+  "limits": [
+    "Existing integration checks, not new direct camera assertions",
+    "No new tests or assertion edits",
+    "No live input/Play stop/scene reload/save/switch",
+    "Fresh Play needed to review follow, restored 60\u201390 FOV, scroll and collision feel",
+    "Prior broad failures not superseded"
+  ]
+}

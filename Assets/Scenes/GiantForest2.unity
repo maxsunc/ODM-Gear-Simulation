@@ -46277,9 +46277,19 @@ PrefabInstance:
       objectReference: {fileID: 2024838844}
     - target: {fileID: 5000510739869925897, guid: f659dfe1937c91f4498ded8710311bbd,
         type: 3}
+      propertyPath: acceleration
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000510739869925897, guid: f659dfe1937c91f4498ded8710311bbd,
+        type: 3}
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 534669905}
+    - target: {fileID: 5000510739869925897, guid: f659dfe1937c91f4498ded8710311bbd,
+        type: 3}
+      propertyPath: grappleTurnSpeed
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 5000510739869925897, guid: f659dfe1937c91f4498ded8710311bbd,
         type: 3}
       propertyPath: lines.Array.data[0]

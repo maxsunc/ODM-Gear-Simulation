@@ -5295,10 +5295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5000510739869925900}
-  acceleration: 70
-  maxSpeed: 100
+  acceleration: 55
+  maxSpeed: 80
   resistanceInertia: 0.8
   strafeSpeed: 50
+  grappleTurnSpeed: 90
   raycastShooters:
   - {fileID: 8085106475835987039}
   - {fileID: 6763496711673008960}

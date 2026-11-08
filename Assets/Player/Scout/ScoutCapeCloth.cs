@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Unity.Profiling;
 
 /// <summary>Render-only, pinned particle FABRIC, not animated cape bones. Fixed
 /// substeps solve stretch/shear/bend and anatomical capsule contacts. Uses the
@@ -31,14 +32,16 @@ public sealed class ScoutCapeCloth : MonoBehaviour
     public string Error { get; private set; }
 
     struct Link { public int a,b;public float rest,stiffness;public bool maximumOnly; }
-    struct Capsule { public Vector3 a,b,axis;public float radius,width,inverseLength;public Quaternion rotation,inverseRotation; }
+    struct Capsule { public Vector3 a,b,axis,min,max;public float radius,width,inverseLength,paddedRadius,paddedWidth,broadRadiusSquared;public Quaternion rotation,inverseRotation; }
+    static readonly ProfilerMarker SimulationMarker=new ProfilerMarker("ODM.ScoutCape.Simulate");
     readonly Vector3[] positions=new Vector3[ParticleCount],previous=new Vector3[ParticleCount],rest=new Vector3[ParticleCount];
+    readonly float[] maximumReach=new float[ParticleCount];
     readonly Vector3[] normals=new Vector3[ParticleCount];
     readonly Capsule[] capsules=new Capsule[7];
     Vector3[] vertices,renderNormals;
     Vector4[] tangents;
     Vector2[] uv,emblem;
-    Link[] links;
+    Link[] links,structuralLinks;
     Transform model,chest,neck,hips,spine,leftShoulder,rightShoulder,leftThigh,rightThigh,leftKnee,rightKnee;
     SkinnedMeshRenderer original;
     new MeshRenderer renderer;
@@ -58,7 +61,7 @@ public sealed class ScoutCapeCloth : MonoBehaviour
             var driver=GetComponent<ScoutPlayerAnimation>();
             if(driver==null || driver.model==null || !Initialize(driver.model))return;
         }
-        if(automaticSimulation)Simulate(Time.deltaTime);
+        if(automaticSimulation)using(SimulationMarker.Auto())Simulate(Time.deltaTime);
     }
     public bool Initialize(Transform visual)
     {
@@ -119,6 +122,10 @@ public sealed class ScoutCapeCloth : MonoBehaviour
             all.Add(new Link{a=a,b=b,rest=length*1.01f,stiffness=1,maximumOnly=true});
         }
         links=all.ToArray();
+        // Same projection order/limits, cached only when length or scale changes.
+        var structural=new List<Link>();foreach(var link in links)if(link.stiffness==1 && !link.maximumOnly)structural.Add(link);
+        structuralLinks=structural.ToArray();
+        for(int i=Columns;i<ParticleCount;i++)maximumReach[i]=Vector3.Distance(rest[i],rest[i%Columns])*scale*1.025f;
     }
     void AddLink(List<Link> all,int a,int b,float stiffness)
     { all.Add(new Link{a=a,b=b,rest=Vector3.Distance(rest[a],rest[b]),stiffness=stiffness}); }
@@ -215,26 +222,25 @@ public sealed class ScoutCapeCloth : MonoBehaviour
                 if(length<.000001f || (link.maximumOnly && length<=link.rest*scale))continue;
                 float wa=link.a<Columns?0:1,wb=link.b<Columns?0:1;if(wa+wb==0)continue;
                 Vector3 correction=d*((length-link.rest*scale)/length*link.stiffness/(wa+wb));
-                positions[link.a]+=correction*wa;positions[link.b]-=correction*wb;
+                if(wa>0)positions[link.a]+=correction;if(wb>0)positions[link.b]-=correction;
             }
             for(int i=Columns;i<ParticleCount;i++)
             {
                 // Long-range attachment constraint prevents explosive stretching
                 // after a discontinuous cosmetic pose; it never moves the player.
-                Vector3 from=positions[i]-positions[i%Columns];float max=Vector3.Distance(rest[i],rest[i%Columns])*scale*1.025f;
+                Vector3 from=positions[i]-positions[i%Columns];float max=maximumReach[i];
                 if(from.sqrMagnitude>max*max)positions[i]=positions[i%Columns]+from.normalized*max;
                 ProjectBody(i);
             }
             // Finish with local material strain limits. Shear/bend/coarse-link
             // projections must not leave the narrow collar absorbing the whole
             // free panel's aerodynamic load as stretched first-row edges.
-            foreach(var link in links)
+            foreach(var link in structuralLinks)
             {
-                if(link.stiffness!=1 || link.maximumOnly)continue;
                 Vector3 d=positions[link.b]-positions[link.a];float length=d.magnitude,max=link.rest*scale*1.04f;
                 if(length<=max)continue;
                 float wa=link.a<Columns?0:1,wb=link.b<Columns?0:1;if(wa+wb==0)continue;
-                Vector3 correction=d*((length-max)/length/(wa+wb));positions[link.a]+=correction*wa;positions[link.b]-=correction*wb;
+                Vector3 correction=d*((length-max)/length/(wa+wb));if(wa>0)positions[link.a]+=correction;if(wb>0)positions[link.b]-=correction;
             }
             for(int i=Columns;i<ParticleCount;i++)ProjectBody(i);
         }
@@ -262,19 +268,31 @@ public sealed class ScoutCapeCloth : MonoBehaviour
         for(int i=0;i<capsules.Length;i++)
         {
             var cap=capsules[i];cap.axis=cap.b-cap.a;cap.inverseLength=cap.axis.sqrMagnitude>.000001f?1/cap.axis.sqrMagnitude:0;
-            if(cap.width>0)cap.inverseRotation=Quaternion.Inverse(cap.rotation);capsules[i]=cap;
+            if(cap.width>0)cap.inverseRotation=Quaternion.Inverse(cap.rotation);
+            cap.paddedRadius=cap.radius+.008f*scale;cap.paddedWidth=cap.width+.008f*scale;
+            // Conservative outer sphere only rejects points that cannot enter
+            // the elliptical torso. Margin protects the unchanged narrow-phase
+            // calculation against floating-point boundary rounding.
+            float broadRadius=Mathf.Max(cap.paddedRadius,cap.paddedWidth)+.0001f*scale;
+            cap.broadRadiusSquared=broadRadius*broadRadius;
+            Vector3 extent=Vector3.one*broadRadius;cap.min=Vector3.Min(cap.a,cap.b)-extent;cap.max=Vector3.Max(cap.a,cap.b)+extent;
+            capsules[i]=cap;
         }
     }
     void ProjectBody(int i)
     {
         if(!bodyCollision)return;
-        foreach(var cap in capsules)
+        for(int k=0;k<capsules.Length;k++)
         {
-            float f=Mathf.Clamp01(Vector3.Dot(positions[i]-cap.a,cap.axis)*cap.inverseLength);
-            Vector3 center=cap.a+cap.axis*f,d=positions[i]-center;float radius=cap.radius+.008f*scale;
+            ref readonly Capsule cap=ref capsules[k];
+            Vector3 point=positions[i];
+            if(point.x<cap.min.x || point.x>cap.max.x || point.y<cap.min.y || point.y>cap.max.y || point.z<cap.min.z || point.z>cap.max.z)continue;
+            float f=Mathf.Clamp01(Vector3.Dot(point-cap.a,cap.axis)*cap.inverseLength);
+            Vector3 center=cap.a+cap.axis*f,d=positions[i]-center;float radius=cap.paddedRadius;
             if(cap.width>0)
             {
-                Vector3 local=cap.inverseRotation*d;float width=cap.width+.008f*scale;
+                if(d.sqrMagnitude>cap.broadRadiusSquared)continue;
+                Vector3 local=cap.inverseRotation*d;float width=cap.paddedWidth;
                 float normalized=Mathf.Sqrt(local.x*local.x/(width*width)+(local.y*local.y+local.z*local.z)/(radius*radius));
                 if(normalized<1)positions[i]=center+(normalized>.00001f?cap.rotation*(local/normalized):-(oldFrame*Vector3.forward)*radius);
             }

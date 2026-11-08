@@ -1,0 +1,47 @@
+{
+  "Spawn": {
+    "size": [
+      1280,
+      720
+    ],
+    "changedPixels": 63855,
+    "meanAbsoluteChannelDifference": 0.5051240596064814,
+    "maxChannelDifference": 149
+  },
+  "Canopy": {
+    "size": [
+      1280,
+      720
+    ],
+    "changedPixels": 100744,
+    "meanAbsoluteChannelDifference": 0.9746028645833333,
+    "maxChannelDifference": 147
+  },
+  "NearWall": {
+    "size": [
+      1280,
+      720
+    ],
+    "changedPixels": 0,
+    "meanAbsoluteChannelDifference": 0.0,
+    "maxChannelDifference": 0
+  },
+  "MidWall": {
+    "size": [
+      1280,
+      720
+    ],
+    "changedPixels": 25485,
+    "meanAbsoluteChannelDifference": 0.17919668692129628,
+    "maxChannelDifference": 186
+  },
+  "Gate": {
+    "size": [
+      1280,
+      720
+    ],
+    "changedPixels": 76445,
+    "meanAbsoluteChannelDifference": 0.7666652199074074,
+    "maxChannelDifference": 186
+  }
+}
