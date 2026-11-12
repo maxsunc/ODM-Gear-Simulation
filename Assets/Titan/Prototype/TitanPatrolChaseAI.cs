@@ -17,14 +17,14 @@ public class TitanPatrolChaseAI : MonoBehaviour
     public Vector3[] patrolPoints = new Vector3[0];
     public bool automaticTick = true;
     [Header("Sight")]
-    [Min(1)] public float sightRange = 158f;
-    [Range(1, 360)] public float fieldOfView = 180f;
+    [Min(1)] public float sightRange = 258f;
+    [Range(1, 360)] public float fieldOfView = 300f;
     public LayerMask sightMask = ~0;
     [Min(.02f)] public float perceptionInterval = .15f;
     [Min(0)] public float targetMemoryDuration = 14f;
     [Header("Navigation")]
     [Min(.1f)] public float patrolSpeed = 8f;
-    [Min(.1f)] public float chaseSpeed = 17.5f;
+    [Min(.1f)] public float chaseSpeed = 20.5f;
     [Min(0)] public float chaseStoppingDistance = 6f;
     [Min(.1f)] public float arrivalDistance = .8f;
     [Min(0)] public float patrolPause = 1.5f;
@@ -33,9 +33,9 @@ public class TitanPatrolChaseAI : MonoBehaviour
     [Header("Stationary search look")]
     [Min(0)] public float searchDuration = 4f;
     [Tooltip("Peak degrees per second of the side-to-side upper-body look. Does not rotate the root or feet.")]
-    [Min(0)] public float searchTurnSpeed = 35f;
+    [Min(0)] public float searchTurnSpeed = 75f;
     [Tooltip("Maximum look angle to either side of straight ahead.")]
-    [Range(0,60)] public float searchLookAngle = 30f;
+    [Range(0, 60)] public float searchLookAngle = 60f;
 
     public TitanAwarenessState State { get; private set; }
     public bool CanSeeTarget { get; private set; }
@@ -104,7 +104,7 @@ public class TitanPatrolChaseAI : MonoBehaviour
             body.Died -= OnDied;
             subscribed = false;
         }
-        SearchLookYaw=searchLookTravel=0;
+        SearchLookYaw = searchLookTravel = 0;
         StopMovement();
     }
 
@@ -163,13 +163,13 @@ public class TitanPatrolChaseAI : MonoBehaviour
                 // Pose data only: TitanMotionStyle owns the torso/head overlay.
                 // One right-left-center sweep, then rest. MotionStyle eases
                 // the corners; travel is bounded by searchTurnSpeed in deg/s.
-                float amplitude=Mathf.Clamp(searchLookAngle,0,60);
-                if(amplitude>.001f&&!float.IsNaN(searchTurnSpeed)&&!float.IsInfinity(searchTurnSpeed))
+                float amplitude = Mathf.Clamp(searchLookAngle, 0, 60);
+                if (amplitude > .001f && !float.IsNaN(searchTurnSpeed) && !float.IsInfinity(searchTurnSpeed))
                 {
-                    searchLookTravel=Mathf.Min(amplitude*4,searchLookTravel+Mathf.Max(0,searchTurnSpeed)*deltaTime);
-                    SearchLookYaw=searchLookTravel<amplitude?searchLookTravel:searchLookTravel<amplitude*3?amplitude*2-searchLookTravel:searchLookTravel-amplitude*4;
+                    searchLookTravel = Mathf.Min(amplitude * 4, searchLookTravel + Mathf.Max(0, searchTurnSpeed) * deltaTime);
+                    SearchLookYaw = searchLookTravel < amplitude ? searchLookTravel : searchLookTravel < amplitude * 3 ? amplitude * 2 - searchLookTravel : searchLookTravel - amplitude * 4;
                 }
-                else SearchLookYaw=0;
+                else SearchLookYaw = 0;
                 waitTimer -= deltaTime;
                 if (waitTimer <= 0) ReturnToPatrol();
             }
@@ -307,7 +307,7 @@ public class TitanPatrolChaseAI : MonoBehaviour
     void EnterState(TitanAwarenessState next)
     {
         if (State == next) return;
-        if(State==TitanAwarenessState.Search||next==TitanAwarenessState.Search)SearchLookYaw=searchLookTravel=0;
+        if (State == TitanAwarenessState.Search || next == TitanAwarenessState.Search) SearchLookYaw = searchLookTravel = 0;
         State = next;
         pathTimer = 0;
     }

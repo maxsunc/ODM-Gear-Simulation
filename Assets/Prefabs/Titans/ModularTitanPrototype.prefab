@@ -282,7 +282,7 @@ MonoBehaviour:
   armHealth: 1000
   legHealth: 2500
   faceHealth: 500
-  napeHealth: 500
+  napeHealth: 1000
   severLaunchSpeed: 7
   severUpwardSpeed: 0.65
   severSpinSpeed: 0.8
@@ -307,7 +307,7 @@ MonoBehaviour:
   walkReferenceSpeed: 10
   runReferenceSpeed: 25
   walkTurnSpeed: 60
-  runTurnSpeed: 35
+  runTurnSpeed: 50
   headLeadTime: 0.085
 --- !u!114 &152838467166530141
 MonoBehaviour:
@@ -1567,8 +1567,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2924886, y: 1.5564213, z: 0.6112512}
-  m_Center: {x: 0.001275301, y: -0.33848476, z: -0.14562556}
+  m_Size: {x: 2.2924886, y: 1.2988558, z: 0.56874454}
+  m_Center: {x: 0.001275301, y: -0.4672675, z: -0.1529994}
 --- !u!114 &7743559947257905480
 MonoBehaviour:
   m_ObjectHideFlags: 0

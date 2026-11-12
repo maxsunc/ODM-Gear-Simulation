@@ -1,0 +1,846 @@
+{
+  "blender": "5.2.3 LTS",
+  "bodyTriangles": 24952,
+  "bodySourceVertices": 13604,
+  "bodyNativeCornerVertices": 15887,
+  "totalTriangles": 26388,
+  "bones": 43,
+  "bodyMaterials": 1,
+  "bodyAtlas": 2048,
+  "protectedSkeletonCapeWeaponsHash": "7d897c7567e49b8f13203601d9e6fbd026a6d8701fd3448e8c86305601c9122b",
+  "originalHandsAndGearPreserved": true,
+  "animationAuthored": false,
+  "sourceAssetsOverwritten": false,
+  "parts": [
+    {
+      "name": "Preserved original hand and gear surfaces",
+      "vertices": 1614,
+      "triangles": 3088
+    },
+    {
+      "name": "Fitted undershirt",
+      "vertices": 297,
+      "triangles": 574
+    },
+    {
+      "name": "Open cropped jacket",
+      "vertices": 369,
+      "triangles": 556
+    },
+    {
+      "name": "Folded jacket lapel",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Lapel seam",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Lapel seam",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Collar stand",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest pocket",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Pocket flap",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Pocket flap",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Jacket front stitched edge",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Jacket front stitched edge",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder patch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Folded jacket lapel",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Lapel seam",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Lapel seam",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Collar stand",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest pocket",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Pocket flap",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Pocket flap",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Jacket front stitched edge",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Jacket front stitched edge",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest webbing",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Chest harness adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder patch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Shoulder feather stitch",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Neck anatomy",
+      "vertices": 100,
+      "triangles": 190
+    },
+    {
+      "name": "Shirt standing collar",
+      "vertices": 132,
+      "triangles": 254
+    },
+    {
+      "name": "Sculpted anime head",
+      "vertices": 1215,
+      "triangles": 2398
+    },
+    {
+      "name": "Ear rim",
+      "vertices": 105,
+      "triangles": 198
+    },
+    {
+      "name": "Ear inner fold",
+      "vertices": 27,
+      "triangles": 46
+    },
+    {
+      "name": "Almond sclera",
+      "vertices": 129,
+      "triangles": 224
+    },
+    {
+      "name": "Upper lash line",
+      "vertices": 119,
+      "triangles": 202
+    },
+    {
+      "name": "Lower eyelid",
+      "vertices": 119,
+      "triangles": 202
+    },
+    {
+      "name": "Iris",
+      "vertices": 33,
+      "triangles": 32
+    },
+    {
+      "name": "Pupil",
+      "vertices": 33,
+      "triangles": 32
+    },
+    {
+      "name": "Eye catchlight",
+      "vertices": 11,
+      "triangles": 10
+    },
+    {
+      "name": "Eye catchlight",
+      "vertices": 11,
+      "triangles": 10
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Ear rim",
+      "vertices": 105,
+      "triangles": 198
+    },
+    {
+      "name": "Ear inner fold",
+      "vertices": 27,
+      "triangles": 46
+    },
+    {
+      "name": "Almond sclera",
+      "vertices": 129,
+      "triangles": 224
+    },
+    {
+      "name": "Upper lash line",
+      "vertices": 119,
+      "triangles": 202
+    },
+    {
+      "name": "Lower eyelid",
+      "vertices": 119,
+      "triangles": 202
+    },
+    {
+      "name": "Iris",
+      "vertices": 33,
+      "triangles": 32
+    },
+    {
+      "name": "Pupil",
+      "vertices": 33,
+      "triangles": 32
+    },
+    {
+      "name": "Eye catchlight",
+      "vertices": 11,
+      "triangles": 10
+    },
+    {
+      "name": "Eye catchlight",
+      "vertices": 11,
+      "triangles": 10
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Expressive eyebrow",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Mouth contour",
+      "vertices": 35,
+      "triangles": 58
+    },
+    {
+      "name": "Lower lip light",
+      "vertices": 21,
+      "triangles": 34
+    },
+    {
+      "name": "Fitted hair underlayer",
+      "vertices": 845,
+      "triangles": 1536
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Swept fringe lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Temple layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Nape layered lock",
+      "vertices": 169,
+      "triangles": 310
+    },
+    {
+      "name": "Tailored sleeve Left",
+      "vertices": 375,
+      "triangles": 718
+    },
+    {
+      "name": "Raglan shoulder Left",
+      "vertices": 165,
+      "triangles": 318
+    },
+    {
+      "name": "Cuff Left",
+      "vertices": 100,
+      "triangles": 190
+    },
+    {
+      "name": "Wrist Left",
+      "vertices": 63,
+      "triangles": 118
+    },
+    {
+      "name": "Tailored trouser Left",
+      "vertices": 377,
+      "triangles": 726
+    },
+    {
+      "name": "Boot shaft Left",
+      "vertices": 150,
+      "triangles": 286
+    },
+    {
+      "name": "Boot cuff Left",
+      "vertices": 75,
+      "triangles": 142
+    },
+    {
+      "name": "Boot foot Left",
+      "vertices": 145,
+      "triangles": 278
+    },
+    {
+      "name": "Boot sole Left",
+      "vertices": 116,
+      "triangles": 222
+    },
+    {
+      "name": "Boot front seam Left",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Boot front seam Left",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Left",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Left",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Left",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Left",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Left",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Left",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Tailored sleeve Right",
+      "vertices": 375,
+      "triangles": 718
+    },
+    {
+      "name": "Raglan shoulder Right",
+      "vertices": 165,
+      "triangles": 318
+    },
+    {
+      "name": "Cuff Right",
+      "vertices": 100,
+      "triangles": 190
+    },
+    {
+      "name": "Wrist Right",
+      "vertices": 63,
+      "triangles": 118
+    },
+    {
+      "name": "Tailored trouser Right",
+      "vertices": 377,
+      "triangles": 726
+    },
+    {
+      "name": "Boot shaft Right",
+      "vertices": 150,
+      "triangles": 286
+    },
+    {
+      "name": "Boot cuff Right",
+      "vertices": 75,
+      "triangles": 142
+    },
+    {
+      "name": "Boot foot Right",
+      "vertices": 145,
+      "triangles": 278
+    },
+    {
+      "name": "Boot sole Right",
+      "vertices": 116,
+      "triangles": 222
+    },
+    {
+      "name": "Boot front seam Right",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Boot front seam Right",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Right",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Right",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg webbing Right",
+      "vertices": 58,
+      "triangles": 110
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Leg strap adjustment",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Right",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Right",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Thigh harness Right",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Trouser hip yoke",
+      "vertices": 132,
+      "triangles": 254
+    },
+    {
+      "name": "Waist webbing",
+      "vertices": 66,
+      "triangles": 126
+    },
+    {
+      "name": "Waist buckle",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Waist buckle",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Waist buckle",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Waist buckle",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Waist buckle",
+      "vertices": 8,
+      "triangles": 12
+    }
+  ]
+}

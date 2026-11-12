@@ -1,0 +1,51 @@
+{
+  "protectedExistingPaths": 1745,
+  "unchangedExistingPaths": 1744,
+  "changedExistingPaths": [
+    "Assets/Prefabs/Player/ScoutVisual.prefab"
+  ],
+  "nativeReport": {
+    "bodyVertices": 15887,
+    "bodyTriangles": 24952,
+    "bones": 43,
+    "materials": 1,
+    "maximumRestLandmarkError": 1.4294042394169537e-08,
+    "originalBoundsError": 1.6596432672599803e-08,
+    "protectedDccHash": "7d897c7567e49b8f13203601d9e6fbd026a6d8701fd3448e8c86305601c9122b",
+    "bindingSpace": "-0.0100000007\t-2.84922042E-08\t0\t0\n-1.66447611E-09\t0.00999992341\t1.76838179E-16\t-1.65652301E-16\n0\t2.2908818E-08\t0.0100000016\t-1.67193381E-09\n0\t0\t0\t1\n",
+    "sourceGeometry": "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-ScoutModel-8i2ih48w\\body-geometry.json",
+    "geometrySha256": "3aa6368b52237349f5d33bfde4302292eea60fb9b85d9c8bd32c44f00ca270d3",
+    "reusedOriginalBindposes": true,
+    "reusedOriginalBoneArray": true,
+    "noAnimationWrites": true,
+    "noPhysicsSimulation": true
+  },
+  "existingRegressions": {
+    "id": "2",
+    "testcasecount": "60",
+    "result": "Failed(Child)",
+    "total": "60",
+    "passed": "55",
+    "failed": "4",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-12 22:40:10Z",
+    "end-time": "2026-11-12 22:40:18Z",
+    "duration": "8.0950983"
+  },
+  "onlyPrefabChanges": "ScoutBody mesh and material references",
+  "originalFbxBlendCapeWeaponsRigClipsPhysicsUnchanged": true,
+  "noLiveSceneOrBlenderChanges": true,
+  "sourcePrefabSha256": "c1de18867573886593e853802fa8f85db4d3f1c81dd9e14141db441272ed9669",
+  "nativeMeshSha256": "fa068be0ceff16d59dac41761d3dd7ad518ae81f685ec7257ad48432d2489711",
+  "publication": "Local files only; no commit/push",
+  "limits": [
+    "Static poses are not moving gameplay or cloth certification",
+    "Original short skinned cape shown in static previews; runtime simulated cape unchanged",
+    "Existing failures retained; no new test code/assertion edits",
+    "Higher body triangle count and 2K atlas require real-device profiling for Android"
+  ]
+}

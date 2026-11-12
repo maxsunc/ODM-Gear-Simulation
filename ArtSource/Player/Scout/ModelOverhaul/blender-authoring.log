@@ -1,0 +1,17 @@
+C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\tools\blender\overhaul_scout_model.py:117: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+C:\Users\maxsu\OneDrive\Documents\ODM Attempt # 1\tools\blender\overhaul_scout_model.py:538: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world=bpy.data.worlds.new('Refined Scout preview world');world.use_nodes=True
+00:34.657  render           | Saved: 'C:\Users\maxsu\AppData\Local\Temp\ODM-ScoutModel-8i2ih48w\ArtSource\Player\Scout\ModelOverhaul\Blender_Front.png'
+00:59.657  render           | Saved: 'C:\Users\maxsu\AppData\Local\Temp\ODM-ScoutModel-8i2ih48w\ArtSource\Player\Scout\ModelOverhaul\Blender_ThreeQuarter.png'
+01:23.125  render           | Saved: 'C:\Users\maxsu\AppData\Local\Temp\ODM-ScoutModel-8i2ih48w\ArtSource\Player\Scout\ModelOverhaul\Blender_Back.png'
+01:54.750  render           | Saved: 'C:\Users\maxsu\AppData\Local\Temp\ODM-ScoutModel-8i2ih48w\ArtSource\Player\Scout\ModelOverhaul\Blender_Face.png'
+
+FBX export starting... 'C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-ScoutModel-8i2ih48w\\ArtSource\\Player\\Scout\\ModelOverhaul\\ScoutPlayer_Refined.fbx'
+(bpy.data.armatures['ScoutSkeleton.006'], 'POSE')
+(bpy.data.armatures['ScoutSkeleton.006'], 'POSE')
+export finished in 0.1794 sec.
+SCOUT_MODEL_OVERHAUL {"blender": "5.2.3 LTS", "bodyTriangles": 24952, "bodySourceVertices": 13604, "bodyNativeCornerVertices": 15887, "totalTriangles": 26388, "bones": 43, "bodyMaterials": 1, "bodyAtlas": 2048, "protectedSkeletonCapeWeaponsHash": "7d897c7567e49b8f13203601d9e6fbd026a6d8701fd3448e8c86305601c9122b", "originalHandsAndGearPreserved": true, "animationAuthored": false, "sourceAssetsOverwritten": false}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

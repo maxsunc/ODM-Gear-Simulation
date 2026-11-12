@@ -1,0 +1,16 @@
+{
+    "bodyVertices": 15887,
+    "bodyTriangles": 24952,
+    "bones": 43,
+    "materials": 1,
+    "maximumRestLandmarkError": 1.4294042394169537e-8,
+    "originalBoundsError": 1.6596432672599805e-8,
+    "protectedDccHash": "7d897c7567e49b8f13203601d9e6fbd026a6d8701fd3448e8c86305601c9122b",
+    "bindingSpace": "-0.0100000007\t-2.84922042E-08\t0\t0\n-1.66447611E-09\t0.00999992341\t1.76838179E-16\t-1.65652301E-16\n0\t2.2908818E-08\t0.0100000016\t-1.67193381E-09\n0\t0\t0\t1\n",
+    "sourceGeometry": "C:\\Users\\maxsu\\AppData\\Local\\Temp\\ODM-ScoutModel-8i2ih48w\\body-geometry.json",
+    "geometrySha256": "3aa6368b52237349f5d33bfde4302292eea60fb9b85d9c8bd32c44f00ca270d3",
+    "reusedOriginalBindposes": true,
+    "reusedOriginalBoneArray": true,
+    "noAnimationWrites": true,
+    "noPhysicsSimulation": true
+}

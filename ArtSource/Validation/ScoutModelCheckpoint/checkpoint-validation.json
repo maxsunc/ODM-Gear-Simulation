@@ -1,0 +1,64 @@
+{
+  "purpose": "Fresh source compile and selected existing regressions before Scout-model checkpoint publication",
+  "results": {
+    "id": "2",
+    "testcasecount": "69",
+    "result": "Failed(Child)",
+    "total": "69",
+    "passed": "64",
+    "failed": "4",
+    "inconclusive": "0",
+    "skipped": "1",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-12 23:08:46Z",
+    "end-time": "2026-11-12 23:08:58Z",
+    "duration": "11.768088"
+  },
+  "filter": "ScoutPlayerPlayModeTests;ScoutHeldStrugglePlayModeTests;ScoutCapeClothPlayModeTests;TitanPatrolChasePlayModeTests;PlayerOnlyRespawn;RealHooksBoostAndCoroutinesSuspendWithoutChangingFreeFlightTuning;RealGroundHoldAlsoSuspendsAndReleasesAtCurrentPoseNotCapturePose;RealHealthIsSingleSourceAndExternalDeathReleasesBeforeRagdoll;HeldAndReleasePendingRejectEvenForcedBaseDamageContacts;WallTeleportCancellationAndCaptureInvalidateImpactReceipts",
+  "currentSourcesMatchTestWorker": true,
+  "sourceSha256": {
+    "Assets/Titan/Prototype/TitanPatrolChaseAI.cs": "38875184680d23598465a12843676267cec9741f8964422901bb1c36bdbb0f37",
+    "Assets/Prefabs/Titans/ModularTitanPrototype.prefab": "542cd53f80001b5eeeb425558eb0618d8031eacd38d05f2a88d0b15c0d3eaf4f",
+    "Assets/Prefabs/Player/ScoutVisual.prefab": "c1de18867573886593e853802fa8f85db4d3f1c81dd9e14141db441272ed9669",
+    "Assets/Art/Player/Scout/ModelOverhaul/ScoutBody_Refined.asset": "fa068be0ceff16d59dac41761d3dd7ad518ae81f685ec7257ad48432d2489711",
+    "Assets/Editor/ScoutModelOverhaulBuilder.cs": "c7ebd25afa74700dc3ae252dace0341d6f628051de345039a69723f77ea0f6fe"
+  },
+  "sameFourFailuresAsModelControl": true,
+  "failureMessages": {
+    "ScoutHeldStrugglePlayModeTests.HeldLoopHasNoSeamSnapAt120HzAndDoesNotModifyTheModelRoot": "  Expected: less than 2\n  But was:  3.93702865f\n",
+    "ScoutHeldStrugglePlayModeTests.HeldLoopMovesRealSkinAndRestrainedLimbsWithoutTranslatingOrScalingAnyBone": "  Expected: 1.20000005f +/- 0.00100000005f\n  But was:  1.79999995f\n",
+    "ScoutPlayerPlayModeTests.NarutoRunLoopsWithoutBoneSnapAndCadenceMatchesAuthoredFootTravel": "  Visual cadence follows measured speed without changing the motor\n  Expected: 2.0f +/- 0.0500000007f\n  But was:  0.987232029f\n",
+    "ScoutPlayerPlayModeTests.NarutoRunPlantsTheStanceFootAndTrailsArmsBehindForwardTorso": "  Flat support retracts evenly before the heel lifts for toe-off\n  Expected: -0.0652145371f +/- 0.00400000019f\n  But was:  -0.0750658065f\n"
+  },
+  "duplicatePatrolSpeedDeclarationRemoved": true,
+  "userTitanTuningPreserved": {
+    "napeHealth": 1000,
+    "runTurnSpeed": 50,
+    "napeDamageZoneSize": [
+      2.2924886,
+      1.2988558,
+      0.56874454
+    ],
+    "napeDamageZoneCenter": [
+      0.001275301,
+      -0.4672675,
+      -0.1529994
+    ],
+    "aiDefaultSightRange": 258,
+    "aiDefaultFov": 300,
+    "aiDefaultPatrolSpeed": 8,
+    "aiDefaultChaseSpeed": 20.5,
+    "aiDefaultSearchTurnSpeed": 75,
+    "aiDefaultSearchLookAngle": 60
+  },
+  "android": "Planning document and Unity-generated Android module references only; no mobile input implementation/build certification",
+  "newTestCodeOrAssertionEdits": false,
+  "liveEditorOrBlenderControl": false,
+  "limits": [
+    "Selected checks, not full suite or standalone/Android build",
+    "Earlier broad-suite and Forest failures remain documented",
+    "Character art approval is not moving contact/crowd/performance certification"
+  ]
+}
