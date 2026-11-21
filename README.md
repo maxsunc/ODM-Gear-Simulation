@@ -2,8 +2,6 @@
 
 A Unity game based on the ODM gear from Attack on Titan.
 
-[Play the demo](https://ratweeb.itch.io/odm-gear)
-
 ## Setup
 
 1. Install [Unity Hub](https://unity.com/download) and Unity **2022.3.25f1**.
